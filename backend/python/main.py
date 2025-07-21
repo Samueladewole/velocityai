@@ -23,6 +23,8 @@ from pulse.monitoring import router as pulse_router
 from pulse.analytics import router as analytics_router
 from cipher.policy_engine import router as cipher_router
 from ai_models.model_server import router as ai_router
+from sales_accelerator.router import router as sales_router
+from sheets_integration.router import router as sheets_router
 from shared.database import init_db, close_db
 from shared.config import get_settings
 from shared.auth import authenticate_user, create_auth_tokens, get_current_user, AuthTokens
@@ -114,7 +116,9 @@ async def root():
             "PRISM - Risk Quantification Engine",
             "PULSE - Real-time Analytics",
             "CIPHER - Policy Automation",
-            "AI Models - Model Serving"
+            "AI Models - Model Serving",
+            "Sales Accelerator - Compliance-driven Revenue Engine",
+            "Sheets Integration - Native Spreadsheet Platform"
         ],
         "docs": "/docs"
     }
@@ -166,6 +170,8 @@ app.include_router(pulse_router, prefix="/pulse", tags=["PULSE - Monitoring"])
 app.include_router(analytics_router, prefix="/analytics", tags=["Analytics"])
 app.include_router(cipher_router, prefix="/cipher", tags=["CIPHER - Policy Engine"])
 app.include_router(ai_router, prefix="/ai", tags=["AI Model Serving"])
+app.include_router(sales_router, prefix="/sales", tags=["Sales Accelerator"])
+app.include_router(sheets_router, prefix="/sheets", tags=["Sheets Integration"])
 
 # Error handlers
 @app.exception_handler(Exception)
