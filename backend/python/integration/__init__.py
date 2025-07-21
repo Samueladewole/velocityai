@@ -1,0 +1,1 @@
+# Integration module for cross-component data flows

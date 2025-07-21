@@ -1,0 +1,219 @@
+# ERIP Platform Alerting Rules
+# Comprehensive alerting for production monitoring
+
+groups:
+  - name: erip-application
+    rules:
+      # Application Health
+      - alert: ERIPBackendDown
+        expr: up{job="erip-backend"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ERIP Backend is down"
+          description: "ERIP Backend instance {{ $labels.instance }} has been down for more than 1 minute."
+
+      - alert: ERIPHighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="erip-backend"}[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Backend high response time"
+          description: "95th percentile response time is {{ $value }}s for instance {{ $labels.instance }}."
+
+      - alert: ERIPHighErrorRate
+        expr: (rate(http_requests_total{job="erip-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="erip-backend"}[5m])) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Backend high error rate"
+          description: "Error rate is {{ $value | humanizePercentage }} for instance {{ $labels.instance }}."
+
+      # Resource Usage
+      - alert: ERIPHighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total{name=~".*erip-backend.*"}[5m]) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Backend high CPU usage"
+          description: "CPU usage is {{ $value | humanizePercentage }} for container {{ $labels.name }}."
+
+      - alert: ERIPHighMemoryUsage
+        expr: (container_memory_usage_bytes{name=~".*erip-backend.*"} / container_spec_memory_limit_bytes{name=~".*erip-backend.*"}) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Backend high memory usage"
+          description: "Memory usage is {{ $value | humanizePercentage }} for container {{ $labels.name }}."
+
+      # AI Integration Alerts
+      - alert: ERIPAIServiceErrors
+        expr: increase(erip_ai_requests_total{status="error"}[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP AI service errors"
+          description: "AI service errors increased by {{ $value }} in the last 5 minutes."
+
+      - alert: ERIPAIServiceSlowResponse
+        expr: histogram_quantile(0.95, rate(erip_ai_request_duration_seconds_bucket[5m])) > 30
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP AI service slow response"
+          description: "95th percentile AI service response time is {{ $value }}s."
+
+  - name: erip-infrastructure
+    rules:
+      # Database Alerts
+      - alert: ERIPDatabaseDown
+        expr: up{job="postgres-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ERIP Database is down"
+          description: "PostgreSQL database is down for more than 1 minute."
+
+      - alert: ERIPDatabaseHighConnections
+        expr: (pg_stat_database_numbackends / pg_settings_max_connections) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Database high connection usage"
+          description: "Database connection usage is {{ $value | humanizePercentage }}."
+
+      - alert: ERIPDatabaseSlowQueries
+        expr: rate(pg_stat_activity_max_tx_duration[5m]) > 300
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Database slow queries"
+          description: "Database has slow running queries (>5min)."
+
+      # Redis Alerts
+      - alert: ERIPRedisDown
+        expr: up{job="redis-exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ERIP Redis is down"
+          description: "Redis cache is down for more than 1 minute."
+
+      - alert: ERIPRedisHighMemoryUsage
+        expr: (redis_memory_used_bytes / redis_memory_max_bytes) > 0.9
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Redis high memory usage"
+          description: "Redis memory usage is {{ $value | humanizePercentage }}."
+
+      # Load Balancer Alerts
+      - alert: ERIPLoadBalancerHighLatency
+        expr: histogram_quantile(0.95, rate(aws_alb_target_response_time_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP Load Balancer high latency"
+          description: "ALB 95th percentile latency is {{ $value }}s."
+
+      - alert: ERIPLoadBalancerUnhealthyTargets
+        expr: aws_alb_unhealthy_host_count > 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ERIP Load Balancer unhealthy targets"
+          description: "{{ $value }} unhealthy targets behind the load balancer."
+
+  - name: erip-business-metrics
+    rules:
+      # Component-Specific Alerts
+      - alert: ERIPCOMPASSAnalysisFailures
+        expr: increase(erip_compass_analysis_failures_total[5m]) > 5
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP COMPASS analysis failures"
+          description: "{{ $value }} COMPASS analysis failures in the last 5 minutes."
+
+      - alert: ERIPATLASAssessmentFailures
+        expr: increase(erip_atlas_assessment_failures_total[5m]) > 3
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP ATLAS assessment failures"
+          description: "{{ $value }} ATLAS security assessment failures in the last 5 minutes."
+
+      - alert: ERIPIntegrationFlowFailures
+        expr: increase(erip_integration_flow_failures_total[10m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP integration flow failures"
+          description: "{{ $value }} integration flow failures in the last 10 minutes."
+
+      # User Experience Alerts
+      - alert: ERIPLowUserSatisfaction
+        expr: rate(erip_user_feedback_negative_total[1h]) / rate(erip_user_feedback_total[1h]) > 0.2
+        for: 30m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP low user satisfaction"
+          description: "User satisfaction dropped below 80% in the last hour."
+
+      # ROI and Value Alerts
+      - alert: ERIPROICalculationErrors
+        expr: increase(erip_beacon_roi_calculation_errors_total[15m]) > 3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP ROI calculation errors"
+          description: "{{ $value }} ROI calculation errors in the last 15 minutes."
+
+  - name: erip-security
+    rules:
+      # Security Alerts
+      - alert: ERIPSecurityScanAnomalies
+        expr: erip_atlas_critical_findings_detected > 10
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "ERIP critical security findings"
+          description: "{{ $value }} critical security findings detected."
+
+      - alert: ERIPAuthenticationFailures
+        expr: increase(erip_auth_failures_total[5m]) > 20
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP high authentication failures"
+          description: "{{ $value }} authentication failures in the last 5 minutes."
+
+      - alert: ERIPSuspiciousAPIActivity
+        expr: rate(http_requests_total{job="erip-backend",status="403"}[5m]) > 5
+        for: 3m
+        labels:
+          severity: warning
+        annotations:
+          summary: "ERIP suspicious API activity"
+          description: "High rate of 403 Forbidden responses: {{ $value }} per second."
