@@ -193,27 +193,27 @@ export const LandingEnhanced: React.FC = () => {
 
   const ecosystemFlow = [
     {
-      title: 'Intelligent Assessment',
+      title: 'Assessment & Analysis',
       components: ['compass', 'atlas'],
-      description: 'AI analyzes your specific industry, size, and risk profile to create personalized compliance roadmaps',
+      description: 'AI-powered regulatory intelligence and security assessment to create personalized compliance roadmaps',
       icon: Brain
     },
     {
-      title: 'Continuous Monitoring',
-      components: ['prism', 'clearance'],
-      description: 'Real-time tracking across all systems builds your Trust Equity™ score automatically, 24/7',
+      title: 'Continuous Operations',
+      components: ['pulse', 'nexus'],
+      description: 'Real-time monitoring and threat intelligence aggregation that builds your Trust Equity™ score 24/7',
       icon: Activity
     },
     {
-      title: 'Expert Network',
-      components: ['cipher', 'pulse'],
-      description: 'When AI isn\'t enough, get connected to pre-vetted experts in your specific regulatory domain',
-      icon: Users
+      title: 'Risk & Decisions',
+      components: ['prism', 'clearance'],
+      description: 'Transform qualitative risks into quantified financial impacts with automated decision workflows',
+      icon: AlertTriangle
     },
     {
-      title: 'Business Value Tracking',
-      components: ['nexus', 'beacon'],
-      description: 'Every compliance activity translates to measurable business outcomes—finally prove security ROI',
+      title: 'Value & Automation',
+      components: ['beacon', 'cipher'],
+      description: 'Automated policy enforcement and measurable ROI demonstration for stakeholder communication',
       icon: TrendingUp
     }
   ];
