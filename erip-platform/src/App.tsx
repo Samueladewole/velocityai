@@ -21,6 +21,11 @@ import { PulseWorking } from '@/pages/PulseWorking';
 import { CipherWorking } from '@/pages/CipherWorking';
 import { NexusWorking } from '@/pages/NexusWorking';
 import { BeaconWorking } from '@/pages/BeaconWorking';
+import { Onboarding } from '@/pages/Onboarding';
+import { MVPDashboard } from '@/pages/MVPDashboard';
+import { DayInTheLifeDemo } from '@/pages/DayInTheLifeDemo';
+import { FreeTrustAssessment } from '@/pages/FreeTrustAssessment';
+import { IntegrationHub } from '@/pages/IntegrationHub';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
 
@@ -49,6 +54,10 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<LandingEnhanced />} />
+        <Route path="/onboarding" element={<Onboarding />} />
+        <Route path="/dashboard" element={<MVPDashboard />} />
+        <Route path="/demo" element={<DayInTheLifeDemo />} />
+        <Route path="/assessment" element={<FreeTrustAssessment />} />
         <Route path="/prism-demo" element={<PrismDemoWorking />} />
         <Route path="/industry" element={<IndustrySelection />} />
         <Route path="/regulatory/eu" element={<EuropeanLandscape />} />
@@ -65,6 +74,7 @@ function App() {
           <Route path="cipher" element={<CipherWorking />} />
           <Route path="nexus" element={<NexusWorking />} />
           <Route path="beacon" element={<BeaconWorking />} />
+          <Route path="integrations" element={<IntegrationHub />} />
         </Route>
         <Route path="/simple" element={<LayoutSimple />}>
           <Route index element={<DashboardSimple />} />

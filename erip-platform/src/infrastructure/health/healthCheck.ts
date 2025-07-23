@@ -751,3 +751,57 @@ export class ERIPHealthCheck {
     }
   }
 }
+
+/**
+ * Health check router for Express
+ */
+import { Router } from 'express'
+
+export const healthCheckRouter = Router()
+
+healthCheckRouter.get('/', async (req: Request, res: Response) => {
+  const healthService = ERIPHealthCheckService.getInstance()
+  
+  try {
+    const status = await healthService.checkComponentHealth()
+    const overallHealth = status.every(component => component.status === 'healthy')
+    
+    res.status(overallHealth ? 200 : 503).json({
+      status: overallHealth ? 'healthy' : 'degraded',
+      timestamp: new Date().toISOString(),
+      components: status,
+      summary: {
+        total: status.length,
+        healthy: status.filter(c => c.status === 'healthy').length,
+        degraded: status.filter(c => c.status === 'degraded').length,
+        unhealthy: status.filter(c => c.status === 'unhealthy').length,
+        offline: status.filter(c => c.status === 'offline').length
+      }
+    })
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      timestamp: new Date().toISOString(),
+      error: 'Health check failed',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    })
+  }
+})
+
+healthCheckRouter.get('/component/:component', async (req: Request, res: Response) => {
+  const healthService = ERIPHealthCheckService.getInstance()
+  
+  try {
+    const componentName = req.params.component as ERIPComponent
+    const status = await healthService.checkSpecificComponent(componentName)
+    
+    res.status(status.status === 'healthy' ? 200 : 503).json(status)
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      timestamp: new Date().toISOString(),
+      error: 'Component health check failed',
+      message: error instanceof Error ? error.message : 'Unknown error'
+    })
+  }
+})

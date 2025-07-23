@@ -725,3 +725,11 @@ export class PrismApiService {
     return this.router
   }
 }
+
+/**
+ * Factory function to create PRISM API router
+ */
+export function createPrismRouter(): Router {
+  const prismApi = new PrismApiService()
+  return prismApi.getRouter()
+}

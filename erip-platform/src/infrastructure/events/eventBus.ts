@@ -5,8 +5,8 @@
  * Implements high-performance event routing with persistence and replay capabilities
  */
 
-// import Redis from 'ioredis'
-// import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge'
+import Redis from 'ioredis'
+import { EventBridgeClient, PutEventsCommand } from '@aws-sdk/client-eventbridge'
 import { ERIPEvent, ERIPEventSchema, EVENT_ROUTING_RULES, EventRoutingRule } from './schemas'
 import { Logger } from '../logging/logger'
 import { TrustEquityEngine } from '../trustEquity/engine'
@@ -40,39 +40,75 @@ export type EventHandler<T = any> = (event: T) => Promise<void> | void
 export type EventFilter = (event: ERIPEvent) => boolean
 
 export class ERIPEventBus {
-  // private redis: Redis
-  // private eventBridge?: EventBridgeClient
+  private redis?: Redis
+  private eventBridge?: EventBridgeClient
   private handlers: Map<string, Set<EventHandler>> = new Map()
   private filters: Map<string, EventFilter> = new Map()
   private logger: Logger
   private trustEngine: TrustEquityEngine
   private eventQueue: ERIPEvent[] = []
   private processingBatch = false
+  private useRedis = false
+  private useAWS = false
   private metricsCollector: EventMetricsCollector
 
   constructor(private config: EventBusConfig) {
-    // this.redis = new Redis({
-    //   host: config.redis.host,
-    //   port: config.redis.port,
-    //   password: config.redis.password,
-    //   db: config.redis.db || 0,
-    //   keyPrefix: config.redis.keyPrefix || 'erip:events:',
-    //   retryDelayOnFailover: 100,
-    //   lazyConnect: true,
-    //   maxRetriesPerRequest: 3
-    // })
-
-    // if (config.aws) {
-    //   this.eventBridge = new EventBridgeClient({ region: config.aws.region })
-    // }
-
     this.logger = Logger.getInstance()
     this.trustEngine = TrustEquityEngine.getInstance()
     this.metricsCollector = new EventMetricsCollector()
 
-    // this.setupRedisSubscriptions()
+    // Initialize Redis if configured and available
+    this.initializeRedis()
+    
+    // Initialize AWS EventBridge if configured
+    this.initializeAWS()
+
     this.setupBatchProcessing()
     this.setupEventRouting()
+  }
+
+  private initializeRedis(): void {
+    try {
+      if (process.env.REDIS_URL || this.config.redis) {
+        this.redis = new Redis({
+          host: this.config.redis.host,
+          port: this.config.redis.port,
+          password: this.config.redis.password,
+          db: this.config.redis.db || 0,
+          keyPrefix: this.config.redis.keyPrefix || 'erip:events:',
+          retryDelayOnFailover: 100,
+          lazyConnect: true,
+          maxRetriesPerRequest: 3,
+          connectTimeout: 5000,
+          maxRetriesPerRequest: 1
+        })
+
+        this.redis.on('ready', () => {
+          this.useRedis = true
+          this.logger.info('Redis EventBus connected successfully')
+          this.setupRedisSubscriptions()
+        })
+
+        this.redis.on('error', (error) => {
+          this.useRedis = false
+          this.logger.warn('Redis EventBus connection failed, falling back to memory', { error: error.message })
+        })
+      }
+    } catch (error) {
+      this.logger.warn('Redis initialization failed, using memory-only EventBus', { error })
+    }
+  }
+
+  private initializeAWS(): void {
+    try {
+      if (this.config.aws && process.env.AWS_REGION) {
+        this.eventBridge = new EventBridgeClient({ region: this.config.aws.region })
+        this.useAWS = true
+        this.logger.info('AWS EventBridge initialized')
+      }
+    } catch (error) {
+      this.logger.warn('AWS EventBridge initialization failed', { error })
+    }
   }
 
   /**

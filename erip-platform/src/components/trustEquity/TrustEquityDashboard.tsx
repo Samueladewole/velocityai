@@ -27,6 +27,14 @@ import {
   Zap
 } from 'lucide-react'
 
+interface TrustActivity {
+  type: string
+  category: string
+  points: number
+  timestamp: Date
+  description?: string
+}
+
 interface TrustScoreData {
   total: number
   tier: {
@@ -48,6 +56,7 @@ interface TrustScoreData {
     minPoints: number
     pointsNeeded: number
   }
+  recentActivities: TrustActivity[]
 }
 
 interface TrustROIData {
@@ -293,8 +302,7 @@ export const TrustEquityDashboard: React.FC<{
           {/* Trust Score Ring */}
           <div className="flex flex-col items-center">
             <ProgressRing
-              value={trustScore.total}
-              max={trustScore.nextTier?.minPoints || 10000}
+              progress={(trustScore.total / (trustScore.nextTier?.minPoints || 10000)) * 100}
               size={200}
               strokeWidth={20}
               color={trustScore.tier.color}

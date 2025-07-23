@@ -614,3 +614,66 @@ export function createTrustScoreApi(
 ): TrustScoreApiService {
   return new TrustScoreApiService(trustCalculator, baseUrl)
 }
+
+/**
+ * Factory function to create Trust Score API router
+ */
+export function createTrustScoreRouter(): Router {
+  const router = Router()
+  const trustCalculator = new TrustScoreCalculator()
+  const api = createTrustScoreApi(trustCalculator)
+
+  // Organization endpoints
+  router.get('/organization/:id', async (req, res) => {
+    await api.getTrustScore(req, res)
+  })
+
+  router.post('/organization/:id/activities', async (req, res) => {
+    await api.logTrustActivity(req, res)
+  })
+
+  router.get('/organization/:id/activities', async (req, res) => {
+    await api.getActivityHistory(req, res)
+  })
+
+  router.get('/organization/:id/roi', async (req, res) => {
+    await api.calculateROI(req, res)
+  })
+
+  router.get('/organization/:id/benchmarks', async (req, res) => {
+    await api.getBenchmarks(req, res)
+  })
+
+  // Shareable URL endpoints
+  router.post('/share', async (req, res) => {
+    await api.createShareableUrl(req, res)
+  })
+
+  router.get('/share/:shareId', async (req, res) => {
+    await api.getSharedProfile(req, res)
+  })
+
+  router.put('/share/:shareId', async (req, res) => {
+    await api.updateShareableUrl(req, res)
+  })
+
+  router.delete('/share/:shareId', async (req, res) => {
+    await api.revokeShareableUrl(req, res)
+  })
+
+  // Public profile endpoints
+  router.get('/public/:orgId', async (req, res) => {
+    await api.getPublicProfile(req, res)
+  })
+
+  router.get('/public/:orgId/badge', async (req, res) => {
+    await api.getTrustBadge(req, res)
+  })
+
+  // Activity types endpoint
+  router.get('/activity-types', async (req, res) => {
+    await api.getActivityTypes(req, res)
+  })
+
+  return router
+}
