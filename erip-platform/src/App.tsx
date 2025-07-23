@@ -28,6 +28,7 @@ import { FreeTrustAssessment } from '@/pages/FreeTrustAssessment';
 import { IntegrationHub } from '@/pages/IntegrationHub';
 import { ExpertNetwork } from '@/pages/ExpertNetwork';
 import { CustomerSuccess } from '@/pages/CustomerSuccess';
+import { InteractiveSandbox } from '@/pages/InteractiveSandbox';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
 
@@ -59,6 +60,7 @@ function App() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/dashboard" element={<MVPDashboard />} />
         <Route path="/demo" element={<DayInTheLifeDemo />} />
+        <Route path="/sandbox" element={<InteractiveSandbox />} />
         <Route path="/assessment" element={<FreeTrustAssessment />} />
         <Route path="/prism-demo" element={<PrismDemoWorking />} />
         <Route path="/industry" element={<IndustrySelection />} />
