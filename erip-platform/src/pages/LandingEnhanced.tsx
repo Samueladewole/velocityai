@@ -193,28 +193,28 @@ export const LandingEnhanced: React.FC = () => {
 
   const ecosystemFlow = [
     {
-      title: 'Assessment & Analysis',
+      title: 'Immediate Value Discovery',
+      components: ['prism', 'beacon'],
+      description: 'Start with "What\'s this costing you?" - Quantify financial impact and show potential ROI upfront',
+      icon: DollarSign
+    },
+    {
+      title: 'Intelligent Assessment',
       components: ['compass', 'atlas'],
-      description: 'AI-powered regulatory intelligence and security assessment to create personalized compliance roadmaps',
+      description: 'Map what you actually need and assess only what matters financially - prioritize by impact, not frameworks',
       icon: Brain
     },
     {
-      title: 'Continuous Operations',
+      title: 'Continuous Intelligence',
       components: ['pulse', 'nexus'],
-      description: 'Real-time monitoring and threat intelligence aggregation that builds your Trust Equity™ score 24/7',
+      description: 'Monitor what\'s valuable and focus on threats that could cost you - don\'t monitor everything, monitor what matters',
       icon: Activity
     },
     {
-      title: 'Risk & Decisions',
-      components: ['prism', 'clearance'],
-      description: 'Transform qualitative risks into quantified financial impacts with automated decision workflows',
-      icon: AlertTriangle
-    },
-    {
-      title: 'Value & Automation',
-      components: ['beacon', 'cipher'],
-      description: 'Automated policy enforcement and measurable ROI demonstration for stakeholder communication',
-      icon: TrendingUp
+      title: 'Automated Excellence',
+      components: ['clearance', 'cipher'],
+      description: 'Automate decisions based on risk appetite and turn decisions into action - scale your value creation',
+      icon: Zap
     }
   ];
 
