@@ -6,10 +6,41 @@ import { Clearance } from '@/pages/Clearance';
 import { Landing } from '@/pages/Landing';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 
+import { MonteCarloVisualization } from '@/components/prism/MonteCarloVisualization';
+import { EUComplianceDashboard } from '@/components/atlas/EUComplianceDashboard';
+
+// Mock data for demonstrations
+const mockScenarios = [
+  {
+    id: '1',
+    name: 'Data Breach',
+    probability: { annual: 0.15 },
+    impact: { financial: { min: 100000, max: 5000000, likely: 750000 } }
+  },
+  {
+    id: '2', 
+    name: 'System Outage',
+    probability: { annual: 0.25 },
+    impact: { financial: { min: 50000, max: 2000000, likely: 300000 } }
+  }
+];
+
 // Placeholder components for other pages
 const CompassPage = () => <div className="p-6"><h2 className="text-2xl font-bold">COMPASS - Regulatory Intelligence Engine</h2><p>AI-powered regulation analysis and compliance tracking</p></div>;
-const AtlasPage = () => <div className="p-6"><h2 className="text-2xl font-bold">ATLAS - Security Assessment System</h2><p>Intelligent security assessments and control monitoring</p></div>;
-const PrismPage = () => <div className="p-6"><h2 className="text-2xl font-bold">PRISM - Risk Quantification Engine</h2><p>Monte Carlo simulations and financial risk modeling</p></div>;
+const AtlasPage = () => (
+  <div className="p-6">
+    <h2 className="text-2xl font-bold mb-4">ATLAS - Security Assessment System</h2>
+    <p className="mb-6">Intelligent security assessments with EU compliance monitoring</p>
+    <EUComplianceDashboard organizationName="Demo Organization" />
+  </div>
+);
+const PrismPage = () => (
+  <div className="p-6">
+    <h2 className="text-2xl font-bold mb-4">PRISM - Risk Quantification Engine</h2>
+    <p className="mb-6">Monte Carlo simulations and financial risk modeling</p>
+    <MonteCarloVisualization scenarios={mockScenarios} />
+  </div>
+);
 const PulsePage = () => <div className="p-6"><h2 className="text-2xl font-bold">PULSE - Continuous Monitoring</h2><p>Real-time monitoring and predictive analytics</p></div>;
 const CipherPage = () => <div className="p-6"><h2 className="text-2xl font-bold">CIPHER - Policy Automation</h2><p>AI-powered policy generation and automation</p></div>;
 const NexusPage = () => <div className="p-6"><h2 className="text-2xl font-bold">NEXUS - Intelligence Platform</h2><p>Threat intelligence and industry benchmarking</p></div>;
