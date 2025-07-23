@@ -150,7 +150,6 @@ export function AnswerGeneration({
       
       onAnswerGenerated(answerObj)
       
-      const processingTime = Date.now() - startTime
       toast({
         title: 'Answer Generated',
         description: `Generated with ${answer.confidence} confidence in ${(processingTime / 1000).toFixed(1)}s`

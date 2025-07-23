@@ -183,7 +183,7 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
       setSimulationState(prev => ({
         ...prev,
         isRunning: false,
-        results: results as any,
+        results,
         progress: 100
       }))
 
@@ -205,7 +205,7 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
         }
       }
       
-      onResultsUpdate?.(enhancedResults as any)
+      onResultsUpdate?.(enhancedResults)
 
       toast({
         title: 'Simulation Complete',
@@ -312,12 +312,12 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
   }))
 
   const percentileData = simulationState.results ? [
-    { name: 'P10', value: (simulationState.results as any).percentiles?.p10 || 0, color: VISUALIZATION_COLORS[0] },
-    { name: 'P25', value: (simulationState.results as any).percentiles?.p25 || 0, color: VISUALIZATION_COLORS[1] },
-    { name: 'P50', value: (simulationState.results as any).percentiles?.p50 || 0, color: VISUALIZATION_COLORS[2] },
-    { name: 'P75', value: (simulationState.results as any).percentiles?.p75 || 0, color: VISUALIZATION_COLORS[3] },
-    { name: 'P90', value: (simulationState.results as any).percentiles?.p90 || 0, color: VISUALIZATION_COLORS[4] },
-    { name: 'P95', value: (simulationState.results as any).percentiles?.p95 || 0, color: VISUALIZATION_COLORS[5] }
+    { name: 'P10', value: simulationState.results.percentiles.p10, color: VISUALIZATION_COLORS[0] },
+    { name: 'P25', value: simulationState.results.percentiles.p25, color: VISUALIZATION_COLORS[1] },
+    { name: 'P50', value: simulationState.results.percentiles.p50, color: VISUALIZATION_COLORS[2] },
+    { name: 'P75', value: simulationState.results.percentiles.p75, color: VISUALIZATION_COLORS[3] },
+    { name: 'P90', value: simulationState.results.percentiles.p90, color: VISUALIZATION_COLORS[4] },
+    { name: 'P95', value: simulationState.results.percentiles.p95, color: VISUALIZATION_COLORS[5] }
   ] : []
 
   return (
@@ -638,11 +638,11 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
                         </div>
                         <div className="flex justify-between">
                           <span>Standard Deviation:</span>
-                          <span className="font-mono">{formatCurrency((simulationState.results.statistics as any).standardDeviation || (simulationState.results.statistics as any).stddev || 0)}</span>
+                          <span className="font-mono">{formatCurrency(simulationState.results.statistics.standardDeviation)}</span>
                         </div>
                         <div className="flex justify-between">
                           <span>Skewness:</span>
-                          <span className="font-mono">{((simulationState.results.statistics as any).skewness || 0).toFixed(3)}</span>
+                          <span className="font-mono">{simulationState.results.statistics.skewness.toFixed(3)}</span>
                         </div>
                       </div>
                     </div>
@@ -734,21 +734,20 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
 function generateDistributionData(results: MonteCarloResult) {
   // Generate histogram data from percentiles
   const data: Array<{ loss: number, density: number }> = []
-  const percentiles = (results as any).percentiles || {}
-  const statistics = (results as any).statistics || {}
+  const percentiles = results.percentiles
   
   // Create bins from percentile data
   const bins = [
-    { loss: statistics.minimum || 0, density: 0.001 },
-    { loss: percentiles.p5 || 0, density: 0.05 },
-    { loss: percentiles.p10 || 0, density: 0.1 },
-    { loss: percentiles.p25 || 0, density: 0.25 },
-    { loss: percentiles.p50 || 0, density: 0.5 },
-    { loss: percentiles.p75 || 0, density: 0.25 },
-    { loss: percentiles.p90 || 0, density: 0.1 },
-    { loss: percentiles.p95 || 0, density: 0.05 },
-    { loss: percentiles.p99 || 0, density: 0.01 },
-    { loss: statistics.maximum || 0, density: 0.001 }
+    { loss: results.statistics.minimum, density: 0.001 },
+    { loss: percentiles.p5, density: 0.05 },
+    { loss: percentiles.p10, density: 0.1 },
+    { loss: percentiles.p25, density: 0.25 },
+    { loss: percentiles.p50, density: 0.5 },
+    { loss: percentiles.p75, density: 0.25 },
+    { loss: percentiles.p90, density: 0.1 },
+    { loss: percentiles.p95, density: 0.05 },
+    { loss: percentiles.p99, density: 0.01 },
+    { loss: results.statistics.maximum, density: 0.001 }
   ]
   
   return bins
