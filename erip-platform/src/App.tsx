@@ -26,6 +26,7 @@ import { MVPDashboard } from '@/pages/MVPDashboard';
 import { DayInTheLifeDemo } from '@/pages/DayInTheLifeDemo';
 import { FreeTrustAssessment } from '@/pages/FreeTrustAssessment';
 import { IntegrationHub } from '@/pages/IntegrationHub';
+import { ExpertNetwork } from '@/pages/ExpertNetwork';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
 
@@ -75,6 +76,7 @@ function App() {
           <Route path="nexus" element={<NexusWorking />} />
           <Route path="beacon" element={<BeaconWorking />} />
           <Route path="integrations" element={<IntegrationHub />} />
+          <Route path="experts" element={<ExpertNetwork />} />
         </Route>
         <Route path="/simple" element={<LayoutSimple />}>
           <Route index element={<DashboardSimple />} />
