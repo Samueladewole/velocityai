@@ -27,6 +27,7 @@ import { DayInTheLifeDemo } from '@/pages/DayInTheLifeDemo';
 import { FreeTrustAssessment } from '@/pages/FreeTrustAssessment';
 import { IntegrationHub } from '@/pages/IntegrationHub';
 import { ExpertNetwork } from '@/pages/ExpertNetwork';
+import { CustomerSuccess } from '@/pages/CustomerSuccess';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
 
@@ -77,6 +78,7 @@ function App() {
           <Route path="beacon" element={<BeaconWorking />} />
           <Route path="integrations" element={<IntegrationHub />} />
           <Route path="experts" element={<ExpertNetwork />} />
+          <Route path="customer-success" element={<CustomerSuccess />} />
         </Route>
         <Route path="/simple" element={<LayoutSimple />}>
           <Route index element={<DashboardSimple />} />
