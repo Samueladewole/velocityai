@@ -87,15 +87,14 @@ function App() {
           <Route path="case-study" element={<CaseStudy />} />
           <Route path="solutions/compliance-automation" element={<ComplianceAutomation />} />
           <Route path="solutions/sales-acceleration" element={<SalesAcceleration />} />
+          {/* Platform component routes with navigation */}
+          <Route path="dashboard" element={<MVPDashboard />} />
+          <Route path="dtef-automation" element={<DTEFAutomation />} />
+          <Route path="certifications" element={<IndustryCertifications />} />
+          <Route path="qie-enhanced" element={<QIEEnhanced />} />
+          <Route path="privacy-management" element={<PrivacyManagement />} />
+          <Route path="ai-governance" element={<AIGovernance />} />
         </Route>
-
-        {/* Component routes without navigation (for direct access) */}
-        <Route path="/dashboard" element={<MVPDashboard />} />
-        <Route path="/dtef-automation" element={<DTEFAutomation />} />
-        <Route path="/certifications" element={<IndustryCertifications />} />
-        <Route path="/qie-enhanced" element={<QIEEnhanced />} />
-        <Route path="/privacy-management" element={<PrivacyManagement />} />
-        <Route path="/ai-governance" element={<AIGovernance />} />
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
         {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
         {/* <Route path="/policy-management" element={<PolicyManagement />} /> */}
