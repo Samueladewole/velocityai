@@ -306,11 +306,6 @@ export const LandingEnhanced: React.FC = () => {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-4">
               <Logo className="h-8 w-8" />
-              <div className="flex items-center space-x-2">
-                <span className="text-xl font-bold text-slate-900">
-                  ERIP
-                </span>
-              </div>
             </div>
             
             <div className="hidden md:flex items-center space-x-6">
@@ -644,9 +639,8 @@ export const LandingEnhanced: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
+              <div className="mb-4">
                 <Logo className="h-8 w-8" />
-                <span className="text-xl font-bold">ERIP</span>
               </div>
               <p className="text-slate-400 text-sm">
                 Building trust through technology excellence.
