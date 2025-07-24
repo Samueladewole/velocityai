@@ -31,6 +31,7 @@ import { CustomerSuccess } from '@/pages/CustomerSuccess';
 import { InteractiveSandbox } from '@/pages/InteractiveSandbox';
 import { ROICalculator } from '@/pages/ROICalculator';
 import { DTEFAutomation } from '@/pages/DTEFAutomation';
+import { IndustryCertifications } from '@/pages/IndustryCertifications';
 // Full Stack Trust Platform components - TODO: Implement these
 // import { FrameworkManager } from '@/pages/FrameworkManager';
 // import { PolicyManagement } from '@/pages/PolicyManagement';
@@ -74,6 +75,7 @@ function App() {
         <Route path="/roi-calculator" element={<ROICalculator />} />
         <Route path="/assessment" element={<FreeTrustAssessment />} />
         <Route path="/dtef-automation" element={<DTEFAutomation />} />
+        <Route path="/certifications" element={<IndustryCertifications />} />
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
         {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
         {/* <Route path="/policy-management" element={<PolicyManagement />} /> */}
