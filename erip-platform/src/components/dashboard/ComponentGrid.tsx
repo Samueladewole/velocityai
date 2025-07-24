@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
   Shield, 
@@ -31,6 +32,7 @@ interface ComponentStatus {
   category: string;
   icon: React.ReactNode;
   color: string;
+  route: string;
 }
 
 const components: ComponentStatus[] = [
@@ -44,7 +46,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'Run simulation',
     category: 'Value Discovery',
     icon: <BarChart3 className="h-5 w-5" />,
-    color: 'from-yellow-400 to-orange-500'
+    color: 'from-yellow-400 to-orange-500',
+    route: '/tools/prism'
   },
   {
     id: 'QIE',
@@ -56,7 +59,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'Upload questionnaire',
     category: 'Trust Building',
     icon: <FileText className="h-5 w-5" />,
-    color: 'from-teal-400 to-cyan-500'
+    color: 'from-teal-400 to-cyan-500',
+    route: '/qie-enhanced'
   },
   {
     id: 'BEACON',
@@ -68,7 +72,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'Share Trust Score',
     category: 'Value Discovery',
     icon: <Shield className="h-5 w-5" />,
-    color: 'from-yellow-400 to-orange-500'
+    color: 'from-yellow-400 to-orange-500',
+    route: '/app/beacon'
   },
   {
     id: 'COMPASS',
@@ -80,7 +85,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'View gaps',
     category: 'Assessment',
     icon: <Target className="h-5 w-5" />,
-    color: 'from-blue-400 to-blue-600'
+    color: 'from-blue-400 to-blue-600',
+    route: '/app/compass'
   },
   {
     id: 'ATLAS',
@@ -92,7 +98,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'Check threats',
     category: 'Assessment',
     icon: <Search className="h-5 w-5" />,
-    color: 'from-blue-400 to-blue-600'
+    color: 'from-blue-400 to-blue-600',
+    route: '/app/atlas'
   },
   {
     id: 'PULSE',
@@ -104,7 +111,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'View monitoring',
     category: 'Monitoring',
     icon: <Activity className="h-5 w-5" />,
-    color: 'from-green-400 to-green-600'
+    color: 'from-green-400 to-green-600',
+    route: '/app/pulse'
   },
   {
     id: 'CLEARANCE',
@@ -116,7 +124,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'New decision',
     category: 'Automation',
     icon: <Zap className="h-5 w-5" />,
-    color: 'from-purple-400 to-purple-600'
+    color: 'from-purple-400 to-purple-600',
+    route: '/app/clearance'
   },
   {
     id: 'PRIVACY',
@@ -128,7 +137,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'Manage privacy',
     category: 'Automation',
     icon: <Lock className="h-5 w-5" />,
-    color: 'from-purple-400 to-purple-600'
+    color: 'from-purple-400 to-purple-600',
+    route: '/privacy-management'
   },
   {
     id: 'AI_GOV',
@@ -140,7 +150,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'View AI systems',
     category: 'Trust Building',
     icon: <Bot className="h-5 w-5" />,
-    color: 'from-teal-400 to-cyan-500'
+    color: 'from-teal-400 to-cyan-500',
+    route: '/ai-governance'
   },
   {
     id: 'CLOUD',
@@ -152,7 +163,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'View findings',
     category: 'Monitoring',
     icon: <Cloud className="h-5 w-5" />,
-    color: 'from-green-400 to-green-600'
+    color: 'from-green-400 to-green-600',
+    route: '/dtef-automation'
   },
   {
     id: 'FRAMEWORK',
@@ -164,7 +176,8 @@ const components: ComponentStatus[] = [
     quickAccess: 'View frameworks',
     category: 'Assessment',
     icon: <Settings className="h-5 w-5" />,
-    color: 'from-blue-400 to-blue-600'
+    color: 'from-blue-400 to-blue-600',
+    route: '/framework-management'
   },
   {
     id: 'TRAINING',
@@ -176,7 +189,34 @@ const components: ComponentStatus[] = [
     quickAccess: 'View progress',
     category: 'Trust Building',
     icon: <Users className="h-5 w-5" />,
-    color: 'from-teal-400 to-cyan-500'
+    color: 'from-teal-400 to-cyan-500',
+    route: '/employee-training'
+  },
+  {
+    id: 'CIPHER',
+    name: 'Data Protection',
+    status: 'active',
+    health: 93,
+    lastAction: 'Encryption keys rotated',
+    trustPoints: '+155 today',
+    quickAccess: 'Manage protection',
+    category: 'Automation',
+    icon: <Lock className="h-5 w-5" />,
+    color: 'from-purple-400 to-purple-600',
+    route: '/app/cipher'
+  },
+  {
+    id: 'NEXUS',
+    name: 'Vendor Risk',
+    status: 'active',
+    health: 85,
+    lastAction: 'New vendor assessed',
+    trustPoints: '+130 today',
+    quickAccess: 'View vendors',
+    category: 'Assessment',
+    icon: <Users className="h-5 w-5" />,
+    color: 'from-blue-400 to-blue-600',
+    route: '/app/nexus'
   }
 ];
 
@@ -200,6 +240,7 @@ interface ComponentGridProps {
 }
 
 export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) => {
+  const navigate = useNavigate();
   const categories = Array.from(new Set(components.map(c => c.category)));
 
   return (
@@ -238,6 +279,7 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
               .map(component => (
                 <Card 
                   key={component.id} 
+                  onClick={() => navigate(component.route)}
                   className="group relative overflow-hidden border-0 bg-gradient-to-br from-white to-slate-50/50 shadow-lg shadow-slate-200/50 transition-all duration-300 hover:shadow-xl hover:shadow-slate-300/50 hover:-translate-y-1 cursor-pointer"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-slate-100/30" />
@@ -286,7 +328,13 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
                     </div>
 
                     {/* Quick Action */}
-                    <button className="w-full flex items-center justify-between p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700">
+                    <button 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate(component.route);
+                      }}
+                      className="w-full flex items-center justify-between p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700"
+                    >
                       <span className="text-sm font-medium">{component.quickAccess}</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>

@@ -44,8 +44,8 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
       description: 'See how ERIP transforms compliance into competitive advantage',
       items: [
         { name: 'Platform Overview', href: '/platform', icon: Shield },
-        { name: 'Trust Equity™ System', href: '/trust-equity', icon: Award },
-        { name: 'Value-First Workflow™', href: '/workflow', icon: Zap }
+        { name: 'Trust Equity™ System', href: '/trust-score', icon: Award },
+        { name: 'Value-First Workflow™', href: '/platform', icon: Zap }
       ]
     },
     {
@@ -63,9 +63,9 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
       category: 'Integrations',
       description: 'Connect with your existing tools',
       items: [
-        { name: 'Cloud Environments', href: '/integrations/cloud', icon: Globe },
-        { name: 'Security Tools', href: '/integrations/security', icon: Shield },
-        { name: 'Compliance Platforms', href: '/integrations/compliance', icon: FileCheck }
+        { name: 'Cloud Environments', href: '/app/integrations', icon: Globe },
+        { name: 'Security Tools', href: '/app/integrations', icon: Shield },
+        { name: 'Compliance Platforms', href: '/app/integrations', icon: FileCheck }
       ]
     },
     {

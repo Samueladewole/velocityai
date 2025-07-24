@@ -889,7 +889,7 @@ export const LandingEnhanced: React.FC = () => {
             <p className="text-slate-600 mb-4">And 500+ more integrations through our open API</p>
             <Button 
               variant="outline" 
-              onClick={() => navigate('/integrations')}
+              onClick={() => navigate('/app/integrations')}
               className="border-blue-200 text-blue-700"
             >
               <ExternalLink className="h-4 w-4 mr-2" />

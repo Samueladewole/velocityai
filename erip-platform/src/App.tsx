@@ -45,6 +45,9 @@ import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
 import { TrustScore } from '@/pages/TrustScore';
 import { Dashboard } from '@/pages/Dashboard';
 import { TrustCenter } from '@/pages/TrustCenter';
+import { ROIGuide } from '@/pages/ROIGuide';
+import { PRISM } from '@/pages/tools/PRISM';
+import { ToolsOverview } from '@/pages/tools/ToolsOverview';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { TourProvider } from '@/components/tour/TourProvider';
@@ -93,6 +96,7 @@ function App() {
           <Route path="demo" element={<DayInTheLifeDemo />} />
           <Route path="sandbox" element={<InteractiveSandbox />} />
           <Route path="roi-calculator" element={<ROICalculator />} />
+          <Route path="roi-guide" element={<ROIGuide />} />
           <Route path="assessment" element={<FreeTrustAssessment />} />
           <Route path="industry" element={<IndustrySelection />} />
           <Route path="regulatory/eu" element={<EuropeanLandscape />} />
@@ -109,6 +113,9 @@ function App() {
           <Route path="policy-management" element={<PolicyManagement />} />
           <Route path="employee-training" element={<EmployeeTraining />} />
           <Route path="assessment-marketplace" element={<AssessmentMarketplace />} />
+          {/* Tools */}
+          <Route path="tools" element={<ToolsOverview />} />
+          <Route path="tools/prism" element={<PRISM />} />
         </Route>
         
         {/* Trust Center Routes (Public) */}

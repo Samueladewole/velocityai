@@ -23,7 +23,8 @@ import {
   QrCode,
   Mail,
   Copy,
-  Check
+  Check,
+  X
 } from 'lucide-react';
 import {
   RadialBarChart,

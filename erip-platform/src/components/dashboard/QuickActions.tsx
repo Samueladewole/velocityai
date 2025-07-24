@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { 
   Upload, 
@@ -13,61 +14,63 @@ import {
   Zap
 } from 'lucide-react';
 
-interface QuickAction {
+
+interface QuickActionItem {
   id: string;
   label: string;
   description: string;
   icon: React.ReactNode;
   color: string;
   shortcut?: string;
-  onClick: () => void;
+  route: string;
 }
-
-const quickActions: QuickAction[] = [
-  {
-    id: 'upload-questionnaire',
-    label: 'Upload Questionnaire',
-    description: 'Process with QIE',
-    icon: <Upload className="h-5 w-5" />,
-    color: 'from-blue-400 to-blue-600',
-    shortcut: 'Cmd+U',
-    onClick: () => console.log('Upload questionnaire')
-  },
-  {
-    id: 'share-trust-score',
-    label: 'Share Trust Score',
-    description: 'Generate public URL',
-    icon: <Share2 className="h-5 w-5" />,
-    color: 'from-green-400 to-green-600',
-    shortcut: 'Cmd+S',
-    onClick: () => console.log('Share trust score')
-  },
-  {
-    id: 'run-simulation',
-    label: 'Run Risk Simulation',
-    description: 'Launch PRISM',
-    icon: <Play className="h-5 w-5" />,
-    color: 'from-purple-400 to-purple-600',
-    shortcut: 'Cmd+R',
-    onClick: () => console.log('Run simulation')
-  },
-  {
-    id: 'view-gaps',
-    label: 'View Compliance Gaps',
-    description: 'Priority items',
-    icon: <Search className="h-5 w-5" />,
-    color: 'from-amber-400 to-amber-600',
-    shortcut: 'Cmd+G',
-    onClick: () => console.log('View gaps')
-  }
-];
 
 interface QuickActionsProps {
   className?: string;
 }
 
 export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) => {
+  const navigate = useNavigate();
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = React.useState(false);
+
+  const quickActions: QuickActionItem[] = [
+    {
+      id: 'upload-questionnaire',
+      label: 'Upload Questionnaire',
+      description: 'Process with QIE',
+      icon: <Upload className="h-5 w-5" />,
+      color: 'from-blue-400 to-blue-600',
+      shortcut: 'Cmd+U',
+      route: '/qie-enhanced'
+    },
+    {
+      id: 'share-trust-score',
+      label: 'Share Trust Score',
+      description: 'Generate public URL',
+      icon: <Share2 className="h-5 w-5" />,
+      color: 'from-green-400 to-green-600',
+      shortcut: 'Cmd+S',
+      route: '/trust-score'
+    },
+    {
+      id: 'run-simulation',
+      label: 'Run Risk Simulation',
+      description: 'Launch PRISM',
+      icon: <Play className="h-5 w-5" />,
+      color: 'from-purple-400 to-purple-600',
+      shortcut: 'Cmd+R',
+      route: '/tools/prism'
+    },
+    {
+      id: 'view-gaps',
+      label: 'View Compliance Gaps',
+      description: 'Priority items',
+      icon: <Search className="h-5 w-5" />,
+      color: 'from-amber-400 to-amber-600',
+      shortcut: 'Cmd+G',
+      route: '/app/compass'
+    }
+  ];
 
   React.useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -105,7 +108,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) =>
         {quickActions.map((action) => (
           <Card 
             key={action.id}
-            onClick={action.onClick}
+            onClick={() => navigate(action.route)}
             className="group relative overflow-hidden border-0 bg-gradient-to-br from-white to-slate-50/50 shadow-lg shadow-slate-200/50 transition-all duration-300 hover:shadow-xl hover:shadow-slate-300/50 hover:-translate-y-1 cursor-pointer"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-transparent to-slate-100/30" />
@@ -163,7 +166,16 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) =>
                   <button
                     key={index}
                     className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-100 transition-colors text-left"
-                    onClick={() => setIsCommandPaletteOpen(false)}
+                    onClick={() => {
+                      setIsCommandPaletteOpen(false);
+                      // Navigate based on the command
+                      if (cmd.label.includes('QIE')) navigate('/qie-enhanced');
+                      else if (cmd.label.includes('PRISM')) navigate('/tools/prism');
+                      else if (cmd.label.includes('BEACON')) navigate('/trust-score');
+                      else if (cmd.label.includes('COMPASS')) navigate('/app/compass');
+                      else if (cmd.label.includes('ATLAS')) navigate('/app/atlas');
+                      else if (cmd.label.includes('dashboard')) navigate('/dashboard');
+                    }}
                   >
                     <div className="flex items-center gap-3">
                       <div className="text-slate-400">{cmd.icon}</div>
