@@ -644,7 +644,7 @@ Based on the pragmatic risk appetite framework, ERIP automates:
 # TEAM & RESOURCES
 
 ## **Development Approach**
-- Single developer (Claude) with comprehensive platform knowledge
+- Single developer (Claude & Samuel) with comprehensive platform knowledge
 - Iterative development with working increments
 - Documentation-driven development
 - User feedback integration

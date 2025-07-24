@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+boto3
+azure-identity
+azure-mgmt-resource
+azure-mgmt-compute
+azure-mgmt-storage
+azure-mgmt-security
+google-cloud-asset
+google-cloud-compute
+google-cloud-storage
+requests
+python-multipart
