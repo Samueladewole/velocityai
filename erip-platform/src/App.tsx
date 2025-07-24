@@ -38,6 +38,7 @@ import { AIGovernance } from '@/pages/AIGovernance';
 import { FrameworkManagement } from '@/pages/FrameworkManagement';
 import { PolicyManagement } from '@/pages/PolicyManagement';
 import { EmployeeTraining } from '@/pages/EmployeeTraining';
+import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { PlatformCapabilities } from '@/pages/PlatformCapabilities';
 import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
 import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
@@ -100,6 +101,7 @@ function App() {
           <Route path="framework-management" element={<FrameworkManagement />} />
           <Route path="policy-management" element={<PolicyManagement />} />
           <Route path="employee-training" element={<EmployeeTraining />} />
+          <Route path="assessment-marketplace" element={<AssessmentMarketplace />} />
         </Route>
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
         {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
