@@ -763,8 +763,9 @@ export const DTEFAutomation: React.FC = () => {
                     </div>
                   </div>
                 )}
-              </CardContent>
-            </Card>
+              </div>
+            </CardContent>
+          </Card>
         </TabsContent>
 
         {/* Roadmap Tab */}
