@@ -42,7 +42,10 @@ import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { PlatformCapabilities } from '@/pages/PlatformCapabilities';
 import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
 import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
+import { TrustScore } from '@/pages/TrustScore';
+import { Dashboard } from '@/pages/Dashboard';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
+import { AppLayout } from '@/components/layout/AppLayout';
 // Full Stack Trust Platform components - TODO: Implement these
 // import { FrameworkManager } from '@/pages/FrameworkManager';
 // import { PolicyManagement } from '@/pages/PolicyManagement';
@@ -92,7 +95,6 @@ function App() {
           <Route path="solutions/compliance-automation" element={<ComplianceAutomation />} />
           <Route path="solutions/sales-acceleration" element={<SalesAcceleration />} />
           {/* Platform component routes with navigation */}
-          <Route path="dashboard" element={<MVPDashboard />} />
           <Route path="dtef-automation" element={<DTEFAutomation />} />
           <Route path="certifications" element={<IndustryCertifications />} />
           <Route path="qie-enhanced" element={<QIEEnhanced />} />
@@ -103,6 +105,13 @@ function App() {
           <Route path="employee-training" element={<EmployeeTraining />} />
           <Route path="assessment-marketplace" element={<AssessmentMarketplace />} />
         </Route>
+        
+        {/* App Layout with Sidebar (for authenticated users) */}
+        <Route path="/" element={<AppLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="trust-score" element={<TrustScore />} />
+        </Route>
+        
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
         {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
         {/* <Route path="/policy-management" element={<PolicyManagement />} /> */}
