@@ -53,8 +53,7 @@ import {
   ChevronDown,
   ExternalLink,
   Clock,
-  DollarSign,
-  Flag
+  DollarSign
 } from 'lucide-react';
 
 export const LandingEnhanced: React.FC = () => {
@@ -311,10 +310,6 @@ export const LandingEnhanced: React.FC = () => {
                 <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
                   ERIP
                 </span>
-                <Flag className="h-4 w-4 text-blue-500" />
-                <Badge variant="outline" className="text-xs border-blue-200 text-blue-700">
-                  Swedish Innovation
-                </Badge>
               </div>
             </div>
             
@@ -653,7 +648,6 @@ export const LandingEnhanced: React.FC = () => {
               <div className="flex items-center space-x-2 mb-4">
                 <Logo className="h-8 w-8" />
                 <span className="text-xl font-bold">ERIP</span>
-                <Flag className="h-4 w-4 text-blue-400" />
               </div>
               <p className="text-slate-400 text-sm">
                 Swedish innovation meets enterprise security. 
