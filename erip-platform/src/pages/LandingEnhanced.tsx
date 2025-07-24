@@ -29,8 +29,6 @@ import {
   ChevronRight,
   Play,
   Info,
-  Menu,
-  X,
   Phone,
   Mail,
   Download,
@@ -59,7 +57,6 @@ import {
 export const LandingEnhanced: React.FC = () => {
   const navigate = useNavigate();
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activePhase, setActivePhase] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('core');
 
@@ -300,37 +297,6 @@ export const LandingEnhanced: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
-      {/* Swedish Innovation Navbar */}
-      <nav className="bg-white/95 backdrop-blur-md border-b border-blue-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4">
-              <Logo className="h-8 w-8" />
-            </div>
-            
-            <div className="hidden md:flex items-center space-x-6">
-              <Button variant="ghost" onClick={() => navigate('/assessment')}>
-                Free Assessment
-              </Button>
-              <Button variant="ghost" onClick={() => navigate('/sandbox')}>
-                Interactive Demo
-              </Button>
-              <Button variant="ghost" onClick={() => navigate('/roi-calculator')}>
-                ROI Calculator
-              </Button>
-              <Button onClick={() => navigate('/onboarding')} className="bg-gradient-to-r from-blue-600 to-indigo-600">
-                Start Free Trial
-              </Button>
-            </div>
-
-            <div className="md:hidden">
-              <Button variant="ghost" size="sm" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-                {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
