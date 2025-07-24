@@ -30,6 +30,14 @@ import { ExpertNetwork } from '@/pages/ExpertNetwork';
 import { CustomerSuccess } from '@/pages/CustomerSuccess';
 import { InteractiveSandbox } from '@/pages/InteractiveSandbox';
 import { ROICalculator } from '@/pages/ROICalculator';
+// Full Stack Trust Platform components - TODO: Implement these
+// import { FrameworkManager } from '@/pages/FrameworkManager';
+// import { PolicyManagement } from '@/pages/PolicyManagement';
+// import { QIEWorkflow } from '@/pages/QIEWorkflow';
+// import { EmployeeTraining } from '@/pages/EmployeeTraining';
+// import { PrivacySuite } from '@/pages/PrivacySuite';
+// import { AIGovernance } from '@/pages/AIGovernance';
+// import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
 
@@ -64,6 +72,14 @@ function App() {
         <Route path="/sandbox" element={<InteractiveSandbox />} />
         <Route path="/roi-calculator" element={<ROICalculator />} />
         <Route path="/assessment" element={<FreeTrustAssessment />} />
+        {/* Full Stack Trust Platform routes - TODO: Implement these components */}
+        {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
+        {/* <Route path="/policy-management" element={<PolicyManagement />} /> */}
+        {/* <Route path="/qie" element={<QIEWorkflow />} /> */}
+        {/* <Route path="/employee-training" element={<EmployeeTraining />} /> */}
+        {/* <Route path="/privacy-suite" element={<PrivacySuite />} /> */}
+        {/* <Route path="/ai-governance" element={<AIGovernance />} /> */}
+        {/* <Route path="/assessment-marketplace" element={<AssessmentMarketplace />} /> */}
         <Route path="/prism-demo" element={<PrismDemoWorking />} />
         <Route path="/industry" element={<IndustrySelection />} />
         <Route path="/regulatory/eu" element={<EuropeanLandscape />} />
