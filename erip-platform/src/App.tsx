@@ -47,6 +47,13 @@ import { Dashboard } from '@/pages/Dashboard';
 import { TrustCenter } from '@/pages/TrustCenter';
 import { ROIGuide } from '@/pages/ROIGuide';
 import { PRISM } from '@/pages/tools/PRISM';
+import { BEACON } from '@/pages/tools/BEACON';
+import { COMPASS } from '@/pages/tools/COMPASS';
+import { ATLAS } from '@/pages/tools/ATLAS';
+import { PULSE } from '@/pages/tools/PULSE';
+import { NEXUS } from '@/pages/tools/NEXUS';
+import { CLEARANCE } from '@/pages/tools/CLEARANCE';
+import { CIPHER } from '@/pages/tools/CIPHER';
 import { ToolsOverview } from '@/pages/tools/ToolsOverview';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
@@ -116,6 +123,13 @@ function App() {
           {/* Tools */}
           <Route path="tools" element={<ToolsOverview />} />
           <Route path="tools/prism" element={<PRISM />} />
+          <Route path="tools/beacon" element={<BEACON />} />
+          <Route path="tools/compass" element={<COMPASS />} />
+          <Route path="tools/atlas" element={<ATLAS />} />
+          <Route path="tools/pulse" element={<PULSE />} />
+          <Route path="tools/nexus" element={<NEXUS />} />
+          <Route path="tools/clearance" element={<CLEARANCE />} />
+          <Route path="tools/cipher" element={<CIPHER />} />
         </Route>
         
         {/* Trust Center Routes (Public) */}

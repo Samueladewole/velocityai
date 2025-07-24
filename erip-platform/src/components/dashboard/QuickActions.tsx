@@ -68,7 +68,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) =>
       icon: <Search className="h-5 w-5" />,
       color: 'from-amber-400 to-amber-600',
       shortcut: 'Cmd+G',
-      route: '/app/compass'
+      route: '/tools/compass'
     }
   ];
 
@@ -171,9 +171,9 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) =>
                       // Navigate based on the command
                       if (cmd.label.includes('QIE')) navigate('/qie-enhanced');
                       else if (cmd.label.includes('PRISM')) navigate('/tools/prism');
-                      else if (cmd.label.includes('BEACON')) navigate('/trust-score');
-                      else if (cmd.label.includes('COMPASS')) navigate('/app/compass');
-                      else if (cmd.label.includes('ATLAS')) navigate('/app/atlas');
+                      else if (cmd.label.includes('BEACON')) navigate('/tools/beacon');
+                      else if (cmd.label.includes('COMPASS')) navigate('/tools/compass');
+                      else if (cmd.label.includes('ATLAS')) navigate('/tools/atlas');
                       else if (cmd.label.includes('dashboard')) navigate('/dashboard');
                     }}
                   >
