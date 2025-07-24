@@ -477,8 +477,7 @@ export const LandingEnhanced: React.FC = () => {
               13+ Enterprise-Grade Components
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-              Every component designed with Swedish innovation principles: 
-              simplicity, functionality, and excellence.
+              Every component designed with principles of simplicity, functionality, and excellence.
             </p>
           </div>
 
@@ -650,7 +649,6 @@ export const LandingEnhanced: React.FC = () => {
                 <span className="text-xl font-bold">ERIP</span>
               </div>
               <p className="text-slate-400 text-sm">
-                Swedish innovation meets enterprise security. 
                 Building trust through technology excellence.
               </p>
             </div>
@@ -679,7 +677,7 @@ export const LandingEnhanced: React.FC = () => {
               <h4 className="font-semibold mb-4">Company</h4>
               <div className="space-y-2 text-sm text-slate-400">
                 <div>About ERIP</div>
-                <div>Swedish Innovation</div>
+                <div>Our Mission</div>
                 <div>Customer Success</div>
                 <div>Partnership Program</div>
               </div>
@@ -687,7 +685,7 @@ export const LandingEnhanced: React.FC = () => {
           </div>
           
           <div className="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
-            <p>&copy; 2024 ERIP. Swedish innovation for global trust. All rights reserved.</p>
+            <p>&copy; 2024 ERIP. All rights reserved.</p>
           </div>
         </div>
       </footer>
