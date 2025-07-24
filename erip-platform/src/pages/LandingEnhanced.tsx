@@ -63,7 +63,7 @@ export const LandingEnhanced: React.FC = () => {
   const [activePhase, setActivePhase] = useState(1);
   const [selectedCategory, setSelectedCategory] = useState('core');
 
-  // Full Stack Trust Platform Components organized by category
+  // Trust Platform Components organized by category
   const componentCategories = {
     core: {
       title: 'Core Security Platform',
@@ -345,7 +345,7 @@ export const LandingEnhanced: React.FC = () => {
             <div className="flex items-center justify-center mb-6">
               <Badge className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 border-blue-200 px-4 py-2">
                 <Sparkles className="h-4 w-4 mr-2" />
-                Full Stack Trust Platform
+                Trust Platform
               </Badge>
             </div>
             
@@ -465,13 +465,13 @@ export const LandingEnhanced: React.FC = () => {
         </div>
       </section>
 
-      {/* Full Stack Trust Platform Components */}
+      {/* Trust Platform Components */}
       <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge className="bg-gradient-to-r from-purple-100 to-violet-100 text-purple-800 border-purple-200 mb-4">
               <Shield className="h-4 w-4 mr-2" />
-              Full Stack Trust Platform
+              Trust Platform
             </Badge>
             <h2 className="text-4xl font-bold text-slate-800 mb-6">
               13+ Enterprise-Grade Components
@@ -584,7 +584,7 @@ export const LandingEnhanced: React.FC = () => {
             <div className="bg-gradient-to-br from-slate-900 to-blue-900 rounded-3xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-6">Success Story</h3>
               <blockquote className="text-lg italic mb-6">
-                "ERIP's Full Stack Trust Platform transformed our compliance program. 
+                "ERIP's Trust Platform transformed our compliance program. 
                 We reduced audit preparation time by 80% and achieved ISO 27001 
                 certification 6 months ahead of schedule."
               </blockquote>
@@ -658,7 +658,7 @@ export const LandingEnhanced: React.FC = () => {
             <div>
               <h4 className="font-semibold mb-4">Platform</h4>
               <div className="space-y-2 text-sm text-slate-400">
-                <div>Full Stack Trust Platform</div>
+                <div>Trust Platform</div>
                 <div>Trust Equity™ System</div>
                 <div>Framework Optimization</div>
                 <div>Policy Automation</div>
