@@ -44,6 +44,7 @@ import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
 import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
 import { TrustScore } from '@/pages/TrustScore';
 import { Dashboard } from '@/pages/Dashboard';
+import { TrustCenter } from '@/pages/TrustCenter';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { TourProvider } from '@/components/tour/TourProvider';
@@ -109,6 +110,9 @@ function App() {
           <Route path="employee-training" element={<EmployeeTraining />} />
           <Route path="assessment-marketplace" element={<AssessmentMarketplace />} />
         </Route>
+        
+        {/* Trust Center Routes (Public) */}
+        <Route path="/trust/:companySlug" element={<TrustCenter />} />
         
         {/* App Layout with Sidebar (for authenticated users) */}
         <Route path="/" element={<AppLayout />}>
