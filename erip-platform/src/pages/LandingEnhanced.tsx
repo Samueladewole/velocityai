@@ -307,7 +307,7 @@ export const LandingEnhanced: React.FC = () => {
             <div className="flex items-center space-x-4">
               <Logo className="h-8 w-8" />
               <div className="flex items-center space-x-2">
-                <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                <span className="text-xl font-bold text-slate-900">
                   ERIP
                 </span>
               </div>
