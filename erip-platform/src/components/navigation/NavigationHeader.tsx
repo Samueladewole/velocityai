@@ -1,0 +1,425 @@
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { 
+  Menu, 
+  X, 
+  Shield, 
+  ChevronDown, 
+  User, 
+  Bell,
+  ExternalLink,
+  Building2,
+  Zap,
+  Brain,
+  Award,
+  FileCheck,
+  Users,
+  Globe,
+  Briefcase,
+  BookOpen,
+  Calculator,
+  Video,
+  MessageSquare,
+  Phone
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
+import { useAuthStore } from '@/store';
+
+interface NavigationHeaderProps {
+  className?: string;
+}
+
+export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [platformOpen, setPlatformOpen] = useState(false);
+  const [solutionsOpen, setSolutionsOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+  const { user, isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
+
+  const platformItems = [
+    {
+      category: 'Overview',
+      description: 'See how ERIP transforms compliance into competitive advantage',
+      items: [
+        { name: 'Platform Overview', href: '/platform', icon: Shield },
+        { name: 'Trust Equity™ System', href: '/trust-equity', icon: Award },
+        { name: 'Value-First Workflow™', href: '/workflow', icon: Zap }
+      ]
+    },
+    {
+      category: 'Components',
+      description: 'Core platform capabilities',
+      items: [
+        { name: 'QIE - Questionnaire Intelligence', href: '/qie-enhanced', icon: Brain },
+        { name: 'ISACA DTEF Automation', href: '/dtef-automation', icon: FileCheck },
+        { name: 'Industry Certifications', href: '/certifications', icon: Award },
+        { name: 'AI Governance', href: '/ai-governance', icon: Brain },
+        { name: 'Privacy Management', href: '/privacy-management', icon: Shield }
+      ]
+    },
+    {
+      category: 'Integrations',
+      description: 'Connect with your existing tools',
+      items: [
+        { name: 'Cloud Environments', href: '/integrations/cloud', icon: Globe },
+        { name: 'Security Tools', href: '/integrations/security', icon: Shield },
+        { name: 'Compliance Platforms', href: '/integrations/compliance', icon: FileCheck }
+      ]
+    },
+    {
+      category: 'Trust Score',
+      description: 'See how Trust Score accelerates sales',
+      items: [
+        { name: 'Share Trust Score', href: '/trust-score-share', icon: ExternalLink },
+        { name: 'Public Profiles', href: '/public-profiles', icon: Users },
+        { name: 'Sales Acceleration', href: '/sales-acceleration', icon: Zap }
+      ]
+    }
+  ];
+
+  const solutionsByUseCase = [
+    { name: 'Compliance Automation', href: '/solutions/compliance-automation', description: '95% time reduction' },
+    { name: 'Risk Quantification', href: '/solutions/risk-quantification', description: 'FAIR methodology' },
+    { name: 'Sales Acceleration', href: '/solutions/sales-acceleration', description: '40% faster deals' },
+    { name: 'AI Governance', href: '/solutions/ai-governance', description: 'ISO 42001 compliance' },
+    { name: 'Privacy Management', href: '/solutions/privacy-management', description: 'GDPR automation' }
+  ];
+
+  const solutionsByIndustry = [
+    { name: 'Financial Services', href: '/solutions/financial-services' },
+    { name: 'Healthcare', href: '/solutions/healthcare' },
+    { name: 'Technology/SaaS', href: '/solutions/technology' },
+    { name: 'Automotive', href: '/solutions/automotive' },
+    { name: 'Manufacturing', href: '/solutions/manufacturing' }
+  ];
+
+  const solutionsByCompanySize = [
+    { name: 'Startups', href: '/solutions/startups' },
+    { name: 'Scaleups', href: '/solutions/scaleups' },
+    { name: 'Mid-Market', href: '/solutions/mid-market' },
+    { name: 'Enterprise', href: '/solutions/enterprise' }
+  ];
+
+  const resourceItems = [
+    { name: 'Documentation', href: '/docs', icon: BookOpen },
+    { name: 'API Reference', href: '/api-docs', icon: FileCheck },
+    { name: 'Trust Academy', href: '/academy', icon: Users },
+    { name: 'Blog & Insights', href: '/blog', icon: MessageSquare },
+    { name: 'Webinars', href: '/webinars', icon: Video },
+    { name: 'Case Studies', href: '/case-studies', icon: Briefcase },
+    { name: 'ROI Calculator', href: '/roi-calculator', icon: Calculator }
+  ];
+
+  const pricingTiers = [
+    { name: 'Starter', price: '€500/month', href: '/pricing/starter' },
+    { name: 'Growth', price: '€1,500/month', href: '/pricing/growth' },
+    { name: 'Enterprise', price: 'Custom', href: '/pricing/enterprise' }
+  ];
+
+  return (
+    <header className={cn(
+      "fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-200/50 shadow-sm",
+      className
+    )}>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-700 shadow-lg">
+              <Shield className="h-5 w-5 text-white" />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
+                ERIP
+              </h1>
+              <p className="text-xs text-slate-500 font-medium">Trust Intelligence Platform</p>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center space-x-8">
+            {/* Platform Dropdown */}
+            <div className="relative group">
+              <button
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                onMouseEnter={() => setPlatformOpen(true)}
+                onMouseLeave={() => setPlatformOpen(false)}
+              >
+                Platform
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              
+              {platformOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-screen max-w-4xl bg-white border border-slate-200 rounded-lg shadow-xl p-6 grid grid-cols-2 gap-6"
+                  onMouseEnter={() => setPlatformOpen(true)}
+                  onMouseLeave={() => setPlatformOpen(false)}
+                >
+                  {platformItems.map((category) => (
+                    <div key={category.category}>
+                      <h3 className="text-sm font-semibold text-slate-900 mb-1">{category.category}</h3>
+                      <p className="text-xs text-slate-500 mb-3">{category.description}</p>
+                      <ul className="space-y-2">
+                        {category.items.map((item) => (
+                          <li key={item.name}>
+                            <Link
+                              to={item.href}
+                              className="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
+                              onClick={() => setPlatformOpen(false)}
+                            >
+                              <item.icon className="h-4 w-4" />
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Solutions Mega Menu */}
+            <div className="relative group">
+              <button
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                onMouseEnter={() => setSolutionsOpen(true)}
+                onMouseLeave={() => setSolutionsOpen(false)}
+              >
+                Solutions
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              
+              {solutionsOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-screen max-w-5xl bg-white border border-slate-200 rounded-lg shadow-xl p-6 grid grid-cols-3 gap-6"
+                  onMouseEnter={() => setSolutionsOpen(true)}
+                  onMouseLeave={() => setSolutionsOpen(false)}
+                >
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-900 mb-3">By Use Case</h3>
+                    <ul className="space-y-2">
+                      {solutionsByUseCase.map((item) => (
+                        <li key={item.name}>
+                          <Link
+                            to={item.href}
+                            className="block px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
+                            onClick={() => setSolutionsOpen(false)}
+                          >
+                            <div className="font-medium">{item.name}</div>
+                            <div className="text-xs text-slate-500">{item.description}</div>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-900 mb-3">By Industry</h3>
+                    <ul className="space-y-2">
+                      {solutionsByIndustry.map((item) => (
+                        <li key={item.name}>
+                          <Link
+                            to={item.href}
+                            className="block px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
+                            onClick={() => setSolutionsOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  
+                  <div>
+                    <h3 className="text-sm font-semibold text-slate-900 mb-3">By Company Size</h3>
+                    <ul className="space-y-2">
+                      {solutionsByCompanySize.map((item) => (
+                        <li key={item.name}>
+                          <Link
+                            to={item.href}
+                            className="block px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
+                            onClick={() => setSolutionsOpen(false)}
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Resources Dropdown */}
+            <div className="relative group">
+              <button
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                onMouseEnter={() => setResourcesOpen(true)}
+                onMouseLeave={() => setResourcesOpen(false)}
+              >
+                Resources
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              
+              {resourcesOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-64 bg-white border border-slate-200 rounded-lg shadow-xl p-4"
+                  onMouseEnter={() => setResourcesOpen(true)}
+                  onMouseLeave={() => setResourcesOpen(false)}
+                >
+                  <ul className="space-y-2">
+                    {resourceItems.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          to={item.href}
+                          className="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
+                          onClick={() => setResourcesOpen(false)}
+                        >
+                          <item.icon className="h-4 w-4" />
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Pricing */}
+            <Link
+              to="/pricing"
+              className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+            >
+              Pricing
+            </Link>
+
+            {/* Company */}
+            <Link
+              to="/company"
+              className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+            >
+              Company
+            </Link>
+          </nav>
+
+          {/* CTA Buttons */}
+          <div className="hidden lg:flex items-center gap-3">
+            {isAuthenticated ? (
+              <div className="flex items-center gap-3">
+                <Button variant="ghost" size="icon" className="relative">
+                  <Bell className="h-5 w-5" />
+                  <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 border-2 border-white" />
+                </Button>
+                
+                <div className="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors border border-slate-200">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-slate-100 to-slate-200">
+                    <User className="h-4 w-4 text-slate-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-slate-900">{user?.name || 'Guest User'}</p>
+                    <p className="text-xs text-slate-500">Administrator</p>
+                  </div>
+                  <ChevronDown className="h-4 w-4 text-slate-400" />
+                </div>
+              </div>
+            ) : (
+              <>
+                <Button 
+                  variant="outline" 
+                  onClick={() => navigate('/demo')}
+                  className="text-sm font-medium"
+                >
+                  Get a Demo
+                </Button>
+                <Button 
+                  onClick={() => navigate('/app')}
+                  className="erip-gradient-primary text-sm font-medium"
+                >
+                  Login
+                </Button>
+              </>
+            )}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </Button>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden border-t border-slate-200 mt-4 py-4">
+            <div className="space-y-4">
+              <Link
+                to="/platform"
+                className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Platform
+              </Link>
+              <Link
+                to="/solutions"
+                className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Solutions
+              </Link>
+              <Link
+                to="/resources"
+                className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Resources
+              </Link>
+              <Link
+                to="/pricing"
+                className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Pricing
+              </Link>
+              <Link
+                to="/company"
+                className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Company
+              </Link>
+              
+              <div className="border-t border-slate-200 pt-4 space-y-2">
+                <Button 
+                  variant="outline" 
+                  className="w-full"
+                  onClick={() => {
+                    navigate('/demo');
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  Get a Demo
+                </Button>
+                <Button 
+                  className="w-full erip-gradient-primary"
+                  onClick={() => {
+                    navigate('/app');
+                    setMobileMenuOpen(false);
+                  }}
+                >
+                  Login
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};

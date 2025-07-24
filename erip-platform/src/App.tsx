@@ -35,6 +35,10 @@ import { IndustryCertifications } from '@/pages/IndustryCertifications';
 import { QIEEnhanced } from '@/pages/QIEEnhanced';
 import { PrivacyManagement } from '@/pages/PrivacyManagement';
 import { AIGovernance } from '@/pages/AIGovernance';
+import { PlatformCapabilities } from '@/pages/PlatformCapabilities';
+import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
+import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
+import { PublicLayout } from '@/components/navigation/PublicLayout';
 // Full Stack Trust Platform components - TODO: Implement these
 // import { FrameworkManager } from '@/pages/FrameworkManager';
 // import { PolicyManagement } from '@/pages/PolicyManagement';
@@ -69,13 +73,24 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingEnhanced />} />
-        <Route path="/onboarding" element={<Onboarding />} />
+        {/* Public routes with comprehensive navigation */}
+        <Route path="/" element={<PublicLayout />}>
+          <Route index element={<LandingEnhanced />} />
+          <Route path="platform" element={<PlatformCapabilities />} />
+          <Route path="onboarding" element={<Onboarding />} />
+          <Route path="demo" element={<DayInTheLifeDemo />} />
+          <Route path="sandbox" element={<InteractiveSandbox />} />
+          <Route path="roi-calculator" element={<ROICalculator />} />
+          <Route path="assessment" element={<FreeTrustAssessment />} />
+          <Route path="industry" element={<IndustrySelection />} />
+          <Route path="regulatory/eu" element={<EuropeanLandscape />} />
+          <Route path="case-study" element={<CaseStudy />} />
+          <Route path="solutions/compliance-automation" element={<ComplianceAutomation />} />
+          <Route path="solutions/sales-acceleration" element={<SalesAcceleration />} />
+        </Route>
+
+        {/* Component routes without navigation (for direct access) */}
         <Route path="/dashboard" element={<MVPDashboard />} />
-        <Route path="/demo" element={<DayInTheLifeDemo />} />
-        <Route path="/sandbox" element={<InteractiveSandbox />} />
-        <Route path="/roi-calculator" element={<ROICalculator />} />
-        <Route path="/assessment" element={<FreeTrustAssessment />} />
         <Route path="/dtef-automation" element={<DTEFAutomation />} />
         <Route path="/certifications" element={<IndustryCertifications />} />
         <Route path="/qie-enhanced" element={<QIEEnhanced />} />
@@ -89,9 +104,6 @@ function App() {
         {/* <Route path="/privacy-suite" element={<PrivacySuite />} /> */}
         {/* <Route path="/assessment-marketplace" element={<AssessmentMarketplace />} /> */}
         <Route path="/prism-demo" element={<PrismDemoWorking />} />
-        <Route path="/industry" element={<IndustrySelection />} />
-        <Route path="/regulatory/eu" element={<EuropeanLandscape />} />
-        <Route path="/case-study" element={<CaseStudy />} />
         <Route path="/app" element={<Layout />}>
           <Route index element={<DashboardEnhanced />} />
           <Route path="compass" element={<CompassWorking />} />
