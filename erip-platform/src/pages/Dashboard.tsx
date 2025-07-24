@@ -4,6 +4,8 @@ import { QuickActions } from '@/components/dashboard/QuickActions';
 import { ComponentGrid } from '@/components/dashboard/ComponentGrid';
 import { IntelligenceInsights } from '@/components/dashboard/IntelligenceInsights';
 import { ActivityStream } from '@/components/dashboard/ActivityStream';
+import { OnboardingFlow } from '@/components/tour/OnboardingFlow';
+import { TourTrigger } from '@/components/tour/TourTrigger';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   BarChart3, 
@@ -118,12 +120,17 @@ const executiveSummaryData = {
 export const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100/50">
+      <OnboardingFlow page="dashboard" />
       <div className="max-w-[1600px] mx-auto p-6 space-y-8">
         {/* Executive Summary */}
-        <ExecutiveSummary {...executiveSummaryData} />
+        <div data-tour="dashboard-header">
+          <ExecutiveSummary {...executiveSummaryData} />
+        </div>
 
         {/* Quick Actions */}
-        <QuickActions />
+        <div data-tour="quick-actions">
+          <QuickActions />
+        </div>
 
         {/* Business Impact Metrics */}
         <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
@@ -265,10 +272,14 @@ export const Dashboard: React.FC = () => {
         </div>
 
         {/* Component Grid */}
-        <ComponentGrid />
+        <div data-tour="component-grid">
+          <ComponentGrid />
+        </div>
 
         {/* Intelligence Insights */}
-        <IntelligenceInsights />
+        <div data-tour="insights-panel">
+          <IntelligenceInsights />
+        </div>
 
         {/* Activity Stream and Additional Charts */}
         <div className="grid gap-6 lg:grid-cols-3">

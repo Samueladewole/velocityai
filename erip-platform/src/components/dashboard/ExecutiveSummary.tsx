@@ -78,7 +78,7 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
         {/* Trust Score Hero Section */}
         <div className="grid md:grid-cols-3 gap-8 mb-8">
           <div className="md:col-span-1">
-            <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white">
+            <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white" data-tour="trust-score">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
                   <div className={`p-2 rounded-lg bg-gradient-to-r ${tierStyle.color}`}>

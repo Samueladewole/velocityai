@@ -46,6 +46,9 @@ import { TrustScore } from '@/pages/TrustScore';
 import { Dashboard } from '@/pages/Dashboard';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
+import { TourProvider } from '@/components/tour/TourProvider';
+import { TourOverlay } from '@/components/tour/TourOverlay';
+import { Tooltip } from '@/components/tour/Tooltip';
 // Full Stack Trust Platform components - TODO: Implement these
 // import { FrameworkManager } from '@/pages/FrameworkManager';
 // import { PolicyManagement } from '@/pages/PolicyManagement';
@@ -78,7 +81,8 @@ function App() {
   console.log('App rendering with store');
   
   return (
-    <Router>
+    <TourProvider>
+      <Router>
       <Routes>
         {/* Public routes with comprehensive navigation */}
         <Route path="/" element={<PublicLayout />}>
@@ -143,7 +147,10 @@ function App() {
           <Route path="prism" element={<div><h2>Prism Page</h2><p>Coming Soon</p></div>} />
         </Route>
       </Routes>
+      <TourOverlay />
+      <Tooltip />
     </Router>
+    </TourProvider>
   );
 }
 

@@ -102,10 +102,13 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ isCollapse
     children.some(child => location.pathname === child.href);
 
   return (
-    <div className={cn(
-      "fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white border-r border-slate-200 transition-all duration-300 z-40",
-      isCollapsed ? "w-16" : "w-64"
-    )}>
+    <div 
+      className={cn(
+        "fixed left-0 top-16 h-[calc(100vh-4rem)] bg-white border-r border-slate-200 transition-all duration-300 z-40",
+        isCollapsed ? "w-16" : "w-64"
+      )}
+      data-tour="sidebar"
+    >
       <div className="flex flex-col h-full">
         {/* Toggle Button */}
         <button

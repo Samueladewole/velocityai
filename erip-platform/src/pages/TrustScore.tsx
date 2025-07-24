@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { OnboardingFlow } from '@/components/tour/OnboardingFlow';
+import { TourTrigger } from '@/components/tour/TourTrigger';
 import { 
   Shield, 
   Award, 
@@ -147,6 +149,7 @@ export const TrustScore: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100/50">
+      <OnboardingFlow page="trust-score" />
       <div className="max-w-7xl mx-auto p-6 space-y-8">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -154,13 +157,17 @@ export const TrustScore: React.FC = () => {
             <h1 className="text-3xl font-bold text-slate-900">Trust Score Command Center</h1>
             <p className="text-slate-600 mt-1">Monitor, analyze, and share your digital trust credentials</p>
           </div>
-          <Button
-            onClick={() => setShowShareModal(true)}
-            className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
-          >
-            <Share2 className="h-4 w-4 mr-2" />
-            Share Trust Score
-          </Button>
+          <div className="flex items-center gap-3">
+            <TourTrigger tourType="trust-score" variant="link" />
+            <Button
+              onClick={() => setShowShareModal(true)}
+              className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800"
+              data-tour="share-trust"
+            >
+              <Share2 className="h-4 w-4 mr-2" />
+              Share Trust Score
+            </Button>
+          </div>
         </div>
 
         {/* Main Trust Score Display */}
@@ -173,7 +180,7 @@ export const TrustScore: React.FC = () => {
             <CardContent>
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Radial Chart */}
-                <div className="relative">
+                <div className="relative" data-tour="trust-radial">
                   <ResponsiveContainer width="100%" height={300}>
                     <RadialBarChart cx="50%" cy="50%" innerRadius="60%" outerRadius="90%" data={radialData}>
                       <PolarGrid stroke="none" />
@@ -198,7 +205,7 @@ export const TrustScore: React.FC = () => {
                 </div>
 
                 {/* Score Details */}
-                <div className="space-y-6">
+                <div className="space-y-6" data-tour="score-breakdown">
                   <div>
                     <h3 className="text-sm font-semibold text-slate-700 mb-3">Score Breakdown</h3>
                     <div className="space-y-3">
@@ -346,7 +353,7 @@ export const TrustScore: React.FC = () => {
         </Card>
 
         {/* Trust Drivers */}
-        <div className="grid gap-6 lg:grid-cols-2">
+        <div className="grid gap-6 lg:grid-cols-2" data-tour="trust-drivers">
           {/* Positive Drivers */}
           <Card className="border-0 bg-gradient-to-br from-white to-green-50/30 shadow-lg">
             <CardHeader>
