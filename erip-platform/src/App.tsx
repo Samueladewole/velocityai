@@ -35,6 +35,7 @@ import { IndustryCertifications } from '@/pages/IndustryCertifications';
 import { QIEEnhanced } from '@/pages/QIEEnhanced';
 import { PrivacyManagement } from '@/pages/PrivacyManagement';
 import { AIGovernance } from '@/pages/AIGovernance';
+import { FrameworkManagement } from '@/pages/FrameworkManagement';
 import { PlatformCapabilities } from '@/pages/PlatformCapabilities';
 import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
 import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
@@ -94,6 +95,7 @@ function App() {
           <Route path="qie-enhanced" element={<QIEEnhanced />} />
           <Route path="privacy-management" element={<PrivacyManagement />} />
           <Route path="ai-governance" element={<AIGovernance />} />
+          <Route path="framework-management" element={<FrameworkManagement />} />
         </Route>
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
         {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
