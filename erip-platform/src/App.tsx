@@ -32,13 +32,15 @@ import { InteractiveSandbox } from '@/pages/InteractiveSandbox';
 import { ROICalculator } from '@/pages/ROICalculator';
 import { DTEFAutomation } from '@/pages/DTEFAutomation';
 import { IndustryCertifications } from '@/pages/IndustryCertifications';
+import { QIEEnhanced } from '@/pages/QIEEnhanced';
+import { PrivacyManagement } from '@/pages/PrivacyManagement';
+import { AIGovernance } from '@/pages/AIGovernance';
 // Full Stack Trust Platform components - TODO: Implement these
 // import { FrameworkManager } from '@/pages/FrameworkManager';
 // import { PolicyManagement } from '@/pages/PolicyManagement';
 // import { QIEWorkflow } from '@/pages/QIEWorkflow';
 // import { EmployeeTraining } from '@/pages/EmployeeTraining';
 // import { PrivacySuite } from '@/pages/PrivacySuite';
-// import { AIGovernance } from '@/pages/AIGovernance';
 // import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
@@ -76,13 +78,15 @@ function App() {
         <Route path="/assessment" element={<FreeTrustAssessment />} />
         <Route path="/dtef-automation" element={<DTEFAutomation />} />
         <Route path="/certifications" element={<IndustryCertifications />} />
+        <Route path="/qie-enhanced" element={<QIEEnhanced />} />
+        <Route path="/privacy-management" element={<PrivacyManagement />} />
+        <Route path="/ai-governance" element={<AIGovernance />} />
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
         {/* <Route path="/framework-manager" element={<FrameworkManager />} /> */}
         {/* <Route path="/policy-management" element={<PolicyManagement />} /> */}
         {/* <Route path="/qie" element={<QIEWorkflow />} /> */}
         {/* <Route path="/employee-training" element={<EmployeeTraining />} /> */}
         {/* <Route path="/privacy-suite" element={<PrivacySuite />} /> */}
-        {/* <Route path="/ai-governance" element={<AIGovernance />} /> */}
         {/* <Route path="/assessment-marketplace" element={<AssessmentMarketplace />} /> */}
         <Route path="/prism-demo" element={<PrismDemoWorking />} />
         <Route path="/industry" element={<IndustrySelection />} />
