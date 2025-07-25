@@ -38,6 +38,8 @@ asyncpg==0.29.0  # PostgreSQL async driver
 redis==5.0.1
 sqlalchemy[asyncio]==2.0.25
 alembic==1.13.1
+psycopg2-binary==2.9.9  # PostgreSQL adapter for TimescaleDB
+timescaledb==2.14.2  # TimescaleDB Python toolkit
 
 # Background Tasks & Queue
 celery[redis]==5.3.4

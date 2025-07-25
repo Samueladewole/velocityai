@@ -31,6 +31,7 @@ from enhanced_auth.router import router as enhanced_auth_router
 from advanced_roles.router import router as advanced_roles_router
 from gbm_risk_engine.router import router as gbm_risk_router
 from owasp_security.router import router as owasp_router
+from financial_intelligence.router import router as financial_intelligence_router
 from shared.database import init_db, close_db
 from shared.config import get_settings
 from shared.auth import authenticate_user, create_auth_tokens, get_current_user, AuthTokens
@@ -138,7 +139,8 @@ async def root():
             "Data Architecture - Multi-cloud Data Infrastructure",
             "Advanced Roles - Enterprise Role Management Framework",
             "GBM Risk Engine - Advanced Quantitative Risk Modeling",
-            "OWASP Security Enhancement - Enterprise Security Framework"
+            "OWASP Security Enhancement - Enterprise Security Framework",
+            "Financial Intelligence - Real-time Financial Metrics & TimescaleDB"
         ],
         "docs": "/docs"
     }
@@ -197,6 +199,7 @@ app.include_router(enhanced_auth_router, prefix="/enhanced-auth", tags=["Enhance
 app.include_router(advanced_roles_router, prefix="/advanced-roles", tags=["Advanced Roles Framework"])
 app.include_router(gbm_risk_router, tags=["GBM Risk Engine - Quantitative Risk Modeling"])
 app.include_router(owasp_router, tags=["OWASP Security Enhancement"])
+app.include_router(financial_intelligence_router, tags=["Financial Intelligence - Real-time Metrics & TimescaleDB"])
 
 # Error handlers
 @app.exception_handler(Exception)
