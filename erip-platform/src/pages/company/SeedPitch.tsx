@@ -129,8 +129,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               Compliance Theater Costs €50B Annually
             </h2>
-            <p className="text-xl text-slate-600">
-              European enterprises waste billions on ineffective security compliance
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              European enterprises are trapped in an expensive compliance cycle that consumes resources without reducing actual risk - creating a massive market opportunity for disruption
             </p>
           </div>
 
@@ -143,17 +143,17 @@ export const SeedPitch: React.FC = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-red-700">Annual Compliance Cost</span>
-                  <span className="font-bold text-red-800">€2.3M</span>
+                <div className="flex justify-between items-center p-2 bg-white rounded">
+                  <span className="text-red-700 font-medium">Annual Compliance Cost</span>
+                  <span className="font-bold text-red-800 text-lg">€2.3M</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-red-700">Average Breach Cost</span>
-                  <span className="font-bold text-red-800">€4.88M</span>
+                <div className="flex justify-between items-center p-2 bg-white rounded">
+                  <span className="text-red-700 font-medium">Average Breach Cost</span>
+                  <span className="font-bold text-red-800 text-lg">€4.88M</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-red-700">Wasted Effort</span>
-                  <span className="font-bold text-red-800">86%</span>
+                <div className="flex justify-between items-center p-2 bg-white rounded">
+                  <span className="text-red-700 font-medium">Compliance Theatre Waste</span>
+                  <span className="font-bold text-red-800 text-lg">86%</span>
                 </div>
               </CardContent>
             </Card>
@@ -166,17 +166,17 @@ export const SeedPitch: React.FC = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-orange-700">Questionnaire Time</span>
-                  <span className="font-bold text-orange-800">6 months</span>
+                <div className="flex justify-between items-center p-2 bg-white rounded">
+                  <span className="text-orange-700 font-medium">Questionnaire Response Time</span>
+                  <span className="font-bold text-orange-800 text-lg">6 months</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-orange-700">Teams Overwhelmed</span>
-                  <span className="font-bold text-orange-800">73%</span>
+                <div className="flex justify-between items-center p-2 bg-white rounded">
+                  <span className="text-orange-700 font-medium">Security Teams Overwhelmed</span>
+                  <span className="font-bold text-orange-800 text-lg">73%</span>
                 </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-orange-700">Deals Delayed</span>
-                  <span className="font-bold text-orange-800">40%</span>
+                <div className="flex justify-between items-center p-2 bg-white rounded">
+                  <span className="text-orange-700 font-medium">Enterprise Deals Delayed</span>
+                  <span className="font-bold text-orange-800 text-lg">40%</span>
                 </div>
               </CardContent>
             </Card>
@@ -228,8 +228,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               The First Security Platform That Pays for Itself
             </h2>
-            <p className="text-xl text-slate-600">
-              Transform compliance from cost center to profit driver
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              ERIP breaks the compliance death spiral by transforming security investments from pure cost centers into measurable profit drivers through our revolutionary Value-First Workflow™
             </p>
           </div>
 
@@ -237,24 +237,24 @@ export const SeedPitch: React.FC = () => {
             <Card className="border-blue-200 bg-blue-50">
               <CardContent className="p-6 text-center">
                 <Brain className="h-12 w-12 mx-auto text-blue-600 mb-4" />
-                <h3 className="font-semibold text-blue-800 mb-2">AI-Powered Intelligence</h3>
-                <p className="text-blue-700 text-sm">95% automation of questionnaires</p>
+                <h3 className="font-semibold text-blue-800 mb-2">AI-Powered QIE™</h3>
+                <p className="text-blue-700 text-sm">95% reduction in questionnaire response time from 6 months to 2 weeks</p>
               </CardContent>
             </Card>
 
             <Card className="border-green-200 bg-green-50">
               <CardContent className="p-6 text-center">
                 <Euro className="h-12 w-12 mx-auto text-green-600 mb-4" />
-                <h3 className="font-semibold text-green-800 mb-2">€€€ ROI Proof</h3>
-                <p className="text-green-700 text-sm">Demonstrate financial value instantly</p>
+                <h3 className="font-semibold text-green-800 mb-2">€€€ Financial Intelligence</h3>
+                <p className="text-green-700 text-sm">Real-time Monte Carlo risk quantification with €4.9M average customer savings</p>
               </CardContent>
             </Card>
 
             <Card className="border-purple-200 bg-purple-50">
               <CardContent className="p-6 text-center">
                 <Zap className="h-12 w-12 mx-auto text-purple-600 mb-4" />
-                <h3 className="font-semibold text-purple-800 mb-2">40% Faster Sales</h3>
-                <p className="text-purple-700 text-sm">Public Trust Scores accelerate deals</p>
+                <h3 className="font-semibold text-purple-800 mb-2">Trust Score Acceleration</h3>
+                <p className="text-purple-700 text-sm">Public trust profiles eliminate security reviews, accelerating B2B deals by 40%</p>
               </CardContent>
             </Card>
           </div>
@@ -293,8 +293,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               €96B European GRC Market by 2028
             </h2>
-            <p className="text-xl text-slate-600">
-              Massive regulatory wave creates unprecedented opportunity
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              Perfect storm of NIS2, DORA, and EU AI Act regulations creating urgent demand for intelligent compliance solutions - with 45,000 European enterprises actively seeking ROI-proven platforms
             </p>
           </div>
 
@@ -384,8 +384,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               SaaS + Success Fees = Aligned Incentives
             </h2>
-            <p className="text-xl text-slate-600">
-              We only win when our customers save money
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              Revolutionary pricing model where our success is directly tied to customer ROI - we earn additional revenue only when we deliver documented savings, creating perfect alignment
             </p>
           </div>
 
@@ -482,8 +482,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               €2M to Achieve Product-Market Fit
             </h2>
-            <p className="text-xl text-slate-600">
-              Focus on first clients, infrastructure, and go-to-market
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              Strategic investment focused on acquiring first enterprise customers, scaling infrastructure to handle enterprise workloads, and building world-class go-to-market engine
             </p>
           </div>
 
@@ -588,8 +588,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               Land & Expand with ROI Proof
             </h2>
-            <p className="text-xl text-slate-600">
-              Start with quick wins, expand through demonstrated value
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              Proven three-phase strategy: Start with free risk assessments and QIE quick wins, expand through PRISM™ risk engine deployment, then scale with full platform suite and international expansion
             </p>
           </div>
 
@@ -737,8 +737,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               18-Month Path to Series A
             </h2>
-            <p className="text-xl text-slate-600">
-              Clear milestones from seed to scale
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              Aggressive but achievable growth trajectory leveraging 18 months of stealth development, perfect regulatory timing, and unique €€€ positioning to reach €1.5M MRR
             </p>
           </div>
 
@@ -865,8 +865,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-5xl font-bold text-slate-900 mb-4">
               €2M Seed Round
             </h2>
-            <p className="text-2xl text-slate-600">
-              Join us in transforming European enterprise security
+            <p className="text-2xl text-slate-600 max-w-4xl mx-auto">
+              Join us in creating the first security platform that pays for itself - transforming how European enterprises approach compliance from reactive cost to proactive profit
             </p>
           </div>
 
@@ -961,8 +961,8 @@ export const SeedPitch: React.FC = () => {
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
               Let's Build the Future Together
             </h2>
-            <p className="text-xl text-slate-600">
-              Ready to transform European enterprise security
+            <p className="text-xl text-slate-600 max-w-4xl mx-auto">
+              Partner with us to revolutionize European enterprise security - from 18 months stealth development to €96B market leadership
             </p>
           </div>
 
@@ -1759,26 +1759,31 @@ export const SeedPitch: React.FC = () => {
         </div>
       </div>
 
-      {/* Slide Thumbnails */}
+      {/* Enhanced Slide Navigation */}
       {!isFullscreen && (
-        <div className="bg-slate-100 border-t border-slate-200 p-4">
+        <div className="bg-slate-100 border-t border-slate-200 p-6">
           <div className="max-w-7xl mx-auto">
-            <div className="flex items-center justify-center gap-2 overflow-x-auto">
+            <h3 className="text-lg font-semibold text-slate-900 mb-4 text-center">Pitch Deck Navigation</h3>
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
               {slides.map((slide, index) => (
                 <button
                   key={slide.id}
                   onClick={() => setCurrentSlide(index)}
                   className={`
-                    flex-shrink-0 p-2 rounded-lg text-xs font-medium transition-all
+                    p-3 rounded-lg text-sm font-medium transition-all text-left border-2
                     ${currentSlide === index 
-                      ? 'bg-blue-600 text-white shadow-md' 
-                      : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
+                      ? 'bg-blue-600 text-white shadow-lg border-blue-600 scale-105' 
+                      : 'bg-white text-slate-700 hover:bg-blue-50 hover:border-blue-200 border-slate-200'
                     }
                   `}
                 >
-                  {index + 1}. {slide.title}
+                  <div className="text-xs opacity-75 mb-1">Slide {index + 1}</div>
+                  <div className="font-semibold">{slide.title}</div>
                 </button>
               ))}
+            </div>
+            <div className="mt-4 text-center text-sm text-slate-600">
+              Click any slide above to jump directly to that section
             </div>
           </div>
         </div>
