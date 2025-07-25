@@ -35,6 +35,7 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
   const [platformOpen, setPlatformOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
   const { user, isAuthenticated } = useAuthStore();
   const navigate = useNavigate();
 
@@ -116,6 +117,14 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
     { name: 'Starter', price: '€500/month', href: '/pricing/starter' },
     { name: 'Growth', price: '€1,500/month', href: '/pricing/growth' },
     { name: 'Enterprise', price: 'Custom', href: '/pricing/enterprise' }
+  ];
+
+  const companyItems = [
+    { name: 'About ERIP', href: '/company/about', icon: Building2 },
+    { name: 'Seed Pitch (€2M)', href: '/company/seed-pitch', icon: Award },
+    { name: 'Contact', href: '/company/contact', icon: Phone },
+    { name: 'Team', href: '/company/team', icon: Users },
+    { name: 'Careers', href: '/company/careers', icon: Briefcase }
   ];
 
   return (
@@ -306,13 +315,40 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               Pricing
             </Link>
 
-            {/* Company */}
-            <Link
-              to="/company"
-              className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-            >
-              Company
-            </Link>
+            {/* Company Dropdown */}
+            <div className="relative group">
+              <button
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                onMouseEnter={() => setCompanyOpen(true)}
+                onMouseLeave={() => setCompanyOpen(false)}
+              >
+                Company
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              
+              {companyOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-1 w-64 bg-white border border-slate-200 rounded-lg shadow-xl p-4"
+                  onMouseEnter={() => setCompanyOpen(true)}
+                  onMouseLeave={() => setCompanyOpen(false)}
+                >
+                  <ul className="space-y-2">
+                    {companyItems.map((item) => (
+                      <li key={item.name}>
+                        <Link
+                          to={item.href}
+                          className="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
+                          onClick={() => setCompanyOpen(false)}
+                        >
+                          <item.icon className="h-4 w-4" />
+                          {item.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
           </nav>
 
           {/* CTA Buttons */}
@@ -406,13 +442,22 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               >
                 Pricing
               </Link>
-              <Link
-                to="/company"
-                className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Company
-              </Link>
+              <div className="space-y-2">
+                <div className="px-3 py-2 text-sm font-semibold text-slate-900 border-b border-slate-200">
+                  Company
+                </div>
+                {companyItems.map((item) => (
+                  <Link
+                    key={item.name}
+                    to={item.href}
+                    className="flex items-center gap-2 px-3 py-2 text-sm text-slate-600 hover:text-slate-900"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
               
               <div className="border-t border-slate-200 pt-4 space-y-2">
                 <Button 

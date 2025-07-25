@@ -55,6 +55,8 @@ import { NEXUS } from '@/pages/tools/NEXUS';
 import { CLEARANCE } from '@/pages/tools/CLEARANCE';
 import { CIPHER } from '@/pages/tools/CIPHER';
 import { ToolsOverview } from '@/pages/tools/ToolsOverview';
+import { Contact } from '@/pages/company/Contact';
+import { SeedPitch } from '@/pages/company/SeedPitch';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { TourProvider } from '@/components/tour/TourProvider';
@@ -110,6 +112,9 @@ function App() {
           <Route path="case-study" element={<CaseStudy />} />
           <Route path="solutions/compliance-automation" element={<ComplianceAutomation />} />
           <Route path="solutions/sales-acceleration" element={<SalesAcceleration />} />
+          {/* Company */}
+          <Route path="company/contact" element={<Contact />} />
+          <Route path="company/seed-pitch" element={<SeedPitch />} />
           {/* Platform component routes with navigation */}
           <Route path="dtef-automation" element={<DTEFAutomation />} />
           <Route path="certifications" element={<IndustryCertifications />} />

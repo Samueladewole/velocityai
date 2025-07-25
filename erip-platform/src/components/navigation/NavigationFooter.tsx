@@ -64,6 +64,7 @@ export const NavigationFooter: React.FC = () => {
     { name: 'Careers', href: '/company/careers' },
     { name: 'Press', href: '/company/press' },
     { name: 'Contact', href: '/company/contact' },
+    { name: 'Seed Pitch (€2M)', href: '/company/seed-pitch' },
     { name: 'Partners', href: '/company/partners' },
     { name: 'Investors', href: '/company/investors' }
   ];
@@ -245,18 +246,18 @@ export const NavigationFooter: React.FC = () => {
               <h4 className="text-sm font-semibold text-white mb-2">Contact</h4>
               <div className="space-y-1">
                 <Link 
-                  to="mailto:hello@erip.com" 
+                  to="mailto:samuel@digitalsecurityinsights.com" 
                   className="text-sm text-slate-300 hover:text-white transition-colors flex items-center gap-2"
                 >
                   <Mail className="h-3 w-3" />
-                  hello@erip.com
+                  samuel@digitalsecurityinsights.com
                 </Link>
                 <Link 
-                  to="tel:+46123456789" 
+                  to="tel:+46735457681" 
                   className="text-sm text-slate-300 hover:text-white transition-colors flex items-center gap-2"
                 >
                   <Phone className="h-3 w-3" />
-                  +46 123 456 789
+                  +46 735 457 681
                 </Link>
               </div>
             </div>

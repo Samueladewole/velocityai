@@ -1108,7 +1108,7 @@ export const LandingEnhanced: React.FC = () => {
           </div>
           
           {/* Multiple CTA Options */}
-          <div className="grid md:grid-cols-4 gap-4 mb-8">
+          <div className="grid md:grid-cols-5 gap-4 mb-8">
             <Button 
               size="lg" 
               onClick={() => navigate('/assessment')}
@@ -1123,7 +1123,15 @@ export const LandingEnhanced: React.FC = () => {
               className="bg-white text-blue-600 hover:bg-blue-50 px-6 py-4 group"
             >
               <PlayCircle className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-              Book a Demo
+              Book a Demo  
+            </Button>
+            <Button 
+              size="lg" 
+              onClick={() => navigate('/company/investor-pitch')}
+              className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 hover:from-yellow-500 hover:to-yellow-600 px-6 py-4 group shadow-lg"
+            >
+              <Briefcase className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
+              Investor Pitch
             </Button>
             <Button 
               size="lg" 
