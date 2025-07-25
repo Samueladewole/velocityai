@@ -1038,7 +1038,625 @@ export const SeedPitch: React.FC = () => {
   };
 
   const exportToPDF = () => {
-    window.print();
+    const printWindow = window.open('', '_blank');
+    if (printWindow) {
+      const pdfContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>ERIP Seed Pitch Deck - €2M Round</title>
+          <style>
+            body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+            .slide { page-break-after: always; margin-bottom: 50px; }
+            .slide:last-child { page-break-after: avoid; }
+            h1 { color: #2563eb; font-size: 32px; margin-bottom: 20px; text-align: center; }
+            h2 { color: #1e40af; font-size: 28px; margin-bottom: 15px; }
+            h3 { color: #1e3a8a; font-size: 24px; margin-bottom: 10px; }
+            .highlight { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; padding: 20px; border-radius: 12px; margin: 20px 0; }
+            .metric { background: #f1f5f9; padding: 15px; border-radius: 8px; margin: 10px 0; }
+            .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin: 20px 0; }
+            .contact { background: #dbeafe; padding: 30px; border-radius: 12px; text-align: center; }
+            @media print { .slide { page-break-after: always; } }
+          </style>
+        </head>
+        <body>
+          <div class="slide">
+            <h1>ERIP - Enterprise Risk Intelligence Platform</h1>
+            <div class="highlight">
+              <h2>€2M Seed Round</h2>
+              <p>The Security Platform That Pays for Itself</p>
+              <p><strong>Focus:</strong> First Clients & Infrastructure</p>
+              <p><strong>Timeline:</strong> January 2025 | Amsterdam, Netherlands</p>
+            </div>
+          </div>
+          
+          <div class="slide">
+            <h1>The €50B Problem</h1>
+            <h2>Compliance Theater Costs €50B Annually</h2>
+            <div class="grid">
+              <div class="metric">
+                <h3>Financial Pain Points</h3>
+                <ul>
+                  <li>€2.3M average annual compliance spend per enterprise</li>
+                  <li>€4.88M average data breach cost (IBM 2024)</li>
+                  <li>86% of compliance activities create zero risk reduction</li>
+                </ul>
+              </div>
+              <div class="metric">
+                <h3>Operational Pain Points</h3>
+                <ul>
+                  <li>6 months average to respond to security questionnaires</li>
+                  <li>73% of security teams buried in compliance paperwork</li>
+                  <li>40% of deals delayed due to security reviews</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>The ERIP Solution</h1>
+            <h2>The First Security Platform That Pays for Itself</h2>
+            <div class="metric">
+              <h3>Value-First Approach</h3>
+              <ul>
+                <li><strong>AI-powered Intelligence:</strong> 95% automation of questionnaires</li>
+                <li><strong>€€€ ROI Proof:</strong> Demonstrate financial value instantly</li>
+                <li><strong>40% Faster Sales:</strong> Public Trust Scores accelerate deals</li>
+                <li><strong>18 Components Built:</strong> Ready for deployment</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>Market Opportunity</h1>
+            <h2>€96B European GRC Market by 2028</h2>
+            <div class="metric">
+              <h3>Market Growth</h3>
+              <ul>
+                <li>2024: €52B → 2028: €96B (85% growth)</li>
+                <li>45,000 EU enterprises in target market</li>
+                <li>€2.3M average annual compliance spend</li>
+                <li>73% actively seeking solutions</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <h3>Regulatory Drivers</h3>
+              <ul>
+                <li><strong>NIS2 Directive:</strong> October 2024 - massive compliance wave</li>
+                <li><strong>DORA:</strong> January 2025 - financial sector requirements</li>
+                <li><strong>EU AI Act:</strong> 2025-2027 - AI governance demand</li>
+                <li><strong>GDPR Enforcement:</strong> €1.7B fines in 2023</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>Business Model</h1>
+            <h2>SaaS + Success Fees = Aligned Incentives</h2>
+            <div class="metric">
+              <h3>Pricing Tiers</h3>
+              <ul>
+                <li><strong>Starter:</strong> €5K/month (up to 100 employees)</li>
+                <li><strong>Growth:</strong> €15K/month (100-1,000 employees)</li>
+                <li><strong>Enterprise:</strong> €30K+/month (1,000+ employees)</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <h3>Unit Economics</h3>
+              <ul>
+                <li>Customer Acquisition Cost: €15K</li>
+                <li>Average Contract Value: €180K</li>
+                <li>Lifetime Value: €720K</li>
+                <li>LTV/CAC Ratio: 48:1</li>
+                <li>Gross Margin: 87%</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>Use of Funds - €2M</h1>
+            <h2>Focus on Product-Market Fit</h2>
+            <div class="metric">
+              <h3>Funding Allocation</h3>
+              <ul>
+                <li><strong>Product Development & Engineering:</strong> €700K (35%)</li>
+                <li><strong>Sales & Marketing:</strong> €600K (30%)</li>
+                <li><strong>Team Building (5 key hires):</strong> €400K (20%)</li>
+                <li><strong>Infrastructure:</strong> €200K (10%)</li>
+                <li><strong>Operations:</strong> €100K (5%)</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <h3>Key Hires (First 6 Months)</h3>
+              <ul>
+                <li>Head of Sales: €120K (Enterprise B2B experience)</li>
+                <li>Senior Engineers (2): €180K (Full-stack, AI/ML focus)</li>
+                <li>Marketing Lead: €90K (B2B SaaS growth)</li>
+                <li>Customer Success: €70K (Technical onboarding)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>Go-to-Market Strategy</h1>
+            <h2>Land & Expand with ROI Proof</h2>
+            <div class="metric">
+              <h3>Phase 1: Land (Months 1-6)</h3>
+              <ul>
+                <li>Free risk assessment</li>
+                <li>QIE module for quick wins</li>
+                <li>90-day pilot program</li>
+                <li>€€€ savings proof</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <h3>Phase 2: Expand (Months 6-18)</h3>
+              <ul>
+                <li>Add PRISM™ risk engine</li>
+                <li>Deploy Trust Score</li>
+                <li>Success fee activation</li>
+                <li>Customer advocacy</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <h3>Customer Acquisition Strategy</h3>
+              <ul>
+                <li><strong>Target:</strong> Mid-market (500-5K employees)</li>
+                <li><strong>Approach:</strong> CISO/CFO dual approach</li>
+                <li><strong>Channels:</strong> Big 4 consultancy partnerships</li>
+                <li><strong>Content:</strong> €€€ ROI case studies and webinars</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>Traction & Milestones</h1>
+            <h2>18-Month Path to Series A</h2>
+            <div class="metric">
+              <h3>Revenue Projections</h3>
+              <ul>
+                <li><strong>Month 6:</strong> 5 customers, €80K MRR</li>
+                <li><strong>Month 12:</strong> 25 customers, €400K MRR</li>
+                <li><strong>Month 18:</strong> 75 customers, €1.5M MRR</li>
+              </ul>
+            </div>
+            <div class="metric">
+              <h3>Why We'll Win</h3>
+              <ul>
+                <li><strong>Unique €€€ Positioning:</strong> Only platform proving ROI</li>
+                <li><strong>18 Months Development:</strong> Deep technology moat</li>
+                <li><strong>Perfect Timing:</strong> NIS2 + DORA compliance wave</li>
+                <li><strong>Founder-Market Fit:</strong> Deep enterprise security expertise</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>The Ask</h1>
+            <div class="highlight">
+              <h2>€2M Seed Round</h2>
+              <p><strong>Round Size:</strong> €2M</p>
+              <p><strong>Pre-money Valuation:</strong> €8M</p>
+              <p><strong>Use of Funds:</strong> 18-month runway to Series A</p>
+            </div>
+            <div class="metric">
+              <h3>Why Invest Now?</h3>
+              <ul>
+                <li><strong>Perfect Timing:</strong> NIS2 + DORA creating urgent demand</li>
+                <li><strong>Unique Approach:</strong> Only platform proving €€€ value</li>
+                <li><strong>Ready to Scale:</strong> 18 months development complete</li>
+                <li><strong>Exceptional Economics:</strong> 48:1 LTV/CAC ratio</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="slide">
+            <h1>Contact</h1>
+            <div class="contact">
+              <h2>Samuel A. Adewole</h2>
+              <h3>Founder & CEO, ERIP</h3>
+              <p><strong>Email:</strong> samuel@digitalsecurityinsights.com</p>
+              <p><strong>Phone:</strong> +46 735 457 681</p>
+              <br>
+              <p><strong>Ready to transform European enterprise security</strong></p>
+              <p>18 months stealth development • €€€ positioning breakthrough • Ready to scale</p>
+              <br>
+              <div style="display: flex; justify-content: center; gap: 40px;">
+                <div><strong>€2M</strong><br>Seed Target</div>
+                <div><strong>€96B</strong><br>Market Size</div>
+                <div><strong>48:1</strong><br>LTV/CAC</div>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+      
+      printWindow.document.write(pdfContent);
+      printWindow.document.close();
+      printWindow.print();
+    }
+  };
+
+  const exportToWord = () => {
+    const wordContent = `
+      ERIP SEED PITCH DECK - €2M ROUND
+      The Security Platform That Pays for Itself
+      
+      =====================================
+      EXECUTIVE SUMMARY
+      =====================================
+      
+      Company: ERIP (Enterprise Risk Intelligence Platform)
+      Round: €2M Seed Funding
+      Focus: First Clients & Infrastructure
+      Founder: Samuel A. Adewole
+      Contact: samuel@digitalsecurityinsights.com | +46 735 457 681
+      
+      =====================================
+      THE PROBLEM: €50B COMPLIANCE THEATER
+      =====================================
+      
+      European enterprises waste billions on ineffective security compliance:
+      
+      FINANCIAL PAIN POINTS:
+      • €2.3M average annual compliance spend per enterprise
+      • €4.88M average data breach cost (IBM 2024)
+      • 86% of compliance activities create zero risk reduction
+      
+      OPERATIONAL PAIN POINTS:
+      • 6 months average to respond to security questionnaires
+      • 73% of security teams buried in compliance paperwork
+      • 40% of deals delayed due to security reviews
+      
+      =====================================
+      THE SOLUTION: ERIP PLATFORM
+      =====================================
+      
+      The First Security Platform That Pays for Itself
+      
+      VALUE-FIRST APPROACH:
+      • AI-powered Intelligence: 95% automation of questionnaires
+      • €€€ ROI Proof: Demonstrate financial value instantly
+      • 40% Faster Sales: Public Trust Scores accelerate deals
+      • 18 Components Built: Ready for deployment
+      
+      CORE CAPABILITIES:
+      • QIE - Questionnaire Intelligence Engine
+      • PRISM™ Risk Quantification with Monte Carlo
+      • Trust Score for sales acceleration
+      • BEACON ROI Calculator with NPV/IRR
+      • Complete compliance automation suite
+      
+      =====================================
+      MARKET OPPORTUNITY
+      =====================================
+      
+      €96B European GRC Market by 2028
+      
+      MARKET GROWTH:
+      • 2024: €52B → 2028: €96B (85% growth)
+      • 45,000 EU enterprises in target market
+      • €2.3M average annual compliance spend
+      • 73% actively seeking solutions
+      
+      REGULATORY DRIVERS:
+      • NIS2 Directive (October 2024) - massive compliance wave
+      • DORA (January 2025) - financial sector requirements
+      • EU AI Act (2025-2027) - AI governance demand
+      • GDPR Enforcement - €1.7B fines in 2023
+      
+      =====================================
+      BUSINESS MODEL
+      =====================================
+      
+      SaaS + Success Fees = Aligned Incentives
+      
+      PRICING TIERS:
+      • Starter: €5K/month (up to 100 employees)
+      • Growth: €15K/month (100-1,000 employees)
+      • Enterprise: €30K+/month (1,000+ employees)
+      
+      UNIT ECONOMICS:
+      • Customer Acquisition Cost: €15K
+      • Average Contract Value: €180K
+      • Lifetime Value: €720K
+      • LTV/CAC Ratio: 48:1
+      • Gross Margin: 87%
+      
+      SUCCESS FEE MODEL:
+      • Additional 10% of documented savings in Year 1
+      • Perfect alignment with customer success
+      • €4.9M average customer savings
+      • €490K success fee potential
+      
+      =====================================
+      USE OF FUNDS - €2M
+      =====================================
+      
+      Focus on Product-Market Fit
+      
+      FUNDING ALLOCATION:
+      • Product Development & Engineering: €700K (35%)
+      • Sales & Marketing: €600K (30%)
+      • Team Building (5 key hires): €400K (20%)
+      • Infrastructure: €200K (10%)
+      • Operations: €100K (5%)
+      
+      KEY HIRES (FIRST 6 MONTHS):
+      • Head of Sales: €120K (Enterprise B2B experience)
+      • Senior Engineers (2): €180K (Full-stack, AI/ML focus)
+      • Marketing Lead: €90K (B2B SaaS growth)
+      • Customer Success: €70K (Technical onboarding)
+      
+      =====================================
+      GO-TO-MARKET STRATEGY
+      =====================================
+      
+      Land & Expand with ROI Proof
+      
+      PHASE 1: LAND (MONTHS 1-6)
+      • Free risk assessment
+      • QIE module for quick wins
+      • 90-day pilot program
+      • €€€ savings proof
+      
+      PHASE 2: EXPAND (MONTHS 6-18)
+      • Add PRISM™ risk engine
+      • Deploy Trust Score
+      • Success fee activation
+      • Customer advocacy
+      
+      CUSTOMER ACQUISITION:
+      • Target: Mid-market (500-5K employees)
+      • Approach: CISO/CFO dual approach
+      • Channels: Big 4 consultancy partnerships
+      • Content: €€€ ROI case studies and webinars
+      
+      =====================================
+      TRACTION & MILESTONES
+      =====================================
+      
+      18-Month Path to Series A
+      
+      REVENUE PROJECTIONS:
+      • Month 6: 5 customers, €80K MRR
+      • Month 12: 25 customers, €400K MRR
+      • Month 18: 75 customers, €1.5M MRR
+      
+      WHY WE'LL WIN:
+      • Unique €€€ Positioning: Only platform proving ROI
+      • 18 Months Development: Deep technology moat
+      • Perfect Timing: NIS2 + DORA compliance wave
+      • Founder-Market Fit: Deep enterprise security expertise
+      
+      =====================================
+      THE ASK
+      =====================================
+      
+      €2M SEED ROUND
+      
+      INVESTMENT TERMS:
+      • Round Size: €2M
+      • Pre-money Valuation: €8M
+      • Use of Funds: 18-month runway to Series A
+      
+      WHY INVEST NOW:
+      • Perfect Timing: NIS2 + DORA creating urgent demand
+      • Unique Approach: Only platform proving €€€ value
+      • Ready to Scale: 18 months development complete
+      • Exceptional Economics: 48:1 LTV/CAC ratio
+      
+      =====================================
+      CONTACT INFORMATION
+      =====================================
+      
+      Samuel A. Adewole
+      Founder & CEO, ERIP
+      
+      Email: samuel@digitalsecurityinsights.com
+      Phone: +46 735 457 681
+      
+      Ready to transform European enterprise security
+      
+      18 months stealth development
+      €€€ positioning breakthrough
+      Ready to scale
+      
+      KEY METRICS:
+      • €2M Seed Target
+      • €96B Market Size
+      • 48:1 LTV/CAC Ratio
+      
+      Join us in building the security platform that pays for itself!
+    `;
+    
+    const blob = new Blob([wordContent], {
+      type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    });
+    
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ERIP_Seed_Pitch_Deck.docx';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
+
+  const exportToPowerPoint = () => {
+    // PowerPoint content as a comprehensive text format that can be imported
+    const pptContent = `
+      SLIDE 1: TITLE
+      ==============
+      ERIP
+      Enterprise Risk Intelligence Platform
+      
+      €2M Seed Round
+      First Clients & Infrastructure
+      
+      January 2025 | Amsterdam, Netherlands | B2B SaaS
+      
+      
+      SLIDE 2: THE PROBLEM
+      ===================
+      The €50B Problem
+      Compliance Theater Costs €50B Annually
+      
+      FINANCIAL PAIN:
+      • €2.3M average annual compliance spend
+      • €4.88M average breach cost
+      • 86% wasted effort
+      
+      OPERATIONAL PAIN:
+      • 6 months questionnaire time
+      • 73% teams overwhelmed
+      • 40% deals delayed
+      
+      
+      SLIDE 3: THE SOLUTION
+      =====================
+      The First Security Platform That Pays for Itself
+      
+      • AI-Powered Intelligence: 95% automation
+      • €€€ ROI Proof: Instant financial value
+      • 40% Faster Sales: Trust Scores accelerate deals
+      • 18 Components: Ready for deployment
+      
+      Value-First Workflow™ transforms compliance costs into competitive advantage
+      
+      
+      SLIDE 4: MARKET OPPORTUNITY
+      ===========================
+      €96B European GRC Market by 2028
+      
+      MARKET GROWTH: €52B (2024) → €96B (2028)
+      TARGET: 45,000 EU enterprises
+      SPEND: €2.3M average annual
+      DEMAND: 73% actively seeking solutions
+      
+      REGULATORY DRIVERS:
+      • NIS2 Directive (Oct 2024)
+      • DORA (Jan 2025)
+      • EU AI Act (2025-2027)
+      • GDPR Enforcement (€1.7B fines)
+      
+      
+      SLIDE 5: BUSINESS MODEL
+      =======================
+      SaaS + Success Fees = Aligned Incentives
+      
+      PRICING:
+      • Starter: €5K/month
+      • Growth: €15K/month
+      • Enterprise: €30K+/month
+      
+      UNIT ECONOMICS:
+      • CAC: €15K
+      • ACV: €180K
+      • LTV: €720K
+      • LTV/CAC: 48:1
+      • Gross Margin: 87%
+      
+      
+      SLIDE 6: USE OF FUNDS
+      =====================
+      €2M to Achieve Product-Market Fit
+      
+      • Product Development: €700K (35%)
+      • Sales & Marketing: €600K (30%)
+      • Team Building: €400K (20%)
+      • Infrastructure: €200K (10%)
+      • Operations: €100K (5%)
+      
+      KEY HIRES:
+      • Head of Sales: €120K
+      • Senior Engineers (2): €180K
+      • Marketing Lead: €90K
+      • Customer Success: €70K
+      
+      
+      SLIDE 7: GO-TO-MARKET
+      =====================
+      Land & Expand with ROI Proof
+      
+      PHASE 1 (1-6 months): Land
+      • Free risk assessment
+      • QIE quick wins
+      • 90-day pilots
+      • €€€ savings proof
+      
+      PHASE 2 (6-18 months): Expand
+      • PRISM™ risk engine
+      • Trust Score deployment
+      • Success fees
+      • Customer advocacy
+      
+      
+      SLIDE 8: TRACTION
+      =================
+      18-Month Path to Series A
+      
+      PROJECTIONS:
+      • Month 6: 5 customers, €80K MRR
+      • Month 12: 25 customers, €400K MRR
+      • Month 18: 75 customers, €1.5M MRR
+      
+      WHY WE'LL WIN:
+      • Unique €€€ positioning
+      • 18-month development moat
+      • Perfect regulatory timing
+      • Founder-market fit
+      
+      
+      SLIDE 9: THE ASK
+      ================
+      €2M Seed Round
+      
+      TERMS:
+      • Round Size: €2M
+      • Pre-money: €8M
+      • Timeline: 18-month runway
+      
+      WHY NOW:
+      • NIS2 + DORA urgency
+      • Only €€€ platform
+      • Ready to scale
+      • 48:1 LTV/CAC
+      
+      
+      SLIDE 10: CONTACT
+      =================
+      Let's Build the Future Together
+      
+      Samuel A. Adewole
+      Founder & CEO, ERIP
+      
+      samuel@digitalsecurityinsights.com
+      +46 735 457 681
+      
+      18 months stealth development
+      €€€ positioning breakthrough
+      Ready to scale
+      
+      €2M Seed | €96B Market | 48:1 LTV/CAC
+      
+      Join us in building the security platform that pays for itself!
+    `;
+    
+    const blob = new Blob([pptContent], {
+      type: 'application/vnd.ms-powerpoint'
+    });
+    
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ERIP_Seed_Pitch_Deck.ppt';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
   };
 
   return (
@@ -1068,7 +1686,23 @@ export const SeedPitch: React.FC = () => {
               className="flex items-center gap-2"
             >
               <Download className="h-4 w-4" />
-              Export PDF
+              PDF
+            </Button>
+            <Button
+              variant="outline"
+              onClick={exportToWord}
+              className="flex items-center gap-2"
+            >
+              <Download className="h-4 w-4" />
+              Word
+            </Button>
+            <Button
+              variant="outline"
+              onClick={exportToPowerPoint}
+              className="flex items-center gap-2"
+            >
+              <Download className="h-4 w-4" />
+              PowerPoint
             </Button>
             <Button
               variant="outline"
