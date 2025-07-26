@@ -340,14 +340,15 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               )}
             </div>
 
-            {/* Dashboard Link (for authenticated users) */}
+            {/* Dashboard Button (for authenticated users) */}
             {isAuthenticated && (
-              <Link
-                to="/dashboard"
-                className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+              <Button
+                onClick={() => navigate('/dashboard')}
+                size="sm"
+                className="font-medium bg-blue-600 hover:bg-blue-700 text-white"
               >
                 Dashboard
-              </Link>
+              </Button>
             )}
           </nav>
 
@@ -451,13 +452,17 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               </div>
 
               {isAuthenticated && (
-                <Link
-                  to="/dashboard"
-                  className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
+                <div className="px-3 py-2">
+                  <Button
+                    onClick={() => {
+                      navigate('/dashboard');
+                      setMobileMenuOpen(false);
+                    }}
+                    className="w-full font-medium bg-blue-600 hover:bg-blue-700 text-white"
+                  >
+                    Dashboard
+                  </Button>
+                </div>
               )}
               
               <div className="border-t border-slate-200 pt-4 space-y-2">
