@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ScrollToTop } from '@/components/ScrollToTop';
 import { LandingEnhanced } from '@/pages/LandingEnhanced';
 // import { TestLanding } from '@/pages/TestLanding';
 import { IndustrySelection } from '@/pages/IndustrySelection';
@@ -111,7 +112,8 @@ function App() {
   return (
     <TourProvider>
       <Router>
-      <Routes>
+        <ScrollToTop />
+        <Routes>
         {/* Public routes with comprehensive navigation */}
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<LandingEnhanced />} />
