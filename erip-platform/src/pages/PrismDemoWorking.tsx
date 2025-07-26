@@ -22,45 +22,85 @@ export function PrismDemoWorking() {
   })
   
   const [simulationResults, setSimulationResults] = useState<any>(null)
+  const [isRunning, setIsRunning] = useState(false)
 
-  const runSimulation = () => {
-    // Simple Monte Carlo simulation using Hubbard estimates
-    const iterations = 10000
-    const results = []
+  const runSimulation = async () => {
+    setIsRunning(true)
+    setSimulationResults(null)
     
-    for (let i = 0; i < iterations; i++) {
-      // Generate random value using triangular distribution approximation
-      const random = Math.random()
-      let value: number
+    try {
+      // First try backend API for professional Monte Carlo analysis
+      const response = await fetch('http://localhost:8001/prism/monte-carlo-analysis', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          iterations: 50000,
+          risk_estimates: estimate,
+          analysis_type: 'hubbard_calibration'
+        })
+      })
       
-      if (random < 0.1) {
-        value = estimate.p10 + (estimate.p30 - estimate.p10) * (random / 0.1)
-      } else if (random < 0.3) {
-        value = estimate.p30 + (estimate.p50 - estimate.p30) * ((random - 0.1) / 0.2)
-      } else if (random < 0.7) {
-        value = estimate.p50 + (estimate.p70 - estimate.p50) * ((random - 0.3) / 0.4)
-      } else if (random < 0.9) {
-        value = estimate.p70 + (estimate.p90 - estimate.p70) * ((random - 0.7) / 0.2)
+      if (response.ok) {
+        const backendResults = await response.json()
+        setSimulationResults({
+          mean: Math.round(backendResults.expected_loss),
+          p95: Math.round(backendResults.var_results.var_95 * 1000000),
+          p99: Math.round(backendResults.var_results.var_99 * 1000000),
+          iterations: backendResults.iterations,
+          backend_powered: true,
+          risk_scenarios: backendResults.risk_scenarios,
+          recommendations: backendResults.recommendations,
+          analysis_id: backendResults.analysis_id
+        })
       } else {
-        value = estimate.p90 * (1 + (random - 0.9) * 2) // Tail extension
+        throw new Error('Backend unavailable, using client-side calculation')
+      }
+    } catch (error) {
+      console.log('Using client-side Monte Carlo simulation:', error)
+      
+      // Fallback to client-side simulation
+      const iterations = 10000
+      const results = []
+      
+      for (let i = 0; i < iterations; i++) {
+        // Generate random value using triangular distribution approximation
+        const random = Math.random()
+        let value: number
+        
+        if (random < 0.1) {
+          value = estimate.p10 + (estimate.p30 - estimate.p10) * (random / 0.1)
+        } else if (random < 0.3) {
+          value = estimate.p30 + (estimate.p50 - estimate.p30) * ((random - 0.1) / 0.2)
+        } else if (random < 0.7) {
+          value = estimate.p50 + (estimate.p70 - estimate.p50) * ((random - 0.3) / 0.4)
+        } else if (random < 0.9) {
+          value = estimate.p70 + (estimate.p90 - estimate.p70) * ((random - 0.7) / 0.2)
+        } else {
+          value = estimate.p90 * (1 + (random - 0.9) * 2) // Tail extension
+        }
+        
+        results.push(value)
       }
       
-      results.push(value)
+      results.sort((a, b) => a - b)
+      
+      const mean = results.reduce((sum, val) => sum + val, 0) / results.length
+      const p95 = results[Math.floor(results.length * 0.95)]
+      const p99 = results[Math.floor(results.length * 0.99)]
+      
+      setSimulationResults({
+        mean: Math.round(mean),
+        p95: Math.round(p95),
+        p99: Math.round(p99),
+        iterations,
+        backend_powered: false,
+        distribution: results
+      })
+    } finally {
+      setIsRunning(false)
     }
-    
-    results.sort((a, b) => a - b)
-    
-    const mean = results.reduce((sum, val) => sum + val, 0) / results.length
-    const p95 = results[Math.floor(results.length * 0.95)]
-    const p99 = results[Math.floor(results.length * 0.99)]
-    
-    setSimulationResults({
-      mean: Math.round(mean),
-      p95: Math.round(p95),
-      p99: Math.round(p99),
-      iterations,
-      distribution: results
-    })
   }
 
   return (
@@ -168,16 +208,22 @@ export function PrismDemoWorking() {
           
           <button
             onClick={runSimulation}
-            className="mt-6 w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold"
+            disabled={isRunning}
+            className="mt-6 w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            🚀 Run Monte Carlo Simulation
+            {isRunning ? '⏳ Running Professional Analysis...' : '🚀 Run Monte Carlo Simulation'}
           </button>
         </div>
 
         {/* Results */}
         <div className="bg-white p-6 rounded-lg shadow-lg border">
-          <h2 className="text-xl font-semibold mb-4 text-green-900">
+          <h2 className="text-xl font-semibold mb-4 text-green-900 flex items-center gap-2">
             📊 Simulation Results
+            {simulationResults?.backend_powered && (
+              <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">
+                AI-Powered Backend
+              </span>
+            )}
           </h2>
           
           {simulationResults ? (
@@ -257,6 +303,44 @@ export function PrismDemoWorking() {
                   </div>
                 </div>
               </div>
+              
+              {/* Backend AI Recommendations */}
+              {simulationResults.backend_powered && simulationResults.recommendations && (
+                <div className="bg-gradient-to-r from-green-50 to-blue-50 p-6 rounded-lg border border-green-200">
+                  <h3 className="font-semibold text-green-900 mb-3 flex items-center gap-2">
+                    🤖 AI-Powered Risk Management Recommendations
+                    <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded-full">
+                      Professional Analysis
+                    </span>
+                  </h3>
+                  <ul className="space-y-2 text-sm text-green-800">
+                    {simulationResults.recommendations.map((rec: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <span className="text-green-600 font-bold">•</span>
+                        {rec}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* Risk Scenarios from Backend */}
+              {simulationResults.backend_powered && simulationResults.risk_scenarios && (
+                <div className="bg-orange-50 p-6 rounded-lg border border-orange-200">
+                  <h3 className="font-semibold text-orange-900 mb-3">⚠️ Key Risk Scenarios</h3>
+                  <div className="space-y-3">
+                    {simulationResults.risk_scenarios.slice(0, 3).map((scenario: any, index: number) => (
+                      <div key={index} className="bg-white p-3 rounded border-l-4 border-orange-400">
+                        <h4 className="font-medium text-orange-900">{scenario.risk_type}</h4>
+                        <div className="text-sm text-orange-700 mt-1">
+                          <div>Probability: {(scenario.probability * 100).toFixed(1)}% | Impact: {scenario.impact}/10</div>
+                          <div className="mt-1 text-xs">{scenario.business_impact}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ) : (
             <div className="text-center text-gray-500 py-8">
