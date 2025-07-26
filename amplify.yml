@@ -1,0 +1,18 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd erip-platform
+        - npm ci
+    build:
+      commands:
+        - cd erip-platform
+        - npm run build
+  artifacts:
+    baseDirectory: erip-platform/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - erip-platform/node_modules/**/*
