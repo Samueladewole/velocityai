@@ -704,7 +704,7 @@ export const EuropeanLandscape: React.FC = () => {
                 <div className="flex gap-3 pt-4 border-t">
                   <Button 
                     size="sm"
-                    onClick={() => navigate(`/tools/compass?industry=${industry.industry.toLowerCase().replace(' ', '-')}`))
+                    onClick={() => navigate(`/tools/compass?industry=${industry.industry.toLowerCase().replace(' ', '-')}`)}
                   >
                     <Brain className="h-4 w-4 mr-2" />
                     Start Assessment
