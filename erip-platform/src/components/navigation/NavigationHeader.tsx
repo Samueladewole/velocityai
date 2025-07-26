@@ -149,16 +149,6 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {/* Dashboard Link (for authenticated users) */}
-            {isAuthenticated && (
-              <Link
-                to="/dashboard"
-                className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-              >
-                Dashboard
-              </Link>
-            )}
-
             {/* Platform Dropdown */}
             <div className="relative group">
               <button
@@ -349,6 +339,16 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                 </div>
               )}
             </div>
+
+            {/* Dashboard Link (for authenticated users) */}
+            {isAuthenticated && (
+              <Link
+                to="/dashboard"
+                className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+              >
+                Dashboard
+              </Link>
+            )}
           </nav>
 
           {/* CTA Buttons */}
@@ -405,15 +405,6 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
         {mobileMenuOpen && (
           <div className="lg:hidden border-t border-slate-200 mt-4 py-4">
             <div className="space-y-4">
-              {isAuthenticated && (
-                <Link
-                  to="/dashboard"
-                  className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  Dashboard
-                </Link>
-              )}
               <Link
                 to="/platform"
                 className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
@@ -458,6 +449,16 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                   </Link>
                 ))}
               </div>
+
+              {isAuthenticated && (
+                <Link
+                  to="/dashboard"
+                  className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Dashboard
+                </Link>
+              )}
               
               <div className="border-t border-slate-200 pt-4 space-y-2">
                 <Button 
