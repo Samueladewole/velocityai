@@ -366,7 +366,7 @@ export const LandingEnhanced: React.FC = () => {
   // Feature highlights for discovery section
   const featureHighlights = [
     {
-      id: 'qie',
+      id: 'qie-enhanced',
       title: 'QIE - Questionnaire Intelligence',
       description: '95% faster questionnaires with AI automation',
       metric: '95% faster',
@@ -375,7 +375,7 @@ export const LandingEnhanced: React.FC = () => {
       badge: 'AI-Powered'
     },
     {
-      id: 'trust-center',
+      id: 'trust/acme-corp',
       title: 'Public Trust Center',
       description: 'Share your security posture with custom URLs',
       metric: 'trust.erip.io/your-company',
@@ -384,7 +384,7 @@ export const LandingEnhanced: React.FC = () => {
       badge: 'Industry First'
     },
     {
-      id: 'dtef',
+      id: 'dtef-automation',
       title: 'ISACA DTEF Automation',
       description: 'First platform to automate Digital Trust Framework',
       metric: '70% overlap reduction',
@@ -393,7 +393,7 @@ export const LandingEnhanced: React.FC = () => {
       badge: 'ISACA Certified'
     },
     {
-      id: 'expert-network',
+      id: 'app/experts',
       title: 'Expert Network',
       description: 'On-demand access to compliance experts',
       metric: '24/7 availability',
