@@ -3,6 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { useNavigate } from 'react-router-dom';
+import { FeaturePageTemplate } from '@/components/templates/PageTemplate';
+import { Grid, Stack, ButtonGroup, CardGrid } from '@/components/ui/layout';
 import { 
   TrendingUp, 
   TrendingDown,
