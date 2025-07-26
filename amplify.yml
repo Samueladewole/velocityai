@@ -7,7 +7,6 @@ frontend:
         - npm ci
     build:
       commands:
-        - cd erip-platform
         - npm run build
   artifacts:
     baseDirectory: erip-platform/dist
