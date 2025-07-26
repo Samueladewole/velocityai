@@ -116,7 +116,7 @@ export function PrismDemoWorking() {
             </p>
           </div>
           <a 
-            href="/app/prism" 
+            href="/tools/prism" 
             className="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors"
           >
             ← Back to PRISM

@@ -73,7 +73,7 @@ const components: ComponentStatus[] = [
     category: 'Value Discovery',
     icon: <Shield className="h-5 w-5" />,
     color: 'from-yellow-400 to-orange-500',
-    route: '/app/beacon'
+    route: '/tools/beacon'
   },
   {
     id: 'COMPASS',
@@ -86,7 +86,7 @@ const components: ComponentStatus[] = [
     category: 'Assessment',
     icon: <Target className="h-5 w-5" />,
     color: 'from-blue-400 to-blue-600',
-    route: '/app/compass'
+    route: '/tools/compass'
   },
   {
     id: 'ATLAS',
@@ -99,7 +99,7 @@ const components: ComponentStatus[] = [
     category: 'Assessment',
     icon: <Search className="h-5 w-5" />,
     color: 'from-blue-400 to-blue-600',
-    route: '/app/atlas'
+    route: '/tools/atlas'
   },
   {
     id: 'PULSE',
@@ -112,7 +112,7 @@ const components: ComponentStatus[] = [
     category: 'Monitoring',
     icon: <Activity className="h-5 w-5" />,
     color: 'from-green-400 to-green-600',
-    route: '/app/pulse'
+    route: '/tools/pulse'
   },
   {
     id: 'CLEARANCE',
@@ -125,7 +125,7 @@ const components: ComponentStatus[] = [
     category: 'Automation',
     icon: <Zap className="h-5 w-5" />,
     color: 'from-purple-400 to-purple-600',
-    route: '/app/clearance'
+    route: '/tools/clearance'
   },
   {
     id: 'PRIVACY',
@@ -203,7 +203,7 @@ const components: ComponentStatus[] = [
     category: 'Automation',
     icon: <Lock className="h-5 w-5" />,
     color: 'from-purple-400 to-purple-600',
-    route: '/app/cipher'
+    route: '/tools/cipher'
   },
   {
     id: 'NEXUS',
@@ -216,7 +216,7 @@ const components: ComponentStatus[] = [
     category: 'Assessment',
     icon: <Users className="h-5 w-5" />,
     color: 'from-blue-400 to-blue-600',
-    route: '/app/nexus'
+    route: '/tools/nexus'
   }
 ];
 

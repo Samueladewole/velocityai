@@ -88,7 +88,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-blue-500 to-indigo-600',
           description: 'AI-powered regulatory compliance tracking across 200+ frameworks',
           trustEquity: 85,
-          route: '/app/compass'
+          route: '/tools/compass'
         },
         {
           id: 'atlas',
@@ -98,7 +98,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-slate-600 to-blue-700',
           description: 'Multi-cloud security posture assessment with automated scanning',
           trustEquity: 92,
-          route: '/app/atlas'
+          route: '/tools/atlas'
         },
         {
           id: 'prism',
@@ -108,7 +108,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-emerald-500 to-teal-600',
           description: 'FAIR methodology risk quantification with Monte Carlo simulations',
           trustEquity: 88,
-          route: '/app/prism'
+          route: '/tools/prism'
         },
         {
           id: 'clearance',
@@ -118,7 +118,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-purple-500 to-violet-600',
           description: 'Zero-trust access control with behavioral analytics',
           trustEquity: 91,
-          route: '/app/clearance'
+          route: '/tools/clearance'
         }
       ]
     },
@@ -134,7 +134,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-red-500 to-orange-600',
           description: 'Real-time threat intelligence with predictive analytics',
           trustEquity: 89,
-          route: '/app/pulse'
+          route: '/tools/pulse'
         },
         {
           id: 'beacon',
@@ -144,7 +144,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-amber-500 to-yellow-600',
           description: 'Automated incident response with AI-powered remediation',
           trustEquity: 87,
-          route: '/app/beacon'
+          route: '/tools/beacon'
         },
         {
           id: 'cipher',
@@ -154,7 +154,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-teal-500 to-cyan-600',
           description: 'Advanced encryption and data loss prevention',
           trustEquity: 93,
-          route: '/app/cipher'
+          route: '/tools/cipher'
         },
         {
           id: 'nexus',
@@ -164,7 +164,7 @@ export const LandingEnhanced: React.FC = () => {
           color: 'from-indigo-500 to-purple-600',
           description: 'Seamless integration with 500+ security tools',
           trustEquity: 86,
-          route: '/app/nexus'
+          route: '/tools/nexus'
         }
       ]
     },
@@ -889,7 +889,7 @@ export const LandingEnhanced: React.FC = () => {
             <p className="text-slate-600 mb-4">And 500+ more integrations through our open API</p>
             <Button 
               variant="outline" 
-              onClick={() => navigate('/app/integrations')}
+              onClick={() => navigate('/tools/integrations')}
               className="border-blue-200 text-blue-700"
             >
               <ExternalLink className="h-4 w-4 mr-2" />

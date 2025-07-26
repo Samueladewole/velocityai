@@ -34,49 +34,49 @@ const navigationItems: NavItem[] = [{
   id: 'compass',
   label: 'COMPASS',
   icon: <Compass className="h-5 w-5" />,
-  path: '/app/compass',
+  path: '/tools/compass',
   description: 'Regulatory Intelligence'
 }, {
   id: 'atlas',
   label: 'ATLAS',
   icon: <Map className="h-5 w-5" />,
-  path: '/app/atlas',
+  path: '/tools/atlas',
   description: 'Security Assessment'
 }, {
   id: 'prism',
   label: 'PRISM',
   icon: <Calculator className="h-5 w-5" />,
-  path: '/app/prism',
+  path: '/tools/prism',
   description: 'Risk Quantification'
 }, {
   id: 'pulse',
   label: 'PULSE',
   icon: <Activity className="h-5 w-5" />,
-  path: '/app/pulse',
+  path: '/tools/pulse',
   description: 'Continuous Monitoring'
 }, {
   id: 'cipher',
   label: 'CIPHER',
   icon: <Lock className="h-5 w-5" />,
-  path: '/app/cipher',
+  path: '/tools/cipher',
   description: 'Policy Automation'
 }, {
   id: 'nexus',
   label: 'NEXUS',
   icon: <Network className="h-5 w-5" />,
-  path: '/app/nexus',
+  path: '/tools/nexus',
   description: 'Intelligence Platform'
 }, {
   id: 'beacon',
   label: 'BEACON',
   icon: <Lightbulb className="h-5 w-5" />,
-  path: '/app/beacon',
+  path: '/tools/beacon',
   description: 'Value Demonstration'
 }, {
   id: 'clearance',
   label: 'CLEARANCE',
   icon: <Shield className="h-5 w-5" />,
-  path: '/app/clearance',
+  path: '/tools/clearance',
   description: 'Risk Clearance'
 }];
 

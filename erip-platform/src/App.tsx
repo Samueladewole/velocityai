@@ -166,6 +166,9 @@ function App() {
           <Route path="tools/nexus" element={<NEXUS />} />
           <Route path="tools/clearance" element={<CLEARANCE />} />
           <Route path="tools/cipher" element={<CIPHER />} />
+          <Route path="tools/integrations" element={<IntegrationHub />} />
+          <Route path="tools/experts" element={<ExpertNetwork />} />
+          <Route path="tools/customer-success" element={<CustomerSuccess />} />
         </Route>
         
         {/* Trust Center Routes (Public) */}
@@ -185,22 +188,6 @@ function App() {
         {/* <Route path="/privacy-suite" element={<PrivacySuite />} /> */}
         {/* <Route path="/assessment-marketplace" element={<AssessmentMarketplace />} /> */}
         <Route path="/prism-demo" element={<PrismDemoWorking />} />
-        <Route path="/app" element={<Layout />}>
-          <Route index element={<DashboardEnhanced />} />
-          <Route path="compass" element={<CompassWorking />} />
-          <Route path="atlas" element={<AtlasWorking />} />
-          <Route path="prism" element={<Prism />} />
-          <Route path="prism-demo" element={<PrismDemo />} />
-          <Route path="prism-test" element={<PrismDemoSimple />} />
-          <Route path="clearance" element={<ClearanceWorking />} />
-          <Route path="pulse" element={<PulseWorking />} />
-          <Route path="cipher" element={<CipherWorking />} />
-          <Route path="nexus" element={<NexusWorking />} />
-          <Route path="beacon" element={<BeaconWorking />} />
-          <Route path="integrations" element={<IntegrationHub />} />
-          <Route path="experts" element={<ExpertNetwork />} />
-          <Route path="customer-success" element={<CustomerSuccess />} />
-        </Route>
         <Route path="/simple" element={<LayoutSimple />}>
           <Route index element={<DashboardSimple />} />
           <Route path="compass" element={<CompassWorking />} />

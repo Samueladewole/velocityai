@@ -64,9 +64,9 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
       category: 'Integrations',
       description: 'Connect with your existing tools',
       items: [
-        { name: 'Cloud Environments', href: '/app/integrations', icon: Globe },
-        { name: 'Security Tools', href: '/app/integrations', icon: Shield },
-        { name: 'Compliance Platforms', href: '/app/integrations', icon: FileCheck }
+        { name: 'Cloud Environments', href: '/tools/integrations', icon: Globe },
+        { name: 'Security Tools', href: '/tools/integrations', icon: Shield },
+        { name: 'Compliance Platforms', href: '/tools/integrations', icon: FileCheck }
       ]
     },
     {
@@ -382,7 +382,7 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                   Get a Demo
                 </Button>
                 <Button 
-                  onClick={() => navigate('/app')}
+                  onClick={() => navigate('/dashboard')}
                   className="erip-gradient-primary text-sm font-medium"
                 >
                   Login
@@ -479,7 +479,7 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                 <Button 
                   className="w-full erip-gradient-primary"
                   onClick={() => {
-                    navigate('/app');
+                    navigate('/dashboard');
                     setMobileMenuOpen(false);
                   }}
                 >
