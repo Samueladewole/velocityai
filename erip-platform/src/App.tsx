@@ -57,11 +57,26 @@ import { CIPHER } from '@/pages/tools/CIPHER';
 import { ToolsOverview } from '@/pages/tools/ToolsOverview';
 import { Contact } from '@/pages/company/Contact';
 import { SeedPitch } from '@/pages/company/SeedPitch';
+import { About } from '@/pages/company/About';
+// Resource pages
+import { Docs } from '@/pages/resources/Docs';
+import { Academy } from '@/pages/resources/Academy';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { TourProvider } from '@/components/tour/TourProvider';
 import { TourOverlay } from '@/components/tour/TourOverlay';
 import { Tooltip } from '@/components/tour/Tooltip';
+// New solution pages
+import { RiskQuantification } from '@/pages/solutions/RiskQuantification';
+import { AIGovernance as AIGovernanceSolution } from '@/pages/solutions/AIGovernance';
+import { PrivacyManagement as PrivacyManagementSolution } from '@/pages/solutions/PrivacyManagement';
+import { FinancialServices } from '@/pages/solutions/FinancialServices';
+import { Healthcare } from '@/pages/solutions/Healthcare';
+import { Technology } from '@/pages/solutions/Technology';
+// Other pages
+import { PublicProfiles } from '@/pages/PublicProfiles';
+// Pricing pages
+import { Pricing } from '@/pages/Pricing';
 // Full Stack Trust Platform components - TODO: Implement these
 // import { FrameworkManager } from '@/pages/FrameworkManager';
 // import { PolicyManagement } from '@/pages/PolicyManagement';
@@ -112,7 +127,21 @@ function App() {
           <Route path="case-study" element={<CaseStudy />} />
           <Route path="solutions/compliance-automation" element={<ComplianceAutomation />} />
           <Route path="solutions/sales-acceleration" element={<SalesAcceleration />} />
+          <Route path="solutions/risk-quantification" element={<RiskQuantification />} />
+          <Route path="solutions/ai-governance" element={<AIGovernanceSolution />} />
+          <Route path="solutions/privacy-management" element={<PrivacyManagementSolution />} />
+          <Route path="solutions/financial-services" element={<FinancialServices />} />
+          <Route path="solutions/healthcare" element={<Healthcare />} />
+          <Route path="solutions/technology" element={<Technology />} />
+          {/* Platform sharing */}
+          <Route path="public-profiles" element={<PublicProfiles />} />
+          {/* Pricing */}
+          <Route path="pricing" element={<Pricing />} />
+          {/* Resources */}
+          <Route path="docs" element={<Docs />} />
+          <Route path="academy" element={<Academy />} />
           {/* Company */}
+          <Route path="company/about" element={<About />} />
           <Route path="company/contact" element={<Contact />} />
           <Route path="company/seed-pitch" element={<SeedPitch />} />
           {/* Platform component routes with navigation */}
@@ -172,9 +201,9 @@ function App() {
         </Route>
         <Route path="/simple" element={<LayoutSimple />}>
           <Route index element={<DashboardSimple />} />
-          <Route path="compass" element={<div><h2>Compass Page</h2><p>Coming Soon</p></div>} />
-          <Route path="atlas" element={<div><h2>Atlas Page</h2><p>Coming Soon</p></div>} />
-          <Route path="prism" element={<div><h2>Prism Page</h2><p>Coming Soon</p></div>} />
+          <Route path="compass" element={<CompassWorking />} />
+          <Route path="atlas" element={<AtlasWorking />} />
+          <Route path="prism" element={<PrismDemo />} />
         </Route>
       </Routes>
       <TourOverlay />

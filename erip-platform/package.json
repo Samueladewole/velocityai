@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "dev:api": "tsx src/server/main.ts",
-    "dev:python": "cd backend/python && source venv/bin/activate && python -m uvicorn main:app --reload --port 8001",
+    "dev:python": "cd backend/python && python3 -m pip install fastapi uvicorn structlog pydantic --break-system-packages && python3 demo_main.py",
     "dev:full": "concurrently \"npm run dev\" \"npm run dev:api\" \"npm run dev:python\"",
     "build": "vite build",
     "build:check": "tsc -b && vite build",

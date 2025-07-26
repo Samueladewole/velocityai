@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
@@ -28,6 +28,56 @@ import {
 
 export const AtlasWorking: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [isScanning, setIsScanning] = useState(false);
+  const [scanResults, setScanResults] = useState<any>(null);
+  const [cloudResources, setCloudResources] = useState<any>(null);
+
+  // Load cloud resources on component mount
+  useEffect(() => {
+    loadCloudResources();
+  }, []);
+
+  const loadCloudResources = async () => {
+    try {
+      const response = await fetch('http://localhost:8001/atlas/cloud-resources');
+      if (response.ok) {
+        const data = await response.json();
+        setCloudResources(data);
+      }
+    } catch (error) {
+      console.error('Failed to load cloud resources:', error);
+    }
+  };
+
+  const runSecurityAssessment = async () => {
+    setIsScanning(true);
+    setScanResults(null);
+    
+    try {
+      const response = await fetch('http://localhost:8001/atlas/security-assessment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          assessment_type: 'comprehensive',
+          cloud_providers: ['aws', 'azure', 'gcp'],
+          include_compliance: true
+        })
+      });
+      
+      if (response.ok) {
+        const results = await response.json();
+        setScanResults(results);
+      } else {
+        console.error('Security assessment failed');
+      }
+    } catch (error) {
+      console.error('Failed to run security assessment:', error);
+    } finally {
+      setIsScanning(false);
+    }
+  };
   
   const securityControls = [
     {
@@ -241,9 +291,22 @@ export const AtlasWorking: React.FC = () => {
               <Download className="h-4 w-4 mr-2" />
               Export
             </Button>
-            <Button className="bg-white text-blue-900 hover:bg-white/90">
-              <Search className="h-4 w-4 mr-2" />
-              Scan Assets
+            <Button 
+              className="bg-white text-blue-900 hover:bg-white/90 disabled:opacity-50"
+              onClick={runSecurityAssessment}
+              disabled={isScanning}
+            >
+              {isScanning ? (
+                <>
+                  <Activity className="h-4 w-4 mr-2 animate-spin" />
+                  Scanning...
+                </>
+              ) : (
+                <>
+                  <Search className="h-4 w-4 mr-2" />
+                  Run Live Scan
+                </>
+              )}
             </Button>
           </div>
         </div>
@@ -398,6 +461,149 @@ export const AtlasWorking: React.FC = () => {
             </div>
           </CardContent>
         </Card>
+
+        {/* Live Scan Results */}
+        {scanResults && (
+          <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
+            <CardHeader className="border-b border-slate-100">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2 text-slate-900">
+                    <Shield className="h-5 w-5 text-blue-600" />
+                    Live Security Assessment Results
+                  </CardTitle>
+                  <CardDescription className="text-slate-600">
+                    Real-time vulnerability scan completed at {new Date(scanResults.completed_at).toLocaleString()}
+                  </CardDescription>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className={`px-3 py-1 rounded-full text-xs font-medium border ${
+                    scanResults.overall_score >= 8 ? 'text-emerald-700 bg-emerald-50 border-emerald-200' :
+                    scanResults.overall_score >= 6 ? 'text-amber-700 bg-amber-50 border-amber-200' :
+                    'text-red-700 bg-red-50 border-red-200'
+                  }`}>
+                    Score: {scanResults.overall_score}/10
+                  </div>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="grid gap-4 md:grid-cols-3 mb-6">
+                <div className="p-4 rounded-lg bg-red-50 border border-red-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <AlertTriangle className="h-5 w-5 text-red-600" />
+                    <span className="text-sm font-semibold text-red-800">Critical</span>
+                  </div>
+                  <div className="text-2xl font-bold text-red-900">{scanResults.critical_findings}</div>
+                </div>
+                <div className="p-4 rounded-lg bg-orange-50 border border-orange-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <AlertTriangle className="h-5 w-5 text-orange-600" />
+                    <span className="text-sm font-semibold text-orange-800">High</span>
+                  </div>
+                  <div className="text-2xl font-bold text-orange-900">{scanResults.high_findings}</div>
+                </div>
+                <div className="p-4 rounded-lg bg-slate-50 border border-slate-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <FileText className="h-5 w-5 text-slate-600" />
+                    <span className="text-sm font-semibold text-slate-800">Total</span>
+                  </div>
+                  <div className="text-2xl font-bold text-slate-900">{scanResults.findings_count}</div>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <h4 className="text-lg font-semibold text-slate-900">Security Findings</h4>
+                {scanResults.findings.slice(0, 3).map((finding: any, index: number) => (
+                  <div key={index} className="p-4 border border-slate-200 rounded-lg bg-white">
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1">
+                        <h5 className="font-semibold text-slate-900">{finding.title}</h5>
+                        <p className="text-sm text-slate-600 mt-1">{finding.description}</p>
+                      </div>
+                      <div className={`px-2 py-1 rounded text-xs font-medium ${
+                        finding.severity === 'CRITICAL' ? 'bg-red-100 text-red-800' :
+                        finding.severity === 'HIGH' ? 'bg-orange-100 text-orange-800' :
+                        'bg-amber-100 text-amber-800'
+                      }`}>
+                        {finding.severity}
+                      </div>
+                    </div>
+                    <div className="text-xs text-slate-500 mb-2">
+                      Risk Score: {finding.risk_score}/10 • Affected: {finding.affected_resources.length} resources
+                    </div>
+                    <div className="text-xs text-slate-600">
+                      <strong>Remediation:</strong> {finding.remediation_steps[0]}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {scanResults.recommendations && (
+                <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <h5 className="font-semibold text-blue-900 mb-2">AI-Powered Recommendations</h5>
+                  <ul className="text-sm text-blue-800 space-y-1">
+                    {scanResults.recommendations.map((rec: string, index: number) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <CheckCircle className="h-4 w-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                        {rec}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Cloud Resources Overview */}
+        {cloudResources && (
+          <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
+            <CardHeader className="border-b border-slate-100">
+              <CardTitle className="flex items-center gap-2 text-slate-900">
+                <Cloud className="h-5 w-5 text-blue-600" />
+                Multi-Cloud Resources ({cloudResources.total_resources} total)
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="p-6">
+              <div className="grid gap-4 md:grid-cols-3">
+                <div className="p-4 rounded-lg bg-orange-50 border border-orange-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Cloud className="h-5 w-5 text-orange-600" />
+                    <span className="text-sm font-semibold text-orange-800">AWS</span>
+                  </div>
+                  <div className="space-y-1 text-sm text-orange-700">
+                    <div>S3 Buckets: {cloudResources.aws_resources.s3_buckets}</div>
+                    <div>EC2 Instances: {cloudResources.aws_resources.ec2_instances}</div>
+                    <div>RDS Instances: {cloudResources.aws_resources.rds_instances}</div>
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-blue-50 border border-blue-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Cloud className="h-5 w-5 text-blue-600" />
+                    <span className="text-sm font-semibold text-blue-800">Azure</span>
+                  </div>
+                  <div className="space-y-1 text-sm text-blue-700">
+                    <div>Storage Accounts: {cloudResources.azure_resources.storage_accounts}</div>
+                    <div>Virtual Machines: {cloudResources.azure_resources.virtual_machines}</div>
+                    <div>Databases: {cloudResources.azure_resources.databases}</div>
+                  </div>
+                </div>
+                <div className="p-4 rounded-lg bg-emerald-50 border border-emerald-200">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Cloud className="h-5 w-5 text-emerald-600" />
+                    <span className="text-sm font-semibold text-emerald-800">GCP</span>
+                  </div>
+                  <div className="space-y-1 text-sm text-emerald-700">
+                    <div>Storage Buckets: {cloudResources.gcp_resources.storage_buckets}</div>
+                    <div>Compute Instances: {cloudResources.gcp_resources.compute_instances}</div>
+                    <div>Databases: {cloudResources.gcp_resources.databases}</div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Vulnerabilities */}
         <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
