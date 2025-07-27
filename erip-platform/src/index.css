@@ -1,5 +1,6 @@
 @import './styles/design-system.css';
 @import './styles/button-alignment.css';
+@import './styles/component-pages.css';
 
 @tailwind base;
 @tailwind components;

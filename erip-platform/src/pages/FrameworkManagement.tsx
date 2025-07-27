@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
+import { ComponentPageTemplate, StatCard, TabConfiguration } from '@/components/templates/ComponentPageTemplate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { RiskBadge } from '@/components/shared/RiskBadge';
 import { StatusBadge } from '@/components/shared/StatusBadge';
 import { TrustPointsDisplay } from '@/components/shared/TrustPointsDisplay';
-import { StatCard } from '@/components/shared/StatCard';
 import { 
   Shield, 
   CheckCircle, 
@@ -225,70 +224,56 @@ export const FrameworkManagement: React.FC = () => {
     framework.fullName.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50/50 p-6">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">Framework Management</h1>
-            <p className="text-slate-600">
-              Intelligent compliance orchestration with 70% overlap optimization
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <TrustPointsDisplay points={totalTrustPoints} size="lg" />
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
-              <Download className="h-4 w-4 mr-2" />
-              Export Report
-            </Button>
-          </div>
-        </div>
+  // Quick stats for the header
+  const quickStats: StatCard[] = [
+    {
+      label: 'Average Progress',
+      value: `${avgProgress}%`,
+      change: '+12%',
+      trend: 'up',
+      icon: <TrendingUp className="h-6 w-6 text-blue-600" />,
+      description: 'Cross-framework completion',
+      color: 'text-blue-600'
+    },
+    {
+      label: 'Overlap Optimization',
+      value: `${overlapOptimization}%`,
+      change: '+8%',
+      trend: 'up',
+      icon: <Network className="h-6 w-6 text-green-600" />,
+      description: 'Control reuse efficiency',
+      color: 'text-green-600'
+    },
+    {
+      label: 'Total Controls',
+      value: `${implementedControls}/${totalControls}`,
+      change: '+15%',
+      trend: 'up',
+      icon: <Shield className="h-6 w-6 text-purple-600" />,
+      description: 'Controls implemented',
+      color: 'text-purple-600'
+    },
+    {
+      label: 'Trust Points',
+      value: totalTrustPoints.toLocaleString(),
+      change: '+25%',
+      trend: 'up',
+      icon: <Award className="h-6 w-6 text-orange-600" />,
+      description: 'Total earned points',
+      color: 'text-orange-600'
+    }
+  ];
 
-        {/* Overview Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <StatCard
-            title="Average Progress"
-            value={`${avgProgress}%`}
-            icon={TrendingUp}
-            trend={{ value: 12, isPositive: true }}
-            className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200"
-          />
-          <StatCard
-            title="Overlap Optimization"
-            value={`${overlapOptimization}%`}
-            icon={Network}
-            trend={{ value: 8, isPositive: true }}
-            className="bg-gradient-to-br from-green-50 to-green-100 border-green-200"
-          />
-          <StatCard
-            title="Total Controls"
-            value={`${implementedControls}/${totalControls}`}
-            icon={Shield}
-            trend={{ value: 15, isPositive: true }}
-            className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200"
-          />
-          <StatCard
-            title="Trust Points"
-            value={totalTrustPoints.toLocaleString()}
-            icon={Award}
-            trend={{ value: 25, isPositive: true }}
-            className="bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200"
-          />
-        </div>
+  // Tab configurations
+  const tabs: TabConfiguration[] = [
+    {
+      id: 'overview',
+      label: 'Framework Overview',
+      badge: frameworks.length,
+      content: (
 
-        {/* Main Content */}
-        <Tabs value={activeTab} onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-4">
-            <TabsTrigger value="overview">Framework Overview</TabsTrigger>
-            <TabsTrigger value="mappings">Control Mappings</TabsTrigger>
-            <TabsTrigger value="optimization">Overlap Analysis</TabsTrigger>
-            <TabsTrigger value="roadmap">Implementation Roadmap</TabsTrigger>
-          </TabsList>
-
-          {/* Framework Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
-            {/* Search and Filter */}
+        <div className="space-y-6">
+          {/* Search and Filter */}
             <div className="flex items-center gap-4">
               <div className="relative flex-1 max-w-md">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
@@ -313,7 +298,7 @@ export const FrameworkManagement: React.FC = () => {
                 return (
                   <Card 
                     key={framework.id}
-                    className="cursor-pointer transition-all duration-200 hover:shadow-xl hover:scale-105 border-slate-200"
+                    className="card-professional cursor-pointer transition-all duration-200 hover:shadow-xl hover:scale-105"
                     onClick={() => setSelectedFramework(framework.id)}
                   >
                     <CardHeader className="pb-4">
@@ -365,10 +350,15 @@ export const FrameworkManagement: React.FC = () => {
                 );
               })}
             </div>
-          </TabsContent>
-
-          {/* Control Mappings Tab */}
-          <TabsContent value="mappings" className="space-y-6">
+        </div>
+      )
+    },
+    {
+      id: 'mappings',
+      label: 'Control Mappings',
+      badge: `${overlapOptimization}%`,
+      content: (
+        <div className="space-y-6">
             <div className="flex items-center justify-between">
               <h3 className="text-xl font-semibold">Cross-Framework Control Mappings</h3>
               <Badge className="bg-green-100 text-green-800">
@@ -379,7 +369,7 @@ export const FrameworkManagement: React.FC = () => {
 
             <div className="space-y-4">
               {controlMappings.map((mapping) => (
-                <Card key={mapping.id} className="border-slate-200">
+                <Card key={mapping.id} className="card-professional border-slate-200">
                   <CardContent className="p-6">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
@@ -423,11 +413,15 @@ export const FrameworkManagement: React.FC = () => {
                 </Card>
               ))}
             </div>
-          </TabsContent>
-
-          {/* Overlap Analysis Tab */}
-          <TabsContent value="optimization" className="space-y-6">
-            <Card className="border-slate-200">
+        </div>
+      )
+    },
+    {
+      id: 'optimization',
+      label: 'Overlap Analysis',
+      content: (
+        <div className="space-y-6">
+            <Card className="card-professional border-slate-200">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Network className="h-5 w-5" />
@@ -485,11 +479,15 @@ export const FrameworkManagement: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-
-          {/* Implementation Roadmap Tab */}
-          <TabsContent value="roadmap" className="space-y-6">
-            <Card className="border-slate-200">
+        </div>
+      )
+    },
+    {
+      id: 'roadmap',
+      label: 'Implementation Roadmap',
+      content: (
+        <div className="space-y-6">
+            <Card className="card-professional border-slate-200">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Clock className="h-5 w-5" />
@@ -549,9 +547,36 @@ export const FrameworkManagement: React.FC = () => {
                 </div>
               </CardContent>
             </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </div>
+        </div>
+      )
+    }
+  ];
+
+  const headerActions = (
+    <>
+      <Button variant="outline">
+        <Filter className="h-4 w-4 mr-2" />
+        Filter
+      </Button>
+      <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
+        <Download className="h-4 w-4 mr-2" />
+        Export Report
+      </Button>
+    </>
+  );
+
+  return (
+    <ComponentPageTemplate
+      title="Framework Management"
+      subtitle="Intelligent Compliance Orchestration"
+      description="Optimize compliance across multiple frameworks with 70% overlap reduction and intelligent control mapping for maximum efficiency."
+      trustScore={avgProgress}
+      trustPoints={totalTrustPoints}
+      quickStats={quickStats}
+      tabs={tabs}
+      actions={headerActions}
+      headerGradient="from-blue-50 to-purple-50"
+      className="card-professional"
+    />
   );
 };

@@ -280,10 +280,10 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
                 <Card 
                   key={component.id} 
                   onClick={() => navigate(component.route)}
-                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-white to-slate-50/50 shadow-lg shadow-slate-200/50 transition-all duration-300 hover:shadow-xl hover:shadow-slate-300/50 hover:-translate-y-1 cursor-pointer"
+                  className="group relative overflow-hidden border-0 bg-gradient-to-br from-white to-slate-50/50 shadow-lg shadow-slate-200/50 transition-all duration-300 hover:shadow-xl hover:shadow-slate-300/50 hover:-translate-y-1 cursor-pointer flex flex-col h-full"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-slate-100/30" />
-                  <CardContent className="relative p-6">
+                  <CardContent className="relative p-6 flex-grow flex flex-col">
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
@@ -327,13 +327,16 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
                       </div>
                     </div>
 
-                    {/* Quick Action */}
+                    {/* Spacer */}
+                    <div className="flex-grow"></div>
+
+                    {/* Quick Action - Always at bottom */}
                     <button 
                       onClick={(e) => {
                         e.stopPropagation();
                         navigate(component.route);
                       }}
-                      className="w-full flex items-center justify-between p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700"
+                      className="w-full flex items-center justify-between p-2 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors group-hover:bg-blue-50 group-hover:text-blue-700 min-h-[40px] mt-4"
                     >
                       <span className="text-sm font-medium">{component.quickAccess}</span>
                       <ArrowRight className="h-4 w-4" />

@@ -401,7 +401,7 @@ export const PlatformCapabilities: React.FC = () => {
                 {filteredComponents.map((component) => (
                   <Card 
                     key={component.id} 
-                    className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg bg-white/70 backdrop-blur-sm"
+                    className="group hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border-0 shadow-lg bg-white/70 backdrop-blur-sm flex flex-col h-full"
                   >
                     <CardHeader className="pb-4">
                       <div className="flex items-start justify-between mb-3">
@@ -435,53 +435,63 @@ export const PlatformCapabilities: React.FC = () => {
                       </p>
                     </CardHeader>
 
-                    <CardContent className="pt-0">
-                      <div className="space-y-4">
-                        {/* Key Features */}
+                    <CardContent className="pt-0 flex-grow flex flex-col pb-6">
+                      {/* Key Features */}
+                      <div className="mb-4">
+                        <h4 className="text-sm font-semibold text-slate-900 mb-2">Key Features</h4>
+                        <ul className="space-y-1">
+                          {component.features.map((feature, index) => (
+                            <li key={index} className="flex items-start gap-2 text-sm text-slate-600">
+                              <CheckCircle className="h-3 w-3 text-green-600 mt-0.5 flex-shrink-0" />
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Value Metrics */}
+                      <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg mb-6">
                         <div>
-                          <h4 className="text-sm font-semibold text-slate-900 mb-2">Key Features</h4>
-                          <ul className="space-y-1">
-                            {component.features.map((feature, index) => (
-                              <li key={index} className="flex items-start gap-2 text-sm text-slate-600">
-                                <CheckCircle className="h-3 w-3 text-green-600 mt-0.5 flex-shrink-0" />
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Value Metrics */}
-                        <div className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                          <div>
-                            <div className="text-2xl font-bold text-blue-600">
-                              {component.metrics.primary}
-                            </div>
-                            <div className="text-xs text-slate-600">
-                              {component.metrics.secondary}
-                            </div>
+                          <div className="text-2xl font-bold text-blue-600">
+                            {component.metrics.primary}
                           </div>
-                          <div className="text-right">
-                            <div className="text-xs text-slate-500 mb-1">
-                              {component.valueCreated}
-                            </div>
-                            <div className="text-xs text-slate-500">
-                              {component.department}
-                            </div>
+                          <div className="text-xs text-slate-600">
+                            {component.metrics.secondary}
                           </div>
                         </div>
+                        <div className="text-right">
+                          <div className="text-xs text-slate-500 mb-1">
+                            {component.valueCreated}
+                          </div>
+                          <div className="text-xs text-slate-500">
+                            {component.department}
+                          </div>
+                        </div>
+                      </div>
 
-                        {/* Action Button */}
+                      {/* Spacer to push button to bottom */}
+                      <div className="flex-grow"></div>
+
+                      {/* Action Button - Always at bottom */}
+                      {component.status === 'Active' ? (
                         <Button 
                           asChild 
-                          className="w-full group-hover:bg-blue-600 transition-colors"
-                          disabled={component.status !== 'Active'}
+                          className="w-full min-h-[44px] group-hover:bg-blue-600 transition-colors"
                         >
-                          <Link to={component.href}>
-                            {component.status === 'Active' ? 'Explore Component' : 'Coming Soon'}
-                            {component.status === 'Active' && <ArrowRight className="ml-2 h-4 w-4" />}
+                          <Link to={component.href} className="flex items-center justify-center gap-2">
+                            <span>Explore Component</span>
+                            <ArrowRight className="h-4 w-4" />
                           </Link>
                         </Button>
-                      </div>
+                      ) : (
+                        <Button 
+                          variant="secondary"
+                          disabled
+                          className="w-full min-h-[44px]"
+                        >
+                          Coming Soon
+                        </Button>
+                      )}
                     </CardContent>
                   </Card>
                 ))}
@@ -563,11 +573,11 @@ export const PlatformCapabilities: React.FC = () => {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="erip-gradient-primary">
+            <Button size="lg" className="h-12 px-8 erip-gradient-primary">
               Get a Platform Demo
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button size="lg" variant="outline">
+            <Button size="lg" variant="outline" className="h-12 px-8">
               Start Free Assessment
             </Button>
           </div>

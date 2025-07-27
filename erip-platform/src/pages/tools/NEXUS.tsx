@@ -8,7 +8,6 @@ import {
   TrendingUp,
   Euro,
   Brain,
-  ArrowRight,
   Play,
   Eye,
   CheckCircle,

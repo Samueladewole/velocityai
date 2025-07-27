@@ -150,11 +150,14 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {/* Platform Dropdown */}
-            <div className="relative group">
+            <div 
+              className="relative group"
+              onMouseEnter={() => setPlatformOpen(true)}
+              onMouseLeave={() => setPlatformOpen(false)}
+            >
               <button
                 className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-                onMouseEnter={() => setPlatformOpen(true)}
-                onMouseLeave={() => setPlatformOpen(false)}
+                onClick={() => setPlatformOpen(!platformOpen)}
               >
                 Platform
                 <ChevronDown className="h-4 w-4" />
@@ -162,10 +165,10 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               
               {platformOpen && (
                 <div 
-                  className="absolute top-full left-0 mt-1 w-screen max-w-4xl bg-white border border-slate-200 rounded-lg shadow-xl p-6 grid grid-cols-2 gap-6"
-                  onMouseEnter={() => setPlatformOpen(true)}
-                  onMouseLeave={() => setPlatformOpen(false)}
+                  className="absolute top-full left-0 mt-0 pt-2 w-screen max-w-4xl"
+                  onClick={(e) => e.stopPropagation()}
                 >
+                  <div className="bg-white border border-slate-200 rounded-lg shadow-xl p-6 grid grid-cols-2 gap-6">
                   {platformItems.map((category) => (
                     <div key={category.category}>
                       <h3 className="text-sm font-semibold text-slate-900 mb-1">{category.category}</h3>
@@ -186,6 +189,7 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                       </ul>
                     </div>
                   ))}
+                  </div>
                 </div>
               )}
             </div>

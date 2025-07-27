@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import { ComponentPageTemplate, StatCard, TabConfiguration } from '@/components/templates/ComponentPageTemplate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { 
   Shield, 
@@ -20,7 +20,6 @@ import {
   Lock,
   Eye,
   BarChart3,
-  ArrowRight,
   Download,
   Upload,
   Sparkles,
@@ -61,7 +60,6 @@ interface DTEFPrinciple {
 }
 
 export const DTEFAutomation: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
   const [selectedDimension, setSelectedDimension] = useState<DTEFDimension | null>(null);
   const [automationMode, setAutomationMode] = useState<'assessment' | 'implementation'>('assessment');
 
@@ -318,583 +316,571 @@ export const DTEFAutomation: React.FC = () => {
     }
   };
 
-  return (
-    <div className="container mx-auto p-6 max-w-7xl">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
-              ISACA DTEF Automation
-            </h1>
-            <p className="text-slate-600">
-              Digital Trust Ecosystem Framework implementation with automated controls and Trust Equity™ integration
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold text-blue-600 mb-1">
-              {calculateOverallTrustScore()}%
-            </div>
-            <div className="text-sm text-slate-600">Overall Trust Score</div>
-          </div>
-        </div>
+  // Quick stats for the header
+  const quickStats: StatCard[] = [
+    {
+      label: 'Trust Maturity',
+      value: 'Level 3.4',
+      change: '+0.4',
+      trend: 'up',
+      icon: <Award className="h-6 w-6 text-blue-600" />,
+      description: 'DTEF maturity level',
+      color: 'text-blue-600'
+    },
+    {
+      label: 'Automated Controls',
+      value: '67%',
+      change: '+15%',
+      trend: 'up',
+      icon: <Zap className="h-6 w-6 text-green-600" />,
+      description: '10 of 15 controls automated',
+      color: 'text-green-600'
+    },
+    {
+      label: 'Compliance Rate',
+      value: '89%',
+      change: '+8%',
+      trend: 'up',
+      icon: <FileCheck className="h-6 w-6 text-purple-600" />,
+      description: 'Across all DTEF dimensions',
+      color: 'text-purple-600'
+    },
+    {
+      label: 'Trust Incidents',
+      value: '-42%',
+      change: '-18%',
+      trend: 'up',
+      icon: <TrendingUp className="h-6 w-6 text-emerald-600" />,
+      description: 'Year-over-year reduction',
+      color: 'text-emerald-600'
+    }
+  ];
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">Trust Maturity</p>
-                  <p className="text-2xl font-bold">Level 3.4</p>
-                </div>
-                <Award className="h-8 w-8 text-blue-600" />
-              </div>
-              <Progress value={68} className="mt-2" />
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">Automated Controls</p>
-                  <p className="text-2xl font-bold">67%</p>
-                </div>
-                <Zap className="h-8 w-8 text-green-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                10 of 15 controls automated
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">Compliance Rate</p>
-                  <p className="text-2xl font-bold">89%</p>
-                </div>
-                <FileCheck className="h-8 w-8 text-purple-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                Across all DTEF dimensions
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">Trust Incidents</p>
-                  <p className="text-2xl font-bold">-42%</p>
-                </div>
-                <TrendingUp className="h-8 w-8 text-emerald-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                Year-over-year reduction
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-
-      {/* Main Content Tabs */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-5 w-full mb-6">
-          <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="dimensions">Dimensions</TabsTrigger>
-          <TabsTrigger value="automation">Automation</TabsTrigger>
-          <TabsTrigger value="assessment">Assessment</TabsTrigger>
-          <TabsTrigger value="roadmap">Roadmap</TabsTrigger>
-        </TabsList>
-
-        {/* Overview Tab */}
-        <TabsContent value="overview">
-          <div className="space-y-6">
-            {/* DTEF Principles */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Digital Trust Principles</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                  {dtefPrinciples.map((principle) => {
-                    const IconComponent = principle.icon;
-                    return (
-                      <div key={principle.id} className="text-center">
-                        <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center mb-3">
-                          <IconComponent className="h-8 w-8 text-blue-600" />
-                        </div>
-                        <h4 className="font-medium text-sm mb-1">{principle.name}</h4>
-                        <div className="text-2xl font-bold text-blue-600 mb-2">
-                          {principle.implementationStatus}%
-                        </div>
-                        <Progress value={principle.implementationStatus} className="h-1" />
+  // Tab configurations
+  const tabs: TabConfiguration[] = [
+    {
+      id: 'overview',
+      label: 'Overview',
+      content: (
+        <div className="space-y-6">
+          {/* DTEF Principles */}
+          <Card className="card-professional">
+            <CardHeader>
+              <CardTitle>Digital Trust Principles</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                {dtefPrinciples.map((principle) => {
+                  const IconComponent = principle.icon;
+                  return (
+                    <div key={principle.id} className="text-center">
+                      <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl flex items-center justify-center mb-3">
+                        <IconComponent className="h-8 w-8 text-blue-600" />
                       </div>
-                    );
-                  })}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Trust Equity Integration */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-blue-600" />
-                  Trust Equity™ Integration
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="font-medium mb-4">DTEF to Trust Equity Mapping</h4>
-                    <div className="space-y-3">
-                      {dtefDimensions.map((dimension) => (
-                        <div key={dimension.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
-                          <div className="flex items-center gap-3">
-                            <div className={`w-2 h-2 rounded-full ${getMaturityLevelColor(dimension.maturityLevel)}`} />
-                            <span className="text-sm font-medium">{dimension.name}</span>
-                          </div>
-                          <div className="flex items-center gap-4">
-                            <span className="text-sm text-slate-600">DTEF: {dimension.score}%</span>
-                            <ArrowRight className="h-4 w-4 text-slate-400" />
-                            <span className="text-sm font-medium text-blue-600">TE: {dimension.trustEquity}%</span>
-                          </div>
-                        </div>
-                      ))}
+                      <h4 className="font-medium text-sm mb-1">{principle.name}</h4>
+                      <div className="text-2xl font-bold text-blue-600 mb-2">
+                        {principle.implementationStatus}%
+                      </div>
+                      <Progress value={principle.implementationStatus} className="h-1" />
                     </div>
-                  </div>
+                  );
+                })}
+              </div>
+            </CardContent>
+          </Card>
 
-                  <div>
-                    <h4 className="font-medium mb-4">Automated Trust Verification</h4>
-                    <Alert>
-                      <Brain className="h-4 w-4" />
-                      <AlertDescription>
-                        AI-powered continuous assessment validates DTEF compliance and automatically 
-                        updates Trust Equity scores across all dimensions in real-time.
-                      </AlertDescription>
-                    </Alert>
-                    <div className="mt-4 space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Last automated assessment</span>
-                        <span className="text-slate-600">2 hours ago</span>
+          {/* Trust Equity Integration */}
+          <Card className="card-professional">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-blue-600" />
+                Trust Equity™ Integration
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <h4 className="font-medium mb-4">DTEF to Trust Equity Mapping</h4>
+                  <div className="space-y-3">
+                    {dtefDimensions.map((dimension) => (
+                      <div key={dimension.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-lg">
+                        <div className="flex items-center gap-3">
+                          <div className={`w-2 h-2 rounded-full ${getMaturityLevelColor(dimension.maturityLevel)}`} />
+                          <span className="text-sm font-medium">{dimension.name}</span>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <span className="text-sm text-slate-600">DTEF: {dimension.score}%</span>
+                          <ArrowRight className="h-4 w-4 text-slate-400" />
+                          <span className="text-sm font-medium text-blue-600">TE: {dimension.trustEquity}%</span>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Controls validated</span>
-                        <span className="text-slate-600">147 of 152</span>
-                      </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span>Next assessment</span>
-                        <span className="text-slate-600">In 4 hours</span>
-                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div>
+                  <h4 className="font-medium mb-4">Automated Trust Verification</h4>
+                  <Alert>
+                    <Brain className="h-4 w-4" />
+                    <AlertDescription>
+                      AI-powered continuous assessment validates DTEF compliance and automatically 
+                      updates Trust Equity scores across all dimensions in real-time.
+                    </AlertDescription>
+                  </Alert>
+                  <div className="mt-4 space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Last automated assessment</span>
+                      <span className="text-slate-600">2 hours ago</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Controls validated</span>
+                      <span className="text-slate-600">147 of 152</span>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span>Next assessment</span>
+                      <span className="text-slate-600">In 4 hours</span>
                     </div>
                   </div>
                 </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )
+    },
+    {
+      id: 'dimensions',
+      label: 'Dimensions',
+      badge: dtefDimensions.length,
+      content: (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-1">
+            <Card className="card-professional">
+              <CardHeader>
+                <CardTitle>DTEF Dimensions</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2">
+                {dtefDimensions.map((dimension) => (
+                  <button
+                    key={dimension.id}
+                    onClick={() => setSelectedDimension(dimension)}
+                    className={`w-full p-4 rounded-lg border transition-all text-left ${
+                      selectedDimension?.id === dimension.id
+                        ? 'border-blue-500 bg-blue-50'
+                        : 'border-slate-200 hover:border-slate-300'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-medium">{dimension.name}</h4>
+                      <Badge className={getMaturityLevelColor(dimension.maturityLevel)}>
+                        {getMaturityLevelName(dimension.maturityLevel)}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-600">Trust Equity</span>
+                      <span className="font-medium">{dimension.trustEquity}%</span>
+                    </div>
+                    <Progress value={dimension.trustEquity} className="mt-2 h-1" />
+                  </button>
+                ))}
               </CardContent>
             </Card>
           </div>
-        </TabsContent>
 
-        {/* Dimensions Tab */}
-        <TabsContent value="dimensions">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-1">
-              <Card>
+          <div className="lg:col-span-2">
+            {selectedDimension ? (
+              <Card className="card-professional">
                 <CardHeader>
-                  <CardTitle>DTEF Dimensions</CardTitle>
+                  <CardTitle>{selectedDimension.name}</CardTitle>
+                  <p className="text-sm text-slate-600">{selectedDimension.description}</p>
                 </CardHeader>
-                <CardContent className="space-y-2">
-                  {dtefDimensions.map((dimension) => (
-                    <button
-                      key={dimension.id}
-                      onClick={() => setSelectedDimension(dimension)}
-                      className={`w-full p-4 rounded-lg border transition-all text-left ${
-                        selectedDimension?.id === dimension.id
-                          ? 'border-blue-500 bg-blue-50'
-                          : 'border-slate-200 hover:border-slate-300'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <h4 className="font-medium">{dimension.name}</h4>
-                        <Badge className={getMaturityLevelColor(dimension.maturityLevel)}>
-                          {getMaturityLevelName(dimension.maturityLevel)}
-                        </Badge>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-4 bg-slate-50 rounded-lg">
+                        <p className="text-sm text-slate-600 mb-1">DTEF Score</p>
+                        <p className="text-2xl font-bold">{selectedDimension.score}%</p>
                       </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-slate-600">Trust Equity</span>
-                        <span className="font-medium">{dimension.trustEquity}%</span>
+                      <div className="p-4 bg-blue-50 rounded-lg">
+                        <p className="text-sm text-slate-600 mb-1">Trust Equity™</p>
+                        <p className="text-2xl font-bold text-blue-600">{selectedDimension.trustEquity}%</p>
                       </div>
-                      <Progress value={dimension.trustEquity} className="mt-2 h-1" />
-                    </button>
-                  ))}
+                    </div>
+
+                    <div>
+                      <h4 className="font-medium mb-3">Controls Status</h4>
+                      <div className="space-y-2">
+                        {selectedDimension.controls.map((control) => (
+                          <div key={control.id} className="p-3 border border-slate-200 rounded-lg">
+                            <div className="flex items-center justify-between mb-2">
+                              <div className="flex items-center gap-2">
+                                <span className="font-medium text-sm">{control.name}</span>
+                                {getAutomationIcon(control.automationLevel)}
+                              </div>
+                              <Badge className={getStatusColor(control.status)}>
+                                {control.status.replace('_', ' ')}
+                              </Badge>
+                            </div>
+                            <div className="flex items-center gap-4 text-xs text-slate-600">
+                              <span>Automation: {control.automationLevel.replace('-', ' ')}</span>
+                              <span>•</span>
+                              <span>Trust Impact: {control.trustImpact}</span>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
-            </div>
+            ) : (
+              <Card className="card-professional">
+                <CardContent className="p-12 text-center text-slate-500">
+                  Select a dimension to view details
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      )
+    },
+    {
+      id: 'automation',
+      label: 'Automation',
+      badge: '67%',
+      content: (
+        <div className="space-y-6">
+          <Card className="card-professional">
+            <CardHeader>
+              <CardTitle>DTEF Automation Engine</CardTitle>
+              <p className="text-sm text-slate-600">
+                Automated implementation and monitoring of DTEF controls
+              </p>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl">
+                  <Zap className="h-12 w-12 text-green-600 mx-auto mb-3" />
+                  <h4 className="font-medium mb-2">Fully Automated</h4>
+                  <div className="text-3xl font-bold text-green-600 mb-1">45%</div>
+                  <p className="text-sm text-slate-600">7 controls</p>
+                </div>
 
-            <div className="lg:col-span-2">
-              {selectedDimension ? (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{selectedDimension.name}</CardTitle>
-                    <p className="text-sm text-slate-600">{selectedDimension.description}</p>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="p-4 bg-slate-50 rounded-lg">
-                          <p className="text-sm text-slate-600 mb-1">DTEF Score</p>
-                          <p className="text-2xl font-bold">{selectedDimension.score}%</p>
-                        </div>
-                        <div className="p-4 bg-blue-50 rounded-lg">
-                          <p className="text-sm text-slate-600 mb-1">Trust Equity™</p>
-                          <p className="text-2xl font-bold text-blue-600">{selectedDimension.trustEquity}%</p>
-                        </div>
-                      </div>
+                <div className="text-center p-6 bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl">
+                  <Settings className="h-12 w-12 text-yellow-600 mx-auto mb-3" />
+                  <h4 className="font-medium mb-2">Semi-Automated</h4>
+                  <div className="text-3xl font-bold text-yellow-600 mb-1">35%</div>
+                  <p className="text-sm text-slate-600">5 controls</p>
+                </div>
 
+                <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl">
+                  <Users className="h-12 w-12 text-gray-600 mx-auto mb-3" />
+                  <h4 className="font-medium mb-2">Manual</h4>
+                  <div className="text-3xl font-bold text-gray-600 mb-1">20%</div>
+                  <p className="text-sm text-slate-600">3 controls</p>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <h4 className="font-medium mb-4">Automation Opportunities</h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <Brain className="h-5 w-5 text-blue-600" />
                       <div>
-                        <h4 className="font-medium mb-3">Controls Status</h4>
-                        <div className="space-y-2">
-                          {selectedDimension.controls.map((control) => (
-                            <div key={control.id} className="p-3 border border-slate-200 rounded-lg">
-                              <div className="flex items-center justify-between mb-2">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-medium text-sm">{control.name}</span>
-                                  {getAutomationIcon(control.automationLevel)}
-                                </div>
-                                <Badge className={getStatusColor(control.status)}>
-                                  {control.status.replace('_', ' ')}
-                                </Badge>
-                              </div>
-                              <div className="flex items-center gap-4 text-xs text-slate-600">
-                                <span>Automation: {control.automationLevel.replace('-', ' ')}</span>
-                                <span>•</span>
-                                <span>Trust Impact: {control.trustImpact}</span>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
+                        <p className="font-medium">Trust Culture Metrics</p>
+                        <p className="text-sm text-slate-600">Automate employee trust surveys and analysis</p>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
+                    <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+                      Automate
+                    </Button>
+                  </div>
+
+                  <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                    <div className="flex items-center gap-3">
+                      <FileCheck className="h-5 w-5 text-purple-600" />
+                      <div>
+                        <p className="font-medium">Continuous Trust Assessment</p>
+                        <p className="text-sm text-slate-600">Real-time trust posture monitoring</p>
+                      </div>
+                    </div>
+                    <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
+                      Automate
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )
+    },
+    {
+      id: 'assessment',
+      label: 'Assessment',
+      content: (
+        <Card className="card-professional">
+          <CardHeader>
+            <CardTitle>DTEF Maturity Assessment</CardTitle>
+            <p className="text-sm text-slate-600">
+              Comprehensive evaluation of your digital trust ecosystem
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {/* Assessment Mode Toggle */}
+              <div className="flex items-center justify-center p-1 bg-slate-100 rounded-lg">
+                <Button
+                  variant={automationMode === 'assessment' ? 'default' : 'ghost'}
+                  onClick={() => setAutomationMode('assessment')}
+                  className="flex-1"
+                >
+                  Quick Assessment
+                </Button>
+                <Button
+                  variant={automationMode === 'implementation' ? 'default' : 'ghost'}
+                  onClick={() => setAutomationMode('implementation')}
+                  className="flex-1"
+                >
+                  Deep Analysis
+                </Button>
+              </div>
+
+              {automationMode === 'assessment' ? (
+                <div className="space-y-4">
+                  <Alert>
+                    <Sparkles className="h-4 w-4" />
+                    <AlertDescription>
+                      AI-powered assessment analyzes your current state across all DTEF dimensions 
+                      and provides actionable recommendations in under 5 minutes.
+                    </AlertDescription>
+                  </Alert>
+
+                  <div className="text-center py-8">
+                    <Button size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600">
+                      <Brain className="h-5 w-5 mr-2" />
+                      Start AI Assessment
+                    </Button>
+                    <p className="text-sm text-slate-600 mt-2">
+                      Automated analysis of 152 control points
+                    </p>
+                  </div>
+                </div>
               ) : (
-                <Card>
-                  <CardContent className="p-12 text-center text-slate-500">
-                    Select a dimension to view details
-                  </CardContent>
-                </Card>
+                <div className="space-y-4">
+                  <Alert>
+                    <FileText className="h-4 w-4" />
+                    <AlertDescription>
+                      Comprehensive 360-degree analysis including stakeholder interviews, 
+                      technical assessments, and process reviews.
+                    </AlertDescription>
+                  </Alert>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="p-4 border border-slate-200 rounded-lg">
+                      <h4 className="font-medium mb-2">Technical Assessment</h4>
+                      <p className="text-sm text-slate-600 mb-3">
+                        Infrastructure, security controls, and technology stack evaluation
+                      </p>
+                      <Button variant="outline" size="sm" className="w-full">
+                        Configure
+                      </Button>
+                    </div>
+
+                    <div className="p-4 border border-slate-200 rounded-lg">
+                      <h4 className="font-medium mb-2">Process Assessment</h4>
+                      <p className="text-sm text-slate-600 mb-3">
+                        Operational procedures, workflows, and governance evaluation
+                      </p>
+                      <Button variant="outline" size="sm" className="w-full">
+                        Configure
+                      </Button>
+                    </div>
+
+                    <div className="p-4 border border-slate-200 rounded-lg">
+                      <h4 className="font-medium mb-2">People Assessment</h4>
+                      <p className="text-sm text-slate-600 mb-3">
+                        Culture, skills, training, and organizational readiness
+                      </p>
+                      <Button variant="outline" size="sm" className="w-full">
+                        Configure
+                      </Button>
+                    </div>
+
+                    <div className="p-4 border border-slate-200 rounded-lg">
+                      <h4 className="font-medium mb-2">Data Assessment</h4>
+                      <p className="text-sm text-slate-600 mb-3">
+                        Data governance, quality, privacy, and analytics practices
+                      </p>
+                      <Button variant="outline" size="sm" className="w-full">
+                        Configure
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
-          </div>
-        </TabsContent>
-
-        {/* Automation Tab */}
-        <TabsContent value="automation">
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>DTEF Automation Engine</CardTitle>
-                <p className="text-sm text-slate-600">
-                  Automated implementation and monitoring of DTEF controls
-                </p>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl">
-                    <Zap className="h-12 w-12 text-green-600 mx-auto mb-3" />
-                    <h4 className="font-medium mb-2">Fully Automated</h4>
-                    <div className="text-3xl font-bold text-green-600 mb-1">45%</div>
-                    <p className="text-sm text-slate-600">7 controls</p>
-                  </div>
-
-                  <div className="text-center p-6 bg-gradient-to-br from-yellow-50 to-amber-50 rounded-xl">
-                    <Settings className="h-12 w-12 text-yellow-600 mx-auto mb-3" />
-                    <h4 className="font-medium mb-2">Semi-Automated</h4>
-                    <div className="text-3xl font-bold text-yellow-600 mb-1">35%</div>
-                    <p className="text-sm text-slate-600">5 controls</p>
-                  </div>
-
-                  <div className="text-center p-6 bg-gradient-to-br from-gray-50 to-slate-50 rounded-xl">
-                    <Users className="h-12 w-12 text-gray-600 mx-auto mb-3" />
-                    <h4 className="font-medium mb-2">Manual</h4>
-                    <div className="text-3xl font-bold text-gray-600 mb-1">20%</div>
-                    <p className="text-sm text-slate-600">3 controls</p>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <h4 className="font-medium mb-4">Automation Opportunities</h4>
-                  <div className="space-y-3">
-                    <div className="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <Brain className="h-5 w-5 text-blue-600" />
-                        <div>
-                          <p className="font-medium">Trust Culture Metrics</p>
-                          <p className="text-sm text-slate-600">Automate employee trust surveys and analysis</p>
-                        </div>
-                      </div>
-                      <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-                        Automate
-                      </Button>
+          </CardContent>
+        </Card>
+      )
+    },
+    {
+      id: 'roadmap',
+      label: 'Roadmap',
+      content: (
+        <Card className="card-professional">
+          <CardHeader>
+            <CardTitle>Digital Trust Transformation Roadmap</CardTitle>
+            <p className="text-sm text-slate-600">
+              Your personalized path to DTEF Level 5 maturity
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-6">
+              {/* Maturity Journey */}
+              <div className="relative">
+                <div className="absolute left-8 top-8 bottom-8 w-0.5 bg-slate-200" />
+                
+                <div className="space-y-8">
+                  <div className="flex items-start gap-4">
+                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center relative z-10">
+                      <CheckCircle className="h-8 w-8 text-green-600" />
                     </div>
-
-                    <div className="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <FileCheck className="h-5 w-5 text-purple-600" />
-                        <div>
-                          <p className="font-medium">Continuous Trust Assessment</p>
-                          <p className="text-sm text-slate-600">Real-time trust posture monitoring</p>
-                        </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-medium">Q1 2024: Foundation</h4>
+                        <Badge className="bg-green-100 text-green-700">Completed</Badge>
                       </div>
-                      <Button size="sm" className="bg-purple-600 hover:bg-purple-700">
-                        Automate
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </TabsContent>
-
-        {/* Assessment Tab */}
-        <TabsContent value="assessment">
-          <Card>
-            <CardHeader>
-              <CardTitle>DTEF Maturity Assessment</CardTitle>
-              <p className="text-sm text-slate-600">
-                Comprehensive evaluation of your digital trust ecosystem
-              </p>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {/* Assessment Mode Toggle */}
-                <div className="flex items-center justify-center p-1 bg-slate-100 rounded-lg">
-                  <Button
-                    variant={automationMode === 'assessment' ? 'default' : 'ghost'}
-                    onClick={() => setAutomationMode('assessment')}
-                    className="flex-1"
-                  >
-                    Quick Assessment
-                  </Button>
-                  <Button
-                    variant={automationMode === 'implementation' ? 'default' : 'ghost'}
-                    onClick={() => setAutomationMode('implementation')}
-                    className="flex-1"
-                  >
-                    Deep Analysis
-                  </Button>
-                </div>
-
-                {automationMode === 'assessment' ? (
-                  <div className="space-y-4">
-                    <Alert>
-                      <Sparkles className="h-4 w-4" />
-                      <AlertDescription>
-                        AI-powered assessment analyzes your current state across all DTEF dimensions 
-                        and provides actionable recommendations in under 5 minutes.
-                      </AlertDescription>
-                    </Alert>
-
-                    <div className="text-center py-8">
-                      <Button size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600">
-                        <Brain className="h-5 w-5 mr-2" />
-                        Start AI Assessment
-                      </Button>
-                      <p className="text-sm text-slate-600 mt-2">
-                        Automated analysis of 152 control points
+                      <p className="text-sm text-slate-600 mb-2">
+                        Established DTEF governance structure and baseline assessment
                       </p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <Alert>
-                      <FileText className="h-4 w-4" />
-                      <AlertDescription>
-                        Comprehensive 360-degree analysis including stakeholder interviews, 
-                        technical assessments, and process reviews.
-                      </AlertDescription>
-                    </Alert>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div className="p-4 border border-slate-200 rounded-lg">
-                        <h4 className="font-medium mb-2">Technical Assessment</h4>
-                        <p className="text-sm text-slate-600 mb-3">
-                          Infrastructure, security controls, and technology stack evaluation
-                        </p>
-                        <Button variant="outline" size="sm" className="w-full">
-                          Configure
-                        </Button>
-                      </div>
-
-                      <div className="p-4 border border-slate-200 rounded-lg">
-                        <h4 className="font-medium mb-2">Process Assessment</h4>
-                        <p className="text-sm text-slate-600 mb-3">
-                          Operational procedures, workflows, and governance evaluation
-                        </p>
-                        <Button variant="outline" size="sm" className="w-full">
-                          Configure
-                        </Button>
-                      </div>
-
-                      <div className="p-4 border border-slate-200 rounded-lg">
-                        <h4 className="font-medium mb-2">People Assessment</h4>
-                        <p className="text-sm text-slate-600 mb-3">
-                          Culture, skills, training, and organizational readiness
-                        </p>
-                        <Button variant="outline" size="sm" className="w-full">
-                          Configure
-                        </Button>
-                      </div>
-
-                      <div className="p-4 border border-slate-200 rounded-lg">
-                        <h4 className="font-medium mb-2">Data Assessment</h4>
-                        <p className="text-sm text-slate-600 mb-3">
-                          Data governance, quality, privacy, and analytics practices
-                        </p>
-                        <Button variant="outline" size="sm" className="w-full">
-                          Configure
-                        </Button>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="text-slate-500">Trust Equity: 45% → 62%</span>
+                        <span className="text-green-600 font-medium">+17%</span>
                       </div>
                     </div>
                   </div>
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
 
-        {/* Roadmap Tab */}
-        <TabsContent value="roadmap">
-          <Card>
-            <CardHeader>
-              <CardTitle>Digital Trust Transformation Roadmap</CardTitle>
-              <p className="text-sm text-slate-600">
-                Your personalized path to DTEF Level 5 maturity
-              </p>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                {/* Maturity Journey */}
-                <div className="relative">
-                  <div className="absolute left-8 top-8 bottom-8 w-0.5 bg-slate-200" />
-                  
-                  <div className="space-y-8">
-                    <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center relative z-10">
-                        <CheckCircle className="h-8 w-8 text-green-600" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium">Q1 2024: Foundation</h4>
-                          <Badge className="bg-green-100 text-green-700">Completed</Badge>
-                        </div>
-                        <p className="text-sm text-slate-600 mb-2">
-                          Established DTEF governance structure and baseline assessment
-                        </p>
-                        <div className="flex items-center gap-4 text-sm">
-                          <span className="text-slate-500">Trust Equity: 45% → 62%</span>
-                          <span className="text-green-600 font-medium">+17%</span>
-                        </div>
-                      </div>
+                  <div className="flex items-start gap-4">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center relative z-10">
+                      <Activity className="h-8 w-8 text-blue-600" />
                     </div>
-
-                    <div className="flex items-start gap-4">
-                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center relative z-10">
-                        <Activity className="h-8 w-8 text-blue-600" />
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-medium">Q2 2024: Automation (Current)</h4>
+                        <Badge className="bg-blue-100 text-blue-700">In Progress</Badge>
                       </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium">Q2 2024: Automation (Current)</h4>
-                          <Badge className="bg-blue-100 text-blue-700">In Progress</Badge>
-                        </div>
-                        <p className="text-sm text-slate-600 mb-2">
-                          Implementing automated controls and continuous monitoring
-                        </p>
-                        <Progress value={65} className="h-2 mb-2" />
-                        <div className="flex items-center gap-4 text-sm">
-                          <span className="text-slate-500">Trust Equity: 62% → 78%</span>
-                          <span className="text-blue-600 font-medium">Target +16%</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4 opacity-60">
-                      <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center relative z-10">
-                        <Cpu className="h-8 w-8 text-slate-400" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium">Q3 2024: AI Integration</h4>
-                          <Badge variant="outline">Planned</Badge>
-                        </div>
-                        <p className="text-sm text-slate-600 mb-2">
-                          Deploy AI-driven trust intelligence and predictive analytics
-                        </p>
-                        <div className="flex items-center gap-4 text-sm">
-                          <span className="text-slate-500">Trust Equity Target: 85%</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex items-start gap-4 opacity-60">
-                      <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center relative z-10">
-                        <Award className="h-8 w-8 text-slate-400" />
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="font-medium">Q4 2024: Excellence</h4>
-                          <Badge variant="outline">Planned</Badge>
-                        </div>
-                        <p className="text-sm text-slate-600 mb-2">
-                          Achieve DTEF Level 5 maturity with full automation
-                        </p>
-                        <div className="flex items-center gap-4 text-sm">
-                          <span className="text-slate-500">Trust Equity Target: 95%</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Action Items */}
-                <div>
-                  <h4 className="font-medium mb-4">Next Steps</h4>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 bg-blue-50 rounded-lg">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                          1
-                        </div>
-                        <h5 className="font-medium">Complete Automation Rollout</h5>
-                      </div>
-                      <p className="text-sm text-slate-600 ml-11">
-                        Deploy remaining 5 automated controls by end of Q2
+                      <p className="text-sm text-slate-600 mb-2">
+                        Implementing automated controls and continuous monitoring
                       </p>
-                    </div>
-
-                    <div className="p-4 bg-purple-50 rounded-lg">
-                      <div className="flex items-center gap-3 mb-2">
-                        <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
-                          2
-                        </div>
-                        <h5 className="font-medium">Trust Culture Training</h5>
+                      <Progress value={65} className="h-2 mb-2" />
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="text-slate-500">Trust Equity: 62% → 78%</span>
+                        <span className="text-blue-600 font-medium">Target +16%</span>
                       </div>
-                      <p className="text-sm text-slate-600 ml-11">
-                        Launch organization-wide digital trust training program
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 opacity-60">
+                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center relative z-10">
+                      <Cpu className="h-8 w-8 text-slate-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-medium">Q3 2024: AI Integration</h4>
+                        <Badge variant="outline">Planned</Badge>
+                      </div>
+                      <p className="text-sm text-slate-600 mb-2">
+                        Deploy AI-driven trust intelligence and predictive analytics
                       </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="text-slate-500">Trust Equity Target: 85%</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4 opacity-60">
+                    <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center relative z-10">
+                      <Award className="h-8 w-8 text-slate-400" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-medium">Q4 2024: Excellence</h4>
+                        <Badge variant="outline">Planned</Badge>
+                      </div>
+                      <p className="text-sm text-slate-600 mb-2">
+                        Achieve DTEF Level 5 maturity with full automation
+                      </p>
+                      <div className="flex items-center gap-4 text-sm">
+                        <span className="text-slate-500">Trust Equity Target: 95%</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
-      </Tabs>
-    </div>
+
+              {/* Action Items */}
+              <div>
+                <h4 className="font-medium mb-4">Next Steps</h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 bg-blue-50 rounded-lg">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        1
+                      </div>
+                      <h5 className="font-medium">Complete Automation Rollout</h5>
+                    </div>
+                    <p className="text-sm text-slate-600 ml-11">
+                      Deploy remaining 5 automated controls by end of Q2
+                    </p>
+                  </div>
+
+                  <div className="p-4 bg-purple-50 rounded-lg">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                        2
+                      </div>
+                      <h5 className="font-medium">Trust Culture Training</h5>
+                    </div>
+                    <p className="text-sm text-slate-600 ml-11">
+                      Launch organization-wide digital trust training program
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      )
+    }
+  ];
+
+  const headerActions = (
+    <>
+      <Button variant="outline">
+        <Settings className="h-4 w-4 mr-2" />
+        Settings
+      </Button>
+      <Button className="bg-gradient-to-r from-blue-600 to-indigo-600">
+        <Brain className="h-4 w-4 mr-2" />
+        Start Assessment
+      </Button>
+    </>
+  );
+
+  return (
+    <ComponentPageTemplate
+      title="ISACA DTEF Automation"
+      subtitle="Digital Trust Ecosystem Framework"
+      description="Automated implementation and monitoring of DTEF controls with Trust Equity™ integration for comprehensive digital trust management."
+      trustScore={calculateOverallTrustScore()}
+      trustPoints={3250}
+      quickStats={quickStats}
+      tabs={tabs}
+      actions={headerActions}
+      headerGradient="from-blue-50 to-indigo-50"
+      className="card-professional"
+    />
   );
 };

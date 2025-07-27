@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { ComponentPageTemplate, StatCard, TabConfiguration } from '@/components/templates/ComponentPageTemplate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { 
   Shield,
@@ -28,18 +28,17 @@ import {
   Scan,
   RefreshCw,
   Plus,
-  Edit3,
-  Trash2,
-  ExternalLink,
   Calendar,
-  Target
+  Building2,
+  Mail,
+  Phone
 } from 'lucide-react';
 
 interface ShadowITApp {
   id: string;
   name: string;
   category: string;
-  riskLevel: 'low' | 'medium' | 'high' | 'critical';
+  riskLevel: 'critical' | 'high' | 'medium' | 'low';
   dataTypes: string[];
   users: number;
   lastSeen: string;
@@ -48,50 +47,40 @@ interface ShadowITApp {
     soc2: boolean;
     iso27001: boolean;
   };
-  trustImpact: number;
 }
 
 interface DSARRequest {
   id: string;
-  requestType: 'access' | 'portability' | 'deletion' | 'rectification' | 'restriction';
+  requesterId: string;
   requesterEmail: string;
-  submissionDate: string;
-  dueDate: string;
-  status: 'pending' | 'processing' | 'completed' | 'overdue';
-  dataSubjects: string[];
-  estimatedRecords: number;
+  type: 'access' | 'rectification' | 'erasure' | 'portability' | 'restriction';
+  status: 'pending' | 'in_progress' | 'completed' | 'overdue';
+  submitted: string;
+  deadline: string;
   trustPoints: number;
 }
 
-interface RoPARecord {
+interface ROPARecord {
   id: string;
-  processingActivity: string;
-  purpose: string[];
+  activity: string;
+  purpose: string;
   dataCategories: string[];
   dataSubjects: string[];
   recipients: string[];
-  retentionPeriod: string;
-  legalBasis: string;
-  riskAssessment: 'low' | 'medium' | 'high';
+  retention: string;
+  status: 'compliant' | 'review_needed' | 'non_compliant';
   lastReviewed: string;
-  status: 'compliant' | 'needs_review' | 'non_compliant';
 }
 
 interface DPIAAssessment {
   id: string;
-  projectName: string;
-  assessmentType: 'mandatory' | 'voluntary';
-  riskLevel: 'low' | 'medium' | 'high';
+  project: string;
+  riskLevel: 'high' | 'medium' | 'low';
   status: 'draft' | 'review' | 'approved' | 'rejected';
-  createdDate: string;
-  completionPercentage: number;
-  risks: {
-    category: string;
-    likelihood: number;
-    impact: number;
-    mitigation: string;
-  }[];
-  trustEquityImpact: number;
+  created: string;
+  reviewer: string;
+  findings: number;
+  mitigation: number;
 }
 
 export const PrivacyManagement: React.FC = () => {
@@ -110,639 +99,636 @@ export const PrivacyManagement: React.FC = () => {
       users: 23,
       lastSeen: '2024-01-23',
       compliance: { gdpr: true, soc2: true, iso27001: false },
-      trustImpact: -15
     },
     {
       id: 'app-2',
-      name: 'Figma',
-      category: 'Design',
+      name: 'Slack',
+      category: 'Communication',
       riskLevel: 'low',
-      dataTypes: ['Business Data', 'IP'],
-      users: 12,
+      dataTypes: ['Personal Data', 'Communication Data'],
+      users: 156,
       lastSeen: '2024-01-23',
       compliance: { gdpr: true, soc2: true, iso27001: true },
-      trustImpact: -5
     },
     {
       id: 'app-3',
-      name: 'Unverified SaaS Tool',
-      category: 'Unknown',
-      riskLevel: 'critical',
-      dataTypes: ['Personal Data', 'Financial Data'],
-      users: 5,
+      name: 'Airtable',
+      category: 'Database',
+      riskLevel: 'high',
+      dataTypes: ['Personal Data', 'Financial Data', 'Customer Data'],
+      users: 8,
       lastSeen: '2024-01-22',
-      compliance: { gdpr: false, soc2: false, iso27001: false },
-      trustImpact: -50
+      compliance: { gdpr: false, soc2: true, iso27001: false },
+    },
+    {
+      id: 'app-4',
+      name: 'Canva',
+      category: 'Design',
+      riskLevel: 'low',
+      dataTypes: ['Business Data'],
+      users: 45,
+      lastSeen: '2024-01-21',
+      compliance: { gdpr: true, soc2: false, iso27001: false },
     }
   ];
 
   const dsarRequests: DSARRequest[] = [
     {
       id: 'dsar-1',
-      requestType: 'access',
+      requesterId: 'user-123',
       requesterEmail: 'john.doe@example.com',
-      submissionDate: '2024-01-20',
-      dueDate: '2024-02-19',
-      status: 'processing',
-      dataSubjects: ['john.doe@example.com'],
-      estimatedRecords: 1247,
-      trustPoints: 25
-    },
-    {
-      id: 'dsar-2',
-      requestType: 'deletion',
-      requesterEmail: 'jane.smith@oldcompany.com',
-      submissionDate: '2024-01-18',
-      dueDate: '2024-02-17',
-      status: 'completed',
-      dataSubjects: ['jane.smith@oldcompany.com'],
-      estimatedRecords: 89,
+      type: 'access',
+      status: 'pending',
+      submitted: '2024-01-20',
+      deadline: '2024-02-19',
       trustPoints: 50
     },
     {
+      id: 'dsar-2',
+      requesterId: 'user-456',
+      requesterEmail: 'jane.smith@example.com',
+      type: 'erasure',
+      status: 'in_progress',
+      submitted: '2024-01-18',
+      deadline: '2024-02-17',
+      trustPoints: 75
+    },
+    {
       id: 'dsar-3',
-      requestType: 'portability',
-      requesterEmail: 'user@domain.com',
-      submissionDate: '2024-01-10',
-      dueDate: '2024-02-09',
+      requesterId: 'user-789',
+      requesterEmail: 'mike.wilson@example.com',
+      type: 'portability',
       status: 'overdue',
-      dataSubjects: ['user@domain.com'],
-      estimatedRecords: 2156,
-      trustPoints: 0
+      submitted: '2024-01-10',
+      deadline: '2024-02-09',
+      trustPoints: 100
     }
   ];
 
-  const ropaRecords: RoPARecord[] = [
+  const ropaRecords: ROPARecord[] = [
     {
       id: 'ropa-1',
-      processingActivity: 'Customer Relationship Management',
-      purpose: ['Contract Performance', 'Customer Service'],
-      dataCategories: ['Contact Information', 'Transaction History'],
+      activity: 'Customer Relationship Management',
+      purpose: 'Managing customer relationships and sales',
+      dataCategories: ['Contact Information', 'Financial Data', 'Communication Records'],
       dataSubjects: ['Customers', 'Prospects'],
-      recipients: ['Sales Team', 'Support Team', 'Marketing'],
-      retentionPeriod: '7 years after contract end',
-      legalBasis: 'Contract Performance (Art. 6(1)(b))',
-      riskAssessment: 'medium',
-      lastReviewed: '2024-01-15',
-      status: 'compliant'
+      recipients: ['Sales Team', 'Customer Support'],
+      retention: '7 years',
+      status: 'compliant',
+      lastReviewed: '2024-01-15'
     },
     {
       id: 'ropa-2',
-      processingActivity: 'Employee Data Management',
-      purpose: ['Employment Contract', 'Payroll', 'HR Management'],
-      dataCategories: ['Personal Details', 'Employment Records', 'Performance Data'],
-      dataSubjects: ['Employees', 'Job Applicants'],
-      recipients: ['HR Team', 'Payroll Provider', 'Management'],
-      retentionPeriod: '10 years after employment end',
-      legalBasis: 'Contract Performance (Art. 6(1)(b))',
-      riskAssessment: 'high',
-      lastReviewed: '2024-01-10',
-      status: 'needs_review'
+      activity: 'Employee Management',
+      purpose: 'HR processes and payroll',
+      dataCategories: ['Personal Data', 'Financial Data', 'Performance Data'],
+      dataSubjects: ['Employees', 'Contractors'],
+      recipients: ['HR Department', 'Payroll Provider'],
+      retention: '10 years',
+      status: 'review_needed',
+      lastReviewed: '2023-12-01'
     }
   ];
 
   const dpiaAssessments: DPIAAssessment[] = [
     {
       id: 'dpia-1',
-      projectName: 'Customer Behavior Analytics Platform',
-      assessmentType: 'mandatory',
+      project: 'Customer Analytics Platform',
       riskLevel: 'high',
-      status: 'review',
-      createdDate: '2024-01-15',
-      completionPercentage: 75,
-      risks: [
-        {
-          category: 'Data Subject Rights',
-          likelihood: 3,
-          impact: 4,
-          mitigation: 'Implement automated consent management and right to erasure'
-        },
-        {
-          category: 'Data Security',
-          likelihood: 2,
-          impact: 5,
-          mitigation: 'End-to-end encryption and access controls'
-        }
-      ],
-      trustEquityImpact: 120
+      status: 'approved',
+      created: '2024-01-15',
+      reviewer: 'Privacy Officer',
+      findings: 8,
+      mitigation: 8
     },
     {
       id: 'dpia-2',
-      projectName: 'AI-Powered Recruitment Tool',
-      assessmentType: 'mandatory',
-      riskLevel: 'high',
-      status: 'approved',
-      createdDate: '2024-01-08',
-      completionPercentage: 100,
-      risks: [
-        {
-          category: 'Algorithmic Bias',
-          likelihood: 4,
-          impact: 4,
-          mitigation: 'Regular bias testing and diverse training data'
-        }
-      ],
-      trustEquityImpact: 200
+      project: 'Employee Wellness App',
+      riskLevel: 'medium',
+      status: 'review',
+      created: '2024-01-10',
+      reviewer: 'Legal Team',
+      findings: 3,
+      mitigation: 2
     }
   ];
 
-  const runShadowITScan = async () => {
+  const startScan = () => {
     setScanning(true);
-    // Simulate scanning process
     setTimeout(() => {
       setScanning(false);
       setLastScan(new Date().toLocaleString());
     }, 3000);
   };
 
-  const getRiskColor = (risk: string) => {
-    switch (risk) {
-      case 'critical': return 'text-red-600 bg-red-50 border-red-200';
-      case 'high': return 'text-orange-600 bg-orange-50 border-orange-200';
-      case 'medium': return 'text-yellow-600 bg-yellow-50 border-yellow-200';
-      case 'low': return 'text-green-600 bg-green-50 border-green-200';
-      default: return 'text-gray-600 bg-gray-50 border-gray-200';
+  const getRiskColor = (level: string) => {
+    switch (level) {
+      case 'critical':
+        return 'text-red-600 bg-red-50';
+      case 'high':
+        return 'text-orange-600 bg-orange-50';
+      case 'medium':
+        return 'text-yellow-600 bg-yellow-50';
+      case 'low':
+        return 'text-green-600 bg-green-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'completed':
-      case 'approved':
       case 'compliant':
+      case 'approved':
         return 'text-green-600 bg-green-50';
-      case 'processing':
+      case 'in_progress':
       case 'review':
-      case 'needs_review':
+      case 'review_needed':
         return 'text-blue-600 bg-blue-50';
+      case 'pending':
+      case 'draft':
+        return 'text-yellow-600 bg-yellow-50';
       case 'overdue':
-      case 'rejected':
       case 'non_compliant':
+      case 'rejected':
         return 'text-red-600 bg-red-50';
       default:
         return 'text-gray-600 bg-gray-50';
     }
   };
 
-  return (
-    <div className="container mx-auto p-6 max-w-7xl">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
-              Privacy Management Suite
-            </h1>
-            <p className="text-slate-600">
-              Comprehensive GDPR compliance with Shadow IT discovery, DSAR automation, RoPA management, and DPIA tools
-            </p>
+  // Quick stats for the header
+  const highRiskApps = shadowITApps.filter(app => app.riskLevel === 'critical' || app.riskLevel === 'high').length;
+  const overdueRequests = dsarRequests.filter(req => req.status === 'overdue').length;
+  const compliantRecords = ropaRecords.filter(record => record.status === 'compliant').length;
+  const approvedDPIAs = dpiaAssessments.filter(dpia => dpia.status === 'approved').length;
+
+  const quickStats: StatCard[] = [
+    {
+      label: 'Shadow IT Apps',
+      value: shadowITApps.length,
+      change: `+${highRiskApps}`,
+      trend: highRiskApps > 0 ? 'down' : 'up',
+      icon: <Search className="h-6 w-6 text-blue-600" />,
+      description: `${highRiskApps} high risk`,
+      color: 'text-blue-600'
+    },
+    {
+      label: 'DSAR Requests',
+      value: dsarRequests.length,
+      change: `${overdueRequests}`,
+      trend: overdueRequests > 0 ? 'down' : 'up',
+      icon: <UserX className="h-6 w-6 text-green-600" />,
+      description: `${overdueRequests} overdue`,
+      color: 'text-green-600'
+    },
+    {
+      label: 'RoPA Records',
+      value: ropaRecords.length,
+      change: `+${compliantRecords}`,
+      trend: 'up',
+      icon: <Database className="h-6 w-6 text-purple-600" />,
+      description: `${compliantRecords} compliant`,
+      color: 'text-purple-600'
+    },
+    {
+      label: 'DPIAs Active',
+      value: dpiaAssessments.length,
+      change: `+${approvedDPIAs}`,
+      trend: 'up',
+      icon: <FileCheck className="h-6 w-6 text-orange-600" />,
+      description: `${approvedDPIAs} approved`,
+      color: 'text-orange-600'
+    }
+  ];
+
+  // Tab configurations
+  const tabs: TabConfiguration[] = [
+    {
+      id: 'shadow-it',
+      label: 'Shadow IT Discovery',
+      badge: shadowITApps.length,
+      content: (
+        <div className="space-y-6">
+          <Card className="card-professional">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2">
+                  <Search className="h-5 w-5" />
+                  Shadow IT Discovery
+                </CardTitle>
+                <Badge className="bg-blue-100 text-blue-800">
+                  Last scan: {lastScan}
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                {shadowITApps.map((app) => (
+                  <Card key={app.id} className="border-slate-200">
+                    <CardContent className="p-4">
+                      <div className="flex items-start justify-between mb-3">
+                        <div>
+                          <h4 className="font-medium">{app.name}</h4>
+                          <p className="text-sm text-slate-500">{app.category}</p>
+                        </div>
+                        <Badge className={getRiskColor(app.riskLevel)}>
+                          {app.riskLevel}
+                        </Badge>
+                      </div>
+                      
+                      <div className="space-y-2 text-sm">
+                        <div className="flex items-center gap-2">
+                          <Users className="h-4 w-4 text-slate-400" />
+                          <span>{app.users} users</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <Clock className="h-4 w-4 text-slate-400" />
+                          <span>Last seen: {app.lastSeen}</span>
+                        </div>
+                      </div>
+
+                      <div className="mt-3 pt-3 border-t border-slate-100">
+                        <p className="text-xs text-slate-500 mb-2">Data Types:</p>
+                        <div className="flex flex-wrap gap-1">
+                          {app.dataTypes.slice(0, 2).map((type) => (
+                            <Badge key={type} variant="outline" className="text-xs">
+                              {type}
+                            </Badge>
+                          ))}
+                          {app.dataTypes.length > 2 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{app.dataTypes.length - 2} more
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="mt-3 flex gap-1">
+                        <Badge className={app.compliance.gdpr ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
+                          GDPR
+                        </Badge>
+                        <Badge className={app.compliance.soc2 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
+                          SOC2
+                        </Badge>
+                        <Badge className={app.compliance.iso27001 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
+                          ISO
+                        </Badge>
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <Alert>
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription>
+                  {highRiskApps} applications detected with high privacy risk. 
+                  Review data handling practices and implement additional controls.
+                </AlertDescription>
+              </Alert>
+
+              <div className="flex gap-3 mt-6">
+                <Button onClick={startScan} className="bg-gradient-to-r from-blue-600 to-purple-600">
+                  <Scan className="h-4 w-4 mr-2" />
+                  Run Shadow IT Scan
+                </Button>
+                <Button variant="outline">
+                  View Detailed Report
+                </Button>
+                <Button variant="ghost" size="sm">
+                  Export Results
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )
+    },
+    {
+      id: 'dsar',
+      label: 'DSAR Automation',
+      badge: dsarRequests.length,
+      content: (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium">Data Subject Access Requests</h3>
+            <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              New DSAR
+            </Button>
           </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold erip-text-gradient mb-1">
-              96%
-            </div>
-            <div className="text-sm text-slate-600">Privacy Compliance</div>
+
+          <div className="grid gap-4">
+            {dsarRequests.map((request) => (
+              <Card key={request.id} className="card-professional">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between">
+                    <div className="space-y-3 flex-1">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+                          <UserX className="h-5 w-5 text-blue-600" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium">{request.requesterEmail}</h4>
+                          <p className="text-sm text-slate-500">Request Type: {request.type}</p>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                        <div>
+                          <span className="text-slate-500">Submitted:</span>
+                          <div className="font-medium">{request.submitted}</div>
+                        </div>
+                        <div>
+                          <span className="text-slate-500">Deadline:</span>
+                          <div className="font-medium">{request.deadline}</div>
+                        </div>
+                        <div>
+                          <span className="text-slate-500">Trust Points:</span>
+                          <div className="font-medium">{request.trustPoints}</div>
+                        </div>
+                        <div>
+                          <span className="text-slate-500">Status:</span>
+                          <Badge className={getStatusColor(request.status)}>
+                            {request.status.replace('_', ' ')}
+                          </Badge>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm">
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        <Download className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Alert>
+            <CheckCircle className="h-4 w-4" />
+            <AlertDescription>
+              DSAR automation processing {dsarRequests.length} requests with 99.2% accuracy, 
+              earning {dsarRequests.reduce((sum, req) => sum + req.trustPoints, 0)} Trust Points.
+            </AlertDescription>
+          </Alert>
+
+          <div className="flex gap-3 mt-6">
+            <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Create New DSAR
+            </Button>
+            <Button variant="outline">
+              Bulk Process Requests
+            </Button>
+            <Button variant="ghost" size="sm">
+              Download Report
+            </Button>
           </div>
         </div>
+      )
+    },
+    {
+      id: 'ropa',
+      label: 'RoPA Management',
+      badge: ropaRecords.length,
+      content: (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium">Records of Processing Activities</h3>
+            <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Add Record
+            </Button>
+          </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">Shadow IT Apps</p>
-                  <p className="text-2xl font-bold">{shadowITApps.length}</p>
-                </div>
-                <Search className="h-8 w-8 text-blue-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                {shadowITApps.filter(app => app.riskLevel === 'critical' || app.riskLevel === 'high').length} high risk
-              </div>
-            </CardContent>
-          </Card>
+          <div className="space-y-4">
+            {ropaRecords.map((record) => (
+              <Card key={record.id} className="card-professional">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="font-medium text-lg">{record.activity}</h4>
+                      <p className="text-slate-600 mt-1">{record.purpose}</p>
+                    </div>
+                    <Badge className={getStatusColor(record.status)}>
+                      {record.status.replace('_', ' ')}
+                    </Badge>
+                  </div>
 
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">DSAR Requests</p>
-                  <p className="text-2xl font-bold">{dsarRequests.length}</p>
-                </div>
-                <UserX className="h-8 w-8 text-green-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                {dsarRequests.filter(req => req.status === 'overdue').length} overdue
-              </div>
-            </CardContent>
-          </Card>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    <div>
+                      <h5 className="font-medium text-sm text-slate-600 mb-2">Data Categories</h5>
+                      <div className="flex flex-wrap gap-1">
+                        {record.dataCategories.map((category) => (
+                          <Badge key={category} variant="outline" className="text-xs">
+                            {category}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h5 className="font-medium text-sm text-slate-600 mb-2">Data Subjects</h5>
+                      <div className="flex flex-wrap gap-1">
+                        {record.dataSubjects.map((subject) => (
+                          <Badge key={subject} variant="outline" className="text-xs">
+                            {subject}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h5 className="font-medium text-sm text-slate-600 mb-2">Recipients</h5>
+                      <div className="flex flex-wrap gap-1">
+                        {record.recipients.map((recipient) => (
+                          <Badge key={recipient} variant="outline" className="text-xs">
+                            {recipient}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
 
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">RoPA Records</p>
-                  <p className="text-2xl font-bold">{ropaRecords.length}</p>
-                </div>
-                <Database className="h-8 w-8 text-purple-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                {ropaRecords.filter(record => record.status === 'compliant').length} compliant
-              </div>
-            </CardContent>
-          </Card>
+                  <div className="flex items-center justify-between pt-4 border-t border-slate-100">
+                    <div className="flex items-center gap-4 text-sm text-slate-600">
+                      <span>Retention: {record.retention}</span>
+                      <span>•</span>
+                      <span>Last reviewed: {record.lastReviewed}</span>
+                    </div>
+                    <div className="flex gap-2">
+                      <Button variant="outline" size="sm">
+                        <Eye className="h-4 w-4" />
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        <Settings className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
 
-          <Card>
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-slate-600">DPIAs Active</p>
-                  <p className="text-2xl font-bold">{dpiaAssessments.length}</p>
-                </div>
-                <FileCheck className="h-8 w-8 text-orange-600" />
-              </div>
-              <div className="text-xs text-slate-500 mt-2">
-                {dpiaAssessments.filter(dpia => dpia.status === 'approved').length} approved
-              </div>
-            </CardContent>
-          </Card>
+          <div className="flex gap-3 mt-6">
+            <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Add RoPA Record
+            </Button>
+            <Button variant="outline">
+              Review All Records
+            </Button>
+            <Button variant="ghost" size="sm">
+              Export RoPA Register
+            </Button>
+          </div>
         </div>
-      </div>
+      )
+    },
+    {
+      id: 'dpia',
+      label: 'DPIA Tools',
+      badge: dpiaAssessments.length,
+      content: (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium">Data Protection Impact Assessments</h3>
+            <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              New DPIA
+            </Button>
+          </div>
 
-      {/* Main Content */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-4 w-full mb-6">
-          <TabsTrigger value="shadow-it">Shadow IT Discovery</TabsTrigger>
-          <TabsTrigger value="dsar">DSAR Automation</TabsTrigger>
-          <TabsTrigger value="ropa">RoPA Management</TabsTrigger>
-          <TabsTrigger value="dpia">DPIA Tools</TabsTrigger>
-        </TabsList>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {dpiaAssessments.map((dpia) => (
+              <Card key={dpia.id} className="card-professional">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="font-medium">{dpia.project}</h4>
+                      <p className="text-sm text-slate-500">Created: {dpia.created}</p>
+                    </div>
+                    <div className="text-right">
+                      <Badge className={getRiskColor(dpia.riskLevel)}>
+                        {dpia.riskLevel} risk
+                      </Badge>
+                      <div className="mt-1">
+                        <Badge className={getStatusColor(dpia.status)}>
+                          {dpia.status}
+                        </Badge>
+                      </div>
+                    </div>
+                  </div>
 
-        {/* Shadow IT Discovery */}
-        <TabsContent value="shadow-it">
-          <div className="space-y-6">
-            <Card className="card-professional">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2">
-                    <Search className="h-5 w-5 text-blue-600" />
-                    Shadow IT Discovery
-                  </CardTitle>
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-slate-600">Last scan: {lastScan}</span>
-                    <Button 
-                      onClick={runShadowITScan} 
-                      disabled={scanning}
-                      className="erip-gradient-primary"
-                    >
-                      {scanning ? (
-                        <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                      ) : (
-                        <Scan className="h-4 w-4 mr-2" />
-                      )}
-                      {scanning ? 'Scanning...' : 'Run Scan'}
+                  <div className="space-y-3">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-600">Reviewer:</span>
+                      <span className="font-medium">{dpia.reviewer}</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-600">Findings:</span>
+                      <span className="font-medium">{dpia.findings}</span>
+                    </div>
+                    
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-600">Mitigations:</span>
+                      <span className="font-medium">{dpia.mitigation}/{dpia.findings}</span>
+                    </div>
+
+                    <div className="mt-3">
+                      <Progress 
+                        value={(dpia.mitigation / dpia.findings) * 100} 
+                        className="h-2"
+                      />
+                      <p className="text-xs text-slate-500 mt-1">
+                        Mitigation Progress: {Math.round((dpia.mitigation / dpia.findings) * 100)}%
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 mt-4 pt-4 border-t border-slate-100">
+                    <Button variant="outline" size="sm" className="flex-1">
+                      <Eye className="h-4 w-4 mr-2" />
+                      Review
+                    </Button>
+                    <Button variant="outline" size="sm" className="flex-1">
+                      <Download className="h-4 w-4 mr-2" />
+                      Export
                     </Button>
                   </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {shadowITApps.map((app) => (
-                    <div key={app.id} className="flex items-center justify-between p-4 border border-slate-200 rounded-lg">
-                      <div className="flex items-start gap-4">
-                        <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                          <Globe className="h-6 w-6 text-slate-600" />
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="font-medium text-slate-900 mb-1">{app.name}</h4>
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className={getRiskColor(app.riskLevel)}>
-                              {app.riskLevel.toUpperCase()}
-                            </Badge>
-                            <span className="text-sm text-slate-600">{app.category}</span>
-                            <span className="text-xs text-slate-500">•</span>
-                            <span className="text-sm text-slate-600">{app.users} users</span>
-                          </div>
-                          <div className="flex items-center gap-1 mb-2">
-                            {app.dataTypes.map((type) => (
-                              <Badge key={type} variant="outline" className="text-xs">
-                                {type}
-                              </Badge>
-                            ))}
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs text-slate-600">Compliance:</span>
-                            <div className="flex items-center gap-1">
-                              <Badge className={app.compliance.gdpr ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                                GDPR
-                              </Badge>
-                              <Badge className={app.compliance.soc2 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                                SOC2
-                              </Badge>
-                              <Badge className={app.compliance.iso27001 ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}>
-                                ISO27001
-                              </Badge>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <div className={`text-sm font-medium ${app.trustImpact < 0 ? 'text-red-600' : 'text-green-600'}`}>
-                          {app.trustImpact > 0 ? '+' : ''}{app.trustImpact} Trust Points
-                        </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <Button size="sm" variant="outline">
-                            <Eye className="h-4 w-4 mr-1" />
-                            Review
-                          </Button>
-                          <Button size="sm" variant="outline">
-                            <Shield className="h-4 w-4 mr-1" />
-                            Approve
-                          </Button>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                <Alert className="mt-6">
-                  <AlertTriangle className="h-4 w-4" />
-                  <AlertDescription>
-                    {shadowITApps.filter(app => app.riskLevel === 'critical' || app.riskLevel === 'high').length} high-risk applications detected. 
-                    Review compliance status and implement access controls to improve Trust Score.
-                  </AlertDescription>
-                </Alert>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </TabsContent>
 
-        {/* DSAR Automation */}
-        <TabsContent value="dsar">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">Data Subject Access Requests</h3>
-              <Button className="erip-gradient-primary">
-                <Plus className="h-4 w-4 mr-2" />
-                New DSAR
-              </Button>
-            </div>
+          <Alert>
+            <Shield className="h-4 w-4" />
+            <AlertDescription>
+              DPIA automation ensures comprehensive privacy risk assessment with 
+              proactive privacy protection and regulatory compliance.
+            </AlertDescription>
+          </Alert>
 
-            <div className="grid gap-4">
-              {dsarRequests.map((request) => (
-                <Card key={request.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <div className="flex items-center gap-2 mb-2">
-                          <Badge className={getStatusColor(request.status)}>
-                            {request.status.replace('_', ' ').toUpperCase()}
-                          </Badge>
-                          <Badge variant="outline">
-                            {request.requestType.toUpperCase()}
-                          </Badge>
-                        </div>
-                        <h4 className="font-medium text-slate-900 mb-2">
-                          {request.requesterEmail}
-                        </h4>
-                        <div className="grid grid-cols-2 gap-4 text-sm text-slate-600">
-                          <div>
-                            <span className="font-medium">Submitted:</span> {request.submissionDate}
-                          </div>
-                          <div>
-                            <span className="font-medium">Due:</span> {request.dueDate}
-                          </div>
-                          <div>
-                            <span className="font-medium">Records:</span> {request.estimatedRecords.toLocaleString()}
-                          </div>
-                          <div>
-                            <span className="font-medium">Trust Points:</span> +{request.trustPoints}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Button size="sm" variant="outline">
-                          <Eye className="h-4 w-4 mr-1" />
-                          Review
-                        </Button>
-                        <Button size="sm" variant="outline">
-                          <Download className="h-4 w-4 mr-1" />
-                          Export
-                        </Button>
-                        {request.status === 'processing' && (
-                          <Button size="sm" className="erip-gradient-primary">
-                            <CheckCircle className="h-4 w-4 mr-1" />
-                            Complete
-                          </Button>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Alert>
-              <Clock className="h-4 w-4" />
-              <AlertDescription>
-                DSAR automation has processed {dsarRequests.filter(req => req.status === 'completed').length} requests this month, 
-                earning {dsarRequests.reduce((sum, req) => sum + req.trustPoints, 0)} Trust Points.
-              </AlertDescription>
-            </Alert>
+          <div className="flex gap-3 mt-6">
+            <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Start New DPIA
+            </Button>
+            <Button variant="outline">
+              Review Pending DPIAs
+            </Button>
+            <Button variant="ghost" size="sm">
+              Generate DPIA Report
+            </Button>
           </div>
-        </TabsContent>
+        </div>
+      )
+    }
+  ];
 
-        {/* RoPA Management */}
-        <TabsContent value="ropa">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">Records of Processing Activities</h3>
-              <Button className="erip-gradient-primary">
-                <Plus className="h-4 w-4 mr-2" />
-                New RoPA Record
-              </Button>
-            </div>
+  const headerActions = (
+    <>
+      <Button variant="outline" onClick={startScan} disabled={scanning}>
+        {scanning ? (
+          <>
+            <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+            Scanning...
+          </>
+        ) : (
+          <>
+            <Scan className="h-4 w-4 mr-2" />
+            Scan Shadow IT
+          </>
+        )}
+      </Button>
+      <Button className="bg-gradient-to-r from-green-600 to-blue-600">
+        <Download className="h-4 w-4 mr-2" />
+        Export Compliance Report
+      </Button>
+    </>
+  );
 
-            <div className="grid gap-4">
-              {ropaRecords.map((record) => (
-                <Card key={record.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className={getStatusColor(record.status)}>
-                              {record.status.replace('_', ' ').toUpperCase()}
-                            </Badge>
-                            <Badge className={getRiskColor(record.riskAssessment)}>
-                              {record.riskAssessment.toUpperCase()} RISK
-                            </Badge>
-                          </div>
-                          <h4 className="font-medium text-slate-900 mb-2">
-                            {record.processingActivity}
-                          </h4>
-                          <div className="text-sm text-slate-600 mb-3">
-                            <strong>Legal Basis:</strong> {record.legalBasis}
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline">
-                            <Edit3 className="h-4 w-4 mr-1" />
-                            Edit
-                          </Button>
-                          <Button size="sm" variant="outline">
-                            <Download className="h-4 w-4 mr-1" />
-                            Export
-                          </Button>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Purposes</h5>
-                          <div className="flex flex-wrap gap-1">
-                            {record.purpose.map((p) => (
-                              <Badge key={p} variant="outline" className="text-xs">
-                                {p}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Data Categories</h5>
-                          <div className="flex flex-wrap gap-1">
-                            {record.dataCategories.map((cat) => (
-                              <Badge key={cat} variant="outline" className="text-xs">
-                                {cat}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Data Subjects</h5>
-                          <div className="flex flex-wrap gap-1">
-                            {record.dataSubjects.map((sub) => (
-                              <Badge key={sub} variant="outline" className="text-xs">
-                                {sub}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                        <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Recipients</h5>
-                          <div className="flex flex-wrap gap-1">
-                            {record.recipients.map((rec) => (
-                              <Badge key={rec} variant="outline" className="text-xs">
-                                {rec}
-                              </Badge>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm text-slate-600 pt-2 border-t border-slate-200">
-                        <span><strong>Retention:</strong> {record.retentionPeriod}</span>
-                        <span><strong>Last Reviewed:</strong> {record.lastReviewed}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </TabsContent>
-
-        {/* DPIA Tools */}
-        <TabsContent value="dpia">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">Data Protection Impact Assessments</h3>
-              <Button className="erip-gradient-primary">
-                <Plus className="h-4 w-4 mr-2" />
-                New DPIA
-              </Button>
-            </div>
-
-            <div className="grid gap-4">
-              {dpiaAssessments.map((dpia) => (
-                <Card key={dpia.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <Badge className={getStatusColor(dpia.status)}>
-                              {dpia.status.toUpperCase()}
-                            </Badge>
-                            <Badge className={getRiskColor(dpia.riskLevel)}>
-                              {dpia.riskLevel.toUpperCase()} RISK
-                            </Badge>
-                            <Badge variant="outline">
-                              {dpia.assessmentType.toUpperCase()}
-                            </Badge>
-                          </div>
-                          <h4 className="font-medium text-slate-900 mb-2">
-                            {dpia.projectName}
-                          </h4>
-                          <div className="flex items-center gap-4 text-sm text-slate-600 mb-3">
-                            <span>Created: {dpia.createdDate}</span>
-                            <span>Trust Impact: +{dpia.trustEquityImpact} points</span>
-                          </div>
-                          <div className="flex items-center gap-2 mb-3">
-                            <span className="text-sm text-slate-600">Progress:</span>
-                            <Progress value={dpia.completionPercentage} className="flex-1 h-2" />
-                            <span className="text-sm font-medium">{dpia.completionPercentage}%</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <Button size="sm" variant="outline">
-                            <Edit3 className="h-4 w-4 mr-1" />
-                            Edit
-                          </Button>
-                          <Button size="sm" variant="outline">
-                            <Download className="h-4 w-4 mr-1" />
-                            Export
-                          </Button>
-                        </div>
-                      </div>
-
-                      <div>
-                        <h5 className="text-sm font-medium text-slate-700 mb-2">Risk Assessment</h5>
-                        <div className="space-y-2">
-                          {dpia.risks.map((risk, index) => (
-                            <div key={index} className="p-3 bg-slate-50 rounded-lg">
-                              <div className="flex items-center justify-between mb-1">
-                                <span className="text-sm font-medium">{risk.category}</span>
-                                <div className="flex items-center gap-2">
-                                  <Badge variant="outline" className="text-xs">
-                                    L: {risk.likelihood}
-                                  </Badge>
-                                  <Badge variant="outline" className="text-xs">
-                                    I: {risk.impact}
-                                  </Badge>
-                                </div>
-                              </div>
-                              <p className="text-xs text-slate-600">{risk.mitigation}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Alert>
-              <Target className="h-4 w-4" />
-              <AlertDescription>
-                Completed DPIAs earn significant Trust Equity points. Each approved assessment demonstrates 
-                proactive privacy protection and regulatory compliance.
-              </AlertDescription>
-            </Alert>
-          </div>
-        </TabsContent>
-      </Tabs>
-    </div>
+  return (
+    <ComponentPageTemplate
+      title="Privacy Management Suite"
+      subtitle="Comprehensive GDPR & Privacy Compliance"
+      description="Advanced privacy tools including Shadow IT discovery, DSAR automation, RoPA management, and DPIA assessments for complete regulatory compliance."
+      trustScore={96}
+      trustPoints={4250}
+      quickStats={quickStats}
+      tabs={tabs}
+      actions={headerActions}
+      headerGradient="from-green-50 to-blue-50"
+      className="card-professional"
+    />
   );
 };

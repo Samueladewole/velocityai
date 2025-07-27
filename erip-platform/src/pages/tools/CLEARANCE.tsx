@@ -8,7 +8,6 @@ import {
   TrendingUp,
   Euro,
   Shield,
-  ArrowRight,
   Play,
   Eye,
   CheckCircle,
@@ -711,7 +710,7 @@ export const CLEARANCE: React.FC = () => {
                         <div className="text-xl font-bold text-red-600">{customer.before.decisionTime}</div>
                         <div className="text-xs text-slate-500">Before</div>
                       </div>
-                      <ArrowRight className="h-5 w-5 text-slate-400" />
+                      <div className="w-px h-8 bg-slate-200"></div>
                       <div className="text-center">
                         <div className="text-xl font-bold text-green-600">{customer.after.decisionTime}</div>
                         <div className="text-xs text-slate-500">After</div>

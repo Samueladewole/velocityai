@@ -51,31 +51,34 @@ const mainNavItems = [
     href: '#',
     description: 'Platform capabilities',
     children: [
-      { title: 'QIE', icon: FileCheck, href: '/qie', description: 'Questionnaire Intelligence' },
-      { title: 'DTEF Automation', icon: Shield, href: '/dtef', description: 'Digital Trust Framework' },
-      { title: 'Framework Management', icon: Settings, href: '/framework-management', description: '70% overlap optimization' },
-      { title: 'Privacy Management', icon: Lock, href: '/privacy-management', description: 'GDPR & CCPA compliance' },
-      { title: 'AI Governance', icon: Bot, href: '/ai-governance', description: 'ISO 42001 compliance' },
-      { title: 'Cloud Security', icon: Cloud, href: '/cloud-security', description: 'Multi-cloud scanning' },
-      { title: 'Policy Management', icon: FileText, href: '/policy-management', description: 'AI-powered policies' },
-      { title: 'Employee Training', icon: GraduationCap, href: '/employee-training', description: 'Gamified learning' },
-      { title: 'Assessment Marketplace', icon: ShoppingCart, href: '/assessment-marketplace', description: 'Community assessments' }
+      { title: 'QIE', icon: FileCheck, href: '/tools/qie-enhanced', description: 'Questionnaire Intelligence' },
+      { title: 'DTEF Automation', icon: Shield, href: '/tools/dtef-automation', description: 'Digital Trust Framework' },
+      { title: 'Framework Management', icon: Settings, href: '/tools/framework-management', description: '70% overlap optimization' },
+      { title: 'Privacy Management', icon: Lock, href: '/tools/privacy-management', description: 'GDPR & CCPA compliance' },
+      { title: 'AI Governance', icon: Bot, href: '/tools/ai-governance', description: 'ISO 42001 compliance' },
+      { title: 'Cloud Security', icon: Cloud, href: '/tools/cloud-security', description: 'Multi-cloud scanning' },
+      { title: 'Policy Management', icon: FileText, href: '/tools/policy-management', description: 'AI-powered policies' },
+      { title: 'Employee Training', icon: GraduationCap, href: '/tools/employee-training', description: 'Gamified learning' },
+      { title: 'Assessment Marketplace', icon: ShoppingCart, href: '/tools/assessment-marketplace', description: 'Community assessments' }
     ]
   },
   {
     title: 'Reports',
     icon: BarChart3,
-    href: '/reports',
+    href: '/tools/reports',
     description: 'Analytics and insights'
   }
 ];
 
 const toolsNavItems = [
-  { title: 'PRISM', icon: BarChart3, href: '/prism', description: 'Risk quantification' },
-  { title: 'COMPASS', icon: Target, href: '/compass', description: 'Compliance navigator' },
-  { title: 'ATLAS', icon: Search, href: '/atlas', description: 'Threat intelligence' },
-  { title: 'PULSE', icon: Activity, href: '/pulse', description: 'Real-time monitoring' },
-  { title: 'CLEARANCE', icon: Zap, href: '/clearance', description: 'Risk decisions' }
+  { title: 'PRISM', icon: BarChart3, href: '/tools/prism', description: 'Risk quantification' },
+  { title: 'BEACON', icon: Zap, href: '/tools/beacon', description: 'Value acceleration' },
+  { title: 'COMPASS', icon: Target, href: '/tools/compass', description: 'Compliance navigator' },
+  { title: 'ATLAS', icon: Search, href: '/tools/atlas', description: 'Threat intelligence' },
+  { title: 'NEXUS', icon: Users, href: '/tools/nexus', description: 'Risk network insights' },
+  { title: 'PULSE', icon: Activity, href: '/tools/pulse', description: 'Real-time monitoring' },
+  { title: 'CLEARANCE', icon: Shield, href: '/tools/clearance', description: 'Risk decisions' },
+  { title: 'CIPHER', icon: Lock, href: '/tools/cipher', description: 'Policy automation' }
 ];
 
 const bottomNavItems = [

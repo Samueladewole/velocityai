@@ -13,7 +13,6 @@ import {
   Users,
   AlertTriangle,
   TrendingUp,
-  ArrowRight,
   Euro,
   Clock,
   Shield,
@@ -311,11 +310,11 @@ export const ToolsOverview: React.FC = () => {
               </Card>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Button 
                 size="lg"
                 onClick={() => navigate('/tools/prism')}
-                className="bg-gradient-to-r from-purple-600 to-blue-700 hover:from-purple-700 hover:to-blue-800"
+                className="bg-gradient-to-r from-purple-600 to-blue-700 hover:from-purple-700 hover:to-blue-800 min-w-[200px]"
               >
                 <Play className="h-5 w-5 mr-2" />
                 Start with PRISM™
@@ -324,6 +323,7 @@ export const ToolsOverview: React.FC = () => {
                 size="lg"
                 variant="outline"
                 onClick={() => navigate('/assessment')}
+                className="min-w-[200px]"
               >
                 <Eye className="h-5 w-5 mr-2" />
                 See My Risk Assessment
@@ -362,7 +362,7 @@ export const ToolsOverview: React.FC = () => {
                 {phaseTools.map((tool) => (
                   <Card 
                     key={tool.id}
-                    className={`group relative overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                    className={`group relative overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full ${
                       tool.available ? 'cursor-pointer' : 'opacity-75'
                     }`}
                     onClick={() => tool.available && navigate(tool.route)}
@@ -393,7 +393,7 @@ export const ToolsOverview: React.FC = () => {
                       </div>
                     </CardHeader>
                     
-                    <CardContent className="relative">
+                    <CardContent className="relative flex-grow flex flex-col pb-6">
                       <div className={`text-2xl font-bold mb-3 ${tool.textColor}`}>
                         {tool.valueProposition}
                       </div>
@@ -416,7 +416,7 @@ export const ToolsOverview: React.FC = () => {
                       </div>
 
                       {/* Key Benefits */}
-                      <div className="space-y-2 mb-4">
+                      <div className="space-y-2 mb-6">
                         {tool.keyBenefits.map((benefit, index) => (
                           <div key={index} className="flex items-start gap-2">
                             <CheckCircle className="h-4 w-4 text-green-600 mt-0.5 flex-shrink-0" />
@@ -425,11 +425,14 @@ export const ToolsOverview: React.FC = () => {
                         ))}
                       </div>
 
-                      {/* Action Button */}
-                      <div className="flex items-center justify-between">
+                      {/* Spacer to push button to bottom */}
+                      <div className="flex-grow"></div>
+
+                      {/* Action Button - Always at bottom */}
+                      <div className="flex items-center justify-between gap-4">
                         {tool.available ? (
                           <Button 
-                            className={`bg-gradient-to-r ${tool.color} hover:scale-105 transition-transform`}
+                            className={`bg-gradient-to-r ${tool.color} hover:scale-105 transition-transform flex-1 min-h-[44px]`}
                             onClick={(e) => {
                               e.stopPropagation();
                               navigate(tool.route);
@@ -439,12 +442,12 @@ export const ToolsOverview: React.FC = () => {
                             <ArrowRight className="h-4 w-4 ml-2" />
                           </Button>
                         ) : (
-                          <Button variant="secondary" disabled>
+                          <Button variant="secondary" disabled className="flex-1 min-h-[44px]">
                             Coming Soon
                           </Button>
                         )}
                         
-                        <div className="text-xs text-slate-500 text-right">
+                        <div className="text-xs text-slate-500 text-right whitespace-nowrap">
                           {tool.phase}
                         </div>
                       </div>
@@ -475,12 +478,12 @@ export const ToolsOverview: React.FC = () => {
             <div className="text-lg">Potential breach cost avoidance*</div>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button 
               size="lg"
               variant="secondary"
               onClick={() => navigate('/tools/prism')}
-              className="bg-white text-purple-700 hover:bg-slate-100"
+              className="bg-white text-purple-700 hover:bg-slate-100 min-w-[200px]"
             >
               <BarChart3 className="h-5 w-5 mr-2" />
               Start with PRISM™
@@ -488,7 +491,7 @@ export const ToolsOverview: React.FC = () => {
             <Button 
               size="lg"
               variant="outline"
-              className="bg-transparent text-white border-white hover:bg-white/10"
+              className="bg-transparent text-white border-white hover:bg-white/10 min-w-[200px]"
               onClick={() => navigate('/assessment')}
             >
               <Target className="h-5 w-5 mr-2" />

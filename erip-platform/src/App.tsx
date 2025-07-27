@@ -40,6 +40,9 @@ import { FrameworkManagement } from '@/pages/FrameworkManagement';
 import { PolicyManagement } from '@/pages/PolicyManagement';
 import { EmployeeTraining } from '@/pages/EmployeeTraining';
 import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
+import { CloudSecurity } from '@/pages/CloudSecurity';
+import { Reports } from '@/pages/Reports';
+import { DebugAuth } from '@/pages/DebugAuth';
 import { PlatformCapabilities } from '@/pages/PlatformCapabilities';
 import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
 import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
@@ -146,18 +149,12 @@ function App() {
           <Route path="company/about" element={<About />} />
           <Route path="company/contact" element={<Contact />} />
           <Route path="company/seed-pitch" element={<SeedPitch />} />
-          {/* Platform component routes with navigation */}
-          <Route path="dtef-automation" element={<DTEFAutomation />} />
+          {/* Non-sidebar routes */}
           <Route path="certifications" element={<IndustryCertifications />} />
-          <Route path="qie-enhanced" element={<QIEEnhanced />} />
-          <Route path="privacy-management" element={<PrivacyManagement />} />
-          <Route path="ai-governance" element={<AIGovernance />} />
-          <Route path="framework-management" element={<FrameworkManagement />} />
-          <Route path="policy-management" element={<PolicyManagement />} />
-          <Route path="employee-training" element={<EmployeeTraining />} />
-          <Route path="assessment-marketplace" element={<AssessmentMarketplace />} />
           {/* Tools */}
           <Route path="tools" element={<ToolsOverview />} />
+          <Route path="tools/qie-enhanced" element={<QIEEnhanced />} />
+          <Route path="tools/dtef-automation" element={<DTEFAutomation />} />
           <Route path="tools/prism" element={<PRISM />} />
           <Route path="tools/beacon" element={<BEACON />} />
           <Route path="tools/compass" element={<COMPASS />} />
@@ -169,6 +166,17 @@ function App() {
           <Route path="tools/integrations" element={<IntegrationHub />} />
           <Route path="tools/experts" element={<ExpertNetwork />} />
           <Route path="tools/customer-success" element={<CustomerSuccess />} />
+          <Route path="tools/reports" element={<Reports />} />
+          {/* Component Management Tools */}
+          <Route path="tools/framework-management" element={<FrameworkManagement />} />
+          <Route path="tools/privacy-management" element={<PrivacyManagement />} />
+          <Route path="tools/ai-governance" element={<AIGovernance />} />
+          <Route path="tools/cloud-security" element={<CloudSecurity />} />
+          <Route path="tools/policy-management" element={<PolicyManagement />} />
+          <Route path="tools/employee-training" element={<EmployeeTraining />} />
+          <Route path="tools/assessment-marketplace" element={<AssessmentMarketplace />} />
+          {/* Debug routes */}
+          <Route path="debug/framework-management" element={<FrameworkManagement />} />
         </Route>
         
         {/* Trust Center Routes (Public) */}
@@ -177,7 +185,27 @@ function App() {
         {/* App Layout with Sidebar (for authenticated users) */}
         <Route path="/" element={<AppLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="debug-auth" element={<DebugAuth />} />
           <Route path="trust-score" element={<TrustScore />} />
+          {/* Component pages with sidebar navigation */}
+          <Route path="qie-enhanced" element={<QIEEnhanced />} />
+          <Route path="dtef-automation" element={<DTEFAutomation />} />
+          <Route path="tools/qie-enhanced" element={<QIEEnhanced />} />
+          <Route path="tools/dtef-automation" element={<DTEFAutomation />} />
+          <Route path="framework-management" element={<FrameworkManagement />} />
+          <Route path="privacy-management" element={<PrivacyManagement />} />
+          <Route path="ai-governance" element={<AIGovernance />} />
+          <Route path="cloud-security" element={<CloudSecurity />} />
+          <Route path="policy-management" element={<PolicyManagement />} />
+          <Route path="employee-training" element={<EmployeeTraining />} />
+          <Route path="assessment-marketplace" element={<AssessmentMarketplace />} />
+          <Route path="tools/framework-management" element={<FrameworkManagement />} />
+          <Route path="tools/privacy-management" element={<PrivacyManagement />} />
+          <Route path="tools/ai-governance" element={<AIGovernance />} />
+          <Route path="tools/cloud-security" element={<CloudSecurity />} />
+          <Route path="tools/policy-management" element={<PolicyManagement />} />
+          <Route path="tools/employee-training" element={<EmployeeTraining />} />
+          <Route path="tools/assessment-marketplace" element={<AssessmentMarketplace />} />
         </Route>
         
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}

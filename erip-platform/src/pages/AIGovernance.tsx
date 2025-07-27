@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { ComponentPageTemplate, StatCard, TabConfiguration } from '@/components/templates/ComponentPageTemplate';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { RiskBadge } from '@/components/shared/RiskBadge';
 import { StatusBadge } from '@/components/shared/StatusBadge';
-import { TrustPointsDisplay } from '@/components/shared/TrustPointsDisplay';
-import { StatCard } from '@/components/shared/StatCard';
 import { 
   Brain,
   Bot,
@@ -38,83 +36,59 @@ import {
   Target,
   Cpu,
   Code,
+  Award,
   Network,
-  AlertCircle,
-  Star,
-  TrendingUp,
-  Award
+  Building2,
+  BookOpen,
+  GraduationCap
 } from 'lucide-react';
-import { 
-  RiskLevel, 
-  ImplementationStatus, 
-  SystemStatus, 
-  ApprovalStatus,
-  DataCategory,
-  BusinessImpact
-} from '@/types/shared';
-
-type AISystemType = 'ml_model' | 'llm' | 'computer_vision' | 'nlp' | 'automation' | 'decision_support';
-type AIRiskCategory = 'minimal' | 'limited' | 'high' | 'unacceptable';
-type AssessmentType = 'pre_deployment' | 'periodic' | 'incident_driven';
-type TrainingCategory = 'ethics' | 'technical' | 'legal' | 'bias_prevention' | 'responsible_ai';
 
 interface AISystem {
   id: string;
   name: string;
-  type: AISystemType;
-  riskLevel: AIRiskCategory;
-  euAIActCategory: string;
+  type: 'llm' | 'ml' | 'computer_vision' | 'nlp' | 'recommendation' | 'automation';
+  riskLevel: 'minimal' | 'limited' | 'high' | 'unacceptable';
+  status: 'development' | 'testing' | 'production' | 'retired';
   owner: string;
-  department: string;
-  status: SystemStatus;
-  lastAssessed: string;
-  complianceScore: number;
-  trustImpact: number;
-  dataTypes: DataCategory[];
-  businessImpact: BusinessImpact;
+  dataTypes: string[];
+  complianceStatus: 'compliant' | 'non_compliant' | 'pending_review';
+  lastAssessment: string;
+  trustPoints: number;
 }
 
 interface ISO42001Control {
   id: string;
   category: string;
-  control: string;
+  name: string;
   description: string;
-  implementation: ImplementationStatus;
+  status: 'implemented' | 'partial' | 'not_implemented' | 'not_applicable';
   evidence: string[];
-  lastReviewed: string;
-  responsibleParty: string;
-  trustPoints: number;
+  responsible: string;
+  lastReview: string;
 }
 
-interface AIRiskAssessment {
+interface RiskAssessment {
   id: string;
-  aiSystemId: string;
-  assessmentType: AssessmentType;
-  risks: {
-    category: string;
-    description: string;
-    likelihood: number;
-    impact: number;
-    mitigation: string;
-    residualRisk: number;
-  }[];
-  overallRiskLevel: RiskLevel;
+  systemId: string;
+  systemName: string;
   assessmentDate: string;
-  nextReview: string;
-  approvalStatus: ApprovalStatus;
-  trustEquityImpact: number;
+  assessor: string;
+  riskLevel: 'minimal' | 'limited' | 'high' | 'unacceptable';
+  mitigations: string[];
+  status: 'draft' | 'review' | 'approved' | 'rejected';
+  findings: number;
+  addressed: number;
 }
 
-interface AITrainingModule {
+interface TrainingModule {
   id: string;
   title: string;
-  category: TrainingCategory;
-  duration: number; // minutes
+  category: 'ethics' | 'governance' | 'risk' | 'compliance' | 'technical';
+  duration: string;
   completionRate: number;
   participants: number;
-  lastUpdated: string;
-  trustPoints: number;
-  mandatory: boolean;
+  status: 'active' | 'draft' | 'archived';
+  certificationRequired: boolean;
 }
 
 export const AIGovernance: React.FC = () => {
@@ -128,611 +102,666 @@ export const AIGovernance: React.FC = () => {
       name: 'Customer Service Chatbot',
       type: 'llm',
       riskLevel: 'limited',
-      euAIActCategory: 'Limited Risk AI System',
-      owner: 'John Smith',
-      department: 'Customer Success',
       status: 'production',
-      lastAssessed: '2024-01-20',
-      complianceScore: 92,
-      trustImpact: 45,
-      dataTypes: ['Personal Data'],
-      businessImpact: 'medium'
+      owner: 'Product Team',
+      dataTypes: ['Customer Data', 'Communication Logs'],
+      complianceStatus: 'compliant',
+      lastAssessment: '2024-01-15',
+      trustPoints: 150
     },
     {
       id: 'ai-2',
-      name: 'Resume Screening AI',
-      type: 'ml_model',
+      name: 'Fraud Detection System',
+      type: 'ml',
       riskLevel: 'high',
-      euAIActCategory: 'High Risk AI System',
-      owner: 'Sarah Johnson',
-      department: 'Human Resources',
-      status: 'testing',
-      lastAssessed: '2024-01-18',
-      complianceScore: 78,
-      trustImpact: 120,
-      dataTypes: ['Personal Data', 'Sensitive Data'],
-      businessImpact: 'high'
+      status: 'production',
+      owner: 'Security Team',
+      dataTypes: ['Financial Data', 'Transaction History', 'Personal Data'],
+      complianceStatus: 'compliant',
+      lastAssessment: '2024-01-10',
+      trustPoints: 300
     },
     {
       id: 'ai-3',
-      name: 'Fraud Detection System',
-      type: 'ml_model',
+      name: 'Document Classification',
+      type: 'nlp',
+      riskLevel: 'limited',
+      status: 'testing',
+      owner: 'Data Team',
+      dataTypes: ['Business Documents', 'Metadata'],
+      complianceStatus: 'pending_review',
+      lastAssessment: '2024-01-08',
+      trustPoints: 75
+    },
+    {
+      id: 'ai-4',
+      name: 'Hiring Assistant',
+      type: 'recommendation',
       riskLevel: 'high',
-      euAIActCategory: 'High Risk AI System',
-      owner: 'Mike Chen',
-      department: 'Finance',
-      status: 'production',
-      lastAssessed: '2024-01-15',
-      complianceScore: 96,
-      trustImpact: 200,
-      dataTypes: ['Financial Data'],
-      businessImpact: 'critical'
+      status: 'development',
+      owner: 'HR Team',
+      dataTypes: ['Personal Data', 'CV Data', 'Performance Data'],
+      complianceStatus: 'non_compliant',
+      lastAssessment: '2023-12-20',
+      trustPoints: 0
     }
   ];
 
   const iso42001Controls: ISO42001Control[] = [
     {
-      id: 'iso42001-1',
+      id: 'iso-1',
       category: 'AI Management System',
-      control: '5.1 Leadership and Commitment',
-      description: 'Top management demonstrates leadership and commitment to the AI management system',
-      implementation: 'implemented',
-      evidence: ['AI Governance Policy', 'Management Review Records'],
-      lastReviewed: '2024-01-15',
-      responsibleParty: 'Chief AI Officer',
-      trustPoints: 50
+      name: 'AI Policy and Objectives',
+      description: 'Establish and maintain AI policy aligned with organizational objectives',
+      status: 'implemented',
+      evidence: ['AI Policy Document v2.1', 'Board Approval Minutes'],
+      responsible: 'AI Governance Board',
+      lastReview: '2024-01-15'
     },
     {
-      id: 'iso42001-2',
-      category: 'AI Risk Management',
-      control: '7.3 AI System Risk Assessment',
-      description: 'Systematic identification and assessment of AI system risks',
-      implementation: 'partial',
-      evidence: ['Risk Assessment Template', 'Preliminary Risk Analysis'],
-      lastReviewed: '2024-01-10',
-      responsibleParty: 'AI Risk Manager',
-      trustPoints: 30
+      id: 'iso-2',
+      category: 'Risk Management',
+      name: 'AI Risk Assessment Process',
+      description: 'Systematic identification and assessment of AI-related risks',
+      status: 'implemented',
+      evidence: ['Risk Assessment Framework', 'Risk Register'],
+      responsible: 'Chief Risk Officer',
+      lastReview: '2024-01-10'
     },
     {
-      id: 'iso42001-3',
-      category: 'AI Lifecycle Management',
-      control: '8.2 AI System Development',
-      description: 'Controlled development process for AI systems',
-      implementation: 'implemented',
-      evidence: ['Development Procedures', 'Code Review Records', 'Testing Documentation'],
-      lastReviewed: '2024-01-20',
-      responsibleParty: 'AI Development Team',
-      trustPoints: 75
+      id: 'iso-3',
+      category: 'Data Governance',
+      name: 'AI Data Management',
+      description: 'Ensure quality, integrity and security of AI training data',
+      status: 'partial',
+      evidence: ['Data Quality Guidelines'],
+      responsible: 'Data Protection Officer',
+      lastReview: '2024-01-05'
+    },
+    {
+      id: 'iso-4',
+      category: 'Monitoring',
+      name: 'AI Performance Monitoring',
+      description: 'Continuous monitoring of AI system performance and impact',
+      status: 'not_implemented',
+      evidence: [],
+      responsible: 'Technical Team',
+      lastReview: '2023-12-15'
     }
   ];
 
-  const aiRiskAssessments: AIRiskAssessment[] = [
+  const riskAssessments: RiskAssessment[] = [
     {
       id: 'risk-1',
-      aiSystemId: 'ai-2',
-      assessmentType: 'pre_deployment',
-      risks: [
-        {
-          category: 'Bias and Discrimination',
-          description: 'Potential bias in resume screening against protected groups',
-          likelihood: 4,
-          impact: 5,
-          mitigation: 'Bias testing, diverse training data, human oversight',
-          residualRisk: 2
-        },
-        {
-          category: 'Privacy',
-          description: 'Processing of sensitive personal data',
-          likelihood: 3,
-          impact: 4,
-          mitigation: 'Data minimization, encryption, access controls',
-          residualRisk: 2
-        }
-      ],
-      overallRiskLevel: 'high' as RiskLevel,
-      assessmentDate: '2024-01-18',
-      nextReview: '2024-04-18',
-      approvalStatus: 'pending',
-      trustEquityImpact: 120
+      systemId: 'ai-1',
+      systemName: 'Customer Service Chatbot',
+      assessmentDate: '2024-01-15',
+      assessor: 'AI Ethics Team',
+      riskLevel: 'limited',
+      mitigations: ['Output filtering', 'Human oversight', 'Data minimization'],
+      status: 'approved',
+      findings: 5,
+      addressed: 5
+    },
+    {
+      id: 'risk-2',
+      systemId: 'ai-2',
+      systemName: 'Fraud Detection System',
+      assessmentDate: '2024-01-10',
+      assessor: 'Security Team',
+      riskLevel: 'high',
+      mitigations: ['Explainability features', 'Bias testing', 'Regular audits'],
+      status: 'approved',
+      findings: 8,
+      addressed: 6
+    },
+    {
+      id: 'risk-3',
+      systemId: 'ai-4',
+      systemName: 'Hiring Assistant',
+      assessmentDate: '2023-12-20',
+      assessor: 'HR Ethics Board',
+      riskLevel: 'high',
+      mitigations: ['Bias detection', 'Human review', 'Fairness testing'],
+      status: 'review',
+      findings: 12,
+      addressed: 3
     }
   ];
 
-  const aiTrainingModules: AITrainingModule[] = [
+  const trainingModules: TrainingModule[] = [
     {
-      id: 'training-1',
-      title: 'AI Ethics and Responsible AI',
+      id: 'train-1',
+      title: 'AI Ethics Fundamentals',
       category: 'ethics',
-      duration: 45,
-      completionRate: 87,
-      participants: 156,
-      lastUpdated: '2024-01-15',
-      trustPoints: 25,
-      mandatory: true
+      duration: '2 hours',
+      completionRate: 78,
+      participants: 145,
+      status: 'active',
+      certificationRequired: true
     },
     {
-      id: 'training-2',
-      title: 'Bias Prevention in AI Systems',
-      category: 'bias_prevention',
-      duration: 30,
-      completionRate: 72,
-      participants: 98,
-      lastUpdated: '2024-01-10',
-      trustPoints: 20,
-      mandatory: true
-    },
-    {
-      id: 'training-3',
-      title: 'EU AI Act Compliance',
-      category: 'legal',
-      duration: 60,
+      id: 'train-2',
+      title: 'ISO 42001 Compliance',
+      category: 'compliance',
+      duration: '1.5 hours',
       completionRate: 65,
       participants: 89,
-      lastUpdated: '2024-01-08',
-      trustPoints: 30,
-      mandatory: false
+      status: 'active',
+      certificationRequired: true
+    },
+    {
+      id: 'train-3',
+      title: 'AI Risk Assessment',
+      category: 'risk',
+      duration: '3 hours',
+      completionRate: 45,
+      participants: 52,
+      status: 'active',
+      certificationRequired: false
+    },
+    {
+      id: 'train-4',
+      title: 'Responsible AI Development',
+      category: 'technical',
+      duration: '4 hours',
+      completionRate: 32,
+      participants: 78,
+      status: 'draft',
+      certificationRequired: true
     }
   ];
 
-
-  const getAISystemIcon = (type: string) => {
-    switch (type) {
-      case 'llm': return <Bot className="h-5 w-5" />;
-      case 'ml_model': return <Brain className="h-5 w-5" />;
-      case 'computer_vision': return <Eye className="h-5 w-5" />;
-      case 'nlp': return <Bot className="h-5 w-5" />;
-      case 'automation': return <Zap className="h-5 w-5" />;
-      case 'decision_support': return <Target className="h-5 w-5" />;
-      default: return <Cpu className="h-5 w-5" />;
-    }
-  };
-
-  const runAISystemScan = async () => {
+  const startScan = () => {
     setScanning(true);
-    // Simulate AI system discovery
     setTimeout(() => {
       setScanning(false);
     }, 3000);
   };
 
-  return (
-    <div className="container mx-auto p-6 max-w-7xl">
-      {/* Header */}
-      <div className="mb-8">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h1 className="text-3xl font-bold text-slate-900 mb-2">
-              AI Governance Module
-            </h1>
-            <p className="text-slate-600">
-              Comprehensive AI governance with ISO 42001 compliance, AI system registry, risk assessments, and responsible AI training
-            </p>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-bold erip-text-gradient mb-1">
-              94%
-            </div>
-            <div className="text-sm text-slate-600">AI Governance Score</div>
-          </div>
-        </div>
+  const getRiskColor = (level: string) => {
+    switch (level) {
+      case 'unacceptable':
+        return 'text-red-600 bg-red-50';
+      case 'high':
+        return 'text-orange-600 bg-orange-50';
+      case 'limited':
+        return 'text-yellow-600 bg-yellow-50';
+      case 'minimal':
+        return 'text-green-600 bg-green-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
+    }
+  };
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <StatCard
-            title="AI Systems"
-            value={aiSystems.length}
-            icon={Brain}
-            subtitle={`${aiSystems.filter(sys => sys.riskLevel === 'high' || sys.riskLevel === 'unacceptable').length} high risk`}
-            color="blue"
-          />
-          
-          <StatCard
-            title="ISO 42001 Controls"
-            value={iso42001Controls.length}
-            icon={Award}
-            subtitle={`${iso42001Controls.filter(ctrl => ctrl.implementation === 'implemented').length} implemented`}
-            color="green"
-          />
-          
-          <StatCard
-            title="Risk Assessments"
-            value={aiRiskAssessments.length}
-            icon={AlertTriangle}
-            subtitle={`${aiRiskAssessments.filter(risk => risk.approvalStatus === 'approved').length} approved`}
-            color="orange"
-          />
-          
-          <StatCard
-            title="Training Completion"
-            value={`${Math.round(aiTrainingModules.reduce((sum, mod) => sum + mod.completionRate, 0) / aiTrainingModules.length)}%`}
-            icon={Users}
-            subtitle="Average across modules"
-            color="purple"
-          />
-        </div>
-      </div>
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'implemented':
+      case 'compliant':
+      case 'approved':
+      case 'production':
+      case 'active':
+        return 'text-green-600 bg-green-50';
+      case 'partial':
+      case 'pending_review':
+      case 'review':
+      case 'testing':
+        return 'text-yellow-600 bg-yellow-50';
+      case 'not_implemented':
+      case 'non_compliant':
+      case 'rejected':
+      case 'development':
+      case 'draft':
+        return 'text-red-600 bg-red-50';
+      case 'retired':
+      case 'archived':
+        return 'text-gray-600 bg-gray-50';
+      default:
+        return 'text-gray-600 bg-gray-50';
+    }
+  };
 
-      {/* Main Content */}
-      <Tabs value={activeTab} onValueChange={setActiveTab}>
-        <TabsList className="grid grid-cols-4 w-full mb-6">
-          <TabsTrigger value="iso42001">ISO 42001</TabsTrigger>
-          <TabsTrigger value="ai-registry">AI Registry</TabsTrigger>
-          <TabsTrigger value="risk-assessment">Risk Assessment</TabsTrigger>
-          <TabsTrigger value="training">AI Training</TabsTrigger>
-        </TabsList>
+  // Quick stats calculations
+  const totalSystems = aiSystems.length;
+  const compliantSystems = aiSystems.filter(sys => sys.complianceStatus === 'compliant').length;
+  const highRiskSystems = aiSystems.filter(sys => sys.riskLevel === 'high' || sys.riskLevel === 'unacceptable').length;
+  const implementedControls = iso42001Controls.filter(ctrl => ctrl.status === 'implemented').length;
+  const totalTrustPoints = aiSystems.reduce((sum, sys) => sum + sys.trustPoints, 0);
+  const avgTrainingCompletion = Math.round(trainingModules.reduce((sum, mod) => sum + mod.completionRate, 0) / trainingModules.length);
 
-        {/* ISO 42001 Framework */}
-        <TabsContent value="iso42001">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">ISO 42001 AI Management System</h3>
-              <Button className="erip-gradient-primary">
-                <Plus className="h-4 w-4 mr-2" />
-                New Control Assessment
-              </Button>
-            </div>
+  const quickStats: StatCard[] = [
+    {
+      label: 'AI Systems',
+      value: totalSystems,
+      change: `+${compliantSystems}`,
+      trend: 'up',
+      icon: <Bot className="h-6 w-6 text-blue-600" />,
+      description: `${compliantSystems} compliant`,
+      color: 'text-blue-600'
+    },
+    {
+      label: 'ISO 42001 Controls',
+      value: `${implementedControls}/${iso42001Controls.length}`,
+      change: '+2',
+      trend: 'up',
+      icon: <Shield className="h-6 w-6 text-green-600" />,
+      description: 'Controls implemented',
+      color: 'text-green-600'
+    },
+    {
+      label: 'High Risk Systems',
+      value: highRiskSystems,
+      change: '-1',
+      trend: 'up',
+      icon: <AlertTriangle className="h-6 w-6 text-orange-600" />,
+      description: 'Require attention',
+      color: 'text-orange-600'
+    },
+    {
+      label: 'Training Completion',
+      value: `${avgTrainingCompletion}%`,
+      change: '+12%',
+      trend: 'up',
+      icon: <GraduationCap className="h-6 w-6 text-purple-600" />,
+      description: 'Average completion rate',
+      color: 'text-purple-600'
+    }
+  ];
 
-            <div className="grid gap-4">
-              {iso42001Controls.map((control) => (
-                <Card key={control.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <StatusBadge status={control.implementation} />
+  // Tab configurations
+  const tabs: TabConfiguration[] = [
+    {
+      id: 'iso42001',
+      label: 'ISO 42001 Compliance',
+      badge: `${implementedControls}/${iso42001Controls.length}`,
+      content: (
+        <div className="space-y-6">
+          <Card className="card-professional">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Shield className="h-5 w-5" />
+                ISO 42001 AI Management System Controls
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="grid gap-4">
+                {iso42001Controls.map((control) => (
+                  <Card key={control.id} className="border-slate-200">
+                    <CardContent className="p-6">
+                      <div className="flex items-start justify-between mb-4">
+                        <div className="space-y-2">
+                          <div className="flex items-center gap-3">
                             <Badge variant="outline" className="text-xs">
                               {control.category}
                             </Badge>
+                            <h4 className="font-medium">{control.name}</h4>
                           </div>
-                          <h4 className="font-medium text-slate-900 mb-2">
-                            {control.control}
-                          </h4>
-                          <p className="text-sm text-slate-600 mb-3">
-                            {control.description}
-                          </p>
+                          <p className="text-sm text-slate-600">{control.description}</p>
                         </div>
-                        <div className="text-right">
-                          <TrustPointsDisplay points={control.trustPoints} size="sm" className="mb-2" />
-                          <div className="flex items-center gap-2">
-                            <Button size="sm" variant="outline">
-                              <Eye className="h-4 w-4 mr-1" />
-                              Review
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <Edit3 className="h-4 w-4 mr-1" />
-                              Update Evidence
-                            </Button>
-                          </div>
-                        </div>
+                        <Badge className={getStatusColor(control.status)}>
+                          {control.status.replace('_', ' ')}
+                        </Badge>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                         <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Evidence</h5>
-                          <div className="flex flex-wrap gap-1">
-                            {control.evidence.map((evidence) => (
-                              <Badge key={evidence} variant="outline" className="text-xs">
-                                <FileCheck className="h-3 w-3 mr-1" />
-                                {evidence}
-                              </Badge>
-                            ))}
+                          <h5 className="font-medium text-sm text-slate-600 mb-2">Evidence</h5>
+                          <div className="space-y-1">
+                            {control.evidence.length > 0 ? (
+                              control.evidence.map((evidence, idx) => (
+                                <Badge key={idx} variant="outline" className="text-xs block w-fit">
+                                  {evidence}
+                                </Badge>
+                              ))
+                            ) : (
+                              <span className="text-xs text-slate-400">No evidence provided</span>
+                            )}
                           </div>
                         </div>
+                        
                         <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Responsible Party</h5>
-                          <Badge variant="outline" className="text-xs">
-                            <Users className="h-3 w-3 mr-1" />
-                            {control.responsibleParty}
-                          </Badge>
+                          <h5 className="font-medium text-sm text-slate-600 mb-2">Responsible</h5>
+                          <p className="text-sm">{control.responsible}</p>
+                        </div>
+                        
+                        <div>
+                          <h5 className="font-medium text-sm text-slate-600 mb-2">Last Review</h5>
+                          <p className="text-sm">{control.lastReview}</p>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between text-sm text-slate-600 pt-2 border-t border-slate-200">
-                        <span><strong>Last Reviewed:</strong> {control.lastReviewed}</span>
-                        <span><strong>Implementation:</strong> {Math.round(control.implementation === 'implemented' ? 100 : control.implementation === 'partial' ? 60 : 0)}%</span>
+                      <div className="flex gap-2 pt-4 border-t border-slate-100">
+                        <Button variant="outline" size="sm">
+                          <Edit3 className="h-4 w-4 mr-2" />
+                          Update
+                        </Button>
+                        <Button variant="outline" size="sm">
+                          <Eye className="h-4 w-4 mr-2" />
+                          View Evidence
+                        </Button>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Alert>
-              <Award className="h-4 w-4" />
-              <AlertDescription>
-                ISO 42001 is the world's first AI management system standard. Complete implementation demonstrates 
-                commitment to responsible AI and earns significant Trust Equity points.
-              </AlertDescription>
-            </Alert>
-          </div>
-        </TabsContent>
-
-        {/* AI System Registry */}
-        <TabsContent value="ai-registry">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">AI System Registry</h3>
-              <div className="flex items-center gap-2">
-                <Button 
-                  onClick={runAISystemScan} 
-                  disabled={scanning}
-                  variant="outline"
-                >
-                  {scanning ? (
-                    <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
-                  ) : (
-                    <Scan className="h-4 w-4 mr-2" />
-                  )}
-                  {scanning ? 'Scanning...' : 'Discover AI Systems'}
-                </Button>
-                <Button className="erip-gradient-primary">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Register AI System
-                </Button>
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
-            </div>
 
-            <div className="grid gap-4">
-              {aiSystems.map((system) => (
-                <Card key={system.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-start gap-4">
-                          <div className="w-12 h-12 bg-slate-100 rounded-lg flex items-center justify-center">
-                            {getAISystemIcon(system.type)}
-                          </div>
-                          <div className="flex-1">
-                            <div className="flex items-center gap-2 mb-2">
-                              <RiskBadge riskLevel={system.riskLevel} />
-                              <StatusBadge status={system.status} />
-                              <Badge variant="outline" className="text-xs">
-                                {system.type.replace('_', ' ').toUpperCase()}
-                              </Badge>
-                            </div>
-                            <h4 className="font-medium text-slate-900 mb-1">{system.name}</h4>
-                            <p className="text-sm text-slate-600 mb-2">{system.euAIActCategory}</p>
-                            <div className="flex items-center gap-4 text-sm text-slate-600">
-                              <span><strong>Owner:</strong> {system.owner}</span>
-                              <span><strong>Department:</strong> {system.department}</span>
-                              <span><strong>Business Impact:</strong> {system.businessImpact}</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="text-sm font-medium text-blue-600 mb-1">
-                            Compliance: {system.complianceScore}%
-                          </div>
-                          <TrustPointsDisplay points={system.trustImpact} size="sm" className="mb-2" />
-                          <div className="flex items-center gap-2">
-                            <Button size="sm" variant="outline">
-                              <Eye className="h-4 w-4 mr-1" />
-                              Details
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <AlertTriangle className="h-4 w-4 mr-1" />
-                              Assess Risk
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
+              <Alert className="mt-6">
+                <CheckCircle className="h-4 w-4" />
+                <AlertDescription>
+                  {implementedControls} of {iso42001Controls.length} ISO 42001 controls implemented. 
+                  System achieving {Math.round((implementedControls / iso42001Controls.length) * 100)}% compliance.
+                </AlertDescription>
+              </Alert>
+            </CardContent>
+          </Card>
+        </div>
+      )
+    },
+    {
+      id: 'registry',
+      label: 'AI System Registry',
+      badge: totalSystems,
+      content: (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium">AI System Registry</h3>
+            <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Register AI System
+            </Button>
+          </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Data Types</h5>
-                          <div className="flex flex-wrap gap-1">
-                            {system.dataTypes.map((type) => (
-                              <Badge key={type} variant="outline" className="text-xs">
-                                <Database className="h-3 w-3 mr-1" />
-                                {type}
-                              </Badge>
-                            ))}
-                          </div>
+          <div className="grid gap-4">
+            {aiSystems.map((system) => (
+              <Card key={system.id} className="card-professional">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center">
+                          <Bot className="h-5 w-5 text-blue-600" />
                         </div>
                         <div>
-                          <h5 className="text-sm font-medium text-slate-700 mb-1">Compliance Progress</h5>
-                          <div className="flex items-center gap-2">
-                            <Progress value={system.complianceScore} className="flex-1 h-2" />
-                            <span className="text-sm font-medium">{system.complianceScore}%</span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm text-slate-600 pt-2 border-t border-slate-200">
-                        <span><strong>Last Assessed:</strong> {system.lastAssessed}</span>
-                        <span><strong>Next Review:</strong> {new Date(Date.now() + 90*24*60*60*1000).toISOString().split('T')[0]}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-
-            <Alert>
-              <Brain className="h-4 w-4" />
-              <AlertDescription>
-                AI system registry provides complete visibility into your AI landscape. Regular assessments 
-                ensure EU AI Act compliance and build Trust Equity through responsible AI management.
-              </AlertDescription>
-            </Alert>
-          </div>
-        </TabsContent>
-
-        {/* Risk Assessment */}
-        <TabsContent value="risk-assessment">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">AI Risk Assessments</h3>
-              <Button className="erip-gradient-primary">
-                <Plus className="h-4 w-4 mr-2" />
-                New Risk Assessment
-              </Button>
-            </div>
-
-            <div className="grid gap-4">
-              {aiRiskAssessments.map((assessment) => (
-                <Card key={assessment.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            <RiskBadge riskLevel={assessment.overallRiskLevel} />
-                            <StatusBadge status={assessment.approvalStatus} />
-                            <Badge variant="outline" className="text-xs">
-                              {assessment.assessmentType.replace('_', ' ').toUpperCase()}
-                            </Badge>
-                          </div>
-                          <h4 className="font-medium text-slate-900 mb-2">
-                            AI System: {aiSystems.find(sys => sys.id === assessment.aiSystemId)?.name || 'Unknown'}
-                          </h4>
-                          <div className="flex items-center gap-4 text-sm text-slate-600 mb-3">
-                            <span><strong>Assessment Date:</strong> {assessment.assessmentDate}</span>
-                            <span><strong>Next Review:</strong> {assessment.nextReview}</span>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <TrustPointsDisplay points={assessment.trustEquityImpact} size="sm" className="mb-2" />
-                          <div className="flex items-center gap-2">
-                            <Button size="sm" variant="outline">
-                              <Eye className="h-4 w-4 mr-1" />
-                              Review
-                            </Button>
-                            {assessment.approvalStatus === 'pending' && (
-                              <Button size="sm" className="erip-gradient-primary">
-                                <CheckCircle className="h-4 w-4 mr-1" />
-                                Approve
-                              </Button>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <h5 className="text-sm font-medium text-slate-700 mb-2">Risk Analysis</h5>
-                        <div className="space-y-2">
-                          {assessment.risks.map((risk, index) => (
-                            <div key={index} className="p-3 bg-slate-50 rounded-lg">
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-sm font-medium">{risk.category}</span>
-                                <div className="flex items-center gap-2">
-                                  <Badge variant="outline" className="text-xs">
-                                    L: {risk.likelihood}/5
-                                  </Badge>
-                                  <Badge variant="outline" className="text-xs">
-                                    I: {risk.impact}/5
-                                  </Badge>
-                                  <RiskBadge 
-                                    riskLevel={risk.residualRisk <= 2 ? 'low' : risk.residualRisk <= 3 ? 'medium' : 'high'} 
-                                    label={`Residual: ${risk.residualRisk}/5`}
-                                  />
-                                </div>
-                              </div>
-                              <p className="text-xs text-slate-600 mb-2">{risk.description}</p>
-                              <p className="text-xs text-slate-700"><strong>Mitigation:</strong> {risk.mitigation}</p>
-                            </div>
-                          ))}
+                          <h4 className="font-medium">{system.name}</h4>
+                          <p className="text-sm text-slate-500">Type: {system.type.toUpperCase()}</p>
                         </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                    
+                    <div className="flex gap-2">
+                      <Badge className={getRiskColor(system.riskLevel)}>
+                        {system.riskLevel} risk
+                      </Badge>
+                      <Badge className={getStatusColor(system.status)}>
+                        {system.status}
+                      </Badge>
+                    </div>
+                  </div>
 
-            <Alert>
-              <AlertTriangle className="h-4 w-4" />
-              <AlertDescription>
-                Regular risk assessments are mandatory for high-risk AI systems under the EU AI Act. 
-                Comprehensive risk management builds Trust Equity and ensures regulatory compliance.
-              </AlertDescription>
-            </Alert>
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+                    <div>
+                      <span className="text-sm text-slate-600">Owner:</span>
+                      <div className="font-medium">{system.owner}</div>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-600">Compliance:</span>
+                      <Badge className={getStatusColor(system.complianceStatus)}>
+                        {system.complianceStatus.replace('_', ' ')}
+                      </Badge>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-600">Last Assessment:</span>
+                      <div className="font-medium">{system.lastAssessment}</div>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-600">Trust Points:</span>
+                      <div className="font-medium text-blue-600">{system.trustPoints}</div>
+                    </div>
+                  </div>
+
+                  <div className="mb-4">
+                    <h5 className="font-medium text-sm text-slate-600 mb-2">Data Types</h5>
+                    <div className="flex flex-wrap gap-1">
+                      {system.dataTypes.map((type) => (
+                        <Badge key={type} variant="outline" className="text-xs">
+                          {type}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 pt-4 border-t border-slate-100">
+                    <Button variant="outline" size="sm">
+                      <Eye className="h-4 w-4 mr-2" />
+                      View Details
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Scan className="h-4 w-4 mr-2" />
+                      Risk Assessment
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Settings className="h-4 w-4 mr-2" />
+                      Configure
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </TabsContent>
+        </div>
+      )
+    },
+    {
+      id: 'risk',
+      label: 'Risk Assessments',
+      badge: riskAssessments.length,
+      content: (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium">AI Risk Assessments</h3>
+            <Button className="bg-gradient-to-r from-orange-600 to-red-600">
+              <Plus className="h-4 w-4 mr-2" />
+              New Assessment
+            </Button>
+          </div>
 
-        {/* AI Training */}
-        <TabsContent value="training">
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-medium">Responsible AI Training</h3>
-              <Button className="erip-gradient-primary">
-                <Plus className="h-4 w-4 mr-2" />
-                Create Training Module
-              </Button>
-            </div>
+          <div className="grid gap-4">
+            {riskAssessments.map((assessment) => (
+              <Card key={assessment.id} className="card-professional">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="font-medium">{assessment.systemName}</h4>
+                      <p className="text-sm text-slate-500">
+                        Assessed by {assessment.assessor} on {assessment.assessmentDate}
+                      </p>
+                    </div>
+                    <div className="flex gap-2">
+                      <Badge className={getRiskColor(assessment.riskLevel)}>
+                        {assessment.riskLevel} risk
+                      </Badge>
+                      <Badge className={getStatusColor(assessment.status)}>
+                        {assessment.status}
+                      </Badge>
+                    </div>
+                  </div>
 
-            <div className="grid gap-4">
-              {aiTrainingModules.map((module) => (
-                <Card key={module.id} className="card-professional">
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div className="flex items-start justify-between">
-                        <div className="flex-1">
-                          <div className="flex items-center gap-2 mb-2">
-                            {module.mandatory && (
-                              <Badge className="bg-red-100 text-red-700">
-                                MANDATORY
-                              </Badge>
-                            )}
-                            <Badge variant="outline" className="text-xs">
-                              {module.category.replace('_', ' ').toUpperCase()}
-                            </Badge>
-                            <Badge variant="outline" className="text-xs">
-                              <Clock className="h-3 w-3 mr-1" />
-                              {module.duration} min
-                            </Badge>
-                          </div>
-                          <h4 className="font-medium text-slate-900 mb-2">
-                            {module.title}
-                          </h4>
-                          <div className="flex items-center gap-4 text-sm text-slate-600 mb-3">
-                            <span><strong>Participants:</strong> {module.participants}</span>
-                            <span><strong>Last Updated:</strong> {module.lastUpdated}</span>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <TrustPointsDisplay points={module.trustPoints} size="sm" className="mb-2" />
-                          <div className="flex items-center gap-2">
-                            <Button size="sm" variant="outline">
-                              <Eye className="h-4 w-4 mr-1" />
-                              View Content
-                            </Button>
-                            <Button size="sm" variant="outline">
-                              <Users className="h-4 w-4 mr-1" />
-                              Assign Users
-                            </Button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div>
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-sm font-medium text-slate-700">Completion Rate</span>
-                          <span className="text-sm font-medium">{module.completionRate}%</span>
-                        </div>
-                        <Progress value={module.completionRate} className="h-2" />
-                      </div>
-
-                      <div className="flex items-center justify-between text-sm text-slate-600 pt-2 border-t border-slate-200">
-                        <span><strong>Category:</strong> {module.category.replace('_', ' ')}</span>
-                        <span><strong>Trust Points per Completion:</strong> +{module.trustPoints}</span>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div>
+                      <span className="text-sm text-slate-600">Findings:</span>
+                      <div className="font-medium">{assessment.findings}</div>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-600">Addressed:</span>
+                      <div className="font-medium">{assessment.addressed}/{assessment.findings}</div>
+                    </div>
+                    <div>
+                      <span className="text-sm text-slate-600">Progress:</span>
+                      <div className="flex items-center gap-2">
+                        <Progress 
+                          value={(assessment.addressed / assessment.findings) * 100} 
+                          className="h-2 flex-1"
+                        />
+                        <span className="text-sm">
+                          {Math.round((assessment.addressed / assessment.findings) * 100)}%
+                        </span>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+                  </div>
 
-            <Alert>
-              <Users className="h-4 w-4" />
-              <AlertDescription>
-                AI training programs build organizational AI literacy and responsible AI culture. 
-                High completion rates demonstrate commitment to AI governance and earn Trust Equity points.
-              </AlertDescription>
-            </Alert>
+                  <div className="mb-4">
+                    <h5 className="font-medium text-sm text-slate-600 mb-2">Mitigations</h5>
+                    <div className="flex flex-wrap gap-1">
+                      {assessment.mitigations.map((mitigation, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs">
+                          {mitigation}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 pt-4 border-t border-slate-100">
+                    <Button variant="outline" size="sm">
+                      <Eye className="h-4 w-4 mr-2" />
+                      View Report
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Edit3 className="h-4 w-4 mr-2" />
+                      Update
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Download className="h-4 w-4 mr-2" />
+                      Export
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </TabsContent>
-      </Tabs>
-    </div>
+
+          <Alert>
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>
+              {highRiskSystems} AI systems classified as high risk. Regular assessments required per ISO 42001.
+            </AlertDescription>
+          </Alert>
+        </div>
+      )
+    },
+    {
+      id: 'training',
+      label: 'Responsible AI Training',
+      badge: `${avgTrainingCompletion}%`,
+      content: (
+        <div className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h3 className="text-lg font-medium">Responsible AI Training Modules</h3>
+            <Button className="bg-gradient-to-r from-purple-600 to-blue-600">
+              <Plus className="h-4 w-4 mr-2" />
+              Create Module
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {trainingModules.map((module) => (
+              <Card key={module.id} className="card-professional">
+                <CardContent className="p-6">
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h4 className="font-medium">{module.title}</h4>
+                      <div className="flex items-center gap-2 mt-1">
+                        <Badge variant="outline" className="text-xs">
+                          {module.category}
+                        </Badge>
+                        <span className="text-sm text-slate-500">{module.duration}</span>
+                        {module.certificationRequired && (
+                          <Badge className="bg-yellow-100 text-yellow-800 text-xs">
+                            Certification Required
+                          </Badge>
+                        )}
+                      </div>
+                    </div>
+                    <Badge className={getStatusColor(module.status)}>
+                      {module.status}
+                    </Badge>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div>
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="text-sm text-slate-600">Completion Rate</span>
+                        <span className="font-medium">{module.completionRate}%</span>
+                      </div>
+                      <Progress value={module.completionRate} className="h-2" />
+                    </div>
+
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-slate-600">Participants:</span>
+                      <span className="font-medium">{module.participants}</span>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-2 mt-6 pt-4 border-t border-slate-100">
+                    <Button variant="outline" size="sm" className="flex-1">
+                      <BookOpen className="h-4 w-4 mr-2" />
+                      View Content
+                    </Button>
+                    <Button variant="outline" size="sm" className="flex-1">
+                      <BarChart3 className="h-4 w-4 mr-2" />
+                      Analytics
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <Alert>
+            <GraduationCap className="h-4 w-4" />
+            <AlertDescription>
+              AI training completion rate: {avgTrainingCompletion}%. 
+              Ongoing education ensures responsible AI development and deployment.
+            </AlertDescription>
+          </Alert>
+        </div>
+      )
+    }
+  ];
+
+  const headerActions = (
+    <>
+      <Button variant="outline" onClick={startScan} disabled={scanning}>
+        {scanning ? (
+          <>
+            <RefreshCw className="h-4 w-4 mr-2 animate-spin" />
+            Scanning...
+          </>
+        ) : (
+          <>
+            <Scan className="h-4 w-4 mr-2" />
+            AI Audit
+          </>
+        )}
+      </Button>
+      <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
+        <Download className="h-4 w-4 mr-2" />
+        Export AI Report
+      </Button>
+    </>
+  );
+
+  return (
+    <ComponentPageTemplate
+      title="AI Governance Module"
+      subtitle="Comprehensive AI Management & ISO 42001 Compliance"
+      description="Advanced AI governance framework with system registry, risk assessments, ISO 42001 compliance tracking, and responsible AI training programs."
+      trustScore={Math.round((implementedControls / iso42001Controls.length) * 100)}
+      trustPoints={totalTrustPoints}
+      quickStats={quickStats}
+      tabs={tabs}
+      actions={headerActions}
+      headerGradient="from-blue-50 to-purple-50"
+      className="card-professional"
+    />
   );
 };
