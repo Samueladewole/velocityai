@@ -43,6 +43,7 @@ import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { CloudSecurity } from '@/pages/CloudSecurity';
 import { Reports } from '@/pages/Reports';
 import { DebugAuth } from '@/pages/DebugAuth';
+import { TestRouting } from '@/pages/TestRouting';
 import { PlatformCapabilities } from '@/pages/PlatformCapabilities';
 import { ComplianceAutomation } from '@/pages/solutions/ComplianceAutomation';
 import { SalesAcceleration } from '@/pages/solutions/SalesAcceleration';
@@ -151,32 +152,8 @@ function App() {
           <Route path="company/seed-pitch" element={<SeedPitch />} />
           {/* Non-sidebar routes */}
           <Route path="certifications" element={<IndustryCertifications />} />
-          {/* Tools */}
+          {/* Tools Overview - only this stays in public layout */}
           <Route path="tools" element={<ToolsOverview />} />
-          <Route path="tools/qie-enhanced" element={<QIEEnhanced />} />
-          <Route path="tools/dtef-automation" element={<DTEFAutomation />} />
-          <Route path="tools/prism" element={<PRISM />} />
-          <Route path="tools/beacon" element={<BEACON />} />
-          <Route path="tools/compass" element={<COMPASS />} />
-          <Route path="tools/atlas" element={<ATLAS />} />
-          <Route path="tools/pulse" element={<PULSE />} />
-          <Route path="tools/nexus" element={<NEXUS />} />
-          <Route path="tools/clearance" element={<CLEARANCE />} />
-          <Route path="tools/cipher" element={<CIPHER />} />
-          <Route path="tools/integrations" element={<IntegrationHub />} />
-          <Route path="tools/experts" element={<ExpertNetwork />} />
-          <Route path="tools/customer-success" element={<CustomerSuccess />} />
-          <Route path="tools/reports" element={<Reports />} />
-          {/* Component Management Tools */}
-          <Route path="tools/framework-management" element={<FrameworkManagement />} />
-          <Route path="tools/privacy-management" element={<PrivacyManagement />} />
-          <Route path="tools/ai-governance" element={<AIGovernance />} />
-          <Route path="tools/cloud-security" element={<CloudSecurity />} />
-          <Route path="tools/policy-management" element={<PolicyManagement />} />
-          <Route path="tools/employee-training" element={<EmployeeTraining />} />
-          <Route path="tools/assessment-marketplace" element={<AssessmentMarketplace />} />
-          {/* Debug routes */}
-          <Route path="debug/framework-management" element={<FrameworkManagement />} />
         </Route>
         
         {/* Trust Center Routes (Public) */}
@@ -186,6 +163,7 @@ function App() {
         <Route path="/" element={<AppLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="debug-auth" element={<DebugAuth />} />
+          <Route path="test-routing" element={<TestRouting />} />
           <Route path="trust-score" element={<TrustScore />} />
           {/* Component pages with sidebar navigation */}
           <Route path="qie-enhanced" element={<QIEEnhanced />} />
@@ -206,6 +184,20 @@ function App() {
           <Route path="tools/policy-management" element={<PolicyManagement />} />
           <Route path="tools/employee-training" element={<EmployeeTraining />} />
           <Route path="tools/assessment-marketplace" element={<AssessmentMarketplace />} />
+          {/* Tool specific routes */}
+          <Route path="tools" element={<ToolsOverview />} />
+          <Route path="tools/prism" element={<PRISM />} />
+          <Route path="tools/beacon" element={<BEACON />} />
+          <Route path="tools/compass" element={<COMPASS />} />
+          <Route path="tools/atlas" element={<ATLAS />} />
+          <Route path="tools/pulse" element={<PULSE />} />
+          <Route path="tools/nexus" element={<NEXUS />} />
+          <Route path="tools/clearance" element={<CLEARANCE />} />
+          <Route path="tools/cipher" element={<CIPHER />} />
+          <Route path="tools/integrations" element={<IntegrationHub />} />
+          <Route path="tools/experts" element={<ExpertNetwork />} />
+          <Route path="tools/customer-success" element={<CustomerSuccess />} />
+          <Route path="tools/reports" element={<Reports />} />
         </Route>
         
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
