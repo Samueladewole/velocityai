@@ -11,6 +11,7 @@ import {
   Database,
   Clock
 } from 'lucide-react';
+import { dateUtils } from '@/components/shared/DateProvider';
 
 interface ComponentStatus {
   status: 'healthy' | 'warning' | 'error';
@@ -71,30 +72,30 @@ const IntegrationDashboard: React.FC = () => {
       // Mock data - replace with actual API calls
       const mockSyncStatus: SyncStatus = {
         customer_id: 'demo_customer',
-        last_full_sync: '2024-01-15T10:30:00Z',
+        last_full_sync: dateUtils.getRecentTimestamp(30),
         sync_frequency_minutes: 15,
         components: {
           trust_equity: {
             status: 'healthy',
-            last_sync: '2024-01-15T10:30:00Z',
+            last_sync: dateUtils.getRecentTimestamp(30),
             records_synced: 1547,
             errors: 0
           },
           compass: {
             status: 'healthy',
-            last_sync: '2024-01-15T10:30:00Z',
+            last_sync: dateUtils.getRecentTimestamp(30),
             records_synced: 64,
             errors: 0
           },
           atlas: {
             status: 'warning',
-            last_sync: '2024-01-15T10:25:00Z',
+            last_sync: dateUtils.getRecentTimestamp(35),
             records_synced: 23,
             errors: 1
           }
         },
         overall_health: 'healthy',
-        next_scheduled_sync: '2024-01-15T10:45:00Z'
+        next_scheduled_sync: dateUtils.getTimestamp(15)
       };
 
       const mockPerformanceReport: PerformanceReport = {

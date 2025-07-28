@@ -22,7 +22,10 @@ import {
   Search,
   Activity,
   Zap,
-  Bell
+  Bell,
+  Sparkles,
+  Globe,
+  Rocket
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store';
@@ -40,10 +43,40 @@ const mainNavItems = [
     description: 'Executive command center'
   },
   {
+    title: 'Velocity AI',
+    icon: Rocket,
+    href: '#',
+    description: 'AI-powered compliance automation',
+    children: [
+      { title: 'AI Agents', icon: Bot, href: '/velocity/dashboard', description: 'Manage AI agents' },
+      { title: 'Live Dashboard', icon: Zap, href: '/velocity/live', description: 'Real-time monitoring' },
+      { title: 'Evidence Review', icon: FileCheck, href: '/velocity/evidence', description: 'Review AI evidence' },
+      { title: 'Integrations', icon: Globe, href: '/velocity/integration', description: 'Platform connections' },
+      { title: 'Agent Creator', icon: Sparkles, href: '/velocity/creator', description: 'Build custom agents' },
+      { title: 'Documentation', icon: HelpCircle, href: '/velocity/docs', description: 'Guides and tutorials' }
+    ]
+  },
+  {
     title: 'Trust Score',
     icon: Trophy,
     href: '/trust-score',
     description: 'Monitor and share trust credentials'
+  },
+  {
+    title: 'Tools',
+    icon: Settings,
+    href: '#',
+    description: 'ERIP Tool Suite',
+    children: [
+      { title: 'PRISM', icon: BarChart3, href: '/tools/prism', description: 'Risk quantification' },
+      { title: 'BEACON', icon: Zap, href: '/tools/beacon', description: 'Value acceleration' },
+      { title: 'COMPASS', icon: Target, href: '/tools/compass', description: 'Compliance navigator' },
+      { title: 'ATLAS', icon: Search, href: '/tools/atlas', description: 'Threat intelligence' },
+      { title: 'NEXUS', icon: Users, href: '/tools/nexus', description: 'Risk network insights' },
+      { title: 'PULSE', icon: Activity, href: '/tools/pulse', description: 'Real-time monitoring' },
+      { title: 'CLEARANCE', icon: Shield, href: '/tools/clearance', description: 'Risk decisions' },
+      { title: 'CIPHER', icon: Lock, href: '/tools/cipher', description: 'Policy automation' }
+    ]
   },
   {
     title: 'Components',
@@ -70,16 +103,6 @@ const mainNavItems = [
   }
 ];
 
-const toolsNavItems = [
-  { title: 'PRISM', icon: BarChart3, href: '/tools/prism', description: 'Risk quantification' },
-  { title: 'BEACON', icon: Zap, href: '/tools/beacon', description: 'Value acceleration' },
-  { title: 'COMPASS', icon: Target, href: '/tools/compass', description: 'Compliance navigator' },
-  { title: 'ATLAS', icon: Search, href: '/tools/atlas', description: 'Threat intelligence' },
-  { title: 'NEXUS', icon: Users, href: '/tools/nexus', description: 'Risk network insights' },
-  { title: 'PULSE', icon: Activity, href: '/tools/pulse', description: 'Real-time monitoring' },
-  { title: 'CLEARANCE', icon: Shield, href: '/tools/clearance', description: 'Risk decisions' },
-  { title: 'CIPHER', icon: Lock, href: '/tools/cipher', description: 'Policy automation' }
-];
 
 const bottomNavItems = [
   { title: 'Settings', icon: Settings, href: '/settings' },
@@ -210,31 +233,6 @@ export const SidebarNavigation: React.FC<SidebarNavigationProps> = ({ isCollapse
               </ul>
             </div>
 
-            {/* Tools */}
-            <div>
-              {!isCollapsed && (
-                <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-3">Tools</h3>
-              )}
-              <ul className="space-y-1">
-                {toolsNavItems.map((item) => (
-                  <li key={item.title}>
-                    <Link
-                      to={item.href}
-                      className={cn(
-                        "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
-                        isActive(item.href)
-                          ? "bg-blue-50 text-blue-700"
-                          : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
-                      )}
-                      title={isCollapsed ? item.title : undefined}
-                    >
-                      <item.icon className={cn("h-5 w-5 flex-shrink-0", isCollapsed && "mx-auto")} />
-                      {!isCollapsed && <span>{item.title}</span>}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
           </div>
         </nav>
 

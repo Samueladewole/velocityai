@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
+import { dateUtils } from '@/components/shared/DateProvider';
 import { 
   CheckCircle, 
   AlertTriangle, 
@@ -80,7 +81,7 @@ export const EvidenceReview: React.FC = () => {
         control: 'CIS Control 4: Admin Privileges',
         status: 'auto_approved',
         confidence: 96,
-        collectedAt: '2024-01-15T10:30:00Z',
+        collectedAt: dateUtils.getRecentTimestamp(30),
         platform: 'aws',
         size: '2.3 MB',
         automationApplied: true,
@@ -99,7 +100,7 @@ export const EvidenceReview: React.FC = () => {
         control: 'CIS Control 5: Secure Configuration',
         status: 'verified',
         confidence: 98,
-        collectedAt: '2024-01-15T10:25:00Z',
+        collectedAt: dateUtils.getRecentTimestamp(35),
         platform: 'aws',
         size: '0.8 KB',
         automationApplied: true,
@@ -117,7 +118,7 @@ export const EvidenceReview: React.FC = () => {
         control: 'CIS Control 6: Audit Logs',
         status: 'pending_review',
         confidence: 87,
-        collectedAt: '2024-01-15T10:20:00Z',
+        collectedAt: dateUtils.getRecentTimestamp(40),
         platform: 'aws',
         size: '45.2 MB',
         automationApplied: true,
@@ -132,7 +133,7 @@ export const EvidenceReview: React.FC = () => {
         control: 'CIS Control 3: Vulnerability Management',
         status: 'failed',
         confidence: 45,
-        collectedAt: '2024-01-15T10:15:00Z',
+        collectedAt: dateUtils.getRecentTimestamp(45),
         platform: 'aws',
         size: '1.2 MB',
         automationApplied: true,
@@ -147,7 +148,7 @@ export const EvidenceReview: React.FC = () => {
         control: 'CC6.1: Logical Access Controls',
         status: 'verified',
         confidence: 94,
-        collectedAt: '2024-01-15T10:10:00Z',
+        collectedAt: dateUtils.getRecentTimestamp(50),
         platform: 'aws',
         size: '3.4 KB',
         automationApplied: true,

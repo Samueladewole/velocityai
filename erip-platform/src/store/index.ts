@@ -118,7 +118,7 @@ export const mockUser: User = {
     subscription: {
       plan: SubscriptionPlan.ENTERPRISE,
       status: SubscriptionStatus.ACTIVE,
-      startDate: new Date('2024-01-01'),
+      startDate: new Date(),
     },
   },
   role: 'ADMIN' as const,

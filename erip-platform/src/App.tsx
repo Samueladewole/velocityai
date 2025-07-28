@@ -63,9 +63,32 @@ import { ToolsOverview } from '@/pages/tools/ToolsOverview';
 import { Contact } from '@/pages/company/Contact';
 import { SeedPitch } from '@/pages/company/SeedPitch';
 import { About } from '@/pages/company/About';
+import Story from '@/pages/company/Story';
+import Team from '@/pages/company/Team';
+import Careers from '@/pages/company/Careers';
+import Press from '@/pages/company/Press';
+import Partners from '@/pages/company/Partners';
+import Investors from '@/pages/company/Investors';
 // Resource pages
 import { Docs } from '@/pages/resources/Docs';
 import { Academy } from '@/pages/resources/Academy';
+import ApiDocs from '@/pages/resources/ApiDocs';
+import Blog from '@/pages/resources/Blog';
+import Webinars from '@/pages/resources/Webinars';
+import CaseStudies from '@/pages/resources/CaseStudies';
+import Help from '@/pages/resources/Help';
+// Legal pages
+import Privacy from '@/pages/legal/Privacy';
+import Terms from '@/pages/legal/Terms';
+import DPA from '@/pages/legal/DPA';
+import Cookies from '@/pages/legal/Cookies';
+import Security from '@/pages/legal/Security';
+import Compliance from '@/pages/legal/Compliance';
+// Certification pages
+import Soc2 from '@/pages/certifications/Soc2';
+import Iso27001 from '@/pages/certifications/Iso27001';
+import Gdpr from '@/pages/certifications/Gdpr';
+import Tisax from '@/pages/certifications/Tisax';
 import { PublicLayout } from '@/components/navigation/PublicLayout';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { TourProvider } from '@/components/tour/TourProvider';
@@ -85,8 +108,14 @@ import VelocityOnboarding from '@/components/velocity/VelocityOnboarding';
 import AgentDashboard from '@/components/velocity/AgentDashboard';
 import IntegrationDashboard from '@/components/velocity/IntegrationDashboard';
 import EvidenceReview from '@/components/velocity/EvidenceReview';
+import CustomAgentCreator from '@/components/velocity/CustomAgentCreator';
+import { LiveDataProvider } from '@/components/velocity/LiveDataProvider';
+import LiveVelocityDashboard from '@/components/velocity/LiveVelocityDashboard';
+import VelocityOnboardingWizard from '@/components/velocity/VelocityOnboardingWizard';
+import VelocityDocumentation from '@/components/velocity/VelocityDocumentation';
 // Other pages
 import { PublicProfiles } from '@/pages/PublicProfiles';
+import Settings from '@/pages/Settings';
 // Pricing pages
 import { Pricing } from '@/pages/Pricing';
 // Full Stack Trust Platform components - TODO: Implement these
@@ -97,6 +126,7 @@ import { Pricing } from '@/pages/Pricing';
 // import { PrivacySuite } from '@/pages/PrivacySuite';
 // import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
+import { DateProvider } from '@/components/shared/DateProvider';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
 
 function App() {
@@ -121,10 +151,11 @@ function App() {
   console.log('App rendering with store');
   
   return (
-    <TourProvider>
-      <Router>
-        <ScrollToTop />
-        <Routes>
+    <DateProvider>
+      <TourProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
         {/* Public routes with comprehensive navigation */}
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<LandingEnhanced />} />
@@ -154,9 +185,32 @@ function App() {
           <Route path="velocity/pricing" element={<VelocityPricing />} />
           {/* Resources */}
           <Route path="docs" element={<Docs />} />
+          <Route path="api-docs" element={<ApiDocs />} />
+          <Route path="blog" element={<Blog />} />
+          <Route path="webinars" element={<Webinars />} />
+          <Route path="case-studies" element={<CaseStudies />} />
+          <Route path="help" element={<Help />} />
           <Route path="academy" element={<Academy />} />
+          {/* Legal */}
+          <Route path="legal/privacy" element={<Privacy />} />
+          <Route path="legal/terms" element={<Terms />} />
+          <Route path="legal/dpa" element={<DPA />} />
+          <Route path="legal/cookies" element={<Cookies />} />
+          <Route path="legal/security" element={<Security />} />
+          <Route path="legal/compliance" element={<Compliance />} />
+          {/* Certifications */}
+          <Route path="certifications/soc2" element={<Soc2 />} />
+          <Route path="certifications/iso27001" element={<Iso27001 />} />
+          <Route path="certifications/gdpr" element={<Gdpr />} />
+          <Route path="certifications/tisax" element={<Tisax />} />
           {/* Company */}
           <Route path="company/about" element={<About />} />
+          <Route path="company/story" element={<Story />} />
+          <Route path="company/team" element={<Team />} />
+          <Route path="company/careers" element={<Careers />} />
+          <Route path="company/press" element={<Press />} />
+          <Route path="company/partners" element={<Partners />} />
+          <Route path="company/investors" element={<Investors />} />
           <Route path="company/contact" element={<Contact />} />
           <Route path="company/seed-pitch" element={<SeedPitch />} />
           {/* Non-sidebar routes */}
@@ -208,10 +262,31 @@ function App() {
           <Route path="tools/customer-success" element={<CustomerSuccess />} />
           <Route path="tools/reports" element={<Reports />} />
           {/* AI Agents & Velocity Tier routes */}
-          <Route path="velocity/dashboard" element={<AgentDashboard />} />
-          <Route path="velocity/onboarding" element={<VelocityOnboarding />} />
-          <Route path="velocity/integration" element={<IntegrationDashboard />} />
-          <Route path="velocity/evidence" element={<EvidenceReview />} />
+          <Route path="velocity/dashboard" element={
+            <LiveDataProvider>
+              <AgentDashboard />
+            </LiveDataProvider>
+          } />
+          <Route path="velocity/live" element={
+            <LiveDataProvider>
+              <LiveVelocityDashboard />
+            </LiveDataProvider>
+          } />
+          <Route path="velocity/onboarding" element={<VelocityOnboardingWizard />} />
+          <Route path="velocity/integration" element={
+            <LiveDataProvider>
+              <IntegrationDashboard />
+            </LiveDataProvider>
+          } />
+          <Route path="velocity/evidence" element={
+            <LiveDataProvider>
+              <EvidenceReview />
+            </LiveDataProvider>
+          } />
+          <Route path="velocity/creator" element={<CustomAgentCreator />} />
+          <Route path="velocity/docs" element={<VelocityDocumentation />} />
+          {/* Settings */}
+          <Route path="settings" element={<Settings />} />
         </Route>
         
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
@@ -229,10 +304,11 @@ function App() {
           <Route path="prism" element={<PrismDemo />} />
         </Route>
       </Routes>
-      <TourOverlay />
-      <Tooltip />
-    </Router>
-    </TourProvider>
+        <TourOverlay />
+        <Tooltip />
+      </Router>
+      </TourProvider>
+    </DateProvider>
   );
 }
 

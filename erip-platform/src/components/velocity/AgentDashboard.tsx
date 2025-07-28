@@ -14,9 +14,13 @@ import {
   Target,
   Plus,
   RefreshCw,
-  Settings
+  Settings,
+  Zap,
+  ArrowRight
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLiveData } from './LiveDataProvider';
+import { useNavigate } from 'react-router-dom';
 
 interface Agent {
   id: string;
@@ -40,6 +44,8 @@ interface RealtimeMetrics {
 }
 
 const AgentDashboard: React.FC = () => {
+  const navigate = useNavigate();
+  const { metrics: liveMetrics, agents: liveAgents, isConnected } = useLiveData();
   const [agents, setAgents] = useState<Agent[]>([]);
   const [metrics, setMetrics] = useState<RealtimeMetrics>({
     activeAgents: 0,
@@ -196,6 +202,14 @@ const AgentDashboard: React.FC = () => {
                 Add Agent
               </Button>
               <Button
+                onClick={() => navigate('/velocity/live')}
+                className="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white"
+              >
+                <Zap className="w-4 h-4 mr-2" />
+                Go Live
+                <ArrowRight className="w-4 h-4 ml-2" />
+              </Button>
+              <Button
                 onClick={fetchAgentsData}
                 disabled={refreshing}
                 variant="outline"
@@ -209,11 +223,19 @@ const AgentDashboard: React.FC = () => {
               </Button>
             </div>
           </div>
-          {metrics.lastUpdated && (
-            <p className="text-xs text-gray-500 mt-2">
-              Last updated: {new Date(metrics.lastUpdated).toLocaleTimeString()}
-            </p>
-          )}
+          <div className="flex items-center justify-between mt-2">
+            {metrics.lastUpdated && (
+              <p className="text-xs text-gray-500">
+                Last updated: {new Date(metrics.lastUpdated).toLocaleTimeString()}
+              </p>
+            )}
+            <div className="flex items-center space-x-2">
+              <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+              <span className="text-xs text-gray-500">
+                {isConnected ? 'Live data connected' : 'Live data disconnected'}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
