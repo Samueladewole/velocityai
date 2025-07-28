@@ -11,7 +11,11 @@ import {
   Shield,
   LayoutDashboard,
   Settings,
-  HelpCircle
+  HelpCircle,
+  Zap,
+  Bot,
+  FileCheck,
+  Globe
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useAppStore } from '@/store';
@@ -30,6 +34,24 @@ const navigationItems: NavItem[] = [{
   icon: <LayoutDashboard className="h-5 w-5" />,
   path: '/app',
   description: 'Executive overview'
+}, {
+  id: 'velocity-dashboard',
+  label: 'AI Agents',
+  icon: <Bot className="h-5 w-5" />,
+  path: '/velocity/dashboard',
+  description: 'Velocity AI Dashboard'
+}, {
+  id: 'velocity-evidence',
+  label: 'Evidence Review',
+  icon: <FileCheck className="h-5 w-5" />,
+  path: '/velocity/evidence',
+  description: 'Review AI Evidence'
+}, {
+  id: 'velocity-integration',
+  label: 'Integrations',
+  icon: <Globe className="h-5 w-5" />,
+  path: '/velocity/integration',
+  description: 'Platform Connections'
 }, {
   id: 'compass',
   label: 'COMPASS',

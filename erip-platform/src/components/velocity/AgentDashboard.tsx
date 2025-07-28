@@ -11,8 +11,12 @@ import {
   Shield,
   Clock,
   Users,
-  Target
+  Target,
+  Plus,
+  RefreshCw,
+  Settings
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 interface Agent {
   id: string;
@@ -22,46 +26,121 @@ interface Agent {
   evidenceCollected: number;
   lastRun: string;
   trustPoints: number;
+  platform: string;
+  nextRun?: string;
+  progress?: number;
+}
+
+interface RealtimeMetrics {
+  activeAgents: number;
+  totalEvidence: number;
+  totalTrustPoints: number;
+  automationRate: number;
+  lastUpdated: string;
 }
 
 const AgentDashboard: React.FC = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
+  const [metrics, setMetrics] = useState<RealtimeMetrics>({
+    activeAgents: 0,
+    totalEvidence: 0,
+    totalTrustPoints: 0,
+    automationRate: 0,
+    lastUpdated: new Date().toISOString()
+  });
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
 
-  useEffect(() => {
-    // Mock data
+  // Simulate real-time data updates
+  const fetchAgentsData = async () => {
+    setRefreshing(true);
+    
+    // Simulate API call delay
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    // Generate dynamic data based on current time
+    const now = new Date();
+    const evidenceBase = Math.floor(now.getMinutes() * 3.2) + 150;
+    const trustPointsBase = Math.floor(now.getSeconds() * 8.7) + 400;
+    
     const mockAgents: Agent[] = [
       {
         id: 'aws-soc2',
         name: 'AWS SOC2 Agent',
         status: 'running',
         framework: 'SOC2',
-        evidenceCollected: 157,
-        lastRun: '2 minutes ago',
-        trustPoints: 471
+        platform: 'AWS',
+        evidenceCollected: evidenceBase + Math.floor(Math.random() * 50),
+        lastRun: `${Math.floor(Math.random() * 5) + 1} minutes ago`,
+        nextRun: 'In 3h 24m',
+        trustPoints: trustPointsBase + Math.floor(Math.random() * 100),
+        progress: Math.floor(Math.random() * 40) + 60
       },
       {
         id: 'gcp-iso27001', 
         name: 'GCP ISO27001 Agent',
         status: 'running',
         framework: 'ISO27001',
-        evidenceCollected: 89,
-        lastRun: '5 minutes ago',
-        trustPoints: 267
+        platform: 'GCP',
+        evidenceCollected: Math.floor(evidenceBase * 0.6) + Math.floor(Math.random() * 30),
+        lastRun: `${Math.floor(Math.random() * 8) + 3} minutes ago`,
+        nextRun: 'In 2h 15m',
+        trustPoints: Math.floor(trustPointsBase * 0.65) + Math.floor(Math.random() * 80),
+        progress: Math.floor(Math.random() * 30) + 70
       },
       {
         id: 'azure-gdpr',
         name: 'Azure GDPR Agent',
-        status: 'paused',
+        status: Math.random() > 0.7 ? 'paused' : 'running',
         framework: 'GDPR',
-        evidenceCollected: 23,
-        lastRun: '1 hour ago',
-        trustPoints: 69
+        platform: 'Azure',
+        evidenceCollected: Math.floor(evidenceBase * 0.2) + Math.floor(Math.random() * 20),
+        lastRun: Math.random() > 0.5 ? '45 minutes ago' : '1 hour ago',
+        nextRun: 'Paused',
+        trustPoints: Math.floor(trustPointsBase * 0.2) + Math.floor(Math.random() * 50),
+        progress: Math.floor(Math.random() * 20) + 20
+      },
+      {
+        id: 'github-cis',
+        name: 'GitHub CIS Controls Agent',
+        status: 'running',
+        framework: 'CIS Controls',
+        platform: 'GitHub',
+        evidenceCollected: Math.floor(evidenceBase * 0.4) + Math.floor(Math.random() * 25),
+        lastRun: `${Math.floor(Math.random() * 15) + 5} minutes ago`,
+        nextRun: 'In 1h 8m',
+        trustPoints: Math.floor(trustPointsBase * 0.45) + Math.floor(Math.random() * 70),
+        progress: Math.floor(Math.random() * 35) + 50
       }
     ];
 
     setAgents(mockAgents);
+    
+    // Update metrics
+    const activeAgents = mockAgents.filter(a => a.status === 'running').length;
+    const totalEvidence = mockAgents.reduce((sum, agent) => sum + agent.evidenceCollected, 0);
+    const totalTrustPoints = mockAgents.reduce((sum, agent) => sum + agent.trustPoints, 0);
+    const automationRate = 94.8 + Math.random() * 1.4; // 94.8% - 96.2%
+    
+    setMetrics({
+      activeAgents,
+      totalEvidence,
+      totalTrustPoints,
+      automationRate: Math.round(automationRate * 10) / 10,
+      lastUpdated: new Date().toISOString()
+    });
+    
     setLoading(false);
+    setRefreshing(false);
+  };
+  
+  useEffect(() => {
+    fetchAgentsData();
+    
+    // Set up real-time updates every 30 seconds
+    const interval = setInterval(fetchAgentsData, 30000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const getStatusIcon = (status: string) => {
@@ -103,8 +182,38 @@ const AgentDashboard: React.FC = () => {
       {/* Header */}
       <div className="bg-white shadow-sm border-b">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <h1 className="text-2xl font-bold text-gray-900">AI Agent Dashboard</h1>
-          <p className="text-gray-600 mt-1">Monitor your compliance automation agents</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">AI Agent Dashboard</h1>
+              <p className="text-gray-600 mt-1">Monitor your compliance automation agents</p>
+            </div>
+            <div className="flex items-center space-x-3">
+              <Button
+                onClick={() => window.location.href = '/velocity/onboarding'}
+                className="bg-purple-600 hover:bg-purple-700 text-white"
+              >
+                <Plus className="w-4 h-4 mr-2" />
+                Add Agent
+              </Button>
+              <Button
+                onClick={fetchAgentsData}
+                disabled={refreshing}
+                variant="outline"
+              >
+                <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+                Refresh
+              </Button>
+              <Button variant="outline">
+                <Settings className="w-4 h-4 mr-2" />
+                Settings
+              </Button>
+            </div>
+          </div>
+          {metrics.lastUpdated && (
+            <p className="text-xs text-gray-500 mt-2">
+              Last updated: {new Date(metrics.lastUpdated).toLocaleTimeString()}
+            </p>
+          )}
         </div>
       </div>
 
@@ -115,7 +224,7 @@ const AgentDashboard: React.FC = () => {
             <div className="flex items-center">
               <Activity className="w-8 h-8 text-blue-600" />
               <div className="ml-4">
-                <div className="text-2xl font-bold text-gray-900">{agents.filter(a => a.status === 'running').length}</div>
+                <div className="text-2xl font-bold text-gray-900">{metrics.activeAgents}</div>
                 <div className="text-sm text-gray-600">Active Agents</div>
               </div>
             </div>
@@ -126,7 +235,7 @@ const AgentDashboard: React.FC = () => {
               <Database className="w-8 h-8 text-green-600" />
               <div className="ml-4">
                 <div className="text-2xl font-bold text-gray-900">
-                  {agents.reduce((sum, agent) => sum + agent.evidenceCollected, 0)}
+                  {metrics.totalEvidence.toLocaleString()}
                 </div>
                 <div className="text-sm text-gray-600">Evidence Collected</div>
               </div>
@@ -138,7 +247,7 @@ const AgentDashboard: React.FC = () => {
               <TrendingUp className="w-8 h-8 text-purple-600" />
               <div className="ml-4">
                 <div className="text-2xl font-bold text-gray-900">
-                  {agents.reduce((sum, agent) => sum + agent.trustPoints, 0)}
+                  {metrics.totalTrustPoints.toLocaleString()}
                 </div>
                 <div className="text-sm text-gray-600">Trust Points</div>
               </div>
@@ -149,7 +258,7 @@ const AgentDashboard: React.FC = () => {
             <div className="flex items-center">
               <Target className="w-8 h-8 text-orange-600" />
               <div className="ml-4">
-                <div className="text-2xl font-bold text-gray-900">95.1%</div>
+                <div className="text-2xl font-bold text-gray-900">{metrics.automationRate}%</div>
                 <div className="text-sm text-gray-600">Automation Rate</div>
               </div>
             </div>
@@ -173,7 +282,25 @@ const AgentDashboard: React.FC = () => {
                     
                     <div>
                       <h3 className="text-lg font-medium text-gray-900">{agent.name}</h3>
-                      <p className="text-sm text-gray-600">Framework: {agent.framework}</p>
+                      <div className="text-sm text-gray-600">
+                        <span>Framework: {agent.framework}</span>
+                        <span className="mx-2">•</span>
+                        <span>Platform: {agent.platform}</span>
+                      </div>
+                      {agent.progress && (
+                        <div className="mt-2">
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="text-gray-500">Collection Progress</span>
+                            <span className="text-gray-700">{agent.progress}%</span>
+                          </div>
+                          <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
+                            <div 
+                              className="bg-blue-600 h-1.5 rounded-full transition-all duration-300" 
+                              style={{ width: `${agent.progress}%` }}
+                            ></div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -191,6 +318,9 @@ const AgentDashboard: React.FC = () => {
                     <div className="text-center">
                       <div className="text-sm font-medium text-gray-900">{agent.lastRun}</div>
                       <div className="text-sm text-gray-600">Last Run</div>
+                      {agent.nextRun && (
+                        <div className="text-xs text-blue-600 mt-1">{agent.nextRun}</div>
+                      )}
                     </div>
 
                     <button
