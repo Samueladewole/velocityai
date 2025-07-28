@@ -20,7 +20,8 @@ import {
   Calculator,
   Video,
   MessageSquare,
-  Phone
+  Phone,
+  Clock
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -33,6 +34,7 @@ interface NavigationHeaderProps {
 export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [platformOpen, setPlatformOpen] = useState(false);
+  const [velocityOpen, setVelocityOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
@@ -76,6 +78,30 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
         { name: 'Share Trust Score', href: '/trust-score-share', icon: ExternalLink },
         { name: 'Public Profiles', href: '/public-profiles', icon: Users },
         { name: 'Sales Acceleration', href: '/sales-acceleration', icon: Zap }
+      ]
+    }
+  ];
+
+  const velocityItems = [
+    {
+      category: 'AI Agents',
+      description: '95% compliance automation with AI-powered evidence collection',
+      items: [
+        { name: 'Velocity Overview', href: '/velocity', icon: Award },
+        { name: 'Agent Dashboard', href: '/velocity/dashboard', icon: Zap },
+        { name: '30-Min Onboarding', href: '/velocity/onboarding', icon: Clock },
+        { name: 'Evidence Review', href: '/velocity/evidence', icon: FileCheck },
+        { name: 'Integration Hub', href: '/velocity/integration', icon: Globe }
+      ]
+    },
+    {
+      category: 'Velocity Tiers',
+      description: 'Pricing designed for fast-growing AI startups',
+      items: [
+        { name: 'Velocity Pricing', href: '/velocity/pricing', icon: Calculator },
+        { name: 'Starter ($999/mo)', href: '/velocity/pricing', icon: Zap },
+        { name: 'Growth ($2,499/mo)', href: '/velocity/pricing', icon: Building2 },
+        { name: 'Scale ($4,999/mo)', href: '/velocity/pricing', icon: Award }
       ]
     }
   ];
@@ -180,6 +206,56 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                               to={item.href}
                               className="flex items-center gap-2 px-2 py-1 text-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 rounded transition-colors"
                               onClick={() => setPlatformOpen(false)}
+                            >
+                              <item.icon className="h-4 w-4" />
+                              {item.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Velocity Dropdown */}
+            <div 
+              className="relative group"
+              onMouseEnter={() => setVelocityOpen(true)}
+              onMouseLeave={() => setVelocityOpen(false)}
+            >
+              <button
+                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-purple-700 hover:text-purple-900 transition-colors relative"
+                onClick={() => setVelocityOpen(!velocityOpen)}
+              >
+                <span className="relative">
+                  Velocity
+                  <span className="absolute -top-1 -right-2 px-1 py-0.5 text-xs bg-purple-100 text-purple-600 rounded-full font-bold">
+                    NEW
+                  </span>
+                </span>
+                <ChevronDown className="h-4 w-4" />
+              </button>
+              
+              {velocityOpen && (
+                <div 
+                  className="absolute top-full left-0 mt-0 pt-2 w-screen max-w-3xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="bg-white border border-purple-200 rounded-lg shadow-xl p-6 grid grid-cols-2 gap-6 bg-gradient-to-br from-purple-50 to-pink-50">
+                  {velocityItems.map((category) => (
+                    <div key={category.category}>
+                      <h3 className="text-sm font-semibold text-purple-900 mb-1">{category.category}</h3>
+                      <p className="text-xs text-purple-600 mb-3">{category.description}</p>
+                      <ul className="space-y-2">
+                        {category.items.map((item) => (
+                          <li key={item.name}>
+                            <Link
+                              to={item.href}
+                              className="flex items-center gap-2 px-2 py-1 text-sm text-purple-700 hover:text-purple-900 hover:bg-purple-100 rounded transition-colors"
+                              onClick={() => setVelocityOpen(false)}
                             >
                               <item.icon className="h-4 w-4" />
                               {item.name}
@@ -417,6 +493,56 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               >
                 Platform
               </Link>
+              <div className="space-y-2">
+                <div className="px-3 py-2 text-sm font-semibold text-purple-900 border-b border-purple-200 bg-purple-50 rounded-lg flex items-center gap-2">
+                  <span>Velocity</span>
+                  <span className="px-1 py-0.5 text-xs bg-purple-100 text-purple-600 rounded-full font-bold">
+                    NEW
+                  </span>
+                </div>
+                <Link
+                  to="/velocity"
+                  className="block px-3 py-2 text-sm text-purple-700 hover:text-purple-900 font-semibold"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Velocity Overview
+                </Link>
+                <Link
+                  to="/velocity/pricing"
+                  className="block px-3 py-2 text-sm text-purple-700 hover:text-purple-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Velocity Pricing
+                </Link>
+                <Link
+                  to="/velocity/onboarding"
+                  className="block px-3 py-2 text-sm text-purple-700 hover:text-purple-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  30-Min Onboarding
+                </Link>
+                <Link
+                  to="/velocity/dashboard"
+                  className="block px-3 py-2 text-sm text-purple-700 hover:text-purple-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Agent Dashboard
+                </Link>
+                <Link
+                  to="/velocity/evidence"
+                  className="block px-3 py-2 text-sm text-purple-700 hover:text-purple-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Evidence Review
+                </Link>
+                <Link
+                  to="/velocity/integration"
+                  className="block px-3 py-2 text-sm text-purple-700 hover:text-purple-900"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Integration Hub
+                </Link>
+              </div>
               <Link
                 to="/solutions"
                 className="block px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900"

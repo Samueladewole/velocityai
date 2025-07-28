@@ -104,11 +104,11 @@ export const SeedPitch: React.FC = () => {
           <div className="flex items-center gap-8 text-sm text-slate-600">
             <div className="flex items-center gap-2">
               <Calendar className="h-4 w-4" />
-              <span>January 2025</span>
+              <span>July 2025</span>
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
-              <span>Amsterdam, Netherlands</span>
+              <span>Malmö, Sweden</span>
             </div>
             <div className="flex items-center gap-2">
               <Briefcase className="h-4 w-4" />

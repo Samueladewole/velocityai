@@ -68,7 +68,7 @@ export const LandingEnhanced: React.FC = () => {
   const navigate = useNavigate();
   const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
   const [activePhase, setActivePhase] = useState(1);
-  const [selectedCategory, setSelectedCategory] = useState('core');
+  const [selectedCategory, setSelectedCategory] = useState('velocity');
   const [animatedTrustScore, setAnimatedTrustScore] = useState(0);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [trustedByCount, setTrustedByCount] = useState(0);
@@ -76,6 +76,45 @@ export const LandingEnhanced: React.FC = () => {
 
   // Trust Platform Components organized by category
   const componentCategories = {
+    velocity: {
+      title: 'AI Agents & Velocity Tier',
+      description: 'AI-powered compliance automation for fast-growing companies',
+      components: [
+        {
+          id: 'velocity-agents',
+          name: 'AI AGENTS',
+          title: 'Automated Evidence Collection',
+          icon: Zap,
+          color: 'from-purple-500 to-pink-600',
+          description: '95% automation with 3x Trust Points for AI-collected evidence',
+          trustEquity: 98,
+          route: '/velocity/dashboard',
+          isNew: true
+        },
+        {
+          id: 'velocity-onboarding',
+          name: 'RAPID ONBOARDING',
+          title: '30-Minute Setup',
+          icon: Clock,
+          color: 'from-blue-500 to-cyan-600',
+          description: 'From signup to Trust Score in under 30 minutes',
+          trustEquity: 96,
+          route: '/velocity/onboarding',
+          isNew: true
+        },
+        {
+          id: 'velocity-integration',
+          name: 'PLATFORM SYNC',
+          title: 'ERIP Integration',
+          icon: Network,
+          color: 'from-green-500 to-teal-600',
+          description: 'Real-time sync with Trust Equity, Compass, and Atlas',
+          trustEquity: 94,
+          route: '/velocity/integration',
+          isNew: true
+        }
+      ]
+    },
     core: {
       title: 'Core Security Platform',
       description: 'Essential security and compliance tools',
@@ -406,6 +445,28 @@ export const LandingEnhanced: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
 
+      {/* Top Announcement Banner */}
+      <div className="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-3 px-4">
+        <div className="max-w-7xl mx-auto flex items-center justify-center text-center">
+          <span className="font-semibold mr-2">🚀 NEW:</span>
+          <span className="mr-4">AI Agents & Velocity Tier - 95% Automation in 30 Minutes</span>
+          <div className="flex gap-2">
+            <button
+              onClick={() => navigate('/velocity/onboarding')}
+              className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-sm font-medium transition-colors"
+            >
+              Start Now →
+            </button>
+            <button
+              onClick={() => navigate('/velocity/pricing')}
+              className="bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded-full text-sm font-medium transition-colors"
+            >
+              Pricing
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Enhanced Hero Section */}
       <section className="relative pt-20 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-indigo-600/5 to-purple-600/5" />
@@ -493,6 +554,41 @@ export const LandingEnhanced: React.FC = () => {
                   <TrendingUp className="h-3 w-3" />
                   <span>Updating in real-time</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Velocity Tier Announcement */}
+            <div className="mt-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl p-6 text-white text-center">
+              <div className="flex items-center justify-center gap-2 mb-3">
+                <Badge className="bg-white/20 text-white font-bold px-3 py-1">
+                  🚀 NEW
+                </Badge>
+                <span className="text-lg font-semibold">AI Agents & Velocity Tier</span>
+              </div>
+              <h3 className="text-2xl font-bold mb-2">95% Compliance Automation in 30 Minutes</h3>
+              <p className="text-purple-100 mb-4 max-w-2xl mx-auto">
+                AI agents automatically collect evidence across cloud platforms with 3x Trust Points multiplier. 
+                From signup to Trust Score in under 30 minutes.
+              </p>
+              <div className="flex items-center justify-center gap-4">
+                <Button 
+                  size="lg"
+                  variant="secondary"
+                  onClick={() => navigate('/velocity/onboarding')}
+                  className="bg-white text-purple-600 hover:bg-gray-100 font-semibold px-6 py-3"
+                >
+                  <Zap className="h-5 w-5 mr-2" />
+                  Start 30-Min Onboarding
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  onClick={() => navigate('/velocity/pricing')}
+                  className="border-white/30 text-white hover:bg-white/10 px-6 py-3"
+                >
+                  <DollarSign className="h-5 w-5 mr-2" />
+                  View Pricing
+                </Button>
               </div>
             </div>
           </div>
@@ -703,9 +799,9 @@ export const LandingEnhanced: React.FC = () => {
 
           {/* Category Tabs */}
           <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="mb-12">
-            <TabsList className="grid w-full grid-cols-4 mb-8">
+            <TabsList className="grid w-full grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mb-8">
               {Object.entries(componentCategories).map(([key, category]) => (
-                <TabsTrigger key={key} value={key} className="text-sm">
+                <TabsTrigger key={key} value={key} className="text-xs md:text-sm px-2 py-2">
                   {category.title}
                 </TabsTrigger>
               ))}
@@ -721,7 +817,7 @@ export const LandingEnhanced: React.FC = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                   {category.components.map((component) => {
                     const IconComponent = component.icon;
-                    const isNew = component.id === 'qie' || component.id === 'ai-governance' || component.id === 'framework-manager';
+                    const isNew = component.isNew || component.id === 'qie' || component.id === 'ai-governance' || component.id === 'framework-manager';
                     const isPopular = component.trustEquity >= 90;
                     
                     return (

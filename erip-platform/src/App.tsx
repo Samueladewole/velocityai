@@ -78,6 +78,13 @@ import { PrivacyManagement as PrivacyManagementSolution } from '@/pages/solution
 import { FinancialServices } from '@/pages/solutions/FinancialServices';
 import { Healthcare } from '@/pages/solutions/Healthcare';
 import { Technology } from '@/pages/solutions/Technology';
+// AI Agents & Velocity Tier components
+import VelocityLanding from '@/components/velocity/VelocityLanding';
+import VelocityPricing from '@/components/velocity/VelocityPricing';
+import VelocityOnboarding from '@/components/velocity/VelocityOnboarding';
+import AgentDashboard from '@/components/velocity/AgentDashboard';
+import IntegrationDashboard from '@/components/velocity/IntegrationDashboard';
+import EvidenceReview from '@/components/velocity/EvidenceReview';
 // Other pages
 import { PublicProfiles } from '@/pages/PublicProfiles';
 // Pricing pages
@@ -143,6 +150,8 @@ function App() {
           <Route path="public-profiles" element={<PublicProfiles />} />
           {/* Pricing */}
           <Route path="pricing" element={<Pricing />} />
+          <Route path="velocity" element={<VelocityLanding />} />
+          <Route path="velocity/pricing" element={<VelocityPricing />} />
           {/* Resources */}
           <Route path="docs" element={<Docs />} />
           <Route path="academy" element={<Academy />} />
@@ -198,6 +207,11 @@ function App() {
           <Route path="tools/experts" element={<ExpertNetwork />} />
           <Route path="tools/customer-success" element={<CustomerSuccess />} />
           <Route path="tools/reports" element={<Reports />} />
+          {/* AI Agents & Velocity Tier routes */}
+          <Route path="velocity/dashboard" element={<AgentDashboard />} />
+          <Route path="velocity/onboarding" element={<VelocityOnboarding />} />
+          <Route path="velocity/integration" element={<IntegrationDashboard />} />
+          <Route path="velocity/evidence" element={<EvidenceReview />} />
         </Route>
         
         {/* Full Stack Trust Platform routes - TODO: Implement these components */}
