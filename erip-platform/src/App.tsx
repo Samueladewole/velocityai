@@ -170,8 +170,8 @@ function App() {
 
   console.log('App rendering with store, subdomain:', subdomain);
   
-  // If on velocity subdomain, show Velocity-specific app
-  if (subdomain === 'velocity') {
+  // If on velocity subdomain or velocity dev paths, show Velocity-specific app
+  if (subdomain === 'velocity' || subdomain === 'velocity-dev') {
     return (
       <DateProvider>
         <Router>
