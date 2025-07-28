@@ -13,7 +13,8 @@ import {
   MessageSquare,
   ChevronRight,
   Copy,
-  Download
+  Download,
+  Shield
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -46,13 +47,14 @@ const CustomAgentCreator: React.FC = () => {
     {
       id: '1',
       type: 'assistant',
-      content: "👋 Hi! I'm your AI Agent Creator. I can help you build custom compliance agents using natural language. Just describe what you need!\n\nFor example:\n• \"Create an AWS agent for SOC2 compliance that checks IAM policies every 4 hours\"\n• \"I need a GitHub agent that monitors code security for ISO27001\"\n• \"Build an Azure agent for GDPR data protection scanning\"",
+      content: "👋 Hi! I'm your AI Agent Creator. I can help you build custom compliance agents using natural language. Just describe what you need!\n\nFor example:\n• \"Create an AWS agent for SOC2 compliance that checks IAM policies every 4 hours\"\n• \"I need a GitHub agent that monitors code security for ISO27001\"\n• \"Build an Azure agent for GDPR data protection scanning\"\n• \"Set up NIS2 cybersecurity monitoring for critical infrastructure\"\n• \"Create a DORA operational resilience agent for financial services\"\n• \"Build an EU AI Act compliance agent for high-risk AI systems\"",
       timestamp: new Date(),
       suggestions: [
         "Create an AWS SOC2 agent",
-        "Build a GitHub security scanner", 
-        "Set up Azure GDPR monitoring",
-        "Create a multi-cloud agent"
+        "Build NIS2 cybersecurity monitoring", 
+        "Set up DORA financial compliance",
+        "Create EU AI Act agent",
+        "Build multi-framework agent"
       ]
     }
   ]);
@@ -88,6 +90,9 @@ const CustomAgentCreator: React.FC = () => {
     let framework = 'soc2';
     if (input.includes('iso27001') || input.includes('iso 27001')) framework = 'iso27001';
     else if (input.includes('gdpr')) framework = 'gdpr';
+    else if (input.includes('nis2') || input.includes('nis 2')) framework = 'nis2';
+    else if (input.includes('dora') || input.includes('digital operational resilience')) framework = 'dora';
+    else if (input.includes('ai act') || input.includes('eu ai act') || input.includes('artificial intelligence act')) framework = 'eu_ai_act';
     else if (input.includes('cis') || input.includes('controls')) framework = 'cis';
     else if (input.includes('nist')) framework = 'nist';
     else if (input.includes('hipaa')) framework = 'hipaa';
@@ -124,17 +129,31 @@ const CustomAgentCreator: React.FC = () => {
         soc2: ['CC6.1 - IAM Policies', 'CC6.2 - Access Reviews', 'CC6.3 - Multi-Factor Auth', 'CC7.1 - CloudTrail Logging'],
         iso27001: ['A.9.1.1 - Access Control', 'A.12.4.1 - Event Logging', 'A.13.1.1 - Network Controls'],
         gdpr: ['Art. 32 - Security Measures', 'Art. 30 - Records of Processing', 'Art. 25 - Data Protection by Design'],
+        nis2: ['7.1 - Cybersecurity Risk Management', '7.2 - Security Policies', '7.3 - Incident Handling', '7.4 - Business Continuity'],
+        dora: ['8.1 - ICT Risk Management', '8.2 - Third-party Dependencies', '8.3 - Incident Reporting', '8.4 - Operational Resilience'],
+        eu_ai_act: ['9.1 - Risk Assessment', '9.2 - Data Governance', '9.3 - Transparency Requirements', '9.4 - Human Oversight'],
         cis: ['CIS 1.1 - Root Access Keys', 'CIS 1.2 - MFA for Root', 'CIS 2.1 - CloudTrail', 'CIS 3.1 - VPC Flow Logs']
       },
       github: {
         soc2: ['CC8.1 - Change Management', 'CC6.1 - Access Control', 'CC7.1 - System Monitoring'],
         iso27001: ['A.14.2.1 - Secure Development', 'A.9.2.1 - User Provisioning', 'A.12.6.1 - Vulnerability Management'],
+        nis2: ['7.1 - Supply Chain Security', '7.2 - Vulnerability Management', '7.3 - Code Security'],
+        eu_ai_act: ['9.1 - AI System Documentation', '9.2 - Model Transparency', '9.3 - Bias Testing'],
         cis: ['CIS 1 - Asset Inventory', 'CIS 3 - Vulnerability Management', 'CIS 5 - Secure Configuration']
       },
       azure: {
         soc2: ['CC6.1 - Identity Management', 'CC7.1 - Activity Logging', 'CC6.7 - Data Classification'],
         gdpr: ['Art. 32 - Technical Measures', 'Art. 30 - Processing Records', 'Art. 35 - Impact Assessment'],
+        nis2: ['7.1 - Identity Access Management', '7.2 - Network Security', '7.3 - Incident Response'],
+        dora: ['8.1 - Cloud Resilience', '8.2 - Data Recovery', '8.3 - Service Continuity'],
+        eu_ai_act: ['9.1 - AI Service Monitoring', '9.2 - Algorithmic Accountability', '9.3 - Risk Mitigation'],
         iso27001: ['A.9.1.1 - Access Policies', 'A.18.1.1 - Legal Requirements', 'A.12.4.1 - Event Logging']
+      },
+      gcp: {
+        soc2: ['CC6.1 - IAM Controls', 'CC7.1 - Cloud Logging', 'CC6.3 - Multi-Factor Authentication'],
+        nis2: ['7.1 - Cloud Security Posture', '7.2 - Resource Monitoring', '7.3 - Access Controls'],
+        dora: ['8.1 - Service Reliability', '8.2 - Disaster Recovery', '8.3 - Incident Management'],
+        eu_ai_act: ['9.1 - ML Model Governance', '9.2 - AI Ethics Compliance', '9.3 - Automated Decision Monitoring']
       }
     };
 
@@ -172,9 +191,20 @@ const CustomAgentCreator: React.FC = () => {
     const descriptions: { [key: string]: string } = {
       'aws_soc2': 'Monitors IAM policies, access controls, and logging configurations to ensure SOC 2 compliance across your AWS infrastructure.',
       'aws_iso27001': 'Scans security configurations, network controls, and access management to meet ISO 27001 requirements.',
+      'aws_nis2': 'Implements NIS2 cybersecurity risk management, incident detection, and business continuity monitoring for critical infrastructure.',
+      'aws_dora': 'Monitors ICT operational resilience, third-party dependencies, and incident response capabilities for financial services.',
+      'aws_eu_ai_act': 'Ensures AI risk assessment, data governance, and transparency requirements compliance for high-risk AI systems.',
       'github_soc2': 'Reviews code security policies, access controls, and change management processes for SOC 2 compliance.',
+      'github_nis2': 'Monitors software supply chain security, vulnerability management, and secure development practices.',
+      'github_eu_ai_act': 'Tracks AI system documentation, model transparency, and bias testing for AI development compliance.',
       'azure_gdpr': 'Analyzes data protection measures, processing activities, and privacy controls for GDPR compliance.',
-      'gcp_cis': 'Implements CIS security benchmarks for Google Cloud Platform infrastructure and services.'
+      'azure_nis2': 'Monitors identity access management, network security, and incident response for critical infrastructure.',
+      'azure_dora': 'Ensures cloud resilience, data recovery, and service continuity for financial sector operations.',
+      'azure_eu_ai_act': 'Monitors AI service operations, algorithmic accountability, and risk mitigation measures.',
+      'gcp_cis': 'Implements CIS security benchmarks for Google Cloud Platform infrastructure and services.',
+      'gcp_nis2': 'Monitors cloud security posture, resource configurations, and access controls for NIS2 compliance.',
+      'gcp_dora': 'Ensures service reliability, disaster recovery, and incident management for operational resilience.',
+      'gcp_eu_ai_act': 'Governs ML model operations, AI ethics compliance, and automated decision monitoring.'
     };
 
     return descriptions[`${platform}_${framework}`] || 'Provides automated compliance monitoring and evidence collection.';
@@ -188,10 +218,10 @@ const CustomAgentCreator: React.FC = () => {
 
   const calculateAutomationLevel = (platform: string, framework: string): number => {
     const automationMap: { [key: string]: number } = {
-      'aws_soc2': 95, 'aws_iso27001': 92, 'aws_gdpr': 88,
-      'github_soc2': 90, 'github_iso27001': 87, 'github_cis': 94,
-      'azure_soc2': 91, 'azure_gdpr': 89, 'azure_iso27001': 85,
-      'gcp_soc2': 93, 'gcp_iso27001': 88, 'gcp_cis': 96
+      'aws_soc2': 95, 'aws_iso27001': 92, 'aws_gdpr': 88, 'aws_nis2': 93, 'aws_dora': 89, 'aws_eu_ai_act': 82,
+      'github_soc2': 90, 'github_iso27001': 87, 'github_cis': 94, 'github_nis2': 91, 'github_eu_ai_act': 85,
+      'azure_soc2': 91, 'azure_gdpr': 89, 'azure_iso27001': 85, 'azure_nis2': 90, 'azure_dora': 87, 'azure_eu_ai_act': 83,
+      'gcp_soc2': 93, 'gcp_iso27001': 88, 'gcp_cis': 96, 'gcp_nis2': 92, 'gcp_dora': 88, 'gcp_eu_ai_act': 84
     };
 
     return automationMap[`${platform}_${framework}`] || 85;
@@ -288,21 +318,44 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
   const deployAgent = async () => {
     if (!generatedConfig) return;
 
-    // Simulate deployment
-    const deployMessage: ChatMessage = {
-      id: Date.now().toString(),
-      type: 'system',
-      content: `🚀 Agent "${generatedConfig.name}" has been successfully deployed!\n\n✅ Configuration saved\n✅ Credentials configured\n✅ Schedule activated\n✅ Initial scan started\n\nYour agent will begin collecting evidence in the next few minutes. You can monitor its progress in the Agent Dashboard.`,
-      timestamp: new Date()
-    };
+    try {
+      // Import API service dynamically
+      const { apiService } = await import('@/services/api');
+      
+      // Create agent using real backend API
+      const agentData = {
+        name: generatedConfig.name,
+        description: generatedConfig.description,
+        platform: generatedConfig.platform,
+        framework: generatedConfig.framework,
+        automation_level: generatedConfig.automationLevel
+      };
 
-    setMessages(prev => [...prev, deployMessage]);
-    setShowConfigPanel(false);
-    
-    // Redirect to dashboard after 3 seconds
-    setTimeout(() => {
-      window.location.href = '/velocity/dashboard';
-    }, 3000);
+      const createdAgent = await apiService.createAgent(agentData);
+
+      const deployMessage: ChatMessage = {
+        id: Date.now().toString(),
+        type: 'system',
+        content: `🚀 Agent "${generatedConfig.name}" has been successfully deployed!\n\n✅ Agent ID: ${createdAgent.id}\n✅ Evidence items: ${createdAgent.evidence_count}\n✅ Success rate: ${createdAgent.success_rate}%\n✅ Status: ${createdAgent.status}\n\nYour agent is now active and collecting compliance evidence. You can monitor its progress in the Agent Dashboard.`,
+        timestamp: new Date()
+      };
+
+      setMessages(prev => [...prev, deployMessage]);
+      setShowConfigPanel(false);
+      
+      // Redirect to dashboard after 3 seconds
+      setTimeout(() => {
+        window.location.href = '/velocity/dashboard';
+      }, 3000);
+    } catch (error: any) {
+      const errorMessage: ChatMessage = {
+        id: Date.now().toString(),
+        type: 'system',
+        content: `❌ Failed to deploy agent: ${error.message}\n\nPlease make sure you're logged in and try again.`,
+        timestamp: new Date()
+      };
+      setMessages(prev => [...prev, errorMessage]);
+    }
   };
 
   return (
@@ -329,7 +382,7 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
                 </div>
                 <div className="text-right">
                   <div className="text-xs text-blue-100">Powered by</div>
-                  <div className="text-sm font-semibold">Claude Opus</div>
+                  <div className="text-sm font-semibold">Most Intelligent Model</div>
                 </div>
               </div>
             </div>

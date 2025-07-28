@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ScrollToTop } from '@/components/ScrollToTop';
+import { FEATURES, ENV } from '@/config/features';
 import { LandingEnhanced } from '@/pages/LandingEnhanced';
 // import { TestLanding } from '@/pages/TestLanding';
 import { IndustrySelection } from '@/pages/IndustrySelection';
@@ -127,7 +128,7 @@ import { Pricing } from '@/pages/Pricing';
 // import { AssessmentMarketplace } from '@/pages/AssessmentMarketplace';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 import { DateProvider } from '@/components/shared/DateProvider';
-// import { CurrencyProvider } from '@/contexts/CurrencyContext';
+import { CurrencyProvider } from '@/contexts/CurrencyContext';
 import VelocityApp from './VelocityApp';
 
 // Add subdomain detection
@@ -149,6 +150,25 @@ const getSubdomain = () => {
 };
 
 function App() {
+  // Domain redirect strategy: Hide ERIP, Launch Velocity
+  useEffect(() => {
+    if (FEATURES.REDIRECT_TO_VELOCITY && ENV.isProduction) {
+      const hostname = window.location.hostname;
+      
+      // Redirect main domain to Velocity subdomain
+      if (hostname === 'eripapp.com' || hostname === 'www.eripapp.com') {
+        window.location.href = 'https://velocity.eripapp.com';
+        return;
+      }
+    }
+    
+    // In development, redirect root paths to Velocity if in Velocity-only mode
+    if (FEATURES.VELOCITY_ONLY && window.location.pathname === '/' && !window.location.pathname.startsWith('/velocity')) {
+      window.location.href = '/velocity';
+      return;
+    }
+  }, []);
+
   const { setTheme } = useAppStore();
   const { login, isAuthenticated } = useAuthStore();
   const subdomain = getSubdomain();
@@ -173,25 +193,28 @@ function App() {
   // If on velocity subdomain, show Velocity-specific app
   if (subdomain === 'velocity') {
     return (
-      <DateProvider>
-        <Router>
-          <ScrollToTop />
-          <VelocityApp />
-        </Router>
-      </DateProvider>
+      <CurrencyProvider>
+        <DateProvider>
+          <Router>
+            <ScrollToTop />
+            <VelocityApp />
+          </Router>
+        </DateProvider>
+      </CurrencyProvider>
     );
   }
   
   // Otherwise show regular ERIP app
   return (
-    <DateProvider>
-      <TourProvider>
-        <Router>
-          <ScrollToTop />
-          <Routes>
+    <CurrencyProvider>
+      <DateProvider>
+        <TourProvider>
+          <Router>
+            <ScrollToTop />
+            <Routes>
         {/* Public routes with comprehensive navigation */}
         <Route path="/" element={<PublicLayout />}>
-          <Route index element={<LandingEnhanced />} />
+          <Route index element={FEATURES.VELOCITY_ONLY ? <VelocityLanding /> : <LandingEnhanced />} />
           <Route path="platform" element={<PlatformCapabilities />} />
           <Route path="onboarding" element={<Onboarding />} />
           <Route path="demo" element={<DayInTheLifeDemo />} />
@@ -342,6 +365,7 @@ function App() {
       </Router>
       </TourProvider>
     </DateProvider>
+    </CurrencyProvider>
   );
 }
 

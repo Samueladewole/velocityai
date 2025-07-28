@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Check, Zap, Shield, Target, Award, ChevronRight, Users, Database, Cloud, Headphones } from 'lucide-react';
+import { useCurrency } from '@/contexts/CurrencyContext';
+import VelocityFooter from './VelocityFooter';
 
 interface TierConfig {
   name: string;
@@ -28,6 +30,7 @@ const VelocityPricing: React.FC = () => {
   const [tiers, setTiers] = useState<TierData>({});
   const [loading, setLoading] = useState(true);
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
+  const { formatAmount } = useCurrency();
 
   // Mock data - replace with API call
   useEffect(() => {
@@ -129,11 +132,7 @@ const VelocityPricing: React.FC = () => {
   };
 
   const formatPrice = (price: number) => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0
-    }).format(price);
+    return formatAmount(price);
   };
 
   const getTierIcon = (tierKey: string) => {
@@ -463,6 +462,9 @@ const VelocityPricing: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Footer */}
+      <VelocityFooter />
     </div>
   );
 };

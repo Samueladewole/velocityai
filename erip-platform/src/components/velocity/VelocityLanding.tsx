@@ -14,6 +14,7 @@ import {
   Target,
   Star
 } from 'lucide-react';
+import VelocityFooter from './VelocityFooter';
 
 const VelocityLanding: React.FC = () => {
   const navigate = useNavigate();
@@ -317,6 +318,9 @@ const VelocityLanding: React.FC = () => {
           </div>
         </div>
       </section>
+      
+      {/* Footer */}
+      <VelocityFooter />
     </div>
   );
 };

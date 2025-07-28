@@ -3,14 +3,24 @@ import { Check, X, ArrowRight, Zap, Shield, Building2, Sparkles } from 'lucide-r
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
+import { useCurrency } from '@/contexts/CurrencyContext';
+import { CurrencySelector } from '@/components/CurrencySelector';
 
 export const Pricing: React.FC = () => {
   const navigate = useNavigate();
+  const { formatAmount, convertFrom } = useCurrency();
+
+  // Define base prices in USD
+  const basePrices = {
+    starter: 550,
+    growth: 1650,
+    enterprise: 4400
+  };
 
   const plans = [
     {
       name: 'Starter',
-      price: '€500',
+      price: formatAmount(basePrices.starter),
       period: '/month',
       description: 'Perfect for growing companies establishing their trust foundation',
       icon: Zap,
@@ -33,7 +43,7 @@ export const Pricing: React.FC = () => {
     },
     {
       name: 'Growth',
-      price: '€1,500',
+      price: formatAmount(basePrices.growth),
       period: '/month',
       description: 'For scaling companies accelerating sales with trust transparency',
       icon: Shield,
@@ -112,6 +122,9 @@ export const Pricing: React.FC = () => {
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
+            <div className="flex justify-center mb-6">
+              <CurrencySelector />
+            </div>
             <h1 className="text-5xl font-bold text-slate-900 mb-6">
               Simple, Transparent Pricing
             </h1>
