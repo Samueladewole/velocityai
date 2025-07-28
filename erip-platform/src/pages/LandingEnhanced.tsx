@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { NavigationFooter } from '@/components/navigation/NavigationFooter';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -1308,54 +1309,7 @@ export const LandingEnhanced: React.FC = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="mb-4">
-                <Logo className="h-8 w-8" />
-              </div>
-              <p className="text-slate-400 text-sm">
-                Building trust through technology excellence.
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Platform</h4>
-              <div className="space-y-2 text-sm text-slate-400">
-                <div>Trust Platform</div>
-                <div>Trust Equity™ System</div>
-                <div>Framework Optimization</div>
-                <div>Policy Automation</div>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <div className="space-y-2 text-sm text-slate-400">
-                <div>Interactive Demo</div>
-                <div>ROI Calculator</div>
-                <div>Free Assessment</div>
-                <div>Expert Network</div>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4">Company</h4>
-              <div className="space-y-2 text-sm text-slate-400">
-                <div>About ERIP</div>
-                <div>Our Mission</div>
-                <div>Customer Success</div>
-                <div>Partnership Program</div>
-              </div>
-            </div>
-          </div>
-          
-          <div className="border-t border-slate-700 mt-8 pt-8 text-center text-sm text-slate-400">
-            <p>&copy; 2024 ERIP. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      <NavigationFooter />
     </div>
   );
 };
