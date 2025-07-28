@@ -128,10 +128,30 @@ import { Pricing } from '@/pages/Pricing';
 import { useAppStore, useAuthStore, mockUser } from '@/store';
 import { DateProvider } from '@/components/shared/DateProvider';
 // import { CurrencyProvider } from '@/contexts/CurrencyContext';
+import VelocityApp from './VelocityApp';
+
+// Add subdomain detection
+const getSubdomain = () => {
+  const hostname = window.location.hostname;
+  const parts = hostname.split('.');
+  
+  // Check if we're on velocity subdomain
+  if (parts[0] === 'velocity' && parts[1] === 'eripapp') {
+    return 'velocity';
+  }
+  
+  // Also check for localhost development
+  if (hostname === 'localhost' && window.location.pathname.startsWith('/velocity')) {
+    return 'velocity-dev';
+  }
+  
+  return null;
+};
 
 function App() {
   const { setTheme } = useAppStore();
   const { login, isAuthenticated } = useAuthStore();
+  const subdomain = getSubdomain();
 
   useEffect(() => {
     console.log('App mounting with store');
@@ -148,8 +168,21 @@ function App() {
     }
   }, [setTheme, login, isAuthenticated]);
 
-  console.log('App rendering with store');
+  console.log('App rendering with store, subdomain:', subdomain);
   
+  // If on velocity subdomain, show Velocity-specific app
+  if (subdomain === 'velocity') {
+    return (
+      <DateProvider>
+        <Router>
+          <ScrollToTop />
+          <VelocityApp />
+        </Router>
+      </DateProvider>
+    );
+  }
+  
+  // Otherwise show regular ERIP app
   return (
     <DateProvider>
       <TourProvider>

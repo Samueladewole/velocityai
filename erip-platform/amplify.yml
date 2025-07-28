@@ -33,12 +33,8 @@ applications:
               value: 'strict-origin-when-cross-origin'
       # URL rewrites for SPA routing (SAFE - won't break existing routes)
       rewrites:
-        # Velocity subdomain routing (only applies to velocity.eripapp.com)
-        - source: '/velocity'
-          target: '/index.html'
-          status: '200'
-          condition: 'Host:velocity.eripapp.com'
-        - source: '/velocity/*'
+        # Velocity subdomain routing - all routes on velocity.eripapp.com go to the React app
+        - source: '/<*>'
           target: '/index.html'
           status: '200'
           condition: 'Host:velocity.eripapp.com'
