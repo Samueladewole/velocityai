@@ -18,13 +18,15 @@ import {
   MessageSquare,
   Video,
   Briefcase,
-  Phone
+  Phone,
+  Zap
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
 export const NavigationFooter: React.FC = () => {
   const productLinks = [
+    { name: 'Velocity AI Platform', href: '/velocity', icon: Zap },
     { name: 'QIE - Questionnaire Intelligence', href: '/qie-enhanced', icon: Brain },
     { name: 'ISACA DTEF Automation', href: '/dtef-automation', icon: FileCheck },
     { name: 'Industry Certifications', href: '/certifications', icon: Award },
