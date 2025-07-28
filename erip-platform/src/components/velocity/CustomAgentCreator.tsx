@@ -13,7 +13,8 @@ import {
   MessageSquare,
   ChevronRight,
   Copy,
-  Download
+  Download,
+  Shield
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
@@ -301,7 +302,7 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
     
     // Redirect to dashboard after 3 seconds
     setTimeout(() => {
-      window.location.href = '/velocity/dashboard';
+      window.location.href = '/dashboard';
     }, 3000);
   };
 
