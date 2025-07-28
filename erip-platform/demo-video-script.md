@@ -9,11 +9,12 @@
 
 ## Scene 1: Hook & Problem (0-20 seconds)
 ### Visual: Split screen showing traditional compliance vs. Velocity
-**Narrator**: *"Compliance monitoring shouldn't take weeks of manual work. What if you could automate 95% of your compliance evidence collection in just 5 minutes?"*
+**Narrator**: *"What if I told you that NIS2, DORA, and EU AI Act compliance could be 95% automated in 30 minutes? Welcome to the future of compliance."*
 
 ### On-screen text:
-- "Traditional Compliance: Weeks of Manual Work"
-- "Velocity AI: 5 Minutes to Full Automation"
+- "Traditional Compliance: 6 months, €267K cost"
+- "Velocity AI: 30 minutes, 95% automated"
+- "EU AI Act Ready • NIS2 Compliant • DORA Enabled"
 
 ---
 

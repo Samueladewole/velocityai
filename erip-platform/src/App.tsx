@@ -152,9 +152,9 @@ const getSubdomain = () => {
 function App() {
   // Domain redirect strategy: Hide ERIP, Launch Velocity
   useEffect(() => {
+    const hostname = window.location.hostname;
+    
     if (FEATURES.REDIRECT_TO_VELOCITY && ENV.isProduction) {
-      const hostname = window.location.hostname;
-      
       // Redirect main domain to Velocity subdomain
       if (hostname === 'eripapp.com' || hostname === 'www.eripapp.com') {
         window.location.href = 'https://velocity.eripapp.com';
@@ -162,8 +162,12 @@ function App() {
       }
     }
     
-    // In development, redirect root paths to Velocity if in Velocity-only mode
-    if (FEATURES.VELOCITY_ONLY && window.location.pathname === '/' && !window.location.pathname.startsWith('/velocity')) {
+    // In development, redirect root paths to Velocity if in Velocity-only mode 
+    // (but only if NOT already on velocity subdomain or localhost velocity path)
+    if (FEATURES.VELOCITY_ONLY && 
+        window.location.pathname === '/' && 
+        hostname !== 'localhost' &&
+        !hostname.includes('velocity')) {
       window.location.href = '/velocity';
       return;
     }
