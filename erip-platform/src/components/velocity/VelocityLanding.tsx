@@ -135,14 +135,14 @@ const VelocityLanding: React.FC = () => {
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <button
-                onClick={() => navigate('/velocity/onboarding')}
+                onClick={() => navigate('/onboarding')}
                 className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
               >
                 <Clock className="w-5 h-5" />
                 Start 30-Min Onboarding
               </button>
               <button
-                onClick={() => navigate('/velocity/pricing')}
+                onClick={() => navigate('/pricing')}
                 className="bg-white text-purple-600 border-2 border-purple-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-50 transition-colors flex items-center gap-2"
               >
                 <DollarSign className="w-5 h-5" />
@@ -246,7 +246,7 @@ const VelocityLanding: React.FC = () => {
                 </ul>
 
                 <button
-                  onClick={() => navigate('/velocity/pricing')}
+                  onClick={() => navigate('/pricing')}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
                     tier.popular
                       ? 'bg-blue-600 text-white hover:bg-blue-700'
@@ -301,14 +301,14 @@ const VelocityLanding: React.FC = () => {
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
-              onClick={() => navigate('/velocity/onboarding')}
+              onClick={() => navigate('/onboarding')}
               className="bg-white text-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2"
             >
               <Zap className="w-5 h-5" />
               Start Free Trial
             </button>
             <button
-              onClick={() => navigate('/velocity/dashboard')}
+              onClick={() => navigate('/dashboard')}
               className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
             >
               <Target className="w-5 h-5" />
