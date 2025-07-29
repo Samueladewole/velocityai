@@ -23,29 +23,47 @@ import {
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { FEATURES, COMPUTED_FEATURES, shouldShowERIPComponent } from '@/config/features';
 
 export const NavigationFooter: React.FC = () => {
+  // Base product links - Velocity first, then conditional ERIP features
+  const baseProductLinks = [
+    { name: 'Velocity AI Platform', href: '/velocity', icon: Zap, show: true },
+    { name: 'QIE - Questionnaire Intelligence', href: '/qie-enhanced', icon: Brain, show: FEATURES.SHOW_QIE },
+    { name: 'Trust Score', href: '/trust-score', icon: ExternalLink, show: FEATURES.SHOW_TRUST_SCORE }
+  ];
+
+  const eripProductLinks = [
+    { name: 'ISACA DTEF Automation', href: '/dtef-automation', icon: FileCheck, show: shouldShowERIPComponent('DTEF') },
+    { name: 'Industry Certifications', href: '/certifications', icon: Award, show: shouldShowERIPComponent('CERTIFICATIONS') },
+    { name: 'AI Governance', href: '/ai-governance', icon: Brain, show: shouldShowERIPComponent('AI_GOVERNANCE') },
+    { name: 'Privacy Management', href: '/privacy-management', icon: Shield, show: shouldShowERIPComponent('PRIVACY') },
+    { name: 'Framework Management', href: '/framework-management', icon: FileCheck, show: shouldShowERIPComponent('FRAMEWORK') },
+    { name: 'Policy Management', href: '/policy-management', icon: FileCheck, show: shouldShowERIPComponent('POLICY') }
+  ];
+
   const productLinks = [
-    { name: 'Velocity AI Platform', href: '/velocity', icon: Zap },
-    { name: 'QIE - Questionnaire Intelligence', href: '/qie-enhanced', icon: Brain },
-    { name: 'ISACA DTEF Automation', href: '/dtef-automation', icon: FileCheck },
-    { name: 'Industry Certifications', href: '/certifications', icon: Award },
-    { name: 'AI Governance', href: '/ai-governance', icon: Brain },
-    { name: 'Privacy Management', href: '/privacy-management', icon: Shield },
-    { name: 'Trust Score Sharing', href: '/trust-score-share', icon: ExternalLink },
-    { name: 'Framework Management', href: '/framework-management', icon: FileCheck },
-    { name: 'Policy Management', href: '/policy-management', icon: FileCheck }
+    ...baseProductLinks.filter(link => link.show),
+    ...(COMPUTED_FEATURES.showERIP ? eripProductLinks.filter(link => link.show) : [])
+  ];
+
+  const baseSolutionLinks = [
+    { name: 'AI Compliance Automation', href: '/solutions/ai-governance', show: true },
+    { name: 'Sales Acceleration', href: '/solutions/sales-acceleration', show: true }
+  ];
+
+  const eripSolutionLinks = [
+    { name: 'Compliance Automation', href: '/solutions/compliance-automation', show: shouldShowERIPComponent('COMPLIANCE') },
+    { name: 'Risk Quantification', href: '/solutions/risk-quantification', show: shouldShowERIPComponent('RISK') },
+    { name: 'Privacy Management', href: '/solutions/privacy-management', show: shouldShowERIPComponent('PRIVACY') },
+    { name: 'Financial Services', href: '/solutions/financial-services', show: shouldShowERIPComponent('FINANCIAL') },
+    { name: 'Healthcare', href: '/solutions/healthcare', show: shouldShowERIPComponent('HEALTHCARE') },
+    { name: 'Technology/SaaS', href: '/solutions/technology', show: shouldShowERIPComponent('TECHNOLOGY') }
   ];
 
   const solutionLinks = [
-    { name: 'Compliance Automation', href: '/solutions/compliance-automation' },
-    { name: 'Risk Quantification', href: '/solutions/risk-quantification' },
-    { name: 'Sales Acceleration', href: '/solutions/sales-acceleration' },
-    { name: 'AI Governance', href: '/solutions/ai-governance' },
-    { name: 'Privacy Management', href: '/solutions/privacy-management' },
-    { name: 'Financial Services', href: '/solutions/financial-services' },
-    { name: 'Healthcare', href: '/solutions/healthcare' },
-    { name: 'Technology/SaaS', href: '/solutions/technology' }
+    ...baseSolutionLinks.filter(link => link.show),
+    ...(COMPUTED_FEATURES.showERIP ? eripSolutionLinks.filter(link => link.show) : [])
   ];
 
   const resourceLinks = [
@@ -60,7 +78,7 @@ export const NavigationFooter: React.FC = () => {
   ];
 
   const companyLinks = [
-    { name: 'About ERIP', href: '/company/about' },
+    { name: FEATURES.VELOCITY_ONLY ? 'About Velocity' : 'About ERIP', href: '/company/about' },
     { name: 'Our Story', href: '/company/story' },
     { name: 'Team', href: '/company/team' },
     { name: 'Careers', href: '/company/careers' },
@@ -124,16 +142,22 @@ export const NavigationFooter: React.FC = () => {
           <div className="lg:col-span-2">
             <Link to="/" className="flex items-center gap-3 mb-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-700 shadow-lg">
-                <Shield className="h-5 w-5 text-white" />
+                {FEATURES.VELOCITY_ONLY ? <Zap className="h-5 w-5 text-white" /> : <Shield className="h-5 w-5 text-white" />}
               </div>
               <div>
-                <h1 className="text-xl font-bold text-white">ERIP</h1>
-                <p className="text-xs text-slate-400 font-medium">Trust Intelligence Platform</p>
+                <h1 className="text-xl font-bold text-white">
+                  {FEATURES.VELOCITY_ONLY ? 'Velocity' : 'ERIP'}
+                </h1>
+                <p className="text-xs text-slate-400 font-medium">
+                  {FEATURES.VELOCITY_ONLY ? 'AI Compliance Platform' : 'Trust Intelligence Platform'}
+                </p>
               </div>
             </Link>
             <p className="text-slate-300 text-sm mb-6 max-w-sm">
-              The only platform that transforms compliance costs into competitive advantage through 
-              Trust Equity™ automation and sales acceleration.
+              {FEATURES.VELOCITY_ONLY 
+                ? 'AI-powered compliance automation that transforms regulatory requirements into competitive advantages through intelligent agent deployment.'
+                : 'The only platform that transforms compliance costs into competitive advantage through Trust Equity™ automation and sales acceleration.'
+              }
             </p>
             
             <div className="flex items-center gap-3 mb-6">
@@ -272,7 +296,7 @@ export const NavigationFooter: React.FC = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-slate-400">
-              © 2025 ERIP Trust Intelligence Platform. All rights reserved.
+              © 2025 {FEATURES.VELOCITY_ONLY ? 'Velocity AI Compliance Platform' : 'ERIP Trust Intelligence Platform'}. All rights reserved.
             </div>
             
             <div className="flex items-center gap-6">

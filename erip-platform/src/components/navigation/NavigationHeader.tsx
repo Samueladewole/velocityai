@@ -26,6 +26,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useAuthStore } from '@/store';
+import { FEATURES, COMPUTED_FEATURES, shouldShowERIPComponent } from '@/config/features';
 
 interface NavigationHeaderProps {
   className?: string;
@@ -146,7 +147,7 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
   ];
 
   const companyItems = [
-    { name: 'About ERIP', href: '/company/about', icon: Building2 },
+    { name: FEATURES.VELOCITY_ONLY ? 'About Velocity' : 'About ERIP', href: '/company/about', icon: Building2 },
     { name: 'Seed Pitch (€2M)', href: '/company/seed-pitch', icon: Award },
     { name: 'Contact', href: '/company/contact', icon: Phone },
     { name: 'Team', href: '/company/team', icon: Users },
@@ -163,31 +164,34 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-blue-600 to-purple-700 shadow-lg">
-              <Shield className="h-5 w-5 text-white" />
+              {FEATURES.VELOCITY_ONLY ? <Zap className="h-5 w-5 text-white" /> : <Shield className="h-5 w-5 text-white" />}
             </div>
             <div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                ERIP
+                {FEATURES.VELOCITY_ONLY ? 'Velocity' : 'ERIP'}
               </h1>
-              <p className="text-xs text-slate-500 font-medium">Trust Intelligence Platform</p>
+              <p className="text-xs text-slate-500 font-medium">
+                {FEATURES.VELOCITY_ONLY ? 'AI Compliance Platform' : 'Trust Intelligence Platform'}
+              </p>
             </div>
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            {/* Platform Dropdown */}
-            <div 
-              className="relative group"
-              onMouseEnter={() => setPlatformOpen(true)}
-              onMouseLeave={() => setPlatformOpen(false)}
-            >
-              <button
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-                onClick={() => setPlatformOpen(!platformOpen)}
+            {/* Platform Dropdown - only show if ERIP features are enabled */}
+            {FEATURES.SHOW_PLATFORM_NAV && COMPUTED_FEATURES.showERIP && (
+              <div 
+                className="relative group"
+                onMouseEnter={() => setPlatformOpen(true)}
+                onMouseLeave={() => setPlatformOpen(false)}
               >
-                Platform
-                <ChevronDown className="h-4 w-4" />
-              </button>
+                <button
+                  className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                  onClick={() => setPlatformOpen(!platformOpen)}
+                >
+                  Platform
+                  <ChevronDown className="h-4 w-4" />
+                </button>
               
               {platformOpen && (
                 <div 
@@ -218,7 +222,8 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                   </div>
                 </div>
               )}
-            </div>
+              </div>
+            )}
 
             {/* Velocity Dropdown */}
             <div 
@@ -270,16 +275,17 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
               )}
             </div>
 
-            {/* Solutions Mega Menu */}
-            <div className="relative group">
-              <button
-                className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
-                onMouseEnter={() => setSolutionsOpen(true)}
-                onMouseLeave={() => setSolutionsOpen(false)}
-              >
-                Solutions
-                <ChevronDown className="h-4 w-4" />
-              </button>
+            {/* Solutions Mega Menu - only show if enabled */}
+            {FEATURES.SHOW_SOLUTIONS_NAV && (
+              <div className="relative group">
+                <button
+                  className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 transition-colors"
+                  onMouseEnter={() => setSolutionsOpen(true)}
+                  onMouseLeave={() => setSolutionsOpen(false)}
+                >
+                  Solutions
+                  <ChevronDown className="h-4 w-4" />
+                </button>
               
               {solutionsOpen && (
                 <div 
@@ -340,7 +346,8 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
                   </div>
                 </div>
               )}
-            </div>
+              </div>
+            )}
 
             {/* Resources Dropdown */}
             <div className="relative group">

@@ -57,84 +57,59 @@ const AgentDashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  // Simulate real-time data updates
+  // Fetch real-time data from backend
   const fetchAgentsData = async () => {
     setRefreshing(true);
     
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Generate dynamic data based on current time
-    const now = new Date();
-    const evidenceBase = Math.floor(now.getMinutes() * 3.2) + 150;
-    const trustPointsBase = Math.floor(now.getSeconds() * 8.7) + 400;
-    
-    const mockAgents: Agent[] = [
-      {
-        id: 'aws-soc2',
-        name: 'AWS SOC2 Agent',
-        status: 'running',
-        framework: 'SOC2',
-        platform: 'AWS',
-        evidenceCollected: evidenceBase + Math.floor(Math.random() * 50),
-        lastRun: `${Math.floor(Math.random() * 5) + 1} minutes ago`,
-        nextRun: 'In 3h 24m',
-        trustPoints: trustPointsBase + Math.floor(Math.random() * 100),
-        progress: Math.floor(Math.random() * 40) + 60
-      },
-      {
-        id: 'gcp-iso27001', 
-        name: 'GCP ISO27001 Agent',
-        status: 'running',
-        framework: 'ISO27001',
-        platform: 'GCP',
-        evidenceCollected: Math.floor(evidenceBase * 0.6) + Math.floor(Math.random() * 30),
-        lastRun: `${Math.floor(Math.random() * 8) + 3} minutes ago`,
-        nextRun: 'In 2h 15m',
-        trustPoints: Math.floor(trustPointsBase * 0.65) + Math.floor(Math.random() * 80),
-        progress: Math.floor(Math.random() * 30) + 70
-      },
-      {
-        id: 'azure-gdpr',
-        name: 'Azure GDPR Agent',
-        status: Math.random() > 0.7 ? 'paused' : 'running',
-        framework: 'GDPR',
-        platform: 'Azure',
-        evidenceCollected: Math.floor(evidenceBase * 0.2) + Math.floor(Math.random() * 20),
-        lastRun: Math.random() > 0.5 ? '45 minutes ago' : '1 hour ago',
-        nextRun: 'Paused',
-        trustPoints: Math.floor(trustPointsBase * 0.2) + Math.floor(Math.random() * 50),
-        progress: Math.floor(Math.random() * 20) + 20
-      },
-      {
-        id: 'github-cis',
-        name: 'GitHub CIS Controls Agent',
-        status: 'running',
-        framework: 'CIS Controls',
-        platform: 'GitHub',
-        evidenceCollected: Math.floor(evidenceBase * 0.4) + Math.floor(Math.random() * 25),
-        lastRun: `${Math.floor(Math.random() * 15) + 5} minutes ago`,
-        nextRun: 'In 1h 8m',
-        trustPoints: Math.floor(trustPointsBase * 0.45) + Math.floor(Math.random() * 70),
-        progress: Math.floor(Math.random() * 35) + 50
-      }
-    ];
-
-    setAgents(mockAgents);
-    
-    // Update metrics
-    const activeAgents = mockAgents.filter(a => a.status === 'running').length;
-    const totalEvidence = mockAgents.reduce((sum, agent) => sum + agent.evidenceCollected, 0);
-    const totalTrustPoints = mockAgents.reduce((sum, agent) => sum + agent.trustPoints, 0);
-    const automationRate = 94.8 + Math.random() * 1.4; // 94.8% - 96.2%
-    
-    setMetrics({
-      activeAgents,
-      totalEvidence,
-      totalTrustPoints,
-      automationRate: Math.round(automationRate * 10) / 10,
-      lastUpdated: new Date().toISOString()
-    });
+    try {
+      // Import API service dynamically
+      const { apiService } = await import('@/services/api');
+      
+      // Fetch real agents and dashboard stats
+      const [agentsData, dashboardStats] = await Promise.all([
+        apiService.getAgents(),
+        apiService.getDashboardStats()
+      ]);
+      
+      // Transform backend data to match frontend interface
+      const transformedAgents: Agent[] = agentsData.map(agent => ({
+        id: agent.id,
+        name: agent.name,
+        status: agent.status === 'active' ? 'running' : 'paused',
+        framework: agent.framework.toUpperCase(),
+        evidenceCollected: agent.evidence_count,
+        lastRun: new Date(agent.created_at).toLocaleDateString() === new Date().toLocaleDateString() 
+          ? 'Today' 
+          : new Date(agent.created_at).toLocaleDateString(),
+        trustPoints: Math.floor(agent.success_rate * 30), // Convert success rate to points
+        platform: agent.platform.toUpperCase(),
+        nextRun: agent.status === 'active' ? '2 hours' : 'Paused',
+        progress: Math.floor(agent.automation_level)
+      }));
+      
+      setAgents(transformedAgents);
+      
+      // Use real dashboard metrics
+      setMetrics({
+        activeAgents: dashboardStats.active_agents,
+        totalEvidence: dashboardStats.total_evidence,
+        totalTrustPoints: Math.floor(dashboardStats.trust_score * 30), // Convert trust score to points
+        automationRate: dashboardStats.avg_automation,
+        lastUpdated: new Date().toISOString()
+      });
+      
+    } catch (error) {
+      console.error('Failed to fetch agents data:', error);
+      // Fall back to empty state if not authenticated or API fails
+      setAgents([]);
+      setMetrics({
+        activeAgents: 0,
+        totalEvidence: 0,
+        totalTrustPoints: 0,
+        automationRate: 0,
+        lastUpdated: new Date().toISOString()
+      });
+    }
     
     setLoading(false);
     setRefreshing(false);

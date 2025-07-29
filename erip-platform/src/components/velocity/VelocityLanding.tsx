@@ -23,7 +23,11 @@ import {
   ChevronRight,
   CreditCard
 } from 'lucide-react';
+<<<<<<< HEAD
 import { Button } from '@/components/ui/button';
+=======
+import VelocityFooter from './VelocityFooter';
+>>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
 
 const VelocityLanding: React.FC = () => {
   const navigate = useNavigate();
@@ -418,6 +422,9 @@ const VelocityLanding: React.FC = () => {
           </p>
         </div>
       </section>
+      
+      {/* Footer */}
+      <VelocityFooter />
     </div>
   );
 };

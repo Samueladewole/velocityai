@@ -35,9 +35,9 @@ function App() {
         <Router>
           <ScrollToTop />
           <PlatformRouter />
-        <TourOverlay />
-        <Tooltip />
-      </Router>
+          <TourOverlay />
+          <Tooltip />
+        </Router>
       </TourProvider>
     </DateProvider>
   );
