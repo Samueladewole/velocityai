@@ -1,0 +1,165 @@
+version: 1
+applications:
+  - frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+            - echo "Building Velocity AI Platform"
+            # Set environment variables for standalone Velocity
+            - export VITE_APP_NAME="Velocity"
+            - export VITE_APP_MODE="standalone"
+            - export VITE_VELOCITY_API_URL="https://api.velocity.eripapp.com"
+            - export VITE_VELOCITY_WS_URL="wss://ws.velocity.eripapp.com"
+        build:
+          commands:
+            - npm run build
+            - echo "Velocity build completed successfully"
+      artifacts:
+        baseDirectory: dist
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+      
+      # Custom headers for Velocity security
+      customHeaders:
+        - pattern: '**/*'
+          headers:
+            - key: 'Strict-Transport-Security'
+              value: 'max-age=31536000; includeSubDomains; preload'
+            - key: 'X-Content-Type-Options'
+              value: 'nosniff'
+            - key: 'X-Frame-Options'
+              value: 'DENY'
+            - key: 'X-XSS-Protection'
+              value: '1; mode=block'
+            - key: 'Referrer-Policy'
+              value: 'strict-origin-when-cross-origin'
+            - key: 'Content-Security-Policy'
+              value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://api.velocity.eripapp.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.velocity.eripapp.com wss://ws.velocity.eripapp.com; frame-src 'none';"
+            - key: 'Permissions-Policy'
+              value: 'geolocation=(), microphone=(), camera=()'
+      
+      # URL rewrites for Velocity SPA
+      rewrites:
+        # Main app routes
+        - source: '/'
+          target: '/index.html'
+          status: '200'
+        - source: '/dashboard'
+          target: '/index.html'
+          status: '200'
+        - source: '/live'
+          target: '/index.html'
+          status: '200'
+        - source: '/onboarding'
+          target: '/index.html'
+          status: '200'
+        - source: '/integration'
+          target: '/index.html'
+          status: '200'
+        - source: '/evidence'
+          target: '/index.html'
+          status: '200'
+        - source: '/creator'
+          target: '/index.html'
+          status: '200'
+        - source: '/docs'
+          target: '/index.html'
+          status: '200'
+        - source: '/pricing'
+          target: '/index.html'
+          status: '200'
+        - source: '/settings'
+          target: '/index.html'
+          status: '200'
+        - source: '/login'
+          target: '/index.html'
+          status: '200'
+        - source: '/signup'
+          target: '/index.html'
+          status: '200'
+        
+        # API proxy routes
+        - source: '/api/<*>'
+          target: 'https://api.velocity.eripapp.com/api/<*>'
+          status: '200'
+        
+        # WebSocket proxy
+        - source: '/ws/<*>'
+          target: 'wss://ws.velocity.eripapp.com/ws/<*>'
+          status: '200'
+        
+        # Health check endpoint
+        - source: '/health'
+          target: '/api/health'
+          status: '200'
+        
+        # Fallback for all other routes
+        - source: '/<*>'
+          target: '/index.html'
+          status: '404-200'
+      
+      # Environment variables for production
+      environmentVariables:
+        - name: VITE_APP_NAME
+          value: Velocity
+        - name: VITE_APP_MODE
+          value: standalone
+        - name: VITE_VELOCITY_API_URL
+          value: https://api.velocity.eripapp.com
+        - name: VITE_VELOCITY_WS_URL
+          value: wss://ws.velocity.eripapp.com
+        - name: VITE_SENTRY_DSN
+          value: ${SENTRY_DSN}
+        - name: VITE_GA_ID
+          value: ${GA_ID}
+        - name: VITE_POSTHOG_KEY
+          value: ${POSTHOG_KEY}
+        - name: VITE_POSTHOG_HOST
+          value: https://app.posthog.com
+        - name: VITE_STRIPE_PUBLIC_KEY
+          value: ${STRIPE_PUBLIC_KEY}
+        
+  # Backend API configuration
+  - backend:
+      phases:
+        preBuild:
+          commands:
+            - echo "Setting up Velocity backend environment"
+            - cd backend/agents
+            - pip install -r requirements.txt
+        build:
+          commands:
+            - echo "Building Velocity backend"
+            # Copy environment configuration
+            - cp .env.production .env
+      artifacts:
+        baseDirectory: backend/agents
+        files:
+          - '**/*'
+      environmentVariables:
+        - name: DATABASE_URL
+          value: ${DATABASE_URL}
+        - name: REDIS_URL
+          value: ${REDIS_URL}
+        - name: JWT_SECRET
+          value: ${JWT_SECRET}
+        - name: STRIPE_SECRET_KEY
+          value: ${STRIPE_SECRET_KEY}
+        - name: AWS_REGION
+          value: us-east-1
+        - name: SENTRY_DSN
+          value: ${SENTRY_DSN}
+        - name: SMTP_HOST
+          value: ${SMTP_HOST}
+        - name: SMTP_PORT
+          value: ${SMTP_PORT}
+        - name: SMTP_USER
+          value: ${SMTP_USER}
+        - name: SMTP_PASSWORD
+          value: ${SMTP_PASSWORD}
+        - name: CORS_ALLOWED_ORIGINS
+          value: https://velocity.eripapp.com,https://api.velocity.eripapp.com

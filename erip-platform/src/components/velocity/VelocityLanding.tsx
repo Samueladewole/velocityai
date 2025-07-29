@@ -12,11 +12,26 @@ import {
   TrendingUp,
   Shield,
   Target,
-  Star
+  Star,
+  Play,
+  Cloud,
+  Bot,
+  FileCheck,
+  BarChart3,
+  Globe,
+  Lock,
+  ChevronRight,
+  CreditCard
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const VelocityLanding: React.FC = () => {
   const navigate = useNavigate();
+  
+  // Check if we're in subdomain mode or main app
+  const isSubdomain = window.location.hostname.includes('velocity.') || 
+                     (window.location.hostname === 'localhost' && window.location.pathname.startsWith('/velocity'));
+  const routePrefix = isSubdomain ? '' : '/velocity';
 
   const features = [
     {
@@ -28,168 +43,174 @@ const VelocityLanding: React.FC = () => {
     {
       icon: Clock,
       title: "30-Minute Setup",
-      description: "From signup to Trust Score in under 30 minutes with guided onboarding",
+      description: "From signup to first evidence collection in under 30 minutes",
       color: "from-blue-500 to-cyan-600"
     },
     {
       icon: Award,
-      title: "3x Trust Points",
-      description: "AI-collected evidence receives 3x multiplier in Trust Score calculation",
+      title: "22+ Point Trust Score Boost",
+      description: "Average Trust Score improvement in first 30 days of usage",
       color: "from-green-500 to-teal-600"
     },
     {
-      icon: Network,
-      title: "Real-time Sync",
-      description: "Seamless integration with Trust Equity, Compass, and Atlas",
+      icon: DollarSign,
+      title: "$15,500 Cost Savings",
+      description: "Average cost reduction from automated compliance processes",
       color: "from-orange-500 to-red-600"
     }
+  ];
+
+  const integrations = [
+    { name: 'AWS', logo: '🌩️', description: 'Complete AWS infrastructure monitoring' },
+    { name: 'Google Cloud', logo: '☁️', description: 'GCP security and compliance automation' },
+    { name: 'Microsoft Azure', logo: '🌐', description: 'Azure resource compliance tracking' },
+    { name: 'GitHub', logo: '🐙', description: 'Code security and policy enforcement' },
+    { name: 'Google Workspace', logo: '📊', description: 'Workspace security monitoring' },
+    { name: 'Slack', logo: '💬', description: 'Communication compliance tracking' },
+  ];
+
+  const frameworks = [
+    { name: 'SOC 2 Type II', controls: '64 Controls', icon: Shield },
+    { name: 'ISO 27001', controls: '114 Controls', icon: Lock },
+    { name: 'CIS Controls v8.1', controls: '153 Controls', icon: Award },
+    { name: 'GDPR', controls: '47 Controls', icon: Globe },
+    { name: 'HIPAA', controls: '42 Controls', icon: FileCheck },
+    { name: 'PCI DSS', controls: '78 Controls', icon: CreditCard },
   ];
 
   const tiers = [
     {
       name: "Starter",
-      price: "$999",
-      period: "/month",
-      description: "Perfect for AI startups getting started with compliance",
+      price: 249,
+      description: "Perfect for growing companies",
       features: [
-        "Up to 5 users",
-        "2 frameworks (SOC2, GDPR)",
-        "1,000 evidence items",
-        "Basic monitoring",
+        "5 team members",
+        "10 compliance frameworks",
+        "500 evidence items/month",
+        "Basic integrations",
         "Email support"
       ],
-      color: "from-purple-500 to-purple-600",
       popular: false
     },
     {
       name: "Growth",
-      price: "$2,499",
-      period: "/month",
-      description: "Ideal for scaling AI companies with multiple frameworks",
+      price: 549,
+      description: "Most popular for mid-market",
       features: [
-        "Up to 15 users",
-        "4 frameworks",
-        "5,000 evidence items",
-        "Advanced monitoring",
-        "Priority support"
+        "20 team members",
+        "25 compliance frameworks",
+        "2,000 evidence items/month",
+        "All integrations",
+        "Priority support",
+        "API access"
       ],
-      color: "from-blue-500 to-blue-600",
       popular: true
     },
     {
-      name: "Scale",
-      price: "$4,999",
-      period: "/month",
-      description: "Enterprise-grade for mature AI companies",
+      name: "Enterprise",
+      price: 1249,
+      description: "For large organizations",
       features: [
-        "Unlimited users",
-        "All frameworks",
-        "50,000 evidence items",
-        "24/7 monitoring",
-        "Dedicated CSM"
+        "Unlimited team members",
+        "Unlimited frameworks",
+        "10,000 evidence items/month",
+        "White-label options",
+        "Dedicated success manager",
+        "Custom integrations"
       ],
-      color: "from-green-500 to-green-600",
       popular: false
     }
   ];
 
   const testimonials = [
     {
-      company: "AI Startup Inc.",
-      quote: "Velocity Tier got us SOC2 compliant in 3 weeks instead of 6 months",
-      author: "Sarah Chen, CTO",
+      quote: "Velocity reduced our SOC 2 prep time from 6 months to 3 weeks. The AI agents work around the clock collecting evidence.",
+      author: "Sarah Chen",
+      company: "TechFlow (Series B)",
       rating: 5
     },
     {
-      company: "DataFlow AI",
-      quote: "The AI agents saved us 400+ hours of manual evidence collection",
-      author: "Mike Rodriguez, Security Lead",
+      quote: "Our Trust Score jumped 28 points in the first month. The automated evidence collection is incredibly thorough.",
+      author: "Marcus Rodriguez",
+      company: "DataVault (Scale-up)",
       rating: 5
     }
   ];
 
+  const stats = [
+    { value: '500+', label: 'Companies Trust Velocity' },
+    { value: '95%', label: 'Automation Rate' },
+    { value: '30min', label: 'Average Setup Time' },
+    { value: '22pts', label: 'Avg Trust Score Boost' },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-blue-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative pt-20 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600/10 via-pink-600/10 to-blue-600/10" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <section className="relative bg-gradient-to-br from-purple-900 via-purple-800 to-pink-800 text-white overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-semibold mb-6">
-              <Zap className="w-4 h-4" />
-              AI Agents & Velocity Tier
-            </div>
-            
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
-              <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                95% Compliance
-              </span>
-              <br />
-              Automation in 30 Minutes
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+              AI-Powered
+              <span className="bg-gradient-to-r from-pink-400 to-yellow-400 bg-clip-text text-transparent"> Compliance </span>
+              Automation
             </h1>
-            
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
-              AI-powered compliance automation designed for fast-growing AI startups. 
-              Get SOC2, ISO27001, and GDPR ready with automated evidence collection and 3x Trust Points.
+            <p className="text-xl lg:text-2xl text-purple-100 mb-8 max-w-3xl mx-auto">
+              Transform quarterly manual compliance into continuous AI monitoring. 
+              95% automation, 30-minute setup, 22+ point Trust Score improvement.
             </p>
-
+            
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-              <button
-                onClick={() => navigate('/onboarding')}
-                className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all transform hover:scale-105 shadow-lg flex items-center gap-2"
+              <Button
+                onClick={() => navigate(`${routePrefix}/signup`)}
+                className="bg-white text-purple-800 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                size="lg"
               >
-                <Clock className="w-5 h-5" />
-                Start 30-Min Onboarding
-              </button>
-              <button
-                onClick={() => navigate('/pricing')}
-                className="bg-white text-purple-600 border-2 border-purple-200 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-purple-50 transition-colors flex items-center gap-2"
+                <Clock className="w-5 h-5 mr-2" />
+                Start 30-Min Setup
+              </Button>
+              <Button
+                onClick={() => window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ', '_blank')}
+                variant="outline"
+                className="border-2 border-white text-white hover:bg-white hover:text-purple-800 px-8 py-4 text-lg font-semibold rounded-lg transition-all"
+                size="lg"
               >
-                <DollarSign className="w-5 h-5" />
-                View Pricing
-              </button>
+                <Play className="w-5 h-5 mr-2" />
+                Watch Demo
+              </Button>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              <div className="text-center">
-                <div className="text-3xl font-bold text-purple-600">95%</div>
-                <div className="text-sm text-gray-600">Automation Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-blue-600">30min</div>
-                <div className="text-sm text-gray-600">Setup Time</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-green-600">3x</div>
-                <div className="text-sm text-gray-600">Trust Points</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold text-orange-600">24/7</div>
-                <div className="text-sm text-gray-600">Monitoring</div>
-              </div>
+            {/* Stats */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-4xl mx-auto">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-3xl lg:text-4xl font-bold text-white mb-1">{stat.value}</div>
+                  <div className="text-purple-200 text-sm lg:text-base">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Built for Fast-Growing AI Companies
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Why Choose Velocity?
             </h2>
-            <p className="text-xl text-gray-600">
-              Everything you need to achieve compliance without slowing down innovation
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              The only AI-native compliance platform that eliminates manual work while improving accuracy and coverage.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {features.map((feature, index) => (
-              <div key={index} className="text-center">
-                <div className={`w-16 h-16 mx-auto mb-4 rounded-2xl bg-gradient-to-r ${feature.color} flex items-center justify-center`}>
-                  <feature.icon className="w-8 h-8 text-white" />
+              <div key={index} className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow">
+                <div className={`w-12 h-12 bg-gradient-to-r ${feature.color} rounded-lg flex items-center justify-center mb-4`}>
+                  <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-2">{feature.title}</h3>
                 <p className="text-gray-600">{feature.description}</p>
@@ -199,41 +220,113 @@ const VelocityLanding: React.FC = () => {
         </div>
       </section>
 
-      {/* Pricing Section */}
-      <section className="py-16 bg-gray-50">
+      {/* Integrations Section */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Velocity Tier Pricing
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Connect Your Entire Stack
             </h2>
-            <p className="text-xl text-gray-600">
-              Transparent pricing designed for AI startups and fast-growing companies
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Velocity integrates with 50+ platforms to provide comprehensive compliance coverage across your infrastructure.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {integrations.map((integration, index) => (
+              <div key={index} className="flex items-center gap-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                <div className="text-3xl">{integration.logo}</div>
+                <div>
+                  <h3 className="font-semibold text-gray-900">{integration.name}</h3>
+                  <p className="text-sm text-gray-600">{integration.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Button
+              onClick={() => navigate(`${routePrefix}/integrations`)}
+              variant="outline"
+              className="px-8 py-3"
+            >
+              View All Integrations <ChevronRight className="w-4 h-4 ml-2" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Frameworks Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Compliance Frameworks Supported
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Comprehensive coverage for all major compliance standards with automated evidence collection.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {frameworks.map((framework, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <framework.icon className="w-5 h-5 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{framework.name}</h3>
+                    <p className="text-sm text-gray-600">{framework.controls}</p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-3">
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-gray-600">Automation Coverage</span>
+                    <span className="font-medium text-purple-600">95%</span>
+                  </div>
+                  <div className="w-full bg-gray-200 rounded-full h-2">
+                    <div className="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full" style={{ width: '95%' }} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Simple, Transparent Pricing
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              No hidden fees. Cancel anytime. All plans include our core AI automation features.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {tiers.map((tier, index) => (
-              <div 
-                key={index}
-                className={`bg-white rounded-2xl shadow-lg border-2 p-8 relative ${
-                  tier.popular ? 'border-blue-500 transform scale-105' : 'border-gray-200'
-                }`}
-              >
+              <div key={index} className={`bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow p-8 ${
+                tier.popular ? 'ring-2 ring-purple-600 relative' : ''
+              }`}>
                 {tier.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-blue-500 text-white px-6 py-2 rounded-full text-sm font-semibold">
+                    <span className="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
                       Most Popular
                     </span>
                   </div>
                 )}
                 
-                <div className="text-center mb-6">
+                <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.name}</h3>
-                  <div className="flex items-baseline justify-center mb-2">
-                    <span className="text-4xl font-bold text-gray-900">{tier.price}</span>
-                    <span className="text-gray-600 ml-1">{tier.period}</span>
+                  <p className="text-gray-600 mb-4">{tier.description}</p>
+                  <div className="mb-4">
+                    <span className="text-4xl font-bold text-gray-900">${tier.price}</span>
+                    <span className="text-gray-600">/month</span>
                   </div>
-                  <p className="text-gray-600">{tier.description}</p>
                 </div>
 
                 <ul className="space-y-3 mb-8">
@@ -245,43 +338,44 @@ const VelocityLanding: React.FC = () => {
                   ))}
                 </ul>
 
-                <button
-                  onClick={() => navigate('/pricing')}
+                <Button
+                  onClick={() => navigate(`${routePrefix}/signup?plan=${tier.name.toLowerCase()}`)}
                   className={`w-full py-3 px-6 rounded-lg font-semibold transition-colors ${
                     tier.popular
-                      ? 'bg-blue-600 text-white hover:bg-blue-700'
+                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white hover:from-purple-700 hover:to-pink-700'
                       : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
                   }`}
                 >
-                  Get Started
-                </button>
+                  Start Free Trial
+                </Button>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Social Proof */}
-      <section className="py-16 bg-white">
+      {/* Testimonials */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Trusted by Leading AI Companies
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+              Trusted by Leading Companies
             </h2>
+            <p className="text-xl text-gray-600">See what our customers are saying about Velocity</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6">
+              <div key={index} className="bg-white rounded-xl p-8 shadow-lg">
                 <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-4 italic">"{testimonial.quote}"</p>
+                <p className="text-gray-700 mb-6 text-lg italic">"{testimonial.quote}"</p>
                 <div>
                   <div className="font-semibold text-gray-900">{testimonial.author}</div>
-                  <div className="text-gray-600 text-sm">{testimonial.company}</div>
+                  <div className="text-purple-600">{testimonial.company}</div>
                 </div>
               </div>
             ))}
@@ -290,31 +384,38 @@ const VelocityLanding: React.FC = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-pink-600">
+      <section className="py-20 bg-gradient-to-r from-purple-600 to-pink-600">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-4">
-            Ready to Accelerate Your Compliance?
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+            Ready to Transform Your Compliance?
           </h2>
-          <p className="text-xl text-purple-100 mb-8">
-            Join leading AI companies using ERIP Velocity Tier for automated compliance
+          <p className="text-xl text-purple-100 mb-8 max-w-2xl mx-auto">
+            Join 500+ companies automating their compliance with AI. Start collecting evidence in under 30 minutes.
           </p>
           
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
-              onClick={() => navigate('/onboarding')}
-              className="bg-white text-purple-600 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors flex items-center gap-2"
+            <Button
+              onClick={() => navigate(`${routePrefix}/signup`)}
+              className="bg-white text-purple-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-lg transition-colors shadow-lg"
+              size="lg"
             >
-              <Zap className="w-5 h-5" />
+              <Zap className="w-5 h-5 mr-2" />
               Start Free Trial
-            </button>
-            <button
-              onClick={() => navigate('/dashboard')}
-              className="border-2 border-white text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-white/10 transition-colors flex items-center gap-2"
+            </Button>
+            <Button
+              onClick={() => navigate(`${routePrefix}/contact`)}
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white/10 px-8 py-4 text-lg font-semibold rounded-lg transition-colors"
+              size="lg"
             >
-              <Target className="w-5 h-5" />
-              View Demo
-            </button>
+              <Users className="w-5 h-5 mr-2" />
+              Talk to Sales
+            </Button>
           </div>
+
+          <p className="text-purple-200 text-sm mt-6">
+            No credit card required • 30-day free trial • Cancel anytime
+          </p>
         </div>
       </section>
     </div>
