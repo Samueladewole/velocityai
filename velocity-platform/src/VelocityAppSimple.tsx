@@ -1,6 +1,8 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import VelocityLanding from '@/components/velocity/VelocityLanding';
+import VelocityDashboardUltimate from '@/components/velocity/VelocityDashboardUltimate';
+import VelocityOnboarding from '@/components/velocity/VelocityOnboarding';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { QIEWorkflowComponent } from '@/components/qie/QIEWorkflow';
 import { ISACADigitalTrustService, DigitalTrustAssessment } from '@/services/velocity/isacaDigitalTrust';
@@ -205,7 +207,14 @@ const SimpleLogin: React.FC = () => {
       };
       
       login(userData);
-      navigate('/velocity/dashboard');
+      
+      // Check if user has completed onboarding
+      const hasCompletedOnboarding = localStorage.getItem('velocity_onboarding');
+      if (!hasCompletedOnboarding) {
+        navigate('/velocity/onboarding');
+      } else {
+        navigate('/velocity/dashboard');
+      }
     }
   };
 
@@ -1540,11 +1549,17 @@ const VelocityAppSimple: React.FC = () => {
           <Route path="/velocity" element={<VelocityLanding />} />
           <Route path="/velocity/" element={<VelocityLanding />} />
           <Route path="/velocity/login" element={<SimpleLogin />} />
+          <Route path="/velocity/signup" element={<SimpleLogin />} />
+          <Route path="/velocity/onboarding" element={
+            <ProtectedRoute>
+              <VelocityOnboarding />
+            </ProtectedRoute>
+          } />
           
           {/* Main Dashboard */}
           <Route path="/velocity/dashboard" element={
             <ProtectedRoute>
-              <SimpleDashboard />
+              <VelocityDashboardUltimate />
             </ProtectedRoute>
           } />
           
