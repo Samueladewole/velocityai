@@ -149,7 +149,7 @@ const VelocityOnboarding: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">ERIP Velocity Onboarding</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Velocity AI Onboarding</h1>
               <p className="text-gray-600">Get to Trust Score in {totalEstimatedTime} minutes</p>
             </div>
             <div className="flex items-center space-x-4">
@@ -249,6 +249,294 @@ const VelocityOnboarding: React.FC = () => {
 };
 
 // Step Components
+const CompanyProfileStep: React.FC<OnboardingStepProps> = ({ onComplete, onNext, data }) => {
+  const [profile, setProfile] = useState<CompanyProfile>(data || {
+    companyName: '',
+    industry: '',
+    companySize: '',
+    website: '',
+    description: '',
+    primaryContact: {
+      name: '',
+      email: '',
+      role: '',
+      phone: ''
+    },
+    complianceGoals: [],
+    currentFrameworks: [],
+    riskTolerance: 'medium',
+    timeline: '',
+    budget: ''
+  });
+
+  const industries = [
+    'Technology/Software', 'Financial Services', 'Healthcare', 'E-commerce',
+    'Manufacturing', 'Education', 'Government', 'Non-profit', 'Other'
+  ];
+
+  const companySizes = [
+    '1-10 employees', '11-50 employees', '51-200 employees', 
+    '201-1000 employees', '1001+ employees'
+  ];
+
+  const complianceGoals = [
+    { id: 'soc2', label: 'Achieve SOC 2 Compliance', icon: Shield },
+    { id: 'iso', label: 'ISO 27001 Certification', icon: Award },
+    { id: 'gdpr', label: 'GDPR Compliance', icon: Globe },
+    { id: 'hipaa', label: 'HIPAA Compliance', icon: Heart },
+    { id: 'pci', label: 'PCI DSS Compliance', icon: CreditCard },
+    { id: 'customer_trust', label: 'Build Customer Trust', icon: Users },
+    { id: 'risk_reduction', label: 'Reduce Security Risk', icon: Shield },
+    { id: 'audit_prep', label: 'Prepare for Audit', icon: FileText }
+  ];
+
+  const timelines = [
+    '1-3 months', '3-6 months', '6-12 months', '12+ months'
+  ];
+
+  const budgets = [
+    'Under $10k', '$10k-$50k', '$50k-$100k', '$100k+', 'Not specified'
+  ];
+
+  const updateProfile = (updates: Partial<CompanyProfile>) => {
+    setProfile(prev => ({ ...prev, ...updates }));
+  };
+
+  const updateContact = (updates: Partial<CompanyProfile['primaryContact']>) => {
+    setProfile(prev => ({
+      ...prev,
+      primaryContact: { ...prev.primaryContact, ...updates }
+    }));
+  };
+
+  const toggleGoal = (goalId: string) => {
+    setProfile(prev => ({
+      ...prev,
+      complianceGoals: prev.complianceGoals.includes(goalId)
+        ? prev.complianceGoals.filter(id => id !== goalId)
+        : [...prev.complianceGoals, goalId]
+    }));
+  };
+
+  const isComplete = profile.companyName && profile.industry && profile.companySize && 
+                   profile.primaryContact.name && profile.primaryContact.email && 
+                   profile.complianceGoals.length > 0 && profile.timeline;
+
+  const handleContinue = () => {
+    onComplete(profile);
+    onNext();
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* Company Basics */}
+      <div className="space-y-6">
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Company Information</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Company Name *</label>
+              <input
+                type="text"
+                value={profile.companyName}
+                onChange={(e) => updateProfile({ companyName: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="Enter your company name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Website</label>
+              <input
+                type="url"
+                value={profile.website}
+                onChange={(e) => updateProfile({ website: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="https://yourcompany.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Industry *</label>
+              <select
+                value={profile.industry}
+                onChange={(e) => updateProfile({ industry: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                <option value="">Select industry</option>
+                {industries.map(industry => (
+                  <option key={industry} value={industry}>{industry}</option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Company Size *</label>
+              <select
+                value={profile.companySize}
+                onChange={(e) => updateProfile({ companySize: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                <option value="">Select size</option>
+                {companySizes.map(size => (
+                  <option key={size} value={size}>{size}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <div className="mt-4">
+            <label className="block text-sm font-medium text-gray-700 mb-2">Company Description</label>
+            <textarea
+              value={profile.description}
+              onChange={(e) => updateProfile({ description: e.target.value })}
+              rows={3}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              placeholder="Brief description of your company and what you do..."
+            />
+          </div>
+        </div>
+
+        {/* Primary Contact */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Primary Contact</h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+              <input
+                type="text"
+                value={profile.primaryContact.name}
+                onChange={(e) => updateContact({ name: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="John Smith"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Email *</label>
+              <input
+                type="email"
+                value={profile.primaryContact.email}
+                onChange={(e) => updateContact({ email: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="john@company.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Role/Title</label>
+              <input
+                type="text"
+                value={profile.primaryContact.role}
+                onChange={(e) => updateContact({ role: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="CTO, Security Manager, etc."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Phone (Optional)</label>
+              <input
+                type="tel"
+                value={profile.primaryContact.phone}
+                onChange={(e) => updateContact({ phone: e.target.value })}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                placeholder="+1 (555) 123-4567"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Compliance Goals */}
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Compliance Goals *</h3>
+          <p className="text-sm text-gray-600 mb-4">Select all that apply to your organization:</p>
+          <div className="grid md:grid-cols-2 gap-3">
+            {complianceGoals.map((goal) => {
+              const IconComponent = goal.icon;
+              const isSelected = profile.complianceGoals.includes(goal.id);
+              return (
+                <div
+                  key={goal.id}
+                  className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                    isSelected
+                      ? 'border-purple-500 bg-purple-50'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                  onClick={() => toggleGoal(goal.id)}
+                >
+                  <IconComponent className="w-5 h-5 text-purple-600 mr-3" />
+                  <span className="font-medium text-gray-900">{goal.label}</span>
+                  {isSelected && <CheckCircle className="w-5 h-5 text-purple-600 ml-auto" />}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Timeline and Budget */}
+        <div className="grid md:grid-cols-3 gap-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Timeline *</label>
+            <select
+              value={profile.timeline}
+              onChange={(e) => updateProfile({ timeline: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            >
+              <option value="">Select timeline</option>
+              {timelines.map(timeline => (
+                <option key={timeline} value={timeline}>{timeline}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Budget (Optional)</label>
+            <select
+              value={profile.budget}
+              onChange={(e) => updateProfile({ budget: e.target.value })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            >
+              <option value="">Select budget range</option>
+              {budgets.map(budget => (
+                <option key={budget} value={budget}>{budget}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Risk Tolerance</label>
+            <select
+              value={profile.riskTolerance}
+              onChange={(e) => updateProfile({ riskTolerance: e.target.value as 'low' | 'medium' | 'high' })}
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            >
+              <option value="low">Low (Conservative)</option>
+              <option value="medium">Medium (Balanced)</option>
+              <option value="high">High (Aggressive)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {/* Progress Summary */}
+      {isComplete && (
+        <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+          <div className="flex items-center gap-2 mb-2">
+            <CheckCircle className="w-5 h-5 text-green-600" />
+            <span className="font-medium text-green-900">Company Profile Complete</span>
+          </div>
+          <p className="text-sm text-green-700">
+            {profile.companyName} • {profile.industry} • {profile.companySize} • {profile.complianceGoals.length} goals selected
+          </p>
+        </div>
+      )}
+
+      <div className="flex justify-end">
+        <button
+          onClick={handleContinue}
+          disabled={!isComplete}
+          className="flex items-center space-x-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <span>Continue</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
+    </div>
+  );
+};
+
 const TemplateSelection: React.FC<OnboardingStepProps & { 
   selectedTemplate: string | null; 
   setSelectedTemplate: (template: string) => void;
@@ -373,6 +661,243 @@ const TemplateSelection: React.FC<OnboardingStepProps & {
           </button>
         </div>
       )}
+    </div>
+  );
+};
+
+const BrowserAutomationStep: React.FC<OnboardingStepProps> = ({ onComplete, onNext, data }) => {
+  const [config, setConfig] = useState<BrowserAutomationConfig>(data || {
+    enableAutomatedEvidenceCollection: true,
+    enableQuestionnaireIntelligence: true,
+    enableRealTimeMonitoring: true,
+    screenshotFrequency: 'daily',
+    alertThreshold: 'medium',
+    automationPlatforms: ['aws']
+  });
+
+  const automationFeatures = [
+    {
+      id: 'evidenceCollection',
+      title: 'Automated Evidence Collection',
+      description: 'Capture screenshots and extract configurations from AWS, GCP, Azure portals automatically',
+      icon: <FileText className="w-6 h-6 text-blue-600" />,
+      enabled: config.enableAutomatedEvidenceCollection,
+      benefits: ['90% reduction in evidence collection time', '95% accuracy in automated capture', 'Always-current compliance data'],
+      techDetails: 'Uses Puppeteer + custom automation scripts'
+    },
+    {
+      id: 'questionnaireIntelligence',
+      title: 'Smart Questionnaire Filling',
+      description: 'AI extracts questions from vendor questionnaires and auto-populates responses using collected evidence',
+      icon: <Zap className="w-6 h-6 text-purple-600" />,
+      enabled: config.enableQuestionnaireIntelligence,
+      benefits: ['80% of responses auto-generated', 'Same-day questionnaire turnaround', 'Faster vendor onboarding'],
+      techDetails: 'Claude/GPT-4 for questionnaire intelligence'
+    },
+    {
+      id: 'realTimeMonitoring',
+      title: 'Real-Time Compliance Monitoring',
+      description: 'Monitor cloud platform security settings for changes and alert when compliance-critical configurations change',
+      icon: <Bell className="w-6 h-6 text-amber-600" />,
+      enabled: config.enableRealTimeMonitoring,
+      benefits: ['Detect compliance drift instantly', 'Maintain fresh evidence automatically', 'Prevent security misconfigurations'],
+      techDetails: 'Continuous monitoring with alerting system'
+    }
+  ];
+
+  const platforms = [
+    { id: 'aws', name: 'AWS', icon: '🌐', description: 'Security Hub, CloudTrail, IAM policies' },
+    { id: 'gcp', name: 'Google Cloud', icon: '☁️', description: 'Security Command Center, IAM' },
+    { id: 'azure', name: 'Microsoft Azure', icon: '🔷', description: 'Security Center, Activity Log' },
+    { id: 'github', name: 'GitHub', icon: '🐙', description: 'Organization security settings' }
+  ];
+
+  const updateConfig = (updates: Partial<BrowserAutomationConfig>) => {
+    setConfig(prev => ({ ...prev, ...updates }));
+  };
+
+  const toggleFeature = (featureId: string) => {
+    switch (featureId) {
+      case 'evidenceCollection':
+        updateConfig({ enableAutomatedEvidenceCollection: !config.enableAutomatedEvidenceCollection });
+        break;
+      case 'questionnaireIntelligence':
+        updateConfig({ enableQuestionnaireIntelligence: !config.enableQuestionnaireIntelligence });
+        break;
+      case 'realTimeMonitoring':
+        updateConfig({ enableRealTimeMonitoring: !config.enableRealTimeMonitoring });
+        break;
+    }
+  };
+
+  const togglePlatform = (platformId: string) => {
+    const platforms = config.automationPlatforms.includes(platformId)
+      ? config.automationPlatforms.filter(id => id !== platformId)
+      : [...config.automationPlatforms, platformId];
+    updateConfig({ automationPlatforms: platforms });
+  };
+
+  const handleContinue = () => {
+    onComplete(config);
+    onNext();
+  };
+
+  return (
+    <div className="space-y-8">
+      {/* Header */}
+      <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
+        <div className="flex items-center gap-3 mb-3">
+          <div className="w-12 h-12 rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center">
+            <Zap className="w-6 h-6 text-white" />
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-blue-900">Browser Automation Features</h3>
+            <p className="text-sm text-blue-700">Configure intelligent automation based on Browser-Use learnings</p>
+          </div>
+        </div>
+        <p className="text-sm text-blue-600">
+          Enable advanced automation features to reduce manual compliance work by 90% and keep your compliance data always current.
+        </p>
+      </div>
+
+      {/* Automation Features */}
+      <div className="space-y-6">
+        <h3 className="text-lg font-semibold text-gray-900">Automation Features</h3>
+        {automationFeatures.map((feature) => (
+          <div key={feature.id} className={`border-2 rounded-lg p-6 transition-all ${
+            feature.enabled ? 'border-purple-500 bg-purple-50' : 'border-gray-200 bg-white'
+          }`}>
+            <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                  {feature.icon}
+                </div>
+                <div className="flex-1">
+                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h4>
+                  <p className="text-gray-600 mb-4">{feature.description}</p>
+                  
+                  <div className="grid md:grid-cols-3 gap-3 mb-4">
+                    {feature.benefits.map((benefit, index) => (
+                      <div key={index} className="flex items-center gap-2 text-sm">
+                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                        <span className="text-gray-700">{benefit}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="text-xs text-gray-500 bg-gray-100 px-3 py-2 rounded-lg">
+                    <strong>Technology:</strong> {feature.techDetails}
+                  </div>
+                </div>
+              </div>
+              
+              <button
+                onClick={() => toggleFeature(feature.id)}
+                className={`w-16 h-8 rounded-full transition-colors relative ${
+                  feature.enabled ? 'bg-purple-600' : 'bg-gray-300'
+                }`}
+              >
+                <div className={`w-6 h-6 bg-white rounded-full absolute top-1 transition-transform ${
+                  feature.enabled ? 'translate-x-9' : 'translate-x-1'
+                }`} />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Platform Selection */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-gray-900">Automation Platforms</h3>
+        <p className="text-sm text-gray-600">Select which platforms to enable for automated evidence collection:</p>
+        
+        <div className="grid md:grid-cols-2 gap-4">
+          {platforms.map((platform) => {
+            const isSelected = config.automationPlatforms.includes(platform.id);
+            return (
+              <div
+                key={platform.id}
+                className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                  isSelected
+                    ? 'border-blue-500 bg-blue-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                }`}
+                onClick={() => togglePlatform(platform.id)}
+              >
+                <span className="text-2xl mr-4">{platform.icon}</span>
+                <div className="flex-1">
+                  <div className="font-medium text-gray-900">{platform.name}</div>
+                  <div className="text-sm text-gray-600">{platform.description}</div>
+                </div>
+                {isSelected && <CheckCircle className="w-5 h-5 text-blue-500" />}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Configuration Options */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Screenshot Frequency</label>
+          <select
+            value={config.screenshotFrequency}
+            onChange={(e) => updateConfig({ screenshotFrequency: e.target.value as 'daily' | 'weekly' | 'monthly' })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          >
+            <option value="daily">Daily (Recommended)</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Alert Threshold</label>
+          <select
+            value={config.alertThreshold}
+            onChange={(e) => updateConfig({ alertThreshold: e.target.value as 'low' | 'medium' | 'high' })}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          >
+            <option value="low">Low (All changes)</option>
+            <option value="medium">Medium (Compliance-relevant)</option>
+            <option value="high">High (Critical only)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Summary */}
+      <div className="bg-white border border-gray-200 rounded-lg p-6">
+        <h3 className="font-semibold text-gray-900 mb-4">Automation Summary</h3>
+        <div className="grid grid-cols-4 gap-4 text-center">
+          <div>
+            <div className="text-2xl font-bold text-blue-600">
+              {[config.enableAutomatedEvidenceCollection, config.enableQuestionnaireIntelligence, config.enableRealTimeMonitoring].filter(Boolean).length}/3
+            </div>
+            <div className="text-sm text-gray-600">Features Enabled</div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold text-purple-600">{config.automationPlatforms.length}</div>
+            <div className="text-sm text-gray-600">Platforms</div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold text-green-600">90%</div>
+            <div className="text-sm text-gray-600">Work Reduction</div>
+          </div>
+          <div>
+            <div className="text-2xl font-bold text-amber-600">{config.screenshotFrequency}</div>
+            <div className="text-sm text-gray-600">Frequency</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex justify-end">
+        <button
+          onClick={handleContinue}
+          className="flex items-center space-x-2 px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+        >
+          <span>Continue to Cloud Setup</span>
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      </div>
     </div>
   );
 };
