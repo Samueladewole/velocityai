@@ -27,18 +27,18 @@ const EnhancedHero = () => {
           {/* Content */}
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
-              <span className="text-emerald-400 text-sm font-medium">Enterprise-Grade Security Platform</span>
+              <span className="text-emerald-400 text-sm font-medium">10 AI Agents • Real-time Monitoring • EU + US Compliance</span>
             </div>
             
             <h1 className="font-serif text-5xl lg:text-7xl font-light text-white mb-6 leading-tight">
-              Digital Trust
+              Multi-Agent AI
               <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-                Accelerated
+                Compliance Platform
               </span>
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
-              Transform your compliance journey from months to minutes with AI-powered automation and real-time trust scoring.
+              10 specialized AI agents automate SOC 2, ISO 27001, GDPR, EU AI Act, NIS2, and DORA compliance with cryptographic verification and real-time monitoring.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -61,15 +61,57 @@ const EnhancedHero = () => {
               </button>
             </div>
             
-            {/* Trust Score Display */}
+            {/* Agent Status Display */}
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-slate-300 font-medium">Your Trust Score</span>
-                <span className="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded">Live Preview</span>
+                <span className="text-slate-300 font-medium">10 AI Agents Active</span>
+                <span className="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded">Real-time</span>
+              </div>
+              <div className="grid grid-cols-5 gap-3 mb-4">
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">AWS</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">GCP</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">GitHub</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">Azure</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">Trust</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">Docs</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">QIE</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">Monitor</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">Observe</span>
+                </div>
+                <div className="text-center">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full mx-auto mb-1 animate-pulse"></div>
+                  <span className="text-xs text-slate-400">Crypto</span>
+                </div>
               </div>
               <div className="flex items-center gap-4">
                 <div className="relative">
-                  <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 100 100">
+                  <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 100 100">
                     <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="8" fill="none" className="text-slate-700" />
                     <circle 
                       cx="50" 
@@ -84,12 +126,20 @@ const EnhancedHero = () => {
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-2xl font-bold text-white">{trustScore}</span>
+                    <span className="text-xl font-bold text-white">{trustScore}</span>
                   </div>
                 </div>
-                <div>
-                  <p className="text-lg font-semibold text-white">Excellent</p>
-                  <p className="text-sm text-slate-400">Ready for enterprise sales</p>
+                <div className="flex-1">
+                  <p className="text-lg font-semibold text-white">Multi-Agent Score</p>
+                  <p className="text-sm text-slate-400">Cryptographically verified</p>
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">SOC 2</span>
+                    <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">GDPR</span>
+                    <span className="text-xs bg-purple-500/20 text-purple-400 px-2 py-1 rounded">ISO 27001</span>
+                    <span className="text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded">EU AI Act</span>
+                    <span className="text-xs bg-pink-500/20 text-pink-400 px-2 py-1 rounded">NIS2</span>
+                    <span className="text-xs bg-indigo-500/20 text-indigo-400 px-2 py-1 rounded">DORA</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -204,22 +254,22 @@ const MetricCard = ({ metric, isActive, onClick }) => {
 const FeatureCards = () => {
   const features = [
     {
-      title: 'AI-Powered Assessment',
-      description: 'Automated compliance scanning that learns from your infrastructure',
+      title: '10 Specialized AI Agents',
+      description: 'AWS, GCP, Azure, GitHub scanners + Trust Engine, Document Generator, QIE Integration, Continuous Monitor, Observability, and Crypto Verification agents',
       icon: <Settings className="w-6 h-6" />,
       color: 'emerald'
     },
     {
-      title: 'Real-time Monitoring',
-      description: 'Continuous compliance tracking with instant alerts',
-      icon: <Bell className="w-6 h-6" />,
-      color: 'amber'
+      title: 'European Compliance Ready',
+      description: 'GDPR, EU AI Act, NIS2, DORA compliance with cryptographic evidence integrity and blockchain verification',
+      icon: <Shield className="w-6 h-6" />,
+      color: 'blue'
     },
     {
-      title: 'Expert Network',
-      description: 'Direct access to compliance experts and auditors',
-      icon: <Users className="w-6 h-6" />,
-      color: 'blue'
+      title: 'Real-time Multi-Agent System',
+      description: 'Rust-powered cryptographic core with sub-100ms trust calculations and WebSocket monitoring dashboard',
+      icon: <Zap className="w-6 h-6" />,
+      color: 'amber'
     }
   ];
 
@@ -228,13 +278,13 @@ const FeatureCards = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-light text-white mb-4">
-            Built for Modern
+            The World's First
             <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-              Security Teams
+              Multi-Agent Compliance Platform
             </span>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            Everything you need to achieve and maintain compliance in one integrated platform
+            10 specialized AI agents working together with cryptographic verification to automate SOC 2, ISO 27001, GDPR, EU AI Act, NIS2, and DORA compliance
           </p>
         </div>
         
