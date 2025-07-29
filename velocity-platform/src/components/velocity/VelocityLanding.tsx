@@ -284,9 +284,62 @@ const FeatureCard = ({ feature, index }) => {
   );
 };
 
-// Enhanced Navigation Component (from docs)
+// Navigation Dropdown Component
+const NavigationDropdown = ({ title, items, isOpen, onToggle, navigate }) => {
+  return (
+    <div className="relative group">
+      <button 
+        onClick={onToggle}
+        className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
+      >
+        {title}
+        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
+      </button>
+      
+      {/* Dropdown Menu */}
+      {isOpen && (
+        <div className="absolute top-full left-0 mt-2 w-80 bg-slate-800/95 backdrop-blur-xl rounded-xl border border-slate-700/50 shadow-2xl py-4 z-50">
+          <div className="px-6 py-2 border-b border-slate-700/50 mb-2">
+            <h3 className="text-white font-semibold text-sm">{title}</h3>
+          </div>
+          <div className="space-y-1">
+            {items.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (item.action) item.action();
+                  else if (item.path) navigate(item.path);
+                  onToggle();
+                }}
+                className="w-full px-6 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 group/item"
+              >
+                <div className="flex items-start gap-3">
+                  <div className={`p-2 rounded-lg bg-${item.color || 'emerald'}-500/10 group-hover/item:bg-${item.color || 'emerald'}-500/20 transition-colors duration-200`}>
+                    {item.icon}
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="text-white font-medium text-sm group-hover/item:text-emerald-400 transition-colors duration-200">
+                      {item.title}
+                    </h4>
+                    <p className="text-slate-400 text-xs mt-1 leading-relaxed">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// Enhanced Navigation Component with Dropdowns
 const EnhancedNavigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState(null);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -294,6 +347,142 @@ const EnhancedNavigation = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => setActiveDropdown(null);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
+
+  const platformItems = [
+    {
+      title: 'Agent Dashboard',
+      description: 'Monitor and manage all AI compliance agents in real-time',
+      icon: <Settings className="w-4 h-4 text-emerald-400" />,
+      path: '/velocity/dashboard',
+      color: 'emerald'
+    },
+    {
+      title: 'Trust Score Engine',
+      description: 'Real-time trust calculations with sub-100ms performance',
+      icon: <TrendingUp className="w-4 h-4 text-blue-400" />,
+      path: '/velocity/dashboard',
+      color: 'blue'
+    },
+    {
+      title: 'Evidence Collection',
+      description: 'Automated evidence gathering from AWS, GCP, Azure, GitHub',
+      icon: <FileText className="w-4 h-4 text-purple-400" />,
+      path: '/velocity/dashboard',
+      color: 'purple'
+    },
+    {
+      title: 'Compliance Monitoring',
+      description: 'Continuous monitoring with drift detection and alerting',
+      icon: <Bell className="w-4 h-4 text-amber-400" />,
+      path: '/velocity/dashboard',
+      color: 'amber'
+    }
+  ];
+
+  const solutionsItems = [
+    {
+      title: 'SOC 2 Compliance',
+      description: 'Automated SOC 2 Type I & II evidence collection and reporting',
+      icon: <Shield className="w-4 h-4 text-emerald-400" />,
+      path: '/velocity/dashboard',
+      color: 'emerald'
+    },
+    {
+      title: 'ISO 27001',
+      description: 'Complete ISO 27001 compliance automation and certification support',
+      icon: <CheckCircle className="w-4 h-4 text-blue-400" />,
+      path: '/velocity/dashboard',
+      color: 'blue'
+    },
+    {
+      title: 'GDPR & Privacy',
+      description: 'EU GDPR compliance with automated privacy impact assessments',
+      icon: <Users className="w-4 h-4 text-purple-400" />,
+      path: '/velocity/dashboard',
+      color: 'purple'
+    },
+    {
+      title: 'Multi-Framework',
+      description: 'Support for HIPAA, PCI DSS, NIST, and custom frameworks',
+      icon: <Zap className="w-4 h-4 text-amber-400" />,
+      path: '/velocity/dashboard',
+      color: 'amber'
+    }
+  ];
+
+  const resourcesItems = [
+    {
+      title: 'Documentation',
+      description: 'Complete API documentation and integration guides',
+      icon: <FileText className="w-4 h-4 text-emerald-400" />,
+      path: '/velocity/docs',
+      color: 'emerald'
+    },
+    {
+      title: 'Compliance Library',
+      description: 'Pre-built templates and controls for major frameworks',
+      icon: <Shield className="w-4 h-4 text-blue-400" />,
+      path: '/velocity/dashboard',
+      color: 'blue'
+    },
+    {
+      title: 'Expert Network',
+      description: 'Direct access to compliance experts and auditors',
+      icon: <Users className="w-4 h-4 text-purple-400" />,
+      path: '/velocity/dashboard',
+      color: 'purple'
+    },
+    {
+      title: 'Community',
+      description: 'Join the Velocity community for best practices and support',
+      icon: <Bell className="w-4 h-4 text-amber-400" />,
+      action: () => window.open('https://community.velocity.ai', '_blank'),
+      color: 'amber'
+    }
+  ];
+
+  const pricingItems = [
+    {
+      title: 'Starter Plan',
+      description: 'Perfect for small teams getting started with compliance',
+      icon: <Clock className="w-4 h-4 text-emerald-400" />,
+      path: '/velocity/pricing',
+      color: 'emerald'
+    },
+    {
+      title: 'Professional',
+      description: 'Advanced features for growing companies and enterprises',
+      icon: <TrendingUp className="w-4 h-4 text-blue-400" />,
+      path: '/velocity/pricing',
+      color: 'blue'
+    },
+    {
+      title: 'Enterprise',
+      description: 'Custom solutions with dedicated support and SLAs',
+      icon: <Shield className="w-4 h-4 text-purple-400" />,
+      path: '/velocity/pricing',
+      color: 'purple'
+    },
+    {
+      title: 'Free Trial',
+      description: '30-day free trial with full access to all features',
+      icon: <Zap className="w-4 h-4 text-amber-400" />,
+      path: '/velocity/signup',
+      color: 'amber'
+    }
+  ];
+
+  const toggleDropdown = (dropdown) => (e) => {
+    e.stopPropagation();
+    setActiveDropdown(activeDropdown === dropdown ? null : dropdown);
+  };
 
   return (
     <nav className={`
@@ -306,7 +495,7 @@ const EnhancedNavigation = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate('/')}>
             <div className="relative">
               <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
@@ -314,51 +503,104 @@ const EnhancedNavigation = () => {
             <span className="text-xl font-bold text-white font-serif">Velocity</span>
           </div>
           
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          {/* Navigation Links with Dropdowns */}
+          <div className="hidden lg:flex items-center space-x-6">
+            <NavigationDropdown
+              title="Platform"
+              items={platformItems}
+              isOpen={activeDropdown === 'platform'}
+              onToggle={toggleDropdown('platform')}
+              navigate={navigate}
+            />
+            <NavigationDropdown
+              title="Solutions"
+              items={solutionsItems}
+              isOpen={activeDropdown === 'solutions'}
+              onToggle={toggleDropdown('solutions')}
+              navigate={navigate}
+            />
+            <NavigationDropdown
+              title="Resources"
+              items={resourcesItems}
+              isOpen={activeDropdown === 'resources'}
+              onToggle={toggleDropdown('resources')}
+              navigate={navigate}
+            />
+            <NavigationDropdown
+              title="Pricing"
+              items={pricingItems}
+              isOpen={activeDropdown === 'pricing'}
+              onToggle={toggleDropdown('pricing')}
+              navigate={navigate}
+            />
+          </div>
+          
+          {/* Mobile Menu Button */}
+          <div className="lg:hidden">
             <button 
-              onClick={() => navigate('/velocity/dashboard')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
+              onClick={toggleDropdown('mobile')}
+              className="text-slate-300 hover:text-white transition-colors"
             >
-              Platform
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button 
-              onClick={() => navigate('/velocity/dashboard')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Solutions
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button 
-              onClick={() => navigate('/velocity/dashboard')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Resources
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button 
-              onClick={() => navigate('/velocity/login')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Pricing
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
             </button>
           </div>
           
           {/* CTA Section */}
-          <div className="flex items-center gap-4">
-            <button className="text-slate-300 hover:text-white transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
+          <div className="hidden lg:flex items-center gap-4">
             <button 
               onClick={() => navigate('/velocity/login')}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+              className="text-slate-300 hover:text-white transition-colors font-medium"
+            >
+              Sign In
+            </button>
+            <button 
+              onClick={() => navigate('/velocity/signup')}
+              className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-emerald-500/25"
             >
               Get Started
             </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {activeDropdown === 'mobile' && (
+          <div className="lg:hidden py-4 border-t border-slate-800/50">
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="text-white font-semibold text-sm px-4">Platform</h3>
+                {platformItems.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      if (item.action) item.action();
+                      else if (item.path) navigate(item.path);
+                      setActiveDropdown(null);
+                    }}
+                    className="w-full text-left px-4 py-2 text-slate-300 hover:text-white transition-colors"
+                  >
+                    {item.title}
+                  </button>
+                ))}
+              </div>
+              <div className="border-t border-slate-800/50 pt-4 px-4 space-y-2">
+                <button 
+                  onClick={() => navigate('/velocity/login')}
+                  className="w-full text-left text-slate-300 hover:text-white transition-colors"
+                >
+                  Sign In
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/signup')}
+                  className="w-full bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                >
+                  Get Started
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );

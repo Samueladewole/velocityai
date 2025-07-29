@@ -213,6 +213,10 @@ class AgentOrchestrator:
             GCPScannerFactory,
             GitHubAnalyzerFactory,
             AzureMonitorFactory,
+            QIEIntegrationFactory,
+            TrustScoreEngineFactory,
+            ContinuousMonitorFactory,
+            ObservabilitySpecialistFactory,
             CryptographicVerificationFactory
         )
         
@@ -221,6 +225,10 @@ class AgentOrchestrator:
             'gcp-scanner': GCPScannerFactory,
             'github-analyzer': GitHubAnalyzerFactory,
             'azure-monitor': AzureMonitorFactory,
+            'qie-integration': QIEIntegrationFactory,
+            'trust-score-engine': TrustScoreEngineFactory,
+            'continuous-monitor': ContinuousMonitorFactory,
+            'observability-specialist': ObservabilitySpecialistFactory,
             'cryptographic-verification': CryptographicVerificationFactory
         })
         

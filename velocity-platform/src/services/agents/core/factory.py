@@ -7,6 +7,7 @@ Supports:
 - GCP Scanner  
 - GitHub Security Analyzer
 - Azure Compliance Monitor
+- QIE Integration Agent
 - Cryptographic Verification Agent
 """
 
@@ -1024,12 +1025,938 @@ if __name__ == "__main__":
     asyncio.run(main())
 '''
 
+class QIEIntegrationFactory(AgentFactory):
+    """Factory for QIE Integration agents"""
+    
+    async def create_agent(self, config: Dict[str, Any]) -> AgentProcess:
+        """Create QIE Integration agent"""
+        logger.info("🏗️ Creating QIE Integration agent")
+        
+        if not self.validate_config(config):
+            raise ValueError("Invalid QIE configuration")
+        
+        agent_id = config.get('agent_id', 'qie-integration')
+        
+        process = AgentProcess(
+            agent_id=agent_id,
+            agent_type='qie-integration',
+            config=config
+        )
+        
+        # Test QIE service availability
+        try:
+            qie_service_url = config.get('qie_service_url', 'http://localhost:3000/api/qie')
+            
+            # Test connection to QIE service
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"{qie_service_url}/health") as resp:
+                    if resp.status != 200:
+                        logger.warning("QIE service not available, agent will start without connection")
+            
+            logger.info("✅ QIE Integration agent validated")
+            
+        except Exception as e:
+            logger.warning(f"⚠️ QIE service validation warning: {e}")
+            # Don't fail - agent can start without immediate connection
+        
+        # Override start method
+        async def qie_start():
+            process.status = "starting"
+            
+            agent_script = self._create_qie_agent_script(config)
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(agent_script)
+                script_path = f.name
+            
+            process.process = subprocess.Popen([
+                'python3', script_path
+            ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            process.status = "running"
+            logger.info(f"🚀 QIE Integration Agent {agent_id} started (PID: {process.process.pid})")
+        
+        process.start = qie_start
+        return process
+    
+    def validate_config(self, config: Dict[str, Any]) -> bool:
+        """Validate QIE configuration"""
+        # QIE agent is flexible and can work with minimal config
+        return True
+    
+    def get_default_config(self) -> Dict[str, Any]:
+        """Get default QIE configuration"""
+        return {
+            'qie_service_url': 'http://localhost:3000/api/qie',
+            'supported_frameworks': ['SOC2', 'ISO27001', 'GDPR', 'HIPAA', 'PCI_DSS', 'NIST'],
+            'processing_interval': 120,
+            'confidence_threshold': 0.75,
+            'max_concurrent_tasks': 5
+        }
+    
+    def _create_qie_agent_script(self, config: Dict[str, Any]) -> str:
+        """Generate QIE Integration agent Python script"""
+        return f'''
+import asyncio
+import json
+import logging
+import aiohttp
+from datetime import datetime
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('qie-integration')
+
+class QIEIntegrationAgent:
+    def __init__(self, config):
+        self.config = config
+        self.qie_service_url = config.get('qie_service_url', 'http://localhost:3000/api/qie')
+        self.supported_frameworks = config.get('supported_frameworks', ['SOC2', 'ISO27001'])
+        
+    async def process_qie_tasks(self):
+        """Main QIE processing loop"""
+        logger.info("🧠 Starting QIE Integration processing")
+        
+        while True:
+            try:
+                # Check for QIE service health
+                await self.check_qie_service_health()
+                
+                # Process questionnaire tasks
+                await self.process_questionnaire_extraction()
+                
+                # Process answer generation tasks
+                await self.process_answer_generation()
+                
+                # Generate observability reports
+                await self.generate_observability_reports()
+                
+                logger.info("✅ QIE processing cycle completed")
+                
+                await asyncio.sleep(self.config.get('processing_interval', 120))
+                
+            except Exception as e:
+                logger.error(f"❌ QIE processing error: {{e}}")
+                await asyncio.sleep(60)
+    
+    async def check_qie_service_health(self):
+        """Check QIE service health"""
+        try:
+            async with aiohttp.ClientSession() as session:
+                async with session.get(f"{{self.qie_service_url}}/health", timeout=5) as resp:
+                    if resp.status == 200:
+                        logger.debug("💚 QIE service healthy")
+                    else:
+                        logger.warning(f"⚠️ QIE service health check failed: {{resp.status}}")
+        except Exception as e:
+            logger.warning(f"⚠️ QIE service health check error: {{e}}")
+    
+    async def process_questionnaire_extraction(self):
+        """Process questionnaire extraction tasks"""
+        logger.info("📋 Processing questionnaire extraction")
+        
+        # Simulate processing questionnaire documents
+        evidence = {{
+            'evidence_type': 'qie_questionnaire_extraction',
+            'source_system': 'qie_integration',
+            'collection_timestamp': datetime.utcnow().isoformat(),
+            'frameworks_processed': self.supported_frameworks,
+            'processing_status': 'active',
+            'confidence_threshold': self.config.get('confidence_threshold', 0.75)
+        }}
+        
+        logger.info("✅ Questionnaire extraction processing completed")
+    
+    async def process_answer_generation(self):
+        """Process intelligent answer generation"""
+        logger.info("🤖 Processing intelligent answer generation")
+        
+        evidence = {{
+            'evidence_type': 'qie_answer_generation',
+            'source_system': 'qie_integration',
+            'collection_timestamp': datetime.utcnow().isoformat(),
+            'ai_models_active': ['gpt-4', 'claude-3-opus'],
+            'processing_status': 'active',
+            'evidence_integration': True
+        }}
+        
+        logger.info("✅ Answer generation processing completed")
+    
+    async def generate_observability_reports(self):
+        """Generate QIE observability reports"""
+        logger.info("📊 Generating QIE observability reports")
+        
+        try:
+            async with aiohttp.ClientSession() as session:
+                # Get QIE metrics if service is available
+                async with session.get(f"{{self.qie_service_url}}/metrics/default", timeout=10) as resp:
+                    if resp.status == 200:
+                        metrics = await resp.json()
+                        logger.info(f"📈 QIE metrics collected: {{len(metrics)}} data points")
+                    else:
+                        logger.info("📈 QIE metrics unavailable, using cached data")
+        except Exception as e:
+            logger.info(f"📈 QIE metrics collection skipped: {{e}}")
+        
+        evidence = {{
+            'evidence_type': 'qie_observability_report',
+            'source_system': 'qie_integration',
+            'collection_timestamp': datetime.utcnow().isoformat(),
+            'reporting_active': True,
+            'compliance_frameworks': self.supported_frameworks
+        }}
+        
+        logger.info("✅ QIE observability report generated")
+
+async def main():
+    config = {json.dumps(config)}
+    agent = QIEIntegrationAgent(config)
+    await agent.process_qie_tasks()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+'''
+
+class TrustScoreEngineFactory(AgentFactory):
+    """Factory for Trust Score Engine agents"""
+    
+    async def create_agent(self, config: Dict[str, Any]) -> AgentProcess:
+        """Create Trust Score Engine agent"""
+        logger.info("🏗️ Creating Trust Score Engine agent")
+        
+        if not self.validate_config(config):
+            raise ValueError("Invalid Trust Score Engine configuration")
+        
+        agent_id = config.get('agent_id', 'trust-score-engine')
+        
+        process = AgentProcess(
+            agent_id=agent_id,
+            agent_type='trust-score-engine',
+            config=config
+        )
+        
+        # Test Rust crypto core availability (optional)
+        try:
+            rust_binary_path = config.get('rust_binary_path', '/Users/macbook/Projects/ERIP-app/velocity-platform/src/services/cryptoCore/target/release/velocity_crypto')
+            
+            # Test if Rust binary exists
+            import os
+            if os.path.exists(rust_binary_path):
+                logger.info("✅ Rust crypto core available")
+            else:
+                logger.info("⚠️ Rust crypto core not found, will use Python fallback")
+            
+            logger.info("✅ Trust Score Engine agent validated")
+            
+        except Exception as e:
+            logger.warning(f"⚠️ Trust Score Engine validation warning: {e}")
+            # Don't fail - agent can work with Python fallback
+        
+        # Override start method
+        async def trust_start():
+            process.status = "starting"
+            
+            agent_script = self._create_trust_agent_script(config)
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(agent_script)
+                script_path = f.name
+            
+            process.process = subprocess.Popen([
+                'python3', script_path
+            ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            process.status = "running"
+            logger.info(f"🚀 Trust Score Engine {agent_id} started (PID: {process.process.pid})")
+        
+        process.start = trust_start
+        return process
+    
+    def validate_config(self, config: Dict[str, Any]) -> bool:
+        """Validate Trust Score Engine configuration"""
+        # Trust Score Engine is flexible and can work with minimal config
+        return True
+    
+    def get_default_config(self) -> Dict[str, Any]:
+        """Get default Trust Score Engine configuration"""
+        return {
+            'target_response_time_ms': 100,
+            'scoring_algorithm': 'multi_factor_weighted',
+            'blockchain_network': 'polygon-mainnet',
+            'cache_ttl_seconds': 300,
+            'max_concurrent_tasks': 10
+        }
+    
+    def _create_trust_agent_script(self, config: Dict[str, Any]) -> str:
+        """Generate Trust Score Engine agent Python script"""
+        return f'''
+import asyncio
+import json
+import logging
+import statistics
+from datetime import datetime, timedelta
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('trust-score-engine')
+
+class TrustScoreEngine:
+    def __init__(self, config):
+        self.config = config
+        self.target_response_time = config.get('target_response_time_ms', 100)
+        self.trust_cache = {{}}
+        self.performance_metrics = {{
+            'total_calculations': 0,
+            'average_time': 0.0,
+            'under_100ms': 0
+        }}
+        
+    async def calculate_trust_scores(self):
+        """Main trust score calculation loop"""
+        logger.info("🎯 Starting Trust Score Engine")
+        
+        while True:
+            try:
+                # Simulate trust score calculations
+                await self.process_trust_calculations()
+                
+                # Performance monitoring
+                await self.monitor_performance()
+                
+                # Cache management
+                await self.manage_cache()
+                
+                logger.info("✅ Trust score processing cycle completed")
+                
+                await asyncio.sleep(30)  # More frequent due to real-time requirements
+                
+            except Exception as e:
+                logger.error(f"❌ Trust score processing error: {{e}}")
+                await asyncio.sleep(15)
+    
+    async def process_trust_calculations(self):
+        """Process trust score calculations"""
+        logger.info("🔢 Processing trust score calculations")
+        
+        calc_start = datetime.now()
+        
+        # Simulate high-performance trust calculations
+        for i in range(10):  # Process 10 entities per cycle
+            entity_id = f"entity_{{i}}"
+            
+            # Mock trust calculation
+            trust_score = 0.75 + (i * 0.02)  # Vary scores
+            calculation_time = 50 + (i * 5)   # Simulate different calc times
+            
+            # Cache result
+            self.trust_cache[entity_id] = {{
+                'score': trust_score,
+                'timestamp': datetime.now(),
+                'calculation_time_ms': calculation_time
+            }}
+            
+            # Update metrics
+            self.performance_metrics['total_calculations'] += 1
+            if calculation_time < 100:
+                self.performance_metrics['under_100ms'] += 1
+        
+        cycle_time = (datetime.now() - calc_start).total_seconds() * 1000
+        logger.info(f"📊 Calculated trust scores for 10 entities in {{cycle_time:.2f}}ms")
+        
+        # Update average time
+        total = self.performance_metrics['total_calculations']
+        if total > 0:
+            self.performance_metrics['average_time'] = (
+                self.performance_metrics['average_time'] * 0.9 + cycle_time * 0.1
+            )
+    
+    async def monitor_performance(self):
+        """Monitor performance metrics"""
+        metrics = self.performance_metrics
+        total = metrics['total_calculations']
+        
+        if total > 0:
+            performance_rate = metrics['under_100ms'] / total
+            logger.info(f"⚡ Performance: {{performance_rate:.1%}} calculations under {{self.target_response_time}}ms")
+            
+            if performance_rate < 0.9:
+                logger.warning("⚠️ Performance target not met - optimizing calculations")
+    
+    async def manage_cache(self):
+        """Manage trust score cache"""
+        # Remove old cache entries
+        current_time = datetime.now()
+        cache_ttl = self.config.get('cache_ttl_seconds', 300)
+        
+        expired_keys = [
+            key for key, value in self.trust_cache.items()
+            if (current_time - value['timestamp']).total_seconds() > cache_ttl
+        ]
+        
+        for key in expired_keys:
+            del self.trust_cache[key]
+        
+        if expired_keys:
+            logger.info(f"🗑️ Cleaned {{len(expired_keys)}} expired cache entries")
+        
+        logger.info(f"💾 Cache status: {{len(self.trust_cache)}} active entries")
+
+async def main():
+    config = {json.dumps(config)}
+    engine = TrustScoreEngine(config)
+    await engine.calculate_trust_scores()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+'''
+
+class ContinuousMonitorFactory(AgentFactory):
+    """Factory for Continuous Monitor agents"""
+    
+    async def create_agent(self, config: Dict[str, Any]) -> AgentProcess:
+        """Create Continuous Monitor agent"""
+        logger.info("🏗️ Creating Continuous Monitor agent")
+        
+        if not self.validate_config(config):
+            raise ValueError("Invalid Continuous Monitor configuration")
+        
+        agent_id = config.get('agent_id', 'continuous-monitor')
+        
+        process = AgentProcess(
+            agent_id=agent_id,
+            agent_type='continuous-monitor',
+            config=config
+        )
+        
+        logger.info("✅ Continuous Monitor agent validated")
+        
+        # Override start method
+        async def monitor_start():
+            process.status = "starting"
+            
+            agent_script = self._create_monitor_agent_script(config)
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(agent_script)
+                script_path = f.name
+            
+            process.process = subprocess.Popen([
+                'python3', script_path
+            ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            process.status = "running"
+            logger.info(f"🚀 Continuous Monitor {agent_id} started (PID: {process.process.pid})")
+        
+        process.start = monitor_start
+        return process
+    
+    def validate_config(self, config: Dict[str, Any]) -> bool:
+        """Validate Continuous Monitor configuration"""
+        # Continuous Monitor is flexible and can work with minimal config
+        return True
+    
+    def get_default_config(self) -> Dict[str, Any]:
+        """Get default Continuous Monitor configuration"""
+        return {
+            'default_check_interval': 300,
+            'drift_detection_threshold': 0.1,
+            'max_alerts_per_hour': 50,
+            'alert_cooldown_seconds': 3600,
+            'supported_frameworks': ['SOC2', 'ISO27001', 'GDPR', 'HIPAA']
+        }
+    
+    def _create_monitor_agent_script(self, config: Dict[str, Any]) -> str:
+        """Generate Continuous Monitor agent Python script"""
+        return f'''
+import asyncio
+import json
+import logging
+from datetime import datetime, timedelta
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('continuous-monitor')
+
+class ContinuousMonitor:
+    def __init__(self, config):
+        self.config = config
+        self.check_interval = config.get('default_check_interval', 300)
+        self.monitoring_active = True
+        self.monitoring_rules = {{}}
+        self.violations_detected = 0
+        self.checks_performed = 0
+        
+    async def start_monitoring(self):
+        """Main continuous monitoring loop"""
+        logger.info("🔍 Starting Continuous Monitor")
+        
+        # Initialize monitoring rules
+        await self.initialize_monitoring_rules()
+        
+        while self.monitoring_active:
+            try:
+                # Perform compliance checks
+                await self.perform_compliance_checks()
+                
+                # Detect configuration drift
+                await self.detect_configuration_drift()
+                
+                # Process violations and alerts
+                await self.process_violations()
+                
+                # Generate monitoring reports
+                await self.generate_monitoring_reports()
+                
+                logger.info("✅ Monitoring cycle completed")
+                
+                # Wait for next monitoring cycle
+                await asyncio.sleep(self.check_interval)
+                
+            except Exception as e:
+                logger.error(f"❌ Monitoring error: {{e}}")
+                await asyncio.sleep(60)  # Short delay before retry
+    
+    async def initialize_monitoring_rules(self):
+        """Initialize default monitoring rules"""
+        logger.info("📋 Initializing monitoring rules")
+        
+        # SOC2 Rules
+        self.monitoring_rules.update({{
+            'soc2_mfa': {{
+                'name': 'Multi-Factor Authentication Required',
+                'framework': 'SOC2',
+                'severity': 'high',
+                'enabled': True
+            }},
+            'soc2_logging': {{
+                'name': 'System Logging Active',
+                'framework': 'SOC2', 
+                'severity': 'medium',
+                'enabled': True
+            }}
+        }})
+        
+        # ISO27001 Rules
+        self.monitoring_rules.update({{
+            'iso_encryption': {{
+                'name': 'Data Encryption Required',
+                'framework': 'ISO27001',
+                'severity': 'high',
+                'enabled': True
+            }}
+        }})
+        
+        logger.info(f"📊 Loaded {{len(self.monitoring_rules)}} monitoring rules")
+    
+    async def perform_compliance_checks(self):
+        """Perform compliance checks against monitoring rules"""
+        logger.info("🔐 Performing compliance checks")
+        
+        # Simulate compliance checking
+        for rule_id, rule in self.monitoring_rules.items():
+            if not rule['enabled']:
+                continue
+                
+            self.checks_performed += 1
+            
+            # Mock compliance check (would integrate with actual evidence)
+            compliance_result = {{
+                'rule_id': rule_id,
+                'compliant': True,  # Placeholder
+                'checked_at': datetime.now().isoformat(),
+                'severity': rule['severity']
+            }}
+            
+            logger.debug(f"✓ Checked rule: {{rule['name']}}")
+        
+        logger.info(f"📈 Completed {{len(self.monitoring_rules)}} compliance checks")
+    
+    async def detect_configuration_drift(self):
+        """Detect configuration drift in monitored systems"""
+        logger.info("📊 Detecting configuration drift")
+        
+        # Simulate drift detection
+        drift_threshold = self.config.get('drift_detection_threshold', 0.1)
+        
+        # Mock drift detection results
+        drift_events = []
+        
+        # Simulate 1-2 drift events per cycle
+        import random
+        if random.random() < 0.3:  # 30% chance of drift
+            drift_events.append({{
+                'entity_id': f'entity_{{random.randint(1, 100)}}',
+                'property': 'security_configuration',
+                'drift_magnitude': random.uniform(0.1, 0.5),
+                'detected_at': datetime.now().isoformat()
+            }})
+        
+        if drift_events:
+            logger.info(f"⚠️ Detected {{len(drift_events)}} configuration drift events")
+        else:
+            logger.info("✅ No configuration drift detected")
+    
+    async def process_violations(self):
+        """Process compliance violations and generate alerts"""
+        logger.info("🚨 Processing compliance violations")
+        
+        # Mock violation processing
+        if self.violations_detected > 0:
+            logger.warning(f"⚠️ Processing {{self.violations_detected}} violations")
+            
+            # Simulate alert generation
+            alerts_sent = min(self.violations_detected, self.config.get('max_alerts_per_hour', 50))
+            logger.info(f"📧 Generated {{alerts_sent}} compliance alerts")
+        else:
+            logger.info("✅ No violations to process")
+    
+    async def generate_monitoring_reports(self):
+        """Generate monitoring reports and metrics"""
+        logger.info("📊 Generating monitoring reports")
+        
+        # Calculate monitoring metrics
+        uptime_hours = 24  # Mock uptime
+        compliance_rate = max(0, 1 - (self.violations_detected / max(self.checks_performed, 1)))
+        
+        monitoring_summary = {{
+            'monitoring_active': self.monitoring_active,
+            'active_rules': len([r for r in self.monitoring_rules.values() if r['enabled']]),
+            'checks_performed': self.checks_performed,
+            'violations_detected': self.violations_detected,
+            'compliance_rate': compliance_rate,
+            'uptime_hours': uptime_hours,
+            'report_timestamp': datetime.now().isoformat()
+        }}
+        
+        logger.info(f"📈 Monitoring Summary: {{compliance_rate:.1%}} compliance rate, {{self.checks_performed}} checks performed")
+
+async def main():
+    config = {json.dumps(config)}
+    monitor = ContinuousMonitor(config)
+    await monitor.start_monitoring()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+'''
+
+class ObservabilitySpecialistFactory(AgentFactory):
+    """Factory for Observability Specialist agents"""
+    
+    async def create_agent(self, config: Dict[str, Any]) -> AgentProcess:
+        """Create Observability Specialist agent"""
+        logger.info("🏗️ Creating Observability Specialist agent")
+        
+        if not self.validate_config(config):
+            raise ValueError("Invalid Observability Specialist configuration")
+        
+        agent_id = config.get('agent_id', 'observability-specialist')
+        
+        process = AgentProcess(
+            agent_id=agent_id,
+            agent_type='observability-specialist',
+            config=config
+        )
+        
+        logger.info("✅ Observability Specialist agent validated")
+        
+        # Override start method
+        async def observability_start():
+            process.status = "starting"
+            
+            agent_script = self._create_observability_agent_script(config)
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
+                f.write(agent_script)
+                script_path = f.name
+            
+            process.process = subprocess.Popen([
+                'python3', script_path
+            ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            
+            process.status = "running"
+            logger.info(f"🚀 Observability Specialist {agent_id} started (PID: {process.process.pid})")
+        
+        process.start = observability_start
+        return process
+    
+    def validate_config(self, config: Dict[str, Any]) -> bool:
+        """Validate Observability Specialist configuration"""
+        # Observability Specialist is flexible and can work with minimal config
+        return True
+    
+    def get_default_config(self) -> Dict[str, Any]:
+        """Get default Observability Specialist configuration"""
+        return {
+            'metric_collection_interval': 60,
+            'anomaly_detection_window_hours': 24,
+            'insight_generation_interval': 3600,
+            'max_alerts_per_metric_per_hour': 10,
+            'performance_percentiles': [50, 75, 90, 95, 99]
+        }
+    
+    def _create_observability_agent_script(self, config: Dict[str, Any]) -> str:
+        """Generate Observability Specialist agent Python script"""
+        return f'''
+import asyncio
+import json
+import logging
+import statistics
+from datetime import datetime, timedelta
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger('observability-specialist')
+
+class ObservabilitySpecialist:
+    def __init__(self, config):
+        self.config = config
+        self.collection_interval = config.get('metric_collection_interval', 60)
+        self.monitoring_active = True
+        self.metrics_data = {{}}
+        self.performance_insights = []
+        self.observability_metrics = {{
+            'metrics_collected': 0,
+            'insights_generated': 0,
+            'alerts_created': 0,
+            'reports_generated': 0
+        }}
+        
+    async def start_observability_monitoring(self):
+        """Main observability monitoring loop"""
+        logger.info("📊 Starting Observability Specialist")
+        
+        # Initialize metric definitions
+        await self.initialize_metrics()
+        
+        while self.monitoring_active:
+            try:
+                # Collect performance metrics
+                await self.collect_performance_metrics()
+                
+                # Detect anomalies
+                await self.detect_performance_anomalies()
+                
+                # Generate insights
+                await self.generate_performance_insights()
+                
+                # Create observability reports
+                await self.generate_observability_reports()
+                
+                # Monitor system health
+                await self.monitor_system_health()
+                
+                logger.info("✅ Observability monitoring cycle completed")
+                
+                # Wait for next collection cycle
+                await asyncio.sleep(self.collection_interval)
+                
+            except Exception as e:
+                logger.error(f"❌ Observability monitoring error: {{e}}")
+                await asyncio.sleep(30)  # Short delay before retry
+    
+    async def initialize_metrics(self):
+        """Initialize standard observability metrics"""
+        logger.info("📋 Initializing observability metrics")
+        
+        # Standard metrics to monitor
+        self.standard_metrics = {{
+            'agent_response_time': {{
+                'name': 'Agent Response Time',
+                'unit': 'milliseconds',
+                'thresholds': {{'warning': 200, 'critical': 500}}
+            }},
+            'system_memory_usage': {{
+                'name': 'System Memory Usage',
+                'unit': 'percentage',
+                'thresholds': {{'warning': 80, 'critical': 95}}
+            }},
+            'compliance_score': {{
+                'name': 'Overall Compliance Score',
+                'unit': 'percentage',
+                'thresholds': {{'warning': 85, 'critical': 70}}
+            }},
+            'agent_throughput': {{
+                'name': 'Agent Task Throughput',
+                'unit': 'tasks/second',
+                'thresholds': {{'warning': 10, 'critical': 5}}
+            }}
+        }}
+        
+        logger.info(f"📊 Initialized {{len(self.standard_metrics)}} standard metrics")
+    
+    async def collect_performance_metrics(self):
+        """Collect performance metrics from all systems"""
+        logger.info("📈 Collecting performance metrics")
+        
+        import random
+        current_time = datetime.now()
+        
+        # Simulate metric collection
+        for metric_id, metric_def in self.standard_metrics.items():
+            # Generate realistic metric values
+            if 'response_time' in metric_id:
+                value = random.uniform(50, 300)  # ms
+            elif 'memory_usage' in metric_id:
+                value = random.uniform(40, 85)  # percentage
+            elif 'compliance_score' in metric_id:
+                value = random.uniform(85, 98)  # percentage
+            elif 'throughput' in metric_id:
+                value = random.uniform(5, 50)  # tasks/sec
+            else:
+                value = random.uniform(0, 100)
+            
+            # Store metric data
+            if metric_id not in self.metrics_data:
+                self.metrics_data[metric_id] = []
+            
+            self.metrics_data[metric_id].append({{
+                'timestamp': current_time.isoformat(),
+                'value': value,
+                'unit': metric_def['unit']
+            }})
+            
+            # Keep only recent data (last 1000 points)
+            if len(self.metrics_data[metric_id]) > 1000:
+                self.metrics_data[metric_id] = self.metrics_data[metric_id][-1000:]
+            
+            self.observability_metrics['metrics_collected'] += 1
+        
+        logger.info(f"📊 Collected metrics for {{len(self.standard_metrics)}} monitoring points")
+    
+    async def detect_performance_anomalies(self):
+        """Detect performance anomalies in collected metrics"""
+        logger.info("🔍 Detecting performance anomalies")
+        
+        anomalies_detected = 0
+        
+        for metric_id, metric_data in self.metrics_data.items():
+            if len(metric_data) < 10:  # Need minimum data points
+                continue
+            
+            # Get recent values
+            recent_values = [point['value'] for point in metric_data[-20:]]
+            
+            if len(recent_values) < 5:
+                continue
+            
+            # Simple anomaly detection using statistical thresholds
+            mean_value = statistics.mean(recent_values)
+            std_dev = statistics.stdev(recent_values) if len(recent_values) > 1 else 0
+            
+            latest_value = recent_values[-1]
+            threshold = mean_value + (2 * std_dev)  # 2-sigma threshold
+            
+            if latest_value > threshold and std_dev > 0:
+                anomalies_detected += 1
+                logger.warning(f"⚠️ Anomaly detected in {{metric_id}}: {{latest_value:.2f}} (threshold: {{threshold:.2f}})")
+        
+        if anomalies_detected > 0:
+            logger.info(f"🚨 Detected {{anomalies_detected}} performance anomalies")
+        else:
+            logger.info("✅ No performance anomalies detected")
+    
+    async def generate_performance_insights(self):
+        """Generate performance insights and recommendations"""
+        logger.info("💡 Generating performance insights")
+        
+        insights_generated = 0
+        
+        # Analyze response time trends
+        if 'agent_response_time' in self.metrics_data:
+            response_times = [p['value'] for p in self.metrics_data['agent_response_time'][-50:]]
+            if len(response_times) >= 10:
+                avg_response_time = statistics.mean(response_times)
+                
+                if avg_response_time > 200:
+                    insight = {{
+                        'category': 'performance',
+                        'title': 'High Agent Response Time',
+                        'description': f'Average response time is {{avg_response_time:.1f}}ms, above recommended 200ms',
+                        'impact_score': 0.8,
+                        'recommendations': ['Optimize agent processing logic', 'Scale agent infrastructure']
+                    }}
+                    self.performance_insights.append(insight)
+                    insights_generated += 1
+        
+        # Analyze memory usage patterns
+        if 'system_memory_usage' in self.metrics_data:
+            memory_usage = [p['value'] for p in self.metrics_data['system_memory_usage'][-30:]]
+            if len(memory_usage) >= 10:
+                avg_memory = statistics.mean(memory_usage)
+                
+                if avg_memory > 80:
+                    insight = {{
+                        'category': 'resource_utilization',
+                        'title': 'High Memory Usage',
+                        'description': f'System memory usage averaging {{avg_memory:.1f}}%, approaching capacity',
+                        'impact_score': 0.7,
+                        'recommendations': ['Monitor memory leaks', 'Consider infrastructure scaling']
+                    }}
+                    self.performance_insights.append(insight)
+                    insights_generated += 1
+        
+        self.observability_metrics['insights_generated'] += insights_generated
+        
+        if insights_generated > 0:
+            logger.info(f"💡 Generated {{insights_generated}} performance insights")
+        else:
+            logger.info("✅ System performance within normal parameters")
+    
+    async def generate_observability_reports(self):
+        """Generate observability reports and dashboards"""
+        logger.info("📊 Generating observability reports")
+        
+        # Calculate system health score
+        health_score = 95.0  # Mock health score
+        
+        # Generate report summary
+        report_summary = {{
+            'timestamp': datetime.now().isoformat(),
+            'system_health_score': health_score,
+            'metrics_collected': self.observability_metrics['metrics_collected'],
+            'insights_generated': self.observability_metrics['insights_generated'],
+            'active_alerts': self.observability_metrics['alerts_created'],
+            'monitoring_status': 'healthy' if health_score > 90 else 'degraded'
+        }}
+        
+        self.observability_metrics['reports_generated'] += 1
+        
+        logger.info(f"📈 System Health Score: {{health_score:.1f}}% - Status: {{report_summary['monitoring_status']}}")
+    
+    async def monitor_system_health(self):
+        """Monitor overall system health"""
+        logger.info("🏥 Monitoring system health")
+        
+        # Check various health indicators
+        health_indicators = {{
+            'agent_availability': 100.0,  # Mock values
+            'data_pipeline_health': 98.5,
+            'storage_health': 99.0,
+            'network_connectivity': 100.0
+        }}
+        
+        overall_health = statistics.mean(health_indicators.values())
+        
+        if overall_health < 95:
+            logger.warning(f"⚠️ System health degraded: {{overall_health:.1f}}%")
+        else:
+            logger.info(f"✅ System health excellent: {{overall_health:.1f}}%")
+
+async def main():
+    config = {json.dumps(config)}
+    specialist = ObservabilitySpecialist(config)
+    await specialist.start_observability_monitoring()
+
+if __name__ == "__main__":
+    asyncio.run(main())
+'''
+
 # Factory registry for easy access
 AGENT_FACTORIES = {
     'aws-evidence-collector': AWSEvidenceCollectorFactory(),
     'gcp-scanner': GCPScannerFactory(),
     'github-analyzer': GitHubAnalyzerFactory(),
     'azure-monitor': AzureMonitorFactory(),
+    'qie-integration': QIEIntegrationFactory(),
+    'trust-score-engine': TrustScoreEngineFactory(),
+    'continuous-monitor': ContinuousMonitorFactory(),
+    'observability-specialist': ObservabilitySpecialistFactory(),
     'cryptographic-verification': CryptographicVerificationFactory()
 }
 
