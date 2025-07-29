@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import { 
   Mail, 
@@ -12,11 +11,10 @@ import {
   CheckCircle,
   Shield,
   Zap,
-  Globe
+  Globe,
+  Star,
+  Play
 } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import velocityApi from '@/services/velocity/api.service';
-import velocityConfig from '@/config/velocity.config';
 
 const VelocitySignup: React.FC = () => {
   const navigate = useNavigate();
@@ -29,586 +27,466 @@ const VelocitySignup: React.FC = () => {
     email: '',
     password: '',
     company: '',
-    tier: 'starter',
-    agreeToTerms: false
+    tier: 'growth',
+    acceptTerms: false,
+    acceptMarketing: true
   });
 
-  // Check if we're on velocity subdomain or dev path
-  const isSubdomain = window.location.hostname.includes('velocity.') || 
-                     (window.location.hostname === 'localhost' && window.location.pathname.startsWith('/velocity'));
-  const routePrefix = isSubdomain ? '' : '/velocity';
+  const tiers = [
+    {
+      value: 'starter',
+      label: 'Starter',
+      price: '$249/month',
+      description: 'Perfect for small teams',
+      features: ['Up to 5 integrations', 'Basic compliance frameworks', 'Email support']
+    },
+    {
+      value: 'growth',
+      label: 'Growth',
+      price: '$549/month',
+      description: 'For growing organizations',
+      popular: true,
+      features: ['Unlimited integrations', 'All compliance frameworks', 'Priority support', 'Custom agents']
+    },
+    {
+      value: 'enterprise',
+      label: 'Enterprise',
+      price: '$1,249/month',
+      description: 'For large enterprises',
+      features: ['White-label solution', 'Dedicated success manager', 'SLA guarantee', 'Custom deployment']
+    }
+  ];
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
     setFormData(prev => ({
       ...prev,
-      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+      [name]: type === 'checkbox' ? checked : value
     }));
+    
+    if (error) setError('');
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim()) return 'Name is required';
+    if (!formData.email.trim()) return 'Email is required';
+    if (!formData.password || formData.password.length < 8) return 'Password must be at least 8 characters';
+    if (!formData.company.trim()) return 'Company name is required';
+    if (!formData.acceptTerms) return 'You must accept the terms of service';
+    return null;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     setIsLoading(true);
+    setError('');
 
     try {
-      if (!formData.agreeToTerms) {
-        throw new Error('Please agree to the terms and conditions');
-      }
-
-      const response = await velocityApi.signup({
+      // Simulate API call for now
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      
+      // Redirect to onboarding
+      // Store auth token for new signup
+      const authData = {
+        token: 'user_token_' + Date.now(),
+        role: 'user',
+        email: formData.email,
         name: formData.name,
-        email: formData.email,
-        password: formData.password,
         company: formData.company,
-        tier: formData.tier
-      });
-
-      if (response.success) {
-        // Redirect to dashboard after successful signup
-        navigate(`${routePrefix}/dashboard`);
-      } else {
-        throw new Error(response.error || 'Signup failed');
-      }
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Signup failed');
-=======
-import { Link, useNavigate } from 'react-router-dom';
-import { Zap, Mail, Lock, Eye, EyeOff, User, Building } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
-import { useAuthStore } from '@/store';
-import VelocityFooter from './VelocityFooter';
-
-const VelocitySignup: React.FC = () => {
-  const navigate = useNavigate();
-  const { login } = useAuthStore();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    company: '',
-    password: '',
-    confirmPassword: ''
-  });
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    // Validation
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      setIsLoading(false);
-      return;
-    }
-
-    if (formData.password.length < 8) {
-      setError('Password must be at least 8 characters long');
-      setIsLoading(false);
-      return;
-    }
-
-    try {
-      // Import API service dynamically to avoid build issues
-      const { apiService } = await import('@/services/api');
-      
-      // Call real backend API
-      const response = await apiService.signup({
-        email: formData.email,
-        password: formData.password,
-        first_name: formData.firstName,
-        last_name: formData.lastName,
-        company: formData.company || undefined
-      });
-      
-      // Create user object for the store
-      const user = {
-        id: response.user.id,
-        email: response.user.email,
-        name: response.user.name,
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        role: 'user' as const,
-        subscription: {
-          plan: 'starter' as const,
-          status: 'active' as const,
-          periodEnd: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) // 14-day trial
-        }
+        tier: formData.tier,
+        loginTime: new Date().toISOString()
       };
-
-      login(user);
-      navigate('/velocity/onboarding');
+      
+      localStorage.setItem('velocity_auth_token', authData.token);
+      localStorage.setItem('velocity_user', JSON.stringify(authData));
+      
+      // Redirect to dashboard after signup
+      navigate('/dashboard');
     } catch (err: any) {
-      setError(err.message || 'Something went wrong. Please try again.');
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
+      setError('Signup failed. Please try again.');
     } finally {
       setIsLoading(false);
     }
   };
 
-<<<<<<< HEAD
-  const benefits = [
-    { icon: Shield, text: "Enterprise-grade security", color: "text-green-500" },
-    { icon: Zap, text: "30-minute setup", color: "text-yellow-500" },
-    { icon: Globe, text: "Multi-cloud support", color: "text-blue-500" }
-  ];
-
-  const tiers = [
-    { value: 'starter', label: 'Starter', price: '$249/month', description: 'Perfect for small teams' },
-    { value: 'growth', label: 'Growth', price: '$549/month', description: 'For growing organizations', popular: true },
-    { value: 'enterprise', label: 'Enterprise', price: '$1,249/month', description: 'For large enterprises' }
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-purple-800 to-pink-800 flex">
-      {/* Left Side - Form */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
-          {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Join Velocity</h1>
-            <p className="text-gray-600">Start automating your compliance in 30 minutes</p>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 font-sans">
+      <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+        
+        .font-serif {
+          font-family: 'Instrument Serif', serif;
+        }
+        
+        .font-sans {
+          font-family: 'Manrope', sans-serif;
+        }
+      `}</style>
 
-          {/* Error Message */}
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg mb-6">
-=======
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }));
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex flex-col">
-      {/* Header */}
-      <header className="border-b bg-white/80 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <Link to="/velocity" className="flex items-center space-x-2">
-            <div className="h-8 w-8 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
-              <Zap className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold">Velocity AI</span>
-          </Link>
-        </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="flex-grow flex items-center justify-center p-4">
-        <Card className="w-full max-w-md p-8">
-          <div className="text-center mb-8">
-            <div className="h-12 w-12 bg-gradient-to-br from-purple-600 to-pink-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-              <Zap className="h-6 w-6 text-white" />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">
-              Start your free trial
-            </h1>
-            <p className="text-gray-600">
-              Get started with Velocity AI in under 30 minutes
-            </p>
-          </div>
-
-          {error && (
-            <div className="mb-6 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
-              {error}
-            </div>
-          )}
-
-<<<<<<< HEAD
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Field */}
-            <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Full Name
-              </label>
-              <div className="relative">
-                <User className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-                  placeholder="John Doe"
-                  required
-                />
-              </div>
-            </div>
-
-            {/* Email Field */}
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Work Email
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-                  placeholder="john@company.com"
-                  required
-=======
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-2">
-                  First name
-                </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <input
-                    id="firstName"
-                    name="firstName"
-                    type="text"
-                    required
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                    placeholder="John"
-                  />
-                </div>
-              </div>
-              <div>
-                <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-2">
-                  Last name
-                </label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                  <input
-                    id="lastName"
-                    name="lastName"
-                    type="text"
-                    required
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                    placeholder="Doe"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Work email
-              </label>
-              <div className="relative">
-                <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                  placeholder="john@company.com"
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
-                />
-              </div>
-            </div>
-
-<<<<<<< HEAD
-            {/* Company Field */}
-            <div>
-              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                Company Name
-              </label>
-              <div className="relative">
-                <Building className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type="text"
-                  id="company"
-                  name="company"
-                  value={formData.company}
-                  onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-                  placeholder="Acme Inc."
-                  required
-=======
-            <div>
-              <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
-                Company name
-              </label>
-              <div className="relative">
-                <Building className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <input
-                  id="company"
-                  name="company"
-                  type="text"
-                  required
-                  value={formData.company}
-                  onChange={handleInputChange}
-                  className="w-full pl-9 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                  placeholder="Acme Corp"
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
-                />
-              </div>
-            </div>
-
-<<<<<<< HEAD
-            {/* Password Field */}
-=======
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
-                Password
-              </label>
-              <div className="relative">
-<<<<<<< HEAD
-                <Lock className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full pl-10 pr-12 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-                  placeholder="••••••••"
-                  required
-                  minLength={8}
-=======
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
-                  required
-                  value={formData.password}
-                  onChange={handleInputChange}
-                  className="w-full pl-9 pr-10 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                  placeholder="At least 8 characters"
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
-<<<<<<< HEAD
-                  className="absolute right-3 top-3 h-5 w-5 text-gray-400 hover:text-gray-600"
-=======
-                  className="absolute right-3 top-3 h-4 w-4 text-gray-400 hover:text-gray-600"
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
-                >
-                  {showPassword ? <EyeOff /> : <Eye />}
-                </button>
-              </div>
-<<<<<<< HEAD
-              <p className="text-xs text-gray-500 mt-1">Minimum 8 characters</p>
-            </div>
-
-            {/* Tier Selection */}
-            <div>
-              <label htmlFor="tier" className="block text-sm font-medium text-gray-700 mb-2">
-                Choose Your Plan
-              </label>
-              <select
-                id="tier"
-                name="tier"
-                value={formData.tier}
-                onChange={handleInputChange}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-colors"
-              >
-                {tiers.map(tier => (
-                  <option key={tier.value} value={tier.value}>
-                    {tier.label} - {tier.price} ({tier.description})
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Terms Agreement */}
-            <div className="flex items-start">
-              <input
-                type="checkbox"
-                id="agreeToTerms"
-                name="agreeToTerms"
-                checked={formData.agreeToTerms}
-                onChange={handleInputChange}
-                className="mt-1 h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
-                required
-              />
-              <label htmlFor="agreeToTerms" className="ml-3 text-sm text-gray-600">
-                I agree to the{' '}
-                <a href="/legal/terms" className="text-purple-600 hover:text-purple-700 underline">
-                  Terms of Service
-                </a>{' '}
-                and{' '}
-                <a href="/legal/privacy" className="text-purple-600 hover:text-purple-700 underline">
-                  Privacy Policy
-                </a>
-              </label>
-            </div>
-
-            {/* Submit Button */}
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-3 rounded-lg font-semibold transition-all transform hover:scale-105 disabled:opacity-50 disabled:scale-100"
-            >
-              {isLoading ? (
-                <div className="flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Creating Account...
-                </div>
-              ) : (
-                <div className="flex items-center justify-center">
-                  Start Free Trial
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </div>
-              )}
-            </Button>
-          </form>
-
-          {/* Login Link */}
-          <div className="text-center mt-6">
-            <p className="text-gray-600">
-              Already have an account?{' '}
-              <button
-                onClick={() => navigate(`${routePrefix}/login`)}
-                className="text-purple-600 hover:text-purple-700 font-semibold"
-              >
-                Sign in
-              </button>
-            </p>
-          </div>
-        </div>
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      {/* Right Side - Benefits */}
-      <div className="hidden lg:flex flex-1 items-center justify-center p-8">
-        <div className="max-w-md text-white">
-          <h2 className="text-4xl font-bold mb-6">
-            Automate Compliance
-            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-yellow-400">
-              In Minutes
-            </span>
-          </h2>
+      <div className="relative z-10 min-h-screen flex items-center justify-center py-12 px-4">
+        <div className="max-w-6xl w-full mx-auto">
           
-          <p className="text-xl text-purple-100 mb-8">
-            Join 500+ companies using Velocity to achieve continuous compliance 
-            with AI-powered automation.
-          </p>
-
-          <div className="space-y-4">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="flex items-center">
-                <div className={`p-2 rounded-lg bg-white/10 mr-4`}>
-                  <benefit.icon className={`h-6 w-6 ${benefit.color}`} />
-                </div>
-                <span className="text-lg">{benefit.text}</span>
+          {/* Header */}
+          <div className="text-center mb-12">
+            <div className="inline-flex items-center gap-3 mb-6">
+              <div className="relative">
+                <div className="w-12 h-12 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
               </div>
-            ))}
+              <span className="text-2xl font-bold text-white font-serif">Velocity</span>
+            </div>
+            
+            <h1 className="font-serif text-4xl lg:text-5xl font-light text-white mb-4 leading-tight">
+              Start Your 
+              <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+                Digital Trust Journey
+              </span>
+            </h1>
+            
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+              Join hundreds of companies automating their compliance with AI-powered intelligence
+            </p>
           </div>
 
-          <div className="mt-8 p-4 bg-white/10 rounded-lg backdrop-blur-sm">
-            <p className="text-sm text-purple-100">
-              "Velocity reduced our SOC 2 prep time from 6 months to 3 weeks."
-            </p>
-            <p className="text-sm text-purple-300 mt-2">
-              — Sarah Chen, CTO at TechFlow
-            </p>
+          <div className="grid lg:grid-cols-5 gap-8">
+            
+            {/* Main Signup Form */}
+            <div className="lg:col-span-3">
+              <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
+                
+                {/* Plan Selection */}
+                <div className="mb-8">
+                  <h2 className="text-xl font-semibold text-white mb-6 font-serif">Choose Your Plan</h2>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {tiers.map((tier) => (
+                      <div
+                        key={tier.value}
+                        className={`relative border-2 rounded-xl p-4 cursor-pointer transition-all duration-300 ${
+                          formData.tier === tier.value
+                            ? 'border-emerald-400 bg-emerald-500/10'
+                            : 'border-white/20 hover:border-white/40 bg-white/5'
+                        }`}
+                        onClick={() => setFormData(prev => ({ ...prev, tier: tier.value }))}
+                      >
+                        {tier.popular && (
+                          <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                            <span className="bg-gradient-to-r from-emerald-400 to-amber-400 text-slate-900 text-xs font-semibold px-3 py-1 rounded-full">
+                              Popular
+                            </span>
+                          </div>
+                        )}
+                        
+                        <div className="text-center">
+                          <input
+                            type="radio"
+                            name="tier"
+                            value={tier.value}
+                            checked={formData.tier === tier.value}
+                            onChange={handleInputChange}
+                            className="sr-only"
+                          />
+                          <h3 className="font-bold text-white mb-1">{tier.label}</h3>
+                          <p className="text-2xl font-bold text-emerald-400 mb-1">{tier.price}</p>
+                          <p className="text-sm text-slate-400 mb-3">{tier.description}</p>
+                          <ul className="text-xs text-slate-400 space-y-1">
+                            {tier.features.map((feature, index) => (
+                              <li key={index} className="flex items-center">
+                                <CheckCircle className="w-3 h-3 text-emerald-400 mr-1 flex-shrink-0" />
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Signup Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  {error && (
+                    <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl backdrop-blur-sm">
+                      <p className="text-sm text-red-300">{error}</p>
+                    </div>
+                  )}
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {/* Name */}
+                    <div>
+                      <label htmlFor="name" className="block text-sm font-medium text-slate-300 mb-2">
+                        Full Name
+                      </label>
+                      <div className="relative">
+                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent backdrop-blur-sm"
+                          placeholder="John Doe"
+                        />
+                      </div>
+                    </div>
+
+                    {/* Company */}
+                    <div>
+                      <label htmlFor="company" className="block text-sm font-medium text-slate-300 mb-2">
+                        Company Name
+                      </label>
+                      <div className="relative">
+                        <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                        <input
+                          type="text"
+                          id="company"
+                          name="company"
+                          value={formData.company}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent backdrop-blur-sm"
+                          placeholder="Acme Corp"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Email */}
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-slate-300 mb-2">
+                      Work Email
+                    </label>
+                    <div className="relative">
+                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="john@company.com"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Password */}
+                  <div>
+                    <label htmlFor="password" className="block text-sm font-medium text-slate-300 mb-2">
+                      Password
+                    </label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-slate-400" />
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        id="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleInputChange}
+                        required
+                        className="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-transparent backdrop-blur-sm"
+                        placeholder="Create a strong password"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-slate-300"
+                      >
+                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                      </button>
+                    </div>
+                    <p className="mt-1 text-xs text-slate-400">Minimum 8 characters</p>
+                  </div>
+
+                  {/* Terms */}
+                  <div className="space-y-3">
+                    <label className="flex items-start">
+                      <input
+                        type="checkbox"
+                        name="acceptTerms"
+                        checked={formData.acceptTerms}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-0.5 rounded border-white/20 bg-white/10 text-emerald-400 focus:ring-emerald-400"
+                      />
+                      <span className="ml-2 text-sm text-slate-300">
+                        I agree to the{' '}
+                        <a href="/terms" className="text-emerald-400 hover:text-emerald-300 underline">
+                          Terms of Service
+                        </a>{' '}
+                        and{' '}
+                        <a href="/privacy" className="text-emerald-400 hover:text-emerald-300 underline">
+                          Privacy Policy
+                        </a>
+                      </span>
+                    </label>
+
+                    <label className="flex items-start">
+                      <input
+                        type="checkbox"
+                        name="acceptMarketing"
+                        checked={formData.acceptMarketing}
+                        onChange={handleInputChange}
+                        className="mt-0.5 rounded border-white/20 bg-white/10 text-emerald-400 focus:ring-emerald-400"
+                      />
+                      <span className="ml-2 text-sm text-slate-300">
+                        Send me product updates and compliance insights (optional)
+                      </span>
+                    </label>
+                  </div>
+
+                  {/* Submit Button */}
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="group relative overflow-hidden w-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25"
+                  >
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      {isLoading ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Creating account...
+                        </>
+                      ) : (
+                        <>
+                          Start Free Trial
+                          <ArrowRight className="w-4 h-4" />
+                        </>
+                      )}
+                    </span>
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                  </button>
+
+                  {/* Login Link */}
+                  <div className="text-center">
+                    <p className="text-sm text-slate-400">
+                      Already have an account?{' '}
+                      <button
+                        type="button"
+                        onClick={() => navigate('/velocity/login')}
+                        className="font-medium text-emerald-400 hover:text-emerald-300"
+                      >
+                        Sign in
+                      </button>
+                    </p>
+                  </div>
+                </form>
+              </div>
+            </div>
+
+            {/* Benefits Sidebar */}
+            <div className="lg:col-span-2 space-y-6">
+              
+              {/* Trust Score Preview */}
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
+                <div className="flex items-center justify-between mb-4">
+                  <span className="text-slate-300 font-medium">Your Trust Score</span>
+                  <span className="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded">Live Preview</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <svg className="w-16 h-16 transform -rotate-90" viewBox="0 0 100 100">
+                      <circle cx="50" cy="50" r="35" stroke="currentColor" strokeWidth="8" fill="none" className="text-slate-700" />
+                      <circle 
+                        cx="50" 
+                        cy="50" 
+                        r="35" 
+                        stroke="currentColor" 
+                        strokeWidth="8" 
+                        fill="none" 
+                        className="text-emerald-400"
+                        strokeDasharray="206 220"
+                        style={{ transition: 'stroke-dasharray 2s ease-out' }}
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-xl font-bold text-white">94</span>
+                    </div>
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold text-white">Excellent</p>
+                    <p className="text-sm text-slate-400">Ready for enterprise sales</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Benefits */}
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
+                <h3 className="font-semibold text-white mb-4 font-serif">Why Choose Velocity?</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <Zap className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-white">95% Automation</p>
+                      <p className="text-sm text-slate-400">Reduce manual compliance work</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Shield className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-white">Enterprise Security</p>
+                      <p className="text-sm text-slate-400">SOC 2 Type II certified</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Globe className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-medium text-white">Multi-Cloud Support</p>
+                      <p className="text-sm text-slate-400">AWS, GCP, Azure, and more</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Testimonial */}
+              <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
+                <div className="flex items-center gap-1 mb-3">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-400 fill-current" />
+                  ))}
+                </div>
+                <p className="text-white text-sm italic mb-4">
+                  "Velocity reduced our SOC 2 prep time from 6 months to 3 weeks. The AI agents work around the clock."
+                </p>
+                <div>
+                  <div className="font-semibold text-white text-sm">Sarah Chen</div>
+                  <div className="text-emerald-400 text-sm">CISO, TechFlow</div>
+                </div>
+              </div>
+
+              {/* Security Badge */}
+              <div className="bg-gradient-to-br from-emerald-500/10 to-amber-500/10 rounded-2xl p-6 border border-emerald-500/20">
+                <h3 className="font-semibold text-emerald-400 mb-2">Enterprise-Grade Security</h3>
+                <p className="text-sm text-slate-300 mb-4">
+                  Your data is protected with bank-level encryption and industry-leading security practices.
+                </p>
+                <div className="flex flex-wrap items-center gap-3 text-xs text-emerald-400">
+                  <span className="bg-emerald-500/10 px-2 py-1 rounded">SOC 2 Compliant</span>
+                  <span className="bg-emerald-500/10 px-2 py-1 rounded">GDPR Ready</span>
+                  <span className="bg-emerald-500/10 px-2 py-1 rounded">256-bit SSL</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-=======
-            </div>
-
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-2">
-                Confirm password
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? 'text' : 'password'}
-                  autoComplete="new-password"
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  className="w-full pl-9 pr-10 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
-                  placeholder="Confirm your password"
-                />
-                <button
-                  type="button"
-                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                  className="absolute right-3 top-3 h-4 w-4 text-gray-400 hover:text-gray-600"
-                >
-                  {showConfirmPassword ? <EyeOff /> : <Eye />}
-                </button>
-              </div>
-            </div>
-
-            <div className="flex items-start">
-              <input
-                id="terms"
-                type="checkbox"
-                required
-                className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded mt-0.5"
-              />
-              <label htmlFor="terms" className="ml-2 text-sm text-gray-600">
-                I agree to the{' '}
-                <Link to="/legal/terms" className="text-purple-600 hover:underline">
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
-                <Link to="/legal/privacy" className="text-purple-600 hover:underline">
-                  Privacy Policy
-                </Link>
-              </label>
-            </div>
-
-            <Button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-            >
-              {isLoading ? 'Creating account...' : 'Start free trial'}
-            </Button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-sm text-gray-600">
-              Already have an account?{' '}
-              <Link
-                to="/velocity/login"
-                className="text-purple-600 hover:text-purple-500 font-medium"
-              >
-                Sign in
-              </Link>
-            </p>
-          </div>
-
-          <div className="mt-6 pt-6 border-t border-gray-200">
-            <div className="text-center">
-              <p className="text-xs text-gray-500">
-                🚀 Start with a 14-day free trial • No credit card required
-              </p>
-            </div>
-          </div>
-        </Card>
-      </main>
-
-      {/* Footer */}
-      <VelocityFooter />
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
     </div>
   );
 };

@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import VelocityFooter from './VelocityFooter';
-import { Shield, TrendingUp, Users, FileText, Settings, Bell, Search, ChevronDown, Play, CheckCircle, Zap, Clock } from 'lucide-react';
+import { Shield, TrendingUp, Users, FileText, Settings, Bell, Search, ChevronDown, Play, CheckCircle } from 'lucide-react';
 
-// Enhanced Hero Section with Custom Design (from docs)
+// Enhanced Hero Section with Custom Design
 const EnhancedHero = () => {
   const [trustScore, setTrustScore] = useState(0);
-  const navigate = useNavigate();
   
   useEffect(() => {
     const timer = setTimeout(() => setTrustScore(94), 500);
@@ -42,10 +39,7 @@ const EnhancedHero = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <button 
-                onClick={() => navigate('/signup')}
-                className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25"
-              >
+              <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25">
                 <span className="relative z-10 flex items-center gap-2">
                   Start Free Assessment
                   <Play className="w-4 h-4" />
@@ -53,10 +47,7 @@ const EnhancedHero = () => {
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               </button>
               
-              <button 
-                onClick={() => window.open('https://demo.velocity.ai', '_blank')}
-                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-300"
-              >
+              <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-300">
                 Watch Demo
               </button>
             </div>
@@ -105,7 +96,7 @@ const EnhancedHero = () => {
   );
 };
 
-// Custom Dashboard Preview Component (from docs)
+// Custom Dashboard Preview Component
 const DashboardPreview = () => {
   const [activeCard, setActiveCard] = useState(0);
   
@@ -161,7 +152,7 @@ const DashboardPreview = () => {
   );
 };
 
-// Enhanced Metric Card Component (from docs)
+// Enhanced Metric Card Component
 const MetricCard = ({ metric, isActive, onClick }) => {
   const colorClasses = {
     emerald: 'from-emerald-500/20 to-emerald-600/20 border-emerald-500/30',
@@ -200,7 +191,65 @@ const MetricCard = ({ metric, isActive, onClick }) => {
   );
 };
 
-// Feature Cards Section (from docs)
+// Enhanced Navigation Component
+const EnhancedNavigation = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <nav className={`
+      fixed top-0 w-full z-50 transition-all duration-300
+      ${isScrolled 
+        ? 'bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/50' 
+        : 'bg-transparent'
+      }
+    `}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
+            </div>
+            <span className="text-xl font-bold text-white font-serif">Velocity</span>
+          </div>
+          
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8">
+            {['Platform', 'Solutions', 'Resources', 'Pricing'].map((item) => (
+              <a 
+                key={item}
+                href="#" 
+                className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
+              >
+                {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
+              </a>
+            ))}
+          </div>
+          
+          {/* CTA Section */}
+          <div className="flex items-center gap-4">
+            <button className="text-slate-300 hover:text-white transition-colors">
+              <Search className="w-5 h-5" />
+            </button>
+            <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+// Feature Cards Section
 const FeatureCards = () => {
   const features = [
     {
@@ -248,7 +297,7 @@ const FeatureCards = () => {
   );
 };
 
-// Individual Feature Card (from docs)
+// Individual Feature Card
 const FeatureCard = ({ feature, index }) => {
   const [isHovered, setIsHovered] = useState(false);
   
@@ -284,88 +333,8 @@ const FeatureCard = ({ feature, index }) => {
   );
 };
 
-// Enhanced Navigation Component (from docs)
-const EnhancedNavigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
-  const navigate = useNavigate();
-  
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  return (
-    <nav className={`
-      fixed top-0 w-full z-50 transition-all duration-300
-      ${isScrolled 
-        ? 'bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/50' 
-        : 'bg-transparent'
-      }
-    `}>
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="relative">
-              <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
-            </div>
-            <span className="text-xl font-bold text-white font-serif">Velocity</span>
-          </div>
-          
-          {/* Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            <button 
-              onClick={() => navigate('/dashboard')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Platform
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button 
-              onClick={() => navigate('/agents')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Solutions
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button 
-              onClick={() => navigate('/docs')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Resources
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-            <button 
-              onClick={() => navigate('/pricing')}
-              className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
-            >
-              Pricing
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
-            </button>
-          </div>
-          
-          {/* CTA Section */}
-          <div className="flex items-center gap-4">
-            <button className="text-slate-300 hover:text-white transition-colors">
-              <Search className="w-5 h-5" />
-            </button>
-            <button 
-              onClick={() => navigate('/signup')}
-              className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
-};
-
-// Main Velocity Landing Component
-const VelocityLanding: React.FC = () => {
+// Main App Component
+const App = () => {
   return (
     <div className="min-h-screen bg-slate-900 font-sans">
       <style jsx>{`
@@ -387,9 +356,8 @@ const VelocityLanding: React.FC = () => {
       <EnhancedNavigation />
       <EnhancedHero />
       <FeatureCards />
-      <VelocityFooter />
     </div>
   );
 };
 
-export default VelocityLanding;
+export default App;

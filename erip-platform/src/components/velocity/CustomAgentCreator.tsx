@@ -331,15 +331,6 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
         automation_level: generatedConfig.automationLevel
       };
 
-<<<<<<< HEAD
-    setMessages(prev => [...prev, deployMessage]);
-    setShowConfigPanel(false);
-    
-    // Redirect to dashboard after 3 seconds
-    setTimeout(() => {
-      window.location.href = '/dashboard';
-    }, 3000);
-=======
       const createdAgent = await apiService.createAgent(agentData);
 
       const deployMessage: ChatMessage = {
@@ -365,7 +356,6 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
       };
       setMessages(prev => [...prev, errorMessage]);
     }
->>>>>>> 07499f1e9c0f114279bedfc699fcc73e95455792
   };
 
   return (

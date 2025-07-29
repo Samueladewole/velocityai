@@ -89,13 +89,11 @@ const VelocityApp: React.FC = () => {
   useEffect(() => {
     console.log('VelocityApp mounted successfully at:', location.pathname);
     console.log('Authentication status:', !!isAuthenticated);
-    console.log('Auth token:', isAuthenticated);
-    console.log('LocalStorage velocity_auth_token:', localStorage.getItem('velocity_auth_token'));
-    console.log('LocalStorage velocity_user:', localStorage.getItem('velocity_user'));
   }, [location.pathname, isAuthenticated]);
 
   return (
-    <Routes>
+    <div>
+      <Routes>
         {/* Root velocity paths */}
         <Route path="/velocity" element={<VelocityLanding />} />
         <Route path="/velocity/" element={<VelocityLanding />} />
@@ -104,19 +102,7 @@ const VelocityApp: React.FC = () => {
         
         {/* Dashboard - the main protected route */}
         <Route path="/velocity/dashboard" element={
-          (() => {
-            console.log('Dashboard route accessed, isAuthenticated:', !!isAuthenticated);
-            if (isAuthenticated) {
-              return (
-                <div style={{ padding: '20px', color: 'white', backgroundColor: '#1e293b' }}>
-                  <h1>Dashboard Test - Authentication Working</h1>
-                  <p>Auth token: {isAuthenticated}</p>
-                  <VelocityDashboard />
-                </div>
-              );
-            }
-            return <Navigate to="/velocity/login" replace />;
-          })()
+          isAuthenticated ? <VelocityDashboard /> : <Navigate to="/velocity/login" replace />
         } />
         
         {/* All other velocity routes */}
@@ -189,7 +175,8 @@ const VelocityApp: React.FC = () => {
         
         {/* Fallback route */}
         <Route path="/*" element={<Navigate to="/velocity" replace />} />
-    </Routes>
+      </Routes>
+    </div>
   );
 };
 
