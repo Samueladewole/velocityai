@@ -8,11 +8,13 @@ from datetime import datetime, timezone
 from typing import List, Optional, Dict, Any
 from contextlib import asynccontextmanager
 
-from fastapi import FastAPI, Depends, HTTPException, WebSocket, WebSocketDisconnect, BackgroundTasks
+from fastapi import FastAPI, Depends, HTTPException, WebSocket, WebSocketDisconnect, BackgroundTasks, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.exceptions import RequestValidationError
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from sqlalchemy.orm import Session
 from sqlalchemy import desc, func
+from starlette.exceptions import HTTPException as StarletteHTTPException
 import uvicorn
 import logging
 import json
@@ -26,6 +28,35 @@ from database import engine, SessionLocal, create_tables, get_db
 from agent_executor import AgentExecutor
 # from cloud_integrations import CloudIntegrationManager  # Temporarily disabled
 from websocket_manager import WebSocketManager
+from auth import (
+    LoginRequest, SignupRequest, TokenResponse, UserResponse, AuthResponse,
+    authenticate_user, create_user, create_tokens, create_user_response,
+    get_current_user, get_current_active_user
+)
+from security import (
+    SecurityHeadersMiddleware, RateLimitMiddleware, SecurityAuditMiddleware,
+    InputValidationMiddleware, SecurityConfig, encrypt_credentials, decrypt_credentials
+)
+from validation import (
+    AgentCreateRequest, AgentUpdateRequest, EvidenceCreateRequest,
+    IntegrationConnectRequest, UserCreateRequest, UserUpdateRequest,
+    PaginationParams, FilterParams, SuccessResponse, PaginatedResponse,
+    velocity_exception_handler, validation_exception_handler,
+    http_exception_handler, general_exception_handler,
+    VelocityException, ValidationException, AuthenticationException,
+    AuthorizationException, ResourceNotFoundException, ConflictException,
+    create_success_response, create_paginated_response
+)
+from rbac import UserRole, Permission, rbac_manager, check_permission
+from browser_automation import (
+    BrowserAutomationService, EvidenceCollectionRequest, QuestionnaireProcessingRequest,
+    MonitoringSetupRequest, AutomationTask, AutomationType, AutomationPlatform,
+    browser_automation_service, generate_evidence_collection_workflow
+)
+from monitoring import (
+    metrics_collector, health_check_service, alert_manager, MonitoringMiddleware,
+    get_prometheus_metrics, get_application_info
+)
 
 # Configuration
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://velocity:password@localhost/velocity_db")
@@ -59,47 +90,55 @@ async def lifespan(app: FastAPI):
     await agent_executor.stop_scheduler()
     await websocket_manager.stop_heartbeat()
 
-# FastAPI app
+# FastAPI app with enhanced security and validation
 app = FastAPI(
     title="Velocity AI Platform",
-    description="AI-Powered Compliance Automation",
+    description="AI-Powered Compliance Automation with Enterprise Security",
     version="1.0.0",
-    lifespan=lifespan
+    lifespan=lifespan,
+    docs_url="/docs" if not SecurityConfig.is_production() else None,
+    redoc_url="/redoc" if not SecurityConfig.is_production() else None
 )
 
-# CORS middleware
+# Add exception handlers
+app.add_exception_handler(VelocityException, velocity_exception_handler)
+app.add_exception_handler(RequestValidationError, validation_exception_handler)
+app.add_exception_handler(StarletteHTTPException, http_exception_handler)
+app.add_exception_handler(Exception, general_exception_handler)
+
+# Security and monitoring middleware (order is important - most restrictive first)
+app.add_middleware(SecurityHeadersMiddleware)
+app.add_middleware(SecurityAuditMiddleware, log_sensitive_endpoints=True)
+app.add_middleware(InputValidationMiddleware)
+app.add_middleware(RateLimitMiddleware)
+app.add_middleware(MonitoringMiddleware)
+
+# CORS middleware with secure origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://localhost:5178",
-        "https://velocity.eripapp.com",
-        "https://app.eripapp.com"
-    ],
+    allow_origins=SecurityConfig.get_cors_origins(),
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
     allow_headers=["*"],
+    expose_headers=["X-Process-Time", "X-RateLimit-Limit", "X-RateLimit-Remaining"]
 )
 
-# Security
-security = HTTPBearer()
+# Permission checking dependencies
+def require_permission(permission: Permission):
+    """Dependency to require specific permission"""
+    def check_permission_dependency(current_user: User = Depends(get_current_active_user)):
+        if not current_user.has_permission(permission.value):
+            raise AuthorizationException(f"Permission required: {permission.value}")
+        return current_user
+    return check_permission_dependency
 
-async def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(security), db: Session = Depends(get_db)):
-    """Get current authenticated user"""
-    # TODO: Implement JWT token validation
-    # For now, return a mock user for development
-    user = db.query(User).first()
-    if not user:
-        # Create default user for development
-        org = Organization(name="Demo Organization", domain="demo.com")
-        db.add(org)
-        db.commit()
-        
-        user = User(name="Demo User", email="demo@velocity.ai", organization_id=org.id)
-        db.add(user)
-        db.commit()
-    
-    return user
+def require_resource_access(resource: str, action: str):
+    """Dependency to require resource access"""
+    def check_resource_dependency(current_user: User = Depends(get_current_active_user)):
+        if not current_user.can_access_resource(resource, action):
+            raise AuthorizationException(f"Access denied: {resource}:{action}")
+        return current_user
+    return check_resource_dependency
 
 # API Routes
 
@@ -113,110 +152,59 @@ async def root():
         "timestamp": datetime.now(timezone.utc).isoformat()
     }
 
-# Authentication Routes
-@app.post("/api/v1/auth/signup")
+# Enhanced Authentication Routes
+@app.post("/api/v1/auth/signup", response_model=AuthResponse)
 async def signup(
-    signup_data: Dict[str, Any],
+    signup_data: SignupRequest,
     db: Session = Depends(get_db)
 ):
-    """Create new user account"""
+    """Create new user account with secure authentication"""
     try:
-        # Check if user already exists
-        existing_user = db.query(User).filter(User.email == signup_data["email"]).first()
-        if existing_user:
-            raise HTTPException(status_code=400, detail="User already exists")
+        user = await create_user(signup_data, db)
+        organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
         
-        # Get or create organization
-        org = db.query(Organization).filter(Organization.domain == signup_data["company"]).first()
-        if not org:
-            org = Organization(
-                name=signup_data["company"],
-                domain=signup_data["company"].lower().replace(" ", ""),
-                tier=signup_data.get("tier", "starter")
-            )
-            db.add(org)
-            db.commit()
-            db.refresh(org)
+        tokens = create_tokens(user, organization)
+        user_response = create_user_response(user, organization)
         
-        # Create user
-        user = User(
-            name=signup_data["name"],
-            email=signup_data["email"],
-            role="admin",  # First user in org is admin
-            organization_id=org.id
-        )
-        db.add(user)
-        db.commit()
-        db.refresh(user)
-        
-        # TODO: Hash password and store properly
-        # For now, just return success
-        
-        return {
-            "success": True,
-            "data": {
-                "access_token": "demo-token",  # Mock token for development
-                "refresh_token": "demo-refresh-token",
-                "token_type": "bearer",
-                "expires_in": 3600,
-                "user": {
-                    "id": str(user.id),
-                    "email": user.email,
-                    "name": user.name,
-                    "company": org.name,
-                    "role": user.role,
-                    "tier": org.tier,
-                    "mfa_enabled": False,
-                    "created_at": user.created_at.isoformat()
-                }
+        return AuthResponse(
+            success=True,
+            data={
+                **tokens.dict(),
+                "user": user_response.dict()
             }
-        }
+        )
         
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error(f"Signup error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/api/v1/auth/login")
+@app.post("/api/v1/auth/login", response_model=AuthResponse)
 async def login(
-    login_data: Dict[str, Any],
+    login_data: LoginRequest,
     db: Session = Depends(get_db)
 ):
-    """Authenticate user"""
+    """Authenticate user with secure JWT tokens"""
     try:
-        # Find user by email
-        user = db.query(User).filter(User.email == login_data["email"]).first()
+        user = await authenticate_user(login_data.email, login_data.password, db)
         if not user:
             raise HTTPException(status_code=401, detail="Invalid credentials")
         
-        # TODO: Verify password hash
-        # For now, just return success
+        organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
+        if not organization:
+            raise HTTPException(status_code=500, detail="Organization not found")
         
-        # Get organization
-        org = db.query(Organization).filter(Organization.id == user.organization_id).first()
+        tokens = create_tokens(user, organization)
+        user_response = create_user_response(user, organization)
         
-        # Update last login
-        user.last_login = datetime.now(timezone.utc)
-        db.commit()
-        
-        return {
-            "success": True,
-            "data": {
-                "access_token": "demo-token",  # Mock token for development
-                "refresh_token": "demo-refresh-token", 
-                "token_type": "bearer",
-                "expires_in": 3600,
-                "user": {
-                    "id": str(user.id),
-                    "email": user.email,
-                    "name": user.name,
-                    "company": org.name if org else "Unknown",
-                    "role": user.role,
-                    "tier": org.tier if org else "starter",
-                    "mfa_enabled": False,
-                    "created_at": user.created_at.isoformat()
-                }
+        return AuthResponse(
+            success=True,
+            data={
+                **tokens.dict(),
+                "user": user_response.dict()
             }
-        }
+        )
         
     except HTTPException:
         raise
@@ -224,41 +212,68 @@ async def login(
         logger.error(f"Login error: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.post("/api/v1/auth/refresh")
+@app.post("/api/v1/auth/refresh", response_model=TokenResponse)
 async def refresh_token(
-    refresh_data: Dict[str, Any]
+    refresh_data: Dict[str, str],
+    db: Session = Depends(get_db)
 ):
-    """Refresh access token"""
-    # TODO: Implement proper token refresh
-    return {
-        "success": True,
-        "data": {
-            "access_token": "demo-token",
-            "refresh_token": "demo-refresh-token",
-            "token_type": "bearer", 
-            "expires_in": 3600
-        }
-    }
+    """Refresh access token using refresh token"""
+    try:
+        from auth import verify_token
+        refresh_token = refresh_data.get("refresh_token")
+        if not refresh_token:
+            raise HTTPException(status_code=400, detail="Refresh token required")
+        
+        payload = verify_token(refresh_token, "refresh")
+        user_id = payload.get("sub")
+        
+        user = db.query(User).filter(User.id == user_id).first()
+        if not user:
+            raise HTTPException(status_code=401, detail="User not found")
+        
+        organization = db.query(Organization).filter(Organization.id == user.organization_id).first()
+        tokens = create_tokens(user, organization)
+        
+        return tokens
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Token refresh error: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/api/v1/agents")
+@app.get("/api/v1/agents", response_model=PaginatedResponse)
 async def get_agents(
-    status: Optional[str] = None,
-    platform: Optional[str] = None,
+    pagination: PaginationParams = Depends(),
+    filters: FilterParams = Depends(),
+    status: Optional[AgentStatus] = None,
+    platform: Optional[Platform] = None,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(require_resource_access("agent", "view"))
 ):
-    """Get all agents for the current organization"""
+    """Get all agents for the current organization with pagination and filtering"""
     query = db.query(Agent).filter(Agent.organization_id == current_user.organization_id)
     
+    # Apply filters
     if status:
         query = query.filter(Agent.status == status)
     if platform:
         query = query.filter(Agent.platform == platform)
+    if filters.search:
+        query = query.filter(Agent.name.ilike(f"%{filters.search}%"))
+    if filters.start_date:
+        query = query.filter(Agent.created_at >= filters.start_date)
+    if filters.end_date:
+        query = query.filter(Agent.created_at <= filters.end_date)
     
-    agents = query.order_by(desc(Agent.created_at)).all()
+    # Get total count for pagination
+    total_count = query.count()
     
-    # Convert to dictionary format with string IDs
-    return [
+    # Apply pagination and ordering
+    agents = query.order_by(desc(Agent.created_at)).offset(pagination.offset).limit(pagination.limit).all()
+    
+    # Convert to response format
+    agent_data = [
         {
             "id": str(agent.id),
             "name": agent.name,
@@ -274,33 +289,44 @@ async def get_agents(
         }
         for agent in agents
     ]
+    
+    return create_paginated_response(agent_data, pagination.page, pagination.limit, total_count)
 
-@app.post("/api/v1/agents")
+@app.post("/api/v1/agents", response_model=SuccessResponse)
 async def create_agent(
-    agent_data: Dict[str, Any],
+    agent_data: AgentCreateRequest,
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(require_resource_access("agent", "create"))
 ):
-    """Create a new AI agent"""
+    """Create a new AI agent with comprehensive validation"""
     try:
-        # Validate integration exists
+        # Validate integration exists and belongs to organization
         integration = db.query(Integration).filter(
-            Integration.id == agent_data.get("integration_id"),
+            Integration.id == agent_data.integration_id,
             Integration.organization_id == current_user.organization_id
         ).first()
         
         if not integration:
-            raise HTTPException(status_code=400, detail="Integration not found")
+            raise ResourceNotFoundException("Integration", agent_data.integration_id)
+        
+        # Check if agent name is unique within organization
+        existing_agent = db.query(Agent).filter(
+            Agent.name == agent_data.name,
+            Agent.organization_id == current_user.organization_id
+        ).first()
+        
+        if existing_agent:
+            raise ConflictException(f"Agent with name '{agent_data.name}' already exists")
         
         # Create agent
         agent = Agent(
-            name=agent_data["name"],
-            description=agent_data.get("description", ""),
-            platform=Platform(agent_data["platform"]),
-            framework=Framework(agent_data["framework"]),
-            configuration=agent_data.get("configuration", {}),
-            schedule=agent_data.get("schedule", {}),
+            name=agent_data.name,
+            description=agent_data.description or "",
+            platform=agent_data.platform,
+            framework=agent_data.framework,
+            configuration=agent_data.configuration,
+            schedule=agent_data.schedule,
             organization_id=current_user.organization_id,
             integration_id=integration.id
         )
@@ -321,18 +347,23 @@ async def create_agent(
             }
         )
         
-        return {"success": True, "agent_id": str(agent.id)}
+        return create_success_response(
+            data={"agent_id": str(agent.id)},
+            message=f"Agent '{agent.name}' created successfully"
+        )
         
+    except (VelocityException, HTTPException):
+        raise
     except Exception as e:
         logger.error(f"Error creating agent: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise VelocityException(f"Failed to create agent: {str(e)}")
 
 @app.post("/api/v1/agents/{agent_id}/run")
 async def run_agent(
     agent_id: str,
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Manually trigger agent execution"""
     agent = db.query(Agent).filter(
@@ -362,7 +393,7 @@ async def get_evidence(
     limit: int = 50,
     offset: int = 0,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Get evidence items for the current organization"""
     query = db.query(EvidenceItem).filter(
@@ -399,7 +430,7 @@ async def validate_evidence(
     evidence_id: str,
     validation_data: Dict[str, Any],
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Validate an evidence item"""
     evidence = db.query(EvidenceItem).filter(
@@ -436,7 +467,7 @@ async def validate_evidence(
 @app.get("/api/v1/integrations")
 async def get_integrations(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Get all integrations for the current organization"""
     integrations = db.query(Integration).filter(
@@ -461,7 +492,7 @@ async def connect_integration(
     credentials: Dict[str, Any],
     background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Connect to a cloud platform"""
     try:
@@ -505,7 +536,7 @@ async def connect_integration(
 @app.get("/api/v1/trust-score")
 async def get_trust_score(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Get current trust score for the organization"""
     trust_score = db.query(TrustScore).filter(
@@ -540,7 +571,7 @@ async def get_trust_score(
 async def get_performance_metrics(
     period: str = "week",
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: User = Depends(get_current_active_user)
 ):
     """Get performance metrics for the organization"""
     # Calculate metrics based on period
@@ -635,6 +666,296 @@ async def update_trust_score(organization_id: str, db: Session):
                 }
             }
         )
+
+# Browser Automation Endpoints
+@app.post("/api/v1/automation/evidence/collect", response_model=SuccessResponse)
+async def start_evidence_collection(
+    request: EvidenceCollectionRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("evidence", "create"))
+):
+    """Start automated evidence collection from cloud platforms"""
+    try:
+        automation_task = await browser_automation_service.collect_evidence(
+            request, current_user, db
+        )
+        
+        return create_success_response(
+            data={
+                "task_id": automation_task.task_id,
+                "status": automation_task.status,
+                "platform": request.platform.value,
+                "automation_type": request.automation_type.value
+            },
+            message="Evidence collection started successfully"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error starting evidence collection: {e}")
+        raise VelocityException(f"Failed to start evidence collection: {str(e)}")
+
+@app.post("/api/v1/automation/questionnaire/process", response_model=SuccessResponse)
+async def process_questionnaire(
+    request: QuestionnaireProcessingRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("evidence", "create"))
+):
+    """Process questionnaire with AI assistance"""
+    try:
+        automation_task = await browser_automation_service.process_questionnaire(
+            request, current_user, db
+        )
+        
+        return create_success_response(
+            data={
+                "task_id": automation_task.task_id,
+                "status": automation_task.status,
+                "format": request.format,
+                "auto_fill": request.auto_fill
+            },
+            message="Questionnaire processing started successfully"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error processing questionnaire: {e}")
+        raise VelocityException(f"Failed to process questionnaire: {str(e)}")
+
+@app.post("/api/v1/automation/monitoring/setup", response_model=SuccessResponse)
+async def setup_compliance_monitoring(
+    request: MonitoringSetupRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("system", "monitor"))
+):
+    """Setup automated compliance monitoring"""
+    try:
+        automation_task = await browser_automation_service.setup_monitoring(
+            request, current_user, db
+        )
+        
+        return create_success_response(
+            data={
+                "task_id": automation_task.task_id,
+                "status": automation_task.status,
+                "platform": request.platform.value,
+                "frequency": request.frequency
+            },
+            message="Compliance monitoring setup started successfully"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error setting up monitoring: {e}")
+        raise VelocityException(f"Failed to setup monitoring: {str(e)}")
+
+@app.get("/api/v1/automation/task/{task_id}", response_model=SuccessResponse)
+async def get_automation_task_status(
+    task_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_user)
+):
+    """Get status of an automation task"""
+    try:
+        automation_task = await browser_automation_service.get_task_status(
+            task_id, current_user
+        )
+        
+        return create_success_response(
+            data={
+                "task_id": automation_task.task_id,
+                "status": automation_task.status,
+                "created_at": automation_task.created_at.isoformat(),
+                "completed_at": automation_task.completed_at.isoformat() if automation_task.completed_at else None,
+                "evidence_count": automation_task.evidence_count,
+                "error_message": automation_task.error_message,
+                "results": automation_task.results
+            }
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error getting task status: {e}")
+        raise VelocityException(f"Failed to get task status: {str(e)}")
+
+@app.delete("/api/v1/automation/task/{task_id}", response_model=SuccessResponse)
+async def cancel_automation_task(
+    task_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("agent", "stop"))
+):
+    """Cancel a running automation task"""
+    try:
+        success = await browser_automation_service.cancel_task(task_id, current_user)
+        
+        if success:
+            return create_success_response(
+                message=f"Automation task {task_id} cancelled successfully"
+            )
+        else:
+            raise VelocityException("Failed to cancel task")
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error cancelling task: {e}")
+        raise VelocityException(f"Failed to cancel task: {str(e)}")
+
+@app.get("/api/v1/automation/workflows/{platform}/{framework}/{control_id}")
+async def get_automation_workflow(
+    platform: AutomationPlatform,
+    framework: Framework,
+    control_id: str,
+    current_user: User = Depends(get_current_active_user)
+):
+    """Get pre-configured automation workflow for a platform and control"""
+    try:
+        workflow = generate_evidence_collection_workflow(platform, framework, control_id)
+        
+        return create_success_response(
+            data=workflow,
+            message="Automation workflow generated successfully"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error generating workflow: {e}")
+        raise VelocityException(f"Failed to generate workflow: {str(e)}")
+
+# Monitoring and Observability Endpoints
+@app.get("/health")
+async def health_check():
+    """Comprehensive health check endpoint"""
+    try:
+        # Perform health checks
+        db_health = await health_check_service.check_database()
+        redis_health = await health_check_service.check_redis()
+        external_health = await health_check_service.check_external_services()
+        
+        # Get overall health status
+        health_status = metrics_collector.get_health_status()
+        
+        # Get system metrics
+        system_metrics = metrics_collector.get_system_metrics()
+        
+        return {
+            "status": health_status["status"],
+            "timestamp": health_status["timestamp"],
+            "uptime_seconds": health_status["uptime_seconds"],
+            "services": {
+                "database": db_health,
+                "redis": redis_health,
+                "external_services": external_health
+            },
+            "system": {
+                "cpu_percent": system_metrics.cpu_percent,
+                "memory_percent": system_metrics.memory_percent,
+                "disk_percent": system_metrics.disk_percent,
+                "load_average": system_metrics.load_average
+            }
+        }
+    
+    except Exception as e:
+        logger.error(f"Health check failed: {e}")
+        return {
+            "status": "unhealthy",
+            "error": str(e),
+            "timestamp": datetime.now(timezone.utc).isoformat()
+        }
+
+@app.get("/health/ready")
+async def readiness_check():
+    """Kubernetes readiness probe"""
+    try:
+        db_health = await health_check_service.check_database()
+        if db_health["status"] != "healthy":
+            raise HTTPException(status_code=503, detail="Database not ready")
+        
+        return {"status": "ready"}
+    
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=503, detail=f"Service not ready: {str(e)}")
+
+@app.get("/health/live")
+async def liveness_check():
+    """Kubernetes liveness probe"""
+    return {
+        "status": "alive",
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+@app.get("/metrics")
+async def prometheus_metrics():
+    """Prometheus metrics endpoint"""
+    from fastapi.responses import PlainTextResponse
+    
+    try:
+        metrics_data = get_prometheus_metrics()
+        return PlainTextResponse(metrics_data, media_type="text/plain")
+    
+    except Exception as e:
+        logger.error(f"Error generating metrics: {e}")
+        raise HTTPException(status_code=500, detail="Metrics unavailable")
+
+@app.get("/info")
+async def application_info():
+    """Application information endpoint"""
+    try:
+        return get_application_info()
+    
+    except Exception as e:
+        logger.error(f"Error getting application info: {e}")
+        raise HTTPException(status_code=500, detail="Application info unavailable")
+
+@app.get("/debug/stats")
+async def debug_stats(
+    current_user: User = Depends(require_permission(Permission.SYSTEM_MONITOR))
+):
+    """Debug statistics for administrators"""
+    try:
+        # Get endpoint statistics
+        endpoint_stats = {}
+        for endpoint in ["/api/v1/agents", "/api/v1/evidence", "/api/v1/integrations"]:
+            endpoint_stats[endpoint] = metrics_collector.get_endpoint_stats(endpoint)
+        
+        # Get system metrics
+        system_metrics = metrics_collector.get_system_metrics()
+        
+        # Check for alerts
+        alerts = alert_manager.check_alerts()
+        
+        return {
+            "endpoint_statistics": endpoint_stats,
+            "system_metrics": {
+                "cpu_percent": system_metrics.cpu_percent,
+                "memory_used_gb": system_metrics.memory_used_bytes / (1024**3),
+                "memory_total_gb": system_metrics.memory_total_bytes / (1024**3),
+                "memory_percent": system_metrics.memory_percent,
+                "disk_used_gb": system_metrics.disk_used_bytes / (1024**3),
+                "disk_total_gb": system_metrics.disk_total_bytes / (1024**3),
+                "disk_percent": system_metrics.disk_percent,
+                "load_average": system_metrics.load_average,
+                "uptime_seconds": system_metrics.uptime_seconds
+            },
+            "active_alerts": alerts,
+            "health_checks": metrics_collector.get_health_status()
+        }
+    
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error getting debug stats: {e}")
+        raise VelocityException(f"Failed to get debug statistics: {str(e)}")
 
 if __name__ == "__main__":
     uvicorn.run(

@@ -2,7 +2,7 @@
 Velocity AI Platform - Database Models
 Production-ready SQLAlchemy models for live data
 """
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Optional, Dict, Any, List
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime, Text, JSON, Float, ForeignKey, Enum as SQLEnum
 from sqlalchemy.ext.declarative import declarative_base
@@ -11,6 +11,7 @@ from sqlalchemy.dialects.postgresql import UUID, JSONB
 import uuid
 import enum
 from pydantic import BaseModel
+from rbac import UserRole
 
 Base = declarative_base()
 
@@ -83,14 +84,71 @@ class User(Base):
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     email = Column(String(255), unique=True, nullable=False)
     name = Column(String(255), nullable=False)
-    role = Column(String(50), default="user")  # admin, user, readonly
+    password_hash = Column(String(255), nullable=False)
+    role = Column(SQLEnum(UserRole), default=UserRole.VIEWER)
     organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id"), nullable=False)
+    
+    # Account status and security
     is_active = Column(Boolean, default=True)
+    is_verified = Column(Boolean, default=False)
+    failed_login_attempts = Column(Integer, default=0)
+    locked_until = Column(DateTime(timezone=True))
     last_login = Column(DateTime(timezone=True))
+    password_changed_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    
+    # Multi-factor authentication
+    mfa_enabled = Column(Boolean, default=False)
+    mfa_secret = Column(String(255))  # TOTP secret
+    backup_codes = Column(JSONB, default=[])  # Emergency backup codes
+    
+    # Profile and preferences
+    profile_data = Column(JSONB, default={})
+    preferences = Column(JSONB, default={})
+    timezone = Column(String(50), default="UTC")
+    
+    # Audit fields
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
+    created_by = Column(UUID(as_uuid=True), ForeignKey("users.id"))
     
     # Relationships
     organization = relationship("Organization", back_populates="users")
+    created_by_user = relationship("User", remote_side=[id])
+    
+    def has_permission(self, permission: str) -> bool:
+        """Check if user has a specific permission"""
+        from rbac import rbac_manager, Permission
+        try:
+            perm = Permission(permission)
+            return rbac_manager.has_permission(self.role, perm)
+        except ValueError:
+            return False
+    
+    def can_access_resource(self, resource: str, action: str) -> bool:
+        """Check if user can access a resource with specific action"""
+        from rbac import rbac_manager
+        return rbac_manager.can_access_resource(self.role, resource, action)
+    
+    def get_permissions(self) -> List[str]:
+        """Get all permissions for this user"""
+        from rbac import get_user_permissions
+        return get_user_permissions(self.role)
+    
+    def is_locked(self) -> bool:
+        """Check if account is locked due to failed login attempts"""
+        if self.locked_until:
+            return datetime.now(timezone.utc) < self.locked_until
+        return False
+    
+    def lock_account(self, duration_minutes: int = 30):
+        """Lock account for specified duration"""
+        self.locked_until = datetime.now(timezone.utc) + timedelta(minutes=duration_minutes)
+        self.failed_login_attempts = 0
+    
+    def unlock_account(self):
+        """Unlock account and reset failed attempts"""
+        self.locked_until = None
+        self.failed_login_attempts = 0
 
 class Agent(Base):
     __tablename__ = "agents"

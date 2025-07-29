@@ -8,13 +8,21 @@ python-multipart==0.0.6
 
 # Database
 sqlalchemy==2.0.23
+sqlalchemy[asyncio]==2.0.23  # Async support
 psycopg2-binary==2.9.9
+asyncpg==0.29.0  # Async PostgreSQL driver
 alembic==1.12.1
+alembic[tz]==1.12.1  # Timezone support for migrations
 
 # Authentication & Security
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
+bcrypt==4.1.2
+pyjwt==2.8.0
 python-multipart==0.0.6
+cryptography==41.0.8
+pyotp==2.9.0  # For TOTP/MFA
+qrcode==7.4.2  # For MFA QR codes
 
 # Cloud SDKs
 boto3==1.34.0
@@ -42,6 +50,9 @@ pydantic-settings==2.1.0
 # Monitoring & Logging
 structlog==23.2.0
 sentry-sdk[fastapi]==1.39.0
+prometheus-client==0.19.0
+psutil==5.9.6  # System metrics
+httpx==0.25.2  # HTTP client for health checks
 
 # Development
 pytest==7.4.3
@@ -53,6 +64,27 @@ mypy==1.7.1
 # Environment
 python-dotenv==1.0.0
 
+# Browser Automation
+playwright==1.40.0
+playwright-asyncio==0.1.9
+selenium==4.15.2  # Fallback browser automation
+beautifulsoup4==4.12.2  # HTML parsing
+
+# Task Queue and Background Processing
+celery[redis]==5.3.4
+flower==2.0.1  # Celery monitoring
+
+# File Processing
+pypdf2==3.0.1  # PDF processing
+openpyxl==3.1.2  # Excel processing
+python-docx==1.1.0  # Word document processing
+
+# Image Processing
+pillow==10.1.0
+opencv-python==4.8.1.78  # Computer vision for browser automation
+
 # Utilities
 python-dateutil==2.8.2
 pytz==2023.3
+tenacity==8.2.3  # Retry mechanism
+croniter==2.0.1  # Cron expression parsing
