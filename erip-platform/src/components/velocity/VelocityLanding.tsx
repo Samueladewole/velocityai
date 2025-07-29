@@ -43,7 +43,7 @@ const EnhancedHero = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <button 
-                onClick={() => navigate('/signup')}
+                onClick={() => navigate('/velocity/login')}
                 className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25"
               >
                 <span className="relative z-10 flex items-center gap-2">
@@ -317,28 +317,28 @@ const EnhancedNavigation = () => {
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
             <button 
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/velocity/dashboard')}
               className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
             >
               Platform
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
             </button>
             <button 
-              onClick={() => navigate('/agents')}
+              onClick={() => navigate('/velocity/dashboard')}
               className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
             >
               Solutions
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
             </button>
             <button 
-              onClick={() => navigate('/docs')}
+              onClick={() => navigate('/velocity/dashboard')}
               className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
             >
               Resources
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
             </button>
             <button 
-              onClick={() => navigate('/pricing')}
+              onClick={() => navigate('/velocity/login')}
               className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
             >
               Pricing
@@ -352,7 +352,7 @@ const EnhancedNavigation = () => {
               <Search className="w-5 h-5" />
             </button>
             <button 
-              onClick={() => navigate('/signup')}
+              onClick={() => navigate('/velocity/login')}
               className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
             >
               Get Started

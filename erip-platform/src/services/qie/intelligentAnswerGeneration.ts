@@ -6,8 +6,8 @@
  */
 
 import { Question, Answer, Evidence, ConfidenceLevel } from '@/types/qie'
-import { TrustScoreCalculator } from '../trustEquity/trustScoreCalculator'
-import { AIService } from '../ai'
+// import { TrustScoreCalculator } from '../trustEquity/trustScoreCalculator'
+import { AIService, aiService } from '../ai'
 import { EnhancedQuestionExtractionService } from './enhancedQuestionExtraction'
 
 export interface AnswerGenerationOptions {
@@ -48,15 +48,15 @@ export interface GeneratedAnswer {
 }
 
 export class IntelligentAnswerGenerationService {
-  private trustCalculator: TrustScoreCalculator
+  private trustCalculator: any
   private aiService: AIService
   private extractionService: EnhancedQuestionExtractionService
   private answerBank: Map<string, AnswerMatch[]> = new Map()
   private learningData: Map<string, number> = new Map() // questionHash -> effectiveness
 
   constructor() {
-    this.trustCalculator = TrustScoreCalculator.getInstance()
-    this.aiService = AIService.getInstance()
+    this.trustCalculator = null // Disabled for browser compatibility
+    this.aiService = aiService
     this.extractionService = new EnhancedQuestionExtractionService()
     this.initializeAnswerBank()
   }

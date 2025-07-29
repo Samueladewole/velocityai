@@ -5,9 +5,43 @@
  * Implements point accumulation, tiering, and real-time score calculation.
  */
 
-import { EventEmitter } from 'events'
-import { Logger } from '../../infrastructure/logging/logger'
-import { MetricsCollector } from '../monitoring/metricsCollector'
+// Browser-compatible EventEmitter
+class SimpleEventEmitter {
+  private events: { [key: string]: Function[] } = {};
+
+  on(event: string, listener: Function) {
+    if (!this.events[event]) {
+      this.events[event] = [];
+    }
+    this.events[event].push(listener);
+  }
+
+  emit(event: string, ...args: any[]) {
+    if (this.events[event]) {
+      this.events[event].forEach(listener => listener(...args));
+    }
+  }
+
+  off(event: string, listener: Function) {
+    if (this.events[event]) {
+      this.events[event] = this.events[event].filter(l => l !== listener);
+    }
+  }
+}
+
+// Simple browser-compatible logger
+const Logger = {
+  info: (message: string, data?: any) => console.log(`[INFO] ${message}`, data || ''),
+  warn: (message: string, data?: any) => console.warn(`[WARN] ${message}`, data || ''),
+  error: (message: string, data?: any) => console.error(`[ERROR] ${message}`, data || '')
+};
+
+// Simple metrics collector
+const MetricsCollector = {
+  getInstance: () => ({
+    recordTrustScoreUpdate: (score: number) => console.log(`Trust score updated: ${score}`)
+  })
+};
 
 export interface TrustActivity {
   id: string
@@ -96,7 +130,7 @@ export interface OrganizationTrustProfile {
   }
 }
 
-export class TrustScoreCalculator extends EventEmitter {
+export class TrustScoreCalculator extends SimpleEventEmitter {
   private logger: Logger
   private metricsCollector?: MetricsCollector
   private activities: Map<string, TrustActivity[]> = new Map() // organizationId -> activities
