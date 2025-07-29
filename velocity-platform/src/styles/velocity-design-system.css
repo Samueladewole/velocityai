@@ -1,0 +1,403 @@
+/**
+ * Velocity.ai Design System
+ * Professional enterprise-grade styling for compliance automation platform
+ * 
+ * Brand Colors:
+ * - Primary: Purple gradient (#8B5CF6 to #D946EF)
+ * - Secondary: Pink accent (#EC4899)
+ * - Dark background with glass morphism effects
+ */
+
+@layer base {
+  :root {
+    /* Velocity Brand Colors */
+    --velocity-purple-50: 250 245 255;
+    --velocity-purple-100: 243 232 255;
+    --velocity-purple-200: 233 213 255;
+    --velocity-purple-300: 216 180 254;
+    --velocity-purple-400: 192 132 252;
+    --velocity-purple-500: 168 85 247;
+    --velocity-purple-600: 147 51 234;
+    --velocity-purple-700: 126 34 206;
+    --velocity-purple-800: 107 33 168;
+    --velocity-purple-900: 88 28 135;
+    
+    --velocity-pink-50: 253 242 248;
+    --velocity-pink-100: 252 231 243;
+    --velocity-pink-200: 251 207 232;
+    --velocity-pink-300: 249 168 212;
+    --velocity-pink-400: 244 114 182;
+    --velocity-pink-500: 236 72 153;
+    --velocity-pink-600: 219 39 119;
+    --velocity-pink-700: 190 24 93;
+    --velocity-pink-800: 157 23 77;
+    --velocity-pink-900: 131 24 67;
+    
+    /* Velocity Theme Colors */
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 340 82% 52%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 263 70% 50%;
+    
+    --radius: 0.75rem;
+    
+    /* Glass Morphism Variables */
+    --glass-bg: rgba(17, 25, 40, 0.75);
+    --glass-border: rgba(255, 255, 255, 0.125);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    
+    /* Gradient Variables */
+    --velocity-gradient: linear-gradient(135deg, #8B5CF6 0%, #D946EF 100%);
+    --velocity-gradient-secondary: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+    --velocity-gradient-dark: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    
+    /* Animation Variables */
+    --animation-fast: 150ms;
+    --animation-base: 250ms;
+    --animation-slow: 350ms;
+    --animation-slower: 500ms;
+  }
+  
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    
+    --primary: 263 70% 50%;
+    --primary-foreground: 0 0% 98%;
+    
+    --secondary: 340 82% 52%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    
+    --accent: 263 70% 50%;
+    --accent-foreground: 0 0% 98%;
+    
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 263 70% 50%;
+  }
+}
+
+@layer utilities {
+  /* Glass Morphism Effects */
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .glass-darker {
+    background: rgba(17, 25, 40, 0.9);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+  }
+  
+  .glass-card {
+    @apply glass rounded-xl p-6 shadow-2xl;
+    box-shadow: var(--glass-shadow);
+  }
+  
+  /* Velocity Gradients */
+  .velocity-gradient {
+    background: var(--velocity-gradient);
+  }
+  
+  .velocity-gradient-text {
+    @apply bg-clip-text text-transparent;
+    background: var(--velocity-gradient);
+  }
+  
+  .velocity-gradient-border {
+    position: relative;
+    background: var(--glass-bg);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+  
+  .velocity-gradient-border::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--velocity-gradient);
+    border-radius: inherit;
+    z-index: -1;
+  }
+  
+  /* Glow Effects */
+  .velocity-glow {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+  }
+  
+  .velocity-glow-sm {
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+  }
+  
+  .velocity-glow-lg {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+  }
+  
+  /* Pulse Animation */
+  .velocity-pulse {
+    animation: velocity-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes velocity-pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  /* Shimmer Effect */
+  .velocity-shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .velocity-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%
+    );
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    to {
+      transform: translateX(200%);
+    }
+  }
+  
+  /* Status Indicators */
+  .status-active {
+    @apply relative;
+  }
+  
+  .status-active::before {
+    content: '';
+    @apply absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full;
+    animation: status-ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  
+  @keyframes status-ping {
+    75%, 100% {
+      transform: scale(2);
+      opacity: 0;
+    }
+  }
+  
+  /* Agent Status Colors */
+  .agent-status-running {
+    @apply text-green-400 bg-green-400/10 border-green-400/20;
+  }
+  
+  .agent-status-paused {
+    @apply text-yellow-400 bg-yellow-400/10 border-yellow-400/20;
+  }
+  
+  .agent-status-error {
+    @apply text-red-400 bg-red-400/10 border-red-400/20;
+  }
+  
+  .agent-status-stopped {
+    @apply text-gray-400 bg-gray-400/10 border-gray-400/20;
+  }
+  
+  /* Metric Cards */
+  .metric-card {
+    @apply glass-card relative overflow-hidden;
+    transition: all var(--animation-base) ease-in-out;
+  }
+  
+  .metric-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.15);
+  }
+  
+  .metric-value {
+    @apply text-4xl font-bold velocity-gradient-text;
+  }
+  
+  .metric-label {
+    @apply text-sm text-muted-foreground uppercase tracking-wider;
+  }
+  
+  /* Data Visualization */
+  .chart-container {
+    @apply glass rounded-lg p-4;
+  }
+  
+  .chart-grid {
+    stroke: rgba(255, 255, 255, 0.1);
+  }
+  
+  .chart-line {
+    stroke: url(#velocity-gradient-chart);
+    stroke-width: 2;
+    fill: none;
+  }
+  
+  .chart-area {
+    fill: url(#velocity-gradient-chart-fill);
+    opacity: 0.2;
+  }
+  
+  /* Loading States */
+  .velocity-skeleton {
+    @apply animate-pulse bg-gradient-to-r from-muted/50 to-muted/30;
+  }
+  
+  /* Scrollbar Styling */
+  .velocity-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .velocity-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  
+  .velocity-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-purple-600/50 rounded-full;
+    transition: background var(--animation-fast) ease;
+  }
+  
+  .velocity-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-purple-600/70;
+  }
+  
+  /* Focus Styles */
+  .velocity-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-background;
+  }
+  
+  /* Button Variants */
+  .btn-velocity {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200;
+    @apply velocity-focus disabled:pointer-events-none disabled:opacity-50;
+  }
+  
+  .btn-velocity-primary {
+    @apply btn-velocity velocity-gradient text-white hover:opacity-90;
+  }
+  
+  .btn-velocity-secondary {
+    @apply btn-velocity bg-purple-600/20 text-purple-300 hover:bg-purple-600/30;
+  }
+  
+  .btn-velocity-ghost {
+    @apply btn-velocity hover:bg-white/5;
+  }
+  
+  /* Card Hover Effects */
+  .card-hover {
+    @apply transition-all duration-300 hover:scale-[1.02];
+  }
+  
+  .card-hover-glow {
+    @apply card-hover hover:velocity-glow;
+  }
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+/* Chart Gradient Definitions */
+svg defs {
+  linearGradient#velocity-gradient-chart {
+    stop:first-child {
+      stop-color: #8B5CF6;
+    }
+    stop:last-child {
+      stop-color: #D946EF;
+    }
+  }
+  
+  linearGradient#velocity-gradient-chart-fill {
+    stop:first-child {
+      stop-color: #8B5CF6;
+      stop-opacity: 0.3;
+    }
+    stop:last-child {
+      stop-color: #D946EF;
+      stop-opacity: 0.1;
+    }
+  }
+}

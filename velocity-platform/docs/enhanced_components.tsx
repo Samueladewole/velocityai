@@ -1,0 +1,363 @@
+import React, { useState, useEffect } from 'react';
+import { Shield, TrendingUp, Users, FileText, Settings, Bell, Search, ChevronDown, Play, CheckCircle } from 'lucide-react';
+
+// Enhanced Hero Section with Custom Design
+const EnhancedHero = () => {
+  const [trustScore, setTrustScore] = useState(0);
+  
+  useEffect(() => {
+    const timer = setTimeout(() => setTrustScore(94), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <section className="relative min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 flex items-center overflow-hidden">
+      {/* Custom animated background elements */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-emerald-500/5 to-amber-500/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Content */}
+          <div>
+            <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
+              <span className="text-emerald-400 text-sm font-medium">Enterprise-Grade Security Platform</span>
+            </div>
+            
+            <h1 className="font-serif text-5xl lg:text-7xl font-light text-white mb-6 leading-tight">
+              Digital Trust
+              <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+                Accelerated
+              </span>
+            </h1>
+            
+            <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
+              Transform your compliance journey from months to minutes with AI-powered automation and real-time trust scoring.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+              <button className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25">
+                <span className="relative z-10 flex items-center gap-2">
+                  Start Free Assessment
+                  <Play className="w-4 h-4" />
+                </span>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+              </button>
+              
+              <button className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-300">
+                Watch Demo
+              </button>
+            </div>
+            
+            {/* Trust Score Display */}
+            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-slate-300 font-medium">Your Trust Score</span>
+                <span className="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded">Live Preview</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="relative">
+                  <svg className="w-20 h-20 transform -rotate-90" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="8" fill="none" className="text-slate-700" />
+                    <circle 
+                      cx="50" 
+                      cy="50" 
+                      r="40" 
+                      stroke="currentColor" 
+                      strokeWidth="8" 
+                      fill="none" 
+                      className="text-emerald-400"
+                      strokeDasharray={`${trustScore * 2.51} 251`}
+                      style={{ transition: 'stroke-dasharray 2s ease-out' }}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-2xl font-bold text-white">{trustScore}</span>
+                  </div>
+                </div>
+                <div>
+                  <p className="text-lg font-semibold text-white">Excellent</p>
+                  <p className="text-sm text-slate-400">Ready for enterprise sales</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Interactive Dashboard Preview */}
+          <div className="relative">
+            <DashboardPreview />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Custom Dashboard Preview Component
+const DashboardPreview = () => {
+  const [activeCard, setActiveCard] = useState(0);
+  
+  const metrics = [
+    { title: 'SOC2 Compliance', value: '98%', trend: '+12%', icon: <Shield className="w-5 h-5" />, color: 'emerald' },
+    { title: 'Risk Score', value: '2.1', trend: '-24%', icon: <TrendingUp className="w-5 h-5" />, color: 'amber' },
+    { title: 'Active Controls', value: '147', trend: '+8%', icon: <CheckCircle className="w-5 h-5" />, color: 'blue' },
+    { title: 'Team Members', value: '23', trend: '+3%', icon: <Users className="w-5 h-5" />, color: 'purple' }
+  ];
+
+  return (
+    <div className="relative">
+      {/* Floating elements */}
+      <div className="absolute -top-4 -right-4 w-8 h-8 bg-emerald-400/20 rounded-lg animate-pulse"></div>
+      <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-amber-400/20 rounded-full animate-pulse delay-500"></div>
+      
+      <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-6 border border-white/20 shadow-2xl">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-lg font-semibold text-white">Security Dashboard</h3>
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+            <span className="text-xs text-slate-400">Live</span>
+          </div>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-4">
+          {metrics.map((metric, index) => (
+            <MetricCard 
+              key={index}
+              metric={metric}
+              isActive={activeCard === index}
+              onClick={() => setActiveCard(index)}
+            />
+          ))}
+        </div>
+        
+        {/* Mini chart area */}
+        <div className="mt-6 h-20 bg-white/5 rounded-xl flex items-end justify-between p-3">
+          {[...Array(12)].map((_, i) => (
+            <div 
+              key={i}
+              className="bg-emerald-400/60 rounded-sm animate-pulse"
+              style={{ 
+                height: `${Math.random() * 60 + 20}%`,
+                width: '6px',
+                animationDelay: `${i * 100}ms`
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Enhanced Metric Card Component
+const MetricCard = ({ metric, isActive, onClick }) => {
+  const colorClasses = {
+    emerald: 'from-emerald-500/20 to-emerald-600/20 border-emerald-500/30',
+    amber: 'from-amber-500/20 to-amber-600/20 border-amber-500/30',
+    blue: 'from-blue-500/20 to-blue-600/20 border-blue-500/30',
+    purple: 'from-purple-500/20 to-purple-600/20 border-purple-500/30'
+  };
+
+  return (
+    <div 
+      className={`
+        group relative cursor-pointer transition-all duration-300 transform hover:scale-105
+        ${isActive ? 'scale-105' : ''}
+      `}
+      onClick={onClick}
+    >
+      {/* Gradient border effect */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${colorClasses[metric.color]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+      
+      <div className="relative bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10 group-hover:border-transparent transition-all duration-300">
+        <div className="flex items-center justify-between mb-3">
+          <div className={`p-2 bg-${metric.color}-500/10 rounded-lg`}>
+            {metric.icon}
+          </div>
+          <span className={`text-xs font-medium ${metric.trend.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+            {metric.trend}
+          </span>
+        </div>
+        
+        <div>
+          <p className="text-xs text-slate-400 mb-1">{metric.title}</p>
+          <p className="text-lg font-bold text-white font-mono">{metric.value}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Enhanced Navigation Component
+const EnhancedNavigation = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <nav className={`
+      fixed top-0 w-full z-50 transition-all duration-300
+      ${isScrolled 
+        ? 'bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/50' 
+        : 'bg-transparent'
+      }
+    `}>
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
+            </div>
+            <span className="text-xl font-bold text-white font-serif">Velocity</span>
+          </div>
+          
+          {/* Navigation Links */}
+          <div className="hidden md:flex items-center space-x-8">
+            {['Platform', 'Solutions', 'Resources', 'Pricing'].map((item) => (
+              <a 
+                key={item}
+                href="#" 
+                className="text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
+              >
+                {item}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
+              </a>
+            ))}
+          </div>
+          
+          {/* CTA Section */}
+          <div className="flex items-center gap-4">
+            <button className="text-slate-300 hover:text-white transition-colors">
+              <Search className="w-5 h-5" />
+            </button>
+            <button className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
+              Get Started
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+// Feature Cards Section
+const FeatureCards = () => {
+  const features = [
+    {
+      title: 'AI-Powered Assessment',
+      description: 'Automated compliance scanning that learns from your infrastructure',
+      icon: <Settings className="w-6 h-6" />,
+      color: 'emerald'
+    },
+    {
+      title: 'Real-time Monitoring',
+      description: 'Continuous compliance tracking with instant alerts',
+      icon: <Bell className="w-6 h-6" />,
+      color: 'amber'
+    },
+    {
+      title: 'Expert Network',
+      description: 'Direct access to compliance experts and auditors',
+      icon: <Users className="w-6 h-6" />,
+      color: 'blue'
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-b from-slate-900 to-slate-800">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-serif font-light text-white mb-4">
+            Built for Modern
+            <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+              Security Teams
+            </span>
+          </h2>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto">
+            Everything you need to achieve and maintain compliance in one integrated platform
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-3 gap-8">
+          {features.map((feature, index) => (
+            <FeatureCard key={index} feature={feature} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Individual Feature Card
+const FeatureCard = ({ feature, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  
+  return (
+    <div 
+      className="group relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Animated background */}
+      <div className={`
+        absolute inset-0 bg-gradient-to-br from-${feature.color}-500/10 to-${feature.color}-600/10 
+        rounded-2xl transition-all duration-500 transform 
+        ${isHovered ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}
+      `} />
+      
+      <div className="relative bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 transition-all duration-300 group-hover:border-white/20">
+        <div className={`w-12 h-12 bg-${feature.color}-500/10 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110`}>
+          {feature.icon}
+        </div>
+        
+        <h3 className="text-xl font-semibold text-white mb-4 font-serif">{feature.title}</h3>
+        <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+        
+        <div className="mt-6">
+          <button className="text-emerald-400 font-medium flex items-center gap-2 group-hover:gap-3 transition-all duration-300">
+            Learn More
+            <ChevronDown className="w-4 h-4 transform -rotate-90 group-hover:translate-x-1 transition-transform duration-300" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Main App Component
+const App = () => {
+  return (
+    <div className="min-h-screen bg-slate-900 font-sans">
+      <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;0,700;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+        
+        .font-serif {
+          font-family: 'Instrument Serif', serif;
+        }
+        
+        .font-sans {
+          font-family: 'Manrope', sans-serif;
+        }
+        
+        .font-mono {
+          font-family: 'JetBrains Mono', monospace;
+        }
+      `}</style>
+      
+      <EnhancedNavigation />
+      <EnhancedHero />
+      <FeatureCards />
+    </div>
+  );
+};
+
+export default App;

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Framework Management</title>
+</head>
+<body>
+    <h1>Test Framework Management Component</h1>
+    <p>Navigate to: <a href="http://localhost:5173/framework-management">http://localhost:5173/framework-management</a></p>
+    <p>Alternative: <a href="http://localhost:5173/tools/framework-management">http://localhost:5173/tools/framework-management</a></p>
+    
+    <script>
+        // Test the URLs
+        fetch('http://localhost:5173/framework-management')
+            .then(response => console.log('framework-management status:', response.status))
+            .catch(err => console.error('Error:', err));
+            
+        fetch('http://localhost:5173/tools/framework-management')
+            .then(response => console.log('tools/framework-management status:', response.status))
+            .catch(err => console.error('Error:', err));
+    </script>
+</body>
+</html>

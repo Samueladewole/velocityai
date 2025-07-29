@@ -1,0 +1,1608 @@
+# ERIP GraphQL Schema
+# Unified API layer for all ERIP components with optimized queries
+
+scalar DateTime
+scalar JSON
+scalar UUID
+scalar BigInt
+
+# ===============================
+# Enums
+# ===============================
+
+enum OrganizationSize {
+  SMALL
+  MEDIUM
+  LARGE
+  ENTERPRISE
+}
+
+enum TrustTier {
+  BRONZE
+  SILVER
+  GOLD
+  PLATINUM
+}
+
+enum RiskAppetite {
+  CONSERVATIVE
+  MODERATE
+  AGGRESSIVE
+}
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  ANALYST
+  VIEWER
+}
+
+enum SeverityLevel {
+  INFO
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum StatusType {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  ACCEPTED
+}
+
+enum ComplianceStatus {
+  COMPLIANT
+  PARTIAL
+  NON_COMPLIANT
+  NOT_ASSESSED
+}
+
+enum AssetType {
+  SERVER
+  APPLICATION
+  DATABASE
+  NETWORK
+  CLOUD_SERVICE
+  ENDPOINT
+}
+
+enum DataClassification {
+  PUBLIC
+  INTERNAL
+  CONFIDENTIAL
+  RESTRICTED
+}
+
+enum ControlType {
+  PREVENTIVE
+  DETECTIVE
+  CORRECTIVE
+}
+
+enum ERIPComponent {
+  COMPASS
+  ATLAS
+  PRISM
+  PULSE
+  CIPHER
+  NEXUS
+  BEACON
+  CLEARANCE
+}
+
+enum TrustCategory {
+  COMPLIANCE
+  SECURITY
+  RISK_MANAGEMENT
+  AUTOMATION
+  INTELLIGENCE
+}
+
+enum TransactionType {
+  EARNED
+  SPENT
+  EXPIRED
+  ADJUSTED
+}
+
+enum TrendDirection {
+  UP
+  DOWN
+  STABLE
+}
+
+# ===============================
+# Core Types
+# ===============================
+
+type Organization {
+  id: UUID!
+  name: String!
+  industry: String!
+  size: OrganizationSize!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  
+  # Trust Equity
+  trustScore: Int!
+  trustTier: TrustTier!
+  trustEquityBalance: BigInt!
+  
+  # Configuration
+  riskAppetite: RiskAppetite!
+  complianceFrameworks: [String!]!
+  settings: JSON
+  subscriptions: [String!]!
+  
+  # Related data
+  users: [User!]!
+  assets: [Asset!]!
+  complianceStatus: [OrganizationComplianceStatus!]!
+  trustTransactions(limit: Int, offset: Int): [TrustEquityTransaction!]!
+  currentTrustScore: TrustScore
+}
+
+type User {
+  id: UUID!
+  email: String!
+  name: String!
+  role: UserRole!
+  organizationId: UUID!
+  organization: Organization!
+  
+  # Activity
+  lastLogin: DateTime
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  
+  # Trust metrics
+  trustPointsContributed: BigInt!
+  activityScore: Int!
+  
+  # Permissions
+  permissions: JSON
+  componentAccess: JSON
+}
+
+# ===============================
+# COMPASS Types
+# ===============================
+
+type RegulatoryFramework {
+  id: UUID!
+  name: String!
+  version: String!
+  jurisdiction: String!
+  industry: [String!]!
+  lastUpdated: DateTime!
+  effectiveDate: DateTime!
+  
+  # Trust configuration
+  trustEquityWeight: Float!
+  basePointsPerRequirement: Int!
+  
+  # Requirements
+  requirements: [FrameworkRequirement!]!
+  totalRequirements: Int!
+}
+
+type FrameworkRequirement {
+  id: UUID!
+  frameworkId: UUID!
+  framework: RegulatoryFramework!
+  section: String!
+  title: String!
+  description: String
+  type: RequirementType!
+  mandatory: Boolean!
+  
+  # Implementation guidance
+  implementationGuidance: [String!]!
+  acceptableMethods: [String!]!
+  evidenceTypes: [String!]!
+  
+  # Risk and scoring
+  riskLevel: SeverityLevel!
+  trustPointsValue: Int!
+  multipliers: JSON
+  
+  # Compliance status across organizations
+  complianceStatus: [ComplianceStatus!]!
+}
+
+enum RequirementType {
+  POLICY
+  TECHNICAL
+  PROCEDURAL
+  DOCUMENTATION
+}
+
+type OrganizationComplianceStatus {
+  id: UUID!
+  requirementId: UUID!
+  requirement: FrameworkRequirement!
+  organizationId: UUID!
+  organization: Organization!
+  
+  status: ComplianceStatus!
+  score: Int!
+  
+  # Assessment
+  lastAssessed: DateTime
+  assessedBy: User
+  nextAssessmentDue: DateTime
+  
+  # Automation
+  automationLevel: Int!
+  monitoringEnabled: Boolean!
+  
+  # Evidence and gaps
+  evidence: [Evidence!]!
+  gaps: [ComplianceGap!]!
+}
+
+type ComplianceGap {
+  id: UUID!
+  requirementId: UUID!
+  requirement: FrameworkRequirement!
+  organizationId: UUID!
+  organization: Organization!
+  
+  title: String!
+  description: String
+  severity: SeverityLevel!
+  
+  # Remediation
+  estimatedCost: Float
+  estimatedTimeToResolve: Int
+  trustEquityAtRisk: Int!
+  businessImpact: String
+  
+  # Tracking
+  status: StatusType!
+  assignee: User
+  createdAt: DateTime!
+  resolvedAt: DateTime
+  
+  # Remediation plan
+  remediationPlan: RemediationPlan
+}
+
+# ===============================
+# ATLAS Types
+# ===============================
+
+type Asset {
+  id: UUID!
+  name: String!
+  type: AssetType!
+  organizationId: UUID!
+  organization: Organization!
+  
+  # Technical details
+  ipAddresses: [String!]!
+  hostnames: [String!]!
+  operatingSystem: String
+  version: String
+  
+  # Classification
+  criticality: SeverityLevel!
+  classification: DataClassification!
+  dataTypes: [String!]!
+  
+  # Business context
+  location: String
+  owner: User
+  businessFunction: String
+  
+  # Security
+  securityControls: [SecurityControl!]!
+  vulnerabilities: [Vulnerability!]!
+  
+  # Trust and risk
+  trustContribution: Int!
+  riskExposure: Float!
+  
+  # Compliance
+  complianceFrameworks: [String!]!
+  lastAssessment: DateTime
+  
+  # Lifecycle
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  decommissionedAt: DateTime
+  
+  # Aggregated metrics
+  totalSecurityControls: Int!
+  implementedControls: Int!
+  totalVulnerabilities: Int!
+  criticalVulnerabilities: Int!
+  securityScore: Int!
+}
+
+type SecurityControl {
+  id: UUID!
+  assetId: UUID!
+  asset: Asset!
+  type: ControlType!
+  category: String!
+  name: String!
+  description: String
+  
+  # Implementation
+  implementationStatus: ImplementationStatus!
+  effectiveness: Int!
+  automationLevel: Int!
+  
+  # Testing
+  lastTested: DateTime
+  testResults: [TestResult!]!
+  
+  # Framework mappings
+  frameworkMappings: [FrameworkMapping!]!
+  
+  # Trust Equity
+  trustPointsGenerated: Int!
+  riskReduction: Float!
+}
+
+enum ImplementationStatus {
+  NOT_IMPLEMENTED
+  PARTIAL
+  IMPLEMENTED
+  OPTIMIZED
+}
+
+type Vulnerability {
+  id: UUID!
+  assetId: UUID!
+  asset: Asset!
+  cveId: String
+  title: String!
+  description: String
+  
+  # Scoring
+  cvssScore: Float!
+  severity: SeverityLevel!
+  exploitability: Float!
+  
+  # Details
+  affectedComponents: [String!]!
+  attackVector: AttackVector!
+  
+  # Remediation
+  remediationSteps: [String!]!
+  patchAvailable: Boolean!
+  workarounds: [String!]!
+  
+  # Risk assessment
+  riskScore: Float!
+  businessImpact: Float!
+  likelihood: Float!
+  
+  # Lifecycle
+  discoveredAt: DateTime!
+  resolvedAt: DateTime
+  status: StatusType!
+  
+  # Trust impact
+  trustEquityImpact: Int!
+}
+
+enum AttackVector {
+  NETWORK
+  ADJACENT
+  LOCAL
+  PHYSICAL
+}
+
+# ===============================
+# PRISM Types
+# ===============================
+
+type RiskScenario {
+  id: UUID!
+  organizationId: UUID!
+  organization: Organization!
+  name: String!
+  description: String
+  category: String!
+  
+  # Risk calculation
+  probability: Float! # 0.0 to 1.0
+  impact: Float!      # dollar amount
+  ale: Float!         # Annual Loss Expectancy
+  sle: Float!         # Single Loss Expectancy
+  aro: Float!         # Annual Rate of Occurrence
+  
+  # Simulation results
+  simulationResults: MonteCarloResults
+  confidenceInterval: ConfidenceInterval!
+  
+  # Mitigation
+  mitigationControls: [MitigationControl!]!
+  residualRisk: Float!
+  costOfMitigation: Float!
+  
+  # Business context
+  affectedAssets: [Asset!]!
+  affectedProcesses: [String!]!
+  regulatoryImplications: [String!]!
+  
+  # Trust Equity
+  trustEquityRequired: Int!
+  trustEquityAtRisk: Int!
+  
+  # Lifecycle
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  lastReviewed: DateTime
+  reviewedBy: User
+}
+
+type MonteCarloResults {
+  simulationId: String!
+  iterations: Int!
+  
+  # Statistical results
+  results: StatisticalResults!
+  percentiles: Percentiles!
+  distribution: Distribution!
+  convergenceMetrics: ConvergenceMetrics!
+}
+
+type StatisticalResults {
+  mean: Float!
+  median: Float!
+  mode: Float!
+  standardDeviation: Float!
+  variance: Float!
+  skewness: Float!
+  kurtosis: Float!
+}
+
+type Percentiles {
+  p5: Float!
+  p10: Float!
+  p25: Float!
+  p50: Float!
+  p75: Float!
+  p90: Float!
+  p95: Float!
+  p99: Float!
+}
+
+type Distribution {
+  x: [Float!]!
+  y: [Float!]!
+}
+
+type ConvergenceMetrics {
+  converged: Boolean!
+  convergenceIteration: Int
+  stabilityScore: Float!
+}
+
+type ConfidenceInterval {
+  lower: Float!
+  upper: Float!
+  confidence: Float!
+}
+
+type MitigationControl {
+  id: UUID!
+  riskScenarioId: UUID!
+  riskScenario: RiskScenario!
+  name: String!
+  type: ControlType!
+  
+  # Effectiveness
+  riskReduction: Float! # percentage
+  cost: Float!
+  implementationTime: Int! # days
+  
+  # Implementation
+  status: MitigationStatus!
+  assignee: User
+  dueDate: DateTime
+  
+  # Dependencies
+  prerequisites: [String!]!
+  dependencies: [String!]!
+  
+  # Trust Equity
+  trustEquityGenerated: Int!
+}
+
+enum MitigationStatus {
+  PLANNED
+  IN_PROGRESS
+  IMPLEMENTED
+  VERIFIED
+}
+
+# ===============================
+# PULSE Types
+# ===============================
+
+type MonitoringMetric {
+  id: UUID!
+  name: String!
+  description: String
+  category: MetricCategory!
+  dataType: MetricDataType!
+  organizationId: UUID!
+  organization: Organization!
+  
+  # Collection
+  source: String!
+  collectionInterval: Int! # seconds
+  retention: Int!          # days
+  
+  # Thresholds
+  warningThreshold: Float
+  criticalThreshold: Float
+  
+  # Processing
+  aggregation: AggregationType!
+  smoothing: SmoothingType!
+  
+  # Alerting
+  alertEnabled: Boolean!
+  alertTemplate: String
+  
+  # Trust Equity
+  trustEquityWeight: Float!
+  
+  # Recent data
+  recentData(hours: Int = 24): [MetricDataPoint!]!
+  currentValue: Float
+  alerts: [Alert!]!
+}
+
+enum MetricCategory {
+  SECURITY
+  PERFORMANCE
+  AVAILABILITY
+  COMPLIANCE
+}
+
+enum MetricDataType {
+  GAUGE
+  COUNTER
+  HISTOGRAM
+  SUMMARY
+}
+
+enum AggregationType {
+  SUM
+  AVG
+  MIN
+  MAX
+  COUNT
+}
+
+enum SmoothingType {
+  NONE
+  MOVING_AVERAGE
+  EXPONENTIAL
+}
+
+type MetricDataPoint {
+  timestamp: DateTime!
+  value: Float!
+  tags: JSON
+}
+
+type Alert {
+  id: UUID!
+  title: String!
+  description: String
+  severity: SeverityLevel!
+  organizationId: UUID!
+  organization: Organization!
+  
+  # Source
+  source: String!
+  metric: MonitoringMetric
+  asset: Asset
+  
+  # Alert data
+  triggeredAt: DateTime!
+  value: Float
+  threshold: Float
+  
+  # Correlation
+  correlatedAlerts: [Alert!]!
+  rootCause: String
+  
+  # Response
+  status: AlertStatus!
+  assignee: User
+  acknowledgedAt: DateTime
+  resolvedAt: DateTime
+  
+  # Automation
+  autoRemediationTriggered: Boolean!
+  remediationActions: [RemediationAction!]!
+  
+  # Business impact
+  affectedServices: [String!]!
+  estimatedImpact: Float!
+  
+  # Trust Equity
+  trustEquityImpact: Int!
+}
+
+enum AlertStatus {
+  OPEN
+  ACKNOWLEDGED
+  IN_PROGRESS
+  RESOLVED
+  FALSE_POSITIVE
+}
+
+type RemediationAction {
+  id: UUID!
+  alertId: UUID!
+  alert: Alert!
+  type: RemediationActionType!
+  name: String!
+  description: String
+  
+  # Execution
+  status: RemediationActionStatus!
+  triggeredAt: DateTime!
+  completedAt: DateTime
+  
+  # Results
+  success: Boolean!
+  output: String
+  errorMessage: String
+  
+  # Impact
+  riskReduction: Float!
+  costSavings: Float!
+}
+
+enum RemediationActionType {
+  AUTOMATED
+  MANUAL
+}
+
+enum RemediationActionStatus {
+  PENDING
+  RUNNING
+  COMPLETED
+  FAILED
+}
+
+# ===============================
+# Trust Equity Types
+# ===============================
+
+type TrustEquityTransaction {
+  id: UUID!
+  entityId: UUID!
+  entityType: EntityType!
+  
+  # Transaction details
+  type: TransactionType!
+  amount: BigInt!
+  balanceAfter: BigInt!
+  
+  # Source
+  source: ERIPComponent!
+  sourceId: UUID!
+  category: TrustCategory!
+  
+  # Metadata
+  description: String!
+  evidence: [String!]!
+  multiplier: Float!
+  
+  # Lifecycle
+  timestamp: DateTime!
+  expiresAt: DateTime
+  reversedAt: DateTime
+  reversalReason: String
+  
+  # Related entity
+  organization: Organization
+  user: User
+  asset: Asset
+}
+
+enum EntityType {
+  ORGANIZATION
+  USER
+  ASSET
+}
+
+type TrustScore {
+  entityId: UUID!
+  entityType: EntityType!
+  
+  # Overall score
+  totalScore: Int!
+  tier: TrustTier!
+  
+  # Component breakdown
+  complianceScore: Int!
+  securityScore: Int!
+  riskManagementScore: Int!
+  automationScore: Int!
+  intelligenceScore: Int!
+  
+  # Trending
+  previousScore: Int!
+  change: Int!
+  trend: TrendDirection!
+  
+  # Metadata
+  lastCalculated: DateTime!
+  calculationVersion: String!
+  
+  # Benchmarking
+  industryPercentile: Int
+  sizePercentile: Int
+  
+  # Related entity
+  organization: Organization
+  user: User
+  asset: Asset
+}
+
+# ===============================
+# Supporting Types
+# ===============================
+
+type Evidence {
+  id: UUID!
+  title: String!
+  description: String
+  type: EvidenceType!
+  organizationId: UUID!
+  organization: Organization!
+  
+  # File info
+  fileName: String!
+  fileSize: BigInt!
+  mimeType: String!
+  checksum: String!
+  
+  # Storage
+  storageLocation: String!
+  accessUrl: String
+  
+  # Metadata
+  tags: [String!]!
+  categories: [String!]!
+  
+  # Verification
+  verificationStatus: VerificationStatus!
+  verifiedBy: User
+  verifiedAt: DateTime
+  expiryDate: DateTime
+  
+  # Framework mappings
+  frameworkMappings: [FrameworkMapping!]!
+  
+  # Lifecycle
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  createdBy: User!
+}
+
+enum EvidenceType {
+  DOCUMENT
+  SCREENSHOT
+  REPORT
+  CERTIFICATE
+  POLICY
+  PROCEDURE
+}
+
+enum VerificationStatus {
+  UNVERIFIED
+  VERIFIED
+  EXPIRED
+  INVALID
+}
+
+type FrameworkMapping {
+  id: UUID!
+  entityType: MappingEntityType!
+  entityId: UUID!
+  frameworkId: UUID!
+  framework: RegulatoryFramework!
+  requirementId: UUID
+  requirement: FrameworkRequirement
+  
+  # Mapping details
+  mappingType: MappingType!
+  confidence: Int!
+  notes: String
+  
+  # Lifecycle
+  createdAt: DateTime!
+  createdBy: User!
+}
+
+enum MappingEntityType {
+  EVIDENCE
+  SECURITY_CONTROL
+  ASSET
+  RISK_SCENARIO
+}
+
+enum MappingType {
+  DIRECT
+  PARTIAL
+  SUPPORTING
+}
+
+type TestResult {
+  id: UUID!
+  testDate: DateTime!
+  testType: TestType!
+  result: TestResultType!
+  score: Int!
+  findings: [String!]!
+  recommendations: [String!]!
+  tester: String!
+}
+
+enum TestType {
+  MANUAL
+  AUTOMATED
+}
+
+enum TestResultType {
+  PASS
+  FAIL
+  PARTIAL
+}
+
+type RemediationPlan {
+  id: UUID!
+  title: String!
+  description: String
+  priority: SeverityLevel!
+  
+  # Steps
+  steps: [RemediationStep!]!
+  
+  # Resources
+  estimatedCost: Float!
+  requiredSkills: [String!]!
+  dependencies: [String!]!
+  
+  # Timeline
+  estimatedDuration: Int! # days
+  startDate: DateTime
+  targetDate: DateTime
+  
+  # Approval
+  approved: Boolean!
+  approvedBy: User
+  approvedAt: DateTime
+}
+
+type RemediationStep {
+  id: UUID!
+  sequence: Int!
+  title: String!
+  description: String
+  assignee: User!
+  
+  # Status
+  status: StatusType!
+  
+  # Timeline
+  estimatedHours: Int!
+  startDate: DateTime
+  completedDate: DateTime
+  
+  # Dependencies
+  dependencies: [String!]!
+  blockers: [String!]!
+}
+
+# ===============================
+# Input Types
+# ===============================
+
+input PaginationInput {
+  page: Int = 1
+  limit: Int = 20
+}
+
+input SortInput {
+  field: String!
+  direction: SortDirection = ASC
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+input DateRangeInput {
+  start: DateTime!
+  end: DateTime!
+}
+
+input FilterInput {
+  field: String!
+  operator: FilterOperator!
+  value: String!
+}
+
+enum FilterOperator {
+  EQ
+  NE
+  GT
+  GTE
+  LT
+  LTE
+  IN
+  CONTAINS
+}
+
+input OrganizationInput {
+  name: String!
+  industry: String!
+  size: OrganizationSize!
+  riskAppetite: RiskAppetite = MODERATE
+  complianceFrameworks: [String!] = []
+  settings: JSON
+}
+
+input UserInput {
+  email: String!
+  name: String!
+  role: UserRole!
+  organizationId: UUID!
+  permissions: JSON
+  componentAccess: JSON
+}
+
+input AssetInput {
+  name: String!
+  type: AssetType!
+  organizationId: UUID!
+  ipAddresses: [String!] = []
+  hostnames: [String!] = []
+  operatingSystem: String
+  version: String
+  criticality: SeverityLevel = MEDIUM
+  classification: DataClassification = INTERNAL
+  dataTypes: [String!] = []
+  location: String
+  ownerId: UUID
+  businessFunction: String
+  complianceFrameworks: [String!] = []
+}
+
+input VulnerabilityInput {
+  assetId: UUID!
+  cveId: String
+  title: String!
+  description: String
+  cvssScore: Float!
+  severity: SeverityLevel!
+  exploitability: Float = 0.0
+  affectedComponents: [String!] = []
+  attackVector: AttackVector = NETWORK
+  remediationSteps: [String!] = []
+  patchAvailable: Boolean = false
+  workarounds: [String!] = []
+  riskScore: Float = 0.0
+  businessImpact: Float = 0.0
+  likelihood: Float = 0.0
+  trustEquityImpact: Int = 0
+}
+
+input RiskScenarioInput {
+  organizationId: UUID!
+  name: String!
+  description: String
+  category: String!
+  probability: Float!
+  impact: Float!
+  sle: Float = 0.0
+  aro: Float = 0.0
+  residualRisk: Float = 0.0
+  costOfMitigation: Float = 0.0
+  affectedProcesses: [String!] = []
+  regulatoryImplications: [String!] = []
+  trustEquityRequired: Int = 0
+  trustEquityAtRisk: Int = 0
+}
+
+input TrustEquityTransactionInput {
+  entityId: UUID!
+  entityType: EntityType!
+  type: TransactionType!
+  amount: BigInt!
+  source: ERIPComponent!
+  sourceId: UUID!
+  category: TrustCategory!
+  description: String!
+  evidence: [String!] = []
+  multiplier: Float = 1.0
+  expiresAt: DateTime
+}
+
+# ===============================
+# Queries
+# ===============================
+
+type Query {
+  # Organizations
+  organizations(
+    pagination: PaginationInput
+    sort: SortInput
+    filters: [FilterInput!]
+  ): OrganizationConnection!
+  
+  organization(id: UUID!): Organization
+  
+  # Users
+  users(
+    organizationId: UUID
+    pagination: PaginationInput
+    sort: SortInput
+    filters: [FilterInput!]
+  ): UserConnection!
+  
+  user(id: UUID!): User
+  
+  # COMPASS queries
+  regulatoryFrameworks(
+    jurisdiction: String
+    industry: String
+    pagination: PaginationInput
+    sort: SortInput
+  ): RegulatoryFrameworkConnection!
+  
+  regulatoryFramework(id: UUID!): RegulatoryFramework
+  
+  frameworkRequirements(
+    frameworkId: UUID
+    type: RequirementType
+    riskLevel: SeverityLevel
+    pagination: PaginationInput
+    sort: SortInput
+  ): FrameworkRequirementConnection!
+  
+  organizationCompliance(
+    organizationId: UUID!
+    frameworkId: UUID
+    status: ComplianceStatus
+    pagination: PaginationInput
+  ): OrganizationComplianceStatusConnection!
+  
+  complianceGaps(
+    organizationId: UUID!
+    severity: SeverityLevel
+    status: StatusType
+    assignee: UUID
+    pagination: PaginationInput
+    sort: SortInput
+  ): ComplianceGapConnection!
+  
+  # ATLAS queries
+  assets(
+    organizationId: UUID!
+    type: AssetType
+    criticality: SeverityLevel
+    classification: DataClassification
+    pagination: PaginationInput
+    sort: SortInput
+    filters: [FilterInput!]
+  ): AssetConnection!
+  
+  asset(id: UUID!): Asset
+  
+  vulnerabilities(
+    assetId: UUID
+    organizationId: UUID
+    severity: SeverityLevel
+    status: StatusType
+    dateRange: DateRangeInput
+    pagination: PaginationInput
+    sort: SortInput
+  ): VulnerabilityConnection!
+  
+  vulnerability(id: UUID!): Vulnerability
+  
+  securityControls(
+    assetId: UUID
+    organizationId: UUID
+    type: ControlType
+    implementationStatus: ImplementationStatus
+    pagination: PaginationInput
+    sort: SortInput
+  ): SecurityControlConnection!
+  
+  # PRISM queries
+  riskScenarios(
+    organizationId: UUID!
+    category: String
+    dateRange: DateRangeInput
+    pagination: PaginationInput
+    sort: SortInput
+  ): RiskScenarioConnection!
+  
+  riskScenario(id: UUID!): RiskScenario
+  
+  # PULSE queries
+  monitoringMetrics(
+    organizationId: UUID!
+    category: MetricCategory
+    source: String
+    pagination: PaginationInput
+    sort: SortInput
+  ): MonitoringMetricConnection!
+  
+  monitoringMetric(id: UUID!): MonitoringMetric
+  
+  alerts(
+    organizationId: UUID!
+    severity: SeverityLevel
+    status: AlertStatus
+    assignee: UUID
+    dateRange: DateRangeInput
+    pagination: PaginationInput
+    sort: SortInput
+  ): AlertConnection!
+  
+  alert(id: UUID!): Alert
+  
+  # Trust Equity queries
+  trustEquityTransactions(
+    entityId: UUID!
+    entityType: EntityType!
+    type: TransactionType
+    source: ERIPComponent
+    category: TrustCategory
+    dateRange: DateRangeInput
+    pagination: PaginationInput
+    sort: SortInput
+  ): TrustEquityTransactionConnection!
+  
+  trustScore(entityId: UUID!, entityType: EntityType!): TrustScore
+  
+  trustScores(
+    entityType: EntityType!
+    tier: TrustTier
+    organizationId: UUID
+    pagination: PaginationInput
+    sort: SortInput
+  ): TrustScoreConnection!
+  
+  # Evidence
+  evidence(
+    organizationId: UUID!
+    type: EvidenceType
+    verificationStatus: VerificationStatus
+    tags: [String!]
+    pagination: PaginationInput
+    sort: SortInput
+  ): EvidenceConnection!
+  
+  # Search
+  search(
+    query: String!
+    types: [String!]
+    organizationId: UUID
+    limit: Int = 20
+  ): SearchResults!
+  
+  # Analytics
+  organizationDashboard(organizationId: UUID!): OrganizationDashboard!
+  trustEquityAnalytics(
+    entityId: UUID!
+    entityType: EntityType!
+    timeframe: Timeframe!
+  ): TrustEquityAnalytics!
+}
+
+# ===============================
+# Mutations
+# ===============================
+
+type Mutation {
+  # Organizations
+  createOrganization(input: OrganizationInput!): Organization!
+  updateOrganization(id: UUID!, input: OrganizationInput!): Organization!
+  deleteOrganization(id: UUID!): Boolean!
+  
+  # Users
+  createUser(input: UserInput!): User!
+  updateUser(id: UUID!, input: UserInput!): User!
+  deleteUser(id: UUID!): Boolean!
+  
+  # Assets
+  createAsset(input: AssetInput!): Asset!
+  updateAsset(id: UUID!, input: AssetInput!): Asset!
+  deleteAsset(id: UUID!): Boolean!
+  
+  # Vulnerabilities
+  createVulnerability(input: VulnerabilityInput!): Vulnerability!
+  updateVulnerability(id: UUID!, input: VulnerabilityInput!): Vulnerability!
+  resolveVulnerability(id: UUID!, resolution: String!): Vulnerability!
+  
+  # Risk scenarios
+  createRiskScenario(input: RiskScenarioInput!): RiskScenario!
+  updateRiskScenario(id: UUID!, input: RiskScenarioInput!): RiskScenario!
+  runMonteCarloSimulation(riskScenarioId: UUID!, iterations: Int!): MonteCarloResults!
+  
+  # Trust Equity
+  recordTrustEquityTransaction(input: TrustEquityTransactionInput!): TrustEquityTransaction!
+  recalculateTrustScore(entityId: UUID!, entityType: EntityType!): TrustScore!
+  
+  # Compliance
+  updateComplianceStatus(
+    requirementId: UUID!
+    organizationId: UUID!
+    status: ComplianceStatus!
+    score: Int!
+    evidence: [UUID!]
+  ): OrganizationComplianceStatus!
+  
+  # Alerts
+  acknowledgeAlert(id: UUID!): Alert!
+  resolveAlert(id: UUID!, resolution: String!): Alert!
+  assignAlert(id: UUID!, assigneeId: UUID!): Alert!
+}
+
+# ===============================
+# Subscriptions
+# ===============================
+
+type Subscription {
+  # Real-time alerts
+  alertsForOrganization(organizationId: UUID!): Alert!
+  
+  # Trust score updates
+  trustScoreUpdates(entityId: UUID!, entityType: EntityType!): TrustScore!
+  
+  # Compliance changes
+  complianceUpdates(organizationId: UUID!): OrganizationComplianceStatus!
+  
+  # Vulnerability discoveries
+  vulnerabilityUpdates(organizationId: UUID!): Vulnerability!
+}
+
+# ===============================
+# Connection Types (for pagination)
+# ===============================
+
+type OrganizationConnection {
+  edges: [OrganizationEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OrganizationEdge {
+  node: Organization!
+  cursor: String!
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  node: User!
+  cursor: String!
+}
+
+type AssetConnection {
+  edges: [AssetEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type AssetEdge {
+  node: Asset!
+  cursor: String!
+}
+
+type VulnerabilityConnection {
+  edges: [VulnerabilityEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type VulnerabilityEdge {
+  node: Vulnerability!
+  cursor: String!
+}
+
+type RiskScenarioConnection {
+  edges: [RiskScenarioEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type RiskScenarioEdge {
+  node: RiskScenario!
+  cursor: String!
+}
+
+type TrustEquityTransactionConnection {
+  edges: [TrustEquityTransactionEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type TrustEquityTransactionEdge {
+  node: TrustEquityTransaction!
+  cursor: String!
+}
+
+type TrustScoreConnection {
+  edges: [TrustScoreEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type TrustScoreEdge {
+  node: TrustScore!
+  cursor: String!
+}
+
+type RegulatoryFrameworkConnection {
+  edges: [RegulatoryFrameworkEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type RegulatoryFrameworkEdge {
+  node: RegulatoryFramework!
+  cursor: String!
+}
+
+type FrameworkRequirementConnection {
+  edges: [FrameworkRequirementEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type FrameworkRequirementEdge {
+  node: FrameworkRequirement!
+  cursor: String!
+}
+
+type OrganizationComplianceStatusConnection {
+  edges: [OrganizationComplianceStatusEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type OrganizationComplianceStatusEdge {
+  node: OrganizationComplianceStatus!
+  cursor: String!
+}
+
+type ComplianceGapConnection {
+  edges: [ComplianceGapEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ComplianceGapEdge {
+  node: ComplianceGap!
+  cursor: String!
+}
+
+type SecurityControlConnection {
+  edges: [SecurityControlEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type SecurityControlEdge {
+  node: SecurityControl!
+  cursor: String!
+}
+
+type MonitoringMetricConnection {
+  edges: [MonitoringMetricEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type MonitoringMetricEdge {
+  node: MonitoringMetric!
+  cursor: String!
+}
+
+type AlertConnection {
+  edges: [AlertEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type AlertEdge {
+  node: Alert!
+  cursor: String!
+}
+
+type EvidenceConnection {
+  edges: [EvidenceEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type EvidenceEdge {
+  node: Evidence!
+  cursor: String!
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+  endCursor: String
+}
+
+# ===============================
+# Analytics Types
+# ===============================
+
+type SearchResults {
+  items: [SearchResultItem!]!
+  totalCount: Int!
+  facets: [SearchFacet!]!
+}
+
+type SearchResultItem {
+  id: UUID!
+  type: String!
+  title: String!
+  description: String
+  highlights: [String!]!
+  score: Float!
+  url: String!
+}
+
+type SearchFacet {
+  field: String!
+  values: [SearchFacetValue!]!
+}
+
+type SearchFacetValue {
+  value: String!
+  count: Int!
+}
+
+type OrganizationDashboard {
+  organization: Organization!
+  
+  # Compliance metrics
+  overallComplianceScore: Int!
+  complianceByFramework: [FrameworkCompliance!]!
+  openGaps: Int!
+  criticalGaps: Int!
+  
+  # Security metrics
+  totalAssets: Int!
+  criticalAssets: Int!
+  totalVulnerabilities: Int!
+  criticalVulnerabilities: Int!
+  securityScore: Int!
+  
+  # Risk metrics
+  totalRiskScenarios: Int!
+  highRiskScenarios: Int!
+  totalRiskExposure: Float!
+  
+  # Trust Equity
+  currentTrustScore: TrustScore!
+  trustEquityBalance: BigInt!
+  trustEquityTrend: [TrustEquityTrendPoint!]!
+  
+  # Activity
+  recentAlerts: [Alert!]!
+  recentTransactions: [TrustEquityTransaction!]!
+  upcomingDeadlines: [Deadline!]!
+}
+
+type FrameworkCompliance {
+  framework: RegulatoryFramework!
+  totalRequirements: Int!
+  compliantRequirements: Int!
+  compliancePercentage: Int!
+  openGaps: Int!
+}
+
+type TrustEquityAnalytics {
+  entityId: UUID!
+  entityType: EntityType!
+  timeframe: Timeframe!
+  
+  # Trend data
+  trendPoints: [TrustEquityTrendPoint!]!
+  totalEarned: BigInt!
+  totalSpent: BigInt!
+  netChange: BigInt!
+  
+  # Category breakdown
+  categoryBreakdown: [CategoryBreakdown!]!
+  
+  # Source breakdown
+  sourceBreakdown: [SourceBreakdown!]!
+  
+  # Predictions
+  predictedScore: Int
+  predictedTier: TrustTier
+  
+  # Benchmarking
+  industryComparison: BenchmarkData
+  sizeComparison: BenchmarkData
+}
+
+type TrustEquityTrendPoint {
+  timestamp: DateTime!
+  balance: BigInt!
+  score: Int!
+  earned: BigInt!
+  spent: BigInt!
+}
+
+type CategoryBreakdown {
+  category: TrustCategory!
+  totalPoints: BigInt!
+  percentage: Float!
+  trend: TrendDirection!
+}
+
+type SourceBreakdown {
+  source: ERIPComponent!
+  totalPoints: BigInt!
+  percentage: Float!
+  transactionCount: Int!
+}
+
+type BenchmarkData {
+  percentile: Int!
+  averageScore: Int!
+  topPercentileScore: Int!
+}
+
+type Deadline {
+  id: UUID!
+  title: String!
+  description: String
+  dueDate: DateTime!
+  type: DeadlineType!
+  severity: SeverityLevel!
+  relatedEntityId: UUID
+  relatedEntityType: String
+}
+
+enum DeadlineType {
+  COMPLIANCE_ASSESSMENT
+  VULNERABILITY_REMEDIATION
+  RISK_REVIEW
+  CERTIFICATE_RENEWAL
+  POLICY_REVIEW
+}
+
+enum Timeframe {
+  LAST_7_DAYS
+  LAST_30_DAYS
+  LAST_90_DAYS
+  LAST_6_MONTHS
+  LAST_YEAR
+  ALL_TIME
+}
