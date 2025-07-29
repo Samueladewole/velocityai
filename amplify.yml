@@ -3,15 +3,15 @@ frontend:
   phases:
     preBuild:
       commands:
-        - cd erip-platform
+        - cd velocity-platform
         - npm ci
     build:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: erip-platform/dist
+    baseDirectory: velocity-platform/dist
     files:
       - '**/*'
   cache:
     paths:
-      - erip-platform/node_modules/**/*
+      - velocity-platform/node_modules/**/*

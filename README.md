@@ -1,18 +1,20 @@
-# ERIP - Enterprise Risk Intelligence Platform
+# Velocity.ai - AI-Powered Compliance Automation Platform
 
 ## Project Structure
 
-The main application is located in the `erip-platform` directory.
+The main application is located in the `velocity-platform` directory (legacy naming - will be migrated).
 
 ```
-ERIP-app/
-├── erip-platform/          # Main frontend application
+Velocity-Platform/
+├── velocity-platform/          # Main Velocity.ai application
 │   ├── src/               # React/TypeScript source code
-│   ├── backend/python/    # Python backend services
+│   ├── backend/python/    # Python FastAPI backend services
+│   ├── backend/velocity/  # Velocity-specific services
+│   ├── src/services/cryptoCore/ # Rust cryptographic engine
+│   ├── src/services/truthLayer/ # Blockchain verification
 │   ├── dist/             # Build output
 │   └── package.json      # Frontend dependencies
-├── backend/python/        # Legacy Python backend (deprecated)
-├── docs/                 # Documentation
+├── docs/                 # Comprehensive documentation
 └── amplify.yml          # AWS Amplify configuration
 ```
 
@@ -20,25 +22,55 @@ ERIP-app/
 
 ```bash
 # Navigate to the main application
-cd erip-platform
+cd velocity-platform
 
 # Install dependencies
 npm install
 
-# Run development server
-npm run dev
+# Set up Python backend
+npm run setup:python
+
+# Run full development stack
+npm run dev:full
 
 # Build for production
 npm run build
 ```
 
-## Deployment
+## Development Modes
 
-The application is configured to deploy via AWS Amplify. The `amplify.yml` file ensures the correct directory (`erip-platform`) is built and deployed.
+```bash
+# Frontend only
+npm run dev
 
-## Frontend URL
+# Backend API server
+npm run dev:api
 
-- Development: http://localhost:5173
-- Production: [Your Amplify URL]
+# Python FastAPI server
+npm run dev:python
 
-All functionality is consolidated under `/tools/` as the primary navigation path.
+# Full stack (all services)
+npm run dev:full
+```
+
+## Key Features
+
+- **AI Agent Orchestration**: 9 specialized compliance agents
+- **Cryptographic Verification**: Rust-powered security engine
+- **Truth Layer**: Blockchain-based evidence integrity
+- **Real-time Monitoring**: Live compliance dashboard
+- **Multi-framework Support**: SOC 2, ISO 27001, GDPR, NIST
+
+## URLs
+
+- **Development**: http://localhost:5173
+- **Velocity Subdomain**: http://localhost:5173/velocity
+- **Production**: [Your Amplify URL]
+
+## Architecture
+
+- **Frontend**: React/TypeScript with real-time WebSocket updates
+- **Backend**: Python FastAPI with Celery task queue
+- **Crypto Core**: Rust engine for performance-critical operations
+- **Database**: PostgreSQL with Redis caching
+- **Blockchain**: Polygon integration for verification

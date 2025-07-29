@@ -4,13 +4,13 @@ echo "🚀 Starting ERIP AI Agents & Velocity Tier Demo"
 echo "================================================"
 
 # Check if we're in the right directory
-if [ ! -f "erip-platform/package.json" ]; then
-    echo "❌ Please run this script from the ERIP-app root directory"
+if [ ! -f "velocity-platform/package.json" ]; then
+    echo "❌ Please run this script from the Velocity-app root directory"
     exit 1
 fi
 
 # Navigate to platform directory
-cd erip-platform
+cd velocity-platform
 
 # Install dependencies if needed
 if [ ! -d "node_modules" ]; then

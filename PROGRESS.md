@@ -330,14 +330,14 @@ Based on the pragmatic risk appetite framework, ERIP automates:
 
 ## Contact & Support
 
-**Project Repository:** `/Users/macbook/Projects/ERIP-app/erip-platform/`  
+**Project Repository:** `/Users/macbook/Projects/Velocity-app/velocity-platform/`  
 **Frontend URL:** http://localhost:5173  
 **Backend URL:** http://localhost:8001 (when running)  
 
 **Key Files:**
-- Architecture: `/architecture/ERIP_ARCHITECTURE.md`
-- Requirements: `/docs/erip_comprehensive_prd.md`
-- Risk Framework: `/docs/erip_risk_appetite_framework.md`
+- Architecture: `/architecture/VELOCITY_ARCHITECTURE.md`
+- Requirements: `/docs/velocity_comprehensive_prd.md`
+- Risk Framework: `/docs/velocity_risk_appetite_framework.md`
 - Database Schema: `/prisma/schema.prisma`
 
 ---
