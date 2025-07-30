@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import VelocityLandingComplete from './VelocityLandingComplete';
 import VelocityDashboardComplete from './VelocityDashboardComplete';
 import VelocityHeader from './VelocityHeader';
@@ -25,68 +25,140 @@ const PlaceholderPage = ({ title, description }: { title: string; description: s
 );
 
 // Assessment Component
-const ComplianceAssessment = () => (
-  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 py-20">
-    <div className="max-w-4xl mx-auto px-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white font-serif mb-4">
-          Free Compliance Assessment
-        </h1>
-        <p className="text-lg text-slate-400">
-          Get your compliance score in 30 minutes - no integration required
-        </p>
-      </div>
-      
-      <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-        <div className="grid md:grid-cols-2 gap-8">
-          <div>
-            <h2 className="text-2xl font-semibold text-white mb-4">What You'll Get:</h2>
-            <ul className="space-y-3 text-slate-300">
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                AI-powered compliance gap analysis
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                Prioritized remediation roadmap
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                Cost estimates for compliance
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                Timeline to audit readiness
-              </li>
-              <li className="flex items-center gap-3">
-                <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                Trust score projection
-              </li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Choose Your Framework:</h3>
-            <div className="grid grid-cols-2 gap-3">
-              {['SOC 2', 'ISO 27001', 'GDPR', 'HIPAA', 'NIST CSF', 'PCI DSS'].map((framework) => (
-                <button
-                  key={framework}
-                  className="p-3 bg-white/5 rounded-lg border border-white/10 text-white hover:border-emerald-500/30 transition-colors text-sm"
-                >
-                  {framework}
-                </button>
-              ))}
+const ComplianceAssessment: React.FC = () => {
+  const navigate = useNavigate();
+  const [selectedFramework, setSelectedFramework] = useState<string>('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const frameworks = [
+    { name: 'SOC 2', description: 'Service Organization Control 2' },
+    { name: 'ISO 27001', description: 'Information Security Management' },
+    { name: 'GDPR', description: 'General Data Protection Regulation' },
+    { name: 'HIPAA', description: 'Health Insurance Portability' },
+    { name: 'NIST CSF', description: 'Cybersecurity Framework' },
+    { name: 'PCI DSS', description: 'Payment Card Industry Standard' }
+  ];
+
+  const handleFrameworkSelect = (framework: string) => {
+    setSelectedFramework(framework);
+  };
+
+  const handleStartAssessment = async () => {
+    if (!selectedFramework) {
+      alert('Please select a compliance framework first');
+      return;
+    }
+
+    setIsLoading(true);
+    
+    // Simulate assessment start
+    setTimeout(() => {
+      setIsLoading(false);
+      // For now, navigate to login or create a demo assessment
+      navigate('/velocity/login');
+    }, 1500);
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 py-20">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Back Button */}
+        <button
+          onClick={() => navigate('/velocity')}
+          className="mb-8 text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+        >
+          ← Back to Home
+        </button>
+
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-bold text-white font-serif mb-4">
+            Free Compliance Assessment
+          </h1>
+          <p className="text-lg text-slate-400">
+            Get your compliance score in 30 minutes - no integration required
+          </p>
+        </div>
+        
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h2 className="text-2xl font-semibold text-white mb-4">What You'll Get:</h2>
+              <ul className="space-y-3 text-slate-300">
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  AI-powered compliance gap analysis
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  Prioritized remediation roadmap
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  Cost estimates for compliance
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  Timeline to audit readiness
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  Trust score projection
+                </li>
+              </ul>
             </div>
             
-            <button className="w-full mt-6 px-6 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300">
-              Start Assessment
-            </button>
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Choose Your Framework:</h3>
+              <div className="grid grid-cols-2 gap-3">
+                {frameworks.map((framework) => (
+                  <button
+                    key={framework.name}
+                    onClick={() => handleFrameworkSelect(framework.name)}
+                    className={`p-3 rounded-lg border text-sm transition-all duration-300 ${
+                      selectedFramework === framework.name
+                        ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400'
+                        : 'bg-white/5 border-white/10 text-white hover:border-emerald-500/30 hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="font-medium">{framework.name}</div>
+                    <div className="text-xs opacity-75 mt-1">{framework.description}</div>
+                  </button>
+                ))}
+              </div>
+              
+              <button 
+                onClick={handleStartAssessment}
+                disabled={!selectedFramework || isLoading}
+                className={`w-full mt-6 px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
+                  selectedFramework && !isLoading
+                    ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25'
+                    : 'bg-slate-700 text-slate-400 cursor-not-allowed'
+                }`}
+              >
+                {isLoading ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                    Starting Assessment...
+                  </div>
+                ) : (
+                  `Start ${selectedFramework} Assessment`
+                )}
+              </button>
+
+              {selectedFramework && (
+                <div className="mt-4 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                  <p className="text-sm text-emerald-400">
+                    ✓ {selectedFramework} framework selected. Assessment will take approximately 20-30 minutes.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Demo Component
 const Demo = () => (
@@ -127,58 +199,78 @@ const Demo = () => (
 );
 
 // Login Component
-const Login = () => (
-  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 flex items-center justify-center">
-    <div className="max-w-md mx-auto px-6">
-      <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg mx-auto mb-4 flex items-center justify-center">
-            <span className="text-white text-2xl">⚡</span>
+const Login = () => {
+  const navigate = useNavigate();
+  
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    localStorage.setItem('velocity_auth_token', 'demo_token');
+    navigate('/velocity/dashboard');
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 flex items-center justify-center">
+      <div className="max-w-md mx-auto px-6">
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <div className="text-center mb-8">
+            <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg mx-auto mb-4 flex items-center justify-center">
+              <span className="text-white text-2xl">⚡</span>
+            </div>
+            <h1 className="text-2xl font-bold text-white font-serif">Welcome Back</h1>
+            <p className="text-slate-400">Sign in to your Velocity account</p>
           </div>
-          <h1 className="text-2xl font-bold text-white font-serif">Welcome Back</h1>
-          <p className="text-slate-400">Sign in to your Velocity account</p>
+          
+          <form className="space-y-4" onSubmit={handleLogin}>
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
+              <input
+                type="email"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                placeholder="Enter your email"
+                defaultValue="demo@velocity.ai"
+              />
+            </div>
+            
+            <div>
+              <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
+              <input
+                type="password"
+                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
+                placeholder="Enter your password"
+                defaultValue="demo123"
+              />
+            </div>
+            
+            <button
+              type="submit"
+              className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
+            >
+              Sign In
+            </button>
+            
+            <div className="text-center mt-4">
+              <p className="text-sm text-slate-400">
+                Demo credentials are pre-filled. Just click "Sign In"
+              </p>
+            </div>
+          </form>
         </div>
-        
-        <form className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
-            <input
-              type="email"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-              placeholder="Enter your email"
-            />
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
-            <input
-              type="password"
-              className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-              placeholder="Enter your password"
-            />
-          </div>
-          
-          <button
-            type="submit"
-            className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
-            onClick={(e) => {
-              e.preventDefault();
-              localStorage.setItem('velocity_auth_token', 'demo_token');
-              window.location.href = '/velocity/dashboard';
-            }}
-          >
-            Sign In
-          </button>
-        </form>
       </div>
     </div>
+  );
+};
+
+// Public Layout for landing and marketing pages (no header/footer)
+const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="min-h-screen">
+    {children}
   </div>
 );
 
-// Layout wrapper component
-const PageLayout: React.FC<{ children: React.ReactNode; showFooter?: boolean }> = ({ 
+// Dashboard Layout with header and footer
+const DashboardLayout: React.FC<{ children: React.ReactNode; showFooter?: boolean }> = ({ 
   children, 
-  showFooter = true 
+  showFooter = false 
 }) => (
   <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
     <VelocityHeader />
@@ -193,253 +285,253 @@ const PageLayout: React.FC<{ children: React.ReactNode; showFooter?: boolean }> 
 const VelocityRoutes: React.FC = () => {
   return (
     <Routes>
-      {/* Public routes */}
+      {/* Public routes - No header/footer */}
       <Route path="/" element={
-        <PageLayout>
+        <PublicLayout>
           <VelocityLandingComplete />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity" element={
-        <PageLayout>
+        <PublicLayout>
           <VelocityLandingComplete />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/" element={
-        <PageLayout>
+        <PublicLayout>
           <VelocityLandingComplete />
-        </PageLayout>
+        </PublicLayout>
       } />
       
-      {/* Assessment and Demo */}
+      {/* Assessment and Demo - Public pages */}
       <Route path="/velocity/assessment" element={
-        <PageLayout>
+        <PublicLayout>
           <ComplianceAssessment />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/demo" element={
-        <PageLayout>
+        <PublicLayout>
           <Demo />
-        </PageLayout>
+        </PublicLayout>
       } />
       
-      {/* Auth routes */}
+      {/* Auth routes - No layout needed */}
       <Route path="/velocity/login" element={<Login />} />
       <Route path="/velocity/signup" element={<Login />} />
       
-      {/* Dashboard routes */}
+      {/* Dashboard routes - Use dashboard layout */}
       <Route path="/velocity/dashboard" element={
-        <PageLayout showFooter={false}>
+        <DashboardLayout>
           <VelocityDashboardComplete />
-        </PageLayout>
+        </DashboardLayout>
       } />
       
-      {/* Product routes */}
+      {/* Product routes - Public marketing pages */}
       <Route path="/velocity/features" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Features" description="Discover Velocity's powerful compliance automation features" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/integrations" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Integrations" description="Connect with your existing tools and cloud services" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/security" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Security" description="Learn about our enterprise-grade security architecture" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/pricing" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Pricing" description="Choose the right plan for your organization" />
-        </PageLayout>
+        </PublicLayout>
       } />
       
-      {/* Solutions routes */}
+      {/* Solutions routes - Public marketing pages */}
       <Route path="/velocity/solutions/soc2" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="SOC 2 Compliance" description="Automate your SOC 2 Type I and Type II compliance" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/solutions/iso27001" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="ISO 27001" description="Streamline your ISO 27001 certification process" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/solutions/gdpr" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="GDPR Compliance" description="Ensure GDPR compliance with automated data protection" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/solutions/hipaa" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="HIPAA Compliance" description="Healthcare compliance made simple" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/solutions/cis-controls" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="CIS Controls" description="Implement CIS Controls with AI automation" />
-        </PageLayout>
+        </PublicLayout>
       } />
       
-      {/* Platform routes */}
+      {/* Platform routes - Authenticated dashboard pages */}
       <Route path="/velocity/agents" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="AI Agents" description="Manage your 10-agent compliance orchestration system" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/agents/:agentId" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Agent Details" description="Configure and monitor individual AI agents" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/evidence" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Evidence Hub" description="Central repository for all compliance evidence" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/evidence/:evidenceId" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Evidence Details" description="View and manage individual evidence items" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/reports" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Reports" description="Generate compliance reports for stakeholders" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/live" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Live Monitor" description="Real-time compliance monitoring dashboard" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/integration" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Integration Dashboard" description="Manage your cloud and tool integrations" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/creator" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Agent Creator" description="Create custom AI agents for your specific needs" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       
-      {/* Resources routes */}
+      {/* Resources routes - Public pages */}
       <Route path="/velocity/docs" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Documentation" description="Comprehensive guides and API documentation" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/api" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="API Reference" description="Complete API reference and developer tools" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/support" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Support" description="Get help from our expert support team" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/community" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Community" description="Join the Velocity compliance community" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/status" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="System Status" description="Real-time system status and uptime monitoring" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/case-studies" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Case Studies" description="Success stories from our customers" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/blog" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Blog" description="Latest insights on compliance and security" />
-        </PageLayout>
+        </PublicLayout>
       } />
       
-      {/* Company routes */}
+      {/* Company routes - Public pages */}
       <Route path="/velocity/about" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="About Velocity" description="Learn about our mission and team" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/careers" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Careers" description="Join our team and help shape the future of compliance" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/contact" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Contact Us" description="Get in touch with our team" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/partners" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Partners" description="Our technology and channel partners" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/privacy" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Privacy Policy" description="How we protect and handle your data" />
-        </PageLayout>
+        </PublicLayout>
       } />
       <Route path="/velocity/terms" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Terms of Service" description="Terms and conditions for using Velocity" />
-        </PageLayout>
+        </PublicLayout>
       } />
       
-      {/* Settings and account routes */}
+      {/* Settings and account routes - Dashboard pages */}
       <Route path="/velocity/settings" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Settings" description="Manage your account and organization settings" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/billing" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Billing" description="Manage your subscription and billing information" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       
-      {/* Additional functional routes */}
+      {/* Additional functional routes - Dashboard pages */}
       <Route path="/velocity/scan" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Compliance Scan" description="Run comprehensive compliance assessment" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/reports/generate" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Generate Report" description="Create new compliance report" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/integrations/add" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Add Integration" description="Connect new cloud service or tool" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/audits/schedule" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Schedule Audit" description="Plan upcoming compliance audit" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/frameworks" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Compliance Frameworks" description="Manage your compliance frameworks" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/compliance" element={
-        <PageLayout>
+        <DashboardLayout>
           <PlaceholderPage title="Compliance Overview" description="Comprehensive compliance status overview" />
-        </PageLayout>
+        </DashboardLayout>
       } />
       <Route path="/velocity/trust-pathway" element={
-        <PageLayout>
+        <PublicLayout>
           <PlaceholderPage title="Trust Pathway" description="Learn about our progressive integration approach" />
-        </PageLayout>
+        </PublicLayout>
       } />
       
       {/* Catch-all redirect */}

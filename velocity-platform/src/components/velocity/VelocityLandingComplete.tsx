@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { 
   Shield, 
   TrendingUp, 
@@ -37,6 +37,220 @@ import {
   Mail,
   Phone
 } from 'lucide-react';
+
+// Public Navigation Header for Landing Page
+const PublicHeader: React.FC = () => {
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/velocity" className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
+            </div>
+            <div>
+              <span className="text-xl font-bold text-white font-serif">Velocity</span>
+              <div className="text-xs text-slate-400">AI Compliance Automation</div>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Platform
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-48 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/velocity/features')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  Features
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/agents')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  AI Agents
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/integrations')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  Integrations
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/security')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  Security
+                </button>
+              </div>
+            </div>
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Solutions
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-48 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/velocity/solutions/soc2')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  SOC 2
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/iso27001')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  ISO 27001
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/gdpr')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  GDPR
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/hipaa')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  HIPAA
+                </button>
+              </div>
+            </div>
+            <button 
+              onClick={() => navigate('/velocity/pricing')}
+              className="text-slate-300 hover:text-white transition-colors"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => navigate('/velocity/docs')}
+              className="text-slate-300 hover:text-white transition-colors"
+            >
+              Resources
+            </button>
+          </nav>
+
+          {/* Right Actions */}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => navigate('/velocity/login')}
+              className="hidden sm:block text-slate-300 hover:text-white transition-colors"
+            >
+              Sign In
+            </button>
+            <button
+              onClick={() => navigate('/velocity/assessment')}
+              className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
+            >
+              Start Free Assessment
+            </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-slate-400 hover:text-white transition-colors"
+            >
+              {mobileMenuOpen ? '✕' : '☰'}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-slate-800/95 backdrop-blur-md border-t border-slate-700/50">
+          <div className="px-6 py-4 space-y-3">
+            <div className="text-slate-400 text-sm font-medium py-1">Platform</div>
+            <button 
+              onClick={() => { navigate('/velocity/features'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Features
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/agents'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              AI Agents
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/integrations'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Integrations
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/security'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Security
+            </button>
+            <div className="text-slate-400 text-sm font-medium py-1">Solutions</div>
+            <button 
+              onClick={() => { navigate('/velocity/solutions/soc2'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              SOC 2
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/solutions/iso27001'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              ISO 27001
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/solutions/gdpr'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              GDPR
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/solutions/hipaa'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              HIPAA
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/pricing'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2"
+            >
+              Pricing
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/docs'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2"
+            >
+              Resources
+            </button>
+            <div className="pt-4 border-t border-slate-700/50 space-y-2">
+              <button
+                onClick={() => { navigate('/velocity/login'); setMobileMenuOpen(false); }}
+                className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2"
+              >
+                Sign In
+              </button>
+              <button
+                onClick={() => { navigate('/velocity/assessment'); setMobileMenuOpen(false); }}
+                className="block w-full px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
+              >
+                Start Free Assessment
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+};
 
 // Animated Trust Score Component for Hero
 const HeroTrustScore = () => {
@@ -287,7 +501,7 @@ const TrustFirstSection = () => {
               
               <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
                 <div className={`p-3 bg-${stage.color}-500/10 rounded-lg w-fit mb-4`}>
-                  <stage.icon className={`w-6 h-6 text-${stage.color}-400`} />
+                  {React.createElement(stage.icon, { className: `w-6 h-6 text-${stage.color}-400` })}
                 </div>
                 
                 <div className="mb-4">
@@ -390,7 +604,7 @@ const AIAgentsSection = () => {
             <div key={index} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
               <div className="flex items-start justify-between mb-4">
                 <div className="p-3 bg-emerald-500/10 rounded-lg">
-                  <agent.icon className="w-6 h-6 text-emerald-400" />
+                  {React.createElement(agent.icon, { className: "w-6 h-6 text-emerald-400" })}
                 </div>
                 <div className="text-right">
                   <div className="text-2xl font-bold text-white font-mono">{agent.automation}%</div>
@@ -419,6 +633,179 @@ const AIAgentsSection = () => {
           <button className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
             <Bot className="w-5 h-5" />
             Explore All 10 Agents
+            <ArrowRight className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Evidence Collection Section
+const EvidenceCollectionSection = () => {
+  const [activeTab, setActiveTab] = useState(0);
+  
+  const evidenceTypes = [
+    {
+      title: "Cloud Infrastructure",
+      icon: Server,
+      count: "2,847",
+      description: "AWS, Azure, GCP configurations",
+      examples: ["IAM policies", "Network security groups", "Encryption settings", "Access logs"]
+    },
+    {
+      title: "Application Security", 
+      icon: Shield,
+      count: "1,923",
+      description: "Code security and vulnerabilities",
+      examples: ["SAST scan results", "Dependency scans", "Security headers", "Authentication flows"]
+    },
+    {
+      title: "Access Controls",
+      icon: Users,
+      count: "856",
+      description: "User permissions and access reviews",
+      examples: ["User access reviews", "Privileged accounts", "MFA configurations", "Session logs"]
+    },
+    {
+      title: "Operational Evidence",
+      icon: Activity,
+      count: "3,421",
+      description: "Processes and documentation",
+      examples: ["Policy documents", "Training records", "Incident responses", "Change logs"]
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white font-serif mb-6">
+            Automated Evidence Collection
+          </h2>
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+            Velocity automatically collects, validates, and organizes evidence from across your entire infrastructure. 
+            No manual screenshots, no missing documentation - just complete, audit-ready evidence portfolios.
+          </p>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+          {/* Evidence Types Tabs */}
+          <div>
+            <div className="grid grid-cols-2 gap-4 mb-8">
+              {evidenceTypes.map((type, index) => (
+                <button
+                  key={index}
+                  onClick={() => setActiveTab(index)}
+                  className={`p-4 rounded-xl text-left transition-all duration-300 ${
+                    activeTab === index
+                      ? 'bg-emerald-500/20 border border-emerald-500/50'
+                      : 'bg-white/5 border border-white/10 hover:bg-white/10'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 mb-2">
+                    {React.createElement(type.icon, { className: `w-5 h-5 ${activeTab === index ? 'text-emerald-400' : 'text-slate-400'}` })}
+                    <span className={`font-medium ${activeTab === index ? 'text-emerald-400' : 'text-white'}`}>
+                      {type.title}
+                    </span>
+                  </div>
+                  <div className={`text-2xl font-bold font-mono mb-1 ${activeTab === index ? 'text-emerald-400' : 'text-slate-300'}`}>
+                    {type.count}
+                  </div>
+                  <div className="text-xs text-slate-400">{type.description}</div>
+                </button>
+              ))}
+            </div>
+
+            {/* Active Evidence Examples */}
+            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+              <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                {React.createElement(evidenceTypes[activeTab].icon, { className: "w-5 h-5 text-emerald-400" })}
+                {evidenceTypes[activeTab].title} Evidence
+              </h3>
+              <div className="space-y-3">
+                {evidenceTypes[activeTab].examples.map((example, index) => (
+                  <div key={index} className="flex items-center gap-3 text-slate-300">
+                    <CheckCircle className="w-4 h-4 text-emerald-400" />
+                    <span className="text-sm">{example}</span>
+                    <div className="ml-auto text-xs text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded">
+                      Auto-collected
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Evidence Collection Stats */}
+          <div className="space-y-6">
+            <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+              <div className="text-center mb-6">
+                <div className="text-5xl font-bold text-emerald-400 font-mono mb-2">8,047</div>
+                <div className="text-slate-400">Evidence items collected today</div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white mb-1">95%</div>
+                  <div className="text-sm text-slate-400">Automated</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white mb-1">24/7</div>
+                  <div className="text-sm text-slate-400">Monitoring</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white mb-1">0</div>
+                  <div className="text-sm text-slate-400">Missing Evidence</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-white mb-1">100%</div>
+                  <div className="text-sm text-slate-400">Audit Ready</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-emerald-500/10 border border-emerald-500/20 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
+                  <span className="text-emerald-400 font-medium">Real-time Collection</span>
+                </div>
+                <p className="text-sm text-slate-300">
+                  Evidence is collected continuously as your infrastructure changes, ensuring you never miss critical compliance data.
+                </p>
+              </div>
+
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
+                  <span className="text-blue-400 font-medium">Intelligent Validation</span>
+                </div>
+                <p className="text-sm text-slate-300">
+                  AI agents automatically validate evidence quality and completeness before auditors even see it.
+                </p>
+              </div>
+
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-4">
+                <div className="flex items-center gap-2 mb-2">
+                  <div className="w-2 h-2 bg-amber-400 rounded-full"></div>
+                  <span className="text-amber-400 font-medium">Audit-Ready Exports</span>
+                </div>
+                <p className="text-sm text-slate-300">
+                  One-click evidence packages formatted exactly how auditors expect to receive them.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="text-center">
+          <button 
+            onClick={() => navigate('/velocity/demo')}
+            className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25"
+          >
+            <Database className="w-5 h-5" />
+            See Evidence Collection in Action
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
@@ -544,15 +931,120 @@ const CTASection = () => {
   );
 };
 
+// Public Footer Component
+const PublicFooter: React.FC = () => {
+  const navigate = useNavigate();
+  
+  return (
+    <footer className="bg-slate-900 border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid md:grid-cols-4 gap-8">
+          {/* Brand */}
+          <div>
+            <div className="flex items-center gap-3 mb-4">
+              <div className="relative">
+                <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
+              </div>
+              <span className="text-xl font-bold text-white font-serif">Velocity</span>
+            </div>
+            <p className="text-slate-400 text-sm leading-relaxed mb-4">
+              AI-powered compliance automation for modern security teams.
+            </p>
+          </div>
+          
+          {/* Product */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Product</h3>
+            <div className="space-y-3">
+              {['Features', 'Integrations', 'Security', 'Pricing'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => navigate(`/velocity/${item.toLowerCase()}`)}
+                  className="block text-slate-400 hover:text-white transition-colors text-sm"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Solutions */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Solutions</h3>
+            <div className="space-y-3">
+              {[
+                { label: 'SOC 2', path: '/velocity/solutions/soc2' },
+                { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },
+                { label: 'GDPR', path: '/velocity/solutions/gdpr' },
+                { label: 'HIPAA', path: '/velocity/solutions/hipaa' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => navigate(item.path)}
+                  className="block text-slate-400 hover:text-white transition-colors text-sm"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Company */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <div className="space-y-3">
+              {[
+                { label: 'About', path: '/velocity/about' },
+                { label: 'Careers', path: '/velocity/careers' },
+                { label: 'Contact', path: '/velocity/contact' },
+                { label: 'Privacy', path: '/velocity/privacy' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => navigate(item.path)}
+                  className="block text-slate-400 hover:text-white transition-colors text-sm"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+        
+        <hr className="border-slate-800 my-8" />
+        
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-slate-400 text-sm">
+            © {new Date().getFullYear()} Velocity. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <span className="text-xs text-slate-500">Enterprise-grade security</span>
+            <div className="flex items-center gap-2">
+              <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+              <span className="text-xs text-slate-400">All systems operational</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
 // Main Landing Component
 const VelocityLandingComplete: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-900">
-      <HeroSection />
-      <TrustFirstSection />
-      <AIAgentsSection />
-      <SocialProofSection />
-      <CTASection />
+      <PublicHeader />
+      <main className="pt-16">
+        <HeroSection />
+        <TrustFirstSection />
+        <AIAgentsSection />
+        <EvidenceCollectionSection />
+        <SocialProofSection />
+        <CTASection />
+      </main>
+      <PublicFooter />
     </div>
   );
 };
