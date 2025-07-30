@@ -25,6 +25,11 @@ import {
 const VelocityFooter: React.FC = () => {
   const navigate = useNavigate();
   
+  // Check if we're in subdomain mode or main app
+  const isSubdomain = window.location.hostname.includes('velocity.') || 
+                     (window.location.hostname === 'localhost' && window.location.pathname.startsWith('/velocity'));
+  const routePrefix = isSubdomain ? '' : '/velocity';
+  
   return (
     <footer className="relative bg-slate-900/50 backdrop-blur-xl border-t border-slate-800/50 mt-16">
       <style jsx>{`
@@ -71,11 +76,11 @@ const VelocityFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Platform</h3>
             <div className="space-y-3">
               {[
-                { label: 'Dashboard', path: '/dashboard', icon: Home },
-                { label: 'AI Agents', path: '/agents', icon: Bot },
-                { label: 'Evidence Hub', path: '/evidence', icon: Database },
-                { label: 'Reports', path: '/reports', icon: BarChart3 },
-                { label: 'Integrations', path: '/integration', icon: Globe }
+                { label: 'Dashboard', path: `${routePrefix}/dashboard`, icon: Home },
+                { label: 'AI Agents', path: `${routePrefix}/agents`, icon: Bot },
+                { label: 'Evidence Hub', path: `${routePrefix}/evidence`, icon: Database },
+                { label: 'Reports', path: `${routePrefix}/reports`, icon: BarChart3 },
+                { label: 'Integrations', path: `${routePrefix}/integrations`, icon: Globe }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -94,11 +99,11 @@ const VelocityFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Resources</h3>
             <div className="space-y-3">
               {[
-                { label: 'Documentation', path: '/docs', icon: BookOpen },
-                { label: 'API Reference', path: '/api', icon: FileText },
-                { label: 'Support', path: '/support', icon: HelpCircle },
-                { label: 'Community', path: '/community', icon: Users },
-                { label: 'Status', path: '/status', icon: Shield }
+                { label: 'Documentation', path: `${routePrefix}/docs`, icon: BookOpen },
+                { label: 'API Reference', path: `${routePrefix}/api`, icon: FileText },
+                { label: 'Support', path: `${routePrefix}/support`, icon: HelpCircle },
+                { label: 'Community', path: `${routePrefix}/community`, icon: Users },
+                { label: 'Status', path: `${routePrefix}/status`, icon: Shield }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -117,11 +122,11 @@ const VelocityFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <div className="space-y-3">
               {[
-                { label: 'About', path: '/about', icon: Users },
-                { label: 'Careers', path: '/careers', icon: Briefcase },
-                { label: 'Contact', path: '/contact', icon: Mail },
-                { label: 'Privacy', path: '/privacy', icon: Lock },
-                { label: 'Terms', path: '/terms', icon: FileText }
+                { label: 'About', path: `${routePrefix}/about`, icon: Users },
+                { label: 'Careers', path: `${routePrefix}/careers`, icon: Briefcase },
+                { label: 'Contact', path: `${routePrefix}/contact`, icon: Mail },
+                { label: 'Privacy', path: `${routePrefix}/privacy`, icon: Lock },
+                { label: 'Terms', path: `${routePrefix}/terms`, icon: FileText }
               ].map((item) => (
                 <button
                   key={item.label}

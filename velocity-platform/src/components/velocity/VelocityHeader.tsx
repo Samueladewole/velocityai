@@ -90,7 +90,8 @@ export const VelocityHeader: React.FC = () => {
     { label: 'Evidence', path: `${routePrefix}/evidence`, icon: FileCheck },
   ];
 
-  const isAuthenticated = false; // TODO: Connect to auth service
+  // Check if user is authenticated (can be expanded with real auth)
+  const isAuthenticated = localStorage.getItem('velocity_auth_token') !== null;
 
   const isActive = (path: string) => {
     return location.pathname === path;
