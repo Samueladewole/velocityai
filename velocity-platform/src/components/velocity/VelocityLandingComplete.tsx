@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import VelocityHeader from './VelocityHeader';
-import VelocityFooter from './VelocityFooter';
 import { 
   Shield, 
   TrendingUp, 
@@ -550,15 +548,11 @@ const CTASection = () => {
 const VelocityLandingComplete: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-900">
-      <VelocityHeader />
-      
       <HeroSection />
       <TrustFirstSection />
       <AIAgentsSection />
       <SocialProofSection />
       <CTASection />
-      
-      <VelocityFooter />
     </div>
   );
 };
