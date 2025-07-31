@@ -18,6 +18,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 import uvicorn
 import logging
 import json
+import uuid
 
 from models import (
     Organization, User, Agent, Integration, EvidenceItem, TrustScore, AgentExecutionLog,
@@ -26,7 +27,10 @@ from models import (
 )
 from database import engine, SessionLocal, create_tables, get_db
 from agent_executor import AgentExecutor
-# from cloud_integrations import CloudIntegrationManager  # Temporarily disabled
+from cloud_integration_manager import (
+    cloud_integration_manager, CloudIntegrationRequest, CloudSyncRequest,
+    EvidenceCollectionType, ConnectionHealthStatus
+)
 from websocket_manager import WebSocketManager
 from auth import (
     LoginRequest, SignupRequest, TokenResponse, UserResponse, AuthResponse,
@@ -58,6 +62,10 @@ from monitoring import (
     get_prometheus_metrics, get_application_info
 )
 from realtime_monitoring import monitoring_service
+from framework_routes import router as framework_router
+from qie_routes import router as qie_router
+from assessment_routes import router as assessment_router
+from evidence_routes import router as evidence_router
 
 # Configuration
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://velocity:password@localhost/velocity_db")
@@ -142,6 +150,12 @@ def require_resource_access(resource: str, action: str):
             raise AuthorizationException(f"Access denied: {resource}:{action}")
         return current_user
     return check_resource_dependency
+
+# Include routers
+app.include_router(framework_router)
+app.include_router(qie_router)
+app.include_router(assessment_router)
+app.include_router(evidence_router)
 
 # API Routes
 
@@ -535,6 +549,471 @@ async def connect_integration(
     except Exception as e:
         logger.error(f"Error connecting integration: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+# Enhanced Cloud Integration Management Endpoints
+
+@app.post("/api/v1/integrations/cloud/{platform}/connect", response_model=SuccessResponse)
+async def connect_cloud_platform(
+    platform: str,
+    request: CloudIntegrationRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("integration", "create"))
+):
+    """Connect to a cloud platform with comprehensive validation and testing"""
+    try:
+        # Validate platform
+        try:
+            platform_enum = Platform(platform.lower())
+        except ValueError:
+            raise ValidationException(f"Unsupported platform: {platform}")
+        
+        # Check if integration already exists
+        existing_integration = db.query(Integration).filter(
+            Integration.platform == platform_enum,
+            Integration.organization_id == current_user.organization_id
+        ).first()
+        
+        if existing_integration and existing_integration.status == IntegrationStatus.CONNECTED:
+            raise ConflictException(f"Integration with {platform} already exists and is connected")
+        
+        # Encrypt credentials before storing
+        encrypted_credentials = encrypt_credentials(request.credentials)
+        
+        # Test connection using cloud integration manager
+        success, error_message = await cloud_integration_manager.connect_platform(
+            platform_enum,
+            request.credentials,
+            str(existing_integration.id) if existing_integration else str(uuid.uuid4()),
+            test_connection=request.test_connection
+        )
+        
+        if not success:
+            raise VelocityException(f"Connection test failed: {error_message}")
+        
+        # Create or update integration record
+        if existing_integration:
+            existing_integration.credentials = encrypted_credentials
+            existing_integration.configuration = request.configuration
+            existing_integration.status = IntegrationStatus.CONNECTED
+            existing_integration.error_count = 0
+            existing_integration.last_error = None
+            integration = existing_integration
+        else:
+            integration = Integration(
+                name=f"{platform_enum.value.upper()} Integration",
+                platform=platform_enum,
+                credentials=encrypted_credentials,
+                configuration=request.configuration,
+                status=IntegrationStatus.CONNECTED,
+                organization_id=current_user.organization_id
+            )
+            db.add(integration)
+        
+        db.commit()
+        db.refresh(integration)
+        
+        # Schedule initial data sync
+        background_tasks.add_task(
+            cloud_integration_manager.sync_platform_data,
+            str(integration.id)
+        )
+        
+        # Notify via WebSocket
+        await websocket_manager.broadcast_to_organization(
+            current_user.organization_id,
+            {
+                "type": "integration_connected",
+                "data": {
+                    "integration_id": str(integration.id),
+                    "platform": platform_enum.value,
+                    "name": integration.name
+                }
+            }
+        )
+        
+        return create_success_response(
+            data={
+                "integration_id": str(integration.id),
+                "platform": platform_enum.value,
+                "status": IntegrationStatus.CONNECTED.value
+            },
+            message=f"Successfully connected to {platform_enum.value.upper()}"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error connecting to {platform}: {e}")
+        raise VelocityException(f"Failed to connect to {platform}: {str(e)}")
+
+@app.get("/api/v1/integrations/cloud/{platform}/test", response_model=SuccessResponse)
+async def test_cloud_platform_connection(
+    platform: str,
+    integration_id: Optional[str] = None,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("integration", "view"))
+):
+    """Test connection health for a cloud platform integration"""
+    try:
+        # Validate platform
+        try:
+            platform_enum = Platform(platform.lower())
+        except ValueError:
+            raise ValidationException(f"Unsupported platform: {platform}")
+        
+        # Find integration
+        query = db.query(Integration).filter(
+            Integration.platform == platform_enum,
+            Integration.organization_id == current_user.organization_id
+        )
+        
+        if integration_id:
+            query = query.filter(Integration.id == integration_id)
+        
+        integration = query.first()
+        if not integration:
+            raise ResourceNotFoundException("Integration", integration_id or platform)
+        
+        # Test connection
+        health_check = await cloud_integration_manager.test_connection(str(integration.id))
+        
+        # Update integration status based on health check
+        if health_check.status == ConnectionHealthStatus.HEALTHY:
+            integration.status = IntegrationStatus.CONNECTED
+            integration.error_count = 0
+            integration.last_error = None
+        else:
+            integration.status = IntegrationStatus.ERROR
+            integration.error_count += 1
+            integration.last_error = health_check.error_message
+        
+        db.commit()
+        
+        return create_success_response(
+            data={
+                "integration_id": str(integration.id),
+                "platform": platform_enum.value,
+                "status": health_check.status.value,
+                "response_time_ms": health_check.response_time_ms,
+                "error_message": health_check.error_message,
+                "last_checked": health_check.last_checked.isoformat(),
+                "metadata": health_check.metadata
+            },
+            message=f"Connection test completed for {platform_enum.value.upper()}"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error testing {platform} connection: {e}")
+        raise VelocityException(f"Failed to test {platform} connection: {str(e)}")
+
+@app.post("/api/v1/integrations/cloud/{platform}/sync", response_model=SuccessResponse)
+async def sync_cloud_platform_data(
+    platform: str,
+    request: CloudSyncRequest,
+    background_tasks: BackgroundTasks,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("integration", "connect"))
+):
+    """Synchronize data from a cloud platform"""
+    try:
+        # Validate platform
+        try:
+            platform_enum = Platform(platform.lower())
+        except ValueError:
+            raise ValidationException(f"Unsupported platform: {platform}")
+        
+        # Find integration
+        integration = db.query(Integration).filter(
+            Integration.id == request.integration_id,
+            Integration.platform == platform_enum,
+            Integration.organization_id == current_user.organization_id
+        ).first()
+        
+        if not integration:
+            raise ResourceNotFoundException("Integration", request.integration_id)
+        
+        if integration.status != IntegrationStatus.CONNECTED:
+            raise VelocityException("Integration is not connected")
+        
+        # Update integration status
+        integration.status = IntegrationStatus.SYNCING
+        db.commit()
+        
+        # Start sync in background
+        async def sync_task():
+            try:
+                sync_result = await cloud_integration_manager.sync_platform_data(
+                    str(integration.id),
+                    request.evidence_types or None,
+                    request.framework
+                )
+                
+                # Create evidence items from sync results
+                evidence_created = 0
+                for result_data in sync_result.get('results', []):
+                    if result_data.get('success') and result_data.get('evidence_items'):
+                        for evidence_data in result_data['evidence_items']:
+                            evidence_item = EvidenceItem(
+                                title=f"{platform_enum.value.upper()} {result_data['collection_type']} Evidence",
+                                description=f"Evidence collected from {platform_enum.value.upper()}",
+                                evidence_type=EvidenceType.API_RESPONSE,
+                                status=EvidenceStatus.PENDING,
+                                framework=request.framework or Framework.SOC2,
+                                control_id="AUTO-GENERATED",
+                                data=evidence_data,
+                                evidence_metadata={
+                                    "platform": platform_enum.value,
+                                    "collection_type": result_data['collection_type'],
+                                    "collected_at": result_data.get('collected_at')
+                                },
+                                confidence_score=0.8,
+                                trust_points=10,
+                                organization_id=current_user.organization_id
+                            )
+                            db.add(evidence_item)
+                            evidence_created += 1
+                
+                # Update integration status
+                integration.status = IntegrationStatus.CONNECTED
+                integration.last_sync = datetime.now(timezone.utc)
+                integration.error_count = 0
+                integration.last_error = None
+                db.commit()
+                
+                # Notify via WebSocket
+                await websocket_manager.broadcast_to_organization(
+                    current_user.organization_id,
+                    {
+                        "type": "sync_completed",
+                        "data": {
+                            "integration_id": str(integration.id),
+                            "platform": platform_enum.value,
+                            "evidence_created": evidence_created,
+                            "total_evidence_collected": sync_result.get('total_evidence_collected', 0)
+                        }
+                    }
+                )
+                
+            except Exception as e:
+                logger.error(f"Sync task failed for {integration.id}: {e}")
+                integration.status = IntegrationStatus.ERROR
+                integration.error_count += 1
+                integration.last_error = str(e)
+                db.commit()
+                
+                # Notify of error
+                await websocket_manager.broadcast_to_organization(
+                    current_user.organization_id,
+                    {
+                        "type": "sync_failed",
+                        "data": {
+                            "integration_id": str(integration.id),
+                            "platform": platform_enum.value,
+                            "error": str(e)
+                        }
+                    }
+                )
+        
+        background_tasks.add_task(sync_task)
+        
+        return create_success_response(
+            data={
+                "integration_id": str(integration.id),
+                "platform": platform_enum.value,
+                "sync_started": True,
+                "evidence_types": [et.value for et in (request.evidence_types or [])],
+                "framework": request.framework.value if request.framework else None
+            },
+            message=f"Data synchronization started for {platform_enum.value.upper()}"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error starting sync for {platform}: {e}")
+        raise VelocityException(f"Failed to start sync for {platform}: {str(e)}")
+
+@app.get("/api/v1/integrations/cloud/status", response_model=SuccessResponse)
+async def get_cloud_integrations_status(
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("integration", "view"))
+):
+    """Get status of all cloud integrations for the organization"""
+    try:
+        # Get all integrations from database
+        integrations = db.query(Integration).filter(
+            Integration.organization_id == current_user.organization_id
+        ).all()
+        
+        # Get detailed status from cloud integration manager
+        integration_statuses = []
+        for integration in integrations:
+            try:
+                status = await cloud_integration_manager.get_connection_status(str(integration.id))
+                
+                # Merge database and manager information
+                integration_status = {
+                    "integration_id": str(integration.id),
+                    "name": integration.name,
+                    "platform": integration.platform.value,
+                    "db_status": integration.status.value,
+                    "connection_status": status.get('status', 'unknown'),
+                    "last_sync": integration.last_sync.isoformat() if integration.last_sync else None,
+                    "error_count": integration.error_count,
+                    "last_error": integration.last_error,
+                    "created_at": integration.created_at.isoformat(),
+                    "updated_at": integration.updated_at.isoformat(),
+                    "health_check": {
+                        "last_checked": status.get('last_health_check'),
+                        "response_time_ms": status.get('response_time_ms'),
+                        "error_message": status.get('error_message'),
+                        "metadata": status.get('metadata', {})
+                    },
+                    "supported_evidence_types": [
+                        et.value for et in cloud_integration_manager.get_supported_evidence_types(integration.platform)
+                    ]
+                }
+                integration_statuses.append(integration_status)
+                
+            except Exception as e:
+                logger.warning(f"Error getting status for integration {integration.id}: {e}")
+                # Fallback to database information only
+                integration_statuses.append({
+                    "integration_id": str(integration.id),
+                    "name": integration.name,
+                    "platform": integration.platform.value,
+                    "db_status": integration.status.value,
+                    "connection_status": "unknown",
+                    "last_sync": integration.last_sync.isoformat() if integration.last_sync else None,
+                    "error_count": integration.error_count,
+                    "last_error": integration.last_error,
+                    "created_at": integration.created_at.isoformat(),
+                    "updated_at": integration.updated_at.isoformat(),
+                    "health_check": None,
+                    "supported_evidence_types": []
+                })
+        
+        # Get overall statistics
+        stats = cloud_integration_manager.get_statistics()
+        
+        return create_success_response(
+            data={
+                "integrations": integration_statuses,
+                "summary": {
+                    "total_integrations": len(integration_statuses),
+                    "connected_integrations": len([i for i in integration_statuses if i["db_status"] == "connected"]),
+                    "healthy_integrations": len([i for i in integration_statuses if i["connection_status"] == "healthy"]),
+                    "platforms": list(set(i["platform"] for i in integration_statuses)),
+                    "last_sync_times": stats.get('last_sync_times', {}),
+                    "manager_statistics": stats
+                }
+            },
+            message="Cloud integrations status retrieved successfully"
+        )
+        
+    except Exception as e:
+        logger.error(f"Error getting cloud integrations status: {e}")
+        raise VelocityException(f"Failed to get cloud integrations status: {str(e)}")
+
+@app.get("/api/v1/integrations/cloud/{platform}/evidence-types", response_model=SuccessResponse)
+async def get_supported_evidence_types(
+    platform: str,
+    current_user: User = Depends(get_current_active_user)
+):
+    """Get supported evidence types for a cloud platform"""
+    try:
+        # Validate platform
+        try:
+            platform_enum = Platform(platform.lower())
+        except ValueError:
+            raise ValidationException(f"Unsupported platform: {platform}")
+        
+        # Get supported evidence types
+        evidence_types = cloud_integration_manager.get_supported_evidence_types(platform_enum)
+        
+        return create_success_response(
+            data={
+                "platform": platform_enum.value,
+                "supported_evidence_types": [et.value for et in evidence_types],
+                "evidence_type_descriptions": {
+                    EvidenceCollectionType.POLICIES.value: "IAM policies and access controls",
+                    EvidenceCollectionType.CONFIGURATIONS.value: "System and service configurations",
+                    EvidenceCollectionType.AUDIT_LOGS.value: "Security and audit logs",
+                    EvidenceCollectionType.SECURITY_GROUPS.value: "Network security groups and firewall rules",
+                    EvidenceCollectionType.ENCRYPTION_STATUS.value: "Encryption status for data at rest and in transit",
+                    EvidenceCollectionType.ACCESS_CONTROLS.value: "Access controls and permissions",
+                    EvidenceCollectionType.COMPLIANCE_RULES.value: "Compliance rules and policy evaluations"
+                }
+            },
+            message=f"Supported evidence types for {platform_enum.value.upper()} retrieved successfully"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error getting supported evidence types for {platform}: {e}")
+        raise VelocityException(f"Failed to get supported evidence types: {str(e)}")
+
+@app.delete("/api/v1/integrations/cloud/{integration_id}", response_model=SuccessResponse)
+async def disconnect_cloud_integration(
+    integration_id: str,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_resource_access("integration", "delete"))
+):
+    """Disconnect and remove a cloud integration"""
+    try:
+        # Find integration
+        integration = db.query(Integration).filter(
+            Integration.id == integration_id,
+            Integration.organization_id == current_user.organization_id
+        ).first()
+        
+        if not integration:
+            raise ResourceNotFoundException("Integration", integration_id)
+        
+        # Disconnect from cloud integration manager
+        success = cloud_integration_manager.disconnect_platform(integration_id)
+        
+        if not success:
+            logger.warning(f"Failed to disconnect from cloud integration manager for {integration_id}")
+        
+        # Remove from database
+        platform_name = integration.platform.value
+        integration_name = integration.name
+        
+        db.delete(integration)
+        db.commit()
+        
+        # Notify via WebSocket
+        await websocket_manager.broadcast_to_organization(
+            current_user.organization_id,
+            {
+                "type": "integration_disconnected",
+                "data": {
+                    "integration_id": integration_id,
+                    "platform": platform_name,
+                    "name": integration_name
+                }
+            }
+        )
+        
+        return create_success_response(
+            data={
+                "integration_id": integration_id,
+                "platform": platform_name,
+                "disconnected": True
+            },
+            message=f"Successfully disconnected {integration_name}"
+        )
+        
+    except (VelocityException, HTTPException):
+        raise
+    except Exception as e:
+        logger.error(f"Error disconnecting integration {integration_id}: {e}")
+        raise VelocityException(f"Failed to disconnect integration: {str(e)}")
 
 @app.get("/api/v1/trust-score")
 async def get_trust_score(

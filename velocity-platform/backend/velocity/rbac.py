@@ -78,6 +78,17 @@ class Permission(Enum):
     EVIDENCE_VALIDATE = "evidence:validate"
     EVIDENCE_EXPORT = "evidence:export"
     
+    # Framework Management
+    MANAGE_FRAMEWORKS = "frameworks:manage"
+    VIEW_COMPLIANCE_STATUS = "compliance:view_status"
+    CONFIGURE_FRAMEWORKS = "frameworks:configure"
+    
+    # Assessment Management
+    ASSESSMENT_CREATE = "assessment:create"
+    ASSESSMENT_VIEW = "assessment:view"
+    ASSESSMENT_DELETE = "assessment:delete"
+    ASSESSMENT_APPROVE = "assessment:approve"
+    
     # Integration Management
     INTEGRATION_CREATE = "integration:create"
     INTEGRATION_UPDATE = "integration:update"
@@ -182,6 +193,8 @@ class RBACManager:
                     Permission.REPORT_VIEW, Permission.REPORT_CREATE, Permission.REPORT_EXPORT,
                     Permission.ANALYTICS_VIEW, Permission.METRICS_VIEW,
                     Permission.FRAMEWORK_MANAGE, Permission.CONTROL_MANAGE,
+                    Permission.MANAGE_FRAMEWORKS, Permission.VIEW_COMPLIANCE_STATUS,
+                    Permission.CONFIGURE_FRAMEWORKS,
                     Permission.ASSESSMENT_CREATE, Permission.ASSESSMENT_APPROVE,
                     Permission.TRUST_SCORE_VIEW, Permission.TRUST_SCORE_CONFIGURE,
                     Permission.DATA_EXPORT, Permission.DATA_IMPORT
@@ -202,6 +215,8 @@ class RBACManager:
                     Permission.INTEGRATION_VIEW, Permission.INTEGRATION_CONNECT,
                     Permission.EVIDENCE_VIEW, Permission.EVIDENCE_VALIDATE,
                     Permission.EVIDENCE_EXPORT, Permission.REPORT_VIEW,
+                    Permission.MANAGE_FRAMEWORKS, Permission.VIEW_COMPLIANCE_STATUS,
+                    Permission.CONFIGURE_FRAMEWORKS,
                     Permission.REPORT_CREATE, Permission.ANALYTICS_VIEW,
                     Permission.FRAMEWORK_MANAGE, Permission.ASSESSMENT_CREATE,
                     Permission.TRUST_SCORE_VIEW, Permission.DATA_EXPORT
