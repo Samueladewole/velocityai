@@ -24,6 +24,21 @@ import SOC2Guide from '../../pages/resources/guides/SOC2Guide';
 import GDPRGuide from '../../pages/resources/guides/GDPRGuide';
 import ISO27001Guide from '../../pages/resources/guides/ISO27001Guide';
 
+// New page imports
+import PlatformOverview from '../../pages/PlatformOverview';
+import FinancialServices from '../../pages/industries/FinancialServices';
+import Healthcare from '../../pages/industries/Healthcare';
+import SaaS from '../../pages/industries/SaaS';
+import Dashboard from '../../pages/platform/Dashboard';
+import EvidenceCollection from '../../pages/platform/EvidenceCollection';
+import TrustScore from '../../pages/platform/TrustScore';
+import QIE from '../../pages/platform/QIE';
+import GDPRRoPAPage from '../../pages/solutions/GDPRRoPAPage';
+import ISAE3000ServicesPricing from '../../pages/ISAE3000ServicesPricing';
+import FinancialServicesPricing from '../../pages/FinancialServicesPricing';
+import ROICalculator from '../../pages/calculators/ROICalculator';
+import CaseStudies from '../../pages/CaseStudies';
+
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated } = useAuthStore();
@@ -473,6 +488,27 @@ const VelocityRoutes: React.FC = () => {
         </PublicLayout>
       } />
       
+      {/* Platform routes - Public pages */}
+      <Route path="/platform/overview" element={<PlatformOverview />} />
+      <Route path="/platform/dashboard" element={<Dashboard />} />
+      <Route path="/platform/evidence-collection" element={<EvidenceCollection />} />
+      <Route path="/platform/trust-score" element={<TrustScore />} />
+      <Route path="/platform/qie" element={<QIE />} />
+      
+      {/* Industry routes - Public pages */}
+      <Route path="/industries/financial-services" element={<FinancialServices />} />
+      <Route path="/industries/healthcare" element={<Healthcare />} />
+      <Route path="/industries/saas" element={<SaaS />} />
+      <Route path="/industries/manufacturing" element={
+        <PlaceholderPage title="Manufacturing Solutions" description="Industrial IoT security and operational technology compliance" />
+      } />
+      <Route path="/industries/government" element={
+        <PlaceholderPage title="Government Solutions" description="FedRAMP and government compliance automation" />
+      } />
+      <Route path="/industries/energy" element={
+        <PlaceholderPage title="Energy Solutions" description="Critical infrastructure protection and NERC CIP compliance" />
+      } />
+      
       {/* Solutions routes - Public marketing pages */}
       <Route path="/velocity/solutions/soc2" element={
         <PublicLayout>
@@ -499,6 +535,8 @@ const VelocityRoutes: React.FC = () => {
           <PCIDSSPage />
         </PublicLayout>
       } />
+      <Route path="/solutions/gdpr-ropa" element={<GDPRRoPAPage />} />
+      <Route path="/solutions/isae-3000" element={<ISAE3000ServicesPricing />} />
       <Route path="/velocity/solutions/cis-controls" element={
         <PublicLayout>
           <PlaceholderPage title="CIS Controls" description="Implement CIS Controls with AI automation" />
@@ -609,10 +647,18 @@ const VelocityRoutes: React.FC = () => {
           <PlaceholderPage title="System Status" description="Real-time system status and uptime monitoring" />
         </PublicLayout>
       } />
+      <Route path="/case-studies" element={<CaseStudies />} />
       <Route path="/velocity/case-studies" element={
         <PublicLayout>
           <PlaceholderPage title="Case Studies" description="Success stories from our customers" />
         </PublicLayout>
+      } />
+      <Route path="/calculators/roi" element={<ROICalculator />} />
+      <Route path="/calculators/banking-roi" element={
+        <PlaceholderPage title="Banking ROI Calculator" description="Specialized ROI calculator for financial institutions" />
+      } />
+      <Route path="/calculators/gdpr-roi" element={
+        <PlaceholderPage title="GDPR ROI Calculator" description="Calculate GDPR compliance savings" />
       } />
       <Route path="/velocity/blog" element={
         <PublicLayout>

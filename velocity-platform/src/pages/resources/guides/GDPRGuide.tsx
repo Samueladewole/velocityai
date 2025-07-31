@@ -537,7 +537,7 @@ const GDPRGuide: React.FC = () => {
                   <ul className="text-slate-300 space-y-1 text-sm">
                     <li>• Insufficient lawful basis for processing</li>
                     <li>• Inadequate consent mechanisms</li>
-                    <li>• Late breach notifications (>72 hours)</li>
+                    <li>• Late breach notifications (&gt;72 hours)</li>
                     <li>• Lack of data subject rights processes</li>
                     <li>• Invalid international transfers</li>
                   </ul>

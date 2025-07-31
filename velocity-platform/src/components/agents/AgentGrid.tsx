@@ -18,13 +18,14 @@ import {
   Eye,
   FileText,
   Cpu,
-  Lock
+  Lock,
+  Users
 } from 'lucide-react';
 
 interface Agent {
   id: string;
   name: string;
-  type: 'AWS' | 'GCP' | 'Azure' | 'GitHub' | 'QIE' | 'TrustScore' | 'Monitor' | 'DocGen' | 'Observability' | 'Crypto';
+  type: 'AWS' | 'GCP' | 'Azure' | 'GitHub' | 'QIE' | 'TrustScore' | 'Monitor' | 'DocGen' | 'Observability' | 'Crypto' | 'ISAE3000' | 'GDPR';
   status: 'collecting' | 'idle' | 'error' | 'scheduled' | 'connecting';
   lastRun: Date;
   nextRun: Date;
@@ -44,7 +45,9 @@ const AGENT_ICONS = {
   Monitor: Eye,
   DocGen: FileText,
   Observability: Activity,
-  Crypto: Lock
+  Crypto: Lock,
+  ISAE3000: Database,
+  GDPR: Users
 };
 
 const STATUS_STYLES = {
@@ -165,6 +168,30 @@ const PRODUCTION_AGENTS: Agent[] = [
     successRate: 100.0,
     currentTask: 'Generating blockchain proofs',
     progress: 45
+  },
+  {
+    id: 'isae3000-evidence',
+    name: 'ISAE 3000 Evidence Agent',
+    type: 'ISAE3000',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 1 * 60 * 1000), // 1 min ago
+    nextRun: new Date(Date.now() + 8 * 60 * 1000), // 8 min
+    evidenceCollected: 523,
+    successRate: 98.8,
+    currentTask: 'Collecting banking system evidence for ISAE 3000 audit',
+    progress: 73
+  },
+  {
+    id: 'gdpr-compliance',
+    name: 'GDPR Compliance Agent',
+    type: 'GDPR',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 2 * 60 * 1000), // 2 min ago
+    nextRun: new Date(Date.now() + 10 * 60 * 1000), // 10 min
+    evidenceCollected: 387,
+    successRate: 97.6,
+    currentTask: 'Generating Records of Processing Activities (RoPA)',
+    progress: 58
   }
 ];
 
@@ -235,7 +262,9 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
       Monitor: 'Monitoring configuration changes',
       DocGen: 'Generating compliance documentation',
       Observability: 'Collecting system metrics and logs',
-      Crypto: 'Generating blockchain proofs'
+      Crypto: 'Generating blockchain proofs',
+      ISAE3000: 'Collecting banking system evidence for ISAE 3000 audit',
+      GDPR: 'Generating Records of Processing Activities (RoPA)'
     };
     return tasks[type] || 'Processing compliance data';
   };
@@ -524,7 +553,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
                 <span className="font-semibold">Full Automation</span>
               </div>
               <p className="text-xs text-slate-600">
-                Deploy all 10 agents for complete coverage
+                Deploy all 12 agents for complete coverage
               </p>
             </Button>
             

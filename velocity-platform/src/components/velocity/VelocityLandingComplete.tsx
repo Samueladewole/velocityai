@@ -35,7 +35,11 @@ import {
   BookOpen,
   MessageSquare,
   Mail,
-  Phone
+  Phone,
+  DollarSign,
+  Calculator,
+  Rocket,
+  Building
 } from 'lucide-react';
 
 // Public Navigation Header for Landing Page
@@ -72,7 +76,7 @@ const PublicHeader: React.FC = () => {
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">AI Agent Dashboard</div>
-                  <div className="text-xs text-slate-400">10 agents working for you</div>
+                  <div className="text-xs text-slate-400">12 agents working for you</div>
                 </button>
                 <button 
                   onClick={() => navigate('/dashboard')}
@@ -99,10 +103,60 @@ const PublicHeader: React.FC = () => {
             </div>
             <div className="relative group">
               <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Industries
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/industries/financial-services')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Financial Services</div>
+                  <div className="text-xs text-slate-400">Banking & FinTech</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/industries/healthcare')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Healthcare & Life Sciences</div>
+                  <div className="text-xs text-slate-400">HIPAA & FDA compliance</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/industries/saas')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">SaaS & Technology</div>
+                  <div className="text-xs text-slate-400">SOC 2 & ISO 27001</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/industries/manufacturing')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Manufacturing</div>
+                  <div className="text-xs text-slate-400">Industrial IoT security</div>
+                </button>
+              </div>
+            </div>
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
                 Solutions
                 <ChevronDown className="w-4 h-4" />
               </button>
-              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/solutions/gdpr-ropa')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">GDPR RoPA Automation</div>
+                  <div className="text-xs text-slate-400">83% vs traditional solutions</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/solutions/isae-3000')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">ISAE 3000 Evidence</div>
+                  <div className="text-xs text-slate-400">88% vs Big 4 consulting</div>
+                </button>
                 <button 
                   onClick={() => navigate('/velocity/solutions/soc2')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
@@ -118,13 +172,6 @@ const PublicHeader: React.FC = () => {
                   <div className="text-xs text-slate-400">ISMS implementation</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/velocity/solutions/gdpr')}
-                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
-                >
-                  <div className="font-medium">GDPR Compliance</div>
-                  <div className="text-xs text-slate-400">Privacy by design</div>
-                </button>
-                <button 
                   onClick={() => navigate('/velocity/solutions/hipaa')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
@@ -133,12 +180,35 @@ const PublicHeader: React.FC = () => {
                 </button>
               </div>
             </div>
-            <button 
-              onClick={() => navigate('/velocity/integrations')}
-              className="text-slate-300 hover:text-white transition-colors"
-            >
-              Integrations
-            </button>
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Resources
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/resources/guides')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Compliance Guides</div>
+                  <div className="text-xs text-slate-400">Best practices & frameworks</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/resources/calculators')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">ROI Calculator</div>
+                  <div className="text-xs text-slate-400">Calculate your savings</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/resources/case-studies')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Case Studies</div>
+                  <div className="text-xs text-slate-400">Customer success stories</div>
+                </button>
+              </div>
+            </div>
             <button 
               onClick={() => navigate('/velocity/pricing')}
               className="text-slate-300 hover:text-white transition-colors"
@@ -202,7 +272,59 @@ const PublicHeader: React.FC = () => {
             >
               QIE Intelligence
             </button>
-            <div className="text-slate-400 text-sm font-medium py-1">Solutions</div>
+            <div className="text-slate-400 text-sm font-medium py-1 pt-4">Industries</div>
+            <button 
+              onClick={() => { navigate('/industries/financial-services'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Financial Services
+            </button>
+            <button 
+              onClick={() => { navigate('/industries/healthcare'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Healthcare
+            </button>
+            <button 
+              onClick={() => { navigate('/industries/saas'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              SaaS
+            </button>
+            <button 
+              onClick={() => { navigate('/industries/manufacturing'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Manufacturing
+            </button>
+            <button 
+              onClick={() => { navigate('/industries/government'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Government
+            </button>
+            <button 
+              onClick={() => { navigate('/industries/energy'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Energy
+            </button>
+            
+            <div className="text-slate-400 text-sm font-medium py-1 pt-4">Solutions</div>
+            <button 
+              onClick={() => { navigate('/solutions/gdpr-ropa'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              <div className="font-medium">GDPR RoPA Automation</div>
+              <div className="text-xs text-slate-400">83% vs traditional solutions</div>
+            </button>
+            <button 
+              onClick={() => { navigate('/solutions/isae-3000'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              <div className="font-medium">ISAE 3000 Evidence</div>
+              <div className="text-xs text-slate-400">88% vs Big 4 consulting</div>
+            </button>
             <button 
               onClick={() => { navigate('/velocity/solutions/soc2'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
@@ -227,17 +349,32 @@ const PublicHeader: React.FC = () => {
             >
               HIPAA
             </button>
+            
+            <div className="text-slate-400 text-sm font-medium py-1 pt-4">Resources</div>
             <button 
-              onClick={() => { navigate('/velocity/pricing'); setMobileMenuOpen(false); }}
-              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2"
+              onClick={() => { navigate('/guides/compliance-automation'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              Pricing
+              Compliance Guides
             </button>
             <button 
-              onClick={() => { navigate('/velocity/docs'); setMobileMenuOpen(false); }}
-              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2"
+              onClick={() => { navigate('/calculators/roi'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              Resources
+              ROI Calculator
+            </button>
+            <button 
+              onClick={() => { navigate('/case-studies'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Case Studies
+            </button>
+            
+            <button 
+              onClick={() => { navigate('/velocity/pricing'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pt-4"
+            >
+              Pricing
             </button>
             <div className="pt-4 border-t border-slate-700/50 space-y-2">
               <button
@@ -325,7 +462,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const [currentFramework, setCurrentFramework] = useState(0);
   
-  const frameworks = ['SOC 2', 'ISO 27001', 'GDPR', 'HIPAA', 'EU AI Act', 'DORA'];
+  const frameworks = ['GDPR RoPA', 'ISAE 3000', 'SOC 2', 'ISO 27001', 'HIPAA', 'Basel III'];
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -349,20 +486,20 @@ const HeroSection = () => {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
               <span className="text-emerald-400 text-sm font-medium">
-                ✨ 10 AI Agents • Zero Integration Risk • 30-Minute Assessment
+                ✨ 12 AI Agents • GDPR RoPA • ISAE 3000 • Zero Risk Assessment
               </span>
             </div>
             
             <h1 className="font-serif text-5xl lg:text-7xl font-light text-white mb-6 leading-tight">
-              Trust-First
+              12 AI Agents
               <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-                Compliance Automation
+                Automate Compliance
               </span>
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
-              Experience Velocity's value with zero risk. Get your compliance score in 30 minutes, 
-              then build trust progressively through our proven 5-stage integration pathway.
+              Revolutionary GDPR RoPA automation (83% vs traditional solutions) and 
+              ISAE 3000 evidence automation (88% vs Big 4 consulting). Zero-risk assessment in 30 minutes.
             </p>
 
             {/* Dynamic Framework Display */}
@@ -702,6 +839,20 @@ const AIAgentsSection = () => {
       capabilities: ['Merkle tree proofs', 'Tamper detection', 'Cryptographic hashing'],
       automation: 100,
       icon: Lock
+    },
+    {
+      name: 'GDPR Compliance Agent',
+      description: 'Automated GDPR RoPA generation and privacy compliance',
+      capabilities: ['Data mapping automation', 'RoPA record generation', 'Privacy impact assessments'],
+      automation: 96,
+      icon: Shield
+    },
+    {
+      name: 'ISAE 3000 Evidence Agent',
+      description: 'Banking evidence automation for ISAE 3000 compliance',
+      capabilities: ['Core banking integration', 'Control evidence collection', 'Audit trail generation'],
+      automation: 94,
+      icon: Database
     }
   ];
 
@@ -710,10 +861,11 @@ const AIAgentsSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white font-serif mb-6">
-            10 Specialized AI Agents
+            12 Specialized AI Agents
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Our intelligent agent system automates 95% of compliance tasks, from evidence collection to report generation.
+            Revolutionary automation including GDPR RoPA generation and ISAE 3000 evidence collection. 
+            95% of compliance tasks automated across all major frameworks.
           </p>
         </div>
 
@@ -1009,6 +1161,254 @@ const SocialProofSection = () => {
   );
 };
 
+// Competitive Advantages Section
+const CompetitiveAdvantagesSection = () => {
+  const navigate = useNavigate();
+  
+  const advantages = [
+    {
+      title: "83% vs Traditional GDPR Solutions",
+      metric: "$137K+ Saved Annually",
+      description: "Revolutionary GDPR RoPA automation vs OneTrust and traditional providers",
+      icon: DollarSign,
+      color: "emerald"
+    },
+    {
+      title: "88% vs Big 4 Consulting",
+      metric: "30 Days vs 6-12 Months",
+      description: "ISAE 3000 evidence automation vs Deloitte, PwC, KPMG manual processes",
+      icon: Clock,
+      color: "blue"
+    },
+    {
+      title: "95% Automation Rate",
+      metric: "vs 15-25% Industry Average",
+      description: "Highest automation rate with 12 visible AI agents working 24/7",
+      icon: Zap,
+      color: "amber"
+    },
+    {
+      title: "6-Week Implementation",
+      metric: "vs 6+ Month Traditional",
+      description: "Rapid deployment with pre-configured banking and enterprise workflows",
+      icon: Rocket,
+      color: "purple"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-900 to-slate-800">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white font-serif mb-6">
+            Competitive Advantages That Matter
+          </h2>
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+            Revolutionary cost savings and speed advantages vs traditional solutions. 
+            Real metrics from actual enterprise deployments.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {advantages.map((advantage, index) => {
+            const Icon = advantage.icon;
+            return (
+              <div key={index} className={`bg-gradient-to-br from-${advantage.color}-500/10 to-${advantage.color}-600/5 rounded-2xl p-6 border border-${advantage.color}-500/20 hover:border-${advantage.color}-500/40 transition-all duration-300`}>
+                <div className="text-center">
+                  <div className={`w-12 h-12 bg-${advantage.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <Icon className={`w-6 h-6 text-${advantage.color}-400`} />
+                  </div>
+                  <h3 className="font-bold text-white mb-2 text-sm">{advantage.title}</h3>
+                  <div className={`text-2xl font-bold text-${advantage.color}-400 mb-3 font-mono`}>
+                    {advantage.metric}
+                  </div>
+                  <p className="text-slate-400 text-sm leading-relaxed">{advantage.description}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Comparison Table Preview */}
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-white font-serif mb-4">
+              Enterprise Cost Comparison
+            </h3>
+            <p className="text-slate-400">See how Velocity compares to traditional solutions</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-6 mb-8">
+            <div className="text-center p-6 bg-slate-800/50 rounded-xl">
+              <div className="text-3xl font-bold text-red-400 mb-2">$380K+</div>
+              <div className="text-slate-300 text-sm mb-1">Traditional GDPR + ISAE 3000</div>
+              <div className="text-xs text-slate-500">Annual consulting costs</div>
+            </div>
+            <div className="text-center p-6 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
+              <div className="text-3xl font-bold text-emerald-400 mb-2">$60K</div>
+              <div className="text-slate-300 text-sm mb-1">Velocity Complete Solution</div>
+              <div className="text-xs text-emerald-400">All frameworks included</div>
+            </div>
+            <div className="text-center p-6 bg-slate-800/50 rounded-xl">
+              <div className="text-3xl font-bold text-emerald-400 mb-2">$320K+</div>
+              <div className="text-slate-300 text-sm mb-1">Annual Savings</div>
+              <div className="text-xs text-slate-500">84% cost reduction</div>
+            </div>
+          </div>
+          
+          <div className="text-center">
+            <button
+              onClick={() => navigate('/calculators/roi')}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white font-medium rounded-lg hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
+            >
+              <Calculator className="w-5 h-5" />
+              Calculate Your Savings
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Industry Showcase Section
+const IndustryShowcaseSection = () => {
+  const navigate = useNavigate();
+  
+  const industries = [
+    {
+      name: "Financial Services",
+      description: "Banking-specific GDPR RoPA and ISAE 3000 automation with core banking integrations",
+      metrics: ["83% vs OneTrust", "88% vs Big 4", "6-week deployment"],
+      icon: Building,
+      color: "blue",
+      path: "/industries/financial-services"
+    },
+    {
+      name: "Healthcare",
+      description: "HIPAA compliance automation with patient data protection and breach prevention",
+      metrics: ["95% HIPAA coverage", "30-day implementation", "Zero breaches"],
+      icon: Shield,
+      color: "emerald",
+      path: "/industries/healthcare"
+    },
+    {
+      name: "SaaS",
+      description: "Multi-tenant SOC 2 and ISO 27001 automation for software companies",
+      metrics: ["96.8% audit pass rate", "45-day audit readiness", "Multi-tenant support"],
+      icon: Globe,
+      color: "purple",
+      path: "/industries/saas"
+    },
+    {
+      name: "Manufacturing",
+      description: "Industrial IoT security and operational technology compliance",
+      metrics: ["OT/IT convergence", "Supply chain security", "ISO 27001 ready"],
+      icon: Settings,
+      color: "amber",
+      path: "/industries/manufacturing"
+    },
+    {
+      name: "Government",
+      description: "FedRAMP and government compliance with advanced security controls",
+      metrics: ["FedRAMP ready", "FISMA compliance", "ATO acceleration"],
+      icon: Lock,
+      color: "red",
+      path: "/industries/government"
+    },
+    {
+      name: "Energy",
+      description: "Critical infrastructure protection with NERC CIP and cybersecurity frameworks",
+      metrics: ["NERC CIP compliance", "Critical infrastructure", "24/7 monitoring"],
+      icon: Zap,
+      color: "yellow",
+      path: "/industries/energy"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-800 to-slate-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-white font-serif mb-6">
+            Multi-Industry Compliance Leadership
+          </h2>
+          <p className="text-lg text-slate-400 max-w-3xl mx-auto">
+            Specialized automation for 6 key industries with pre-configured workflows, 
+            industry-specific integrations, and regulatory expertise.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {industries.map((industry, index) => {
+            const Icon = industry.icon;
+            return (
+              <div 
+                key={index} 
+                className={`group bg-gradient-to-br from-${industry.color}-500/5 to-${industry.color}-600/5 rounded-2xl p-6 border border-${industry.color}-500/20 hover:border-${industry.color}-500/40 transition-all duration-300 cursor-pointer`}
+                onClick={() => navigate(industry.path)}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <div className={`p-3 bg-${industry.color}-500/10 rounded-lg`}>
+                    <Icon className={`w-6 h-6 text-${industry.color}-400`} />
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
+                </div>
+                
+                <h3 className="text-xl font-bold text-white mb-3">{industry.name}</h3>
+                <p className="text-slate-400 text-sm mb-4 leading-relaxed">{industry.description}</p>
+                
+                <div className="space-y-2">
+                  {industry.metrics.map((metric, idx) => (
+                    <div key={idx} className="flex items-center gap-2">
+                      <CheckCircle className={`w-3 h-3 text-${industry.color}-400 flex-shrink-0`} />
+                      <span className="text-xs text-slate-300">{metric}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Industry Stats */}
+        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
+          <div className="text-center mb-8">
+            <h3 className="text-2xl font-bold text-white font-serif mb-4">
+              Cross-Industry Impact
+            </h3>
+            <p className="text-slate-400">Proven results across diverse regulatory environments</p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="text-center">
+              <div className="text-3xl font-bold text-blue-400 mb-2">150+</div>
+              <div className="text-slate-300 text-sm mb-1">Financial Institutions</div>
+              <div className="text-xs text-slate-500">Including Top 10 banks</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-emerald-400 mb-2">300+</div>
+              <div className="text-slate-300 text-sm mb-1">Healthcare Organizations</div>
+              <div className="text-xs text-slate-500">HIPAA compliant</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-purple-400 mb-2">500+</div>
+              <div className="text-slate-300 text-sm mb-1">SaaS Companies</div>
+              <div className="text-xs text-slate-500">SOC 2 certified</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl font-bold text-amber-400 mb-2">95%</div>
+              <div className="text-slate-300 text-sm mb-1">Cross-Industry Success</div>
+              <div className="text-xs text-slate-500">First-time audit pass rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // CTA Section
 const CTASection = () => {
   const navigate = useNavigate();
@@ -1083,9 +1483,9 @@ const PublicFooter: React.FC = () => {
   return (
     <footer className="bg-slate-900 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-8">
           {/* Brand */}
-          <div>
+          <div className="lg:col-span-2">
             <div className="flex items-center gap-3 mb-4">
               <div className="relative">
                 <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
@@ -1094,35 +1494,26 @@ const PublicFooter: React.FC = () => {
               <span className="text-xl font-bold text-white font-serif">Velocity</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
-              AI-powered compliance automation for modern security teams.
+              12 AI Agents automate compliance with revolutionary GDPR RoPA and ISAE 3000 evidence automation. 
+              83% cost savings vs traditional solutions.
             </p>
-          </div>
-          
-          {/* Product */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">Product</h3>
-            <div className="space-y-3">
-              {['Features', 'Integrations', 'Security', 'Pricing'].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => navigate(`/velocity/${item.toLowerCase()}`)}
-                  className="block text-slate-400 hover:text-white transition-colors text-sm"
-                >
-                  {item}
-                </button>
-              ))}
+            <div className="flex items-center gap-4 text-xs text-slate-500">
+              <span>✓ 12 AI Agents</span>
+              <span>✓ GDPR RoPA</span>
+              <span>✓ ISAE 3000</span>
             </div>
           </div>
           
-          {/* Solutions */}
+          {/* Platform */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Solutions</h3>
+            <h3 className="text-white font-semibold mb-4">Platform</h3>
             <div className="space-y-3">
               {[
-                { label: 'SOC 2', path: '/velocity/solutions/soc2' },
-                { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },
-                { label: 'GDPR', path: '/velocity/solutions/gdpr' },
-                { label: 'HIPAA', path: '/velocity/solutions/hipaa' }
+                { label: 'AI Agent Dashboard', path: '/dashboard' },
+                { label: 'Evidence Collection', path: '/dashboard' },
+                { label: 'Trust Score', path: '/dashboard' },
+                { label: 'QIE Intelligence', path: '/velocity/qie' },
+                { label: 'Pricing', path: '/velocity/pricing' }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -1135,15 +1526,71 @@ const PublicFooter: React.FC = () => {
             </div>
           </div>
           
-          {/* Company */}
+          {/* Industries */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Company</h3>
+            <h3 className="text-white font-semibold mb-4">Industries</h3>
             <div className="space-y-3">
               {[
-                { label: 'About', path: '/velocity/about' },
-                { label: 'Careers', path: '/velocity/careers' },
-                { label: 'Contact', path: '/velocity/contact' },
-                { label: 'Privacy', path: '/velocity/privacy' }
+                { label: 'Financial Services', path: '/industries/financial-services' },
+                { label: 'Healthcare', path: '/industries/healthcare' },
+                { label: 'SaaS', path: '/industries/saas' },
+                { label: 'Manufacturing', path: '/industries/manufacturing' },
+                { label: 'Government', path: '/industries/government' },
+                { label: 'Energy', path: '/industries/energy' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => navigate(item.path)}
+                  className="block text-slate-400 hover:text-white transition-colors text-sm"
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Solutions */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Solutions</h3>
+            <div className="space-y-3">
+              {[
+                { label: 'GDPR RoPA', path: '/solutions/gdpr-ropa', badge: '83% savings' },
+                { label: 'ISAE 3000', path: '/solutions/isae-3000', badge: '88% vs Big 4' },
+                { label: 'SOC 2', path: '/velocity/solutions/soc2' },
+                { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },
+                { label: 'GDPR', path: '/velocity/solutions/gdpr' },
+                { label: 'HIPAA', path: '/velocity/solutions/hipaa' }
+              ].map((item) => (
+                <button
+                  key={item.label}
+                  onClick={() => navigate(item.path)}
+                  className="block text-slate-400 hover:text-white transition-colors text-sm"
+                >
+                  <div className="flex items-center justify-between">
+                    <span>{item.label}</span>
+                    {item.badge && (
+                      <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded ml-2">
+                        {item.badge}
+                      </span>
+                    )}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+          
+          {/* Resources */}
+          <div>
+            <h3 className="text-white font-semibold mb-4">Resources</h3>
+            <div className="space-y-3">
+              {[
+                { label: 'Compliance Guides', path: '/guides/compliance-automation' },
+                { label: 'ROI Calculator', path: '/calculators/roi' },
+                { label: 'Banking ROI', path: '/calculators/banking-roi' },
+                { label: 'GDPR ROI', path: '/calculators/gdpr-roi' },
+                { label: 'Case Studies', path: '/case-studies' },
+                { label: 'Demo', path: '/velocity/demo' },
+                { label: 'Documentation', path: '/velocity/docs' }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -1186,6 +1633,8 @@ const VelocityLandingComplete: React.FC = () => {
         <ImpactMetricsSection />
         <TrustFirstSection />
         <AIAgentsSection />
+        <CompetitiveAdvantagesSection />
+        <IndustryShowcaseSection />
         <EvidenceCollectionSection />
         <SocialProofSection />
         <CTASection />
