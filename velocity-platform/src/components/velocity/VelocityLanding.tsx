@@ -40,7 +40,7 @@ const EnhancedHero = () => {
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
-              Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
+              Our 13 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
             </p>
             
             <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 mb-8 border border-white/10">

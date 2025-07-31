@@ -76,7 +76,7 @@ const PublicHeader: React.FC = () => {
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">AI Agent Dashboard</div>
-                  <div className="text-xs text-slate-400">12 agents working for you</div>
+                  <div className="text-xs text-slate-400">13 agents working for you</div>
                 </button>
                 <button 
                   onClick={() => navigate('/dashboard')}
@@ -533,7 +533,7 @@ const HeroSection = () => {
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
-              Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
+              Our 13 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
             </p>
             
             <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 mb-8 border border-white/10">

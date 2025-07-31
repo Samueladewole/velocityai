@@ -24,7 +24,7 @@ interface HumanizedHero1 {
   badge: "✨ Trusted by 500+ Companies • GDPR RoPA • ISAE 3000 • Zero Manual Work",
   
   headline: "Stop Drowning in Compliance Paperwork",
-  subheadline: "Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.",
+  subheadline: "Our 13 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.",
   
   description: "Revolutionary GDPR RoPA automation (83% cheaper than OneTrust) and ISAE 3000 evidence collection (88% less than Big 4 consulting). Your compliance team will finally sleep well.",
   

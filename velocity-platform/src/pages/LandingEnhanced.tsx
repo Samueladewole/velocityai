@@ -499,7 +499,7 @@ export const LandingEnhanced: React.FC = () => {
             </h1>
             
             <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-              Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
+              Our 13 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
             </p>
             
             <div className="bg-blue-50 rounded-xl p-4 mb-8 border border-blue-100 max-w-3xl mx-auto">

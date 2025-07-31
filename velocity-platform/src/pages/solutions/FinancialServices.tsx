@@ -18,7 +18,7 @@ export const FinancialServices: React.FC = () => {
       title: 'DORA Readiness',
       description: 'Digital Operational Resilience Act compliance for EU financial entities',
       icon: Shield,
-      metric: '2024 deadline ready'
+      metric: '202 deadline ready'
     },
     {
       title: 'Cyber Risk Quantification',

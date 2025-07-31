@@ -206,7 +206,7 @@ class VelocityDocumentManager:
                 </div>
                 <div class="footer">
                     <p>This report was generated automatically by Velocity AI</p>
-                    <p>© 2024 Velocity AI. All rights reserved.</p>
+                    <p>© 2025 Velocity AI. All rights reserved.</p>
                     {{#include_unsubscribe}}
                     <p><a href="{{unsubscribe_url}}">Unsubscribe</a></p>
                     {{/include_unsubscribe}}
