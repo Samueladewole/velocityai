@@ -69,7 +69,7 @@
 - **Quality Perception**: Higher pricing indicates superior product quality
 
 ### **Aggressive Competitive Comparison**
-- **Delve**: ~$6,000-8,000/month → Velocity saves 30-40%
+- **Traditional Platforms**: ~$6,000-8,000/month → Velocity saves 30-40%
 - **Traditional Consulting**: $200K+ annually → Velocity replaces entirely
 - **Manual Processes**: 6+ months to audit-ready → Velocity delivers 60 days
 - **Basic Tools**: Limited automation → Velocity provides 98.7% automation

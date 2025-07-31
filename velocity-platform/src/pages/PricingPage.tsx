@@ -9,7 +9,9 @@ import {
   Trophy,
   Crown,
   Rocket,
-  Star
+  Star,
+  Home,
+  ArrowLeft
 } from 'lucide-react';
 
 const PricingPage: React.FC = () => {
@@ -118,6 +120,17 @@ const PricingPage: React.FC = () => {
       {/* Header */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20">
+          {/* Navigation Button */}
+          <div className="flex justify-start mb-8">
+            <button
+              onClick={() => navigate('/velocity')}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back to Home
+            </button>
+          </div>
+          
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 rounded-full text-emerald-400 text-sm font-medium mb-6">
               <Zap className="w-4 h-4" />

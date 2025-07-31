@@ -66,6 +66,7 @@ from framework_routes import router as framework_router
 from qie_routes import router as qie_router
 from assessment_routes import router as assessment_router
 from evidence_routes import router as evidence_router
+from document_routes import router as document_router
 
 # Configuration
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://velocity:password@localhost/velocity_db")
@@ -156,6 +157,7 @@ app.include_router(framework_router)
 app.include_router(qie_router)
 app.include_router(assessment_router)
 app.include_router(evidence_router)
+app.include_router(document_router)
 
 # API Routes
 

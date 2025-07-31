@@ -19,6 +19,10 @@ import IntegrationsPage from '../../pages/IntegrationsPage';
 import PricingPage from '../../pages/PricingPage';
 import QIEPage from '../../pages/QIEPage';
 import FeaturesPage from '../../pages/FeaturesPage';
+import ResourceCenter from '../../pages/resources/ResourceCenter';
+import SOC2Guide from '../../pages/resources/guides/SOC2Guide';
+import GDPRGuide from '../../pages/resources/guides/GDPRGuide';
+import ISO27001Guide from '../../pages/resources/guides/ISO27001Guide';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -560,6 +564,26 @@ const VelocityRoutes: React.FC = () => {
       } />
       
       {/* Resources routes - Public pages */}
+      <Route path="/velocity/resources" element={
+        <PublicLayout>
+          <ResourceCenter />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/resources/guides/soc2" element={
+        <PublicLayout>
+          <SOC2Guide />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/resources/guides/gdpr" element={
+        <PublicLayout>
+          <GDPRGuide />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/resources/guides/iso27001" element={
+        <PublicLayout>
+          <ISO27001Guide />
+        </PublicLayout>
+      } />
       <Route path="/velocity/docs" element={
         <PublicLayout>
           <PlaceholderPage title="Documentation" description="Comprehensive guides and API documentation" />

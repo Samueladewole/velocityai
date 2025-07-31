@@ -89,6 +89,59 @@ const SOCIAL_PLATFORMS = {
   }
 };
 
+// Enhanced export formats with professional document generation
+const ENHANCED_EXPORT_FORMATS = {
+  pdf: { 
+    icon: FileText, 
+    label: 'PDF Report', 
+    mime: 'application/pdf',
+    description: 'Professional PDF with charts and executive summary',
+    features: ['Charts', 'Tables', 'Executive Summary', 'Branding']
+  },
+  xlsx: { 
+    icon: Table, 
+    label: 'Excel Workbook', 
+    mime: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    description: 'Interactive Excel with multiple worksheets',
+    features: ['Multiple Sheets', 'Charts', 'Data Analysis', 'Formulas']
+  },
+  docx: { 
+    icon: FileText, 
+    label: 'Word Document', 
+    mime: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    description: 'Formatted Word document with professional layout',
+    features: ['Professional Layout', 'Tables', 'Headers/Footers', 'TOC']
+  },
+  pptx: { 
+    icon: Image, 
+    label: 'PowerPoint', 
+    mime: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    description: 'Executive presentation slides',
+    features: ['Slide Layouts', 'Charts', 'Executive Summary', 'Branding']
+  },
+  csv: { 
+    icon: Table, 
+    label: 'CSV Data', 
+    mime: 'text/csv',
+    description: 'Raw data for analysis and import',
+    features: ['Raw Data', 'Excel Compatible', 'Database Import']
+  },
+  json: { 
+    icon: FileText, 
+    label: 'JSON Data', 
+    mime: 'application/json',
+    description: 'Structured data for API integration',
+    features: ['API Integration', 'Structured Data', 'Programmatic Access']
+  },
+  html: { 
+    icon: Image, 
+    label: 'HTML Report', 
+    mime: 'text/html',
+    description: 'Interactive web-based report',
+    features: ['Interactive', 'Web-based', 'Responsive', 'Shareable']
+  }
+};
+
 export const ExportSystem: React.FC<ExportSystemProps> = ({
   title,
   data,
@@ -231,7 +284,54 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
     }
   }, [pageElement, title]);
 
-  // Main export handler
+  const exportToHTML = useCallback(async (data: any, filename: string) => {
+    try {
+      const htmlContent = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>${title}</title>
+          <style>
+            body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
+            .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+            .header { text-align: center; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 2px solid #007bff; }
+            .title { color: #2c3e50; font-size: 2.5em; margin-bottom: 10px; }
+            .subtitle { color: #6c757d; font-size: 1.1em; }
+            .data-section { margin: 30px 0; }
+            .data-title { color: #495057; font-size: 1.5em; margin-bottom: 15px; }
+            .data-content { background: #f8f9fa; padding: 20px; border-radius: 5px; }
+            pre { background: #343a40; color: #f8f9fa; padding: 15px; border-radius: 5px; overflow-x: auto; }
+          </style>
+        </head>
+        <body>
+          <div class="container">
+            <div class="header">
+              <h1 class="title">${title}</h1>
+              <p class="subtitle">Generated on ${new Date().toLocaleString()}</p>
+            </div>
+            <div class="data-section">
+              <h2 class="data-title">Report Data</h2>
+              <div class="data-content">
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+              </div>
+            </div>
+          </div>
+        </body>
+        </html>
+      `;
+      
+      const blob = new Blob([htmlContent], { type: 'text/html' });
+      downloadBlob(blob, `${filename}.html`);
+      return true;
+    } catch (error) {
+      console.error('HTML export failed:', error);
+      return false;
+    }
+  }, [title]);
+
+  // Enhanced export handler using backend API
   const handleExport = useCallback(async (format: string) => {
     if (!exportConfig.formats.includes(format as any)) return;
 
@@ -244,40 +344,64 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
 
     try {
       const filename = exportConfig.filename || `${title.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`;
-      let success = false;
 
-      // Simulate progress
+      // Progress simulation
       const progressInterval = setInterval(() => {
         setExportProgress(prev => ({
           ...prev,
-          progress: Math.min(prev.progress + 20, 90)
+          progress: Math.min(prev.progress + 15, 85)
         }));
-      }, 200);
+      }, 300);
 
       setExportProgress(prev => ({ ...prev, message: `Generating ${format.toUpperCase()}...` }));
+
+      let success = false;
+      let downloadUrl = '';
 
       if (exportConfig.customExporter) {
         await exportConfig.customExporter(format, data);
         success = true;
       } else {
-        switch (format) {
-          case 'pdf':
-            success = await exportToPDF(data, filename);
-            break;
-          case 'csv':
-            success = await exportToCSV(data, filename);
-            break;
-          case 'excel':
-            success = await exportToExcel(data, filename);
-            break;
-          case 'json':
-            success = await exportToJSON(data, filename);
-            break;
-          case 'png':
-            success = await exportToPNG(filename);
-            break;
-          default:
-            throw new Error(`Unsupported format: ${format}`);
+        // Use backend API for professional document generation
+        try {
+          const exportRequest = {
+            document_type: 'compliance_report',
+            format: format,
+            title: title,
+            data: data,
+            include_charts: true,
+            include_raw_data: format === 'json' || format === 'csv',
+            password_protect: false
+          };
+
+          const response = await fetch('/api/v1/documents/export/quick', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(exportRequest)
+          });
+
+          if (response.ok) {
+            const result = await response.json();
+            downloadUrl = result.data.download_url;
+            success = true;
+
+            // Trigger download
+            const link = document.createElement('a');
+            link.href = downloadUrl;
+            link.download = `${filename}.${format}`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } else {
+            // Fallback to client-side generation
+            success = await fallbackExport(format, data, filename);
+          }
+        } catch (apiError) {
+          console.warn('Backend export failed, falling back to client-side:', apiError);
+          success = await fallbackExport(format, data, filename);
         }
       }
 
@@ -310,7 +434,33 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
       });
       onExport?.(format, false);
     }
-  }, [exportConfig, data, title, exportToPDF, exportToCSV, exportToExcel, exportToJSON, exportToPNG, onExport]);
+  }, [exportConfig, data, title, onExport]);
+
+  // Fallback export function for client-side generation
+  const fallbackExport = useCallback(async (format: string, data: any, filename: string): Promise<boolean> => {
+    try {
+      switch (format) {
+        case 'pdf':
+          return await exportToPDF(data, filename);
+        case 'csv':
+          return await exportToCSV(data, filename);
+        case 'xlsx':
+        case 'excel':
+          return await exportToExcel(data, filename);
+        case 'json':
+          return await exportToJSON(data, filename);
+        case 'png':
+          return await exportToPNG(filename);
+        case 'html':
+          return await exportToHTML(data, filename);
+        default:
+          throw new Error(`Unsupported format: ${format}`);
+      }
+    } catch (error) {
+      console.error(`Fallback export failed for ${format}:`, error);
+      return false;
+    }
+  }, [exportToPDF, exportToCSV, exportToExcel, exportToJSON, exportToPNG]);
 
   // Sharing functions
   const generateShareUrl = useCallback(() => {
@@ -431,23 +581,108 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
                 <p className="text-sm text-slate-600">{exportProgress.message}</p>
               </div>
             ) : (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-                {exportConfig.formats.map(format => {
-                  const FormatIcon = EXPORT_FORMATS[format]?.icon || FileText;
-                  const label = EXPORT_FORMATS[format]?.label || format.toUpperCase();
-                  
-                  return (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {exportConfig.formats.map(format => {
+                    const formatInfo = ENHANCED_EXPORT_FORMATS[format] || EXPORT_FORMATS[format];
+                    const FormatIcon = formatInfo?.icon || FileText;
+                    const label = formatInfo?.label || format.toUpperCase();
+                    const description = formatInfo?.description || '';
+                    const features = formatInfo?.features || [];
+                    
+                    return (
+                      <div
+                        key={format}
+                        className="border border-slate-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all duration-200 cursor-pointer"
+                        onClick={() => handleExport(format)}
+                      >
+                        <div className="flex items-start gap-3">
+                          <div className="flex-shrink-0">
+                            <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
+                              <FormatIcon className="h-5 w-5 text-blue-600" />
+                            </div>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h3 className="font-medium text-slate-900 mb-1">{label}</h3>
+                            <p className="text-sm text-slate-600 mb-2">{description}</p>
+                            {features.length > 0 && (
+                              <div className="flex flex-wrap gap-1">
+                                {features.slice(0, 3).map((feature, idx) => (
+                                  <span
+                                    key={idx}
+                                    className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700"
+                                  >
+                                    {feature}
+                                  </span>
+                                ))}
+                                {features.length > 3 && (
+                                  <span className="text-xs text-slate-500">
+                                    +{features.length - 3} more
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className="mt-3">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="w-full text-blue-600 border-blue-200 hover:bg-blue-50"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleExport(format);
+                            }}
+                          >
+                            <Download className="h-4 w-4 mr-2" />
+                            Export {label}
+                          </Button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Quick Actions */}
+                <div className="border-t pt-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <h3 className="text-sm font-medium text-slate-700">Quick Actions</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
                     <Button
-                      key={format}
                       variant="outline"
-                      onClick={() => handleExport(format)}
-                      className="flex flex-col items-center gap-2 h-auto py-3"
+                      size="sm"
+                      onClick={() => {
+                        // Export all formats
+                        exportConfig.formats.forEach(format => {
+                          setTimeout(() => handleExport(format), Math.random() * 1000);
+                        });
+                      }}
+                      className="text-slate-600"
                     >
-                      <FormatIcon className="h-5 w-5" />
-                      <span className="text-xs">{label}</span>
+                      <Download className="h-4 w-4 mr-2" />
+                      Export All Formats
                     </Button>
-                  );
-                })}
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleExport('pdf')}
+                      className="text-slate-600"
+                    >
+                      <FileText className="h-4 w-4 mr-2" />
+                      Quick PDF
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleExport('xlsx')}
+                      className="text-slate-600"
+                    >
+                      <Table className="h-4 w-4 mr-2" />
+                      Quick Excel
+                    </Button>
+                  </div>
+                </div>
               </div>
             )}
           </CardContent>

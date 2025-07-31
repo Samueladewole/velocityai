@@ -261,7 +261,7 @@
 - **Real-Time Monitoring**: Continuous compliance vs periodic audits
 - **Multi-Framework Intelligence**: Unified platform vs single-purpose tools
 
-### **vs Major Competitors (Delve, etc.)**
+### **vs Major Competitors**
 - **Revolutionary AI Agents**: 10 specialized agents vs basic automation
 - **98.7% Automation**: Industry-leading automation rate
 - **Cryptographic Trust**: Blockchain-based evidence validation

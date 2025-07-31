@@ -249,11 +249,58 @@ export function QuestionnaireUpload({
                 </span>
               </div>
               <ul className="text-xs text-blue-700 space-y-1">
-                <li>• Extracting questions with 99% accuracy</li>
-                <li>• Auto-categorizing by framework/domain</li>
-                <li>• Detecting duplicates across questionnaires</li>
-                <li>• Mapping to standard frameworks (SOC2, ISO, etc.)</li>
+                <li>• Extracting questions with 99% accuracy using advanced NLP</li>
+                <li>• Auto-categorizing by framework/domain (SOC2, ISO27001, GDPR, etc.)</li>
+                <li>• Detecting duplicates across questionnaires and existing database</li>
+                <li>• Mapping to standard frameworks and control families</li>
+                <li>• Generating intelligent answer suggestions based on your organization</li>
+                <li>• Creating evidence requirements for each question</li>
               </ul>
+            </div>
+          )}
+
+          {/* Upload Statistics */}
+          {uploadedFiles.length > 0 && (
+            <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
+                    <FileText className="h-4 w-4 text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-emerald-900">Files Uploaded</p>
+                    <p className="text-lg font-bold text-emerald-600">{uploadedFiles.length}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                    <Brain className="h-4 w-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-blue-900">Questions Extracted</p>
+                    <p className="text-lg font-bold text-blue-600">
+                      {uploadedFiles.reduce((sum, file) => sum + (file.extractedQuestions || 0), 0)}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
+                    <CheckCircle className="h-4 w-4 text-purple-600" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-purple-900">Processing Status</p>
+                    <p className="text-lg font-bold text-purple-600">
+                      {uploadedFiles.filter(f => f.status === 'completed').length}/{uploadedFiles.length}
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </CardContent>
