@@ -414,9 +414,9 @@ const HeroSection = () => {
             {/* Live Agent Activity */}
             <div className="mt-6 space-y-3">
               {[
-                { agent: 'COMPASS', task: 'Mapping SOC 2 controls', status: 'active' },
-                { agent: 'ATLAS', task: 'Scanning AWS security groups', status: 'active' },
-                { agent: 'PULSE', task: 'Monitoring compliance drift', status: 'active' }
+                { agent: 'AWS Evidence Collector', task: 'Scanning CloudTrail configurations', status: 'active' },
+                { agent: 'Trust Score Engine', task: 'Calculating cryptographic verification', status: 'active' },
+                { agent: 'GitHub Security Analyzer', task: 'Analyzing organization security settings', status: 'active' }
               ].map((item, index) => (
                 <div 
                   key={index}
@@ -626,46 +626,74 @@ const TrustFirstSection = () => {
 const AIAgentsSection = () => {
   const agents = [
     {
-      name: 'COMPASS',
-      description: 'Compliance Framework Mapping & Gap Analysis',
-      capabilities: ['Framework mapping', 'Control assessment', 'Gap identification'],
-      automation: 90,
-      icon: Target
+      name: 'AWS Evidence Collector',
+      description: 'Automated AWS compliance evidence gathering',
+      capabilities: ['CloudTrail monitoring', 'Config rules validation', 'Security Hub integration'],
+      automation: 98,
+      icon: Zap
     },
     {
-      name: 'ATLAS',
-      description: 'Security Assessment & Vulnerability Management',
-      capabilities: ['Security scanning', 'Vulnerability assessment', 'Risk analysis'],
-      automation: 85,
-      icon: Shield
+      name: 'GCP Security Scanner',
+      description: 'Google Cloud security assessment & monitoring',
+      capabilities: ['IAM policy analysis', 'Security Command Center', 'Resource inventory'],
+      automation: 97,
+      icon: Cpu
     },
     {
-      name: 'NEXUS',
-      description: 'Cross-Framework Control Harmonization',
-      capabilities: ['Control mapping', 'Framework alignment', 'Duplicate detection'],
-      automation: 88,
-      icon: Layers
-    },
-    {
-      name: 'BEACON',
-      description: 'Compliance Reporting & Communication',
-      capabilities: ['Report generation', 'Stakeholder communication', 'Dashboard creation'],
-      automation: 92,
-      icon: BarChart3
-    },
-    {
-      name: 'PULSE',
-      description: 'Real-Time Monitoring & Alerting',
-      capabilities: ['Continuous monitoring', 'Drift detection', 'Real-time alerts'],
-      automation: 95,
+      name: 'Azure Security Monitor',
+      description: 'Microsoft Azure security and compliance tracking',
+      capabilities: ['Security Center alerts', 'Policy compliance', 'Defender integration'],
+      automation: 96,
       icon: Activity
     },
     {
-      name: 'PRISM',
-      description: 'Risk Quantification & Business Impact',
-      capabilities: ['Risk calculation', 'Impact analysis', 'ROI modeling'],
-      automation: 87,
-      icon: TrendingUp
+      name: 'GitHub Security Analyzer',
+      description: 'Repository security and branch protection analysis',
+      capabilities: ['Security settings scan', 'Branch protection rules', 'Access control audit'],
+      automation: 99,
+      icon: Database
+    },
+    {
+      name: 'QIE Integration Agent',
+      description: 'Questionnaire Intelligence Engine for automated responses',
+      capabilities: ['Framework questionnaires', 'AI-powered responses', 'Multi-framework mapping'],
+      automation: 94,
+      icon: FileText
+    },
+    {
+      name: 'Trust Score Engine',
+      description: 'Cryptographic verification and trust scoring',
+      capabilities: ['Blockchain proofs', 'Evidence verification', 'Trust calculation'],
+      automation: 100,
+      icon: Shield
+    },
+    {
+      name: 'Continuous Monitor',
+      description: 'Real-time configuration change monitoring',
+      capabilities: ['Drift detection', 'Real-time alerts', 'Configuration tracking'],
+      automation: 97,
+      icon: Eye
+    },
+    {
+      name: 'Document Generator',
+      description: 'Automated compliance documentation creation',
+      capabilities: ['Policy generation', 'Evidence documentation', 'Report creation'],
+      automation: 95,
+      icon: FileText
+    },
+    {
+      name: 'Observability Specialist',
+      description: 'System monitoring and performance analysis',
+      capabilities: ['System metrics', 'Performance monitoring', 'Alert management'],
+      automation: 98,
+      icon: Activity
+    },
+    {
+      name: 'Cryptographic Verification',
+      description: 'Blockchain-based evidence integrity verification',
+      capabilities: ['Merkle tree proofs', 'Tamper detection', 'Cryptographic hashing'],
+      automation: 100,
+      icon: Lock
     }
   ];
 

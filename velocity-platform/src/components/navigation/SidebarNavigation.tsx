@@ -37,68 +37,63 @@ interface SidebarNavigationProps {
 
 const mainNavItems = [
   {
-    title: 'Dashboard',
-    icon: LayoutDashboard,
-    href: '/dashboard',
-    description: 'Executive command center'
+    title: 'Agent Dashboard',
+    icon: Bot,
+    href: '/velocity/agents',
+    description: '10 AI agents working for you'
   },
   {
-    title: 'Velocity AI',
-    icon: Rocket,
-    href: '#',
-    description: 'AI-powered compliance automation',
-    children: [
-      { title: 'AI Agents', icon: Bot, href: '/velocity/dashboard', description: 'Manage AI agents' },
-      { title: 'Live Dashboard', icon: Zap, href: '/velocity/live', description: 'Real-time monitoring' },
-      { title: 'Evidence Review', icon: FileCheck, href: '/velocity/evidence', description: 'Review AI evidence' },
-      { title: 'Integrations', icon: Globe, href: '/velocity/integration', description: 'Platform connections' },
-      { title: 'Agent Creator', icon: Sparkles, href: '/velocity/creator', description: 'Build custom agents' },
-      { title: 'Documentation', icon: HelpCircle, href: '/velocity/docs', description: 'Guides and tutorials' }
-    ]
+    title: 'Evidence Collection',
+    icon: FileCheck,
+    href: '/velocity/evidence',
+    description: 'Automated evidence gathering'
   },
   {
     title: 'Trust Score',
     icon: Trophy,
-    href: '/trust-score',
-    description: 'Monitor and share trust credentials'
+    href: '/velocity/trust-score',
+    description: 'Cryptographically verified trust'
   },
   {
-    title: 'Tools',
-    icon: Settings,
-    href: '#',
-    description: 'ERIP Tool Suite',
-    children: [
-      { title: 'PRISM', icon: BarChart3, href: '/tools/prism', description: 'Risk quantification' },
-      { title: 'BEACON', icon: Zap, href: '/tools/beacon', description: 'Value acceleration' },
-      { title: 'COMPASS', icon: Target, href: '/tools/compass', description: 'Compliance navigator' },
-      { title: 'ATLAS', icon: Search, href: '/tools/atlas', description: 'Threat intelligence' },
-      { title: 'NEXUS', icon: Users, href: '/tools/nexus', description: 'Risk network insights' },
-      { title: 'PULSE', icon: Activity, href: '/tools/pulse', description: 'Real-time monitoring' },
-      { title: 'CLEARANCE', icon: Shield, href: '/tools/clearance', description: 'Risk decisions' },
-      { title: 'CIPHER', icon: Lock, href: '/tools/cipher', description: 'Policy automation' }
-    ]
+    title: 'QIE Intelligence',
+    icon: FileText,
+    href: '/velocity/qie',
+    description: 'Questionnaire automation'
   },
   {
-    title: 'Components',
-    icon: Boxes,
+    title: 'Cloud Integrations',
+    icon: Cloud,
+    href: '/velocity/integrations',
+    description: 'AWS, GCP, Azure connections'
+  },
+  {
+    title: 'Compliance Frameworks',
+    icon: Shield,
+    href: '/velocity/frameworks',
+    description: 'SOC 2, ISO 27001, GDPR, HIPAA'
+  },
+  {
+    title: 'AI Agents',
+    icon: Bot,
     href: '#',
-    description: 'Platform capabilities',
+    description: '10 intelligent automation agents',
     children: [
-      { title: 'QIE', icon: FileCheck, href: '/tools/qie-enhanced', description: 'Questionnaire Intelligence' },
-      { title: 'DTEF Automation', icon: Shield, href: '/tools/dtef-automation', description: 'Digital Trust Framework' },
-      { title: 'Framework Management', icon: Settings, href: '/tools/framework-management', description: '70% overlap optimization' },
-      { title: 'Privacy Management', icon: Lock, href: '/tools/privacy-management', description: 'GDPR & CCPA compliance' },
-      { title: 'AI Governance', icon: Bot, href: '/tools/ai-governance', description: 'ISO 42001 compliance' },
-      { title: 'Cloud Security', icon: Cloud, href: '/tools/cloud-security', description: 'Multi-cloud scanning' },
-      { title: 'Policy Management', icon: FileText, href: '/tools/policy-management', description: 'AI-powered policies' },
-      { title: 'Employee Training', icon: GraduationCap, href: '/tools/employee-training', description: 'Gamified learning' },
-      { title: 'Assessment Marketplace', icon: ShoppingCart, href: '/tools/assessment-marketplace', description: 'Community assessments' }
+      { title: 'AWS Evidence Collector', icon: Zap, href: '/velocity/agents/aws-evidence', description: 'CloudTrail, Config, Security Hub' },
+      { title: 'GCP Security Scanner', icon: Cpu, href: '/velocity/agents/gcp-scanner', description: 'IAM, Cloud Security Command Center' },
+      { title: 'Azure Security Monitor', icon: Activity, href: '/velocity/agents/azure-monitor', description: 'Security Center, Sentinel, Defender' },
+      { title: 'GitHub Security Analyzer', icon: Database, href: '/velocity/agents/github-analyzer', description: 'Repository security, branch protection' },
+      { title: 'QIE Integration Agent', icon: FileText, href: '/velocity/agents/qie-agent', description: 'Questionnaire intelligence engine' },
+      { title: 'Trust Score Engine', icon: Shield, href: '/velocity/agents/trust-engine', description: 'Cryptographic verification system' },
+      { title: 'Continuous Monitor', icon: Eye, href: '/velocity/agents/continuous-monitor', description: 'Real-time configuration tracking' },
+      { title: 'Document Generator', icon: FileText, href: '/velocity/agents/doc-generator', description: 'Automated compliance documentation' },
+      { title: 'Observability Specialist', icon: Activity, href: '/velocity/agents/observability', description: 'System monitoring and alerting' },
+      { title: 'Cryptographic Verification', icon: Lock, href: '/velocity/agents/crypto-verification', description: 'Blockchain proof generation' }
     ]
   },
   {
     title: 'Reports',
     icon: BarChart3,
-    href: '/tools/reports',
+    href: '/velocity/reports',
     description: 'Analytics and insights'
   }
 ];

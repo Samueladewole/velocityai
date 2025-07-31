@@ -1,0 +1,468 @@
+import React, { useState, useEffect } from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { 
+  Play, 
+  Pause, 
+  RefreshCw, 
+  CheckCircle, 
+  AlertTriangle, 
+  Clock,
+  Activity,
+  Zap,
+  Shield,
+  Database,
+  Eye,
+  FileText,
+  Cpu,
+  Lock
+} from 'lucide-react';
+
+interface Agent {
+  id: string;
+  name: string;
+  type: 'AWS' | 'GCP' | 'Azure' | 'GitHub' | 'QIE' | 'TrustScore' | 'Monitor' | 'DocGen' | 'Observability' | 'Crypto';
+  status: 'collecting' | 'idle' | 'error' | 'scheduled' | 'connecting';
+  lastRun: Date;
+  nextRun: Date;
+  evidenceCollected: number;
+  successRate: number;
+  currentTask?: string;
+  progress?: number;
+}
+
+const AGENT_ICONS = {
+  AWS: Zap,
+  GCP: Cpu,
+  Azure: Activity,
+  GitHub: Database,
+  QIE: FileText,
+  TrustScore: Shield,
+  Monitor: Eye,
+  DocGen: FileText,
+  Observability: Activity,
+  Crypto: Lock
+};
+
+const STATUS_STYLES = {
+  collecting: 'border-emerald-500 bg-emerald-50 text-emerald-700',
+  idle: 'border-slate-300 bg-slate-50 text-slate-600',
+  error: 'border-red-500 bg-red-50 text-red-700',
+  scheduled: 'border-amber-500 bg-amber-50 text-amber-700',
+  connecting: 'border-blue-500 bg-blue-50 text-blue-700'
+};
+
+const PRODUCTION_AGENTS: Agent[] = [
+  {
+    id: 'aws-evidence',
+    name: 'AWS Evidence Collector',
+    type: 'AWS',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 2 * 60 * 1000), // 2 min ago
+    nextRun: new Date(Date.now() + 28 * 60 * 1000), // 28 min from now
+    evidenceCollected: 247,
+    successRate: 98.2,
+    currentTask: 'Scanning CloudTrail configurations',
+    progress: 67
+  },
+  {
+    id: 'gcp-scanner',
+    name: 'GCP Security Scanner',
+    type: 'GCP',
+    status: 'idle',
+    lastRun: new Date(Date.now() - 60 * 60 * 1000), // 1 hour ago
+    nextRun: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours
+    evidenceCollected: 156,
+    successRate: 97.8
+  },
+  {
+    id: 'azure-monitor',
+    name: 'Azure Security Monitor',
+    type: 'Azure',
+    status: 'scheduled',
+    lastRun: new Date(Date.now() - 30 * 60 * 1000), // 30 min ago
+    nextRun: new Date(Date.now() + 90 * 60 * 1000), // 90 min
+    evidenceCollected: 203,
+    successRate: 96.5
+  },
+  {
+    id: 'github-analyzer',
+    name: 'GitHub Security Analyzer',
+    type: 'GitHub',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 5 * 60 * 1000), // 5 min ago
+    nextRun: new Date(Date.now() + 55 * 60 * 1000), // 55 min
+    evidenceCollected: 89,
+    successRate: 99.1,
+    currentTask: 'Analyzing organization security settings',
+    progress: 23
+  },
+  {
+    id: 'qie-agent',
+    name: 'QIE Integration Agent',
+    type: 'QIE',
+    status: 'idle',
+    lastRun: new Date(Date.now() - 15 * 60 * 1000), // 15 min ago
+    nextRun: new Date(Date.now() + 45 * 60 * 1000), // 45 min
+    evidenceCollected: 134,
+    successRate: 94.7
+  },
+  {
+    id: 'trust-engine',
+    name: 'Trust Score Engine',
+    type: 'TrustScore',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 1 * 60 * 1000), // 1 min ago
+    nextRun: new Date(Date.now() + 14 * 60 * 1000), // 14 min
+    evidenceCollected: 312,
+    successRate: 99.8,
+    currentTask: 'Calculating cryptographic verification',
+    progress: 89
+  },
+  {
+    id: 'continuous-monitor',
+    name: 'Continuous Monitor',
+    type: 'Monitor',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 30 * 1000), // 30 sec ago
+    nextRun: new Date(Date.now() + 4.5 * 60 * 1000), // 4.5 min
+    evidenceCollected: 445,
+    successRate: 97.3,
+    currentTask: 'Monitoring configuration changes',
+    progress: 15
+  },
+  {
+    id: 'doc-generator',
+    name: 'Document Generator',
+    type: 'DocGen',
+    status: 'idle',
+    lastRun: new Date(Date.now() - 45 * 60 * 1000), // 45 min ago
+    nextRun: new Date(Date.now() + 75 * 60 * 1000), // 75 min
+    evidenceCollected: 178,
+    successRate: 95.4
+  },
+  {
+    id: 'observability',
+    name: 'Observability Specialist',
+    type: 'Observability',
+    status: 'scheduled',
+    lastRun: new Date(Date.now() - 20 * 60 * 1000), // 20 min ago
+    nextRun: new Date(Date.now() + 40 * 60 * 1000), // 40 min
+    evidenceCollected: 267,
+    successRate: 98.9
+  },
+  {
+    id: 'crypto-verification',
+    name: 'Cryptographic Verification',
+    type: 'Crypto',
+    status: 'collecting',
+    lastRun: new Date(Date.now() - 3 * 60 * 1000), // 3 min ago
+    nextRun: new Date(Date.now() + 12 * 60 * 1000), // 12 min
+    evidenceCollected: 89,
+    successRate: 100.0,
+    currentTask: 'Generating blockchain proofs',
+    progress: 45
+  }
+];
+
+interface AgentGridProps {
+  className?: string;
+}
+
+export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
+  const [agents, setAgents] = useState<Agent[]>(PRODUCTION_AGENTS);
+  const [lastUpdate, setLastUpdate] = useState(new Date());
+
+  // Simulate real-time updates (replace with actual WebSocket)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setAgents(prev => prev.map(agent => {
+        // Simulate progress updates for collecting agents
+        if (agent.status === 'collecting' && agent.progress !== undefined) {
+          const newProgress = Math.min(100, agent.progress + Math.random() * 5);
+          return {
+            ...agent,
+            progress: newProgress,
+            // Complete task when progress reaches 100
+            ...(newProgress >= 100 && {
+              status: 'idle' as const,
+              progress: undefined,
+              currentTask: undefined,
+              lastRun: new Date(),
+              nextRun: new Date(Date.now() + Math.random() * 60 * 60 * 1000),
+              evidenceCollected: agent.evidenceCollected + Math.floor(Math.random() * 5) + 1
+            })
+          };
+        }
+        return agent;
+      }));
+      setLastUpdate(new Date());
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const formatTimeAgo = (date: Date) => {
+    const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
+    if (seconds < 60) return `${seconds}s ago`;
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    return `${hours}h ago`;
+  };
+
+  const formatTimeUntil = (date: Date) => {
+    const seconds = Math.floor((date.getTime() - Date.now()) / 1000);
+    if (seconds < 60) return `${seconds}s`;
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m`;
+    const hours = Math.floor(minutes / 60);
+    return `${hours}h`;
+  };
+
+  const handleAgentAction = (agentId: string, action: 'deploy' | 'pause' | 'resume') => {
+    // TODO: Connect to actual backend API
+    console.log(`Agent ${agentId}: ${action}`);
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'collecting': return <Activity className="h-4 w-4 animate-pulse" />;
+      case 'idle': return <CheckCircle className="h-4 w-4" />;
+      case 'error': return <AlertTriangle className="h-4 w-4" />;
+      case 'scheduled': return <Clock className="h-4 w-4" />;
+      case 'connecting': return <RefreshCw className="h-4 w-4 animate-spin" />;
+      default: return <CheckCircle className="h-4 w-4" />;
+    }
+  };
+
+  const totalEvidence = agents.reduce((sum, agent) => sum + agent.evidenceCollected, 0);
+  const activeAgents = agents.filter(agent => agent.status === 'collecting').length;
+  const avgSuccessRate = agents.reduce((sum, agent) => sum + agent.successRate, 0) / agents.length;
+
+  return (
+    <div className={`space-y-6 ${className}`}>
+      {/* Hero Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-emerald-600 text-sm font-medium">Total Agents</p>
+                <p className="text-2xl font-bold text-emerald-900">{agents.length}</p>
+              </div>
+              <Cpu className="h-8 w-8 text-emerald-500" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-200">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-blue-600 text-sm font-medium">Active Now</p>
+                <p className="text-2xl font-bold text-blue-900">{activeAgents}</p>
+              </div>
+              <Activity className="h-8 w-8 text-blue-500 animate-pulse" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-purple-50 to-violet-50 border-purple-200">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-purple-600 text-sm font-medium">Evidence Collected</p>
+                <p className="text-2xl font-bold text-purple-900">{totalEvidence.toLocaleString()}</p>
+              </div>
+              <Database className="h-8 w-8 text-purple-500" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="bg-gradient-to-br from-amber-50 to-orange-50 border-amber-200">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-amber-600 text-sm font-medium">Success Rate</p>
+                <p className="text-2xl font-bold text-amber-900">{avgSuccessRate.toFixed(1)}%</p>
+              </div>
+              <Shield className="h-8 w-8 text-amber-500" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Real-time Status */}
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-2xl font-bold text-slate-900">AI Agent Monitoring</h2>
+        <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+            Live - Updated {formatTimeAgo(lastUpdate)}
+          </div>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => window.location.reload()}
+          >
+            <RefreshCw className="h-4 w-4 mr-2" />
+            Refresh
+          </Button>
+        </div>
+      </div>
+
+      {/* Agent Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {agents.map((agent) => {
+          const IconComponent = AGENT_ICONS[agent.type];
+          
+          return (
+            <Card 
+              key={agent.id} 
+              className={`transition-all duration-200 hover:shadow-lg hover:scale-105 ${STATUS_STYLES[agent.status]}`}
+            >
+              <CardHeader className="pb-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <IconComponent className="h-5 w-5" />
+                    <Badge variant="outline" className="text-xs">
+                      {agent.type}
+                    </Badge>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    {getStatusIcon(agent.status)}
+                    <span className="text-xs font-medium capitalize">
+                      {agent.status}
+                    </span>
+                  </div>
+                </div>
+                <CardTitle className="text-sm font-semibold leading-tight">
+                  {agent.name}
+                </CardTitle>
+              </CardHeader>
+
+              <CardContent className="pt-0 space-y-3">
+                {/* Current Task & Progress */}
+                {agent.currentTask && agent.progress !== undefined && (
+                  <div className="space-y-2">
+                    <p className="text-xs text-slate-600 truncate">
+                      {agent.currentTask}
+                    </p>
+                    <div className="space-y-1">
+                      <div className="flex justify-between text-xs">
+                        <span>Progress</span>
+                        <span>{Math.round(agent.progress)}%</span>
+                      </div>
+                      <Progress value={agent.progress} className="h-1.5" />
+                    </div>
+                  </div>
+                )}
+
+                {/* Stats */}
+                <div className="grid grid-cols-2 gap-2 text-xs">
+                  <div>
+                    <p className="text-slate-500">Evidence</p>
+                    <p className="font-semibold">{agent.evidenceCollected}</p>
+                  </div>
+                  <div>
+                    <p className="text-slate-500">Success Rate</p>
+                    <p className="font-semibold">{agent.successRate}%</p>
+                  </div>
+                </div>
+
+                {/* Timing */}
+                <div className="text-xs space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Last run:</span>
+                    <span>{formatTimeAgo(agent.lastRun)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-500">Next run:</span>
+                    <span>In {formatTimeUntil(agent.nextRun)}</span>
+                  </div>
+                </div>
+
+                {/* Actions */}
+                <div className="flex gap-2 pt-2">
+                  {agent.status === 'idle' && (
+                    <Button 
+                      size="sm" 
+                      className="flex-1 h-8 text-xs"
+                      onClick={() => handleAgentAction(agent.id, 'deploy')}
+                    >
+                      <Play className="h-3 w-3 mr-1" />
+                      Deploy
+                    </Button>
+                  )}
+                  {agent.status === 'collecting' && (
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1 h-8 text-xs"
+                      onClick={() => handleAgentAction(agent.id, 'pause')}
+                    >
+                      <Pause className="h-3 w-3 mr-1" />
+                      Pause
+                    </Button>
+                  )}
+                  {agent.status === 'error' && (
+                    <Button 
+                      size="sm" 
+                      variant="destructive" 
+                      className="flex-1 h-8 text-xs"
+                      onClick={() => handleAgentAction(agent.id, 'resume')}
+                    >
+                      <RefreshCw className="h-3 w-3 mr-1" />
+                      Retry
+                    </Button>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          );
+        })}
+      </div>
+
+      {/* Quick Deploy Section */}
+      <Card className="bg-gradient-to-r from-slate-50 to-slate-100 border-slate-200">
+        <CardContent className="p-6">
+          <h3 className="text-lg font-semibold mb-4">Quick Deploy</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Button className="h-auto p-4 flex flex-col items-start" variant="outline">
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="h-5 w-5 text-emerald-600" />
+                <span className="font-semibold">SOC 2 Ready</span>
+              </div>
+              <p className="text-sm text-slate-600 text-left">
+                Deploy all SOC 2 compliance agents
+              </p>
+            </Button>
+            
+            <Button className="h-auto p-4 flex flex-col items-start" variant="outline">
+              <div className="flex items-center gap-2 mb-2">
+                <Zap className="h-5 w-5 text-blue-600" />
+                <span className="font-semibold">Full Automation</span>
+              </div>
+              <p className="text-sm text-slate-600 text-left">
+                Deploy all 10 agents for complete coverage
+              </p>
+            </Button>
+            
+            <Button className="h-auto p-4 flex flex-col items-start" variant="outline">
+              <div className="flex items-center gap-2 mb-2">
+                <FileText className="h-5 w-5 text-purple-600" />
+                <span className="font-semibold">QIE Ready</span>
+              </div>
+              <p className="text-sm text-slate-600 text-left">
+                Deploy questionnaire processing agents
+              </p>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+};

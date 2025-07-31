@@ -7,6 +7,7 @@ import VelocityFooter from './VelocityFooter';
 import CustomerImpactShowcase from './CustomerImpactShowcase';
 import ROIMetricsDashboard from './ROIMetricsDashboard';
 import CompetitiveAdvantageShowcase from './CompetitiveAdvantageShowcase';
+import AgentDashboard from '../../pages/AgentDashboard';
 
 // Create placeholder components for all the routes
 const PlaceholderPage = ({ title, description }: { title: string; description: string }) => (
@@ -339,7 +340,7 @@ const VelocityRoutes: React.FC = () => {
       {/* Dashboard routes - Use dashboard layout */}
       <Route path="/velocity/dashboard" element={
         <DashboardLayout>
-          <VelocityDashboardComplete />
+          <AgentDashboard />
         </DashboardLayout>
       } />
       
@@ -395,7 +396,7 @@ const VelocityRoutes: React.FC = () => {
       {/* Platform routes - Authenticated dashboard pages */}
       <Route path="/velocity/agents" element={
         <DashboardLayout>
-          <PlaceholderPage title="AI Agents" description="Manage your 10-agent compliance orchestration system" />
+          <AgentDashboard />
         </DashboardLayout>
       } />
       <Route path="/velocity/agents/:agentId" element={
