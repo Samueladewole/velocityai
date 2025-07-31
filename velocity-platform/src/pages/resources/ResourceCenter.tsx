@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PublicHeader } from '../../components/common/PublicHeader';
 import CaseStudies from '../../components/resources/CaseStudies';
 import BlogContent from '../../components/resources/BlogContent';
 
@@ -296,10 +297,11 @@ const ResourceCenter: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+      <PublicHeader />
       <CookieBanner />
       
       {/* Header */}
-      <div className="bg-slate-900/50 backdrop-blur-sm border-b border-slate-700">
+      <div className="bg-slate-900/50 backdrop-blur-sm border-b border-slate-700 pt-16">
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex items-center justify-between mb-6">
             <button
@@ -370,15 +372,15 @@ const ComplianceGuides: React.FC<{ searchTerm: string; selectedCategory: string 
       color: 'emerald'
     },
     {
-      id: 'gdpr',
-      title: 'GDPR Compliance Automation',
-      description: 'AI-powered GDPR compliance with automated data mapping and privacy controls',
+      id: 'gdpr-international-transfers',
+      title: 'GDPR International Transfer Solutions',
+      description: 'AI-powered cross-border transfer compliance with Transfer Impact Assessments and post-Schrems II automation',
       category: 'Data Privacy',
-      readTime: '12 min',
+      readTime: '14 min',
       difficulty: 'Advanced',
-      agentCount: 8,
-      automationRate: '87%',
-      icon: '🔒',
+      agentCount: 12,
+      automationRate: '94%',
+      icon: '🌍',
       color: 'blue'
     },
     {

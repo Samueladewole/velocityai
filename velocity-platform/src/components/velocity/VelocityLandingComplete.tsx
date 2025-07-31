@@ -135,6 +135,20 @@ const PublicHeader: React.FC = () => {
                   <div className="font-medium">Manufacturing</div>
                   <div className="text-xs text-slate-400">Industrial IoT security</div>
                 </button>
+                <button 
+                  onClick={() => navigate('/industries/government')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Government</div>
+                  <div className="text-xs text-slate-400">FedRAMP & FISMA</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/industries/energy')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Energy</div>
+                  <div className="text-xs text-slate-400">NERC CIP & critical infrastructure</div>
+                </button>
               </div>
             </div>
             <div className="relative group">
@@ -144,11 +158,11 @@ const PublicHeader: React.FC = () => {
               </button>
               <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/solutions/gdpr-ropa')}
+                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">GDPR RoPA Automation</div>
-                  <div className="text-xs text-slate-400">83% vs traditional solutions</div>
+                  <div className="font-medium">GDPR International Transfers</div>
+                  <div className="text-xs text-slate-400">81% vs traditional solutions</div>
                 </button>
                 <button 
                   onClick={() => navigate('/solutions/isae-3000')}
@@ -177,6 +191,27 @@ const PublicHeader: React.FC = () => {
                 >
                   <div className="font-medium">HIPAA Automation</div>
                   <div className="text-xs text-slate-400">Healthcare compliance</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/pci-dss')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">PCI DSS</div>
+                  <div className="text-xs text-slate-400">Payment security</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/cis-controls')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">CIS Controls</div>
+                  <div className="text-xs text-slate-400">Cybersecurity framework</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/frameworks')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">NIST Framework</div>
+                  <div className="text-xs text-slate-400">Cybersecurity standards</div>
                 </button>
               </div>
             </div>
@@ -312,11 +347,11 @@ const PublicHeader: React.FC = () => {
             
             <div className="text-slate-400 text-sm font-medium py-1 pt-4">Solutions</div>
             <button 
-              onClick={() => { navigate('/solutions/gdpr-ropa'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/solutions/gdpr-international-transfers'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              <div className="font-medium">GDPR RoPA Automation</div>
-              <div className="text-xs text-slate-400">83% vs traditional solutions</div>
+              <div className="font-medium">GDPR International Transfers</div>
+              <div className="text-xs text-slate-400">81% vs traditional solutions</div>
             </button>
             <button 
               onClick={() => { navigate('/solutions/isae-3000'); setMobileMenuOpen(false); }}
@@ -387,7 +422,7 @@ const PublicHeader: React.FC = () => {
                 onClick={() => { navigate('/velocity/assessment'); setMobileMenuOpen(false); }}
                 className="block w-full px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
               >
-                Start Free Assessment
+                See Your Agents Working Live
               </button>
             </div>
           </div>
@@ -462,7 +497,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const [currentFramework, setCurrentFramework] = useState(0);
   
-  const frameworks = ['GDPR RoPA', 'ISAE 3000', 'SOC 2', 'ISO 27001', 'HIPAA', 'Basel III'];
+  const frameworks = ['GDPR International Transfers', 'ISAE 3000', 'SOC 2', 'ISO 27001', 'HIPAA', 'Basel III'];
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -486,21 +521,31 @@ const HeroSection = () => {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
               <span className="text-emerald-400 text-sm font-medium">
-                ✨ 12 AI Agents • GDPR RoPA • ISAE 3000 • Zero Risk Assessment
+                ✨ Trusted by 500+ Companies • GDPR International Transfers • ISAE 3000 • Zero Manual Work
               </span>
             </div>
             
             <h1 className="font-serif text-5xl lg:text-7xl font-light text-white mb-6 leading-tight">
-              12 AI Agents
+              Stop Drowning in
               <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-                Automate Compliance
+                Compliance Paperwork
               </span>
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
-              Revolutionary GDPR RoPA automation (83% vs traditional solutions) and 
-              ISAE 3000 evidence automation (88% vs Big 4 consulting). Zero-risk assessment in 30 minutes.
+              Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
             </p>
+            
+            <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 mb-8 border border-white/10">
+              <p className="text-sm text-slate-300 mb-2">
+                <span className="font-semibold text-emerald-400">Revolutionary GDPR International Transfer automation</span> (81% cheaper than traditional solutions) and 
+                <span className="font-semibold text-blue-400"> ISAE 3000 evidence collection</span> (88% less than Big 4 consulting). 
+                Your compliance team will finally sleep well.
+              </p>
+              <p className="text-xs text-slate-400">
+                🧠 Powered by Anthropic's Claude Sonnet 4 • Superior reasoning and context handling
+              </p>
+            </div>
 
             {/* Dynamic Framework Display */}
             <div className="mb-8">
@@ -520,7 +565,7 @@ const HeroSection = () => {
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Target className="w-5 h-5" />
-                  Start Free Assessment
+                  See Your Agents Working Live
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -530,7 +575,7 @@ const HeroSection = () => {
                 className="group flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
               >
                 <Play className="w-5 h-5" />
-                View Demo
+                Calculate Time Savings
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </button>
             </div>
@@ -559,9 +604,9 @@ const HeroSection = () => {
             {/* Live Agent Activity */}
             <div className="mt-6 space-y-3">
               {[
-                { agent: 'AWS Evidence Collector', task: 'Scanning CloudTrail configurations', status: 'active' },
-                { agent: 'Trust Score Engine', task: 'Calculating cryptographic verification', status: 'active' },
-                { agent: 'GitHub Security Analyzer', task: 'Analyzing organization security settings', status: 'active' }
+                { agent: 'AWS Evidence Collector', task: '✅ Found proof your logging works perfectly', status: 'active' },
+                { agent: 'Trust Score Engine', task: '📈 Your compliance score just improved to 94%!', status: 'active' },
+                { agent: 'GitHub Security Analyzer', task: '🔒 Documented your code security practices', status: 'active' }
               ].map((item, index) => (
                 <div 
                   key={index}
@@ -842,8 +887,8 @@ const AIAgentsSection = () => {
     },
     {
       name: 'GDPR Compliance Agent',
-      description: 'Automated GDPR RoPA generation and privacy compliance',
-      capabilities: ['Data mapping automation', 'RoPA record generation', 'Privacy impact assessments'],
+      description: 'Automated GDPR international transfer compliance and TIA generation',
+      capabilities: ['Transfer Impact Assessments', 'Cloud provider monitoring', 'Standard Contractual Clauses'],
       automation: 96,
       icon: Shield
     },
@@ -864,7 +909,7 @@ const AIAgentsSection = () => {
             12 Specialized AI Agents
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Revolutionary automation including GDPR RoPA generation and ISAE 3000 evidence collection. 
+            Revolutionary automation including GDPR international transfer compliance and ISAE 3000 evidence collection. 
             95% of compliance tasks automated across all major frameworks.
           </p>
         </div>
@@ -1169,7 +1214,7 @@ const CompetitiveAdvantagesSection = () => {
     {
       title: "83% vs Traditional GDPR Solutions",
       metric: "$137K+ Saved Annually",
-      description: "Revolutionary GDPR RoPA automation vs OneTrust and traditional providers",
+      description: "Revolutionary GDPR international transfer automation vs traditional compliance providers",
       icon: DollarSign,
       color: "emerald"
     },
@@ -1279,7 +1324,7 @@ const IndustryShowcaseSection = () => {
   const industries = [
     {
       name: "Financial Services",
-      description: "Banking-specific GDPR RoPA and ISAE 3000 automation with core banking integrations",
+      description: "Banking-specific GDPR international transfer and ISAE 3000 automation with core banking integrations",
       metrics: ["83% vs OneTrust", "88% vs Big 4", "6-week deployment"],
       icon: Building,
       color: "blue",
@@ -1429,15 +1474,15 @@ const CTASection = () => {
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <Target className="w-5 h-5" />
-            Start Free Assessment
+            See Your Agents Working Live
           </button>
           
           <button
             onClick={() => navigate('/velocity/demo')}
             className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
           >
-            <Calendar className="w-5 h-5" />
-            Schedule Demo
+            <Calculator className="w-5 h-5" />
+            Calculate Time Savings
           </button>
         </div>
 
@@ -1494,12 +1539,12 @@ const PublicFooter: React.FC = () => {
               <span className="text-xl font-bold text-white font-serif">Velocity</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
-              12 AI Agents automate compliance with revolutionary GDPR RoPA and ISAE 3000 evidence automation. 
-              83% cost savings vs traditional solutions.
+              Stop drowning in compliance paperwork. Our AI agents work around the clock with revolutionary GDPR international transfer and ISAE 3000 evidence automation. 
+              83% savings vs OneTrust, 88% vs Big 4 consulting.
             </p>
             <div className="flex items-center gap-4 text-xs text-slate-500">
               <span>✓ 12 AI Agents</span>
-              <span>✓ GDPR RoPA</span>
+              <span>✓ GDPR International Transfers</span>
               <span>✓ ISAE 3000</span>
             </div>
           </div>
@@ -1554,7 +1599,7 @@ const PublicFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Solutions</h3>
             <div className="space-y-3">
               {[
-                { label: 'GDPR RoPA', path: '/solutions/gdpr-ropa', badge: '83% savings' },
+                { label: 'GDPR International Transfers', path: '/solutions/gdpr-international-transfers', badge: '81% savings' },
                 { label: 'ISAE 3000', path: '/solutions/isae-3000', badge: '88% vs Big 4' },
                 { label: 'SOC 2', path: '/velocity/solutions/soc2' },
                 { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },

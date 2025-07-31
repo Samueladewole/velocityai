@@ -7,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Progress } from '@/components/ui/progress';
 import { Logo } from '@/components/Logo';
+import BackToTopButton from '@/components/ui/BackToTopButton';
 import { 
   Shield,
   ArrowRight,
@@ -490,17 +491,27 @@ export const LandingEnhanced: React.FC = () => {
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                Trust Equity™
-              </span>
+              <span className="text-slate-800">Stop Drowning in</span>
               <br />
-              <span className="text-slate-800">Made Simple</span>
+              <span className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+                Compliance Paperwork
+              </span>
             </h1>
             
             <p className="text-xl text-slate-600 max-w-3xl mx-auto mb-8">
-              Start with ROI, not compliance. See your risk in euros, not scores. 
-              The world's first value-first trust platform that quantifies business impact.
+              Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
             </p>
+            
+            <div className="bg-blue-50 rounded-xl p-4 mb-8 border border-blue-100 max-w-3xl mx-auto">
+              <p className="text-sm text-slate-700 mb-2">
+                <span className="font-semibold text-blue-600">Revolutionary GDPR RoPA automation</span> (83% cheaper than OneTrust) and 
+                <span className="font-semibold text-green-600"> ISAE 3000 evidence collection</span> (88% less than Big 4 consulting). 
+                Your compliance team will finally sleep well.
+              </p>
+              <p className="text-xs text-slate-500">
+                🧠 Powered by Anthropic's Claude Sonnet 4 • Superior reasoning and context handling
+              </p>
+            </div>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
               <Button 
@@ -509,7 +520,7 @@ export const LandingEnhanced: React.FC = () => {
                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 text-lg group"
               >
                 <Calculator className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                Get Your Trust Score
+                See Your Agents Working Live
               </Button>
               <Button 
                 size="lg" 
@@ -518,7 +529,7 @@ export const LandingEnhanced: React.FC = () => {
                 className="border-blue-200 text-blue-700 px-8 py-4 text-lg group"
               >
                 <PlayCircle className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform" />
-                Watch 2-min Demo
+                Calculate Time Savings
               </Button>
             </div>
 
@@ -1308,8 +1319,83 @@ export const LandingEnhanced: React.FC = () => {
         </div>
       </section>
 
+      {/* Evidence Collection Section */}
+      <section className="py-20 bg-gradient-to-b from-slate-50 to-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+              Evidence Collection on
+              <span className="block bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                Autopilot
+              </span>
+            </h2>
+            <p className="text-xl text-slate-600 max-w-2xl mx-auto mb-8">
+              No more scrambling during audits—you're always ready with professional documentation packages. AI agents work 24/7 so your team can focus on growing the business.
+            </p>
+            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 text-lg">
+              See Your Evidence Collection in Action
+            </Button>
+          </div>
+          
+          <div className="grid md:grid-cols-5 gap-6 mb-16">
+            <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <div className="text-2xl mb-3">🔗</div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Connect Securely</h3>
+              <p className="text-sm text-slate-600">AI agents safely connect to your AWS, GCP, Azure, and GitHub using secure APIs</p>
+            </Card>
+            
+            <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <div className="text-2xl mb-3">🔍</div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Smart Discovery</h3>
+              <p className="text-sm text-slate-600">✅ Found 47 security controls - Your AWS setup looks great!</p>
+            </Card>
+            
+            <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <div className="text-2xl mb-3">📸</div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Evidence Capture</h3>
+              <p className="text-sm text-slate-600">🛡️ Your security monitoring looks excellent! Screenshots and configs collected.</p>
+            </Card>
+            
+            <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <div className="text-2xl mb-3">📂</div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Smart Organization</h3>
+              <p className="text-sm text-slate-600">📈 Your compliance score improved! Everything sorted by SOC 2, GDPR, ISO 27001.</p>
+            </Card>
+            
+            <Card className="p-6 hover:shadow-lg transition-all duration-300">
+              <div className="text-2xl mb-3">📋</div>
+              <h3 className="text-lg font-semibold text-slate-900 mb-2">Audit-Ready Results</h3>
+              <p className="text-sm text-slate-600">🔒 Documented your code security practices - Ready to impress enterprise prospects!</p>
+            </Card>
+          </div>
+          
+          <Card className="p-8 bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+            <div className="text-center">
+              <h3 className="text-2xl font-semibold text-slate-900 mb-4">Here's What Your Agents Just Found:</h3>
+              <div className="grid md:grid-cols-3 gap-6 text-left">
+                <div className="bg-white rounded-lg p-4 border border-blue-200">
+                  <div className="text-blue-600 font-medium mb-2">✅ AWS Agent</div>
+                  <div className="text-sm text-slate-700">Found proof your logging works perfectly - 47 CloudTrail configurations verified</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 border border-green-200">
+                  <div className="text-green-600 font-medium mb-2">🛡️ Azure Agent</div>
+                  <div className="text-sm text-slate-700">Your security monitoring looks excellent! 23 security center controls documented</div>
+                </div>
+                <div className="bg-white rounded-lg p-4 border border-purple-200">
+                  <div className="text-purple-600 font-medium mb-2">📈 Trust Engine</div>
+                  <div className="text-sm text-slate-700">Your compliance score just improved to 94%! Powered by Claude Sonnet 4</div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
+
       {/* Footer */}
       <NavigationFooter />
+      
+      {/* Back to Top Button */}
+      <BackToTopButton variant="emerald" threshold={150} />
     </div>
   );
 };

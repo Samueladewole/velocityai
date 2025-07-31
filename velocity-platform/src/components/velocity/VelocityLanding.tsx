@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import VelocityFooter from './VelocityFooter';
-import { Shield, TrendingUp, Users, FileText, Settings, Bell, Search, ChevronDown, Play, CheckCircle, Zap, Clock } from 'lucide-react';
+import BackToTopButton from '@/components/ui/BackToTopButton';
+import { Shield, TrendingUp, Users, FileText, Settings, Bell, Search, ChevronDown, Play, CheckCircle, Zap, Clock, ChevronUp } from 'lucide-react';
+
 
 // Enhanced Hero Section with Custom Design (from docs)
 const EnhancedHero = () => {
@@ -27,19 +29,30 @@ const EnhancedHero = () => {
           {/* Content */}
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
-              <span className="text-emerald-400 text-sm font-medium">10 AI Agents • Real-time Monitoring • EU + US Compliance</span>
+              <span className="text-emerald-400 text-sm font-medium">✨ Trusted by 500+ Companies • GDPR RoPA • ISAE 3000 • Zero Manual Work</span>
             </div>
             
             <h1 className="font-serif text-5xl lg:text-7xl font-light text-white mb-6 leading-tight">
-              Multi-Agent AI
+              Stop Drowning in
               <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-                Compliance Platform
+                Compliance Paperwork
               </span>
             </h1>
             
             <p className="text-xl text-slate-300 mb-8 leading-relaxed font-light max-w-lg">
-              10 specialized AI agents automate SOC 2, ISO 27001, GDPR, EU AI Act, NIS2, and DORA compliance with cryptographic verification and real-time monitoring.
+              Our 12 AI agents work around the clock so you don't have to. Get audit-ready in 30 minutes, not 6 months. Win enterprise deals with same-day security responses.
             </p>
+            
+            <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 mb-8 border border-white/10">
+              <p className="text-sm text-slate-300 mb-2">
+                <span className="font-semibold text-emerald-400">Revolutionary GDPR RoPA automation</span> (83% cheaper than OneTrust) and 
+                <span className="font-semibold text-blue-400"> ISAE 3000 evidence collection</span> (88% less than Big 4 consulting). 
+                Your compliance team will finally sleep well.
+              </p>
+              <p className="text-xs text-slate-400">
+                🧠 Powered by Anthropic's Claude Sonnet 4 • Superior reasoning and context handling
+              </p>
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <button 
@@ -47,7 +60,7 @@ const EnhancedHero = () => {
                 className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Start Free Assessment
+                  See Your Agents Working Live
                   <Play className="w-4 h-4" />
                 </span>
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
@@ -57,15 +70,15 @@ const EnhancedHero = () => {
                 onClick={() => window.open('https://demo.velocity.ai', '_blank')}
                 className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-medium hover:bg-white/20 hover:border-white/30 transition-all duration-300"
               >
-                Watch Demo
+                Calculate Time Savings
               </button>
             </div>
             
             {/* Agent Status Display */}
             <div className="bg-white/5 backdrop-blur-md rounded-2xl p-6 border border-white/10">
               <div className="flex items-center justify-between mb-4">
-                <span className="text-slate-300 font-medium">10 AI Agents Active</span>
-                <span className="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded">Real-time</span>
+                <span className="text-slate-300 font-medium">12 AI Agents Working For You</span>
+                <span className="text-xs text-slate-400 bg-slate-800/50 px-2 py-1 rounded">Live now</span>
               </div>
               <div className="grid grid-cols-5 gap-3 mb-4">
                 <div className="text-center">
@@ -130,8 +143,8 @@ const EnhancedHero = () => {
                   </div>
                 </div>
                 <div className="flex-1">
-                  <p className="text-lg font-semibold text-white">Multi-Agent Score</p>
-                  <p className="text-sm text-slate-400">Cryptographically verified</p>
+                  <p className="text-lg font-semibold text-white">Trust Score: Looking Great! 📈</p>
+                  <p className="text-sm text-slate-400">Powered by Claude Sonnet 4</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">SOC 2</span>
                     <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">GDPR</span>
@@ -254,20 +267,20 @@ const MetricCard = ({ metric, isActive, onClick }) => {
 const FeatureCards = () => {
   const features = [
     {
-      title: '10 Specialized AI Agents',
-      description: 'AWS, GCP, Azure, GitHub scanners + Trust Engine, Document Generator, QIE Integration, Continuous Monitor, Observability, and Crypto Verification agents',
+      title: 'Your Personal Compliance Team',
+      description: '12 AI agents handle the boring stuff: AWS security checks ✓ GitHub vulnerabilities fixed ✓ GDPR records updated ✓ You focus on what matters.',
       icon: <Settings className="w-6 h-6" />,
       color: 'emerald'
     },
     {
-      title: 'European Compliance Ready',
-      description: 'GDPR, EU AI Act, NIS2, DORA compliance with cryptographic evidence integrity and blockchain verification',
+      title: 'Enterprise Customers Love This',
+      description: 'Same-day security questionnaire responses. GDPR RoPA ready in 30 minutes. No more losing deals to compliance delays.',
       icon: <Shield className="w-6 h-6" />,
       color: 'blue'
     },
     {
-      title: 'Real-time Multi-Agent System',
-      description: 'Rust-powered cryptographic core with sub-100ms trust calculations and WebSocket monitoring dashboard',
+      title: 'Save $500K+ Annually',
+      description: '83% cheaper than OneTrust. 88% less than Big 4 consulting. Revolutionary GDPR RoPA automation that actually works.',
       icon: <Zap className="w-6 h-6" />,
       color: 'amber'
     }
@@ -278,13 +291,13 @@ const FeatureCards = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-serif font-light text-white mb-4">
-            The World's First
+            Revolutionary GDPR RoPA automation
             <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
-              Multi-Agent Compliance Platform
+              (83% cheaper than OneTrust)
             </span>
           </h2>
           <p className="text-xl text-slate-400 max-w-2xl mx-auto">
-            10 specialized AI agents working together with cryptographic verification to automate SOC 2, ISO 27001, GDPR, EU AI Act, NIS2, and DORA compliance
+            Your compliance team will finally sleep well. Our AI agents handle the tedious work so you can focus on growing your business and winning enterprise deals.
           </p>
         </div>
         
@@ -656,6 +669,88 @@ const EnhancedNavigation = () => {
   );
 };
 
+// Evidence Collection Section
+const EvidenceCollectionSection = () => {
+  const steps = [
+    {
+      step: "🔗 Connect Securely",
+      title: "Safe System Integration",
+      description: "AI agents safely connect to your AWS, GCP, Azure, and GitHub using secure APIs"
+    },
+    {
+      step: "🔍 Smart Discovery", 
+      title: "Automatic Security Scanning",
+      description: "✅ Found 47 security controls - Your AWS setup looks great!"
+    },
+    {
+      step: "📸 Evidence Capture",
+      title: "Professional Documentation",
+      description: "🛡️ Your security monitoring looks excellent! Screenshots and configs collected."
+    },
+    {
+      step: "📂 Intelligent Organization",
+      title: "Framework-Ready Packages",
+      description: "📈 Your compliance score improved! Everything sorted by SOC 2, GDPR, ISO 27001."
+    },
+    {
+      step: "📋 Audit-Ready Results",
+      title: "Same-Day Responses",
+      description: "🔒 Documented your code security practices - Ready to impress enterprise prospects!"
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-b from-slate-800 to-slate-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-serif font-light text-white mb-4">
+            Evidence Collection on
+            <span className="block font-bold bg-gradient-to-r from-emerald-400 to-amber-400 bg-clip-text text-transparent">
+              Autopilot
+            </span>
+          </h2>
+          <p className="text-xl text-slate-400 max-w-2xl mx-auto mb-8">
+            No more scrambling during audits—you're always ready with professional documentation packages. AI agents work 24/7 so your team can focus on growing the business.
+          </p>
+          <button className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25">
+            See Your Evidence Collection in Action
+          </button>
+        </div>
+        
+        <div className="grid md:grid-cols-5 gap-6">
+          {steps.map((step, index) => (
+            <div key={index} className="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10 hover:bg-white/10 transition-all duration-300">
+              <div className="text-2xl mb-3">{step.step}</div>
+              <h3 className="text-lg font-semibold text-white mb-2">{step.title}</h3>
+              <p className="text-sm text-slate-300">{step.description}</p>
+            </div>
+          ))}
+        </div>
+        
+        <div className="mt-16 bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10">
+          <div className="text-center">
+            <h3 className="text-2xl font-semibold text-white mb-4">Here's What Your Agents Just Found:</h3>
+            <div className="grid md:grid-cols-3 gap-6 text-left">
+              <div className="bg-emerald-500/10 rounded-lg p-4 border border-emerald-500/20">
+                <div className="text-emerald-400 font-medium mb-2">✅ AWS Agent</div>
+                <div className="text-sm text-slate-300">Found proof your logging works perfectly - 47 CloudTrail configurations verified</div>
+              </div>
+              <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/20">
+                <div className="text-blue-400 font-medium mb-2">🛡️ Azure Agent</div>
+                <div className="text-sm text-slate-300">Your security monitoring looks excellent! 23 security center controls documented</div>
+              </div>
+              <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
+                <div className="text-purple-400 font-medium mb-2">📈 Trust Engine</div>
+                <div className="text-sm text-slate-300">Your compliance score just improved to 94%! Powered by Claude Sonnet 4</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Main Velocity Landing Component
 const VelocityLanding: React.FC = () => {
   return (
@@ -679,7 +774,9 @@ const VelocityLanding: React.FC = () => {
       <EnhancedNavigation />
       <EnhancedHero />
       <FeatureCards />
+      <EvidenceCollectionSection />
       <VelocityFooter />
+      <BackToTopButton variant="emerald" alwaysVisible={true} />
     </div>
   );
 };

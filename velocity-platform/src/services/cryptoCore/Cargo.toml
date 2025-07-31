@@ -43,6 +43,9 @@ anyhow = "1.0"
 # Benchmarking
 criterion = { version = "0.5", features = ["html_reports"] }
 
+# Time handling for blockchain
+chrono = { version = "0.4", features = ["serde"] }
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 

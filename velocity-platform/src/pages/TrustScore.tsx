@@ -155,8 +155,8 @@ export const TrustScore: React.FC = () => {
         {/* Header */}
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-slate-900">Trust Score Command Center</h1>
-            <p className="text-slate-600 mt-1">Monitor, analyze, and share your digital trust credentials</p>
+            <h1 className="text-3xl font-bold text-slate-900">Your Trust Score: Looking Great! 📈</h1>
+            <p className="text-slate-600 mt-1">Powered by Claude Sonnet 4 • Real-time monitoring • Cryptographically verified</p>
           </div>
           <div className="flex items-center gap-3">
             <TourTrigger tourType="trust-score" variant="link" />
@@ -176,7 +176,7 @@ export const TrustScore: React.FC = () => {
           {/* Radial Score Chart */}
           <Card className="lg:col-span-2 border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl">Your Trust Score</CardTitle>
+              <CardTitle className="text-2xl">Trust Score: Looking Great! 📈</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 gap-8">

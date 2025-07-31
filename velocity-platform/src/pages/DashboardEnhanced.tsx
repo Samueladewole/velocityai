@@ -27,6 +27,7 @@ import {
 } from '@/components/charts/RiskCharts';
 import { ChartExplanationButton, PageExplanations } from '@/components/charts/ChartExplanation';
 import { chartExplanations, pageCorrelations } from '@/data/chartExplanations';
+import BackToTopButton from '@/components/ui/BackToTopButton';
 
 interface MetricCard {
   title: string;
@@ -417,6 +418,8 @@ export const DashboardEnhanced: React.FC = () => {
           </div>
         </CardContent>
       </Card>
+      
+      <BackToTopButton variant="purple" />
     </div>
   );
 };

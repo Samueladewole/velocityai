@@ -8,6 +8,7 @@ pub mod merkle_tree;
 pub mod trust_calculator;
 pub mod signature_verifier;
 pub mod monte_carlo;
+pub mod blockchain_compliance;
 pub mod ffi;
 
 use thiserror::Error;

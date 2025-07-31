@@ -451,7 +451,7 @@ const QIE: React.FC = () => {
                   <div className="p-3 bg-slate-50 rounded-lg">
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm font-medium">Response Time</span>
-                      <span className="text-xs text-slate-500">Goal: <24hrs</span>
+                      <span className="text-xs text-slate-500">Goal: &lt;24hrs</span>
                     </div>
                     <div className="text-sm text-blue-600">-4hrs to reach target</div>
                   </div>

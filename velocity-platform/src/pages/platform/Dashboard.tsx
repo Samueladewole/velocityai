@@ -19,6 +19,7 @@ import {
   Settings
 } from 'lucide-react';
 import { PublicHeader } from '../../components/common/PublicHeader';
+import BackToTopButton from '@/components/ui/BackToTopButton';
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
@@ -364,6 +365,8 @@ const Dashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      <BackToTopButton variant="blue" />
     </div>
   );
 };

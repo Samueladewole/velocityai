@@ -288,7 +288,7 @@ export const TrustCenter: React.FC = () => {
                           {company.trustScore.current}
                         </div>
                         
-                        <p className="text-lg text-blue-100 mb-2">Trust Score</p>
+                        <p className="text-lg text-blue-100 mb-2">Trust Score: Looking Great! 📈</p>
                         <p className="text-sm text-blue-200">{company.trustScore.percentile}</p>
                         
                         <div className="mt-6 pt-6 border-t border-white/20">

@@ -29,11 +29,14 @@ import PlatformOverview from '../../pages/PlatformOverview';
 import FinancialServices from '../../pages/industries/FinancialServices';
 import Healthcare from '../../pages/industries/Healthcare';
 import SaaS from '../../pages/industries/SaaS';
+import Manufacturing from '../../pages/industries/Manufacturing';
+import Government from '../../pages/industries/Government';
+import Energy from '../../pages/industries/Energy';
 import Dashboard from '../../pages/platform/Dashboard';
 import EvidenceCollection from '../../pages/platform/EvidenceCollection';
 import TrustScore from '../../pages/platform/TrustScore';
 import QIE from '../../pages/platform/QIE';
-import GDPRRoPAPage from '../../pages/solutions/GDPRRoPAPage';
+import GDPRInternationalTransfersPage from '../../pages/solutions/GDPRInternationalTransfersPage';
 import ISAE3000ServicesPricing from '../../pages/ISAE3000ServicesPricing';
 import FinancialServicesPricing from '../../pages/FinancialServicesPricing';
 import ROICalculator from '../../pages/calculators/ROICalculator';
@@ -499,15 +502,9 @@ const VelocityRoutes: React.FC = () => {
       <Route path="/industries/financial-services" element={<FinancialServices />} />
       <Route path="/industries/healthcare" element={<Healthcare />} />
       <Route path="/industries/saas" element={<SaaS />} />
-      <Route path="/industries/manufacturing" element={
-        <PlaceholderPage title="Manufacturing Solutions" description="Industrial IoT security and operational technology compliance" />
-      } />
-      <Route path="/industries/government" element={
-        <PlaceholderPage title="Government Solutions" description="FedRAMP and government compliance automation" />
-      } />
-      <Route path="/industries/energy" element={
-        <PlaceholderPage title="Energy Solutions" description="Critical infrastructure protection and NERC CIP compliance" />
-      } />
+      <Route path="/industries/manufacturing" element={<Manufacturing />} />
+      <Route path="/industries/government" element={<Government />} />
+      <Route path="/industries/energy" element={<Energy />} />
       
       {/* Solutions routes - Public marketing pages */}
       <Route path="/velocity/solutions/soc2" element={
@@ -535,7 +532,7 @@ const VelocityRoutes: React.FC = () => {
           <PCIDSSPage />
         </PublicLayout>
       } />
-      <Route path="/solutions/gdpr-ropa" element={<GDPRRoPAPage />} />
+      <Route path="/solutions/gdpr-international-transfers" element={<GDPRInternationalTransfersPage />} />
       <Route path="/solutions/isae-3000" element={<ISAE3000ServicesPricing />} />
       <Route path="/velocity/solutions/cis-controls" element={
         <PublicLayout>

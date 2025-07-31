@@ -28,6 +28,7 @@ import {
 import { LineChart, Line, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Button } from '@/components/ui/button';
 import { useLiveData } from './LiveDataProvider';
+import BackToTopButton from '@/components/ui/BackToTopButton';
 
 const LiveVelocityDashboard: React.FC = () => {
   const { 
@@ -444,6 +445,8 @@ const LiveVelocityDashboard: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      <BackToTopButton variant="blue" />
     </div>
   );
 };
