@@ -124,7 +124,13 @@ class SecurityHeadersMiddleware(BaseHTTPMiddleware):
         response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'"
         
         # Remove server identification
-        response.headers.pop("Server", None)
+        if hasattr(response.headers, 'pop'):
+            response.headers.pop("Server", None)
+        elif hasattr(response.headers, '__delitem__'):
+            try:
+                del response.headers["Server"]
+            except KeyError:
+                pass
         
         return response
 

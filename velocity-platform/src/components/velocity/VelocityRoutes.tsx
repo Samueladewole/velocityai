@@ -4,6 +4,9 @@ import VelocityLandingComplete from './VelocityLandingComplete';
 import VelocityDashboardComplete from './VelocityDashboardComplete';
 import VelocityHeader from './VelocityHeader';
 import VelocityFooter from './VelocityFooter';
+import CustomerImpactShowcase from './CustomerImpactShowcase';
+import ROIMetricsDashboard from './ROIMetricsDashboard';
+import CompetitiveAdvantageShowcase from './CompetitiveAdvantageShowcase';
 
 // Create placeholder components for all the routes
 const PlaceholderPage = ({ title, description }: { title: string; description: string }) => (
@@ -311,6 +314,21 @@ const VelocityRoutes: React.FC = () => {
       <Route path="/velocity/demo" element={
         <PublicLayout>
           <Demo />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/impact" element={
+        <PublicLayout>
+          <CustomerImpactShowcase />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/roi" element={
+        <PublicLayout>
+          <ROIMetricsDashboard />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/competitive" element={
+        <PublicLayout>
+          <CompetitiveAdvantageShowcase />
         </PublicLayout>
       } />
       

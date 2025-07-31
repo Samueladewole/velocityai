@@ -436,6 +436,88 @@ const HeroSection = () => {
   );
 };
 
+// Customer Impact Metrics Section
+const ImpactMetricsSection = () => {
+  const navigate = useNavigate();
+  
+  const metrics = [
+    {
+      value: '$120K',
+      label: 'Average Annual Savings',
+      description: 'Per customer in first year',
+      icon: '💰',
+      color: 'from-green-400 to-emerald-500'
+    },
+    {
+      value: '2 Hours',
+      label: 'Questionnaire Response',
+      description: 'vs 2 weeks industry standard',
+      icon: '⚡',
+      color: 'from-blue-400 to-cyan-500'
+    },
+    {
+      value: '95%',
+      label: 'Evidence Automation',
+      description: 'vs 40% industry average',
+      icon: '🤖',
+      color: 'from-purple-400 to-pink-500'
+    },
+    {
+      value: '650%',
+      label: 'Average ROI',
+      description: 'Return on investment',
+      icon: '📈',
+      color: 'from-orange-400 to-red-500'
+    }
+  ];
+
+  return (
+    <section className="py-20 bg-gradient-to-br from-slate-800 to-slate-900">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white font-serif mb-4">
+            Transformational Impact for Our Customers
+          </h2>
+          <p className="text-lg text-slate-300 max-w-3xl mx-auto">
+            See how Velocity customers turn compliance from a cost center into a competitive advantage
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {metrics.map((metric, index) => (
+            <div 
+              key={index}
+              className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
+            >
+              <div className="text-4xl mb-4">{metric.icon}</div>
+              <div className={`text-3xl font-bold bg-gradient-to-r ${metric.color} bg-clip-text text-transparent mb-2`}>
+                {metric.value}
+              </div>
+              <div className="text-white font-semibold mb-1">
+                {metric.label}
+              </div>
+              <div className="text-sm text-slate-400">
+                {metric.description}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <button
+            onClick={() => navigate('/velocity/impact')}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+          >
+            <TrendingUp className="w-5 h-5" />
+            See Full Customer Impact Stories
+            <ArrowRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Trust-First Value Proposition
 const TrustFirstSection = () => {
   const navigate = useNavigate();
@@ -923,6 +1005,33 @@ const CTASection = () => {
           </button>
         </div>
 
+        {/* Customer Impact Links */}
+        <div className="flex flex-wrap justify-center gap-6 mb-8">
+          <button
+            onClick={() => navigate('/velocity/impact')}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-blue-500/20 backdrop-blur-sm text-blue-300 rounded-lg font-medium border border-blue-400/30 hover:bg-blue-500/30 transition-all duration-300"
+          >
+            <TrendingUp className="w-4 h-4" />
+            Customer Impact Stories
+          </button>
+          
+          <button
+            onClick={() => navigate('/velocity/roi')}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green-500/20 backdrop-blur-sm text-green-300 rounded-lg font-medium border border-green-400/30 hover:bg-green-500/30 transition-all duration-300"
+          >
+            <BarChart3 className="w-4 h-4" />
+            ROI Calculator
+          </button>
+          
+          <button
+            onClick={() => navigate('/velocity/competitive')}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-500/20 backdrop-blur-sm text-purple-300 rounded-lg font-medium border border-purple-400/30 hover:bg-purple-500/30 transition-all duration-300"
+          >
+            <Award className="w-4 h-4" />
+            Why We Win
+          </button>
+        </div>
+
         <p className="text-sm text-slate-400">
           No credit card required • Exit anytime • Full data export guarantee
         </p>
@@ -1038,6 +1147,7 @@ const VelocityLandingComplete: React.FC = () => {
       <PublicHeader />
       <main className="pt-16">
         <HeroSection />
+        <ImpactMetricsSection />
         <TrustFirstSection />
         <AIAgentsSection />
         <EvidenceCollectionSection />

@@ -20,7 +20,7 @@ passlib[bcrypt]==1.7.4
 bcrypt==4.1.2
 pyjwt==2.8.0
 python-multipart==0.0.6
-cryptography==41.0.8
+cryptography>=41.0.0
 pyotp==2.9.0  # For TOTP/MFA
 qrcode==7.4.2  # For MFA QR codes
 
@@ -40,7 +40,7 @@ aiohttp==3.9.1
 
 # Background Tasks & Scheduling
 celery==5.3.4
-redis==5.0.1
+redis>=4.5.2,<5.0.0
 croniter==2.0.1
 
 # Data Processing
@@ -66,7 +66,6 @@ python-dotenv==1.0.0
 
 # Browser Automation
 playwright==1.40.0
-playwright-asyncio==0.1.9
 selenium==4.15.2  # Fallback browser automation
 beautifulsoup4==4.12.2  # HTML parsing
 

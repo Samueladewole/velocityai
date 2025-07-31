@@ -7,21 +7,28 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from models import Base
 
-# Database configuration
+# Database configuration - using SQLite for quick startup
 DATABASE_URL = os.getenv(
     "DATABASE_URL", 
-    "postgresql://velocity_user:velocity_pass@localhost:5432/velocity_db"
+    "sqlite:///velocity.db"
 )
 
-# Create engine
-engine = create_engine(
-    DATABASE_URL,
-    pool_size=20,
-    max_overflow=30,
-    pool_pre_ping=True,
-    pool_recycle=300,
-    echo=False  # Set to True for SQL debugging
-)
+# Create engine - different settings for SQLite vs PostgreSQL
+if DATABASE_URL.startswith("sqlite"):
+    engine = create_engine(
+        DATABASE_URL,
+        echo=False,  # Set to True for SQL debugging
+        connect_args={"check_same_thread": False}  # SQLite specific
+    )
+else:
+    engine = create_engine(
+        DATABASE_URL,
+        pool_size=20,
+        max_overflow=30,
+        pool_pre_ping=True,
+        pool_recycle=300,
+        echo=False  # Set to True for SQL debugging
+    )
 
 # Create SessionLocal class
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

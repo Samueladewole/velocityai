@@ -63,7 +63,7 @@ class EvidenceCollectionRequest(BaseModel):
 class QuestionnaireProcessingRequest(BaseModel):
     """Request for automated questionnaire processing"""
     questionnaire_file: str = Field(..., description="Path to questionnaire file")
-    format: str = Field(..., regex="^(pdf|excel|word|csv)$", description="File format")
+    format: str = Field(..., pattern="^(pdf|excel|word|csv)$", description="File format")
     auto_fill: bool = Field(True, description="Automatically fill responses")
     review_required: bool = Field(True, description="Require human review")
     evidence_source: Optional[str] = Field(None, description="Specific evidence source to use")
@@ -74,7 +74,7 @@ class MonitoringSetupRequest(BaseModel):
     monitoring_rules: List[Dict[str, Any]] = Field(..., description="Monitoring configuration rules")
     alert_thresholds: Dict[str, Any] = Field(default_factory=dict, description="Alert thresholds")
     notification_settings: Dict[str, Any] = Field(default_factory=dict, description="Notification preferences")
-    frequency: str = Field("daily", regex="^(hourly|daily|weekly)$", description="Monitoring frequency")
+    frequency: str = Field("daily", pattern="^(hourly|daily|weekly)$", description="Monitoring frequency")
 
 class AutomationTask(BaseModel):
     """Automation task status and results"""

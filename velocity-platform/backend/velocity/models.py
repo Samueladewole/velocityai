@@ -7,7 +7,7 @@ from typing import Optional, Dict, Any, List
 from sqlalchemy import create_engine, Column, Integer, String, Boolean, DateTime, Text, JSON, Float, ForeignKey, Enum as SQLEnum
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
-from sqlalchemy.dialects.postgresql import UUID, JSONB
+from sqlalchemy.dialects.postgresql import UUID, JSON
 import uuid
 import enum
 from pydantic import BaseModel
@@ -68,7 +68,7 @@ class Organization(Base):
     name = Column(String(255), nullable=False)
     domain = Column(String(255), unique=True, nullable=False)
     tier = Column(String(50), default="starter")  # starter, growth, enterprise
-    settings = Column(JSONB, default={})
+    settings = Column(JSON, default={})
     created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
     updated_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     
@@ -99,11 +99,11 @@ class User(Base):
     # Multi-factor authentication
     mfa_enabled = Column(Boolean, default=False)
     mfa_secret = Column(String(255))  # TOTP secret
-    backup_codes = Column(JSONB, default=[])  # Emergency backup codes
+    backup_codes = Column(JSON, default=[])  # Emergency backup codes
     
     # Profile and preferences
-    profile_data = Column(JSONB, default={})
-    preferences = Column(JSONB, default={})
+    profile_data = Column(JSON, default={})
+    preferences = Column(JSON, default={})
     timezone = Column(String(50), default="UTC")
     
     # Audit fields
@@ -159,8 +159,8 @@ class Agent(Base):
     platform = Column(SQLEnum(Platform), nullable=False)
     framework = Column(SQLEnum(Framework), nullable=False)
     status = Column(SQLEnum(AgentStatus), default=AgentStatus.IDLE)
-    configuration = Column(JSONB, default={})
-    schedule = Column(JSONB, default={})  # Cron-like scheduling
+    configuration = Column(JSON, default={})
+    schedule = Column(JSON, default={})  # Cron-like scheduling
     organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id"), nullable=False)
     integration_id = Column(UUID(as_uuid=True), ForeignKey("integrations.id"))
     
@@ -187,8 +187,8 @@ class Integration(Base):
     name = Column(String(255), nullable=False)
     platform = Column(SQLEnum(Platform), nullable=False)
     status = Column(SQLEnum(IntegrationStatus), default=IntegrationStatus.DISCONNECTED)
-    credentials = Column(JSONB, default={})  # Encrypted credentials
-    configuration = Column(JSONB, default={})
+    credentials = Column(JSON, default={})  # Encrypted credentials
+    configuration = Column(JSON, default={})
     organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id"), nullable=False)
     
     # Connection metrics
@@ -214,8 +214,8 @@ class EvidenceItem(Base):
     status = Column(SQLEnum(EvidenceStatus), default=EvidenceStatus.PENDING)
     
     # Evidence data
-    data = Column(JSONB, default={})  # The actual evidence content
-    evidence_metadata = Column(JSONB, default={})  # Collection metadata
+    data = Column(JSON, default={})  # The actual evidence content
+    evidence_metadata = Column(JSON, default={})  # Collection metadata
     file_path = Column(String(500))  # For screenshots/documents
     
     # Compliance mapping
@@ -258,9 +258,9 @@ class AgentExecutionLog(Base):
     execution_time = Column(Float, default=0.0)  # seconds
     
     # Logs and debugging
-    logs = Column(JSONB, default=[])  # Array of log entries
-    error_details = Column(JSONB, default={})
-    performance_metrics = Column(JSONB, default={})
+    logs = Column(JSON, default=[])  # Array of log entries
+    error_details = Column(JSON, default={})
+    performance_metrics = Column(JSON, default={})
     
     # Relationships
     agent = relationship("Agent", back_populates="execution_logs")
@@ -273,7 +273,7 @@ class TrustScore(Base):
     
     # Current scores
     total_score = Column(Integer, default=0)
-    framework_scores = Column(JSONB, default={})  # Per-framework breakdown
+    framework_scores = Column(JSON, default={})  # Per-framework breakdown
     
     # Historical tracking
     previous_score = Column(Integer, default=0)
