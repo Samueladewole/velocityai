@@ -39,19 +39,19 @@ const mainNavItems = [
   {
     title: 'Agent Dashboard',
     icon: Bot,
-    href: '/velocity/agents',
+    href: '/dashboard',
     description: '10 AI agents working for you'
   },
   {
     title: 'Evidence Collection',
     icon: FileCheck,
-    href: '/velocity/evidence',
+    href: '/dashboard',
     description: 'Automated evidence gathering'
   },
   {
     title: 'Trust Score',
     icon: Trophy,
-    href: '/velocity/trust-score',
+    href: '/dashboard',
     description: 'Cryptographically verified trust'
   },
   {
@@ -63,13 +63,13 @@ const mainNavItems = [
   {
     title: 'Cloud Integrations',
     icon: Cloud,
-    href: '/velocity/integrations',
+    href: '/dashboard',
     description: 'AWS, GCP, Azure connections'
   },
   {
     title: 'Compliance Frameworks',
     icon: Shield,
-    href: '/velocity/frameworks',
+    href: '/dashboard',
     description: 'SOC 2, ISO 27001, GDPR, HIPAA'
   },
   {

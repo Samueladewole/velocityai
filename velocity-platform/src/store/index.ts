@@ -107,12 +107,12 @@ export const useNotificationStore = create<NotificationState>()(
 
 // Mock user for development
 export const mockUser: User = {
-  id: 'user_1',
-  email: 'admin@erip.ai',
-  name: 'Admin User',
+  id: 'velocity_demo_user',
+  email: 'demo@velocity.ai',
+  name: 'Velocity Demo User',
   organization: {
-    id: 'org_1',
-    name: 'ERIP Demo Organization',
+    id: 'velocity_demo_org',
+    name: 'Velocity Demo Organization',
     industry: 'Technology',
     size: 'ENTERPRISE' as const,
     subscription: {

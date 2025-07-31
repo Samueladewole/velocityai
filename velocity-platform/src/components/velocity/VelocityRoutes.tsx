@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '@/store';
 import VelocityLandingComplete from './VelocityLandingComplete';
 import VelocityDashboardComplete from './VelocityDashboardComplete';
 import VelocityHeader from './VelocityHeader';
@@ -8,6 +9,27 @@ import CustomerImpactShowcase from './CustomerImpactShowcase';
 import ROIMetricsDashboard from './ROIMetricsDashboard';
 import CompetitiveAdvantageShowcase from './CompetitiveAdvantageShowcase';
 import AgentDashboard from '../../pages/AgentDashboard';
+import UnifiedDashboard from '../../pages/UnifiedDashboard';
+import SOC2Page from '../../pages/solutions/SOC2Page';
+import ISO27001Page from '../../pages/solutions/ISO27001Page';
+import GDPRPage from '../../pages/solutions/GDPRPage';
+import HIPAAPage from '../../pages/solutions/HIPAAPage';
+import PCIDSSPage from '../../pages/solutions/PCIDSSPage';
+import IntegrationsPage from '../../pages/IntegrationsPage';
+import PricingPage from '../../pages/PricingPage';
+import QIEPage from '../../pages/QIEPage';
+import FeaturesPage from '../../pages/FeaturesPage';
+
+// Protected Route Component
+const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isAuthenticated } = useAuthStore();
+  
+  if (!isAuthenticated) {
+    return <Navigate to="/velocity/login" replace />;
+  }
+  
+  return <>{children}</>;
+};
 
 // Create placeholder components for all the routes
 const PlaceholderPage = ({ title, description }: { title: string; description: string }) => (
@@ -55,24 +77,76 @@ const ComplianceAssessment: React.FC = () => {
 
     setIsLoading(true);
     
-    // Simulate assessment start
-    setTimeout(() => {
+    try {
+      // Try to create an assessment using the backend API
+      const response = await fetch('http://localhost:8000/api/v1/assessments/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          framework: selectedFramework,
+          organizationName: 'Demo Organization',
+          assessmentType: 'free_assessment'
+        })
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        // Navigate to dashboard with assessment results
+        navigate('/velocity/dashboard', { 
+          state: { 
+            assessmentStarted: true, 
+            framework: selectedFramework,
+            assessmentId: result.assessment_id 
+          } 
+        });
+      } else {
+        // If API fails, still provide a good user experience
+        navigate('/velocity/dashboard', { 
+          state: { 
+            assessmentStarted: true, 
+            framework: selectedFramework,
+            demo: true 
+          } 
+        });
+      }
+    } catch (error) {
+      console.error('Assessment API error:', error);
+      // Fallback to dashboard with demo mode
+      navigate('/velocity/dashboard', { 
+        state: { 
+          assessmentStarted: true, 
+          framework: selectedFramework,
+          demo: true 
+        } 
+      });
+    } finally {
       setIsLoading(false);
-      // For now, navigate to login or create a demo assessment
-      navigate('/velocity/login');
-    }, 1500);
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 py-20">
       <div className="max-w-4xl mx-auto px-6">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate('/velocity')}
-          className="mb-8 text-slate-400 hover:text-white transition-colors flex items-center gap-2"
-        >
-          ← Back to Home
-        </button>
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mb-8">
+          <button
+            onClick={() => navigate('/velocity')}
+            className="text-slate-400 hover:text-white transition-colors flex items-center gap-2"
+          >
+            ← Back to Home
+          </button>
+          <button
+            onClick={() => navigate('/velocity/dashboard')}
+            className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Go to Dashboard
+          </button>
+        </div>
 
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-white font-serif mb-4">
@@ -205,11 +279,34 @@ const Demo = () => (
 // Login Component
 const Login = () => {
   const navigate = useNavigate();
+  const { login } = useAuthStore();
   
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem('velocity_auth_token', 'demo_token');
-    navigate('/velocity/dashboard');
+    
+    // Create demo user for login
+    const demoUser = {
+      id: 'demo_user_1',
+      email: 'demo@velocity.ai',
+      name: 'Demo User',
+      organization: {
+        id: 'velocity_demo_org',
+        name: 'Velocity Demo Organization',
+        industry: 'Technology',
+        size: 'ENTERPRISE' as const,
+        subscription: {
+          plan: 'ENTERPRISE' as const,
+          status: 'ACTIVE' as const,
+          startDate: new Date(),
+        },
+      },
+      role: 'ADMIN' as const,
+      permissions: [],
+    };
+    
+    // Use Zustand store for persistent login
+    login(demoUser);
+    navigate('/dashboard');
   };
 
   return (
@@ -337,22 +434,23 @@ const VelocityRoutes: React.FC = () => {
       <Route path="/velocity/login" element={<Login />} />
       <Route path="/velocity/signup" element={<Login />} />
       
-      {/* Dashboard routes - Use dashboard layout */}
-      <Route path="/velocity/dashboard" element={
-        <DashboardLayout>
-          <AgentDashboard />
-        </DashboardLayout>
+      {/* Dashboard routes - Protected unified dashboard */}
+      <Route path="/dashboard" element={
+        <ProtectedRoute>
+          <UnifiedDashboard />
+        </ProtectedRoute>
       } />
+      <Route path="/velocity/dashboard" element={<Navigate to="/dashboard" replace />} />
       
       {/* Product routes - Public marketing pages */}
       <Route path="/velocity/features" element={
         <PublicLayout>
-          <PlaceholderPage title="Features" description="Discover Velocity's powerful compliance automation features" />
+          <FeaturesPage />
         </PublicLayout>
       } />
       <Route path="/velocity/integrations" element={
         <PublicLayout>
-          <PlaceholderPage title="Integrations" description="Connect with your existing tools and cloud services" />
+          <IntegrationsPage />
         </PublicLayout>
       } />
       <Route path="/velocity/security" element={
@@ -362,29 +460,39 @@ const VelocityRoutes: React.FC = () => {
       } />
       <Route path="/velocity/pricing" element={
         <PublicLayout>
-          <PlaceholderPage title="Pricing" description="Choose the right plan for your organization" />
+          <PricingPage />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/qie" element={
+        <PublicLayout>
+          <QIEPage />
         </PublicLayout>
       } />
       
       {/* Solutions routes - Public marketing pages */}
       <Route path="/velocity/solutions/soc2" element={
         <PublicLayout>
-          <PlaceholderPage title="SOC 2 Compliance" description="Automate your SOC 2 Type I and Type II compliance" />
+          <SOC2Page />
         </PublicLayout>
       } />
       <Route path="/velocity/solutions/iso27001" element={
         <PublicLayout>
-          <PlaceholderPage title="ISO 27001" description="Streamline your ISO 27001 certification process" />
+          <ISO27001Page />
         </PublicLayout>
       } />
       <Route path="/velocity/solutions/gdpr" element={
         <PublicLayout>
-          <PlaceholderPage title="GDPR Compliance" description="Ensure GDPR compliance with automated data protection" />
+          <GDPRPage />
         </PublicLayout>
       } />
       <Route path="/velocity/solutions/hipaa" element={
         <PublicLayout>
-          <PlaceholderPage title="HIPAA Compliance" description="Healthcare compliance made simple" />
+          <HIPAAPage />
+        </PublicLayout>
+      } />
+      <Route path="/velocity/solutions/pci-dss" element={
+        <PublicLayout>
+          <PCIDSSPage />
         </PublicLayout>
       } />
       <Route path="/velocity/solutions/cis-controls" element={
@@ -395,44 +503,60 @@ const VelocityRoutes: React.FC = () => {
       
       {/* Platform routes - Authenticated dashboard pages */}
       <Route path="/velocity/agents" element={
-        <DashboardLayout>
-          <AgentDashboard />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <AgentDashboard />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/agents/:agentId" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Agent Details" description="Configure and monitor individual AI agents" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Agent Details" description="Configure and monitor individual AI agents" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/evidence" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Evidence Hub" description="Central repository for all compliance evidence" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Evidence Hub" description="Central repository for all compliance evidence" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/evidence/:evidenceId" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Evidence Details" description="View and manage individual evidence items" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Evidence Details" description="View and manage individual evidence items" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/reports" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Reports" description="Generate compliance reports for stakeholders" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Reports" description="Generate compliance reports for stakeholders" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/live" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Live Monitor" description="Real-time compliance monitoring dashboard" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Live Monitor" description="Real-time compliance monitoring dashboard" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/integration" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Integration Dashboard" description="Manage your cloud and tool integrations" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Integration Dashboard" description="Manage your cloud and tool integrations" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/creator" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Agent Creator" description="Create custom AI agents for your specific needs" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Agent Creator" description="Create custom AI agents for your specific needs" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       
       {/* Resources routes - Public pages */}
@@ -506,14 +630,18 @@ const VelocityRoutes: React.FC = () => {
       
       {/* Settings and account routes - Dashboard pages */}
       <Route path="/velocity/settings" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Settings" description="Manage your account and organization settings" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Settings" description="Manage your account and organization settings" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       <Route path="/velocity/billing" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Billing" description="Manage your subscription and billing information" />
-        </DashboardLayout>
+        <ProtectedRoute>
+          <DashboardLayout>
+            <PlaceholderPage title="Billing" description="Manage your subscription and billing information" />
+          </DashboardLayout>
+        </ProtectedRoute>
       } />
       
       {/* Additional functional routes - Dashboard pages */}

@@ -71,16 +71,15 @@ const VelocityFooter: React.FC = () => {
             </div>
           </div>
           
-          {/* Platform */}
+          {/* Product */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Platform</h3>
+            <h3 className="text-white font-semibold mb-4">Product</h3>
             <div className="space-y-3">
               {[
-                { label: 'Dashboard', path: `${routePrefix}/dashboard`, icon: Home },
-                { label: 'AI Agents', path: `${routePrefix}/agents`, icon: Bot },
-                { label: 'Evidence Hub', path: `${routePrefix}/evidence`, icon: Database },
-                { label: 'Reports', path: `${routePrefix}/reports`, icon: BarChart3 },
-                { label: 'Integrations', path: `${routePrefix}/integrations`, icon: Globe }
+                { label: 'Features', path: `${routePrefix}/features`, icon: Bot },
+                { label: 'Integrations', path: `${routePrefix}/integrations`, icon: Globe },
+                { label: 'Security', path: `${routePrefix}/security`, icon: Shield },
+                { label: 'Pricing', path: `${routePrefix}/pricing`, icon: BarChart3 }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -94,16 +93,15 @@ const VelocityFooter: React.FC = () => {
             </div>
           </div>
           
-          {/* Resources */}
+          {/* Solutions */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Resources</h3>
+            <h3 className="text-white font-semibold mb-4">Solutions</h3>
             <div className="space-y-3">
               {[
-                { label: 'Documentation', path: `${routePrefix}/docs`, icon: BookOpen },
-                { label: 'API Reference', path: `${routePrefix}/api`, icon: FileText },
-                { label: 'Support', path: `${routePrefix}/support`, icon: HelpCircle },
-                { label: 'Community', path: `${routePrefix}/community`, icon: Users },
-                { label: 'Status', path: `${routePrefix}/status`, icon: Shield }
+                { label: 'SOC 2', path: `${routePrefix}/solutions/soc2`, icon: Shield },
+                { label: 'ISO 27001', path: `${routePrefix}/solutions/iso27001`, icon: Award },
+                { label: 'GDPR', path: `${routePrefix}/solutions/gdpr`, icon: Lock },
+                { label: 'HIPAA', path: `${routePrefix}/solutions/hipaa`, icon: FileText }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -125,8 +123,7 @@ const VelocityFooter: React.FC = () => {
                 { label: 'About', path: `${routePrefix}/about`, icon: Users },
                 { label: 'Careers', path: `${routePrefix}/careers`, icon: Briefcase },
                 { label: 'Contact', path: `${routePrefix}/contact`, icon: Mail },
-                { label: 'Privacy', path: `${routePrefix}/privacy`, icon: Lock },
-                { label: 'Terms', path: `${routePrefix}/terms`, icon: FileText }
+                { label: 'Privacy', path: `${routePrefix}/privacy`, icon: Lock }
               ].map((item) => (
                 <button
                   key={item.label}

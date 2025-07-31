@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -172,6 +173,7 @@ interface AgentGridProps {
 }
 
 export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
+  const navigate = useNavigate();
   const [agents, setAgents] = useState<Agent[]>(PRODUCTION_AGENTS);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
@@ -222,7 +224,73 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
     return `${hours}h`;
   };
 
+  const getDefaultTaskForAgent = (type: Agent['type']): string => {
+    const tasks = {
+      AWS: 'Scanning CloudTrail configurations',
+      GCP: 'Analyzing IAM policies and permissions',
+      Azure: 'Monitoring Security Center alerts',
+      GitHub: 'Analyzing repository security settings',
+      QIE: 'Processing compliance questionnaires',
+      TrustScore: 'Calculating cryptographic verification',
+      Monitor: 'Monitoring configuration changes',
+      DocGen: 'Generating compliance documentation',
+      Observability: 'Collecting system metrics and logs',
+      Crypto: 'Generating blockchain proofs'
+    };
+    return tasks[type] || 'Processing compliance data';
+  };
+
   const handleAgentAction = (agentId: string, action: 'deploy' | 'pause' | 'resume') => {
+    // Update agent status based on action
+    setAgents(prev => prev.map(agent => {
+      if (agent.id === agentId) {
+        switch (action) {
+          case 'deploy':
+            return {
+              ...agent,
+              status: 'connecting' as const,
+              currentTask: 'Initializing agent deployment...',
+              progress: 0
+            };
+          case 'pause':
+            return {
+              ...agent,
+              status: 'idle' as const,
+              currentTask: undefined,
+              progress: undefined
+            };
+          case 'resume':
+            return {
+              ...agent,
+              status: 'connecting' as const,
+              currentTask: 'Reconnecting agent...',
+              progress: 0
+            };
+          default:
+            return agent;
+        }
+      }
+      return agent;
+    }));
+
+    // Simulate deployment process
+    if (action === 'deploy' || action === 'resume') {
+      setTimeout(() => {
+        setAgents(prev => prev.map(agent => {
+          if (agent.id === agentId) {
+            return {
+              ...agent,
+              status: 'collecting' as const,
+              currentTask: getDefaultTaskForAgent(agent.type),
+              progress: Math.random() * 50 + 10,
+              lastRun: new Date()
+            };
+          }
+          return agent;
+        }));
+      }, 2000);
+    }
+
     // TODO: Connect to actual backend API
     console.log(`Agent ${agentId}: ${action}`);
   };
@@ -315,14 +383,14 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
       </div>
 
       {/* Agent Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 auto-rows-fr">
         {agents.map((agent) => {
           const IconComponent = AGENT_ICONS[agent.type];
           
           return (
             <Card 
               key={agent.id} 
-              className={`transition-all duration-200 hover:shadow-lg hover:scale-105 ${STATUS_STYLES[agent.status]}`}
+              className={`h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:scale-105 ${STATUS_STYLES[agent.status]}`}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">
@@ -344,7 +412,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
                 </CardTitle>
               </CardHeader>
 
-              <CardContent className="pt-0 space-y-3">
+              <CardContent className="pt-0 space-y-3 flex-1 flex flex-col">
                 {/* Current Task & Progress */}
                 {agent.currentTask && agent.progress !== undefined && (
                   <div className="space-y-2">
@@ -362,57 +430,58 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
                 )}
 
                 {/* Stats */}
-                <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div>
-                    <p className="text-slate-500">Evidence</p>
-                    <p className="font-semibold">{agent.evidenceCollected}</p>
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div className="text-center p-2 bg-white/50 rounded-md">
+                    <p className="text-slate-500 mb-1">Evidence</p>
+                    <p className="font-bold text-slate-900">{agent.evidenceCollected}</p>
                   </div>
-                  <div>
-                    <p className="text-slate-500">Success Rate</p>
-                    <p className="font-semibold">{agent.successRate}%</p>
+                  <div className="text-center p-2 bg-white/50 rounded-md">
+                    <p className="text-slate-500 mb-1">Success Rate</p>
+                    <p className="font-bold text-slate-900">{agent.successRate}%</p>
                   </div>
                 </div>
 
                 {/* Timing */}
-                <div className="text-xs space-y-1">
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Last run:</span>
-                    <span>{formatTimeAgo(agent.lastRun)}</span>
+                <div className="text-xs space-y-2 p-2 bg-slate-50 rounded-md">
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500 font-medium">Last run:</span>
+                    <span className="font-semibold">{formatTimeAgo(agent.lastRun)}</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-slate-500">Next run:</span>
-                    <span>In {formatTimeUntil(agent.nextRun)}</span>
+                  <div className="flex justify-between items-center">
+                    <span className="text-slate-500 font-medium">Next run:</span>
+                    <span className="font-semibold">In {formatTimeUntil(agent.nextRun)}</span>
                   </div>
                 </div>
 
                 {/* Actions */}
-                <div className="flex gap-2 pt-2">
-                  {agent.status === 'idle' && (
+                <div className="flex gap-2 pt-2 mt-auto">
+                  {(agent.status === 'idle' || agent.status === 'scheduled') && (
                     <Button 
                       size="sm" 
-                      className="flex-1 h-8 text-xs"
+                      className="flex-1 h-9 text-xs font-medium"
                       onClick={() => handleAgentAction(agent.id, 'deploy')}
                     >
                       <Play className="h-3 w-3 mr-1" />
                       Deploy
                     </Button>
                   )}
-                  {agent.status === 'collecting' && (
+                  {(agent.status === 'collecting' || agent.status === 'connecting') && (
                     <Button 
                       size="sm" 
                       variant="outline" 
-                      className="flex-1 h-8 text-xs"
+                      className="flex-1 h-9 text-xs font-medium"
                       onClick={() => handleAgentAction(agent.id, 'pause')}
+                      disabled={agent.status === 'connecting'}
                     >
                       <Pause className="h-3 w-3 mr-1" />
-                      Pause
+                      {agent.status === 'connecting' ? 'Starting...' : 'Pause'}
                     </Button>
                   )}
                   {agent.status === 'error' && (
                     <Button 
                       size="sm" 
                       variant="destructive" 
-                      className="flex-1 h-8 text-xs"
+                      className="flex-1 h-9 text-xs font-medium"
                       onClick={() => handleAgentAction(agent.id, 'resume')}
                     >
                       <RefreshCw className="h-3 w-3 mr-1" />
@@ -431,32 +500,44 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
         <CardContent className="p-6">
           <h3 className="text-lg font-semibold mb-4">Quick Deploy</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Button className="h-auto p-4 flex flex-col items-start" variant="outline">
+            <Button 
+              className="h-24 p-4 flex flex-col items-center justify-center text-center hover:shadow-md transition-all" 
+              variant="outline"
+              onClick={() => navigate('/velocity/solutions/soc2')}
+            >
               <div className="flex items-center gap-2 mb-2">
                 <Shield className="h-5 w-5 text-emerald-600" />
                 <span className="font-semibold">SOC 2 Ready</span>
               </div>
-              <p className="text-sm text-slate-600 text-left">
+              <p className="text-xs text-slate-600">
                 Deploy all SOC 2 compliance agents
               </p>
             </Button>
             
-            <Button className="h-auto p-4 flex flex-col items-start" variant="outline">
+            <Button 
+              className="h-24 p-4 flex flex-col items-center justify-center text-center hover:shadow-md transition-all" 
+              variant="outline"
+              onClick={() => navigate('/velocity/integrations')}
+            >
               <div className="flex items-center gap-2 mb-2">
                 <Zap className="h-5 w-5 text-blue-600" />
                 <span className="font-semibold">Full Automation</span>
               </div>
-              <p className="text-sm text-slate-600 text-left">
+              <p className="text-xs text-slate-600">
                 Deploy all 10 agents for complete coverage
               </p>
             </Button>
             
-            <Button className="h-auto p-4 flex flex-col items-start" variant="outline">
+            <Button 
+              className="h-24 p-4 flex flex-col items-center justify-center text-center hover:shadow-md transition-all" 
+              variant="outline"
+              onClick={() => navigate('/velocity/qie')}
+            >
               <div className="flex items-center gap-2 mb-2">
                 <FileText className="h-5 w-5 text-purple-600" />
                 <span className="font-semibold">QIE Ready</span>
               </div>
-              <p className="text-sm text-slate-600 text-left">
+              <p className="text-xs text-slate-600">
                 Deploy questionnaire processing agents
               </p>
             </Button>

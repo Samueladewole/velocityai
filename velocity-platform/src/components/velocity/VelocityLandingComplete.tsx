@@ -66,30 +66,34 @@ const PublicHeader: React.FC = () => {
                 Platform
                 <ChevronDown className="w-4 h-4" />
               </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/velocity/features')}
+                  onClick={() => navigate('/dashboard')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  Features
+                  <div className="font-medium">AI Agent Dashboard</div>
+                  <div className="text-xs text-slate-400">10 agents working for you</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/velocity/agents')}
+                  onClick={() => navigate('/dashboard')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  AI Agents
+                  <div className="font-medium">Evidence Collection</div>
+                  <div className="text-xs text-slate-400">Automated gathering</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/velocity/integrations')}
+                  onClick={() => navigate('/dashboard')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  Integrations
+                  <div className="font-medium">Trust Score</div>
+                  <div className="text-xs text-slate-400">Cryptographic verification</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/velocity/security')}
+                  onClick={() => navigate('/velocity/qie')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  Security
+                  <div className="font-medium">QIE Intelligence</div>
+                  <div className="text-xs text-slate-400">Questionnaire automation</div>
                 </button>
               </div>
             </div>
@@ -98,44 +102,48 @@ const PublicHeader: React.FC = () => {
                 Solutions
                 <ChevronDown className="w-4 h-4" />
               </button>
-              <div className="absolute top-full left-0 mt-2 w-48 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
                   onClick={() => navigate('/velocity/solutions/soc2')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  SOC 2
+                  <div className="font-medium">SOC 2 Automation</div>
+                  <div className="text-xs text-slate-400">45-day audit readiness</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/solutions/iso27001')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  ISO 27001
+                  <div className="font-medium">ISO 27001 Automation</div>
+                  <div className="text-xs text-slate-400">ISMS implementation</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/solutions/gdpr')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  GDPR
+                  <div className="font-medium">GDPR Compliance</div>
+                  <div className="text-xs text-slate-400">Privacy by design</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/solutions/hipaa')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  HIPAA
+                  <div className="font-medium">HIPAA Automation</div>
+                  <div className="text-xs text-slate-400">Healthcare compliance</div>
                 </button>
               </div>
             </div>
+            <button 
+              onClick={() => navigate('/velocity/integrations')}
+              className="text-slate-300 hover:text-white transition-colors"
+            >
+              Integrations
+            </button>
             <button 
               onClick={() => navigate('/velocity/pricing')}
               className="text-slate-300 hover:text-white transition-colors"
             >
               Pricing
-            </button>
-            <button 
-              onClick={() => navigate('/velocity/docs')}
-              className="text-slate-300 hover:text-white transition-colors"
-            >
-              Resources
             </button>
           </nav>
 
@@ -151,7 +159,7 @@ const PublicHeader: React.FC = () => {
               onClick={() => navigate('/velocity/assessment')}
               className="px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
             >
-              Start Free Assessment
+              Watch AI Agents
             </button>
 
             {/* Mobile Menu Button */}
@@ -171,28 +179,28 @@ const PublicHeader: React.FC = () => {
           <div className="px-6 py-4 space-y-3">
             <div className="text-slate-400 text-sm font-medium py-1">Platform</div>
             <button 
-              onClick={() => { navigate('/velocity/features'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              Features
+              AI Agent Dashboard
             </button>
             <button 
-              onClick={() => { navigate('/velocity/agents'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              AI Agents
+              Evidence Collection
             </button>
             <button 
-              onClick={() => { navigate('/velocity/integrations'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              Integrations
+              Trust Score
             </button>
             <button 
-              onClick={() => { navigate('/velocity/security'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/velocity/qie'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              Security
+              QIE Intelligence
             </button>
             <div className="text-slate-400 text-sm font-medium py-1">Solutions</div>
             <button 
