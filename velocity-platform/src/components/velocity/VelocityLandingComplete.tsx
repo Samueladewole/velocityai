@@ -543,7 +543,7 @@ const HeroSection = () => {
                 Your compliance team will finally sleep well.
               </p>
               <p className="text-xs text-slate-400">
-                🧠 Powered by Anthropic's Claude Sonnet 4 • Superior reasoning and context handling
+                🧠 Powered by Advanced AI Technology • Superior reasoning and context handling
               </p>
             </div>
 

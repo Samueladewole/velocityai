@@ -509,7 +509,7 @@ export const LandingEnhanced: React.FC = () => {
                 Your compliance team will finally sleep well.
               </p>
               <p className="text-xs text-slate-500">
-                🧠 Powered by Anthropic's Claude Sonnet 4 • Superior reasoning and context handling
+                🧠 Powered by Advanced AI Technology • Superior reasoning and context handling
               </p>
             </div>
 
@@ -1383,7 +1383,7 @@ export const LandingEnhanced: React.FC = () => {
                 </div>
                 <div className="bg-white rounded-lg p-4 border border-purple-200">
                   <div className="text-purple-600 font-medium mb-2">📈 Trust Engine</div>
-                  <div className="text-sm text-slate-700">Your compliance score just improved to 94%! Powered by Claude Sonnet 4</div>
+                  <div className="text-sm text-slate-700">Your compliance score just improved to 94%! Powered by Advanced AI</div>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 """
 ERIP Sales Intelligence Engine
-Natural Language Compliance Q&A System powered by Claude Sonnet 4
+Natural Language Compliance Q&A System powered by Advanced AI
 """
 
 import asyncio
@@ -184,7 +184,7 @@ class SalesIntelligenceEngine:
             )
     
     async def _generate_ai_response(self, question: ComplianceQuestion) -> str:
-        """Generate AI response using Claude Sonnet 4 with sales-optimized prompts"""
+        """Generate AI response using Advanced AI with sales-optimized prompts"""
         
         # Build context from knowledge base
         context = self._build_question_context(question)

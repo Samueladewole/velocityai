@@ -50,7 +50,7 @@ const EnhancedHero = () => {
                 Your compliance team will finally sleep well.
               </p>
               <p className="text-xs text-slate-400">
-                🧠 Powered by Anthropic's Claude Sonnet 4 • Superior reasoning and context handling
+                🧠 Powered by Advanced AI Technology • Superior reasoning and context handling
               </p>
             </div>
             
@@ -144,7 +144,7 @@ const EnhancedHero = () => {
                 </div>
                 <div className="flex-1">
                   <p className="text-lg font-semibold text-white">Trust Score: Looking Great! 📈</p>
-                  <p className="text-sm text-slate-400">Powered by Claude Sonnet 4</p>
+                  <p className="text-sm text-slate-400">Powered by Advanced AI</p>
                   <div className="flex flex-wrap gap-1 mt-2">
                     <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded">SOC 2</span>
                     <span className="text-xs bg-blue-500/20 text-blue-400 px-2 py-1 rounded">GDPR</span>
@@ -741,7 +741,7 @@ const EvidenceCollectionSection = () => {
               </div>
               <div className="bg-purple-500/10 rounded-lg p-4 border border-purple-500/20">
                 <div className="text-purple-400 font-medium mb-2">📈 Trust Engine</div>
-                <div className="text-sm text-slate-300">Your compliance score just improved to 94%! Powered by Claude Sonnet 4</div>
+                <div className="text-sm text-slate-300">Your compliance score just improved to 94%! Powered by Advanced AI</div>
               </div>
             </div>
           </div>

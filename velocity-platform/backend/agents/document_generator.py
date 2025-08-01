@@ -1,11 +1,11 @@
 """
 Document Generator Agent (Agent 6)
-Your documentation team's best friend - automatically creates professional
-compliance documents
+Your documentation team's best friend - automatically creates
+professional compliance documents
 
-No more starting from blank pages or copying old templates that don't fit.
-This agent writes policies, procedures, and compliance documents that
-actually make sense for your business.
+No more starting from blank pages or copying old templates that
+don't fit. This agent writes policies, procedures, and compliance
+documents that actually make sense for your business.
 """
 import asyncio
 from datetime import datetime, timedelta
@@ -17,26 +17,28 @@ logger = logging.getLogger(__name__)
 
 class DocumentGeneratorAgent:
     """
-    Document Generator Agent - From blank page to professional policy in
-    minutes
+    Document Generator Agent - From blank page to
+    professional policy in minutes
 
     What this agent does for you:
     - Analyzes your business to understand what policies you actually need
     - Generates professional, customized compliance documents
     - Creates policies that auditors love and employees actually understand
     - Keeps documents current with regulatory changes
-    - Eliminates the "copy-paste from Google" approach to policy writing
+    - Eliminates the "copy-paste from Google" policy writing
     """
 
     def __init__(self, credentials: Dict[str, str]):
-        """Set up document generation system - professional docs"""
+        """Set up document generation system - prof docs"""
         self.credentials = credentials
         self.organization_id = credentials.get('organization_id')
         self.organization_name = credentials.get(
             'organization_name', 'Your Organization'
         )
         self.industry = credentials.get('industry', 'Technology')
-        self.company_size = credentials.get('company_size', 'medium')
+        self.company_size = credentials.get(
+            'company_size', 'medium'
+        )
         self.frameworks = credentials.get(
             'frameworks', ['SOC2', 'ISO27001']
         )
