@@ -431,7 +431,7 @@ const ROICalculator: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-2">Banking ROI Calculator</h3>
               <p className="text-slate-600 mb-4">
-                Specialized for financial institutions with GDPR RoPA and ISAE 3000 calculations
+                Specialized for financial institutions with Banking ROI and ISAE 3000 calculations
               </p>
               <div className="flex items-center gap-2 text-blue-600 font-medium">
                 <span>Calculate Banking Savings</span>
@@ -444,12 +444,12 @@ const ROICalculator: React.FC = () => {
               <div className="p-3 bg-emerald-100 rounded-lg w-fit mb-4">
                 <Shield className="w-6 h-6 text-emerald-600" />
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-2">GDPR ROI Calculator</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-2">Banking ROI Calculator</h3>
               <p className="text-slate-600 mb-4">
-                Calculate savings specifically for GDPR compliance and privacy automation
+                Calculate savings specifically for Banking compliance and regulatory automation
               </p>
               <div className="flex items-center gap-2 text-emerald-600 font-medium">
-                <span>Calculate GDPR Savings</span>
+                <span>Calculate Banking Savings</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
             </div>

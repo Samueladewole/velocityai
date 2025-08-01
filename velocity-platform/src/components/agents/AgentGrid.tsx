@@ -22,10 +22,13 @@ import {
   Users
 } from 'lucide-react';
 
+// Import the real Velocity API service
+import { velocityApi } from '@/services/velocity-api';
+
 interface Agent {
   id: string;
   name: string;
-  type: 'AWS' | 'GCP' | 'Azure' | 'GitHub' | 'QIE' | 'TrustScore' | 'Monitor' | 'DocGen' | 'Observability' | 'Crypto' | 'ISAE3000' | 'GDPR';
+  type: 'AWS' | 'GCP' | 'Azure' | 'GitHub' | 'QIE' | 'TrustScore' | 'Monitor' | 'DocGen' | 'Observability' | 'Crypto' | 'ISAE3000' | 'BankingROI';
   status: 'collecting' | 'idle' | 'error' | 'scheduled' | 'connecting';
   lastRun: Date;
   nextRun: Date;
@@ -47,7 +50,7 @@ const AGENT_ICONS = {
   Observability: Activity,
   Crypto: Lock,
   ISAE3000: Database,
-  GDPR: Users
+  BankingROI: Users
 };
 
 const STATUS_STYLES = {
@@ -183,14 +186,14 @@ const PRODUCTION_AGENTS: Agent[] = [
   },
   {
     id: 'gdpr-compliance',
-    name: 'GDPR Compliance Agent',
-    type: 'GDPR',
+    name: 'Banking ROI Calculator Agent',
+    type: 'BankingROI',
     status: 'collecting',
     lastRun: new Date(Date.now() - 2 * 60 * 1000), // 2 min ago
     nextRun: new Date(Date.now() + 10 * 60 * 1000), // 10 min
     evidenceCollected: 387,
     successRate: 97.6,
-    currentTask: 'Generating Records of Processing Activities (RoPA)',
+    currentTask: 'Calculating Banking ROI metrics',
     progress: 58
   }
 ];
@@ -201,37 +204,60 @@ interface AgentGridProps {
 
 export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
   const navigate = useNavigate();
-  const [agents, setAgents] = useState<Agent[]>(PRODUCTION_AGENTS);
+  const [agents, setAgents] = useState<Agent[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [lastUpdate, setLastUpdate] = useState(new Date());
 
-  // Simulate real-time updates (replace with actual WebSocket)
+  // Load real agents from backend API
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAgents(prev => prev.map(agent => {
-        // Simulate progress updates for collecting agents
-        if (agent.status === 'collecting' && agent.progress !== undefined) {
-          const newProgress = Math.min(100, agent.progress + Math.random() * 5);
-          return {
-            ...agent,
-            progress: newProgress,
-            // Complete task when progress reaches 100
-            ...(newProgress >= 100 && {
-              status: 'idle' as const,
-              progress: undefined,
-              currentTask: undefined,
-              lastRun: new Date(),
-              nextRun: new Date(Date.now() + Math.random() * 60 * 60 * 1000),
-              evidenceCollected: agent.evidenceCollected + Math.floor(Math.random() * 5) + 1
-            })
-          };
-        }
-        return agent;
-      }));
-      setLastUpdate(new Date());
-    }, 2000);
+    const loadAgents = async () => {
+      try {
+        setLoading(true);
+        const realAgents = await velocityApi.getAgents();
+        
+        // Transform backend agent data to match frontend interface
+        const transformedAgents = realAgents.map(agent => ({
+          id: agent.id,
+          name: agent.name,
+          type: agent.platform.toUpperCase() as Agent['type'],
+          status: mapBackendStatus(agent.status),
+          lastRun: agent.last_run ? new Date(agent.last_run) : new Date(Date.now() - Math.random() * 60 * 60 * 1000),
+          nextRun: agent.next_run ? new Date(agent.next_run) : new Date(Date.now() + Math.random() * 60 * 60 * 1000),
+          evidenceCollected: agent.evidence_collected || 0,
+          successRate: agent.success_rate || 0
+        }));
+        
+        setAgents(transformedAgents);
+        setError(null);
+      } catch (err) {
+        console.error('Failed to load agents:', err);
+        setError('Failed to load agents. Using mock data.');
+        // Fallback to mock data if API fails
+        setAgents(PRODUCTION_AGENTS);
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    loadAgents();
+
+    // Set up real-time updates via polling (replace with WebSocket later)
+    const interval = setInterval(loadAgents, 30000); // Update every 30 seconds
     return () => clearInterval(interval);
   }, []);
+
+  // Map backend agent status to frontend status
+  const mapBackendStatus = (backendStatus: string): Agent['status'] => {
+    switch (backendStatus.toLowerCase()) {
+      case 'running': return 'collecting';
+      case 'idle': return 'idle';
+      case 'completed': return 'idle';
+      case 'error': return 'error';
+      case 'scheduled': return 'scheduled';
+      default: return 'idle';
+    }
+  };
 
   const formatTimeAgo = (date: Date) => {
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
@@ -264,47 +290,31 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
       Observability: 'Collecting system metrics and logs',
       Crypto: 'Generating blockchain proofs',
       ISAE3000: 'Collecting banking system evidence for ISAE 3000 audit',
-      GDPR: 'Generating Records of Processing Activities (RoPA)'
+      BankingROI: 'Calculating Banking ROI metrics'
     };
     return tasks[type] || 'Processing compliance data';
   };
 
-  const handleAgentAction = (agentId: string, action: 'deploy' | 'pause' | 'resume') => {
-    // Update agent status based on action
-    setAgents(prev => prev.map(agent => {
-      if (agent.id === agentId) {
-        switch (action) {
-          case 'deploy':
+  const handleAgentAction = async (agentId: string, action: 'deploy' | 'pause' | 'resume') => {
+    try {
+      if (action === 'deploy' || action === 'resume') {
+        // Update UI immediately for better UX
+        setAgents(prev => prev.map(agent => {
+          if (agent.id === agentId) {
             return {
               ...agent,
               status: 'connecting' as const,
-              currentTask: 'Initializing agent deployment...',
+              currentTask: 'Starting agent execution...',
               progress: 0
             };
-          case 'pause':
-            return {
-              ...agent,
-              status: 'idle' as const,
-              currentTask: undefined,
-              progress: undefined
-            };
-          case 'resume':
-            return {
-              ...agent,
-              status: 'connecting' as const,
-              currentTask: 'Reconnecting agent...',
-              progress: 0
-            };
-          default:
-            return agent;
-        }
-      }
-      return agent;
-    }));
+          }
+          return agent;
+        }));
 
-    // Simulate deployment process
-    if (action === 'deploy' || action === 'resume') {
-      setTimeout(() => {
+        // Call real API to run the agent
+        await velocityApi.runAgent(agentId);
+        
+        // Update status to collecting after API call succeeds
         setAgents(prev => prev.map(agent => {
           if (agent.id === agentId) {
             return {

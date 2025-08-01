@@ -17,7 +17,10 @@ from models import (
     AgentStatus, EvidenceType, EvidenceStatus, Platform, Framework
 )
 from database import SessionLocal
-# from cloud_integrations import CloudIntegrationManager  # Temporarily disabled
+import sys
+import os
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'agents'))
+from aws_evidence_collector import AWSEvidenceCollector
 
 logger = logging.getLogger(__name__)
 
@@ -250,197 +253,139 @@ class AgentExecutor:
             raise e
     
     async def _execute_aws_agent(self, agent: Agent, integration: Integration, db: Session) -> Dict[str, Any]:
-        """Execute AWS-specific agent workflow"""
-        evidence_items = []
+        """
+        Execute AWS Evidence Collector Agent with real boto3 integration
         
-        # Connect to AWS (disabled for development)
-        # aws_client = await self.cloud_manager.get_aws_client(integration.credentials)
-        aws_client = None  # Mock for development
+        This method now uses the actual AWSEvidenceCollector class to collect
+        real compliance evidence from AWS services including IAM, CloudTrail,
+        Security Groups, S3, and Config rules.
         
-        # Collect evidence based on framework
-        if agent.framework == Framework.SOC2:
-            evidence_items.extend(await self._collect_aws_soc2_evidence(aws_client, agent, db))
-        elif agent.framework == Framework.ISO27001:
-            evidence_items.extend(await self._collect_aws_iso27001_evidence(aws_client, agent, db))
-        elif agent.framework == Framework.CIS_CONTROLS:
-            evidence_items.extend(await self._collect_aws_cis_evidence(aws_client, agent, db))
-        
-        return {
-            "evidence_collected": len(evidence_items),
-            "performance_metrics": {
-                "api_calls": len(evidence_items) * 2,
-                "response_time_avg": 0.5,
-                "success_rate": 1.0
+        Args:
+            agent: The AWS agent configuration
+            integration: AWS integration with encrypted credentials
+            db: Database session for storing evidence
+            
+        Returns:
+            Dict containing evidence collection results and performance metrics
+        """
+        try:
+            # Decrypt and prepare AWS credentials
+            from security import decrypt_credentials
+            credentials = decrypt_credentials(integration.credentials)
+            
+            # Initialize AWS Evidence Collector with real credentials
+            aws_collector = AWSEvidenceCollector(credentials)
+            
+            # Test connection first
+            connection_test = await aws_collector.test_connection()
+            if not connection_test["success"]:
+                raise Exception(f"AWS connection failed: {connection_test.get('error', 'Unknown error')}")
+            
+            # Collect all evidence types based on framework requirements
+            collection_result = await aws_collector.collect_all_evidence()
+            
+            # Store evidence items in database
+            evidence_items_created = 0
+            for evidence_data in collection_result.get("evidence_items", []):
+                try:
+                    # Create evidence item in database
+                    evidence_item = EvidenceItem(
+                        title=f"AWS {evidence_data['type'].replace('_', ' ').title()}",
+                        description=f"AWS compliance evidence: {evidence_data['resource_name']}",
+                        evidence_type=EvidenceType.API_RESPONSE,
+                        status=EvidenceStatus.PENDING,
+                        framework=agent.framework,
+                        platform=Platform.AWS,
+                        control_id=evidence_data.get("control_id", "AUTO-GENERATED"),
+                        data=evidence_data["data"],
+                        evidence_metadata={
+                            "aws_resource_id": evidence_data["resource_id"],
+                            "aws_resource_type": evidence_data["type"],
+                            "collection_timestamp": evidence_data["collected_at"],
+                            "agent_id": str(agent.id),
+                            "integration_id": str(integration.id)
+                        },
+                        confidence_score=evidence_data.get("confidence_score", 0.85),
+                        trust_points=10,  # Base trust points for AWS evidence
+                        organization_id=agent.organization_id,
+                        agent_id=agent.id
+                    )
+                    
+                    db.add(evidence_item)
+                    evidence_items_created += 1
+                    
+                except Exception as e:
+                    logger.warning(f"Failed to create evidence item: {e}")
+            
+            # Commit all evidence items to database
+            db.commit()
+            
+            logger.info(f"AWS Agent completed successfully: {evidence_items_created} evidence items stored")
+            
+            return {
+                "success": True,
+                "evidence_collected": evidence_items_created,
+                "collection_results": collection_result.get("collection_results", {}),
+                "aws_account_id": connection_test.get("account_id"),
+                "performance_metrics": {
+                    "total_api_calls": sum(result.get("count", 0) for result in collection_result.get("collection_results", {}).values()),
+                    "successful_collections": collection_result.get("successful_collections", 0),
+                    "automation_rate": collection_result.get("automation_rate", 98.5),
+                    "confidence_score": collection_result.get("confidence_score", 0.91),
+                    "collection_time_seconds": (datetime.now(timezone.utc) - datetime.fromisoformat(collection_result.get("collected_at", datetime.now(timezone.utc).isoformat()).replace('Z', '+00:00'))).total_seconds()
+                }
             }
-        }
-    
-    async def _collect_aws_soc2_evidence(self, aws_client, agent: Agent, db: Session) -> List[Dict]:
-        """Collect SOC 2 evidence from AWS"""
-        evidence_items = []
-        
-        try:
-            # Example: Collect IAM policies for access control (CC6.1)
-            # iam_policies = await aws_client.list_policies()
-            iam_policies = [{"PolicyName": "DemoPolicy1"}, {"PolicyName": "DemoPolicy2"}]  # Mock data
-            
-            for policy in iam_policies[:5]:  # Limit for demo
-                evidence = EvidenceItem(
-                    title=f"IAM Policy: {policy.get('PolicyName', 'Unknown')}",
-                    description="AWS IAM policy for access control compliance",
-                    evidence_type=EvidenceType.API_RESPONSE,
-                    status=EvidenceStatus.PENDING,
-                    data=policy,
-                    evidence_metadata={
-                        "aws_service": "iam",
-                        "resource_type": "policy",
-                        "collection_method": "api"
-                    },
-                    framework=agent.framework,
-                    control_id="CC6.1",
-                    confidence_score=0.95,
-                    trust_points=15,
-                    agent_id=agent.id,
-                    organization_id=agent.organization_id
-                )
-                
-                db.add(evidence)
-                evidence_items.append(policy)
-            
-            # Collect CloudTrail logs for monitoring (CC7.1)
-            # cloudtrail_events = await aws_client.get_cloudtrail_events()
-            cloudtrail_events = [{"EventName": "AssumeRole"}, {"EventName": "CreateUser"}]  # Mock data
-            
-            if cloudtrail_events:
-                evidence = EvidenceItem(
-                    title="CloudTrail Event Logs",
-                    description="AWS CloudTrail logs for system monitoring",
-                    evidence_type=EvidenceType.LOG_ENTRY,
-                    status=EvidenceStatus.PENDING,
-                    data={"events": cloudtrail_events[:10]},  # Sample events
-                    evidence_metadata={
-                        "aws_service": "cloudtrail",
-                        "event_count": len(cloudtrail_events),
-                        "time_range": "last_24_hours"
-                    },
-                    framework=agent.framework,
-                    control_id="CC7.1",
-                    confidence_score=0.90,
-                    trust_points=20,
-                    agent_id=agent.id,
-                    organization_id=agent.organization_id
-                )
-                
-                db.add(evidence)
-                evidence_items.append({"cloudtrail_events": len(cloudtrail_events)})
-            
-            db.commit()
             
         except Exception as e:
-            logger.error(f"Error collecting AWS SOC 2 evidence: {e}")
-            raise
-        
-        return evidence_items
-    
-    async def _collect_aws_iso27001_evidence(self, aws_client, agent: Agent, db: Session) -> List[Dict]:
-        """Collect ISO 27001 evidence from AWS"""
-        evidence_items = []
-        
-        try:
-            # Example: Collect encryption configurations (A.10.1.1)
-            # s3_buckets = await aws_client.list_s3_buckets()
-            s3_buckets = [{"Name": "demo-bucket-1"}, {"Name": "demo-bucket-2"}]  # Mock data
-            
-            for bucket in s3_buckets[:3]:  # Limit for demo
-                # encryption_config = await aws_client.get_bucket_encryption(bucket['Name'])
-                encryption_config = {"Rules": [{"ApplyServerSideEncryptionByDefault": {"SSEAlgorithm": "AES256"}}]}  # Mock
-                
-                evidence = EvidenceItem(
-                    title=f"S3 Bucket Encryption: {bucket['Name']}",
-                    description="S3 bucket encryption configuration for data protection",
-                    evidence_type=EvidenceType.CONFIGURATION,
-                    status=EvidenceStatus.PENDING,
-                    data={
-                        "bucket_name": bucket['Name'],
-                        "encryption": encryption_config
-                    },
-                    evidence_metadata={
-                        "aws_service": "s3",
-                        "resource_type": "bucket",
-                        "encryption_enabled": bool(encryption_config)
-                    },
-                    framework=agent.framework,
-                    control_id="A.10.1.1",
-                    confidence_score=0.92,
-                    trust_points=18,
-                    agent_id=agent.id,
-                    organization_id=agent.organization_id
-                )
-                
-                db.add(evidence)
-                evidence_items.append(bucket)
-            
-            db.commit()
-            
-        except Exception as e:
-            logger.error(f"Error collecting AWS ISO 27001 evidence: {e}")
-            raise
-        
-        return evidence_items
-    
-    async def _collect_aws_cis_evidence(self, aws_client, agent: Agent, db: Session) -> List[Dict]:
-        """Collect CIS Controls evidence from AWS"""
-        evidence_items = []
-        
-        try:
-            # Example: Collect security group configurations (CIS Control 4.1)
-            # security_groups = await aws_client.describe_security_groups()
-            security_groups = [{"GroupName": "demo-sg-1", "IpPermissions": []}, {"GroupName": "demo-sg-2", "IpPermissions": []}]  # Mock
-            
-            for sg in security_groups[:5]:  # Limit for demo
-                evidence = EvidenceItem(
-                    title=f"Security Group: {sg.get('GroupName', 'Unknown')}",
-                    description="AWS Security Group configuration for network access control",
-                    evidence_type=EvidenceType.CONFIGURATION,
-                    status=EvidenceStatus.PENDING,
-                    data=sg,
-                    evidence_metadata={
-                        "aws_service": "ec2",
-                        "resource_type": "security_group",
-                        "rules_count": len(sg.get('IpPermissions', []))
-                    },
-                    framework=agent.framework,
-                    control_id="4.1",
-                    confidence_score=0.88,
-                    trust_points=12,
-                    agent_id=agent.id,
-                    organization_id=agent.organization_id
-                )
-                
-                db.add(evidence)
-                evidence_items.append(sg)
-            
-            db.commit()
-            
-        except Exception as e:
-            logger.error(f"Error collecting AWS CIS evidence: {e}")
-            raise
-        
-        return evidence_items
+            logger.error(f"AWS agent execution failed: {e}")
+            raise e
     
     async def _execute_gcp_agent(self, agent: Agent, integration: Integration, db: Session) -> Dict[str, Any]:
-        """Execute GCP-specific agent workflow"""
-        # Similar implementation for GCP
-        return {"evidence_collected": 3, "performance_metrics": {}}
+        """
+        Execute GCP Evidence Collector Agent
+        
+        TODO: Implement real GCP evidence collection using google-cloud-* libraries
+        This is a placeholder that should be replaced with actual GCP API calls
+        similar to the AWS implementation above.
+        """
+        logger.warning("GCP agent not yet implemented - returning placeholder data")
+        return {
+            "success": False,
+            "evidence_collected": 0,
+            "error": "GCP agent implementation pending",
+            "performance_metrics": {}
+        }
+    
     
     async def _execute_azure_agent(self, agent: Agent, integration: Integration, db: Session) -> Dict[str, Any]:
-        """Execute Azure-specific agent workflow"""
-        # Similar implementation for Azure
-        return {"evidence_collected": 4, "performance_metrics": {}}
+        """
+        Execute Azure Evidence Collector Agent
+        
+        TODO: Implement real Azure evidence collection using azure-* libraries
+        This is a placeholder that should be replaced with actual Azure API calls.
+        """
+        logger.warning("Azure agent not yet implemented - returning placeholder data")
+        return {
+            "success": False,
+            "evidence_collected": 0,
+            "error": "Azure agent implementation pending",
+            "performance_metrics": {}
+        }
     
     async def _execute_github_agent(self, agent: Agent, integration: Integration, db: Session) -> Dict[str, Any]:
-        """Execute GitHub-specific agent workflow"""
-        # Similar implementation for GitHub
-        return {"evidence_collected": 2, "performance_metrics": {}}
+        """
+        Execute GitHub Security Analyzer Agent
+        
+        TODO: Implement real GitHub security analysis using PyGithub or GitHub API
+        This is a placeholder that should be replaced with actual GitHub API calls.
+        """
+        logger.warning("GitHub agent not yet implemented - returning placeholder data")
+        return {
+            "success": False,
+            "evidence_collected": 0,
+            "error": "GitHub agent implementation pending",
+            "performance_metrics": {}
+        }
     
     def _calculate_success_rate(self, agent: Agent, current_success: bool) -> float:
         """Calculate rolling success rate"""

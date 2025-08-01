@@ -47,15 +47,15 @@ const FinancialServicesPricing: React.FC = () => {
         "Community Reinvestment Act Reporting"
       ],
       features: [
-        "8 AI Agents (AWS, GCP, Trust Score, Monitor, QIE, GDPR, ISAE3000, DocGen)",
-        "Banking Frameworks (SOC 2, GDPR, GLBA, PCI DSS)",
+        "8 AI Agents (AWS, GCP, Trust Score, Monitor, QIE, Banking ROI, ISAE3000, DocGen)",
+        "Banking Frameworks (SOC 2, Basel III, GLBA, PCI DSS)",
         "Real-time regulatory compliance monitoring",
-        "Automated RoPA generation for GDPR",
+        "Automated Banking ROI calculations",
         "ISAE 3000 banking evidence automation",
         "Basel III operational risk alignment",
         "Cross-border transfer compliance (SWIFT)",
         "Customer data protection workflows",
-        "Breach notification automation (72-hour GDPR)",
+        "Regulatory notification automation",
         "Up to 50 banking staff members",
         "Priority banking support (8-hour response)"
       ],
@@ -84,7 +84,7 @@ const FinancialServicesPricing: React.FC = () => {
       ],
       features: [
         "ALL 12 AI Agents (complete banking automation suite)",
-        "Comprehensive Banking Frameworks (SOC 2, ISO 27001, GDPR, HIPAA, PCI DSS, GLBA)",
+        "Comprehensive Banking Frameworks (SOC 2, ISO 27001, Basel III, HIPAA, PCI DSS, GLBA)",
         "Advanced ISAE 3000 evidence automation",
         "SOX 404 coordination with ISAE 3000",
         "Basel III capital calculation automation",

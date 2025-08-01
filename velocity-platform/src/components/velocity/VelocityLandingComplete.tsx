@@ -158,10 +158,10 @@ const PublicHeader: React.FC = () => {
               </button>
               <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
+                  onClick={() => navigate('/calculators/banking-roi')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">GDPR International Transfers</div>
+                  <div className="font-medium">Banking ROI Calculator</div>
                   <div className="text-xs text-slate-400">81% vs traditional solutions</div>
                 </button>
                 <button 
@@ -347,10 +347,10 @@ const PublicHeader: React.FC = () => {
             
             <div className="text-slate-400 text-sm font-medium py-1 pt-4">Solutions</div>
             <button 
-              onClick={() => { navigate('/solutions/gdpr-international-transfers'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/calculators/banking-roi'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              <div className="font-medium">GDPR International Transfers</div>
+              <div className="font-medium">Banking ROI Calculator</div>
               <div className="text-xs text-slate-400">81% vs traditional solutions</div>
             </button>
             <button 
@@ -484,7 +484,7 @@ const HeroTrustScore = () => {
           <div>
             <p className="text-white font-semibold">Trust Score</p>
             <p className="text-sm text-emerald-300">Audit Ready</p>
-            <p className="text-xs text-white/60">SOC 2 • ISO 27001 • GDPR</p>
+            <p className="text-xs text-white/60">SOC 2 • ISO 27001 • Basel III</p>
           </div>
         </div>
       </div>
@@ -497,7 +497,7 @@ const HeroSection = () => {
   const navigate = useNavigate();
   const [currentFramework, setCurrentFramework] = useState(0);
   
-  const frameworks = ['GDPR International Transfers', 'ISAE 3000', 'SOC 2', 'ISO 27001', 'HIPAA', 'Basel III'];
+  const frameworks = ['Banking ROI Calculator', 'ISAE 3000', 'SOC 2', 'ISO 27001', 'HIPAA', 'Basel III'];
   
   useEffect(() => {
     const interval = setInterval(() => {
@@ -521,7 +521,7 @@ const HeroSection = () => {
           <div>
             <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
               <span className="text-emerald-400 text-sm font-medium">
-                ✨ Trusted by 500+ Companies • GDPR International Transfers • ISAE 3000 • Zero Manual Work
+                ✨ Trusted by 500+ Companies • Banking ROI Calculator • ISAE 3000 • Zero Manual Work
               </span>
             </div>
             
@@ -538,7 +538,7 @@ const HeroSection = () => {
             
             <div className="bg-white/5 backdrop-blur-md rounded-xl p-4 mb-8 border border-white/10">
               <p className="text-sm text-slate-300 mb-2">
-                <span className="font-semibold text-emerald-400">Revolutionary GDPR International Transfer automation</span> (81% cheaper than traditional solutions) and 
+                <span className="font-semibold text-emerald-400">Revolutionary Banking ROI automation</span> (81% cheaper than traditional solutions) and 
                 <span className="font-semibold text-blue-400"> ISAE 3000 evidence collection</span> (88% less than Big 4 consulting). 
                 Your compliance team will finally sleep well.
               </p>
@@ -886,9 +886,9 @@ const AIAgentsSection = () => {
       icon: Lock
     },
     {
-      name: 'GDPR Compliance Agent',
-      description: 'Automated GDPR international transfer compliance and TIA generation',
-      capabilities: ['Transfer Impact Assessments', 'Cloud provider monitoring', 'Standard Contractual Clauses'],
+      name: 'Banking ROI Calculator Agent',
+      description: 'Automated banking compliance ROI calculation and cost optimization',
+      capabilities: ['Basel III compliance costs', 'Regulatory cost analysis', 'Banking automation ROI'],
       automation: 96,
       icon: Shield
     },
@@ -909,7 +909,7 @@ const AIAgentsSection = () => {
             12 Specialized AI Agents
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Revolutionary automation including GDPR international transfer compliance and ISAE 3000 evidence collection. 
+            Revolutionary automation including Banking ROI calculations and ISAE 3000 evidence collection. 
             95% of compliance tasks automated across all major frameworks.
           </p>
         </div>
@@ -1212,9 +1212,9 @@ const CompetitiveAdvantagesSection = () => {
   
   const advantages = [
     {
-      title: "83% vs Traditional GDPR Solutions",
+      title: "83% vs Traditional Banking Solutions",
       metric: "€137K+ Saved Annually",
-      description: "Revolutionary GDPR international transfer automation vs traditional compliance providers",
+      description: "Revolutionary Banking ROI automation vs traditional compliance providers",
       icon: DollarSign,
       color: "emerald"
     },
@@ -1324,8 +1324,8 @@ const IndustryShowcaseSection = () => {
   const industries = [
     {
       name: "Financial Services",
-      description: "Banking-specific GDPR international transfer and ISAE 3000 automation with core banking integrations",
-      metrics: ["83% vs OneTrust", "88% vs Big 4", "6-week deployment"],
+      description: "Banking-specific ROI calculations and ISAE 3000 automation with core banking integrations",
+      metrics: ["83% cost savings", "88% vs Big 4", "6-week deployment"],
       icon: Building,
       color: "blue",
       path: "/industries/financial-services"
@@ -1539,12 +1539,12 @@ const PublicFooter: React.FC = () => {
               <span className="text-xl font-bold text-white font-serif">Velocity</span>
             </div>
             <p className="text-slate-400 text-sm leading-relaxed mb-4">
-              Stop drowning in compliance paperwork. Our AI agents work around the clock with revolutionary GDPR international transfer and ISAE 3000 evidence automation. 
-              83% savings vs OneTrust, 88% vs Big 4 consulting.
+              Stop drowning in compliance paperwork. Our AI agents work around the clock with revolutionary Banking ROI calculations and ISAE 3000 evidence automation. 
+              83% cost savings, 88% vs Big 4 consulting.
             </p>
             <div className="flex items-center gap-4 text-xs text-slate-500">
               <span>✓ 12 AI Agents</span>
-              <span>✓ GDPR International Transfers</span>
+              <span>✓ Banking ROI Calculator</span>
               <span>✓ ISAE 3000</span>
             </div>
           </div>
@@ -1599,7 +1599,7 @@ const PublicFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Solutions</h3>
             <div className="space-y-3">
               {[
-                { label: 'GDPR International Transfers', path: '/solutions/gdpr-international-transfers', badge: '81% savings' },
+                { label: 'Banking ROI Calculator', path: '/calculators/banking-roi', badge: '81% savings' },
                 { label: 'ISAE 3000', path: '/solutions/isae-3000', badge: '88% vs Big 4' },
                 { label: 'SOC 2', path: '/velocity/solutions/soc2' },
                 { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },

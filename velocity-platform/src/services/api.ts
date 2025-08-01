@@ -3,7 +3,7 @@
  * Handles all backend communication
  */
 
-const API_BASE_URL = 'http://localhost:8001';
+const API_BASE_URL = 'http://localhost:8000';
 
 export interface LoginCredentials {
   email: string;
@@ -109,7 +109,7 @@ class ApiService {
 
   // Authentication
   async login(credentials: LoginCredentials): Promise<AuthResponse> {
-    const response = await this.request<AuthResponse>('/auth/login', {
+    const response = await this.request<AuthResponse>('/api/v1/auth/login', {
       method: 'POST',
       body: JSON.stringify(credentials),
     });
@@ -122,7 +122,7 @@ class ApiService {
   }
 
   async signup(data: SignupData): Promise<AuthResponse> {
-    const response = await this.request<AuthResponse>('/auth/signup', {
+    const response = await this.request<AuthResponse>('/api/v1/auth/signup', {
       method: 'POST',
       body: JSON.stringify(data),
     });

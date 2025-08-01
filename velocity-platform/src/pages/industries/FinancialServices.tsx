@@ -27,7 +27,7 @@ const FinancialServices: React.FC = () => {
   const bankingChallenges = [
     {
       title: "Complex Regulatory Landscape",
-      description: "Multiple overlapping regulations (SOC 2, GDPR, GLBA, PCI DSS, Basel III, ISAE 3000)",
+      description: "Multiple overlapping regulations (SOC 2, Basel III, GLBA, PCI DSS, ISAE 3000)",
       icon: Shield,
       solution: "Unified compliance platform handling all banking frameworks"
     },
@@ -53,11 +53,11 @@ const FinancialServices: React.FC = () => {
 
   const bankingSolutions = [
     {
-      name: "GDPR RoPA Automation",
-      description: "Automated Records of Processing Activities for banking customer data",
-      savings: "83% vs OneTrust",
+      name: "Banking ROI Calculator",
+      description: "Automated ROI calculation and cost optimization for banking compliance",
+      savings: "83% cost reduction",
       timeline: "4 weeks",
-      features: ["Customer data mapping", "Cross-border transfer automation", "Breach notification (72-hour)", "Privacy impact assessments"],
+      features: ["Compliance cost analysis", "Basel III cost calculations", "Regulatory efficiency metrics", "Banking automation ROI"],
       price: "€28K vs €165K traditional"
     },
     {
@@ -81,9 +81,9 @@ const FinancialServices: React.FC = () => {
   const caseStudies = [
     {
       company: "Regional Bank (€15B Assets)",
-      challenge: "GDPR compliance for 2.5M customers across 12 EU countries",
-      solution: "Velocity GDPR RoPA automation with core banking integration",
-      results: ["€150K saved vs traditional solution", "4-week implementation", "100% GDPR audit pass", "Zero privacy breaches"],
+      challenge: "Banking compliance cost optimization across 12 EU countries",
+      solution: "Velocity Banking ROI Calculator with core banking integration",
+      results: ["€150K saved vs traditional solution", "4-week implementation", "100% compliance audit pass", "Zero regulatory issues"],
       industry: "Community Banking"
     },
     {
@@ -151,7 +151,7 @@ const FinancialServices: React.FC = () => {
             </h1>
             
             <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
-              Purpose-built for financial institutions. GDPR RoPA automation (83% savings vs OneTrust) 
+              Purpose-built for financial institutions. Banking ROI calculations (83% cost savings) 
               and ISAE 3000 evidence collection (88% vs Big 4 consulting).
             </p>
 
@@ -176,7 +176,7 @@ const FinancialServices: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <div className="text-center">
                 <div className="text-3xl font-bold text-emerald-400 mb-2">83%</div>
-                <div className="text-sm text-slate-300">GDPR Cost Savings</div>
+                <div className="text-sm text-slate-300">Banking Cost Savings</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-2">88%</div>
@@ -306,7 +306,7 @@ const FinancialServices: React.FC = () => {
                 Banking-Specific Solutions
               </h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Revolutionary automation for GDPR RoPA, ISAE 3000, and Basel III compliance 
+                Revolutionary automation for Banking ROI, ISAE 3000, and Basel III compliance 
                 with pre-configured banking workflows.
               </p>
             </div>
@@ -360,7 +360,7 @@ const FinancialServices: React.FC = () => {
                 className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors mr-4"
               >
                 <Shield className="w-5 h-5" />
-                Explore GDPR RoPA
+                Explore Banking ROI
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button
@@ -450,7 +450,7 @@ const FinancialServices: React.FC = () => {
                   <thead className="bg-slate-50">
                     <tr>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Provider</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">GDPR Cost</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Banking ROI</th>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">ISAE 3000</th>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Timeline</th>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Automation</th>

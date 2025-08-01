@@ -119,17 +119,17 @@ export const PlatformCapabilities: React.FC = () => {
       category: 'Privacy & Protection',
       workflow: 'governance',
       department: 'Privacy',
-      description: 'Shadow IT, DSAR, RoPA, DPIA with Python backend',
+      description: 'Shadow IT, DSAR, Banking ROI, DPIA with Python backend',
       features: [
         'Automated Shadow IT discovery and risk assessment',
         'DSAR processing with template generation',
-        'RoPA management with GDPR compliance tracking'
+        'Banking ROI management with compliance tracking'
       ],
       trustPoints: 250,
       href: '/privacy-management',
       status: 'Active',
       valueCreated: 'Privacy Automation',
-      metrics: { primary: '100%', secondary: 'GDPR compliance' }
+      metrics: { primary: '100%', secondary: 'Banking compliance' }
     },
     {
       id: 'ai-governance',

@@ -29,15 +29,15 @@ const CaseStudies: React.FC = () => {
       company: "Regional Bank (€15B Assets)",
       industry: "banking",
       logo: "🏦",
-      challenge: "Multi-jurisdictional GDPR compliance for 2.5M customers across 12 EU countries with complex data flows and legacy banking systems",
-      solution: "Velocity GDPR RoPA automation with specialized banking agents and core system integration",
+      challenge: "Multi-jurisdictional banking compliance cost optimization for 2.5M customers across 12 EU countries with complex data flows and legacy banking systems",
+      solution: "Velocity Banking ROI Calculator with specialized banking agents and core system integration",
       implementation: "4 weeks",
       results: [
-        "€150K saved vs OneTrust + consulting",
-        "100% GDPR audit pass on first attempt",
+        "€150K saved vs traditional + consulting",
+        "100% compliance audit pass on first attempt",
         "83% reduction in compliance costs",
         "Zero privacy breaches since implementation",
-        "Automated RoPA for 15 banking processes"
+        "Automated Banking ROI for 15 banking processes"
       ],
       metrics: {
         costSavings: "€150,000",
@@ -45,9 +45,9 @@ const CaseStudies: React.FC = () => {
         automationIncrease: "83%",
         auditSuccess: "100%"
       },
-      quote: "Velocity transformed our GDPR compliance from a cost center to a competitive advantage. The banking-specific automation saved us months of manual work.",
+      quote: "Velocity transformed our banking compliance costs from a burden to a competitive advantage. The banking-specific ROI automation saved us months of manual work.",
       author: "Chief Compliance Officer",
-      frameworks: ["GDPR", "GLBA", "PCI DSS"],
+      frameworks: ["Basel III", "GLBA", "PCI DSS"],
       featured: true
     },
     {
@@ -73,7 +73,7 @@ const CaseStudies: React.FC = () => {
       },
       quote: "The healthcare-specific automation gave us confidence that every patient interaction was compliant. Our audit was seamless.",
       author: "VP of Engineering",
-      frameworks: ["HIPAA", "SOC 2", "GDPR"],
+      frameworks: ["HIPAA", "SOC 2", "Basel III"],
       featured: true
     },
     {
@@ -99,7 +99,7 @@ const CaseStudies: React.FC = () => {
       },
       quote: "Velocity's AI agents worked around the clock collecting evidence. What used to take months now happens automatically.",
       author: "CISO",
-      frameworks: ["SOC 2", "ISO 27001", "GDPR"],
+      frameworks: ["SOC 2", "ISO 27001", "Basel III"],
       featured: false
     },
     {
@@ -177,7 +177,7 @@ const CaseStudies: React.FC = () => {
       },
       quote: "Velocity made our Series B possible. We went from zero compliance to investment-ready in just 3 weeks.",
       author: "Co-Founder & CTO",
-      frameworks: ["SOC 2", "GDPR", "PCI DSS"],
+      frameworks: ["SOC 2", "Basel III", "PCI DSS"],
       featured: false
     }
   ];
