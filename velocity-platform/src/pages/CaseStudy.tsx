@@ -216,11 +216,11 @@ export const CaseStudy: React.FC = () => {
               const Icon = solution.icon;
               return (
                 <Card key={index} className="border-0 shadow-lg overflow-hidden">
-                  <div className={`h-2 bg-gradient-to-r ${solution.color}`} />
+                  <div className={`h-2 bg-gradient-to-r €{solution.color}`} />
                   <CardContent className="p-8">
                     <div className="grid lg:grid-cols-3 gap-6">
                       <div className="flex items-start gap-4">
-                        <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${solution.color} text-white`}>
+                        <div className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br €{solution.color} text-white`}>
                           <Icon className="h-6 w-6" />
                         </div>
                         <div>
@@ -265,7 +265,7 @@ export const CaseStudy: React.FC = () => {
                   {beforeAfter.before.metrics.map((metric, index) => (
                     <div key={index} className="flex justify-between items-start">
                       <span className="font-medium text-slate-700">{metric.label}:</span>
-                      <span className={`text-sm ${metric.color} text-right flex-1 ml-2`}>{metric.value}</span>
+                      <span className={`text-sm €{metric.color} text-right flex-1 ml-2`}>{metric.value}</span>
                     </div>
                   ))}
                 </div>
@@ -284,7 +284,7 @@ export const CaseStudy: React.FC = () => {
                   {beforeAfter.after.metrics.map((metric, index) => (
                     <div key={index} className="flex justify-between items-start">
                       <span className="font-medium text-slate-700">{metric.label}:</span>
-                      <span className={`text-sm ${metric.color} text-right flex-1 ml-2 font-medium`}>{metric.value}</span>
+                      <span className={`text-sm €{metric.color} text-right flex-1 ml-2 font-medium`}>{metric.value}</span>
                     </div>
                   ))}
                 </div>

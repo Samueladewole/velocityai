@@ -181,7 +181,7 @@ export class MonteCarloEngine {
         // Progress reporting for long simulations
         if (i % Math.max(1, Math.floor(parameters.iterations / 20)) === 0) {
           const progress = (i / parameters.iterations * 100).toFixed(1)
-          this.logger.debug(`Simulation progress: ${progress}%`)
+          this.logger.debug(`Simulation progress: €{progress}%`)
         }
       }
 
@@ -214,7 +214,7 @@ export class MonteCarloEngine {
       // Publish completion event
       if (this.eventBus) {
         await this.eventBus.publish({
-          eventId: `mc_${simulationId}`,
+          eventId: `mc_€{simulationId}`,
           timestamp: new Date().toISOString(),
           type: 'monte.carlo.completed',
           source: 'prism',
@@ -374,7 +374,7 @@ export class MonteCarloEngine {
         return this.samplePoisson(dist.parameters.lambda || 1)
       
       default:
-        throw new Error(`Unsupported distribution type: ${dist.type}`)
+        throw new Error(`Unsupported distribution type: €{dist.type}`)
     }
   }
 
@@ -399,7 +399,7 @@ export class MonteCarloEngine {
         ))
       
       default:
-        throw new Error(`Unsupported frequency distribution: ${freq.type}`)
+        throw new Error(`Unsupported frequency distribution: €{freq.type}`)
     }
   }
 
@@ -632,7 +632,7 @@ export class MonteCarloEngine {
     )
 
     if (highImpactScenarios.length > 0) {
-      recommendations.push(`Focus on ${highImpactScenarios.length} high-impact scenarios: ${highImpactScenarios.map(s => s.name).join(', ')}`)
+      recommendations.push(`Focus on €{highImpactScenarios.length} high-impact scenarios: €{highImpactScenarios.map(s => s.name).join(', ')}`)
     }
 
     // Statistical insights
@@ -641,7 +641,7 @@ export class MonteCarloEngine {
     }
 
     if (riskMetrics.probabilityOfRuin > 0.01) {
-      recommendations.push(`${(riskMetrics.probabilityOfRuin * 100).toFixed(1)}% chance of catastrophic loss - consider insurance or risk transfer`)
+      recommendations.push(`€{(riskMetrics.probabilityOfRuin * 100).toFixed(1)}% chance of catastrophic loss - consider insurance or risk transfer`)
     }
 
     // Cost-benefit analysis
@@ -754,6 +754,6 @@ export class MonteCarloEngine {
   }
 
   private generateSimulationId(): string {
-    return `sim_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `sim_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 }

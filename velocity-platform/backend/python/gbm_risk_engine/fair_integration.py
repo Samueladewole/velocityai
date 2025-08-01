@@ -391,9 +391,9 @@ class FAIRRiskEngine:
         """Determine risk rating and score"""
         
         # Risk thresholds (would be configurable in production)
-        critical_threshold = 10000000  # $10M
-        high_threshold = 1000000      # $1M
-        medium_threshold = 100000     # $100K
+        critical_threshold = 10000000  # €10M
+        high_threshold = 1000000      # €1M
+        medium_threshold = 100000     # €100K
         
         # Use the higher of ALE or VaR for rating
         risk_value = max(ale, var_99)

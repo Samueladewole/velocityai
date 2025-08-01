@@ -142,11 +142,11 @@ export class ComplianceObservabilityService {
     observabilityCore.trackComplianceEvent({
       eventType: 'evidence_collection',
       actor,
-      action: `evidence_${action}`,
+      action: `evidence_€{action}`,
       resource: evidenceId,
       outcome: 'success',
       evidence: {
-        reasoning: `Evidence ${action} by ${actor}`,
+        reasoning: `Evidence €{action} by €{actor}`,
         after: metadata
       },
       complianceFramework: metadata.framework || 'general',
@@ -172,7 +172,7 @@ export class ComplianceObservabilityService {
       resource: assessmentId,
       outcome: completionPercentage >= 90 ? 'success' : completionPercentage >= 70 ? 'partial' : 'failure',
       evidence: {
-        reasoning: `Assessment completed with ${completionPercentage}% compliance`,
+        reasoning: `Assessment completed with €{completionPercentage}% compliance`,
         after: {
           completionPercentage,
           gapsFound: gaps.length,
@@ -301,13 +301,13 @@ export class ComplianceObservabilityService {
       ...auditTrail.decisions.slice(0, 5).map(d => ({
         timestamp: d.timestamp,
         type: d.decisionType,
-        description: `${d.decisionType} by ${d.actor}`,
+        description: `€{d.decisionType} by €{d.actor}`,
         actor: d.actor
       })),
       ...auditTrail.events.slice(0, 5).map(e => ({
         timestamp: e.timestamp,
         type: e.eventType,
-        description: `${e.action} on ${e.resource}`,
+        description: `€{e.action} on €{e.resource}`,
         actor: e.actor
       }))
     ].sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime()).slice(0, 10)
@@ -514,7 +514,7 @@ export class ComplianceObservabilityService {
           if (daysUntilExpiry <= 90) {
             deadlines.push({
               type: 'evidence_renewal',
-              description: `${evidence.title} expires in ${daysUntilExpiry} days`,
+              description: `€{evidence.title} expires in €{daysUntilExpiry} days`,
               dueDate: evidence.validUntil,
               severity: daysUntilExpiry <= 30 ? 'critical' : daysUntilExpiry <= 60 ? 'high' : 'medium'
             })
@@ -530,7 +530,7 @@ export class ComplianceObservabilityService {
       if (daysUntilReview <= 90) {
         deadlines.push({
           type: 'assessment_due',
-          description: `${framework.framework} assessment due in ${daysUntilReview} days`,
+          description: `€{framework.framework} assessment due in €{daysUntilReview} days`,
           dueDate: framework.nextReview,
           severity: daysUntilReview <= 30 ? 'high' : 'medium'
         })
@@ -547,7 +547,7 @@ export class ComplianceObservabilityService {
         if (daysUntilDue <= 90) {
           deadlines.push({
             type: 'gap_remediation',
-            description: `${gap.requirement} remediation due in ${daysUntilDue} days`,
+            description: `€{gap.requirement} remediation due in €{daysUntilDue} days`,
             dueDate: gap.dueDate,
             severity: gap.severity
           })
@@ -572,12 +572,12 @@ export class ComplianceObservabilityService {
     
     frameworks.forEach(framework => {
       if (framework.completionPercentage < 80) {
-        actions.push(`Prioritize ${framework.framework} compliance improvements`)
+        actions.push(`Prioritize €{framework.framework} compliance improvements`)
       }
       
       const criticalGaps = framework.criticalGaps.filter(g => g.severity === 'critical')
       if (criticalGaps.length > 0) {
-        actions.push(`Address ${criticalGaps.length} critical gaps in ${framework.framework}`)
+        actions.push(`Address €{criticalGaps.length} critical gaps in €{framework.framework}`)
       }
     })
 
@@ -593,7 +593,7 @@ export class ComplianceObservabilityService {
       )
       
       if (upcomingReview <= 30) {
-        steps.push(`Schedule ${framework.framework} review within ${upcomingReview} days`)
+        steps.push(`Schedule €{framework.framework} review within €{upcomingReview} days`)
       }
     })
 
@@ -634,7 +634,7 @@ export class ComplianceObservabilityService {
   }
 
   private generateId(prefix: string): string {
-    return `${prefix}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `€{prefix}_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 }
 

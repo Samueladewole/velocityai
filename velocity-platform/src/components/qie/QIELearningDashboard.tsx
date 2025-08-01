@@ -152,7 +152,7 @@ export function QIELearningDashboard() {
     }
 
     exportData(exportableData, 'json', {
-      filename: `qie-learning-metrics-${selectedPeriod}`
+      filename: `qie-learning-metrics-€{selectedPeriod}`
     })
 
     toast({
@@ -204,7 +204,7 @@ export function QIELearningDashboard() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">
-              {insights?.averageEffectiveness ? `${Math.round(insights.averageEffectiveness * 100)}%` : '0%'}
+              {insights?.averageEffectiveness ? `€{Math.round(insights.averageEffectiveness * 100)}%` : '0%'}
             </div>
             <div className="flex items-center text-sm text-green-600 mt-1">
               <TrendingUp className="h-3 w-3 mr-1" />
@@ -232,7 +232,7 @@ export function QIELearningDashboard() {
           <CardContent>
             <div className="text-2xl font-bold">
               {feedback.length > 0 
-                ? `${Math.round((feedback.filter(f => f.rating === 'accepted').length / feedback.length) * 100)}%`
+                ? `€{Math.round((feedback.filter(f => f.rating === 'accepted').length / feedback.length) * 100)}%`
                 : '0%'}
             </div>
             <div className="flex items-center text-sm text-green-600 mt-1">
@@ -324,13 +324,13 @@ export function QIELearningDashboard() {
                       cx="50%"
                       cy="50%"
                       labelLine={false}
-                      label={({ name, value }) => `${name}: ${value}`}
+                      label={({ name, value }) => `€{name}: €{value}`}
                       outerRadius={80}
                       fill="#8884d8"
                       dataKey="value"
                     >
                       {feedbackDistribution.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
+                        <Cell key={`cell-€{index}`} fill={entry.color} />
                       ))}
                     </Pie>
                     <Tooltip />

@@ -73,7 +73,7 @@ const ISO27001Guide: React.FC = () => {
                 <h3 className="text-lg font-semibold text-purple-400 mb-2">Traditional ISO 27001</h3>
                 <ul className="text-slate-300 space-y-1 text-sm">
                   <li>• 18-24 months implementation</li>
-                  <li>• $150K-$400K+ in costs</li>
+                  <li>• €150K-€400K+ in costs</li>
                   <li>• 114 controls to implement</li>
                   <li>• Complex documentation requirements</li>
                   <li>• 3-4 FTE resources required</li>

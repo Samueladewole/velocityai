@@ -72,7 +72,7 @@ export const isFeatureEnabled = (feature: keyof typeof FEATURES): boolean => {
 
 export const shouldShowERIPComponent = (component: string): boolean => {
   if (COMPUTED_FEATURES.showERIP) return true;
-  return isFeatureEnabled(`SHOW_${component.toUpperCase()}` as keyof typeof FEATURES);
+  return isFeatureEnabled(`SHOW_€{component.toUpperCase()}` as keyof typeof FEATURES);
 };
 
 // Debug logging in development

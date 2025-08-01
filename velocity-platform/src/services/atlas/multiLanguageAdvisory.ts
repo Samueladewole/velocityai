@@ -122,7 +122,7 @@ export class MultiLanguageAdvisoryService {
     lastUpdated: Date
   }> {
     
-    const cacheKey = `${sourceLanguage}-${targetLanguage}-${this.hashContent(content)}`
+    const cacheKey = `€{sourceLanguage}-€{targetLanguage}-€{this.hashContent(content)}`
     
     // Check cache first
     if (this.translationCache.has(cacheKey)) {
@@ -139,7 +139,7 @@ export class MultiLanguageAdvisoryService {
     // Get cultural context for target language
     const culturalContext = this.culturalContexts.get(targetLanguage)
     if (!culturalContext) {
-      throw new Error(`Cultural context not available for language: ${targetLanguage}`)
+      throw new Error(`Cultural context not available for language: €{targetLanguage}`)
     }
 
     // Apply template-based translation
@@ -205,7 +205,7 @@ export class MultiLanguageAdvisoryService {
     const technicalTerms = this.extractTechnicalTerms(original)
     technicalTerms.forEach(term => {
       if (!translation.toLowerCase().includes(term.toLowerCase())) {
-        issues.push(`Technical term "${term}" may be missing in translation`)
+        issues.push(`Technical term "€{term}" may be missing in translation`)
         qualityScore -= 10
       }
     })
@@ -491,14 +491,14 @@ export class MultiLanguageAdvisoryService {
     const culturalContext = this.culturalContexts.get(language)
 
     if (!culturalContext) {
-      throw new Error(`Cultural context not available for language: ${language}`)
+      throw new Error(`Cultural context not available for language: €{language}`)
     }
 
     return this.applyTemplate(template, vulnerability, culturalContext)
   }
 
   private getTranslationTemplate(severity: string, language: string): string {
-    const templateKey = `${severity.toLowerCase()}-vulnerability`
+    const templateKey = `€{severity.toLowerCase()}-vulnerability`
     const template = this.translationTemplates.get(templateKey)
     
     if (!template) {
@@ -551,26 +551,26 @@ export class MultiLanguageAdvisoryService {
 
     // Apply technical terminology translations
     culturalContext.technicalTerminology.forEach((translation, original) => {
-      const regex = new RegExp(`\\b${original}\\b`, 'gi')
+      const regex = new RegExp(`\\b€{original}\\b`, 'gi')
       if (regex.test(adaptedContent)) {
         adaptedContent = adaptedContent.replace(regex, translation)
-        adaptations.push(`Translated technical term: ${original} → ${translation}`)
+        adaptations.push(`Translated technical term: €{original} → €{translation}`)
       }
     })
 
     // Apply regulatory reference translations
     culturalContext.regulatoryReferences.forEach((translation, original) => {
-      const regex = new RegExp(`\\b${original}\\b`, 'g')
+      const regex = new RegExp(`\\b€{original}\\b`, 'g')
       if (regex.test(adaptedContent)) {
         adaptedContent = adaptedContent.replace(regex, translation)
-        adaptations.push(`Localized regulatory reference: ${original} → ${translation}`)
+        adaptations.push(`Localized regulatory reference: €{original} → €{translation}`)
       }
     })
 
     // Add cultural-specific emergency contact information
     adaptedContent += `\n\nLOCAL EMERGENCY CONTACTS:\n`
-    adaptedContent += `CERT: ${culturalContext.emergencyContacts.cert}\n`
-    adaptedContent += `Regulator: ${culturalContext.emergencyContacts.regulator}\n`
+    adaptedContent += `CERT: €{culturalContext.emergencyContacts.cert}\n`
+    adaptedContent += `Regulator: €{culturalContext.emergencyContacts.regulator}\n`
     adaptations.push('Added localized emergency contact information')
 
     return {

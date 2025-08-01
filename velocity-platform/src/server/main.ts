@@ -38,16 +38,16 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
 app.use('*', (req: express.Request, res: express.Response) => {
   res.status(404).json({
     error: 'Not found',
-    message: `Route ${req.originalUrl} not found`
+    message: `Route €{req.originalUrl} not found`
   })
 })
 
 // Start server
 const server = app.listen(PORT, () => {
-  console.log(`🚀 ERIP API Server running on http://localhost:${PORT}`)
-  console.log(`📊 Health check: http://localhost:${PORT}/health`)
-  console.log(`🔒 Trust Score API: http://localhost:${PORT}/api/trust-score`)
-  console.log(`📈 PRISM API: http://localhost:${PORT}/api/prism`)
+  console.log(`🚀 ERIP API Server running on http://localhost:€{PORT}`)
+  console.log(`📊 Health check: http://localhost:€{PORT}/health`)
+  console.log(`🔒 Trust Score API: http://localhost:€{PORT}/api/trust-score`)
+  console.log(`📈 PRISM API: http://localhost:€{PORT}/api/prism`)
 })
 
 // Graceful shutdown

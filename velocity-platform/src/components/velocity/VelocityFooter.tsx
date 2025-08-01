@@ -76,10 +76,10 @@ const VelocityFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Product</h3>
             <div className="space-y-3">
               {[
-                { label: 'Features', path: `${routePrefix}/features`, icon: Bot },
-                { label: 'Integrations', path: `${routePrefix}/integrations`, icon: Globe },
-                { label: 'Security', path: `${routePrefix}/security`, icon: Shield },
-                { label: 'Pricing', path: `${routePrefix}/pricing`, icon: BarChart3 }
+                { label: 'Features', path: `€{routePrefix}/features`, icon: Bot },
+                { label: 'Integrations', path: `€{routePrefix}/integrations`, icon: Globe },
+                { label: 'Security', path: `€{routePrefix}/security`, icon: Shield },
+                { label: 'Pricing', path: `€{routePrefix}/pricing`, icon: BarChart3 }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -98,10 +98,10 @@ const VelocityFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Solutions</h3>
             <div className="space-y-3">
               {[
-                { label: 'SOC 2', path: `${routePrefix}/solutions/soc2`, icon: Shield },
-                { label: 'ISO 27001', path: `${routePrefix}/solutions/iso27001`, icon: Award },
-                { label: 'GDPR', path: `${routePrefix}/solutions/gdpr`, icon: Lock },
-                { label: 'HIPAA', path: `${routePrefix}/solutions/hipaa`, icon: FileText }
+                { label: 'SOC 2', path: `€{routePrefix}/solutions/soc2`, icon: Shield },
+                { label: 'ISO 27001', path: `€{routePrefix}/solutions/iso27001`, icon: Award },
+                { label: 'GDPR', path: `€{routePrefix}/solutions/gdpr`, icon: Lock },
+                { label: 'HIPAA', path: `€{routePrefix}/solutions/hipaa`, icon: FileText }
               ].map((item) => (
                 <button
                   key={item.label}
@@ -120,10 +120,10 @@ const VelocityFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <div className="space-y-3">
               {[
-                { label: 'About', path: `${routePrefix}/about`, icon: Users },
-                { label: 'Careers', path: `${routePrefix}/careers`, icon: Briefcase },
-                { label: 'Contact', path: `${routePrefix}/contact`, icon: Mail },
-                { label: 'Privacy', path: `${routePrefix}/privacy`, icon: Lock }
+                { label: 'About', path: `€{routePrefix}/about`, icon: Users },
+                { label: 'Careers', path: `€{routePrefix}/careers`, icon: Briefcase },
+                { label: 'Contact', path: `€{routePrefix}/contact`, icon: Mail },
+                { label: 'Privacy', path: `€{routePrefix}/privacy`, icon: Lock }
               ].map((item) => (
                 <button
                   key={item.label}

@@ -284,7 +284,7 @@ export const ClearanceWorking: React.FC = () => {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-all ${
+            className={`flex-1 py-2 px-4 text-sm font-medium rounded-md transition-all €{
               activeTab === tab
                 ? 'bg-white text-purple-700 shadow-sm'
                 : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
@@ -735,10 +735,10 @@ export const ClearanceWorking: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(decision.status)}`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getStatusColor(decision.status)}`}>
                         {decision.status.replace('-', ' ')}
                       </div>
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getPriorityColor(decision.priority)}`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getPriorityColor(decision.priority)}`}>
                         {decision.priority} priority
                       </div>
                     </div>

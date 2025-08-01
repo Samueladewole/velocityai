@@ -212,9 +212,9 @@ export const COMPASS: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -396,14 +396,14 @@ export const COMPASS: React.FC = () => {
                           <div className="flex items-center justify-center gap-2">
                             <div 
                               className="h-2 w-16 rounded-full bg-slate-200"
-                              style={{background: `linear-gradient(to right, ${reg.color} ${reg.impactScore}%, #e2e8f0 ${reg.impactScore}%)`}}
+                              style={{background: `linear-gradient(to right, €{reg.color} €{reg.impactScore}%, #e2e8f0 €{reg.impactScore}%)`}}
                             />
                             <span className="text-sm font-bold">{reg.impactScore}</span>
                           </div>
                         </td>
                         <td className="py-3 px-4 text-center">
                           <Badge 
-                            className={`${
+                            className={`€{
                               reg.priority === 'Critical' ? 'bg-red-100 text-red-700' :
                               reg.priority === 'High' ? 'bg-orange-100 text-orange-700' :
                               'bg-green-100 text-green-700'
@@ -445,8 +445,8 @@ export const COMPASS: React.FC = () => {
                   <AreaChart data={costReduction}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
-                    <YAxis tickFormatter={(value) => `€${(value/1000000).toFixed(1)}M`} />
-                    <Tooltip formatter={(value) => [`€${(Number(value)/1000000).toFixed(1)}M`, '']} />
+                    <YAxis tickFormatter={(value) => `€€{(value/1000000).toFixed(1)}M`} />
+                    <Tooltip formatter={(value) => [`€€{(Number(value)/1000000).toFixed(1)}M`, '']} />
                     <Area 
                       type="monotone" 
                       dataKey="traditional" 
@@ -521,7 +521,7 @@ export const COMPASS: React.FC = () => {
                     <div className="w-full bg-slate-200 rounded-full h-2">
                       <div 
                         className="bg-gradient-to-r from-green-400 to-green-600 h-2 rounded-full transition-all duration-1000"
-                        style={{ width: `${fw.reduction}%` }}
+                        style={{ width: `€{fw.reduction}%` }}
                       />
                     </div>
                     <div className="text-center">

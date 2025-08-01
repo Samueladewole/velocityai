@@ -69,13 +69,13 @@ const GlassCard: React.FC<{
     border border-white/10 
     rounded-2xl 
     transition-all duration-300
-    ${hover ? 'hover:bg-white/[0.07] hover:border-white/20 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-0.5' : ''}
-    ${gradient ? 'bg-gradient-to-br from-white/5 to-white/[0.02]' : ''}
-    ${onClick ? 'cursor-pointer' : ''}
+    €{hover ? 'hover:bg-white/[0.07] hover:border-white/20 hover:shadow-lg hover:shadow-emerald-500/10 hover:-translate-y-0.5' : ''}
+    €{gradient ? 'bg-gradient-to-br from-white/5 to-white/[0.02]' : ''}
+    €{onClick ? 'cursor-pointer' : ''}
   `;
 
   return (
-    <div className={`${baseClasses} ${className}`} onClick={onClick}>
+    <div className={`€{baseClasses} €{className}`} onClick={onClick}>
       {gradient && (
         <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 via-transparent to-amber-500/5 opacity-50" />
       )}
@@ -129,8 +129,8 @@ const LiveIndicator: React.FC<{ status?: 'active' | 'idle' | 'error' }> = ({ sta
   return (
     <div className="flex items-center gap-2">
       <div className="relative">
-        <div className={`w-2 h-2 ${colors[status]} rounded-full animate-pulse`} />
-        <div className={`absolute inset-0 w-2 h-2 ${colors[status]} rounded-full animate-ping`} />
+        <div className={`w-2 h-2 €{colors[status]} rounded-full animate-pulse`} />
+        <div className={`absolute inset-0 w-2 h-2 €{colors[status]} rounded-full animate-ping`} />
       </div>
       <span className="text-xs text-slate-400 uppercase tracking-wider">Live</span>
     </div>
@@ -224,7 +224,7 @@ const UltimateNavigation: React.FC = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-emerald-400/20 to-amber-400/20 rounded-lg flex items-center justify-center">
                 <User className="w-4 h-4 text-emerald-400" />
               </div>
-              <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${showProfile ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform €{showProfile ? 'rotate-180' : ''}`} />
             </button>
           </div>
         </div>
@@ -243,7 +243,7 @@ const NavButton: React.FC<{
     onClick={onClick}
     className={`
       flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm transition-all
-      ${active 
+      €{active 
         ? 'bg-emerald-500/10 text-emerald-400 shadow-lg shadow-emerald-500/10' 
         : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
       }
@@ -276,16 +276,16 @@ const AgentMonitorCard: React.FC<{ agent: Agent }> = ({ agent }) => {
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div className="flex items-start gap-4">
-            <div className={`p-3 bg-${color}-500/10 rounded-xl`}>
-              <Icon className={`w-6 h-6 text-${color}-400`} />
+            <div className={`p-3 bg-€{color}-500/10 rounded-xl`}>
+              <Icon className={`w-6 h-6 text-€{color}-400`} />
             </div>
             <div>
               <h3 className="font-semibold text-white text-lg mb-1">{agent.name}</h3>
               <p className="text-sm text-slate-400">{agent.description}</p>
               <div className="flex items-center gap-4 mt-2">
                 <div className="flex items-center gap-1.5">
-                  <div className={`w-2 h-2 bg-${color}-400 rounded-full ${agent.status === 'running' ? 'animate-pulse' : ''}`} />
-                  <span className={`text-xs font-medium text-${color}-400 capitalize`}>{agent.status}</span>
+                  <div className={`w-2 h-2 bg-€{color}-400 rounded-full €{agent.status === 'running' ? 'animate-pulse' : ''}`} />
+                  <span className={`text-xs font-medium text-€{color}-400 capitalize`}>{agent.status}</span>
                 </div>
                 <span className="text-xs text-slate-500">
                   Last active {new Date(agent.metrics.lastActivity).toLocaleTimeString()}
@@ -298,7 +298,7 @@ const AgentMonitorCard: React.FC<{ agent: Agent }> = ({ agent }) => {
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-2 hover:bg-white/5 rounded-lg transition-colors"
           >
-            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform €{isExpanded ? 'rotate-180' : ''}`} />
           </button>
         </div>
         
@@ -415,7 +415,7 @@ const TrendIndicator: React.FC<{ trend: MetricTrend }> = ({ trend }) => {
   };
   const Icon = icons[trend];
   
-  return <Icon className={`w-3 h-3 ${colors[trend]}`} />;
+  return <Icon className={`w-3 h-3 €{colors[trend]}`} />;
 };
 
 const PerformanceBar: React.FC<{
@@ -437,8 +437,8 @@ const PerformanceBar: React.FC<{
       </div>
       <div className="h-1.5 bg-slate-700/50 rounded-full overflow-hidden">
         <div 
-          className={`h-full bg-${color}-500 transition-all duration-500`}
-          style={{ width: `${percentage}%` }}
+          className={`h-full bg-€{color}-500 transition-all duration-500`}
+          style={{ width: `€{percentage}%` }}
         />
       </div>
     </div>
@@ -597,10 +597,10 @@ const ActivityTimeline: React.FC = () => {
               )}
               
               {/* Icon */}
-              <div className={`relative flex-shrink-0 w-12 h-12 ${style.bg} rounded-xl flex items-center justify-center`}>
-                <AgentIcon className={`w-5 h-5 ${style.text}`} />
-                <div className={`absolute -bottom-1 -right-1 w-5 h-5 ${style.bg} rounded-full flex items-center justify-center border-2 border-slate-800`}>
-                  <StatusIcon className={`w-3 h-3 ${style.text}`} />
+              <div className={`relative flex-shrink-0 w-12 h-12 €{style.bg} rounded-xl flex items-center justify-center`}>
+                <AgentIcon className={`w-5 h-5 €{style.text}`} />
+                <div className={`absolute -bottom-1 -right-1 w-5 h-5 €{style.bg} rounded-full flex items-center justify-center border-2 border-slate-800`}>
+                  <StatusIcon className={`w-3 h-3 €{style.text}`} />
                 </div>
               </div>
               
@@ -632,10 +632,10 @@ const ActivityTimeline: React.FC = () => {
 // Helper function
 const formatTimeAgo = (date: Date): string => {
   const minutes = Math.floor((Date.now() - date.getTime()) / 60000);
-  if (minutes < 60) return `${minutes}m ago`;
+  if (minutes < 60) return `€{minutes}m ago`;
   const hours = Math.floor(minutes / 60);
-  if (hours < 24) return `${hours}h ago`;
-  return `${Math.floor(hours / 24)}d ago`;
+  if (hours < 24) return `€{hours}h ago`;
+  return `€{Math.floor(hours / 24)}d ago`;
 };
 
 // Quick Actions Grid
@@ -680,8 +680,8 @@ const QuickActionsGrid: React.FC = () => {
           onClick={action.onClick}
           className="p-6 cursor-pointer group"
         >
-          <div className={`w-12 h-12 bg-${action.color}-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
-            <action.icon className={`w-6 h-6 text-${action.color}-400`} />
+          <div className={`w-12 h-12 bg-€{action.color}-500/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+            <action.icon className={`w-6 h-6 text-€{action.color}-400`} />
           </div>
           <h4 className="font-medium text-white mb-1 group-hover:text-emerald-400 transition-colors">
             {action.title}
@@ -726,13 +726,13 @@ const ComplianceStatus: React.FC = () => {
               </div>
               <div className="h-2 bg-slate-700/50 rounded-full overflow-hidden">
                 <div 
-                  className={`h-full transition-all duration-500 ${
+                  className={`h-full transition-all duration-500 €{
                     framework.status >= 95 ? 'bg-emerald-500' : 
                     framework.status >= 90 ? 'bg-blue-500' : 
                     framework.status >= 80 ? 'bg-amber-500' : 
                     'bg-red-500'
                   }`}
-                  style={{ width: `${framework.status}%` }}
+                  style={{ width: `€{framework.status}%` }}
                 />
               </div>
               <p className="text-xs text-slate-500 mt-1">Last audit: {framework.lastAudit}</p>
@@ -902,7 +902,7 @@ const VelocityDashboardUltimate: React.FC = () => {
             <MetricCard
               title="Active Agents"
               value={metrics.activeAgents}
-              suffix={`/${metrics.totalAgents}`}
+              suffix={`/€{metrics.totalAgents}`}
               trend="stable"
               icon={Bot}
               color="blue"
@@ -1000,13 +1000,13 @@ const MetricCard: React.FC<{
 }> = ({ title, value, suffix = '', trend, change, icon: Icon, color, sparkline }) => (
   <GlassCard hover gradient className="p-6">
     <div className="flex items-start justify-between mb-4">
-      <div className={`p-2.5 bg-${color}-500/10 rounded-xl`}>
-        <Icon className={`w-5 h-5 text-${color}-400`} />
+      <div className={`p-2.5 bg-€{color}-500/10 rounded-xl`}>
+        <Icon className={`w-5 h-5 text-€{color}-400`} />
       </div>
       {trend && (
         <div className="flex items-center gap-2">
           {change && (
-            <span className={`text-xs font-medium ${trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>
+            <span className={`text-xs font-medium €{trend === 'up' ? 'text-emerald-400' : 'text-red-400'}`}>
               {change}
             </span>
           )}
@@ -1028,10 +1028,10 @@ const MetricCard: React.FC<{
         {[...Array(12)].map((_, i) => (
           <div 
             key={i}
-            className={`flex-1 bg-${color}-500/30 rounded-sm`}
+            className={`flex-1 bg-€{color}-500/30 rounded-sm`}
             style={{ 
-              height: `${Math.random() * 100}%`,
-              animationDelay: `${i * 50}ms`
+              height: `€{Math.random() * 100}%`,
+              animationDelay: `€{i * 50}ms`
             }}
           />
         ))}

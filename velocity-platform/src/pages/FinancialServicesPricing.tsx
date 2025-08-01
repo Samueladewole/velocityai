@@ -31,13 +31,13 @@ const FinancialServicesPricing: React.FC = () => {
   const bankingTiers = [
     {
       name: "Community Banking",
-      description: "Perfect for community banks and credit unions with up to $2B in assets",
+      description: "Perfect for community banks and credit unions with up to €2B in assets",
       price: { monthly: 2999, annual: 29990 },
       popular: false,
       icon: Building,
       color: "emerald",
-      assetRange: "Up to $2B in assets",
-      savingsMessage: "Replaces $150K+ in compliance consulting annually",
+      assetRange: "Up to €2B in assets",
+      savingsMessage: "Replaces €150K+ in compliance consulting annually",
       competitorComparison: "75% cheaper than traditional banking compliance solutions",
       bankingSpecific: [
         "Core Banking System Integration (Temenos, Finastra)",
@@ -67,13 +67,13 @@ const FinancialServicesPricing: React.FC = () => {
     },
     {
       name: "Regional Banking",
-      description: "Designed for regional banks with $2B-$50B in assets requiring multi-jurisdictional compliance",
+      description: "Designed for regional banks with €2B-€50B in assets requiring multi-jurisdictional compliance",
       price: { monthly: 5999, annual: 59990 },
       popular: true,
       icon: Trophy,
       color: "blue",
-      assetRange: "$2B-$50B in assets",
-      savingsMessage: "Replaces $350K+ in compliance consulting annually",
+      assetRange: "€2B-€50B in assets",
+      savingsMessage: "Replaces €350K+ in compliance consulting annually",
       competitorComparison: "70% cheaper with revolutionary banking automation",
       bankingSpecific: [
         "Multi-State Banking Compliance Coordination",
@@ -105,14 +105,14 @@ const FinancialServicesPricing: React.FC = () => {
     },
     {
       name: "Global Banking Enterprise",
-      description: "Complete solution for global banks with $50B+ in assets and complex international operations",
+      description: "Complete solution for global banks with €50B+ in assets and complex international operations",
       price: { monthly: 12999, annual: 129990 },
       popular: false,
       icon: Crown,
       color: "purple",
-      assetRange: "$50B+ in assets",
-      savingsMessage: "Replaces $750K+ in compliance consulting annually",
-      competitorComparison: "65% cheaper than Big 4 consulting ($35K+/month elsewhere)",
+      assetRange: "€50B+ in assets",
+      savingsMessage: "Replaces €750K+ in compliance consulting annually",
+      competitorComparison: "65% cheaper than Big 4 consulting (€35K+/month elsewhere)",
       bankingSpecific: [
         "Global Regulatory Harmonization (Fed, ECB, BoE, etc.)",
         "Systemically Important Bank (SIB) Requirements",
@@ -244,14 +244,14 @@ const FinancialServicesPricing: React.FC = () => {
             <div className="flex justify-center mb-8">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-1 border border-white/20">
                 {[
-                  { id: 'community', label: 'Community Bank', assets: 'Up to $2B' },
-                  { id: 'regional', label: 'Regional Bank', assets: '$2B-$50B' },
-                  { id: 'enterprise', label: 'Global Bank', assets: '$50B+' }
+                  { id: 'community', label: 'Community Bank', assets: 'Up to €2B' },
+                  { id: 'regional', label: 'Regional Bank', assets: '€2B-€50B' },
+                  { id: 'enterprise', label: 'Global Bank', assets: '€50B+' }
                 ].map((size) => (
                   <button
                     key={size.id}
                     onClick={() => setInstitutionSize(size.id as any)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all €{
                       institutionSize === size.id
                         ? 'bg-blue-500 text-white'
                         : 'text-slate-300 hover:text-white'
@@ -266,18 +266,18 @@ const FinancialServicesPricing: React.FC = () => {
             
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm €{billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
                 Monthly
               </span>
               <button
                 onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'annual' : 'monthly')}
                 className="relative w-12 h-6 bg-slate-700 rounded-full transition-colors duration-300"
               >
-                <div className={`absolute top-1 w-4 h-4 bg-blue-500 rounded-full transition-transform duration-300 ${
+                <div className={`absolute top-1 w-4 h-4 bg-blue-500 rounded-full transition-transform duration-300 €{
                   billingPeriod === 'annual' ? 'translate-x-7' : 'translate-x-1'
                 }`} />
               </button>
-              <span className={`text-sm ${billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm €{billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
                 Annual
               </span>
               {billingPeriod === 'annual' && (
@@ -304,7 +304,7 @@ const FinancialServicesPricing: React.FC = () => {
               return (
                 <div 
                   key={index} 
-                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 ${
+                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 €{
                     isSelected
                       ? 'border-blue-500/70 shadow-2xl shadow-blue-500/30 scale-105' 
                       : tier.popular 
@@ -322,8 +322,8 @@ const FinancialServicesPricing: React.FC = () => {
                   )}
                   
                   <div className="text-center mb-8">
-                    <div className={`p-4 bg-${tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
-                      <tier.icon className={`w-8 h-8 text-${tier.color}-400`} />
+                    <div className={`p-4 bg-€{tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
+                      <tier.icon className={`w-8 h-8 text-€{tier.color}-400`} />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm mb-2">{tier.description}</p>
@@ -332,13 +332,13 @@ const FinancialServicesPricing: React.FC = () => {
                     <div className="mb-6">
                       <div className="flex items-baseline justify-center gap-1">
                         <span className="text-4xl font-bold text-white">
-                          ${billingPeriod === 'monthly' ? tier.price.monthly.toLocaleString() : Math.round(tier.price.annual / 12).toLocaleString()}
+                          €{billingPeriod === 'monthly' ? tier.price.monthly.toLocaleString() : Math.round(tier.price.annual / 12).toLocaleString()}
                         </span>
                         <span className="text-slate-400">/month</span>
                       </div>
                       {billingPeriod === 'annual' && (
                         <div className="text-blue-400 text-sm mt-2">
-                          Save ${savings.savings.toLocaleString()}/year ({savings.percentage}% off)
+                          Save €{savings.savings.toLocaleString()}/year ({savings.percentage}% off)
                         </div>
                       )}
                       
@@ -358,7 +358,7 @@ const FinancialServicesPricing: React.FC = () => {
                     
                     <button
                       onClick={() => navigate('/velocity/assessment')}
-                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 €{
                         tier.popular || isSelected
                           ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl'
                           : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
@@ -382,7 +382,7 @@ const FinancialServicesPricing: React.FC = () => {
                     <div className="text-white font-medium mt-6 mb-3">Platform Features:</div>
                     {tier.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start gap-3">
-                        <CheckCircle className={`w-4 h-4 text-${tier.color}-400 mt-0.5 flex-shrink-0`} />
+                        <CheckCircle className={`w-4 h-4 text-€{tier.color}-400 mt-0.5 flex-shrink-0`} />
                         <span className="text-slate-300 text-sm">{feature}</span>
                       </div>
                     ))}
@@ -420,7 +420,7 @@ const FinancialServicesPricing: React.FC = () => {
                     <h3 className="font-semibold text-white">{addon.name}</h3>
                   </div>
                   <div className="text-2xl font-bold text-blue-400 mb-2">
-                    ${addon.price.toLocaleString()}
+                    €{addon.price.toLocaleString()}
                   </div>
                   <p className="text-slate-400 text-sm mb-4">{addon.description}</p>
                   <button className="w-full px-4 py-2 bg-blue-500/20 hover:bg-blue-500/30 text-blue-300 rounded-lg text-sm font-medium transition-colors">
@@ -444,10 +444,10 @@ const FinancialServicesPricing: React.FC = () => {
               {bankingValueProps.map((prop, index) => {
                 const Icon = prop.icon;
                 return (
-                  <div key={index} className={`bg-gradient-to-br from-${prop.color}-500/10 to-${prop.color}-600/10 rounded-2xl p-6 border border-${prop.color}-500/20`}>
+                  <div key={index} className={`bg-gradient-to-br from-€{prop.color}-500/10 to-€{prop.color}-600/10 rounded-2xl p-6 border border-€{prop.color}-500/20`}>
                     <div className="text-center">
-                      <div className={`w-12 h-12 bg-${prop.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                        <Icon className={`w-6 h-6 text-${prop.color}-400`} />
+                      <div className={`w-12 h-12 bg-€{prop.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
+                        <Icon className={`w-6 h-6 text-€{prop.color}-400`} />
                       </div>
                       <h3 className="font-bold text-white mb-3">{prop.title}</h3>
                       <p className="text-slate-300 text-sm">{prop.description}</p>
@@ -480,7 +480,7 @@ const FinancialServicesPricing: React.FC = () => {
                   <div className="text-xs text-slate-400 mt-1">vs 6-18 months traditional</div>
                 </div>
                 <div className="text-center p-6 bg-white/5 rounded-xl">
-                  <div className="text-3xl font-bold text-purple-400 mb-2">$2.1M</div>
+                  <div className="text-3xl font-bold text-purple-400 mb-2">€2.1M</div>
                   <div className="text-slate-300 text-sm">3-Year Savings</div>
                   <div className="text-xs text-slate-400 mt-1">Regional bank average</div>
                 </div>

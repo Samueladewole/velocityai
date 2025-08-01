@@ -34,8 +34,8 @@ const Skeleton = React.forwardRef<HTMLDivElement, SkeletonProps>(
     };
     
     const dimensions = {
-      width: width ? (typeof width === 'number' ? `${width}px` : width) : undefined,
-      height: height ? (typeof height === 'number' ? `${height}px` : height) : undefined,
+      width: width ? (typeof width === 'number' ? `€{width}px` : width) : undefined,
+      height: height ? (typeof height === 'number' ? `€{height}px` : height) : undefined,
     };
     
     return (
@@ -109,7 +109,7 @@ export const SkeletonTable: React.FC<{ rows?: number; columns?: number; classNam
       <div className="border rounded-lg overflow-hidden">
         {/* Header */}
         <div className="border-b bg-muted/50 p-4">
-          <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+          <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(€{columns}, 1fr)` }}>
             {Array.from({ length: columns }).map((_, i) => (
               <Skeleton key={i} variant="text" height={20} />
             ))}
@@ -119,7 +119,7 @@ export const SkeletonTable: React.FC<{ rows?: number; columns?: number; classNam
         <div className="divide-y">
           {Array.from({ length: rows }).map((_, rowIndex) => (
             <div key={rowIndex} className="p-4">
-              <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(${columns}, 1fr)` }}>
+              <div className="grid gap-4" style={{ gridTemplateColumns: `repeat(€{columns}, 1fr)` }}>
                 {Array.from({ length: columns }).map((_, colIndex) => (
                   <Skeleton 
                     key={colIndex} 

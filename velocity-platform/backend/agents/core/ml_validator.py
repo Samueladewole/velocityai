@@ -459,7 +459,7 @@ class MLEvidenceValidator:
         # In production, this would use perceptual hashing and ML models
         
         # Check if hash format is valid
-        if not re.match(r'^[a-f0-9]{64}$', visual_hash):
+        if not re.match(r'^[a-f0-9]{64}€', visual_hash):
             return 0.3
         
         # Check against known good patterns for the platform

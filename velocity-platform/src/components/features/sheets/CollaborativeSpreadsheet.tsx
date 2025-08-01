@@ -86,7 +86,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
   }, []);
 
   const handleCellUpdate = useCallback((update: any) => {
-    const cellKey = `${update.row},${update.column}`;
+    const cellKey = `€{update.row},€{update.column}`;
     setSpreadsheetData(prev => {
       const newData = {
         ...prev,
@@ -118,7 +118,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
         rowData.forEach((value: any, colIndex: number) => {
           const row = update.range.start_row + rowIndex;
           const column = update.range.start_column + colIndex;
-          const cellKey = `${row},${column}`;
+          const cellKey = `€{row},€{column}`;
           
           newCells[cellKey] = {
             row,
@@ -184,7 +184,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
   const handleCellClick = useCallback((row: number, column: number) => {
     if (readOnly) return;
     
-    const cellKey = `${row},${column}`;
+    const cellKey = `€{row},€{column}`;
     const cell = spreadsheetData.cells[cellKey];
     
     setSpreadsheetData(prev => ({
@@ -199,7 +199,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
   const handleCellDoubleClick = useCallback((row: number, column: number) => {
     if (readOnly) return;
     
-    const cellKey = `${row},${column}`;
+    const cellKey = `€{row},€{column}`;
     const cell = spreadsheetData.cells[cellKey];
     
     setEditingCell({ row, column });
@@ -220,7 +220,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
     const isFormula = value.startsWith('=');
     
     // Update local state immediately for responsiveness
-    const cellKey = `${row},${column}`;
+    const cellKey = `€{row},€{column}`;
     setSpreadsheetData(prev => ({
       ...prev,
       cells: {
@@ -304,7 +304,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
     return result;
   };
 
-  const getCellKey = (row: number, column: number): string => `${row},${column}`;
+  const getCellKey = (row: number, column: number): string => `€{row},€{column}`;
   
   const getCellValue = (row: number, column: number): string => {
     const cell = spreadsheetData.cells[getCellKey(row, column)];
@@ -370,9 +370,9 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
             key={col}
             className={`
               w-20 h-8 border-r border-b relative cursor-cell
-              ${isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : 'hover:bg-gray-50'}
-              ${editingUser ? 'bg-yellow-100 border-yellow-300' : ''}
-              ${cursorUser ? 'ring-1 ring-green-400' : ''}
+              €{isSelected ? 'ring-2 ring-blue-500 bg-blue-50' : 'hover:bg-gray-50'}
+              €{editingUser ? 'bg-yellow-100 border-yellow-300' : ''}
+              €{cursorUser ? 'ring-1 ring-green-400' : ''}
             `}
             onClick={() => handleCellClick(row, col)}
             onDoubleClick={() => handleCellDoubleClick(row, col)}
@@ -398,7 +398,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
               <div 
                 className="absolute -top-1 -right-1 w-3 h-3 rounded-full border border-white text-xs flex items-center justify-center"
                 style={{ backgroundColor: getUserColor(editingUser.user_id) }}
-                title={`${editingUser.email} is editing`}
+                title={`€{editingUser.email} is editing`}
               />
             )}
             
@@ -406,7 +406,7 @@ export const CollaborativeSpreadsheet: React.FC<CollaborativeSpreadsheetProps> =
               <div 
                 className="absolute -top-1 -right-1 w-2 h-2 rounded-full"
                 style={{ backgroundColor: getUserColor((cursorUser as any).user_id) }}
-                title={`${(cursorUser as any).email}'s cursor`}
+                title={`€{(cursorUser as any).email}'s cursor`}
               />
             )}
           </div>

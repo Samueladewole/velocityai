@@ -169,9 +169,9 @@ const ROIMetricsDashboard: React.FC = () => {
   }, []);
 
   const formatMetricValue = (value: number, unit: string): string => {
-    if (unit === 'K USD') return `$${value}K`;
-    if (unit === '% increase') return `+${value}%`;
-    return `${value} ${unit}`;
+    if (unit === 'K USD') return `€€{value}K`;
+    if (unit === '% increase') return `+€{value}%`;
+    return `€{value} €{unit}`;
   };
 
   const calculateImprovement = (current: number, previous: number, trend: string): string => {
@@ -179,7 +179,7 @@ const ROIMetricsDashboard: React.FC = () => {
       ? ((previous - current) / previous * 100)
       : ((current - previous) / previous * 100);
     
-    return `${Math.round(improvement)}%`;
+    return `€{Math.round(improvement)}%`;
   };
 
   const getCategoryColor = (category: string): string => {
@@ -263,7 +263,7 @@ const ROIMetricsDashboard: React.FC = () => {
                 <button
                   key={tab.key}
                   onClick={() => setActiveView(tab.key as any)}
-                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 ${
+                  className={`rounded-full px-6 py-3 font-medium transition-all duration-300 €{
                     activeView === tab.key
                       ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg'
                       : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
@@ -286,7 +286,7 @@ const ROIMetricsDashboard: React.FC = () => {
                       <div className="text-2xl">
                         {getCategoryIcon(metric.category)}
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium border €{
                         metric.impact === 'high' 
                           ? 'bg-red-500/20 text-red-400 border-red-500/30' :
                         metric.impact === 'medium'
@@ -298,7 +298,7 @@ const ROIMetricsDashboard: React.FC = () => {
                     </div>
                     
                     <div className="space-y-2">
-                      <div className={`text-3xl font-bold bg-gradient-to-r ${
+                      <div className={`text-3xl font-bold bg-gradient-to-r €{
                         metric.category === 'cost' ? 'from-emerald-400 to-emerald-500' :
                         metric.category === 'time' ? 'from-blue-400 to-cyan-500' :
                         metric.category === 'revenue' ? 'from-purple-400 to-pink-500' :
@@ -308,7 +308,7 @@ const ROIMetricsDashboard: React.FC = () => {
                       </div>
                       
                       <div className="flex items-center space-x-2">
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border ${
+                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium border €{
                           metric.trend === 'up' 
                             ? 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30' 
                             : metric.trend === 'down'
@@ -345,7 +345,7 @@ const ROIMetricsDashboard: React.FC = () => {
                       Cost Impact
                     </h3>
                   </div>
-                  <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent mb-2">$120K</div>
+                  <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent mb-2">€120K</div>
                   <div className="text-sm text-slate-400 mb-4">Average annual savings per customer</div>
                   <div className="space-y-3 text-sm">
                     <div className="flex justify-between text-white">
@@ -458,7 +458,7 @@ const ROIMetricsDashboard: React.FC = () => {
                             <div 
                               className="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full"
                               style={{ 
-                                width: `${Math.min(95, (item.industry / Math.max(item.velocity, item.industry)) * 100)}%` 
+                                width: `€{Math.min(95, (item.industry / Math.max(item.velocity, item.industry)) * 100)}%` 
                               }}
                             />
                           </div>
@@ -507,7 +507,7 @@ const ROIMetricsDashboard: React.FC = () => {
                       phase: 'Month 3',
                       title: 'Business Impact',
                       description: 'Measurable business outcomes and ROI realization',
-                      metrics: ['Enterprise deals: +40%', 'Sales cycle: -40%', 'Cost savings: $30K/month'],
+                      metrics: ['Enterprise deals: +40%', 'Sales cycle: -40%', 'Cost savings: €30K/month'],
                       impact: 'ROI targets exceeded'
                     },
                     {

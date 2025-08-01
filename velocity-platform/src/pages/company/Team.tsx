@@ -40,7 +40,7 @@ const Team: React.FC = () => {
                 <a href={member.twitter} className="text-gray-400 hover:text-blue-600">
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href={`mailto:${member.email}`} className="text-gray-400 hover:text-blue-600">
+                <a href={`mailto:€{member.email}`} className="text-gray-400 hover:text-blue-600">
                   <Mail className="w-5 h-5" />
                 </a>
               </div>

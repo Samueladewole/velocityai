@@ -26,21 +26,21 @@ const CaseStudies: React.FC = () => {
   const caseStudies = [
     {
       id: 1,
-      company: "Regional Bank ($15B Assets)",
+      company: "Regional Bank (€15B Assets)",
       industry: "banking",
       logo: "🏦",
       challenge: "Multi-jurisdictional GDPR compliance for 2.5M customers across 12 EU countries with complex data flows and legacy banking systems",
       solution: "Velocity GDPR RoPA automation with specialized banking agents and core system integration",
       implementation: "4 weeks",
       results: [
-        "$150K saved vs OneTrust + consulting",
+        "€150K saved vs OneTrust + consulting",
         "100% GDPR audit pass on first attempt",
         "83% reduction in compliance costs",
         "Zero privacy breaches since implementation",
         "Automated RoPA for 15 banking processes"
       ],
       metrics: {
-        costSavings: "$150,000",
+        costSavings: "€150,000",
         timeSavings: "18 weeks",
         automationIncrease: "83%",
         auditSuccess: "100%"
@@ -59,14 +59,14 @@ const CaseStudies: React.FC = () => {
       solution: "Velocity HIPAA automation with patient data classification and breach prevention systems",
       implementation: "6 weeks",
       results: [
-        "$200K saved vs traditional consulting",
+        "€200K saved vs traditional consulting",
         "95% HIPAA coverage across all systems",
         "Zero patient data breaches",
         "Automated BAA management for 150+ vendors",
         "Real-time PHI monitoring and alerts"
       ],
       metrics: {
-        costSavings: "$200,000",
+        costSavings: "€200,000",
         timeSavings: "16 weeks",
         automationIncrease: "95%",
         auditSuccess: "100%"
@@ -85,14 +85,14 @@ const CaseStudies: React.FC = () => {
       solution: "Complete Velocity platform with multi-tenant isolation monitoring and automated evidence collection",
       implementation: "8 weeks",
       results: [
-        "$120K saved vs traditional audit prep",
+        "€120K saved vs traditional audit prep",
         "96.8% audit pass rate",
         "45-day audit readiness vs 6 months",
         "Automated evidence for 400+ controls",
         "Real-time security posture monitoring"
       ],
       metrics: {
-        costSavings: "$120,000",
+        costSavings: "€120,000",
         timeSavings: "20 weeks",
         automationIncrease: "90%",
         auditSuccess: "96.8%"
@@ -104,21 +104,21 @@ const CaseStudies: React.FC = () => {
     },
     {
       id: 4,
-      company: "Investment Bank ($50B Assets)",
+      company: "Investment Bank (€50B Assets)",
       industry: "banking",
       logo: "🏛️",
       challenge: "ISAE 3000 compliance for trading systems across US, EU, and APAC with complex derivatives processing",
       solution: "Velocity Enterprise with custom banking agents and global compliance monitoring",
       implementation: "12 weeks",
       results: [
-        "$500K+ saved vs Big 4 consulting",
+        "€500K+ saved vs Big 4 consulting",
         "88% cost reduction vs traditional approach",
         "25-country compliance coverage",
         "Real-time risk monitoring for trading systems",
         "Automated regulatory reporting"
       ],
       metrics: {
-        costSavings: "$500,000",
+        costSavings: "€500,000",
         timeSavings: "40 weeks",
         automationIncrease: "88%",
         auditSuccess: "100%"
@@ -137,14 +137,14 @@ const CaseStudies: React.FC = () => {
       solution: "Velocity manufacturing automation with OT/IT convergence monitoring and supply chain security",
       implementation: "10 weeks",
       results: [
-        "$180K saved vs consulting fees",
+        "€180K saved vs consulting fees",
         "75% reduction in manual documentation",
         "50-facility network compliance",
         "Automated vendor risk assessments",
         "IoT device security monitoring"
       ],
       metrics: {
-        costSavings: "$180,000",
+        costSavings: "€180,000",
         timeSavings: "24 weeks",
         automationIncrease: "75%",
         auditSuccess: "95%"
@@ -163,14 +163,14 @@ const CaseStudies: React.FC = () => {
       solution: "Velocity Professional with accelerated implementation and dedicated success management",
       implementation: "3 weeks",
       results: [
-        "$75K saved vs hiring compliance team",
+        "€75K saved vs hiring compliance team",
         "4-framework compliance in 3 weeks",
         "Series B funding successful",
         "96% automation of compliance tasks",
         "Investor-ready compliance posture"
       ],
       metrics: {
-        costSavings: "$75,000",
+        costSavings: "€75,000",
         timeSavings: "12 weeks",
         automationIncrease: "96%",
         auditSuccess: "100%"
@@ -229,7 +229,7 @@ const CaseStudies: React.FC = () => {
                 <div className="text-sm text-slate-300">Organizations</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">$50M+</div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">€50M+</div>
                 <div className="text-sm text-slate-300">Total Savings</div>
               </div>
               <div className="text-center">
@@ -330,7 +330,7 @@ const CaseStudies: React.FC = () => {
                 <button
                   key={industry.id}
                   onClick={() => setActiveFilter(industry.id as any)}
-                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-200 €{
                     activeFilter === industry.id
                       ? 'bg-blue-600 text-white'
                       : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'

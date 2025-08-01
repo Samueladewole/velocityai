@@ -68,7 +68,7 @@ const QIE: React.FC = () => {
                 <h3 className="text-xl font-bold text-slate-900 mb-6">QIE Impact Metrics</h3>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-emerald-600 mb-2">$2.5M</div>
+                    <div className="text-3xl font-bold text-emerald-600 mb-2">€2.5M</div>
                     <div className="text-sm text-slate-600">Avg Cost Savings</div>
                   </div>
                   <div className="text-center">
@@ -144,7 +144,7 @@ const QIE: React.FC = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-slate-600">Annual Savings:</span>
-                      <span className="font-bold text-emerald-600">$420,000</span>
+                      <span className="font-bold text-emerald-600">€420,000</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600">Time Reduced:</span>
@@ -165,7 +165,7 @@ const QIE: React.FC = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-slate-600">Annual Savings:</span>
-                      <span className="font-bold text-emerald-600">$180,000</span>
+                      <span className="font-bold text-emerald-600">€180,000</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-600">Time Reduced:</span>
@@ -202,19 +202,19 @@ const QIE: React.FC = () => {
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span>Cost Avoidance</span>
-                    <span className="font-medium text-emerald-600">$1.2M</span>
+                    <span className="font-medium text-emerald-600">€1.2M</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Audit Savings</span>
-                    <span className="font-medium text-emerald-600">$340K</span>
+                    <span className="font-medium text-emerald-600">€340K</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Consulting Reduction</span>
-                    <span className="font-medium text-emerald-600">$280K</span>
+                    <span className="font-medium text-emerald-600">€280K</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Risk Mitigation</span>
-                    <span className="font-medium text-emerald-600">$890K</span>
+                    <span className="font-medium text-emerald-600">€890K</span>
                   </div>
                 </div>
               </div>
@@ -338,7 +338,7 @@ const QIE: React.FC = () => {
                 {/* Key Performance Indicators */}
                 <div className="grid lg:grid-cols-6 gap-4">
                   {[
-                    { label: 'Monthly Savings', value: '$45K', change: '+12%', color: 'emerald' },
+                    { label: 'Monthly Savings', value: '€45K', change: '+12%', color: 'emerald' },
                     { label: 'Time Saved', value: '120 hrs', change: '+8%', color: 'blue' },
                     { label: 'ROI %', value: '450%', change: '+15%', color: 'purple' },
                     { label: 'Efficiency', value: '94%', change: '+3%', color: 'amber' },
@@ -348,7 +348,7 @@ const QIE: React.FC = () => {
                     <div key={index} className="bg-white rounded-lg p-3 border text-center">
                       <div className="text-lg font-bold text-slate-900">{kpi.value}</div>
                       <div className="text-xs text-slate-600 mb-1">{kpi.label}</div>
-                      <div className={`text-xs font-medium text-${kpi.color}-600`}>{kpi.change}</div>
+                      <div className={`text-xs font-medium text-€{kpi.color}-600`}>{kpi.change}</div>
                     </div>
                   ))}
                 </div>
@@ -491,21 +491,21 @@ const QIE: React.FC = () => {
                           <div className="flex items-center gap-3">
                             <span className="text-xs text-slate-600 w-16">You</span>
                             <div className="flex-1 bg-slate-200 rounded-full h-2">
-                              <div className="bg-emerald-500 h-2 rounded-full" style={{width: `${item.your}%`}}></div>
+                              <div className="bg-emerald-500 h-2 rounded-full" style={{width: `€{item.your}%`}}></div>
                             </div>
                             <span className="text-xs font-medium w-12">{item.your}%</span>
                           </div>
                           <div className="flex items-center gap-3">
                             <span className="text-xs text-slate-600 w-16">Industry</span>
                             <div className="flex-1 bg-slate-200 rounded-full h-2">
-                              <div className="bg-slate-400 h-2 rounded-full" style={{width: `${item.industry}%`}}></div>
+                              <div className="bg-slate-400 h-2 rounded-full" style={{width: `€{item.industry}%`}}></div>
                             </div>
                             <span className="text-xs font-medium w-12">{item.industry}%</span>
                           </div>
                           <div className="flex items-center gap-3">
                             <span className="text-xs text-slate-600 w-16">Top 10%</span>
                             <div className="flex-1 bg-slate-200 rounded-full h-2">
-                              <div className="bg-blue-500 h-2 rounded-full" style={{width: `${item.top}%`}}></div>
+                              <div className="bg-blue-500 h-2 rounded-full" style={{width: `€{item.top}%`}}></div>
                             </div>
                             <span className="text-xs font-medium w-12">{item.top}%</span>
                           </div>
@@ -521,10 +521,10 @@ const QIE: React.FC = () => {
                     <div className="p-4 bg-emerald-50 rounded-lg">
                       <h5 className="font-semibold text-slate-900 mb-2">Cost Per Control</h5>
                       <div className="flex justify-between text-sm mb-2">
-                        <span>Your Cost: $245</span>
+                        <span>Your Cost: €245</span>
                         <span className="text-emerald-600">67% below industry</span>
                       </div>
-                      <div className="text-xs text-slate-600">Industry Average: $742</div>
+                      <div className="text-xs text-slate-600">Industry Average: €742</div>
                     </div>
 
                     <div className="p-4 bg-blue-50 rounded-lg">
@@ -575,12 +575,12 @@ const QIE: React.FC = () => {
               </div>
               <div className="bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl p-6 text-white text-center">
                 <h3 className="font-bold mb-2">Net Savings</h3>
-                <div className="text-3xl font-bold mb-2">$2.1M</div>
+                <div className="text-3xl font-bold mb-2">€2.1M</div>
                 <div className="text-sm opacity-90">Annual</div>
               </div>
               <div className="bg-gradient-to-r from-amber-500 to-amber-600 rounded-xl p-6 text-white text-center">
                 <h3 className="font-bold mb-2">Cost Avoidance</h3>
-                <div className="text-3xl font-bold mb-2">$850K</div>
+                <div className="text-3xl font-bold mb-2">€850K</div>
                 <div className="text-sm opacity-90">Risk mitigation</div>
               </div>
             </div>
@@ -597,20 +597,20 @@ const QIE: React.FC = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between p-3 bg-red-50 rounded-lg">
                       <span>Velocity Platform (Annual)</span>
-                      <span className="font-medium">$120,000</span>
+                      <span className="font-medium">€120,000</span>
                     </div>
                     <div className="flex justify-between p-3 bg-red-50 rounded-lg">
                       <span>Implementation & Training</span>
-                      <span className="font-medium">$45,000</span>
+                      <span className="font-medium">€45,000</span>
                     </div>
                     <div className="flex justify-between p-3 bg-red-50 rounded-lg">
                       <span>Integration Setup</span>
-                      <span className="font-medium">$25,000</span>
+                      <span className="font-medium">€25,000</span>
                     </div>
                     <hr />
                     <div className="flex justify-between font-bold text-lg">
                       <span>Total Investment</span>
-                      <span className="text-red-600">$190,000</span>
+                      <span className="text-red-600">€190,000</span>
                     </div>
                   </div>
                 </div>
@@ -620,24 +620,24 @@ const QIE: React.FC = () => {
                   <div className="space-y-3">
                     <div className="flex justify-between p-3 bg-emerald-50 rounded-lg">
                       <span>Audit Cost Reduction</span>
-                      <span className="font-medium">$420,000</span>
+                      <span className="font-medium">€420,000</span>
                     </div>
                     <div className="flex justify-between p-3 bg-emerald-50 rounded-lg">
                       <span>Staff Time Savings</span>
-                      <span className="font-medium">$680,000</span>
+                      <span className="font-medium">€680,000</span>
                     </div>
                     <div className="flex justify-between p-3 bg-emerald-50 rounded-lg">
                       <span>Consultant Elimination</span>
-                      <span className="font-medium">$320,000</span>
+                      <span className="font-medium">€320,000</span>
                     </div>
                     <div className="flex justify-between p-3 bg-emerald-50 rounded-lg">
                       <span>Risk Mitigation Value</span>
-                      <span className="font-medium">$450,000</span>
+                      <span className="font-medium">€450,000</span>
                     </div>
                     <hr />
                     <div className="flex justify-between font-bold text-lg">
                       <span>Total Returns</span>
-                      <span className="text-emerald-600">$1,870,000</span>
+                      <span className="text-emerald-600">€1,870,000</span>
                     </div>
                   </div>
                 </div>
@@ -650,7 +650,7 @@ const QIE: React.FC = () => {
                     ROI = (Returns - Investment) / Investment × 100
                   </div>
                   <div className="text-sm text-slate-600 mb-2">
-                    ROI = ($1,870,000 - $190,000) / $190,000 × 100
+                    ROI = (€1,870,000 - €190,000) / €190,000 × 100
                   </div>
                   <div className="text-3xl font-bold text-emerald-600">= 884% ROI</div>
                 </div>
@@ -676,11 +676,11 @@ const QIE: React.FC = () => {
                       <div className="grid grid-cols-2 gap-4 text-sm">
                         <div>
                           <span className="text-slate-600">Investment: </span>
-                          <span className="font-medium">${(item.investment / 1000)}K</span>
+                          <span className="font-medium">€{(item.investment / 1000)}K</span>
                         </div>
                         <div>
                           <span className="text-slate-600">Returns: </span>
-                          <span className="font-medium">${(item.returns / 1000)}K</span>
+                          <span className="font-medium">€{(item.returns / 1000)}K</span>
                         </div>
                       </div>
                     </div>
@@ -690,7 +690,7 @@ const QIE: React.FC = () => {
                     <div className="text-center">
                       <div className="font-bold text-slate-900">Cumulative 3-Year ROI</div>
                       <div className="text-2xl font-bold text-emerald-600">758%</div>
-                      <div className="text-sm text-slate-600">Total Net Benefit: $3.97M</div>
+                      <div className="text-sm text-slate-600">Total Net Benefit: €3.97M</div>
                     </div>
                   </div>
                 </div>
@@ -812,7 +812,7 @@ const QIE: React.FC = () => {
                 <div className="text-sm text-slate-300">Average ROI</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">$2.1M</div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">€2.1M</div>
                 <div className="text-sm text-slate-300">Annual Savings</div>
               </div>
               <div className="text-center">
@@ -842,7 +842,7 @@ const QIE: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                   activeTab === tab.id
                     ? 'bg-amber-600 text-white'
                     : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'

@@ -104,7 +104,7 @@ export class ObservableQIEService {
     // Track the extraction process
     const aiDecision = aiAgentMonitoring.monitorAIDecision(
       'QIE_QuestionExtraction',
-      `Extract questions from ${filename}`,
+      `Extract questions from €{filename}`,
       'Processing document for question extraction',
       0.9, // High confidence for extraction
       'gpt-4',
@@ -131,7 +131,7 @@ export class ObservableQIEService {
 
       // Track compliance event
       complianceObservability.trackEvidenceCollection(
-        `extraction_${Date.now()}`,
+        `extraction_€{Date.now()}`,
         'upload',
         userId,
         organizationId,
@@ -297,7 +297,7 @@ export class ObservableQIEService {
         resource: question.id,
         outcome: answer.confidence === 'verified' || answer.confidence === 'high' ? 'success' : 'partial',
         evidence: {
-          reasoning: `Generated answer with ${answer.confidence} confidence`,
+          reasoning: `Generated answer with €{answer.confidence} confidence`,
           after: {
             confidence: answer.confidence,
             evidenceCount: answer.evidence.length,
@@ -482,16 +482,16 @@ export class ObservableQIEService {
     return `
 Generate a comprehensive answer for this security questionnaire question with full observability:
 
-Question: ${question.question}
-Category: ${question.category}
-Type: ${question.type}
-Framework: ${question.complianceFramework || 'General'}
-Required: ${question.required ? 'Yes' : 'No'}
+Question: €{question.question}
+Category: €{question.category}
+Type: €{question.type}
+Framework: €{question.complianceFramework || 'General'}
+Required: €{question.required ? 'Yes' : 'No'}
 
 Answer Requirements:
-- Tone: ${options.tone || 'formal'}
-- Length: ${options.length || 'standard'}
-- Include Evidence: ${options.includeEvidence ? 'Yes' : 'No'}
+- Tone: €{options.tone || 'formal'}
+- Length: €{options.length || 'standard'}
+- Include Evidence: €{options.includeEvidence ? 'Yes' : 'No'}
 
 Please provide:
 1. A complete, accurate answer

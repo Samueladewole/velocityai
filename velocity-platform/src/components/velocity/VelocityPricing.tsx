@@ -123,7 +123,7 @@ const VelocityPricing: React.FC = () => {
     setSelectedTier(tierKey);
     
     // Simulate API call
-    console.log(`Selected plan: ${tierKey}, billing: ${billingPeriod}`);
+    console.log(`Selected plan: €{tierKey}, billing: €{billingPeriod}`);
     
     // Would redirect to checkout or open modal
     setTimeout(() => {
@@ -187,7 +187,7 @@ const VelocityPricing: React.FC = () => {
             <div className="inline-flex items-center bg-gray-100 rounded-lg p-1">
               <button
                 onClick={() => setBillingPeriod('monthly')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors €{
                   billingPeriod === 'monthly'
                     ? 'bg-white text-gray-900 shadow'
                     : 'text-gray-600 hover:text-gray-900'
@@ -197,7 +197,7 @@ const VelocityPricing: React.FC = () => {
               </button>
               <button
                 onClick={() => setBillingPeriod('annual')}
-                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-colors €{
                   billingPeriod === 'annual'
                     ? 'bg-white text-gray-900 shadow'
                     : 'text-gray-600 hover:text-gray-900'
@@ -219,7 +219,7 @@ const VelocityPricing: React.FC = () => {
           {Object.entries(tiers).map(([tierKey, tier]) => (
             <div
               key={tierKey}
-              className={`bg-white rounded-lg shadow-lg border-2 transition-all duration-200 ${getTierColor(tierKey)} ${
+              className={`bg-white rounded-lg shadow-lg border-2 transition-all duration-200 €{getTierColor(tierKey)} €{
                 tierKey === 'growth' ? 'transform scale-105' : ''
               }`}
             >
@@ -263,7 +263,7 @@ const VelocityPricing: React.FC = () => {
                     <Users className="w-5 h-5 mr-3 text-gray-400" />
                     <span>
                       {typeof tier.limits.users === 'number' 
-                        ? `Up to ${tier.limits.users} users` 
+                        ? `Up to €{tier.limits.users} users` 
                         : 'Unlimited users'
                       }
                     </span>
@@ -272,7 +272,7 @@ const VelocityPricing: React.FC = () => {
                     <Shield className="w-5 h-5 mr-3 text-gray-400" />
                     <span>
                       {typeof tier.limits.frameworks === 'number'
-                        ? `${tier.limits.frameworks} frameworks`
+                        ? `€{tier.limits.frameworks} frameworks`
                         : 'All frameworks'
                       }
                     </span>
@@ -314,7 +314,7 @@ const VelocityPricing: React.FC = () => {
                 <button
                   onClick={() => handleSelectPlan(tierKey)}
                   disabled={selectedTier === tierKey}
-                  className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-colors ${getButtonColor(tierKey)} disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center`}
+                  className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-colors €{getButtonColor(tierKey)} disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center`}
                 >
                   {selectedTier === tierKey ? (
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>

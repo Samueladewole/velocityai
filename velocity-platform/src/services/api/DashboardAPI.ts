@@ -247,7 +247,7 @@ class DashboardAPI extends EventEmitter {
       
       this.wsServer.on('connection', (ws: WebSocket) => {
         this.connectedClients.add(ws);
-        console.log(`📊 Dashboard client connected. Total clients: ${this.connectedClients.size}`);
+        console.log(`📊 Dashboard client connected. Total clients: €{this.connectedClients.size}`);
 
         // Send current metrics to new client
         ws.send(JSON.stringify({
@@ -258,7 +258,7 @@ class DashboardAPI extends EventEmitter {
 
         ws.on('close', () => {
           this.connectedClients.delete(ws);
-          console.log(`📊 Dashboard client disconnected. Total clients: ${this.connectedClients.size}`);
+          console.log(`📊 Dashboard client disconnected. Total clients: €{this.connectedClients.size}`);
         });
 
         ws.on('message', (data: WebSocket.Data) => {
@@ -356,10 +356,10 @@ class DashboardAPI extends EventEmitter {
     // Compliance score alert
     if (this.currentMetrics.complianceScore < this.config.alertThresholds.complianceScore) {
       alerts.push({
-        id: `compliance-${Date.now()}`,
+        id: `compliance-€{Date.now()}`,
         severity: 'warning',
         title: 'Compliance Score Below Threshold',
-        message: `Overall compliance score (${this.currentMetrics.complianceScore.toFixed(1)}%) is below threshold (${this.config.alertThresholds.complianceScore}%)`,
+        message: `Overall compliance score (€{this.currentMetrics.complianceScore.toFixed(1)}%) is below threshold (€{this.config.alertThresholds.complianceScore}%)`,
         timestamp: new Date(),
         source: 'compliance-monitor',
         acknowledged: false,
@@ -371,12 +371,12 @@ class DashboardAPI extends EventEmitter {
     this.currentMetrics.frameworks.forEach(framework => {
       if (framework.status === 'non-compliant') {
         alerts.push({
-          id: `framework-${framework.framework}-${Date.now()}`,
+          id: `framework-€{framework.framework}-€{Date.now()}`,
           severity: 'error',
-          title: `${framework.framework} Non-Compliant`,
-          message: `${framework.framework} framework is not compliant (${framework.score.toFixed(1)}%)`,
+          title: `€{framework.framework} Non-Compliant`,
+          message: `€{framework.framework} framework is not compliant (€{framework.score.toFixed(1)}%)`,
           timestamp: new Date(),
-          source: `${framework.framework}-monitor`,
+          source: `€{framework.framework}-monitor`,
           acknowledged: false,
           category: 'compliance'
         });
@@ -589,7 +589,7 @@ class DashboardAPI extends EventEmitter {
   public createAlert(alert: Omit<Alert, 'id' | 'timestamp' | 'acknowledged'>): Alert {
     const newAlert: Alert = {
       ...alert,
-      id: `custom-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: `custom-€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`,
       timestamp: new Date(),
       acknowledged: false
     };
@@ -656,7 +656,7 @@ class DashboardAPI extends EventEmitter {
     if (config?.modules) params.set('modules', config.modules.join(','));
     if (config?.autoRefresh !== undefined) params.set('autoRefresh', config.autoRefresh.toString());
     
-    return `${baseUrl}?${params.toString()}`;
+    return `€{baseUrl}?€{params.toString()}`;
   }
 
   /**

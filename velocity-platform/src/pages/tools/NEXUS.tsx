@@ -286,9 +286,9 @@ export const NEXUS: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -480,7 +480,7 @@ export const NEXUS: React.FC = () => {
                           <div className="flex items-center justify-center gap-2">
                             <div 
                               className="h-2 w-16 rounded-full bg-slate-200"
-                              style={{background: `linear-gradient(to right, ${source.color} ${source.reliability}%, #e2e8f0 ${source.reliability}%)`}}
+                              style={{background: `linear-gradient(to right, €{source.color} €{source.reliability}%, #e2e8f0 €{source.reliability}%)`}}
                             />
                             <span className="text-sm font-bold">{source.reliability}%</span>
                           </div>

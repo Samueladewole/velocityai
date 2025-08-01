@@ -125,7 +125,7 @@ const VelocityOnboarding: React.FC = () => {
 
   const handleStepComplete = (stepIndex: number, data: any) => {
     setCompletedSteps(prev => new Set([...prev, stepIndex]));
-    setOnboardingData(prev => ({ ...prev, [`step_${stepIndex}`]: data }));
+    setOnboardingData(prev => ({ ...prev, [`step_€{stepIndex}`]: data }));
   };
 
   const nextStep = () => {
@@ -159,7 +159,7 @@ const VelocityOnboarding: React.FC = () => {
               <div className="w-32 bg-gray-200 rounded-full h-2">
                 <div 
                   className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                  style={{ width: `${getProgress()}%` }}
+                  style={{ width: `€{getProgress()}%` }}
                 />
               </div>
             </div>
@@ -185,7 +185,7 @@ const VelocityOnboarding: React.FC = () => {
                         <Circle className="w-6 h-6 text-gray-300" />
                       )}
                     </div>
-                    <div className={`flex-1 ${index === currentStep ? 'text-blue-900 font-medium' : 'text-gray-600'}`}>
+                    <div className={`flex-1 €{index === currentStep ? 'text-blue-900 font-medium' : 'text-gray-600'}`}>
                       <div className="text-sm">{step.title}</div>
                       <div className="text-xs text-gray-500">{step.estimatedTime}m</div>
                     </div>
@@ -234,7 +234,7 @@ const VelocityOnboarding: React.FC = () => {
                 {React.createElement(steps[currentStep].component, {
                   onComplete: (data: any) => handleStepComplete(currentStep, data),
                   onNext: nextStep,
-                  data: onboardingData[`step_${currentStep}`],
+                  data: onboardingData[`step_€{currentStep}`],
                   selectedTemplate,
                   setSelectedTemplate,
                   setTrustScore
@@ -295,7 +295,7 @@ const CompanyProfileStep: React.FC<OnboardingStepProps> = ({ onComplete, onNext,
   ];
 
   const budgets = [
-    'Under $10k', '$10k-$50k', '$50k-$100k', '$100k+', 'Not specified'
+    'Under €10k', '€10k-€50k', '€50k-€100k', '€100k+', 'Not specified'
   ];
 
   const updateProfile = (updates: Partial<CompanyProfile>) => {
@@ -451,7 +451,7 @@ const CompanyProfileStep: React.FC<OnboardingStepProps> = ({ onComplete, onNext,
               return (
                 <div
                   key={goal.id}
-                  className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all ${
+                  className={`flex items-center p-3 border-2 rounded-lg cursor-pointer transition-all €{
                     isSelected
                       ? 'border-purple-500 bg-purple-50'
                       : 'border-gray-200 hover:border-gray-300'
@@ -596,7 +596,7 @@ const TemplateSelection: React.FC<OnboardingStepProps & {
         {templates.map((template) => (
           <div
             key={template.id}
-            className={`p-6 border-2 rounded-lg cursor-pointer transition-all ${
+            className={`p-6 border-2 rounded-lg cursor-pointer transition-all €{
               selectedTemplate === template.id
                 ? 'border-blue-500 bg-blue-50'
                 : 'border-gray-200 hover:border-gray-300'
@@ -764,7 +764,7 @@ const BrowserAutomationStep: React.FC<OnboardingStepProps> = ({ onComplete, onNe
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-gray-900">Automation Features</h3>
         {automationFeatures.map((feature) => (
-          <div key={feature.id} className={`border-2 rounded-lg p-6 transition-all ${
+          <div key={feature.id} className={`border-2 rounded-lg p-6 transition-all €{
             feature.enabled ? 'border-purple-500 bg-purple-50' : 'border-gray-200 bg-white'
           }`}>
             <div className="flex items-start justify-between mb-4">
@@ -793,11 +793,11 @@ const BrowserAutomationStep: React.FC<OnboardingStepProps> = ({ onComplete, onNe
               
               <button
                 onClick={() => toggleFeature(feature.id)}
-                className={`w-16 h-8 rounded-full transition-colors relative ${
+                className={`w-16 h-8 rounded-full transition-colors relative €{
                   feature.enabled ? 'bg-purple-600' : 'bg-gray-300'
                 }`}
               >
-                <div className={`w-6 h-6 bg-white rounded-full absolute top-1 transition-transform ${
+                <div className={`w-6 h-6 bg-white rounded-full absolute top-1 transition-transform €{
                   feature.enabled ? 'translate-x-9' : 'translate-x-1'
                 }`} />
               </button>
@@ -817,7 +817,7 @@ const BrowserAutomationStep: React.FC<OnboardingStepProps> = ({ onComplete, onNe
             return (
               <div
                 key={platform.id}
-                className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${
+                className={`flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all €{
                   isSelected
                     ? 'border-blue-500 bg-blue-50'
                     : 'border-gray-200 hover:border-gray-300'
@@ -1118,11 +1118,11 @@ const FrameworkSelection: React.FC<OnboardingStepProps> = ({ onComplete, onNext 
           return (
             <div
               key={framework.id}
-              className={`relative border-2 rounded-lg p-4 cursor-pointer transition-all ${
+              className={`relative border-2 rounded-lg p-4 cursor-pointer transition-all €{
                 isSelected 
                   ? 'border-purple-500 bg-purple-50 shadow-lg' 
                   : 'border-gray-200 hover:border-gray-300 bg-white'
-              } ${framework.required ? '' : 'hover:shadow-md'}`}
+              } €{framework.required ? '' : 'hover:shadow-md'}`}
               onClick={() => toggleFramework(framework.id)}
             >
               {framework.badge && (
@@ -1138,7 +1138,7 @@ const FrameworkSelection: React.FC<OnboardingStepProps> = ({ onComplete, onNext 
               )}
 
               <div className="flex items-start space-x-3">
-                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${framework.color} flex items-center justify-center flex-shrink-0`}>
+                <div className={`w-12 h-12 rounded-lg bg-gradient-to-r €{framework.color} flex items-center justify-center flex-shrink-0`}>
                   <IconComponent className="w-6 h-6 text-white" />
                 </div>
                 
@@ -1164,7 +1164,7 @@ const FrameworkSelection: React.FC<OnboardingStepProps> = ({ onComplete, onNext 
                   </div>
                 </div>
 
-                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center €{
                   isSelected 
                     ? 'border-purple-500 bg-purple-500' 
                     : 'border-gray-300'
@@ -1408,7 +1408,7 @@ const InitialScan: React.FC<OnboardingStepProps> = ({ onComplete, onNext, setTru
             <div className="w-full bg-gray-200 rounded-full h-3 mb-4">
               <div 
                 className="bg-gradient-to-r from-purple-500 to-blue-500 h-3 rounded-full transition-all duration-300"
-                style={{ width: `${scanProgress}%` }}
+                style={{ width: `€{scanProgress}%` }}
               />
             </div>
             <div className="flex items-center gap-2 text-sm text-gray-600">
@@ -1433,7 +1433,7 @@ const InitialScan: React.FC<OnboardingStepProps> = ({ onComplete, onNext, setTru
                           <h4 className="font-medium text-gray-900 text-sm">{control.name}</h4>
                           <p className="text-xs text-gray-600 mb-2">{control.description}</p>
                         </div>
-                        <div className={`w-3 h-3 rounded-full ${
+                        <div className={`w-3 h-3 rounded-full €{
                           status.compliance === 'passing' ? 'bg-green-500' : 'bg-yellow-500'
                         }`} />
                       </div>
@@ -1619,7 +1619,7 @@ const TrustScoreReview: React.FC<OnboardingStepProps & { trustScore?: number }> 
           </div>
           
           <div className="text-center">
-            <div className={`text-4xl font-bold mb-2 px-4 py-2 rounded-lg ${grade.bg} ${grade.color}`}>
+            <div className={`text-4xl font-bold mb-2 px-4 py-2 rounded-lg €{grade.bg} €{grade.color}`}>
               {grade.grade}
             </div>
             <div className="text-purple-200">Grade</div>
@@ -1653,7 +1653,7 @@ const TrustScoreReview: React.FC<OnboardingStepProps & { trustScore?: number }> 
                   <div className="font-medium text-gray-900">{item.label}</div>
                   <div className="text-sm text-gray-600">{item.description}</div>
                 </div>
-                <div className={`text-2xl font-bold ${item.color}`}>
+                <div className={`text-2xl font-bold €{item.color}`}>
                   +{item.value}
                 </div>
               </div>

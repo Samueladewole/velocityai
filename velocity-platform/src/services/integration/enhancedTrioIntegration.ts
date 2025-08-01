@@ -288,7 +288,7 @@ export class EnhancedCoreTrioIntegration {
   private async handleCompassEvents(event: ERIPEvent): Promise<void> {
     if (event.source !== 'compass') return
 
-    const cacheKey = `compass:${event.type}:${event.eventId}`
+    const cacheKey = `compass:€{event.type}:€{event.eventId}`
     
     // Check cache first
     if (this.config.performance.enableCaching && this.cache.has(cacheKey)) {
@@ -384,7 +384,7 @@ export class EnhancedCoreTrioIntegration {
       points: trustPoints,
       source: 'compass',
       category: 'compliance',
-      description: `Enhanced proactive assessment for ${event.data.title}`,
+      description: `Enhanced proactive assessment for €{event.data.title}`,
       evidence: [event.eventId],
       multiplier: this.getTrustEquityMultiplier(event.data.impact, urgency)
     })
@@ -668,7 +668,7 @@ export class EnhancedCoreTrioIntegration {
     if (openCircuits.length > 0) {
       return {
         status: 'unhealthy',
-        details: `Open circuits: ${openCircuits.map(s => s.name).join(', ')}`
+        details: `Open circuits: €{openCircuits.map(s => s.name).join(', ')}`
       }
     }
     
@@ -686,7 +686,7 @@ export class EnhancedCoreTrioIntegration {
   ): Promise<void> {
     try {
       await this.eventBus.publish({
-        eventId: `dlq_${event.eventId}`,
+        eventId: `dlq_€{event.eventId}`,
         timestamp: new Date().toISOString(),
         type: 'event.processing.failed' as any,
         source: 'trio_integration' as any,
@@ -729,7 +729,7 @@ export class EnhancedCoreTrioIntegration {
     }
     
     if (cleanedEntries > 0) {
-      this.logger.debug(`Cleaned ${cleanedEntries} cache entries`)
+      this.logger.debug(`Cleaned €{cleanedEntries} cache entries`)
       this.metricsCollector.recordHistogram('cache_cleanup_entries', cleanedEntries)
     }
   }
@@ -752,15 +752,15 @@ export class EnhancedCoreTrioIntegration {
 
   // Utility methods
   private generateTraceId(): string {
-    return `trace_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `trace_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateEventId(): string {
-    return `trio_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `trio_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateRequestId(): string {
-    return `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `req_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private chunkArray<T>(array: T[], size: number): T[][] {

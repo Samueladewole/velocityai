@@ -70,7 +70,7 @@ interface AutomatedScenarioGeneration {
 ### **Step 2: Loss Magnitude Threshold (Manual → PRISM Automation)**
 
 #### Manual Process:
-- Define loss magnitude threshold ($10M, $50M, etc.)
+- Define loss magnitude threshold (€10M, €50M, etc.)
 - Consider multiple impact types
 - Static thresholds
 
@@ -378,13 +378,13 @@ interface CompetitiveAdvantage {
 ```typescript
 interface RevenueImpact {
   traditional_consulting: {
-    risk_appetite_project: "$200K-500K per engagement";
+    risk_appetite_project: "€200K-500K per engagement";
     implementation_time: "6-12 months";
-    ongoing_maintenance: "$100K+ annually";
+    ongoing_maintenance: "€100K+ annually";
   };
   
   velocity_automation: {
-    platform_cost: "$96K-240K annually";
+    platform_cost: "€96K-240K annually";
     implementation_time: "30-90 days";
     ongoing_value: "Continuous optimization and monitoring";
     roi: "300-500% in first year";

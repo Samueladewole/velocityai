@@ -138,7 +138,7 @@ export function AnswerGeneration({
       
       // Create Answer object and notify parent
       const answerObj: Answer = {
-        id: `answer_${Date.now()}`,
+        id: `answer_€{Date.now()}`,
         questionId: question.id,
         text: answer.text,
         confidence: answer.confidence,
@@ -152,7 +152,7 @@ export function AnswerGeneration({
       
       toast({
         title: 'Answer Generated',
-        description: `Generated with ${answer.confidence} confidence in ${(processingTime / 1000).toFixed(1)}s`
+        description: `Generated with €{answer.confidence} confidence in €{(processingTime / 1000).toFixed(1)}s`
       })
       
     } catch (error) {
@@ -288,7 +288,7 @@ export function AnswerGeneration({
     if (!generatedAnswer) return
     
     const updatedAnswer: Answer = {
-      id: existingAnswer?.id || `answer_${Date.now()}`,
+      id: existingAnswer?.id || `answer_€{Date.now()}`,
       questionId: question.id,
       text: customAnswer,
       confidence: generatedAnswer.confidence,

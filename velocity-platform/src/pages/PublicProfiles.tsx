@@ -76,7 +76,7 @@ export const PublicProfiles: React.FC = () => {
                     <h3 className="text-xl font-semibold">{profile.company}</h3>
                     <p className="text-sm text-slate-600">{profile.industry}</p>
                   </div>
-                  <div className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  <div className={`px-3 py-1 rounded-full text-sm font-medium €{
                     profile.tier === 'Platinum' ? 'bg-purple-100 text-purple-700' : 'bg-yellow-100 text-yellow-700'
                   }`}>
                     {profile.tier}

@@ -353,7 +353,7 @@ export const RiskVisualization: React.FC<RiskDashboardProps> = ({
     const pathData = gbmResults.paths.slice(0, 100).map((path, index) => 
       path.map((price, step) => ({
         step,
-        [`path${index}`]: price
+        [`path€{index}`]: price
       }))
     );
     
@@ -368,8 +368,8 @@ export const RiskVisualization: React.FC<RiskDashboardProps> = ({
             <Line 
               key={index}
               type="monotone" 
-              dataKey={`path${index}`} 
-              stroke={`hsl(${index * 3.6}, 70%, 50%)`}
+              dataKey={`path€{index}`} 
+              stroke={`hsl(€{index * 3.6}, 70%, 50%)`}
               strokeWidth={0.5}
               dot={false}
             />
@@ -400,13 +400,13 @@ export const RiskVisualization: React.FC<RiskDashboardProps> = ({
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-lg font-semibold mb-4">Annual Loss Expectancy</h3>
         <div className="text-3xl font-bold text-red-600">
-          ${fairResults.annualLossExpectancy.toLocaleString()}
+          €{fairResults.annualLossExpectancy.toLocaleString()}
         </div>
       </div>
       
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-lg font-semibold mb-4">Risk Score</h3>
-        <div className={`text-3xl font-bold ${
+        <div className={`text-3xl font-bold €{
           fairResults.riskScore === 'CRITICAL' ? 'text-red-800' :
           fairResults.riskScore === 'HIGH' ? 'text-red-600' :
           fairResults.riskScore === 'MEDIUM' ? 'text-yellow-600' :
@@ -422,19 +422,19 @@ export const RiskVisualization: React.FC<RiskDashboardProps> = ({
     <div className="p-6">
       <div className="flex border-b mb-6">
         <button 
-          className={`px-4 py-2 ${activeTab === 'simulation' ? 'border-b-2 border-blue-500' : ''}`}
+          className={`px-4 py-2 €{activeTab === 'simulation' ? 'border-b-2 border-blue-500' : ''}`}
           onClick={() => setActiveTab('simulation')}
         >
           Monte Carlo Simulation
         </button>
         <button 
-          className={`px-4 py-2 ${activeTab === 'risk' ? 'border-b-2 border-blue-500' : ''}`}
+          className={`px-4 py-2 €{activeTab === 'risk' ? 'border-b-2 border-blue-500' : ''}`}
           onClick={() => setActiveTab('risk')}
         >
           Risk Metrics
         </button>
         <button 
-          className={`px-4 py-2 ${activeTab === 'fair' ? 'border-b-2 border-blue-500' : ''}`}
+          className={`px-4 py-2 €{activeTab === 'fair' ? 'border-b-2 border-blue-500' : ''}`}
           onClick={() => setActiveTab('fair')}
         >
           FAIR Analysis
@@ -590,7 +590,7 @@ This enhancement will transform ERIP from a strong risk management platform into
 
 - **Market Differentiation**: Enterprise-grade Monte Carlo risk modeling
 - **Revenue Expansion**: Target tier-1 financial institutions and large enterprises
-- **Competitive Advantage**: Match $500K+ enterprise risk platforms at fraction of cost
+- **Competitive Advantage**: Match €500K+ enterprise risk platforms at fraction of cost
 - **Expert Validation**: Advanced statistical methods for regulatory compliance
 
 ### **Integration with Existing ERIP Components**

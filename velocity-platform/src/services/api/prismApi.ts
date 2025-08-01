@@ -171,7 +171,7 @@ export class PrismApiService {
 
       // Publish completion event
       await this.eventBus.publish({
-        eventId: `prism_${requestId}`,
+        eventId: `prism_€{requestId}`,
         timestamp: new Date().toISOString(),
         type: 'risk.quantified',
         source: 'prism',
@@ -197,7 +197,7 @@ export class PrismApiService {
         points: 50,
         source: 'prism',
         category: 'risk_management',
-        description: `Completed Monte Carlo simulation with ${result.totalIterations} iterations`,
+        description: `Completed Monte Carlo simulation with €{result.totalIterations} iterations`,
         evidence: [requestId],
         multiplier: validatedRequest.parameters.iterations >= 100000 ? 1.5 : 1.0
       })
@@ -281,7 +281,7 @@ export class PrismApiService {
 
       // Publish risk assessment event
       await this.eventBus.publish({
-        eventId: `quick_${requestId}`,
+        eventId: `quick_€{requestId}`,
         timestamp: new Date().toISOString(),
         type: 'risk.quantified',
         source: 'prism',
@@ -604,8 +604,8 @@ export class PrismApiService {
     if (options.length > 0 && options[0].roi > 200) {
       return {
         decision: 'mitigate',
-        rationale: `Best option provides ${options[0].roi.toFixed(0)}% ROI`,
-        action: `Implement ${options[0].name}`
+        rationale: `Best option provides €{options[0].roi.toFixed(0)}% ROI`,
+        action: `Implement €{options[0].name}`
       }
     }
 
@@ -634,7 +634,7 @@ export class PrismApiService {
     
     const riskRatio = result.riskMetrics.var95 / parameters.businessContext.annualRevenue
     if (riskRatio > 0.05) {
-      insights.push(`Risk exposure represents ${(riskRatio * 100).toFixed(1)}% of annual revenue`)
+      insights.push(`Risk exposure represents €{(riskRatio * 100).toFixed(1)}% of annual revenue`)
     }
 
     if (result.statistics.skewness > 1) {
@@ -642,7 +642,7 @@ export class PrismApiService {
     }
 
     if (result.riskMetrics.probabilityOfRuin > 0.01) {
-      insights.push(`${(result.riskMetrics.probabilityOfRuin * 100).toFixed(1)}% probability of catastrophic loss`)
+      insights.push(`€{(result.riskMetrics.probabilityOfRuin * 100).toFixed(1)}% probability of catastrophic loss`)
     }
 
     return insights
@@ -682,7 +682,7 @@ export class PrismApiService {
   }
 
   private generateRequestId(): string {
-    return `prism_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `prism_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   // Additional endpoint implementations would go here...

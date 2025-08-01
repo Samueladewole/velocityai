@@ -147,8 +147,8 @@ export const NexusWorking: React.FC = () => {
   };
 
   const formatNumber = (num: number) => {
-    if (num >= 1000000) return `${(num / 1000000).toFixed(1)}M`;
-    if (num >= 1000) return `${(num / 1000).toFixed(1)}K`;
+    if (num >= 1000000) return `€{(num / 1000000).toFixed(1)}M`;
+    if (num >= 1000) return `€{(num / 1000).toFixed(1)}K`;
     return num.toString();
   };
 
@@ -405,7 +405,7 @@ export const NexusWorking: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="font-semibold text-slate-900">{insight.title}</h3>
-                        <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getSeverityColor(insight.severity)}`}>
+                        <div className={`px-2 py-1 rounded-full text-xs font-medium border €{getSeverityColor(insight.severity)}`}>
                           {insight.severity}
                         </div>
                         <span className="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">

@@ -130,7 +130,7 @@ export class VelocityCryptographicCore {
     const hash = this.generateSecureHash(serializedData)
     
     const proof: CryptographicProof = {
-      id: `proof_${randomUUID()}`,
+      id: `proof_€{randomUUID()}`,
       hash,
       signature: this.generateSignature(hash, signingKey),
       timestamp: new Date(),
@@ -153,7 +153,7 @@ export class VelocityCryptographicCore {
     metadata: any,
     actorId: string
   ): EvidenceIntegrity {
-    const evidenceId = `evidence_${randomUUID()}`
+    const evidenceId = `evidence_€{randomUUID()}`
     const contentHash = this.generateSecureHash(evidenceData)
     const metadataHash = this.generateSecureHash(metadata)
     const originalHash = this.generateSecureHash({ contentHash, metadataHash })
@@ -166,7 +166,7 @@ export class VelocityCryptographicCore {
     }, 'evidence')
 
     const initialCustodyEntry: ChainOfCustodyEntry = {
-      id: `custody_${randomUUID()}`,
+      id: `custody_€{randomUUID()}`,
       actor: actorId,
       action: 'created',
       timestamp: new Date(),
@@ -178,7 +178,7 @@ export class VelocityCryptographicCore {
     }
 
     const initialVerification: VerificationEntry = {
-      id: `verify_${randomUUID()}`,
+      id: `verify_€{randomUUID()}`,
       verifierId: 'velocity_crypto_system',
       verifierType: 'system',
       verificationResult: 'passed',
@@ -289,10 +289,10 @@ export class VelocityCryptographicCore {
         timestamp: new Date()
       },
       auditTrail: [
-        `Decision created: ${new Date().toISOString()}`,
-        `Model verified: ${modelHash.substring(0, 12)}...`,
-        `Human review completed: ${reviewerId}`,
-        `Cryptographic proof generated: ${cryptographicProof.id}`
+        `Decision created: €{new Date().toISOString()}`,
+        `Model verified: €{modelHash.substring(0, 12)}...`,
+        `Human review completed: €{reviewerId}`,
+        `Cryptographic proof generated: €{cryptographicProof.id}`
       ]
     }
   }
@@ -307,7 +307,7 @@ export class VelocityCryptographicCore {
     skillsAttestation: string[],
     validityPeriod?: number
   ): ProfessionalCredential {
-    const credentialId = `cred_${randomUUID()}`
+    const credentialId = `cred_€{randomUUID()}`
     const issuanceDate = new Date()
     const expirationDate = validityPeriod 
       ? new Date(issuanceDate.getTime() + validityPeriod * 365 * 24 * 60 * 60 * 1000)
@@ -323,13 +323,13 @@ export class VelocityCryptographicCore {
     }, 'credential')
 
     const initialVerification: VerificationEntry = {
-      id: `verify_${randomUUID()}`,
+      id: `verify_€{randomUUID()}`,
       verifierId: issuer,
       verifierType: 'human',
       verificationResult: 'passed',
       timestamp: new Date(),
       cryptographicProof,
-      attestation: `Professional credential verified by ${issuer}`,
+      attestation: `Professional credential verified by €{issuer}`,
       confidence: 0.95
     }
 
@@ -420,11 +420,11 @@ export class VelocityCryptographicCore {
     cryptographicProof: CryptographicProof
     immutableURI: string
   } {
-    const nftId = `compliance_nft_${randomUUID()}`
+    const nftId = `compliance_nft_€{randomUUID()}`
     
     const metadata = {
-      name: `${frameworkType} Compliance Certificate`,
-      description: `Cryptographically verified ${frameworkType} compliance for ${organizationId}`,
+      name: `€{frameworkType} Compliance Certificate`,
+      description: `Cryptographically verified €{frameworkType} compliance for €{organizationId}`,
       organizationId,
       frameworkType,
       completionDate: new Date().toISOString(),
@@ -444,7 +444,7 @@ export class VelocityCryptographicCore {
       completionData
     }, 'evidence')
 
-    const immutableURI = `ipfs://${this.generateMockIPFSHash(JSON.stringify(metadata))}`
+    const immutableURI = `ipfs://€{this.generateMockIPFSHash(JSON.stringify(metadata))}`
 
     return {
       nftId,
@@ -481,7 +481,7 @@ export class VelocityCryptographicCore {
 
   private verifyHash(hash: string): boolean {
     // Simplified hash verification
-    return hash.length === 64 && /^[a-f0-9]+$/.test(hash)
+    return hash.length === 64 && /^[a-f0-9]+€/.test(hash)
   }
 
   private verifySignature(signature: string, data: string): boolean {
@@ -546,9 +546,9 @@ export class VelocityCryptographicCore {
 
   private getHistoricalTrustProofs(organizationId: string): string[] {
     return [
-      `${organizationId}_2024_01_proof`,
-      `${organizationId}_2024_02_proof`,
-      `${organizationId}_2024_03_proof`
+      `€{organizationId}_2024_01_proof`,
+      `€{organizationId}_2024_02_proof`,
+      `€{organizationId}_2024_03_proof`
     ]
   }
 
@@ -562,11 +562,11 @@ export class VelocityCryptographicCore {
 
   private generateMockIPFSHash(data: string): string {
     const hash = this.generateSecureHash(data)
-    return `Qm${hash.substring(0, 44)}`
+    return `Qm€{hash.substring(0, 44)}`
   }
 
   private generateMockTxId(): string {
-    return `0x${this.generateSecureHash(randomUUID()).substring(0, 64)}`
+    return `0x€{this.generateSecureHash(randomUUID()).substring(0, 64)}`
   }
 
   private estimateDataSize(data: any): number {
@@ -574,15 +574,15 @@ export class VelocityCryptographicCore {
   }
 
   private generateMasterKey(): string {
-    return this.generateSecureHash(`velocity_master_${Date.now()}_${randomUUID()}`)
+    return this.generateSecureHash(`velocity_master_€{Date.now()}_€{randomUUID()}`)
   }
 
   private generateSigningKey(): string {
-    return this.generateSecureHash(`velocity_signing_${Date.now()}_${randomUUID()}`)
+    return this.generateSecureHash(`velocity_signing_€{Date.now()}_€{randomUUID()}`)
   }
 
   private generateEncryptionKey(): string {
-    return this.generateSecureHash(`velocity_encryption_${Date.now()}_${randomUUID()}`)
+    return this.generateSecureHash(`velocity_encryption_€{Date.now()}_€{randomUUID()}`)
   }
 
   /**

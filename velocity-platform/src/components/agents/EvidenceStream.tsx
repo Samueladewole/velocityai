@@ -170,11 +170,11 @@ export const EvidenceStream: React.FC<EvidenceStreamProps> = ({ className = '' }
         const frameworks = [['SOC2'], ['ISO27001'], ['GDPR'], ['HIPAA'], ['SOC2', 'ISO27001']] as const;
         
         const newEvidence: EvidenceItem = {
-          id: `ev-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+          id: `ev-€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`,
           agentId: agents[Math.floor(Math.random() * agents.length)],
           agentName: 'Live Agent',
           type: types[Math.floor(Math.random() * types.length)],
-          title: `New Evidence ${Date.now()}`,
+          title: `New Evidence €{Date.now()}`,
           description: 'Real-time evidence collection',
           timestamp: new Date(),
           framework: frameworks[Math.floor(Math.random() * frameworks.length)],
@@ -210,11 +210,11 @@ export const EvidenceStream: React.FC<EvidenceStreamProps> = ({ className = '' }
 
   const formatTimeAgo = (date: Date) => {
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-    if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 60) return `€{seconds}s ago`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m ago`;
+    if (minutes < 60) return `€{minutes}m ago`;
     const hours = Math.floor(minutes / 60);
-    return `${hours}h ago`;
+    return `€{hours}h ago`;
   };
 
   const getStatusIcon = (status: string) => {
@@ -240,7 +240,7 @@ export const EvidenceStream: React.FC<EvidenceStreamProps> = ({ className = '' }
   const activeCollecting = evidence.filter(e => e.status === 'collecting').length;
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Header Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
         <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200">
@@ -337,7 +337,7 @@ export const EvidenceStream: React.FC<EvidenceStreamProps> = ({ className = '' }
           return (
             <Card 
               key={item.id}
-              className={`transition-all duration-200 hover:shadow-md ${STATUS_STYLES[item.status]}`}
+              className={`transition-all duration-200 hover:shadow-md €{STATUS_STYLES[item.status]}`}
             >
               <CardContent className="p-4">
                 <div className="flex items-start justify-between gap-4">
@@ -373,7 +373,7 @@ export const EvidenceStream: React.FC<EvidenceStreamProps> = ({ className = '' }
                       {item.framework.map(fw => (
                         <Badge 
                           key={fw} 
-                          className={`text-xs ${FRAMEWORK_COLORS[fw]}`}
+                          className={`text-xs €{FRAMEWORK_COLORS[fw]}`}
                           variant="secondary"
                         >
                           {fw}
@@ -406,7 +406,7 @@ export const EvidenceStream: React.FC<EvidenceStreamProps> = ({ className = '' }
                   {/* Right side - Confidence and actions */}
                   <div className="flex flex-col items-end gap-3">
                     <div className="text-center">
-                      <div className={`text-2xl font-bold ${getConfidenceColor(item.confidence)}`}>
+                      <div className={`text-2xl font-bold €{getConfidenceColor(item.confidence)}`}>
                         {item.confidence}%
                       </div>
                       <div className="text-xs text-slate-500">Confidence</div>

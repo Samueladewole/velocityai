@@ -184,7 +184,7 @@ export const LiveDataProvider: React.FC<LiveDataProviderProps> = ({ children }) 
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : 'Unknown error';
       setErrors(prev => ({ ...prev, [loadingKey]: errorMessage }));
-      console.error(`Error loading ${loadingKey}:`, error);
+      console.error(`Error loading €{loadingKey}:`, error);
     } finally {
       setLoading(prev => ({ ...prev, [loadingKey]: false }));
     }

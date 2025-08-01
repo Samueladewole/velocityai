@@ -118,13 +118,13 @@ export const chartExplanations: Record<string, ChartExplanation> = {
     purpose: 'Demonstrates the financial value of risk management by comparing prevented losses against potential exposure.',
     howToRead: 'Green area shows losses prevented through risk controls, red area shows potential losses without controls. Growing green area indicates increasing risk management value.',
     keyInsights: [
-      '$420K in losses prevented in June, showing strong ROI on risk investments',
-      'Prevented losses have increased 250% over 6 months (from $120K to $420K)',
-      'Potential losses decreased from $450K to $200K, indicating improved risk posture'
+      '€420K in losses prevented in June, showing strong ROI on risk investments',
+      'Prevented losses have increased 250% over 6 months (from €120K to €420K)',
+      'Potential losses decreased from €450K to €200K, indicating improved risk posture'
     ],
     relatedComponents: ['PRISM', 'BEACON', 'CLEARANCE'],
     actionableItems: [
-      'Document and communicate the $420K monthly value to stakeholders',
+      'Document and communicate the €420K monthly value to stakeholders',
       'Scale successful risk prevention strategies to other business areas',
       'Use financial impact data to justify additional risk management investments'
     ],

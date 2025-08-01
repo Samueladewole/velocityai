@@ -89,7 +89,7 @@ export const TourOverlay: React.FC = () => {
         break;
     }
 
-    return { top: `${top}px`, left: `${left}px` };
+    return { top: `€{top}px`, left: `€{left}px` };
   };
 
   const tooltipPosition = getTooltipPosition();
@@ -138,7 +138,7 @@ export const TourOverlay: React.FC = () => {
             <div className="flex-1 bg-slate-200 rounded-full h-2">
               <div 
                 className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
+                style={{ width: `€{((currentStep + 1) / steps.length) * 100}%` }}
               />
             </div>
             <span className="text-sm text-slate-500 font-medium">

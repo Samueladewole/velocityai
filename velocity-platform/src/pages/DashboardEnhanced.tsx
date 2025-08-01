@@ -61,7 +61,7 @@ const metrics: MetricCard[] = [
   },
   {
     title: 'ROI Generated',
-    value: '$2.4M',
+    value: '€2.4M',
     change: '+18%',
     icon: <DollarSign className="h-4 w-4" />,
     trend: 'up'
@@ -199,7 +199,7 @@ export const DashboardEnhanced: React.FC = () => {
             <CardContent className="relative">
               <div className="text-3xl font-bold text-slate-900 mb-2">{metric.value}</div>
               {metric.change && (
-                <div className={`flex items-center gap-1 text-sm font-medium ${
+                <div className={`flex items-center gap-1 text-sm font-medium €{
                   metric.trend === 'up' ? 'text-green-700' : 
                   metric.trend === 'down' ? 'text-red-700' : 
                   'text-slate-600'
@@ -390,7 +390,7 @@ export const DashboardEnhanced: React.FC = () => {
             {recentActivities.map((activity, index) => (
               <div key={index} className="group flex items-start space-x-4 p-3 rounded-xl hover:bg-slate-50/80 transition-all duration-200">
                 <div className="flex flex-col items-center mt-1">
-                  <div className={`h-3 w-3 rounded-full ring-4 ring-white shadow-sm ${
+                  <div className={`h-3 w-3 rounded-full ring-4 ring-white shadow-sm €{
                     activity.severity === 'high' ? 'bg-red-500' :
                     activity.severity === 'medium' ? 'bg-amber-500' :
                     'bg-emerald-500'

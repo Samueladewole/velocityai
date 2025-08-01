@@ -39,7 +39,7 @@ Enterprise Risk Intelligence Platform (ERIP) - A comprehensive Trust Equity™ p
 
 ### **🎯 ERIP Velocity Tier Positioning** ✅
 - **Target Customers:** AI startups and fast-growing SaaS (Series Seed to Series B)
-- **Pricing:** $999/mo starter, $2,499/mo growth, $4,999/mo scale
+- **Pricing:** €999/mo starter, €2,499/mo growth, €4,999/mo scale
 - **Value Proposition:** 30 minutes to Trust Score vs weeks of manual work
 - **Competitive Advantage:** 3x Trust Equity multiplier for automated evidence collection
 - **Market Differentiation:** Only security platform with quantified trust value and AI automation
@@ -70,9 +70,9 @@ Enterprise Risk Intelligence Platform (ERIP) - A comprehensive Trust Equity™ p
 - ✅ **Continuous Monitoring**: 4-hour evidence collection cycles with 30-minute Trust Score updates
 
 #### 💰 Pricing & Billing
-- ✅ **Velocity Starter**: $999/month - Up to 5 cloud accounts, basic automation
-- ✅ **Velocity Professional**: $2,499/month - Up to 15 accounts, advanced features  
-- ✅ **Velocity Enterprise**: $4,999/month - Unlimited accounts, custom integrations
+- ✅ **Velocity Starter**: €999/month - Up to 5 cloud accounts, basic automation
+- ✅ **Velocity Professional**: €2,499/month - Up to 15 accounts, advanced features  
+- ✅ **Velocity Enterprise**: €4,999/month - Unlimited accounts, custom integrations
 - ✅ **Stripe Integration**: Automated billing with usage tracking
 
 ### Authentication Strategy ✅
@@ -171,7 +171,7 @@ commit: feat: Complete ERIP AI Agents & Velocity Tier implementation
 - Complete multi-platform evidence collection architecture
 - Add real-time WebSocket updates for agent monitoring
 - Implement Trust Score generation in under 30 minutes
-- Add Stripe billing integration for Velocity tiers ($999-$4,999/month)
+- Add Stripe billing integration for Velocity tiers (€999-€4,999/month)
 - Create comprehensive onboarding wizard and navigation
 
 🤖 Generated with [Claude Code](https://claude.ai/code)
@@ -1167,7 +1167,7 @@ Based on the pragmatic risk appetite framework, ERIP automates:
 
 ## **Value Proposition Achievement**
 - ✅ **Automation Speed:** 30-day implementation vs 6-month manual
-- ✅ **Cost Efficiency:** $8K-20K monthly vs $200K-500K consulting
+- ✅ **Cost Efficiency:** €8K-20K monthly vs €200K-500K consulting
 - ✅ **Decision Speed:** Hours vs weeks for risk decisions
 - ✅ **Accuracy:** 95%+ vs manual error-prone processes
 

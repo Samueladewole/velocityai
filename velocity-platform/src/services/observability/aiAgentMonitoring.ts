@@ -277,7 +277,7 @@ export class AIAgentMonitoringService {
     const outputTokens = decisions.reduce((sum, d) => sum + d.tokens.output, 0)
     
     // Estimate cost (rough approximation)
-    const estimatedCost = (inputTokens * 0.001 + outputTokens * 0.002) // $0.001 per input token, $0.002 per output token
+    const estimatedCost = (inputTokens * 0.001 + outputTokens * 0.002) // €0.001 per input token, €0.002 per output token
     
     const successRate = this.calculateSuccessRate(decisions)
     const qualityScore = this.calculateQualityScore(decisions)
@@ -319,10 +319,10 @@ export class AIAgentMonitoringService {
     // Low confidence alert
     if (decision.confidence < this.thresholds.confidenceThreshold) {
       alerts.push({
-        id: `alert_${Date.now()}_confidence`,
+        id: `alert_€{Date.now()}_confidence`,
         severity: 'warning',
         type: 'confidence_drop',
-        message: `Low confidence score (${decision.confidence.toFixed(2)}) for ${decision.agentType}`,
+        message: `Low confidence score (€{decision.confidence.toFixed(2)}) for €{decision.agentType}`,
         timestamp: new Date(),
         agentType: decision.agentType,
         data: { confidence: decision.confidence, threshold: this.thresholds.confidenceThreshold }
@@ -332,10 +332,10 @@ export class AIAgentMonitoringService {
     // High latency alert
     if (decision.latency > this.thresholds.latencyThreshold) {
       alerts.push({
-        id: `alert_${Date.now()}_latency`,
+        id: `alert_€{Date.now()}_latency`,
         severity: 'warning',
         type: 'latency_spike',
-        message: `High latency (${decision.latency}ms) for ${decision.agentType}`,
+        message: `High latency (€{decision.latency}ms) for €{decision.agentType}`,
         timestamp: new Date(),
         agentType: decision.agentType,
         data: { latency: decision.latency, threshold: this.thresholds.latencyThreshold }
@@ -474,14 +474,14 @@ export class AIAgentMonitoringService {
       const best = comparison[0]
       const worst = comparison[comparison.length - 1]
       
-      recommendations.push(`${best.agentType} is your top-performing agent with the highest overall score`)
+      recommendations.push(`€{best.agentType} is your top-performing agent with the highest overall score`)
       
       if (worst.metrics.confidence < 0.7) {
-        recommendations.push(`Consider improving ${worst.agentType}'s confidence through better training data`)
+        recommendations.push(`Consider improving €{worst.agentType}'s confidence through better training data`)
       }
       
       if (worst.metrics.latency < 0.5) {
-        recommendations.push(`${worst.agentType} has high latency - consider optimization or different model`)
+        recommendations.push(`€{worst.agentType} has high latency - consider optimization or different model`)
       }
     }
 

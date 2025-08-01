@@ -178,7 +178,7 @@ export const Reports: React.FC = () => {
                   <div>
                     <p className="text-sm text-slate-600 mb-1">{metric.label}</p>
                     <p className="text-2xl font-bold text-slate-900">
-                      {typeof metric.value === 'number' ? `${metric.value}%` : metric.value}
+                      {typeof metric.value === 'number' ? `€{metric.value}%` : metric.value}
                     </p>
                     <div className="flex items-center gap-2 mt-2">
                       {metric.trend === 'up' ? (
@@ -186,7 +186,7 @@ export const Reports: React.FC = () => {
                       ) : (
                         <ArrowDown className="h-4 w-4 text-red-600" />
                       )}
-                      <span className={`text-sm font-medium ${
+                      <span className={`text-sm font-medium €{
                         metric.trend === 'up' ? 'text-green-600' : 'text-red-600'
                       }`}>
                         {metric.change}
@@ -267,7 +267,7 @@ export const Reports: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {reportTemplates.map((template) => (
                   <div key={template.name} className="flex items-start gap-4 p-4 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors cursor-pointer">
-                    <div className={`p-3 rounded-lg bg-gradient-to-r ${template.color} text-white`}>
+                    <div className={`p-3 rounded-lg bg-gradient-to-r €{template.color} text-white`}>
                       <template.icon className="h-6 w-6" />
                     </div>
                     <div className="flex-grow">

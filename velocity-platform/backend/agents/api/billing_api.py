@@ -331,28 +331,28 @@ async def get_revenue_analytics():
         # Mock analytics data - replace with real queries
         analytics = {
             "total_customers": 247,
-            "monthly_recurring_revenue": 485750,  # $4,857.50
-            "annual_recurring_revenue": 5829000,  # $58,290.00
+            "monthly_recurring_revenue": 485750,  # €4,857.50
+            "annual_recurring_revenue": 5829000,  # €58,290.00
             "by_tier": {
                 "starter": {
                     "customers": 156,
-                    "mrr": 155844,  # $1,558.44
+                    "mrr": 155844,  # €1,558.44
                     "percentage": 63.2
                 },
                 "growth": {
                     "customers": 67,
-                    "mrr": 167433,  # $1,674.33
+                    "mrr": 167433,  # €1,674.33
                     "percentage": 27.1
                 },
                 "scale": {
                     "customers": 24,
-                    "mrr": 119976,  # $1,199.76
+                    "mrr": 119976,  # €1,199.76
                     "percentage": 9.7
                 }
             },
             "churn_rate": 2.1,
             "upgrade_rate": 8.4,
-            "average_ltv": 18450,  # $184.50
+            "average_ltv": 18450,  # €184.50
             "trial_conversion_rate": 34.7
         }
         

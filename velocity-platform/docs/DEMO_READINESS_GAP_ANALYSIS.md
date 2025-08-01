@@ -142,12 +142,12 @@ const demoData = {
       severity: "CRITICAL",
       affectedResources: ["s3://company-prod-data"],
       riskScore: 9.2,
-      estimatedCost: "$2.3M potential exposure"
+      estimatedCost: "€2.3M potential exposure"
     }
   ],
   portfolioAnalysis: {
-    totalValue: "$50M",
-    var95: "$2.1M",
+    totalValue: "€50M",
+    var95: "€2.1M",
     sharpeRatio: 1.47,
     riskAdjustedReturn: "12.3%"
   }

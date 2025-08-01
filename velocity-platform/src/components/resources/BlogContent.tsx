@@ -23,7 +23,7 @@ const blogPosts = [
       - Average enterprise manages 15+ compliance frameworks simultaneously
       - 78% of organizations failed at least one audit in the past 2 years
       - Compliance teams spend 65% of their time on manual evidence collection
-      - Average cost of compliance program: $2.8M annually for mid-sized companies
+      - Average cost of compliance program: €2.8M annually for mid-sized companies
       
       ## Why Traditional Methods Are Failing
       
@@ -303,7 +303,7 @@ const BlogCard: React.FC<{
 }> = ({ post, onClick }) => {
   return (
     <article
-      className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 ${
+      className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700 hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 €{
         post.featured ? 'ring-2 ring-emerald-500/20' : ''
       }`}
       onClick={onClick}
@@ -433,18 +433,18 @@ const BlogDetail: React.FC<{
               .split('\n')
               .map(line => {
                 if (line.startsWith('## ')) {
-                  return `<h2 class="text-2xl font-bold text-white mt-8 mb-4">${line.replace('## ', '')}</h2>`;
+                  return `<h2 class="text-2xl font-bold text-white mt-8 mb-4">€{line.replace('## ', '')}</h2>`;
                 }
                 if (line.startsWith('**') && line.endsWith('**')) {
-                  return `<h3 class="text-lg font-semibold text-emerald-400 mt-6 mb-3">${line.replace(/\*\*/g, '')}</h3>`;
+                  return `<h3 class="text-lg font-semibold text-emerald-400 mt-6 mb-3">€{line.replace(/\*\*/g, '')}</h3>`;
                 }
                 if (line.startsWith('- ')) {
-                  return `<li class="mb-2">${line.replace('- ', '')}</li>`;
+                  return `<li class="mb-2">€{line.replace('- ', '')}</li>`;
                 }
                 if (line.trim() === '') {
                   return '<br>';
                 }
-                return `<p class="mb-4">${line}</p>`;
+                return `<p class="mb-4">€{line}</p>`;
               })
               .join('')
           }}

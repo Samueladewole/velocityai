@@ -199,7 +199,7 @@ export const TrustScore: React.FC = () => {
                   </ResponsiveContainer>
                   <div className="absolute inset-0 flex flex-col items-center justify-center">
                     <span className="text-5xl font-bold text-slate-900">{currentScore}</span>
-                    <span className={`text-lg font-semibold bg-gradient-to-r ${tierData.gradient} bg-clip-text text-transparent`}>
+                    <span className={`text-lg font-semibold bg-gradient-to-r €{tierData.gradient} bg-clip-text text-transparent`}>
                       {currentTier} Tier
                     </span>
                   </div>
@@ -221,7 +221,7 @@ export const TrustScore: React.FC = () => {
                               <div 
                                 className="h-2 rounded-full transition-all duration-1000"
                                 style={{ 
-                                  width: `${component.score}%`,
+                                  width: `€{component.score}%`,
                                   backgroundColor: component.color
                                 }}
                               />
@@ -241,8 +241,8 @@ export const TrustScore: React.FC = () => {
                       </div>
                       <div className="w-full bg-slate-200 rounded-full h-3 mb-2">
                         <div 
-                          className={`h-3 rounded-full bg-gradient-to-r ${tierConfig[tierData.next as keyof typeof tierConfig].gradient} transition-all duration-1000`}
-                          style={{ width: `${progressToNext}%` }}
+                          className={`h-3 rounded-full bg-gradient-to-r €{tierConfig[tierData.next as keyof typeof tierConfig].gradient} transition-all duration-1000`}
+                          style={{ width: `€{progressToNext}%` }}
                         />
                       </div>
                       <p className="text-xs text-slate-600">Unlock: {tierConfig[tierData.next as keyof typeof tierConfig].benefits[tierConfig[tierData.next as keyof typeof tierConfig].benefits.length - 1]}</p>
@@ -257,7 +257,7 @@ export const TrustScore: React.FC = () => {
           <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Award className={`h-5 w-5 text-${tierData.color}`} />
+                <Award className={`h-5 w-5 text-€{tierData.color}`} />
                 {currentTier} Tier Benefits
               </CardTitle>
             </CardHeader>
@@ -277,16 +277,16 @@ export const TrustScore: React.FC = () => {
                   {achievements.map((achievement) => (
                     <div 
                       key={achievement.name}
-                      className={`p-3 rounded-lg border ${
+                      className={`p-3 rounded-lg border €{
                         achievement.unlocked 
                           ? 'bg-gradient-to-r from-slate-50 to-slate-100 border-slate-200' 
                           : 'bg-slate-50/50 border-slate-100'
                       }`}
                     >
-                      <achievement.icon className={`h-5 w-5 mb-1 ${
+                      <achievement.icon className={`h-5 w-5 mb-1 €{
                         achievement.unlocked ? 'text-amber-600' : 'text-slate-400'
                       }`} />
-                      <p className={`text-xs font-medium ${
+                      <p className={`text-xs font-medium €{
                         achievement.unlocked ? 'text-slate-700' : 'text-slate-400'
                       }`}>
                         {achievement.name}

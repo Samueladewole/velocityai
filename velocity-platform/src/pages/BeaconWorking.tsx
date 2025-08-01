@@ -352,7 +352,7 @@ export const BeaconWorking: React.FC = () => {
   };
 
   const formatPercentage = (value: number) => {
-    return `${value.toFixed(1)}%`;
+    return `€{value.toFixed(1)}%`;
   };
 
   const getCategoryIcon = (category: string) => {
@@ -608,7 +608,7 @@ export const BeaconWorking: React.FC = () => {
           <div className="flex items-center justify-center gap-1 bg-white rounded-lg p-1 mb-8 max-w-2xl mx-auto border shadow-sm">
             <button
               onClick={() => setActiveTab('investment')}
-              className={`px-6 py-3 text-sm font-medium rounded-md transition-all flex-1 ${
+              className={`px-6 py-3 text-sm font-medium rounded-md transition-all flex-1 €{
                 activeTab === 'investment' 
                   ? 'bg-amber-600 text-white shadow-sm' 
                   : 'text-slate-600 hover:bg-slate-50'
@@ -618,7 +618,7 @@ export const BeaconWorking: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('trust-equity')}
-              className={`px-6 py-3 text-sm font-medium rounded-md transition-all flex-1 ${
+              className={`px-6 py-3 text-sm font-medium rounded-md transition-all flex-1 €{
                 activeTab === 'trust-equity' 
                   ? 'bg-amber-600 text-white shadow-sm' 
                   : 'text-slate-600 hover:bg-slate-50'
@@ -628,7 +628,7 @@ export const BeaconWorking: React.FC = () => {
             </button>
             <button
               onClick={() => setActiveTab('optimization')}
-              className={`px-6 py-3 text-sm font-medium rounded-md transition-all flex-1 ${
+              className={`px-6 py-3 text-sm font-medium rounded-md transition-all flex-1 €{
                 activeTab === 'optimization' 
                   ? 'bg-amber-600 text-white shadow-sm' 
                   : 'text-slate-600 hover:bg-slate-50'
@@ -839,7 +839,7 @@ export const BeaconWorking: React.FC = () => {
                             <span>Annual: {formatCurrency(category.annualSpend)}</span>
                           </div>
                         </div>
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        <div className={`px-3 py-1 rounded-full text-xs font-medium €{
                           category.trend === 'optimized' ? 'bg-emerald-50 text-emerald-700' :
                           category.trend === 'improving' ? 'bg-blue-50 text-blue-700' :
                           category.trend === 'expanding' ? 'bg-purple-50 text-purple-700' :
@@ -1077,7 +1077,7 @@ export const BeaconWorking: React.FC = () => {
                           <div className="w-20 bg-slate-100 rounded-full h-1.5">
                             <div
                               className="bg-gradient-to-r from-amber-500 to-amber-600 h-1.5 rounded-full"
-                              style={{ width: `${component.percentage}%` }}
+                              style={{ width: `€{component.percentage}%` }}
                             />
                           </div>
                           <span className="font-medium text-slate-900 w-16 text-right">
@@ -1127,7 +1127,7 @@ export const BeaconWorking: React.FC = () => {
                         <span>Format: {report.format}</span>
                       </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(report.status)}`}>
+                    <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getStatusColor(report.status)}`}>
                       {report.status}
                     </div>
                   </div>
@@ -1191,7 +1191,7 @@ export const BeaconWorking: React.FC = () => {
               >
                 <div className="flex items-center justify-between mb-4">
                   <h3 className="font-semibold text-slate-900">{benchmark.category}</h3>
-                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  <div className={`px-2 py-1 rounded-full text-xs font-medium €{
                     benchmark.trend === 'improving' ? 'bg-emerald-50 text-emerald-700' :
                     benchmark.trend === 'declining' ? 'bg-red-50 text-red-700' :
                     'bg-blue-50 text-blue-700'
@@ -1205,25 +1205,25 @@ export const BeaconWorking: React.FC = () => {
                     <span className="text-sm text-slate-600">Our Performance</span>
                     <span className="text-lg font-bold text-slate-900">
                       {benchmark.category === 'Incident Response Time' || benchmark.category === 'Risk Maturity' 
-                        ? `${benchmark.ourScore}${benchmark.category === 'Risk Maturity' ? '/5' : 'h'}` 
+                        ? `€{benchmark.ourScore}€{benchmark.category === 'Risk Maturity' ? '/5' : 'h'}` 
                         : benchmark.category === 'Risk Investment ROI'
-                        ? `${benchmark.ourScore}%`
-                        : `${benchmark.ourScore}%`}
+                        ? `€{benchmark.ourScore}%`
+                        : `€{benchmark.ourScore}%`}
                     </span>
                   </div>
                   
                   <div className="flex items-center justify-between">
                     <span className="text-sm text-slate-600">Industry Average</span>
-                    <span className={`font-medium ${getBenchmarkColor(
+                    <span className={`font-medium €{getBenchmarkColor(
                       benchmark.ourScore, 
                       benchmark.industryAverage, 
                       benchmark.category === 'Incident Response Time'
                     )}`}>
                       {benchmark.category === 'Incident Response Time' || benchmark.category === 'Risk Maturity' 
-                        ? `${benchmark.industryAverage}${benchmark.category === 'Risk Maturity' ? '/5' : 'h'}` 
+                        ? `€{benchmark.industryAverage}€{benchmark.category === 'Risk Maturity' ? '/5' : 'h'}` 
                         : benchmark.category === 'Risk Investment ROI'
-                        ? `${benchmark.industryAverage}%`
-                        : `${benchmark.industryAverage}%`}
+                        ? `€{benchmark.industryAverage}%`
+                        : `€{benchmark.industryAverage}%`}
                     </span>
                   </div>
                   
@@ -1231,10 +1231,10 @@ export const BeaconWorking: React.FC = () => {
                     <span className="text-sm text-slate-600">Best in Class</span>
                     <span className="font-medium text-purple-700">
                       {benchmark.category === 'Incident Response Time' || benchmark.category === 'Risk Maturity' 
-                        ? `${benchmark.bestInClass}${benchmark.category === 'Risk Maturity' ? '/5' : 'h'}` 
+                        ? `€{benchmark.bestInClass}€{benchmark.category === 'Risk Maturity' ? '/5' : 'h'}` 
                         : benchmark.category === 'Risk Investment ROI'
-                        ? `${benchmark.bestInClass}%`
-                        : `${benchmark.bestInClass}%`}
+                        ? `€{benchmark.bestInClass}%`
+                        : `€{benchmark.bestInClass}%`}
                     </span>
                   </div>
                   
@@ -1243,13 +1243,13 @@ export const BeaconWorking: React.FC = () => {
                       <div
                         className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-2 rounded-full"
                         style={{ 
-                          width: `${(benchmark.ourScore / (benchmark.bestInClass * 1.1)) * 100}%` 
+                          width: `€{(benchmark.ourScore / (benchmark.bestInClass * 1.1)) * 100}%` 
                         }}
                       />
                       <div
                         className="absolute top-0 w-px h-2 bg-amber-500"
                         style={{ 
-                          left: `${(benchmark.industryAverage / (benchmark.bestInClass * 1.1)) * 100}%` 
+                          left: `€{(benchmark.industryAverage / (benchmark.bestInClass * 1.1)) * 100}%` 
                         }}
                         title="Industry Average"
                       />
@@ -1523,7 +1523,7 @@ export const BeaconWorking: React.FC = () => {
                         <p className="text-slate-600 mt-1">{opportunity.description}</p>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                        <div className={`px-3 py-1 rounded-full text-xs font-medium €{
                           opportunity.effort === 'low' ? 'bg-emerald-50 text-emerald-700' :
                           opportunity.effort === 'medium' ? 'bg-amber-50 text-amber-700' :
                           'bg-red-50 text-red-700'
@@ -1545,7 +1545,7 @@ export const BeaconWorking: React.FC = () => {
                         <div className="text-sm text-slate-600 mb-1">
                           {opportunity.potentialSaving ? 'Potential Saving' : 'Additional Cost'}
                         </div>
-                        <div className={`text-xl font-bold ${
+                        <div className={`text-xl font-bold €{
                           opportunity.potentialSaving ? 'text-emerald-700' : 'text-blue-600'
                         }`}>
                           {formatCurrency(opportunity.potentialSaving || opportunity.additionalCost || 0)}
@@ -1555,7 +1555,7 @@ export const BeaconWorking: React.FC = () => {
                         <div className="text-sm text-slate-600 mb-1">
                           {opportunity.additionalValue ? 'Additional Value' : 'Risk Impact'}
                         </div>
-                        <div className={`text-xl font-bold ${
+                        <div className={`text-xl font-bold €{
                           opportunity.additionalValue ? 'text-purple-700' : 
                           opportunity.riskImpact === 'neutral' ? 'text-slate-600' :
                           opportunity.riskImpact === 'minimal' ? 'text-emerald-600' : 'text-red-600'

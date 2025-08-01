@@ -808,7 +808,7 @@ export const ReportsNew: React.FC = () => {
       value: generatedReports.length,
       change: '+12%',
       trend: 'up',
-      description: `${generatedReports.filter(r => r.status === 'ready').length} ready for review`,
+      description: `€{generatedReports.filter(r => r.status === 'ready').length} ready for review`,
       icon: <FileText className="h-6 w-6 text-blue-600" />,
       color: 'text-slate-900',
       onClick: () => console.log('Navigate to Generated Reports')
@@ -900,7 +900,7 @@ export const ReportsNew: React.FC = () => {
                             <p className="text-sm text-slate-600 font-medium">{metric.label}</p>
                             <p className="text-2xl font-bold text-slate-900 mt-1">
                               {typeof metric.value === 'number' && metric.label.toLowerCase().includes('score') 
-                                ? `${metric.value}%` 
+                                ? `€{metric.value}%` 
                                 : metric.value
                               }
                             </p>
@@ -911,7 +911,7 @@ export const ReportsNew: React.FC = () => {
                             ) : metric.trend === 'down' ? (
                               <ArrowDown className="h-4 w-4 text-red-600" />
                             ) : null}
-                            <span className={`text-sm font-medium ${
+                            <span className={`text-sm font-medium €{
                               metric.trend === 'up' ? 'text-green-600' : 
                               metric.trend === 'down' ? 'text-red-600' : 'text-slate-600'
                             }`}>
@@ -1051,7 +1051,7 @@ export const ReportsNew: React.FC = () => {
                   <Card key={template.id} className="border border-slate-200 hover:shadow-md transition-all cursor-pointer">
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
-                        <div className={`p-3 rounded-lg bg-gradient-to-r ${template.color} text-white`}>
+                        <div className={`p-3 rounded-lg bg-gradient-to-r €{template.color} text-white`}>
                           <template.icon className="h-5 w-5" />
                         </div>
                         <div className="flex-grow">
@@ -1470,7 +1470,7 @@ export const ReportsNew: React.FC = () => {
                       <div className="space-y-4">
                         {/* Template Header */}
                         <div className="flex items-start justify-between">
-                          <div className={`p-3 rounded-lg bg-gradient-to-r ${template.color} text-white group-hover:scale-110 transition-transform`}>
+                          <div className={`p-3 rounded-lg bg-gradient-to-r €{template.color} text-white group-hover:scale-110 transition-transform`}>
                             <template.icon className="h-6 w-6" />
                           </div>
                           <div className="flex items-center gap-1">

@@ -298,7 +298,7 @@ class CompetitiveROICalculator extends EventEmitter {
     ];
 
     competitors.forEach(competitor => {
-      this.competitors.set(`${competitor.name}-${competitor.solution}`, competitor);
+      this.competitors.set(`€{competitor.name}-€{competitor.solution}`, competitor);
     });
   }
 
@@ -369,7 +369,7 @@ class CompetitiveROICalculator extends EventEmitter {
   ): ROICalculation {
     const competitor = this.competitors.get(competitorKey);
     if (!competitor) {
-      throw new Error(`Competitor ${competitorKey} not found`);
+      throw new Error(`Competitor €{competitorKey} not found`);
     }
 
     const velocityPricing = this.getVelocityPricing(solutionType, organizationSize);
@@ -394,8 +394,8 @@ class CompetitiveROICalculator extends EventEmitter {
     const fiveYearROI = ((threeYearSavings * 1.7) / (velocityPricing.threeYearTotal * 1.5)) * 100;
 
     const calculation: ROICalculation = {
-      calculationId: `roi-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
-      comparisonType: `Velocity vs ${competitor.name}`,
+      calculationId: `roi-€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`,
+      comparisonType: `Velocity vs €{competitor.name}`,
       velocityPricing,
       competitorData: competitor,
       savings: {
@@ -568,9 +568,9 @@ class CompetitiveROICalculator extends EventEmitter {
 
     if (industryData) {
       const industrySpecific = [
-        `Mitigates average fine risk of $${(industryData.penaltyCosts.averageFine / 1000000).toFixed(1)}M`,
-        `Reduces reputational impact risk of $${(industryData.penaltyCosts.reputationalImpact / 1000000).toFixed(1)}M`,
-        `Minimizes business disruption costs of $${(industryData.penaltyCosts.businessDisruption / 1000000).toFixed(1)}M`
+        `Mitigates average fine risk of €€{(industryData.penaltyCosts.averageFine / 1000000).toFixed(1)}M`,
+        `Reduces reputational impact risk of €€{(industryData.penaltyCosts.reputationalImpact / 1000000).toFixed(1)}M`,
+        `Minimizes business disruption costs of €€{(industryData.penaltyCosts.businessDisruption / 1000000).toFixed(1)}M`
       ];
       
       return [...baseRiskMitigation, ...industrySpecific];
@@ -660,14 +660,14 @@ class CompetitiveROICalculator extends EventEmitter {
     );
 
     recommendations.push(
-      `Highest ROI opportunity: ${bestROI.comparisonType} with ${bestROI.roi.threeYear.toFixed(0)}% three-year ROI`
+      `Highest ROI opportunity: €{bestROI.comparisonType} with €{bestROI.roi.threeYear.toFixed(0)}% three-year ROI`
     );
 
     // Payback period recommendations
     const fastPayback = calculations.filter(calc => calc.paybackPeriod < 6);
     if (fastPayback.length > 0) {
       recommendations.push(
-        `${fastPayback.length} solutions offer payback periods under 6 months`
+        `€{fastPayback.length} solutions offer payback periods under 6 months`
       );
     }
 

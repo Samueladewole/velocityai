@@ -758,9 +758,9 @@ export const AssessmentMarketplaceNew: React.FC = () => {
 
   const formatPrice = (price: number, priceType: string) => {
     if (priceType === 'free') return 'Free';
-    if (priceType === 'subscription') return `€${price}/month`;
-    if (priceType === 'usage-based') return `€${price}/use`;
-    return `€${price}`;
+    if (priceType === 'subscription') return `€€{price}/month`;
+    if (priceType === 'usage-based') return `€€{price}/use`;
+    return `€€{price}`;
   };
 
   const getDifficultyColor = (difficulty: string) => {
@@ -804,7 +804,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
     },
     {
       label: 'Trust Points Pool',
-      value: `${(stats.totalTrustPointsDistributed / 1000).toFixed(1)}K`,
+      value: `€{(stats.totalTrustPointsDistributed / 1000).toFixed(1)}K`,
       change: '+18%',
       trend: 'up',
       icon: <Coins className="h-5 w-5 text-yellow-600" />,
@@ -822,7 +822,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
     },
     {
       label: 'Free Assessments',
-      value: `${((stats.freeAssessments / stats.totalAssessments) * 100).toFixed(0)}%`,
+      value: `€{((stats.freeAssessments / stats.totalAssessments) * 100).toFixed(0)}%`,
       change: 'stable',
       trend: 'neutral',
       icon: <Heart className="h-5 w-5 text-red-600" />,
@@ -944,7 +944,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
           </div>
 
           {/* Assessment Grid */}
-          <div className={`grid gap-6 ${viewMode === 'grid' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}>
+          <div className={`grid gap-6 €{viewMode === 'grid' ? 'grid-cols-1 lg:grid-cols-2' : 'grid-cols-1'}`}>
             {filteredAssessments.map((assessment) => {
               const IconComponent = getCategoryIcon(assessment.category);
               const categoryColor = getCategoryColor(assessment.category);
@@ -978,7 +978,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColor} flex items-center justify-center shadow-lg`}>
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{categoryColor} flex items-center justify-center shadow-lg`}>
                           <IconComponent className="h-6 w-6 text-white" />
                         </div>
                         <div>
@@ -994,7 +994,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                             <Badge variant="outline" className="text-xs">
                               {assessment.type.replace('-', ' ')}
                             </Badge>
-                            <Badge className={`text-xs border ${getDifficultyColor(assessment.difficulty)}`}>
+                            <Badge className={`text-xs border €{getDifficultyColor(assessment.difficulty)}`}>
                               {assessment.difficulty}
                             </Badge>
                           </div>
@@ -1002,7 +1002,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <Button variant="ghost" size="sm" className="hover:bg-red-50">
-                          <Heart className={`h-4 w-4 ${assessment.isFavorite ? 'text-red-500 fill-current' : 'text-slate-400'}`} />
+                          <Heart className={`h-4 w-4 €{assessment.isFavorite ? 'text-red-500 fill-current' : 'text-slate-400'}`} />
                         </Button>
                         <Button variant="ghost" size="sm" className="hover:bg-blue-50">
                           <Share2 className="h-4 w-4 text-slate-400" />
@@ -1075,7 +1075,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                             {[1, 2, 3, 4, 5].map((star) => (
                               <Star 
                                 key={star} 
-                                className={`h-4 w-4 ${star <= assessment.rating ? 'text-yellow-500 fill-current' : 'text-slate-300'}`} 
+                                className={`h-4 w-4 €{star <= assessment.rating ? 'text-yellow-500 fill-current' : 'text-slate-300'}`} 
                               />
                             ))}
                           </div>
@@ -1268,7 +1268,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                   <Card key={assessment.id} className="border-slate-200 hover:shadow-lg transition-shadow">
                     <CardHeader className="pb-4">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${categoryColor} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r €{categoryColor} flex items-center justify-center`}>
                           <IconComponent className="h-5 w-5 text-white" />
                         </div>
                         <Badge className="bg-green-100 text-green-800 border-green-200">
@@ -1348,7 +1348,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                   <CardHeader className="pb-4">
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${categoryColor} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r €{categoryColor} flex items-center justify-center`}>
                           <IconComponent className="h-5 w-5 text-white" />
                         </div>
                         <Badge variant="outline" className="capitalize">{assessment.category.replace('-', ' ')}</Badge>
@@ -1422,7 +1422,7 @@ export const AssessmentMarketplaceNew: React.FC = () => {
                             </Badge>
                           </div>
                           <div className="flex items-center gap-3">
-                            <Badge className={`text-xs ${category.growth > 0 ? 'bg-green-100 text-green-800' : 'bg-slate-100 text-slate-600'}`}>
+                            <Badge className={`text-xs €{category.growth > 0 ? 'bg-green-100 text-green-800' : 'bg-slate-100 text-slate-600'}`}>
                               {category.growth > 0 ? '+' : ''}{category.growth}%
                             </Badge>
                             <span className="text-sm font-medium w-12 text-right">

@@ -178,7 +178,7 @@ export const ROIGuide: React.FC = () => {
               <Card key={category.category} className="border-0 shadow-lg">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-3">
-                    <div className={`p-2 rounded-lg bg-gradient-to-r ${category.color}`}>
+                    <div className={`p-2 rounded-lg bg-gradient-to-r €{category.color}`}>
                       <category.icon className="h-6 w-6 text-white" />
                     </div>
                     {category.category}

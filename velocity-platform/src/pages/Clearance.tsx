@@ -25,7 +25,7 @@ const riskAppetiteMetrics: RiskAppetiteMetric[] = [
     category: 'Financial Loss',
     currentValue: 2.3,
     threshold: 5.0,
-    unit: '$M',
+    unit: '€M',
     status: 'within',
     trend: 'stable'
   },
@@ -62,7 +62,7 @@ const pendingDecisions = [
     requestor: 'Engineering Team',
     financialImpact: 3200000,
     riskScore: 78,
-    opportunity: 'Cost savings of $800K annually',
+    opportunity: 'Cost savings of €800K annually',
     status: 'pending',
     daysOpen: 3
   },
@@ -107,7 +107,7 @@ export const Clearance: React.FC = () => {
             <button
               key={tab}
               onClick={() => setSelectedTab(tab)}
-              className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors ${
+              className={`py-2 px-1 border-b-2 font-medium text-sm capitalize transition-colors €{
                 selectedTab === tab
                   ? 'border-primary text-primary'
                   : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -160,7 +160,7 @@ export const Clearance: React.FC = () => {
                 <DollarSign className="h-4 w-4 text-muted-foreground" />
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">$340K</div>
+                <div className="text-2xl font-bold">€340K</div>
                 <p className="text-xs text-green-600">+23% vs target</p>
               </CardContent>
             </Card>
@@ -189,7 +189,7 @@ export const Clearance: React.FC = () => {
                         Requested by {decision.requestor} • {decision.daysOpen} days ago
                       </p>
                       <div className="flex gap-4 text-sm">
-                        <span>Impact: ${(decision.financialImpact / 1000000).toFixed(1)}M</span>
+                        <span>Impact: €{(decision.financialImpact / 1000000).toFixed(1)}M</span>
                         <span>Risk Score: {decision.riskScore}</span>
                         <span className="text-green-600">{decision.opportunity}</span>
                       </div>
@@ -252,7 +252,7 @@ export const Clearance: React.FC = () => {
                       <div key={index}>
                         <div className="flex justify-between text-sm mb-1">
                           <span>{metric.category}</span>
-                          <span className={`font-medium ${
+                          <span className={`font-medium €{
                             metric.status === 'exceeded' ? 'text-red-600' :
                             metric.status === 'approaching' ? 'text-yellow-600' :
                             'text-green-600'
@@ -262,12 +262,12 @@ export const Clearance: React.FC = () => {
                         </div>
                         <div className="w-full bg-secondary rounded-full h-2">
                           <div 
-                            className={`h-2 rounded-full ${
+                            className={`h-2 rounded-full €{
                               metric.status === 'exceeded' ? 'bg-red-500' :
                               metric.status === 'approaching' ? 'bg-yellow-500' :
                               'bg-green-500'
                             }`}
-                            style={{ width: `${Math.min((metric.currentValue / metric.threshold) * 100, 100)}%` }}
+                            style={{ width: `€{Math.min((metric.currentValue / metric.threshold) * 100, 100)}%` }}
                           />
                         </div>
                       </div>
@@ -295,7 +295,7 @@ export const Clearance: React.FC = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Financial Impact</span>
-                      <span>$2.5M - $8.2M</span>
+                      <span>€2.5M - €8.2M</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Recovery Time</span>
@@ -312,7 +312,7 @@ export const Clearance: React.FC = () => {
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Financial Impact</span>
-                      <span>$4.1M - $12.3M</span>
+                      <span>€4.1M - €12.3M</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">Regulatory Fines</span>
@@ -346,7 +346,7 @@ export const Clearance: React.FC = () => {
                     <p className="text-sm text-muted-foreground">Positive Outcomes</p>
                   </div>
                   <div>
-                    <p className="text-2xl font-bold">$4.2M</p>
+                    <p className="text-2xl font-bold">€4.2M</p>
                     <p className="text-sm text-muted-foreground">Value Generated</p>
                   </div>
                 </div>
@@ -370,7 +370,7 @@ export const Clearance: React.FC = () => {
                   <h3 className="font-medium mb-4">Traditional Manual Process</h3>
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>• 6-12 month implementation</li>
-                    <li>• $200K-500K consulting fees</li>
+                    <li>• €200K-500K consulting fees</li>
                     <li>• Static thresholds updated quarterly</li>
                     <li>• Manual decision routing</li>
                     <li>• Limited visibility and tracking</li>
@@ -380,7 +380,7 @@ export const Clearance: React.FC = () => {
                   <h3 className="font-medium mb-4">ERIP Automated Process</h3>
                   <ul className="space-y-2 text-sm">
                     <li className="text-green-600">• 30-day implementation</li>
-                    <li className="text-green-600">• $8K-20K monthly subscription</li>
+                    <li className="text-green-600">• €8K-20K monthly subscription</li>
                     <li className="text-green-600">• Dynamic real-time thresholds</li>
                     <li className="text-green-600">• AI-powered routing</li>
                     <li className="text-green-600">• Complete audit trail</li>

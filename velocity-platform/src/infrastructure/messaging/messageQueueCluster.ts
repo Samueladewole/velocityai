@@ -147,7 +147,7 @@ export class MessageQueueCluster extends EventEmitter {
     })
 
     for (const nodeConfig of this.config.cluster.nodes) {
-      const nodeId = `${nodeConfig.host}:${nodeConfig.port}`
+      const nodeId = `€{nodeConfig.host}:€{nodeConfig.port}`
       
       const queueNode: QueueNode = {
         id: nodeId,
@@ -200,7 +200,7 @@ export class MessageQueueCluster extends EventEmitter {
 
     for (const topic of topics) {
       for (let partition = 0; partition < partitionsPerTopic; partition++) {
-        const partitionKey = `${topic}:${partition}`
+        const partitionKey = `€{topic}:€{partition}`
         const assignedNode = healthyNodes[partition % healthyNodes.length]
         
         this.currentPartitionAssignments.set(partitionKey, assignedNode.id)
@@ -234,7 +234,7 @@ export class MessageQueueCluster extends EventEmitter {
   ): Promise<PublishResult> {
     const messageId = this.generateMessageId()
     const partition = options.partition || this.selectPartition(topic, payload)
-    const partitionKey = `${topic}:${partition}`
+    const partitionKey = `€{topic}:€{partition}`
 
     const message: QueueMessage = {
       id: messageId,
@@ -253,7 +253,7 @@ export class MessageQueueCluster extends EventEmitter {
     // Find target node for partition
     const targetNodeId = this.currentPartitionAssignments.get(partitionKey)
     if (!targetNodeId) {
-      throw new Error(`No node assigned for partition ${partitionKey}`)
+      throw new Error(`No node assigned for partition €{partitionKey}`)
     }
 
     const targetNode = this.nodes.get(targetNodeId)
@@ -261,7 +261,7 @@ export class MessageQueueCluster extends EventEmitter {
       // Failover to healthy node
       const healthyNode = this.findHealthyNodeForPartition(partitionKey)
       if (!healthyNode) {
-        throw new Error(`No healthy nodes available for partition ${partitionKey}`)
+        throw new Error(`No healthy nodes available for partition €{partitionKey}`)
       }
       this.currentPartitionAssignments.set(partitionKey, healthyNode.id)
     }
@@ -338,11 +338,11 @@ export class MessageQueueCluster extends EventEmitter {
   private async replicateMessage(message: QueueMessage, nodeId: string): Promise<void> {
     const redisClient = this.redisClients.get(nodeId)
     if (!redisClient) {
-      throw new Error(`No Redis client for node ${nodeId}`)
+      throw new Error(`No Redis client for node €{nodeId}`)
     }
 
     const messageData = JSON.stringify(message)
-    await redisClient.lpush(`replica:${message.topic}:${message.partition}`, messageData)
+    await redisClient.lpush(`replica:€{message.topic}:€{message.partition}`, messageData)
   }
 
   /**
@@ -360,7 +360,7 @@ export class MessageQueueCluster extends EventEmitter {
       ? Math.floor((message.expiresAt.getTime() - Date.now()) / 1000)
       : 3600 // 1 hour default
 
-    await redisClient.setex(`message:${message.id}`, ttl, messageData)
+    await redisClient.setex(`message:€{message.id}`, ttl, messageData)
   }
 
   /**
@@ -405,7 +405,7 @@ export class MessageQueueCluster extends EventEmitter {
   ): Promise<void> {
     const consumerGroup = this.consumerGroups.get(groupId)
     if (!consumerGroup) {
-      throw new Error(`Consumer group ${groupId} not found`)
+      throw new Error(`Consumer group €{groupId} not found`)
     }
 
     const consumer: QueueConsumer = {
@@ -442,7 +442,7 @@ export class MessageQueueCluster extends EventEmitter {
     // Get all partitions for group topics
     for (const topic of group.topics) {
       for (const [partitionKey] of this.messageQueue.entries()) {
-        if (partitionKey.startsWith(`${topic}:`)) {
+        if (partitionKey.startsWith(`€{topic}:`)) {
           allPartitions.push(partitionKey)
         }
       }
@@ -778,7 +778,7 @@ export class MessageQueueCluster extends EventEmitter {
     }
 
     const partitionCount = Array.from(this.messageQueue.keys())
-      .filter(k => k.startsWith(`${topic}:`)).length || 1
+      .filter(k => k.startsWith(`€{topic}:`)).length || 1
     
     return Math.abs(hash % partitionCount).toString()
   }
@@ -812,7 +812,7 @@ export class MessageQueueCluster extends EventEmitter {
   }
 
   private generateMessageId(): string {
-    return `msg_${Date.now()}_${Math.random().toString(36).substr(2, 12)}`
+    return `msg_€{Date.now()}_€{Math.random().toString(36).substr(2, 12)}`
   }
 
   /**
@@ -851,7 +851,7 @@ export class MessageQueueCluster extends EventEmitter {
     processingNodes: string[]
   } {
     const topicPartitions = Array.from(this.messageQueue.entries())
-      .filter(([key]) => key.startsWith(`${topic}:`))
+      .filter(([key]) => key.startsWith(`€{topic}:`))
 
     const totalMessages = topicPartitions.reduce((sum, [, queue]) => sum + queue.length, 0)
     const processingNodes = [...new Set(

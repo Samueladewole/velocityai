@@ -4,7 +4,7 @@
 
 ### **Reality Check:**
 - **16 months bootstrapping** = time to ship and monetize
-- **AWS Amplify** = $5-15/month vs $500+/month EU cloud
+- **AWS Amplify** = €5-15/month vs €500+/month EU cloud
 - **velocity.eripapp.com** = perfect subdomain for testing
 - **EU migration** = plan for when revenue allows
 
@@ -91,30 +91,30 @@ SUPABASE_ANON_KEY=your_supabase_anon_key
 interface BootstrapStack {
   hosting: {
     service: "AWS Amplify",
-    cost: "$0-15/month",
+    cost: "€0-15/month",
     features: ["CDN", "SSL", "Custom domain", "CI/CD"]
   },
   
   database: {
     service: "Supabase (free tier)",
-    cost: "$0/month",
+    cost: "€0/month",
     limits: "500MB storage, 50MB file uploads",
-    upgrade: "$25/month when needed"
+    upgrade: "€25/month when needed"
   },
   
   authentication: {
     service: "NextAuth.js + Supabase Auth",
-    cost: "$0/month",
+    cost: "€0/month",
     features: ["Google/GitHub login", "Magic links"]
   },
   
   ai_integration: {
     service: "Claude API (pay-per-use)",
-    cost: "$50-200/month depending on usage",
+    cost: "€50-200/month depending on usage",
     note: "Only cost scales with customers"
   },
   
-  total_monthly: "$50-250/month until you have paying customers"
+  total_monthly: "€50-250/month until you have paying customers"
 }
 ```
 
@@ -209,17 +209,17 @@ interface MVPPages {
     tiers: [
       {
         name: "Starter",
-        price: "$199/month",
+        price: "€199/month",
         features: ["AWS Transfer Scanner", "Basic GDPR Compliance", "Email Support"]
       },
       {
         name: "Professional", 
-        price: "$499/month",
+        price: "€499/month",
         features: ["Multi-cloud Scanning", "SOC 2 Automation", "Transfer Impact Assessments"]
       },
       {
         name: "Enterprise",
-        price: "$999/month", 
+        price: "€999/month", 
         features: ["Custom Frameworks", "White-label", "Dedicated Support"]
       }
     ]
@@ -320,7 +320,7 @@ interface LeadGeneration {
 
 Start generating revenue with:
 1. **Free GDPR scanner** (lead magnet)
-2. **$199/month starter tier** (accessible pricing)
+2. **€199/month starter tier** (accessible pricing)
 3. **Focus on AWS + GDPR** (specific pain point)
 4. **EU migration roadmap** (enterprise credibility)
 

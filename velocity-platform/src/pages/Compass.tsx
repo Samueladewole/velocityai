@@ -341,7 +341,7 @@ export const Compass: React.FC = () => {
                             framework.score >= 90 ? "bg-green-500" :
                             framework.score >= 70 ? "bg-amber-500" : "bg-red-500"
                           )}
-                          style={{ width: `${framework.score}%` }}
+                          style={{ width: `€{framework.score}%` }}
                         />
                       </div>
                     </div>

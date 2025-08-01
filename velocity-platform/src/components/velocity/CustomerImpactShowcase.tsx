@@ -37,7 +37,7 @@ const CustomerImpactShowcase: React.FC = () => {
     {
       icon: '💰',
       title: 'Average Cost Savings',
-      value: '$120K',
+      value: '€120K',
       description: 'First-year savings per customer',
       trend: 'up',
       color: 'green'
@@ -88,14 +88,14 @@ const CustomerImpactShowcase: React.FC = () => {
     {
       company: 'TechFlow SaaS',
       industry: 'SaaS Platform',
-      size: 'Series B ($50M ARR)',
-      challenge: 'Lost $2M enterprise deal due to slow security review process',
+      size: 'Series B (€50M ARR)',
+      challenge: 'Lost €2M enterprise deal due to slow security review process',
       solution: 'Implemented Velocity QIE for instant compliance responses',
       results: [
         'Same-day security questionnaire responses',
         '40% increase in enterprise deal win rate',
         'Reduced sales cycle from 6 months to 4 months',
-        'Eliminated $80K in annual consultant fees'
+        'Eliminated €80K in annual consultant fees'
       ],
       roi: '650%',
       timeline: '3 months'
@@ -118,12 +118,12 @@ const CustomerImpactShowcase: React.FC = () => {
     {
       company: 'GlobalPay Fintech',
       industry: 'Financial Services',
-      size: 'Growth Stage ($25M ARR)',
-      challenge: 'SOC 2 audit prep cost $180K and took 6 months',
+      size: 'Growth Stage (€25M ARR)',
+      challenge: 'SOC 2 audit prep cost €180K and took 6 months',
       solution: 'Year-round audit readiness with automated evidence collection',
       results: [
         'Completed SOC 2 in 4 weeks',
-        'Reduced audit costs to $30K',
+        'Reduced audit costs to €30K',
         'Continuous compliance monitoring',
         'Expanded to European markets'
       ],
@@ -139,8 +139,8 @@ const CustomerImpactShowcase: React.FC = () => {
     
     const calculateROI = () => {
       const auditSavings = parseInt(currentAuditCost) * 0.7; // 70% reduction
-      const dealAcceleration = parseInt(dealsPerYear) * 0.3 * 50000; // 30% more deals at $50K avg
-      const timeSavings = parseInt(companySize) * 2000; // $2K per employee in time savings
+      const dealAcceleration = parseInt(dealsPerYear) * 0.3 * 50000; // 30% more deals at €50K avg
+      const timeSavings = parseInt(companySize) * 2000; // €2K per employee in time savings
       
       const totalSavings = auditSavings + dealAcceleration + timeSavings;
       const velocityCost = 120000; // Annual platform cost
@@ -200,7 +200,7 @@ const CustomerImpactShowcase: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
               <div className="text-3xl font-bold bg-gradient-to-r from-emerald-400 to-emerald-500 bg-clip-text text-transparent">
-                ${results.totalSavings}
+                €{results.totalSavings}
               </div>
               <div className="text-sm text-slate-400">Annual Savings</div>
             </div>
@@ -278,7 +278,7 @@ const CustomerImpactShowcase: React.FC = () => {
             <div className="bg-slate-800/50 backdrop-blur-sm rounded-full p-1 border border-slate-700/50">
               <button
                 onClick={() => setActiveTab('metrics')}
-                className={`rounded-full px-6 py-3 font-medium transition-all duration-300 ${
+                className={`rounded-full px-6 py-3 font-medium transition-all duration-300 €{
                   activeTab === 'metrics'
                     ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
@@ -288,7 +288,7 @@ const CustomerImpactShowcase: React.FC = () => {
               </button>
               <button
                 onClick={() => setActiveTab('stories')}
-                className={`rounded-full px-6 py-3 font-medium transition-all duration-300 ${
+                className={`rounded-full px-6 py-3 font-medium transition-all duration-300 €{
                   activeTab === 'stories'
                     ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
@@ -298,7 +298,7 @@ const CustomerImpactShowcase: React.FC = () => {
               </button>
               <button
                 onClick={() => setActiveTab('calculator')}
-                className={`rounded-full px-6 py-3 font-medium transition-all duration-300 ${
+                className={`rounded-full px-6 py-3 font-medium transition-all duration-300 €{
                   activeTab === 'calculator'
                     ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg'
                     : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
@@ -318,7 +318,7 @@ const CustomerImpactShowcase: React.FC = () => {
                   <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-2">
                     <div className="flex items-start justify-between mb-4">
                       <div className="text-3xl">{metric.icon}</div>
-                      <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                      <div className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium €{
                         metric.trend === 'up' 
                           ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/30' 
                           : 'bg-amber-500/20 text-amber-400 border border-amber-500/30'
@@ -326,7 +326,7 @@ const CustomerImpactShowcase: React.FC = () => {
                         {metric.trend === 'up' ? '↗️' : '↘️'}
                       </div>
                     </div>
-                    <div className={`text-3xl font-bold bg-gradient-to-r ${
+                    <div className={`text-3xl font-bold bg-gradient-to-r €{
                       metric.color === 'green' ? 'from-emerald-400 to-emerald-500' :
                       metric.color === 'blue' ? 'from-blue-400 to-cyan-500' :
                       metric.color === 'purple' ? 'from-purple-400 to-pink-500' :
@@ -358,14 +358,14 @@ const CustomerImpactShowcase: React.FC = () => {
                     <span className="text-emerald-400 mr-3 mt-1">✓</span>
                     <div>
                       <div className="text-white font-semibold">90% reduction in compliance consultant fees</div>
-                      <div className="text-sm text-slate-400">Save $50K-200K per audit</div>
+                      <div className="text-sm text-slate-400">Save €50K-200K per audit</div>
                     </div>
                   </li>
                   <li className="flex items-start">
                     <span className="text-emerald-400 mr-3 mt-1">✓</span>
                     <div>
                       <div className="text-white font-semibold">80% reduction in employee time</div>
-                      <div className="text-sm text-slate-400">$40K-120K productivity gains</div>
+                      <div className="text-sm text-slate-400">€40K-120K productivity gains</div>
                     </div>
                   </li>
                   <li className="flex items-start">

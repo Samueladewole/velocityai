@@ -297,7 +297,7 @@ export const SalesAcceleration: React.FC = () => {
                           <h3 className="font-semibold text-slate-900 mb-4">{demo.title}</h3>
                           {demo.steps.map((step, index) => (
                             <div key={index} className="flex items-center gap-4">
-                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold €{
                                 step.status === 'complete' ? 'bg-green-100 text-green-700' :
                                 step.status === 'active' ? 'bg-blue-100 text-blue-700' :
                                 'bg-slate-100 text-slate-500'

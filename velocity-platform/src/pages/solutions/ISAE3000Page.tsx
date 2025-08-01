@@ -62,10 +62,10 @@ const ISAE3000Page: React.FC = () => {
   ];
 
   const costComparison = [
-    { provider: "Velocity AI", cost: "$45,000", timeline: "6 weeks", coverage: "100%" },
-    { provider: "Deloitte", cost: "$380,000", timeline: "22+ weeks", coverage: "85%" },
-    { provider: "PwC", cost: "$350,000", timeline: "20+ weeks", coverage: "80%" },
-    { provider: "EY", cost: "$365,000", timeline: "24+ weeks", coverage: "82%" }
+    { provider: "Velocity AI", cost: "€45,000", timeline: "6 weeks", coverage: "100%" },
+    { provider: "Deloitte", cost: "€380,000", timeline: "22+ weeks", coverage: "85%" },
+    { provider: "PwC", cost: "€350,000", timeline: "20+ weeks", coverage: "80%" },
+    { provider: "EY", cost: "€365,000", timeline: "24+ weeks", coverage: "82%" }
   ];
 
   const bankingCapabilities = [
@@ -141,7 +141,7 @@ const ISAE3000Page: React.FC = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             {costComparison.map((provider, index) => (
-              <div key={index} className={`p-6 rounded-lg border ${
+              <div key={index} className={`p-6 rounded-lg border €{
                 provider.provider === 'Velocity AI' 
                   ? 'bg-gradient-to-br from-blue-500/20 to-emerald-500/20 border-blue-500/30' 
                   : 'bg-white/5 border-white/10'

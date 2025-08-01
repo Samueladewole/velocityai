@@ -50,7 +50,7 @@ const AgentMonitor: React.FC = () => {
 
   // WebSocket for real-time updates
   const { connect, disconnect, send, lastMessage } = useWebSocket(
-    `${process.env.REACT_APP_WS_URL}/agents/monitor`
+    `€{process.env.REACT_APP_WS_URL}/agents/monitor`
   );
 
   // Connect to WebSocket on mount
@@ -108,7 +108,7 @@ const AgentMonitor: React.FC = () => {
 
   const startAgent = async (agentId: string) => {
     try {
-      const response = await fetch(`/api/agents/${agentId}/start`, {
+      const response = await fetch(`/api/agents/€{agentId}/start`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -126,7 +126,7 @@ const AgentMonitor: React.FC = () => {
 
   const stopAgent = async (agentId: string) => {
     try {
-      const response = await fetch(`/api/agents/${agentId}/stop`, {
+      const response = await fetch(`/api/agents/€{agentId}/stop`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -139,7 +139,7 @@ const AgentMonitor: React.FC = () => {
 
   const retryTask = async (taskId: string) => {
     try {
-      const response = await fetch(`/api/tasks/${taskId}/retry`, {
+      const response = await fetch(`/api/tasks/€{taskId}/retry`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' }
       });
@@ -180,9 +180,9 @@ const AgentMonitor: React.FC = () => {
     const end = endTime || new Date();
     const duration = Math.round((end.getTime() - startTime.getTime()) / 1000);
     
-    if (duration < 60) return `${duration}s`;
-    if (duration < 3600) return `${Math.round(duration / 60)}m`;
-    return `${Math.round(duration / 3600)}h`;
+    if (duration < 60) return `€{duration}s`;
+    if (duration < 3600) return `€{Math.round(duration / 60)}m`;
+    return `€{Math.round(duration / 3600)}h`;
   };
 
   return (
@@ -201,7 +201,7 @@ const AgentMonitor: React.FC = () => {
             <span className="text-sm text-gray-600">Real-time updates</span>
           </label>
           <div className="flex items-center space-x-2">
-            <div className={`w-2 h-2 rounded-full ${isRealTimeEnabled ? 'bg-green-500' : 'bg-gray-400'}`} />
+            <div className={`w-2 h-2 rounded-full €{isRealTimeEnabled ? 'bg-green-500' : 'bg-gray-400'}`} />
             <span className="text-sm text-gray-600">
               {isRealTimeEnabled ? 'Connected' : 'Disconnected'}
             </span>
@@ -260,7 +260,7 @@ const AgentMonitor: React.FC = () => {
                       <div className="w-32 bg-gray-200 rounded-full h-2">
                         <div 
                           className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                          style={{ width: `${agent.progress}%` }}
+                          style={{ width: `€{agent.progress}%` }}
                         />
                       </div>
                       <span className="text-sm text-gray-600">{agent.progress}%</span>
@@ -329,7 +329,7 @@ const AgentMonitor: React.FC = () => {
                         <div className="font-medium text-gray-900">{task.type}</div>
                         <div className="text-sm text-gray-600">ID: {task.id.slice(0, 8)}</div>
                       </div>
-                      <span className={`px-2 py-1 text-xs rounded-full ${getPriorityColor(task.priority)}`}>
+                      <span className={`px-2 py-1 text-xs rounded-full €{getPriorityColor(task.priority)}`}>
                         {task.priority}
                       </span>
                     </div>

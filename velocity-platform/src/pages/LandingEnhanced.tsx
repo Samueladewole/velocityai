@@ -656,7 +656,7 @@ export const LandingEnhanced: React.FC = () => {
             {workflowPhases.map((phase, index) => (
               <Card 
                 key={phase.phase}
-                className={`cursor-pointer transition-all duration-300 ${
+                className={`cursor-pointer transition-all duration-300 €{
                   activePhase === phase.phase 
                     ? 'ring-2 ring-blue-500 shadow-lg transform scale-105' 
                     : 'hover:shadow-md'
@@ -664,7 +664,7 @@ export const LandingEnhanced: React.FC = () => {
                 onClick={() => setActivePhase(phase.phase)}
               >
                 <CardHeader className="text-center pb-4">
-                  <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold ${
+                  <div className={`w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold €{
                     activePhase === phase.phase 
                       ? 'bg-gradient-to-r from-blue-600 to-indigo-600' 
                       : 'bg-slate-400'
@@ -722,12 +722,12 @@ export const LandingEnhanced: React.FC = () => {
                 <Card 
                   key={feature.id}
                   className="group cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] bg-white border-slate-200"
-                  onClick={() => navigate(`/${feature.id}`)}
+                  onClick={() => navigate(`/€{feature.id}`)}
                 >
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex items-center gap-4">
-                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r ${feature.color} text-white group-hover:scale-110 transition-transform`}>
+                        <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-r €{feature.color} text-white group-hover:scale-110 transition-transform`}>
                           <IconComponent className="h-6 w-6" />
                         </div>
                         <div>
@@ -744,7 +744,7 @@ export const LandingEnhanced: React.FC = () => {
                     <p className="text-slate-600 mb-4">{feature.description}</p>
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-slate-500">Key Metric:</span>
-                      <span className={`font-semibold bg-gradient-to-r ${feature.color} bg-clip-text text-transparent`}>
+                      <span className={`font-semibold bg-gradient-to-r €{feature.color} bg-clip-text text-transparent`}>
                         {feature.metric}
                       </span>
                     </div>
@@ -777,7 +777,7 @@ export const LandingEnhanced: React.FC = () => {
               <div className="flex gap-2">
                 <button
                   onClick={() => setComponentFilter('all')}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  className={`px-3 py-1 text-sm rounded-full transition-colors €{
                     componentFilter === 'all' 
                       ? 'bg-blue-100 text-blue-700 border border-blue-200' 
                       : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -787,7 +787,7 @@ export const LandingEnhanced: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setComponentFilter('new')}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  className={`px-3 py-1 text-sm rounded-full transition-colors €{
                     componentFilter === 'new' 
                       ? 'bg-green-100 text-green-700 border border-green-200' 
                       : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -797,7 +797,7 @@ export const LandingEnhanced: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setComponentFilter('popular')}
-                  className={`px-3 py-1 text-sm rounded-full transition-colors ${
+                  className={`px-3 py-1 text-sm rounded-full transition-colors €{
                     componentFilter === 'popular' 
                       ? 'bg-purple-100 text-purple-700 border border-purple-200' 
                       : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -857,7 +857,7 @@ export const LandingEnhanced: React.FC = () => {
                         )}
 
                         <CardHeader className="text-center pb-4">
-                          <div className={`w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-gradient-to-r ${component.color} text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                          <div className={`w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center bg-gradient-to-r €{component.color} text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
                             <IconComponent className="h-8 w-8" />
                           </div>
                           <CardTitle className="text-lg mb-2 group-hover:text-blue-600 transition-colors">

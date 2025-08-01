@@ -507,7 +507,7 @@ export const Prism: React.FC = () => {
                     strokeWidth={2}
                     fillOpacity={1} 
                     fill="url(#colorVar)" 
-                    name="VaR (M$)"
+                    name="VaR (M€)"
                   />
                   </LazyAreaChart>
                 </LazyResponsiveContainer>

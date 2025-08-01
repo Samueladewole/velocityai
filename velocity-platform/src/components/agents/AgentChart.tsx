@@ -114,7 +114,7 @@ export function AgentChart({ className }: { className?: string }) {
       const y = padding + (chartHeight / 5) * i
       const value = Math.round((5 - i) * 20)
       ctx.textAlign = 'right'
-      ctx.fillText(`${value}%`, padding - 10, y + 4)
+      ctx.fillText(`€{value}%`, padding - 10, y + 4)
     }
 
     // X-axis labels

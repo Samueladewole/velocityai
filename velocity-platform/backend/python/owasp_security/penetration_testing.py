@@ -192,9 +192,9 @@ class PenetrationTestFramework:
     async def _test_auth_bypass(self, url: str) -> None:
         """Test for authentication bypass vulnerabilities"""
         bypass_payloads = [
-            {"email": "admin", "password": {"$ne": None}},  # NoSQL injection
-            {"email": "admin", "password": {"$gt": ""}},
-            {"email": {"$regex": ".*"}, "password": {"$regex": ".*"}},
+            {"email": "admin", "password": {"€ne": None}},  # NoSQL injection
+            {"email": "admin", "password": {"€gt": ""}},
+            {"email": {"€regex": ".*"}, "password": {"€regex": ".*"}},
         ]
         
         for payload in bypass_payloads:
@@ -400,7 +400,7 @@ class PenetrationTestFramework:
             "| whoami",
             "& ping -c 1 127.0.0.1",
             "`id`",
-            "$(whoami)",
+            "€(whoami)",
             "; cat /etc/passwd"
         ]
         

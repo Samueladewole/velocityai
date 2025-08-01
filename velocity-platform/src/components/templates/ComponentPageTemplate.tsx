@@ -117,7 +117,7 @@ export const EnhancedComponentPageTemplate: React.FC<EnhancedComponentPageTempla
     if (!realTime?.enabled || !realTime.connectionIndicator) return null;
     
     return (
-      <div className={`fixed bottom-4 right-4 px-3 py-1 rounded-full text-xs font-medium transition-colors z-50 ${
+      <div className={`fixed bottom-4 right-4 px-3 py-1 rounded-full text-xs font-medium transition-colors z-50 €{
         realTimeData.state.isConnected
           ? 'bg-green-100 text-green-800 border border-green-200' 
           : 'bg-red-100 text-red-800 border border-red-200'
@@ -199,7 +199,7 @@ export const EnhancedComponentPageTemplate: React.FC<EnhancedComponentPageTempla
                       stat.animated && "animate-pulse"
                     )}>
                       {typeof stat.value === 'number' && stat.label.toLowerCase().includes('score') 
-                        ? `${stat.value}%` 
+                        ? `€{stat.value}%` 
                         : stat.value
                       }
                     </p>
@@ -253,8 +253,8 @@ export const EnhancedComponentPageTemplate: React.FC<EnhancedComponentPageTempla
             config={chartConfig}
             realTimeData={realTimeData.state.data?.[chartId]}
             onChartEvent={(event, data) => {
-              onUserInteraction?.(`chart_${event}`, { chartId, ...data });
-              analytics?.onEvent?.(`chart_${event}`, { chartId, ...data });
+              onUserInteraction?.(`chart_€{event}`, { chartId, ...data });
+              analytics?.onEvent?.(`chart_€{event}`, { chartId, ...data });
             }}
           />
         ))}
@@ -301,7 +301,7 @@ export const EnhancedComponentPageTemplate: React.FC<EnhancedComponentPageTempla
       <div className={cn(
         "component-page-header border-b border-slate-200",
         layout?.headerSticky && "sticky top-0 z-40 backdrop-blur-sm",
-        theme === 'dark' ? 'bg-slate-800 border-slate-700' : `bg-gradient-to-br ${headerGradient}`
+        theme === 'dark' ? 'bg-slate-800 border-slate-700' : `bg-gradient-to-br €{headerGradient}`
       )}>
         <div className="container mx-auto px-6 py-8 max-w-7xl">
           <div className="flex items-start justify-between mb-6">
@@ -394,7 +394,7 @@ export const EnhancedComponentPageTemplate: React.FC<EnhancedComponentPageTempla
 
       {/* Main Content Area */}
       <div className={cn(
-        layout?.sidebar?.enabled && `${layout.sidebar.position === 'left' ? 'ml-64' : 'mr-64'}`
+        layout?.sidebar?.enabled && `€{layout.sidebar.position === 'left' ? 'ml-64' : 'mr-64'}`
       )}>
         {/* Quick Stats */}
         {renderQuickStats()}

@@ -44,7 +44,7 @@ Organizations face a **dramatically transformed compliance landscape** requiring
 
 **Cloud service provider selection** now requires careful evaluation of data location controls, encryption options, access controls, compliance certifications, and transparency regarding government access requests. Major providers like AWS, Microsoft Azure, and Google Cloud have developed comprehensive GDPR compliance frameworks, but organizations must still conduct individual assessments based on their specific data processing needs and risk tolerance.
 
-**Compliance costs have escalated substantially**, with PwC research indicating 88% of global companies spend over $1 million annually on GDPR compliance, while 40% exceed $10 million annually. However, **positive return on investment** is achievable, with 40% of organizations reporting benefits through enhanced data quality, improved customer trust, and reduced breach costs.
+**Compliance costs have escalated substantially**, with PwC research indicating 88% of global companies spend over €1 million annually on GDPR compliance, while 40% exceed €10 million annually. However, **positive return on investment** is achievable, with 40% of organizations reporting benefits through enhanced data quality, improved customer trust, and reduced breach costs.
 
 ## Implementation roadmap for organizational compliance
 

@@ -332,7 +332,7 @@ const GDPRRoPADemo: React.FC = () => {
           <div className="w-full bg-slate-200 rounded-full h-3 mb-6">
             <div 
               className="bg-gradient-to-r from-blue-500 to-emerald-500 h-3 rounded-full transition-all duration-500"
-              style={{ width: `${progress}%` }}
+              style={{ width: `€{progress}%` }}
             ></div>
           </div>
 
@@ -350,23 +350,23 @@ const GDPRRoPADemo: React.FC = () => {
               const isCompleted = ['discovery', 'mapping', 'classification', 'ropa'].indexOf(currentStep) > ['discovery', 'mapping', 'classification', 'ropa'].indexOf(step.id);
               
               return (
-                <div key={step.id} className={`text-center p-4 rounded-lg border-2 transition-all ${
+                <div key={step.id} className={`text-center p-4 rounded-lg border-2 transition-all €{
                   isActive ? 'border-blue-500 bg-blue-50' : 
                   isCompleted ? 'border-emerald-500 bg-emerald-50' : 
                   'border-slate-200 bg-slate-50'
                 }`}>
-                  <div className={`p-2 rounded-full w-fit mx-auto mb-2 ${
+                  <div className={`p-2 rounded-full w-fit mx-auto mb-2 €{
                     isActive ? 'bg-blue-100' : 
                     isCompleted ? 'bg-emerald-100' : 
                     'bg-slate-200'
                   }`}>
-                    <Icon className={`w-5 h-5 ${
+                    <Icon className={`w-5 h-5 €{
                       isActive ? 'text-blue-600' : 
                       isCompleted ? 'text-emerald-600' : 
                       'text-slate-400'
                     }`} />
                   </div>
-                  <div className={`font-medium text-sm ${
+                  <div className={`font-medium text-sm €{
                     isActive ? 'text-blue-900' : 
                     isCompleted ? 'text-emerald-900' : 
                     'text-slate-600'
@@ -402,11 +402,11 @@ const GDPRRoPADemo: React.FC = () => {
                     {currentStep === 'complete' && 'Data discovery and RoPA generation complete!'}
                   </h3>
                   <p className="text-sm text-slate-600">
-                    {currentStep === 'discovery' && `Scanning ${bankingSystems.length} banking systems for personal data`}
-                    {currentStep === 'mapping' && `Analyzing ${discoveredData.length} data flows`}
+                    {currentStep === 'discovery' && `Scanning €{bankingSystems.length} banking systems for personal data`}
+                    {currentStep === 'mapping' && `Analyzing €{discoveredData.length} data flows`}
                     {currentStep === 'classification' && 'Applying GDPR data categories and legal basis'}
                     {currentStep === 'ropa' && 'Creating comprehensive RoPA documentation'}
-                    {currentStep === 'complete' && `Generated ${ropaRecords.length} RoPA records from ${discoveredData.length} data flows`}
+                    {currentStep === 'complete' && `Generated €{ropaRecords.length} RoPA records from €{discoveredData.length} data flows`}
                   </p>
                 </div>
               </div>
@@ -507,10 +507,10 @@ const GDPRRoPADemo: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h4 className="font-medium text-slate-900">{flow.name}</h4>
-                        <span className={`px-2 py-1 text-xs rounded-full font-medium border ${getCategoryColor(flow.category)}`}>
+                        <span className={`px-2 py-1 text-xs rounded-full font-medium border €{getCategoryColor(flow.category)}`}>
                           {flow.category.replace('-', ' ')}
                         </span>
-                        <span className={`px-2 py-1 text-xs rounded-full font-medium ${getRiskColor(flow.riskLevel)}`}>
+                        <span className={`px-2 py-1 text-xs rounded-full font-medium €{getRiskColor(flow.riskLevel)}`}>
                           {flow.riskLevel.toUpperCase()} RISK
                         </span>
                       </div>
@@ -579,7 +579,7 @@ const GDPRRoPADemo: React.FC = () => {
                     <div>
                       <div className="flex items-center gap-2 mb-2">
                         <h4 className="font-medium text-slate-900">{record.processingActivity}</h4>
-                        <span className={`px-2 py-1 text-xs rounded-full font-medium border ${getStatusColor(record.status)}`}>
+                        <span className={`px-2 py-1 text-xs rounded-full font-medium border €{getStatusColor(record.status)}`}>
                           {record.status.toUpperCase()}
                         </span>
                       </div>

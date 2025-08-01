@@ -95,7 +95,7 @@ class TrustPathwayOrchestrator:
                 value_demonstrated={
                     ValueMetric.TIME_SAVED: "Preview 80% time savings on compliance tasks",
                     ValueMetric.COMPLIANCE_IMPROVEMENT: "Show path to 90%+ compliance score",
-                    ValueMetric.COST_REDUCTION: "Demonstrate $100K+ annual savings potential",
+                    ValueMetric.COST_REDUCTION: "Demonstrate €100K+ annual savings potential",
                     ValueMetric.AUTOMATION_PERCENTAGE: "Preview 95% automation capability"
                 },
                 next_milestone="pilot_agreement"

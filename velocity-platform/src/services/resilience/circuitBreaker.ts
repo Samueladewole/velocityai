@@ -84,7 +84,7 @@ export class CircuitBreaker {
   }
 
   private async defaultFallback(error: Error): Promise<any> {
-    throw new Error(`Circuit breaker fallback: ${error.message}`)
+    throw new Error(`Circuit breaker fallback: €{error.message}`)
   }
 
   public getState(): CircuitBreakerState {

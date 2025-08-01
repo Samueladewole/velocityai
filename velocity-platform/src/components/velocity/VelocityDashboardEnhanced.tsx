@@ -123,7 +123,7 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
       initializing: RotateCw
     };
     const Icon = icons[status] || Circle;
-    return <Icon className={`w-3 h-3 ${status === 'initializing' ? 'animate-spin' : ''}`} />;
+    return <Icon className={`w-3 h-3 €{status === 'initializing' ? 'animate-spin' : ''}`} />;
   };
   
   const Icon = getAgentIcon(agent.type);
@@ -135,7 +135,7 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
       <div className="p-5">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-start gap-4">
-            <div className={`p-3 rounded-lg bg-${agent.type === 'aws' ? 'orange' : agent.type === 'gcp' ? 'blue' : agent.type === 'github' ? 'purple' : 'emerald'}-500/10`}>
+            <div className={`p-3 rounded-lg bg-€{agent.type === 'aws' ? 'orange' : agent.type === 'gcp' ? 'blue' : agent.type === 'github' ? 'purple' : 'emerald'}-500/10`}>
               <Icon className="w-6 h-6 text-emerald-400" />
             </div>
             <div>
@@ -146,7 +146,7 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
           
           {/* Agent Controls */}
           <div className="flex items-center gap-2">
-            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${statusColors}`}>
+            <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium €{statusColors}`}>
               {getStatusIcon(agent.status)}
               <span className="capitalize">{agent.status}</span>
             </div>
@@ -236,10 +236,10 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
             </div>
             <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
               <div 
-                className={`h-full transition-all duration-500 ${
+                className={`h-full transition-all duration-500 €{
                   agent.cpu > 80 ? 'bg-red-500' : agent.cpu > 60 ? 'bg-amber-500' : 'bg-emerald-500'
                 }`}
-                style={{ width: `${agent.cpu}%` }}
+                style={{ width: `€{agent.cpu}%` }}
               />
             </div>
           </div>
@@ -251,10 +251,10 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
             </div>
             <div className="h-1.5 bg-slate-700 rounded-full overflow-hidden">
               <div 
-                className={`h-full transition-all duration-500 ${
+                className={`h-full transition-all duration-500 €{
                   agent.memory > 80 ? 'bg-red-500' : agent.memory > 60 ? 'bg-amber-500' : 'bg-emerald-500'
                 }`}
-                style={{ width: `${agent.memory}%` }}
+                style={{ width: `€{agent.memory}%` }}
               />
             </div>
           </div>
@@ -266,7 +266,7 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
           className="mt-4 w-full flex items-center justify-center gap-2 py-2 text-sm text-slate-400 hover:text-white transition-colors"
         >
           {isExpanded ? 'Show Less' : 'Show More'}
-          <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+          <ChevronDown className={`w-4 h-4 transition-transform €{isExpanded ? 'rotate-180' : ''}`} />
         </button>
       </div>
       
@@ -288,7 +288,7 @@ const AgentCard: React.FC<{ agent: Agent; onAction: (action: string, agentId: st
             </div>
             <div className="flex items-center justify-between text-sm">
               <span className="text-slate-400">Failed Tasks</span>
-              <span className={`font-medium ${agent.tasks.failed > 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+              <span className={`font-medium €{agent.tasks.failed > 0 ? 'text-red-400' : 'text-emerald-400'}`}>
                 {agent.tasks.failed}
               </span>
             </div>
@@ -493,7 +493,7 @@ const VelocityDashboardEnhanced: React.FC = () => {
   }, []);
   
   const handleAgentAction = (action: string, agentId: string) => {
-    console.log(`Action ${action} on agent ${agentId}`);
+    console.log(`Action €{action} on agent €{agentId}`);
     
     if (action === 'pause' || action === 'start') {
       setAgents(prevAgents =>
@@ -662,7 +662,7 @@ const VelocityDashboardEnhanced: React.FC = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setSelectedFilter('all')}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors €{
                     selectedFilter === 'all' 
                       ? 'bg-emerald-500/20 text-emerald-400' 
                       : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
@@ -672,7 +672,7 @@ const VelocityDashboardEnhanced: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setSelectedFilter('running')}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors €{
                     selectedFilter === 'running' 
                       ? 'bg-emerald-500/20 text-emerald-400' 
                       : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
@@ -682,7 +682,7 @@ const VelocityDashboardEnhanced: React.FC = () => {
                 </button>
                 <button
                   onClick={() => setSelectedFilter('paused')}
-                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors €{
                     selectedFilter === 'paused' 
                       ? 'bg-amber-500/20 text-amber-400' 
                       : 'text-slate-400 hover:text-white hover:bg-slate-800/50'

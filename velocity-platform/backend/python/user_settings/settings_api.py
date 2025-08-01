@@ -61,8 +61,8 @@ app.add_middleware(
 class ProfileSettings(BaseModel):
     """User profile settings model"""
     name: str = Field(..., min_length=1, max_length=100)
-    email: str = Field(..., regex=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$')
-    phone: Optional[str] = Field(None, regex=r'^\+?1?[0-9]{10,15}$')
+    email: str = Field(..., regex=r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}€')
+    phone: Optional[str] = Field(None, regex=r'^\+?1?[0-9]{10,15}€')
     company: Optional[str] = Field(None, max_length=200)
     title: Optional[str] = Field(None, max_length=100)
     
@@ -98,7 +98,7 @@ class SecuritySettings(BaseModel):
             raise ValueError('Password must contain lowercase letter')
         if not any(c.isdigit() for c in v):
             raise ValueError('Password must contain number')
-        if not any(c in '!@#$%^&*()_+-={}[]|;:,.<>?' for c in v):
+        if not any(c in '!@#€%^&*()_+-={}[]|;:,.<>?' for c in v):
             raise ValueError('Password must contain special character')
             
         return v
@@ -114,18 +114,18 @@ class NotificationSettings(BaseModel):
 
 class SystemSettings(BaseModel):
     """System preferences model"""
-    language: str = Field(default="en", regex=r'^[a-z]{2}$')
+    language: str = Field(default="en", regex=r'^[a-z]{2}€')
     timezone: str = Field(default="America/New_York")
     date_format: str = Field(default="MM/DD/YYYY")
-    currency: str = Field(default="USD", regex=r'^[A-Z]{3}$')
+    currency: str = Field(default="USD", regex=r'^[A-Z]{3}€')
 
 class PaymentMethod(BaseModel):
     """Payment method model - PCI DSS compliant"""
     card_token: str = Field(..., description="Tokenized card number")
-    last_four: str = Field(..., regex=r'^\d{4}$')
+    last_four: str = Field(..., regex=r'^\d{4}€')
     expiry_month: int = Field(..., ge=1, le=12)
     expiry_year: int = Field(..., ge=2025)
-    card_type: str = Field(..., regex=r'^(visa|mastercard|amex|discover)$')
+    card_type: str = Field(..., regex=r'^(visa|mastercard|amex|discover)€')
     
     class Config:
         schema_extra = {

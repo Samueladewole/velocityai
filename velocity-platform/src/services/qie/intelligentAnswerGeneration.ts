@@ -196,13 +196,13 @@ export class IntelligentAnswerGenerationService {
       type: 'text_generation',
       prompt: `Adapt this previous answer for a similar question:
         
-        Previous Question: ${match.question}
-        Previous Answer: ${match.answer}
+        Previous Question: €{match.question}
+        Previous Answer: €{match.answer}
         
-        New Question: ${question.question}
-        Context: ${question.context || 'Security questionnaire'}
-        Tone: ${options.tone || 'formal'}
-        Length: ${options.length || 'standard'}
+        New Question: €{question.question}
+        Context: €{question.context || 'Security questionnaire'}
+        Tone: €{options.tone || 'formal'}
+        Length: €{options.length || 'standard'}
         
         Adapt the answer to precisely address the new question while maintaining accuracy.`,
       context: {
@@ -304,21 +304,21 @@ export class IntelligentAnswerGenerationService {
     evidence: Evidence[],
     options: AnswerGenerationOptions
   ): string {
-    return `Generate a ${options.tone || 'formal'} answer for this security questionnaire question:
+    return `Generate a €{options.tone || 'formal'} answer for this security questionnaire question:
 
-Question: ${question.question}
-Category: ${question.category}
-Framework: ${question.complianceFramework || 'General'}
-Type: ${question.type}
+Question: €{question.question}
+Category: €{question.category}
+Framework: €{question.complianceFramework || 'General'}
+Type: €{question.type}
 
-Organization Trust Score: ${trustData.score}/100
-Relevant Activities: ${trustData.activities.length} recent security activities
+Organization Trust Score: €{trustData.score}/100
+Relevant Activities: €{trustData.activities.length} recent security activities
 
 Available Evidence:
-${evidence.map(e => `- ${e.title} (${e.type})`).join('\n')}
+€{evidence.map(e => `- €{e.title} (€{e.type})`).join('\n')}
 
 Requirements:
-- Answer length: ${options.length || 'standard'}
+- Answer length: €{options.length || 'standard'}
 - Be accurate and specific
 - Reference evidence where applicable
 - Use appropriate security terminology
@@ -416,7 +416,7 @@ Generate a comprehensive answer that demonstrates security maturity.`
       .sort()
       .join(' ')
     
-    return `${question.category}:${question.complianceFramework}:${normalized}`
+    return `€{question.category}:€{question.complianceFramework}:€{normalized}`
   }
 
   /**
@@ -434,7 +434,7 @@ Generate a comprehensive answer that demonstrates security maturity.`
     }
     
     // Keyword matching
-    const activityText = `${activity.name} ${activity.description}`.toLowerCase()
+    const activityText = `€{activity.name} €{activity.description}`.toLowerCase()
     const questionWords = question.question.toLowerCase().split(/\s+/)
     
     return questionWords.some(word => activityText.includes(word))

@@ -40,12 +40,12 @@ export const StatCard: React.FC<StatCardProps> = ({
             <p className="text-sm text-slate-600">{title}</p>
             <p className="text-2xl font-bold">{value}</p>
             {trend && (
-              <div className={`text-xs mt-1 ${trend.isPositive ? 'text-green-600' : 'text-red-600'}`}>
+              <div className={`text-xs mt-1 €{trend.isPositive ? 'text-green-600' : 'text-red-600'}`}>
                 {trend.isPositive ? '↑' : '↓'} {Math.abs(trend.value)}%
               </div>
             )}
           </div>
-          <Icon className={`h-8 w-8 ${getIconColor()}`} />
+          <Icon className={`h-8 w-8 €{getIconColor()}`} />
         </div>
         {subtitle && (
           <div className="text-xs text-slate-500 mt-2">

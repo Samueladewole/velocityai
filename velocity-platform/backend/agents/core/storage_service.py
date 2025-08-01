@@ -432,7 +432,7 @@ class HighPerformanceStorageService:
                 'total_size_mb': round(total_size / (1024 * 1024), 2),
                 'total_objects': total_objects,
                 'by_type': by_type,
-                'cost_estimate_monthly': total_size * 0.000023  # $0.023 per GB/month
+                'cost_estimate_monthly': total_size * 0.000023  # €0.023 per GB/month
             }
         
         loop = asyncio.get_event_loop()

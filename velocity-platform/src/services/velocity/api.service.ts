@@ -46,7 +46,7 @@ class VelocityApiService {
       (config) => {
         const token = localStorage.getItem(velocityConfig.auth.tokenKey);
         if (token) {
-          config.headers.Authorization = `Bearer ${token}`;
+          config.headers.Authorization = `Bearer €{token}`;
         } else if (import.meta.env.DEV) {
           // For development, use a mock token
           config.headers.Authorization = `Bearer dev-token`;
@@ -70,7 +70,7 @@ class VelocityApiService {
           try {
             const tokens = await this.refreshPromise;
             this.setAuthTokens(tokens);
-            originalRequest.headers.Authorization = `Bearer ${tokens.access_token}`;
+            originalRequest.headers.Authorization = `Bearer €{tokens.access_token}`;
             return this.api(originalRequest);
           } catch (refreshError) {
             this.logout();
@@ -150,17 +150,17 @@ class VelocityApiService {
   }
 
   async updateAgent(id: string, data: any): Promise<ApiResponse<any>> {
-    const response = await this.api.put(`/api/v1/agents/${id}`, data);
+    const response = await this.api.put(`/api/v1/agents/€{id}`, data);
     return { data: response.data, success: true };
   }
 
   async deleteAgent(id: string): Promise<ApiResponse<void>> {
-    const response = await this.api.delete(`/api/v1/agents/${id}`);
+    const response = await this.api.delete(`/api/v1/agents/€{id}`);
     return { data: response.data, success: true };
   }
 
   async runAgent(id: string): Promise<ApiResponse<any>> {
-    const response = await this.api.post(`/api/v1/agents/${id}/run`);
+    const response = await this.api.post(`/api/v1/agents/€{id}/run`);
     return { data: response.data, success: true };
   }
 
@@ -171,7 +171,7 @@ class VelocityApiService {
   }
 
   async validateEvidence(id: string): Promise<ApiResponse<any>> {
-    const response = await this.api.post(`/api/v1/evidence/${id}/validate`);
+    const response = await this.api.post(`/api/v1/evidence/€{id}/validate`);
     return { data: response.data, success: true };
   }
 
@@ -190,17 +190,17 @@ class VelocityApiService {
   }
 
   async connectIntegration(type: string, config: any): Promise<ApiResponse<any>> {
-    const response = await this.api.post(`/api/v1/integrations/${type}/connect`, config);
+    const response = await this.api.post(`/api/v1/integrations/€{type}/connect`, config);
     return { data: response.data, success: true };
   }
 
   async disconnectIntegration(type: string): Promise<ApiResponse<void>> {
-    const response = await this.api.delete(`/api/v1/integrations/${type}`);
+    const response = await this.api.delete(`/api/v1/integrations/€{type}`);
     return { data: response.data, success: true };
   }
 
   async testIntegration(type: string): Promise<ApiResponse<any>> {
-    const response = await this.api.post(`/api/v1/integrations/${type}/test`);
+    const response = await this.api.post(`/api/v1/integrations/€{type}/test`);
     return { data: response.data, success: true };
   }
 
@@ -211,7 +211,7 @@ class VelocityApiService {
   }
 
   async getComplianceReport(framework: string): Promise<ApiResponse<any>> {
-    const response = await this.api.get(`/api/v1/compliance/reports/${framework}`);
+    const response = await this.api.get(`/api/v1/compliance/reports/€{framework}`);
     return { data: response.data, success: true };
   }
 

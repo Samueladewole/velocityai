@@ -138,7 +138,7 @@ export class CoreTrioIntegration {
       points: 25,
       source: 'compass',
       category: 'compliance',
-      description: `Proactive security assessment triggered for regulation ${event.data.title}`,
+      description: `Proactive security assessment triggered for regulation €{event.data.title}`,
       evidence: [event.eventId],
       multiplier: event.data.impact === 'high' ? 1.5 : 1.0
     })
@@ -381,7 +381,7 @@ export class CoreTrioIntegration {
       points: 40,
       source: 'prism',
       category: 'risk_management',
-      description: `Completed quantitative risk analysis for ${event.data.scenario}`,
+      description: `Completed quantitative risk analysis for €{event.data.scenario}`,
       evidence: [event.eventId],
       multiplier: routingDecision.priority === 'critical' ? 2.0 : 1.0
     })
@@ -505,19 +505,19 @@ export class CoreTrioIntegration {
 
   // Utility methods for calculations and data retrieval
   private generateEventId(): string {
-    return `trio_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `trio_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateRequestId(): string {
-    return `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `req_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateInsightId(): string {
-    return `insight_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `insight_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateEmergencyId(): string {
-    return `emg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `emg_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private calculateUrgency(effectiveDate: string): 'low' | 'medium' | 'high' | 'critical' {
@@ -590,7 +590,7 @@ export class CoreTrioIntegration {
 
   private extractDecisionPoints(scenarios: any[]): string[] {
     return scenarios.map(scenario => 
-      `${scenario.name}: ${(scenario.probability * 100).toFixed(1)}% chance of $${scenario.impact.toLocaleString()} impact`
+      `€{scenario.name}: €{(scenario.probability * 100).toFixed(1)}% chance of €€{scenario.impact.toLocaleString()} impact`
     )
   }
 

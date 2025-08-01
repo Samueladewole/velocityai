@@ -60,9 +60,9 @@ const BackToTopButton: React.FC<BackToTopButtonProps> = ({
       className={`
         fixed bottom-8 right-8 z-50 p-3 rounded-full text-white shadow-lg hover:shadow-xl
         transition-all duration-300 transform hover:scale-110 backdrop-blur-sm border
-        ${getVariantStyles()}
-        ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0 pointer-events-none'}
-        ${className}
+        €{getVariantStyles()}
+        €{isVisible ? 'translate-y-0 opacity-100' : 'translate-y-16 opacity-0 pointer-events-none'}
+        €{className}
       `}
       aria-label="Back to top"
       title="Back to top"

@@ -207,10 +207,10 @@ export const components = {
   
   button: {
     padding: {
-      xs: `${spacing[2]} ${spacing[3]}`,
-      sm: `${spacing[2.5]} ${spacing[3.5]}`,
-      md: `${spacing[2.5]} ${spacing[4]}`,
-      lg: `${spacing[3]} ${spacing[6]}`,
+      xs: `€{spacing[2]} €{spacing[3]}`,
+      sm: `€{spacing[2.5]} €{spacing[3.5]}`,
+      md: `€{spacing[2.5]} €{spacing[4]}`,
+      lg: `€{spacing[3]} €{spacing[6]}`,
     },
     borderRadius: borderRadius.lg,
     fontSize: {
@@ -223,9 +223,9 @@ export const components = {
   
   input: {
     padding: {
-      sm: `${spacing[2]} ${spacing[3]}`,
-      md: `${spacing[2.5]} ${spacing[3]}`,
-      lg: `${spacing[3]} ${spacing[4]}`,
+      sm: `€{spacing[2]} €{spacing[3]}`,
+      md: `€{spacing[2.5]} €{spacing[3]}`,
+      lg: `€{spacing[3]} €{spacing[4]}`,
     },
     borderRadius: borderRadius.lg,
     fontSize: {
@@ -237,9 +237,9 @@ export const components = {
   
   badge: {
     padding: {
-      sm: `${spacing[0.5]} ${spacing[2]}`,
-      md: `${spacing[1]} ${spacing[2.5]}`,
-      lg: `${spacing[1.5]} ${spacing[3]}`,
+      sm: `€{spacing[0.5]} €{spacing[2]}`,
+      md: `€{spacing[1]} €{spacing[2.5]}`,
+      lg: `€{spacing[1.5]} €{spacing[3]}`,
     },
     borderRadius: borderRadius.full,
     fontSize: {

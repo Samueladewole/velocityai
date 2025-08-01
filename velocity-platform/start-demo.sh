@@ -11,7 +11,7 @@ python3 -m pip install fastapi uvicorn structlog pydantic --break-system-package
 echo "🔧 Starting Python backend..."
 cd backend/python
 python3 demo_main.py &
-BACKEND_PID=$!
+BACKEND_PID=€!
 cd ../..
 
 # Wait for backend to start
@@ -35,6 +35,6 @@ npm run dev
 cleanup() {
     echo ""
     echo "🛑 Shutting down demo..."
-    kill $BACKEND_PID 2>/dev/null
+    kill €BACKEND_PID 2>/dev/null
 }
 trap cleanup EXIT

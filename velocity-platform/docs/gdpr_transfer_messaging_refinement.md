@@ -82,7 +82,7 @@ interface TransferGuideComponent {
     
     format: "Professional PDF with actionable checklists",
     length: "25 pages",
-    value: "Save $50K+ on legal fees with DIY assessment framework"
+    value: "Save €50K+ on legal fees with DIY assessment framework"
   },
   
   lead_capture: {

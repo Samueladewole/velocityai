@@ -95,8 +95,8 @@ export const TrustScoreSharing: React.FC<{
       setIsLoading(true)
       
       const [profileRes, urlsRes] = await Promise.all([
-        fetch(`/api/trust-score/organizations/${organizationId}/profile`),
-        fetch(`/api/trust-score/organizations/${organizationId}/share-urls`)
+        fetch(`/api/trust-score/organizations/€{organizationId}/profile`),
+        fetch(`/api/trust-score/organizations/€{organizationId}/share-urls`)
       ])
 
       const [profileData, urlsData] = await Promise.all([
@@ -118,7 +118,7 @@ export const TrustScoreSharing: React.FC<{
     if (!profile) return
 
     try {
-      const response = await fetch(`/api/trust-score/organizations/${organizationId}/profile`, {
+      const response = await fetch(`/api/trust-score/organizations/€{organizationId}/profile`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -136,7 +136,7 @@ export const TrustScoreSharing: React.FC<{
 
   const createShareableUrl = async (customizations: any = {}) => {
     try {
-      const response = await fetch(`/api/trust-score/organizations/${organizationId}/share-url`, {
+      const response = await fetch(`/api/trust-score/organizations/€{organizationId}/share-url`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -175,14 +175,14 @@ export const TrustScoreSharing: React.FC<{
     
     switch (type) {
       case 'badge':
-        return `<img src="${baseUrl}/api/trust-score/badge/${organizationId}/svg?style=minimal" alt="Trust Score Badge" />`
+        return `<img src="€{baseUrl}/api/trust-score/badge/€{organizationId}/svg?style=minimal" alt="Trust Score Badge" />`
       
       case 'score':
-        return `<div id="trust-score-${organizationId}"></div>
-<script src="${baseUrl}/api/trust-score/badge/${organizationId}/embed.js"></script>`
+        return `<div id="trust-score-€{organizationId}"></div>
+<script src="€{baseUrl}/api/trust-score/badge/€{organizationId}/embed.js"></script>`
       
       case 'profile':
-        return `<iframe src="${baseUrl}/public/${organizationId}" width="400" height="300" frameborder="0"></iframe>`
+        return `<iframe src="€{baseUrl}/public/€{organizationId}" width="400" height="300" frameborder="0"></iframe>`
       
       default:
         return ''
@@ -218,7 +218,7 @@ export const TrustScoreSharing: React.FC<{
             <button
               key={key}
               onClick={() => setActiveTab(key as any)}
-              className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm ${
+              className={`flex items-center gap-2 py-4 px-1 border-b-2 font-medium text-sm €{
                 activeTab === key
                   ? 'border-blue-500 text-blue-600'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
@@ -274,7 +274,7 @@ export const TrustScoreSharing: React.FC<{
                   <div className="flex justify-between">
                     <span className="text-gray-600">Public URL</span>
                     <a 
-                      href={`/public/${organizationId}`}
+                      href={`/public/€{organizationId}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 flex items-center gap-1"
@@ -460,7 +460,7 @@ export const TrustScoreSharing: React.FC<{
                 <h3 className="font-medium mb-3">Preview</h3>
                 <div className="border rounded-lg p-4 bg-gray-50 text-center">
                   <img 
-                    src={`/api/trust-score/badge/${organizationId}/svg?style=minimal`}
+                    src={`/api/trust-score/badge/€{organizationId}/svg?style=minimal`}
                     alt="Trust Score Badge"
                     className="mx-auto"
                   />
@@ -535,7 +535,7 @@ export const TrustScoreSharing: React.FC<{
                 <h3 className="font-medium mb-3">Preview</h3>
                 <div className="border rounded-lg overflow-hidden bg-gray-50">
                   <iframe 
-                    src={`/public/${organizationId}`}
+                    src={`/public/€{organizationId}`}
                     width="100%" 
                     height="300" 
                     frameBorder="0"

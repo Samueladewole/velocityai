@@ -110,7 +110,7 @@ export function EUComplianceDashboard({
     return colors[riskLevel as keyof typeof colors] || colors.MEDIUM
   }
 
-  const formatPercentage = (value: number) => `${Math.round(value)}%`
+  const formatPercentage = (value: number) => `€{Math.round(value)}%`
 
   if (loading) {
     return (
@@ -272,7 +272,7 @@ export function EUComplianceDashboard({
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
-                    <Tooltip formatter={(value: number) => [`${value.toFixed(1)}%`, 'Compliance']} />
+                    <Tooltip formatter={(value: number) => [`€{value.toFixed(1)}%`, 'Compliance']} />
                     <Bar dataKey="compliance" fill="#3b82f6" radius={4} />
                   </BarChart>
                 </ResponsiveContainer>

@@ -273,7 +273,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
       case 'pills':
         variantClasses = `
           rounded-full
-          ${isActive 
+          €{isActive 
             ? 'bg-blue-600 text-white shadow-lg' 
             : 'text-slate-600 hover:bg-slate-100'
           }
@@ -282,7 +282,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
       case 'underline':
         variantClasses = `
           border-b-2 rounded-none
-          ${isActive 
+          €{isActive 
             ? 'border-blue-600 text-blue-600' 
             : 'border-transparent text-slate-600 hover:text-slate-900'
           }
@@ -291,7 +291,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
       case 'cards':
         variantClasses = `
           rounded-t-lg border border-b-0
-          ${isActive 
+          €{isActive 
             ? 'bg-white border-slate-200 text-slate-900' 
             : 'bg-slate-50 border-slate-200 text-slate-600 hover:bg-slate-100'
           }
@@ -300,7 +300,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
       default:
         variantClasses = `
           rounded-lg
-          ${isActive 
+          €{isActive 
             ? 'bg-blue-50 text-blue-700 border border-blue-200' 
             : 'text-slate-600 hover:bg-slate-50 border border-transparent'
           }
@@ -312,7 +312,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
         key={tab.id}
         onClick={() => handleTabChange(tab.id)}
         disabled={!isAccessible}
-        className={`${baseClasses} ${variantClasses} ${!isAccessible ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`€{baseClasses} €{variantClasses} €{!isAccessible ? 'opacity-50 cursor-not-allowed' : ''}`}
         aria-selected={isActive}
         role="tab"
       >
@@ -345,7 +345,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
           <div className="absolute bottom-0 left-0 right-0 h-1 bg-slate-200 rounded-full overflow-hidden">
             <div 
               className="h-full bg-blue-600 transition-all duration-300"
-              style={{ width: `${progress}%` }}
+              style={{ width: `€{progress}%` }}
             />
           </div>
         )}
@@ -384,9 +384,9 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
   const renderTabList = () => {
     const listClasses = `
       flex gap-1 p-1
-      ${orientation === 'vertical' ? 'flex-col' : 'flex-row'}
-      ${scrollable && orientation === 'horizontal' ? 'overflow-x-auto' : ''}
-      ${tabListClassName || ''}
+      €{orientation === 'vertical' ? 'flex-col' : 'flex-row'}
+      €{scrollable && orientation === 'horizontal' ? 'overflow-x-auto' : ''}
+      €{tabListClassName || ''}
     `;
 
     return (
@@ -416,7 +416,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
         <div 
           className={listClasses}
           style={scrollable && orientation === 'horizontal' ? {
-            transform: `translateX(-${scrollPosition}px)`
+            transform: `translateX(-€{scrollPosition}px)`
           } : undefined}
           role="tablist"
         >
@@ -467,7 +467,7 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
   const renderTabContent = () => {
     const contentClasses = `
       tab-content
-      ${tabContentClassName || ''}
+      €{tabContentClassName || ''}
     `;
 
     return (
@@ -523,9 +523,9 @@ export const EnhancedTabs: React.FC<EnhancedTabsProps> = ({
   };
 
   return (
-    <div className={`enhanced-tabs ${className || ''}`}>
+    <div className={`enhanced-tabs €{className || ''}`}>
       <div className={`
-        ${orientation === 'vertical' ? 'flex gap-6' : 'space-y-4'}
+        €{orientation === 'vertical' ? 'flex gap-6' : 'space-y-4'}
       `}>
         {/* Tab List */}
         <div className={orientation === 'vertical' ? 'w-64 flex-shrink-0' : ''}>

@@ -167,19 +167,19 @@ class MobileSalesEnablementEngine:
                 recent_wins=[
                     {
                         "customer": "GlobalHealth",
-                        "value": "$340K",
+                        "value": "€340K",
                         "key_factor": "HIPAA automation capabilities"
                     },
                     {
                         "customer": "FinTech Solutions", 
-                        "value": "$125K",
+                        "value": "€125K",
                         "key_factor": "Real-time regulatory monitoring"
                     }
                 ],
                 quick_stats={
                     "win_rate": {"value": "68%", "trend": "up", "color": "green"},
                     "cycle_time": {"value": "45 days", "trend": "down", "color": "green"},
-                    "pipeline": {"value": "$2.4M", "trend": "up", "color": "blue"},
+                    "pipeline": {"value": "€2.4M", "trend": "up", "color": "blue"},
                     "compliance_score": {"value": "92%", "trend": "stable", "color": "green"}
                 }
             )

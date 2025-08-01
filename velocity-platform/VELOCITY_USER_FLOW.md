@@ -59,7 +59,7 @@ From `/velocity/` page user can:
 #### **Path A: Pricing Research**
 ```
 /velocity/pricing → Detailed 3-tier comparison
-                 → $999, $2,499, $4,999/month
+                 → €999, €2,499, €4,999/month
                  → Feature comparison tables
                  → Trial signup CTAs
 ```

@@ -406,10 +406,10 @@ def calculate_roi(organization_size: str, frameworks: List[str]) -> Dict:
     risk_value = breach_cost * risk_reduction * 0.01  # 1% annual breach probability
     
     return {
-        "monthly_time_savings": f"${monthly_savings:,.0f}",
-        "annual_audit_savings": f"${audit_savings:,.0f}",
-        "risk_reduction_value": f"${risk_value:,.0f}",
-        "total_annual_value": f"${(monthly_savings * 12) + audit_savings + risk_value:,.0f}",
+        "monthly_time_savings": f"€{monthly_savings:,.0f}",
+        "annual_audit_savings": f"€{audit_savings:,.0f}",
+        "risk_reduction_value": f"€{risk_value:,.0f}",
+        "total_annual_value": f"€{(monthly_savings * 12) + audit_savings + risk_value:,.0f}",
         "roi_percentage": 300,
         "payback_period_months": 3
     }

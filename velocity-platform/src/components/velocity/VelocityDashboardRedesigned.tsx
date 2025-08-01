@@ -96,7 +96,7 @@ const DashboardNavigation = () => {
   };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 €{
       scrolled 
         ? 'bg-slate-900/95 backdrop-blur-xl shadow-lg shadow-slate-900/20' 
         : 'bg-slate-900/80 backdrop-blur-lg'
@@ -128,7 +128,7 @@ const DashboardNavigation = () => {
                     <button 
                       key={item.label}
                       onClick={() => navigate(item.path)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 ${
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium transition-all duration-300 €{
                         isActive 
                           ? 'bg-emerald-500/20 text-emerald-400' 
                           : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
@@ -195,7 +195,7 @@ const DashboardNavigation = () => {
                       {notifications.map((notification) => (
                         <div 
                           key={notification.id} 
-                          className={`p-4 hover:bg-slate-700/30 transition-colors cursor-pointer border-b border-slate-700/30 ${
+                          className={`p-4 hover:bg-slate-700/30 transition-colors cursor-pointer border-b border-slate-700/30 €{
                             notification.unread ? 'bg-slate-700/20' : ''
                           }`}
                         >
@@ -322,7 +322,7 @@ const DashboardNavigation = () => {
                     navigate(item.path);
                     setIsMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 ${
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all duration-300 €{
                     isActive 
                       ? 'bg-emerald-500/20 text-emerald-400' 
                       : 'text-slate-300 hover:text-white hover:bg-slate-800/50'
@@ -369,12 +369,12 @@ const MetricCard = ({ title, value, change, trend, icon: Icon, color, onClick, s
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Glow Effect */}
-      <div className={`absolute inset-0 bg-gradient-to-r ${colorClasses[color]} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500`}></div>
+      <div className={`absolute inset-0 bg-gradient-to-r €{colorClasses[color]} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500`}></div>
       
       <div className="relative bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 transition-all duration-300 group-hover:border-slate-600/50 group-hover:transform group-hover:scale-[1.02]">
         <div className="flex items-start justify-between mb-4">
-          <div className={`p-3 rounded-xl ${bgClasses[color]} transition-all duration-300`}>
-            <Icon className={`w-6 h-6 bg-gradient-to-r ${colorClasses[color]} bg-clip-text text-transparent`} />
+          <div className={`p-3 rounded-xl €{bgClasses[color]} transition-all duration-300`}>
+            <Icon className={`w-6 h-6 bg-gradient-to-r €{colorClasses[color]} bg-clip-text text-transparent`} />
           </div>
           {trend && (
             <div className="flex items-center gap-1">
@@ -383,7 +383,7 @@ const MetricCard = ({ title, value, change, trend, icon: Icon, color, onClick, s
               ) : (
                 <TrendingDown className="w-4 h-4 text-red-400" />
               )}
-              <span className={`text-sm font-medium ${isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
+              <span className={`text-sm font-medium €{isPositive ? 'text-emerald-400' : 'text-red-400'}`}>
                 {change}
               </span>
             </div>
@@ -392,7 +392,7 @@ const MetricCard = ({ title, value, change, trend, icon: Icon, color, onClick, s
         
         <div>
           <p className="text-slate-400 text-sm mb-1">{title}</p>
-          <p className={`text-3xl font-bold bg-gradient-to-r ${colorClasses[color]} bg-clip-text text-transparent`}>
+          <p className={`text-3xl font-bold bg-gradient-to-r €{colorClasses[color]} bg-clip-text text-transparent`}>
             {value}
           </p>
           {subtitle && (
@@ -405,7 +405,7 @@ const MetricCard = ({ title, value, change, trend, icon: Icon, color, onClick, s
           <div className="mt-4">
             <div className="w-full bg-slate-700/50 rounded-full h-1.5 overflow-hidden">
               <div 
-                className={`h-full bg-gradient-to-r ${colorClasses[color]} transition-all duration-1000 ease-out`}
+                className={`h-full bg-gradient-to-r €{colorClasses[color]} transition-all duration-1000 ease-out`}
                 style={{ width: value }}
               ></div>
             </div>
@@ -413,7 +413,7 @@ const MetricCard = ({ title, value, change, trend, icon: Icon, color, onClick, s
         )}
 
         {/* Hover Arrow */}
-        <div className={`absolute bottom-4 right-4 transition-all duration-300 ${isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}`}>
+        <div className={`absolute bottom-4 right-4 transition-all duration-300 €{isHovered ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-2'}`}>
           <ArrowRight className="w-4 h-4 text-slate-400" />
         </div>
       </div>
@@ -510,11 +510,11 @@ const AIAgentsOverview = () => {
           <div 
             key={agent.id}
             className="group bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 hover:border-slate-600/50 transition-all duration-300 cursor-pointer"
-            onClick={() => navigate(`/agents/${agent.id}`)}
+            onClick={() => navigate(`/agents/€{agent.id}`)}
           >
             <div className="flex items-start justify-between mb-3">
               <div className="flex items-start gap-3">
-                <div className={`p-2 rounded-lg ${getStatusColor(agent.status).split(' ')[1]}`}>
+                <div className={`p-2 rounded-lg €{getStatusColor(agent.status).split(' ')[1]}`}>
                   <Bot className="w-5 h-5 text-emerald-400" />
                 </div>
                 <div>
@@ -532,7 +532,7 @@ const AIAgentsOverview = () => {
               </div>
               <div className="flex items-center gap-2">
                 {getHealthIcon(agent.health)}
-                <span className={`text-xs font-medium px-2 py-1 rounded-full ${getStatusColor(agent.status)}`}>
+                <span className={`text-xs font-medium px-2 py-1 rounded-full €{getStatusColor(agent.status)}`}>
                   {agent.status}
                 </span>
               </div>
@@ -557,7 +557,7 @@ const AIAgentsOverview = () => {
             <div className="w-full bg-slate-700/50 rounded-full h-1.5 overflow-hidden">
               <div 
                 className="h-full bg-gradient-to-r from-emerald-400 to-emerald-600 transition-all duration-1000"
-                style={{ width: `${agent.progress}%` }}
+                style={{ width: `€{agent.progress}%` }}
               ></div>
             </div>
           </div>
@@ -645,7 +645,7 @@ const ComplianceFrameworksOverview = () => {
           <div 
             key={index}
             className="group bg-slate-800/50 border border-slate-700/50 rounded-xl p-5 hover:border-slate-600/50 transition-all duration-300 cursor-pointer"
-            onClick={() => navigate(`/compliance/${framework.name.toLowerCase().replace(/\s+/g, '-')}`)}
+            onClick={() => navigate(`/compliance/€{framework.name.toLowerCase().replace(/\s+/g, '-')}`)}
           >
             {/* Header */}
             <div className="flex items-center justify-between mb-4">
@@ -654,10 +654,10 @@ const ComplianceFrameworksOverview = () => {
                   {framework.name}
                 </h3>
                 <div className="flex items-center gap-3 mt-1">
-                  <span className={`text-xs font-medium px-2 py-1 rounded-full border ${getStatusColor(framework.status)}`}>
+                  <span className={`text-xs font-medium px-2 py-1 rounded-full border €{getStatusColor(framework.status)}`}>
                     {framework.status.replace('-', ' ')}
                   </span>
-                  <span className={`text-xs font-medium ${framework.trend.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+                  <span className={`text-xs font-medium €{framework.trend.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
                     {framework.trend}
                   </span>
                 </div>
@@ -682,18 +682,18 @@ const ComplianceFrameworksOverview = () => {
                     stroke="url(#gradient)"
                     strokeWidth="4"
                     fill="none"
-                    strokeDasharray={`${framework.score * 1.76} 176`}
+                    strokeDasharray={`€{framework.score * 1.76} 176`}
                     className="transition-all duration-1000"
                   />
                   <defs>
                     <linearGradient id="gradient">
-                      <stop offset="0%" className={`text-${getScoreColor(framework.score).split(' ')[0].split('-')[1]}-400`} />
-                      <stop offset="100%" className={`text-${getScoreColor(framework.score).split(' ')[2].split('-')[1]}-600`} />
+                      <stop offset="0%" className={`text-€{getScoreColor(framework.score).split(' ')[0].split('-')[1]}-400`} />
+                      <stop offset="100%" className={`text-€{getScoreColor(framework.score).split(' ')[2].split('-')[1]}-600`} />
                     </linearGradient>
                   </defs>
                 </svg>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className={`text-lg font-bold bg-gradient-to-r ${getScoreColor(framework.score)} bg-clip-text text-transparent`}>
+                  <span className={`text-lg font-bold bg-gradient-to-r €{getScoreColor(framework.score)} bg-clip-text text-transparent`}>
                     {framework.score}
                   </span>
                 </div>
@@ -815,7 +815,7 @@ const ActivityTimeline = () => {
                 <div className="w-12 h-12 bg-slate-700/50 rounded-xl flex items-center justify-center group-hover:bg-slate-700/70 transition-colors">
                   {getActivityIcon(activity.type)}
                 </div>
-                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full ${getImpactColor(activity.impact)} ring-2 ring-slate-800`}></div>
+                <div className={`absolute -top-1 -right-1 w-3 h-3 rounded-full €{getImpactColor(activity.impact)} ring-2 ring-slate-800`}></div>
               </div>
               
               {/* Content */}
@@ -898,7 +898,7 @@ const QuickActions = () => {
             className="group relative overflow-hidden bg-slate-800/50 border border-slate-700/50 rounded-xl p-4 hover:border-slate-600/50 transition-all duration-300"
           >
             <div className="relative z-10">
-              <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${colorClasses[action.color]} mb-3 group-hover:scale-110 transition-transform duration-300`}>
+              <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r €{colorClasses[action.color]} mb-3 group-hover:scale-110 transition-transform duration-300`}>
                 <action.icon className="w-5 h-5 text-white" />
               </div>
               <h3 className="font-medium text-white mb-1">{action.title}</h3>
@@ -906,7 +906,7 @@ const QuickActions = () => {
             </div>
             
             {/* Hover Effect */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${colorClasses[action.color]} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+            <div className={`absolute inset-0 bg-gradient-to-r €{colorClasses[action.color]} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
           </button>
         ))}
       </div>
@@ -963,7 +963,7 @@ const VelocityDashboard: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 mb-8">
             <MetricCard
               title="Trust Score"
-              value={`${metrics.trustScore}%`}
+              value={`€{metrics.trustScore}%`}
               change="+2.3%"
               trend={true}
               icon={Shield}
@@ -993,7 +993,7 @@ const VelocityDashboard: React.FC = () => {
             />
             <MetricCard
               title="Automation"
-              value={`${metrics.automationRate}%`}
+              value={`€{metrics.automationRate}%`}
               change="+5%"
               trend={true}
               icon={Zap}

@@ -37,7 +37,7 @@ const AgentDashboard: React.FC = () => {
               <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-emerald-50 rounded-full">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                 <span className="text-sm font-medium text-emerald-700">
-                  10 Agents Active
+                  13 Agents Active
                 </span>
               </div>
             </div>
@@ -68,7 +68,7 @@ const AgentDashboard: React.FC = () => {
                     🤖 AI Agent Automation Center
                   </h2>
                   <p className="text-emerald-100 text-lg">
-                    10 AI agents collecting evidence automatically from your cloud infrastructure
+                    13 AI agents collecting evidence automatically from your cloud infrastructure
                   </p>
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-1">
@@ -303,7 +303,7 @@ const AgentDashboard: React.FC = () => {
                       <span className="font-semibold">Full Automation</span>
                     </div>
                     <p className="text-sm text-slate-600 text-left">
-                      Deploy all 10 agents for comprehensive coverage
+                      Deploy all 13 agents for comprehensive coverage
                     </p>
                     <div className="flex gap-2 mt-2">
                       <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">

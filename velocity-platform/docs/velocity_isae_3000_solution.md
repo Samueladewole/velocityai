@@ -10,7 +10,7 @@ interface ISAEProblems {
     consultant_dependency: "Expensive Deloitte resources required",
     documentation: "Documents spread across various platforms",
     process_efficiency: "Weeks/months to collect evidence",
-    cost_structure: "$500K-2M+ for comprehensive ISAE 3000 engagement"
+    cost_structure: "€500K-2M+ for comprehensive ISAE 3000 engagement"
   },
   
   specific_challenges: {
@@ -96,18 +96,18 @@ interface ISAEEvidencCategories {
 ```typescript
 interface DeloitteISAECosts {
   professional_fees: {
-    partner_hours: "100 hours @ $800/hour = $80,000",
-    manager_hours: "300 hours @ $400/hour = $120,000", 
-    senior_hours: "500 hours @ $250/hour = $125,000",
-    staff_hours: "800 hours @ $150/hour = $120,000",
-    total_fees: "$445,000 for evidence collection phase alone"
+    partner_hours: "100 hours @ €800/hour = €80,000",
+    manager_hours: "300 hours @ €400/hour = €120,000", 
+    senior_hours: "500 hours @ €250/hour = €125,000",
+    staff_hours: "800 hours @ €150/hour = €120,000",
+    total_fees: "€445,000 for evidence collection phase alone"
   },
   
   internal_costs: {
     client_staff_time: "200+ hours of internal team coordination",
     document_preparation: "Weeks of manual document compilation",
     system_access_setup: "IT resources for auditor access",
-    total_internal_cost: "$150,000+ in internal effort"
+    total_internal_cost: "€150,000+ in internal effort"
   },
   
   timeline: {
@@ -117,7 +117,7 @@ interface DeloitteISAECosts {
     total_timeline: "12-22 weeks for evidence phase"
   },
   
-  total_engagement_cost: "$595,000+ just for evidence collection and review"
+  total_engagement_cost: "€595,000+ just for evidence collection and review"
 }
 ```
 
@@ -125,9 +125,9 @@ interface DeloitteISAECosts {
 ```typescript
 interface VelocityISAECosts {
   licensing: {
-    velocity_enterprise: "$4,999/month = $59,988/year",
-    isae_specialist_module: "$10,000 one-time setup",
-    total_annual_cost: "$69,988/year"
+    velocity_enterprise: "€4,999/month = €59,988/year",
+    isae_specialist_module: "€10,000 one-time setup",
+    total_annual_cost: "€69,988/year"
   },
   
   implementation: {
@@ -141,11 +141,11 @@ interface VelocityISAECosts {
     evidence_collection: "95% automated vs 95% manual",
     audit_preparation: "Hours instead of weeks",
     consultant_dependency: "Minimal vs extensive",
-    annual_savings: "$525,000+ vs traditional approach"
+    annual_savings: "€525,000+ vs traditional approach"
   },
   
   roi_calculation: {
-    first_year_savings: "$525,000 savings vs Deloitte approach",
+    first_year_savings: "€525,000 savings vs Deloitte approach",
     payback_period: "1.6 months",
     three_year_roi: "2,250% return on investment"
   }
@@ -291,7 +291,7 @@ interface Phase3Implementation {
 interface BankISAEProposal {
   solution: "Velocity AI ISAE 3000 Evidence Automation Platform",
   banking_specialization: "Pre-configured for financial services regulatory requirements",
-  pricing: "$4,999/month + $10,000 setup vs $595,000+ Deloitte engagement",
+  pricing: "€4,999/month + €10,000 setup vs €595,000+ Deloitte engagement",
   
   immediate_benefits: [
     "95% reduction in evidence collection time",
@@ -304,7 +304,7 @@ interface BankISAEProposal {
   implementation_timeline: "6 weeks vs 22+ weeks traditional approach",
   
   roi_metrics: {
-    cost_savings: "$525,000+ annually vs traditional auditor-led approach",
+    cost_savings: "€525,000+ annually vs traditional auditor-led approach",
     efficiency_gains: "200+ hours of internal staff time saved per audit cycle",
     risk_reduction: "Continuous monitoring vs point-in-time testing",
     audit_quality: "100% evidence completeness vs 80-90% traditional coverage"
@@ -326,8 +326,8 @@ interface CompetitiveAdvantages {
   },
   
   cost_structure: {
-    velocity: "$70K annually with continuous monitoring",
-    deloitte: "$595K+ per engagement with periodic testing"
+    velocity: "€70K annually with continuous monitoring",
+    deloitte: "€595K+ per engagement with periodic testing"
   },
   
   audit_readiness: {
@@ -356,7 +356,7 @@ interface DemoScript {
   },
   
   cost_comparison: {
-    calculator: "Interactive ROI calculator showing $525K+ annual savings",
+    calculator: "Interactive ROI calculator showing €525K+ annual savings",
     timeline: "6 weeks automation vs 22+ weeks traditional approach",
     efficiency: "95% automated vs 95% manual evidence collection"
   },

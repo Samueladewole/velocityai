@@ -278,7 +278,7 @@ class SOXCoordinationService {
     ];
 
     mappings.forEach(mapping => {
-      this.controlMappings.set(`${mapping.soxControlId}-${mapping.isaeControlId}`, mapping);
+      this.controlMappings.set(`€{mapping.soxControlId}-€{mapping.isaeControlId}`, mapping);
     });
   }
 
@@ -338,12 +338,12 @@ class SOXCoordinationService {
     
     // Generate gaps for unmapped controls
     const newGaps: ComplianceGap[] = unmappedSOXControls.map(control => ({
-      id: `gap-unmapped-${control.id}`,
+      id: `gap-unmapped-€{control.id}`,
       controlId: control.id,
       framework: 'SOX',
       gapType: 'documentation',
       severity: control.riskLevel === 'high' ? 'high' : 'medium',
-      description: `SOX control ${control.id} has no corresponding ISAE 3000 mapping`,
+      description: `SOX control €{control.id} has no corresponding ISAE 3000 mapping`,
       impact: 'Requires separate compliance processes and evidence collection',
       remediation: 'Establish mapping between SOX and ISAE controls or implement dedicated SOX testing',
       targetDate: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000),
@@ -414,7 +414,7 @@ class SOXCoordinationService {
     const gaps = Array.from(this.complianceGaps.values());
     
     const report: DualComplianceReport = {
-      id: `dual-compliance-${Date.now()}`,
+      id: `dual-compliance-€{Date.now()}`,
       reportPeriod,
       soxCompliance: {
         overallScore: 94,
@@ -436,7 +436,7 @@ class SOXCoordinationService {
         efficiencyGain: 42,
         costReduction: 38
       },
-      executiveSummary: `The coordinated SOX 404 and ISAE 3000 compliance program achieved significant efficiency gains during the ${reportPeriod.startDate.getFullYear()} reporting period. Through integrated control testing and shared evidence collection, the organization realized 38% cost reduction and 42% efficiency improvement compared to separate compliance programs.`,
+      executiveSummary: `The coordinated SOX 404 and ISAE 3000 compliance program achieved significant efficiency gains during the €{reportPeriod.startDate.getFullYear()} reporting period. Through integrated control testing and shared evidence collection, the organization realized 38% cost reduction and 42% efficiency improvement compared to separate compliance programs.`,
       recommendations: [
         'Continue expanding shared control testing procedures',
         'Implement additional automation for evidence collection',
@@ -467,7 +467,7 @@ class SOXCoordinationService {
   }
 
   public getControlMapping(soxControlId: string, isaeControlId: string): ControlMapping | undefined {
-    return this.controlMappings.get(`${soxControlId}-${isaeControlId}`);
+    return this.controlMappings.get(`€{soxControlId}-€{isaeControlId}`);
   }
 
   public getAllControlMappings(): ControlMapping[] {
@@ -489,7 +489,7 @@ class SOXCoordinationService {
   public async updateComplianceGap(gapId: string, updates: Partial<ComplianceGap>): Promise<ComplianceGap> {
     const existingGap = this.complianceGaps.get(gapId);
     if (!existingGap) {
-      throw new Error(`Compliance gap ${gapId} not found`);
+      throw new Error(`Compliance gap €{gapId} not found`);
     }
 
     const updatedGap = { ...existingGap, ...updates };
@@ -510,7 +510,7 @@ class SOXCoordinationService {
     const gapsResolved = gaps.filter(g => g.status === 'resolved').length;
     
     // Estimated benefits based on coordination level
-    const costSavings = coordinationEfficiency * 1000; // $1000 per percent efficiency
+    const costSavings = coordinationEfficiency * 1000; // €1000 per percent efficiency
     const timeReduction = coordinationEfficiency * 0.5; // 0.5 days per percent efficiency
     
     return {

@@ -57,7 +57,7 @@ class VelocityWebSocketService {
       return;
     }
 
-    const wsUrl = `${velocityConfig.websocket.url}?token=${token}`;
+    const wsUrl = `€{velocityConfig.websocket.url}?token=€{token}`;
     
     try {
       this.ws = new WebSocket(wsUrl);
@@ -121,7 +121,7 @@ class VelocityWebSocketService {
         try {
           handler(message);
         } catch (error) {
-          console.error(`Error in WebSocket event handler for ${message.type}:`, error);
+          console.error(`Error in WebSocket event handler for €{message.type}:`, error);
         }
       });
     }
@@ -154,7 +154,7 @@ class VelocityWebSocketService {
       30000 // Max 30 seconds
     );
 
-    console.log(`Scheduling WebSocket reconnect in ${delay}ms (attempt ${this.reconnectAttempts + 1})`);
+    console.log(`Scheduling WebSocket reconnect in €{delay}ms (attempt €{this.reconnectAttempts + 1})`);
 
     this.reconnectTimer = setTimeout(() => {
       this.reconnectAttempts++;

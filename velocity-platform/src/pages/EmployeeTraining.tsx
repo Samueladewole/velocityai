@@ -456,7 +456,7 @@ export const EmployeeTraining: React.FC = () => {
           />
           <StatCard
             title="Avg Completion"
-            value={`${averageCompletion}%`}
+            value={`€{averageCompletion}%`}
             icon={CheckCircle}
             trend={{ value: 8, isPositive: true }}
             className="bg-gradient-to-br from-green-50 to-green-100 border-green-200"
@@ -659,7 +659,7 @@ export const EmployeeTraining: React.FC = () => {
                           <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-2xl">
                             {learner.avatar}
                           </div>
-                          <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white ${
+                          <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white €{
                             index === 0 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
                             index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
                             index === 2 ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
@@ -730,11 +730,11 @@ export const EmployeeTraining: React.FC = () => {
                   <Card key={achievement.id} className="border-slate-200 overflow-hidden">
                     <CardHeader className="pb-4">
                       <div className="flex items-center justify-between mb-3">
-                        <div className={`w-16 h-16 rounded-xl bg-gradient-to-r ${achievement.color} flex items-center justify-center`}>
+                        <div className={`w-16 h-16 rounded-xl bg-gradient-to-r €{achievement.color} flex items-center justify-center`}>
                           <IconComponent className="h-8 w-8 text-white" />
                         </div>
                         <div className="text-right">
-                          <Badge className={`${getRarityColor(achievement.rarity)} text-white`}>
+                          <Badge className={`€{getRarityColor(achievement.rarity)} text-white`}>
                             {achievement.rarity}
                           </Badge>
                           <div className="text-sm text-slate-500 mt-1">

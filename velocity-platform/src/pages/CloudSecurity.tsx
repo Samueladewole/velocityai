@@ -274,24 +274,24 @@ export const CloudSecurity: React.FC = () => {
     {
       label: 'Cloud Accounts',
       value: cloudProviders.length,
-      change: `${cloudProviders.filter(p => p.status === 'connected').length}`,
+      change: `€{cloudProviders.filter(p => p.status === 'connected').length}`,
       trend: 'up',
       icon: <Cloud className="h-6 w-6 text-purple-600" />,
-      description: `${cloudProviders.filter(p => p.status === 'connected').length} connected`,
+      description: `€{cloudProviders.filter(p => p.status === 'connected').length} connected`,
       color: 'text-purple-600'
     },
     {
       label: 'Security Findings',
       value: totalFindings,
-      change: `${criticalFindings}`,
+      change: `€{criticalFindings}`,
       trend: criticalFindings > 0 ? 'down' : 'up',
       icon: <AlertTriangle className="h-6 w-6 text-red-600" />,
-      description: `${criticalFindings} critical`,
+      description: `€{criticalFindings} critical`,
       color: 'text-red-600'
     },
     {
       label: 'Compliance Score',
-      value: `${avgCompliance}%`,
+      value: `€{avgCompliance}%`,
       change: '+3%',
       trend: 'up',
       icon: <CheckCircle className="h-6 w-6 text-green-600" />,
@@ -336,7 +336,7 @@ export const CloudSecurity: React.FC = () => {
                 {cloudProviders.map((provider) => (
                   <div key={provider.id} className="flex items-center justify-between p-4 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors">
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-lg ${
+                      <div className={`p-3 rounded-lg €{
                         provider.status === 'connected' ? 'bg-green-100' : 
                         provider.status === 'pending' ? 'bg-yellow-100' : 'bg-gray-100'
                       }`}>
@@ -401,7 +401,7 @@ export const CloudSecurity: React.FC = () => {
                   <Card key={finding.severity} className="border-0 shadow-md">
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <Badge className={`bg-gradient-to-r ${finding.color} text-white`}>
+                        <Badge className={`bg-gradient-to-r €{finding.color} text-white`}>
                           {finding.severity}
                         </Badge>
                         <span className="text-2xl font-bold">{finding.count}</span>
@@ -444,7 +444,7 @@ export const CloudSecurity: React.FC = () => {
 
           <div className="space-y-4">
             {securityFindings.map((finding) => (
-              <Card key={finding.id} className={`card-professional border ${getSeverityColor(finding.severity)}`}>
+              <Card key={finding.id} className={`card-professional border €{getSeverityColor(finding.severity)}`}>
                 <CardContent className="p-6">
                   <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
@@ -525,7 +525,7 @@ export const CloudSecurity: React.FC = () => {
     {
       id: 'compliance',
       label: 'Compliance',
-      badge: `${avgCompliance}%`,
+      badge: `€{avgCompliance}%`,
       content: (
         <div className="space-y-6">
           <div className="flex items-center justify-between">

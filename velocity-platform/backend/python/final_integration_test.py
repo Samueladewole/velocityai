@@ -41,9 +41,9 @@ import numpy as np
 total_risk = threat_frequency * impact_magnitude
 risk_stats = monte_carlo.calculate_statistics(total_risk, [0.95, 0.99])
 
-print(f'  ✅ Annual Loss Expectancy: ${risk_stats["statistics"]["mean"]:,.0f}')
-print(f'  ✅ 95th Percentile Risk: ${risk_stats["percentiles"]["p95"]:,.0f}')
-print(f'  ✅ Max Potential Loss: ${risk_stats["statistics"]["max"]:,.0f}')
+print(f'  ✅ Annual Loss Expectancy: €{risk_stats["statistics"]["mean"]:,.0f}')
+print(f'  ✅ 95th Percentile Risk: €{risk_stats["percentiles"]["p95"]:,.0f}')
+print(f'  ✅ Max Potential Loss: €{risk_stats["statistics"]["max"]:,.0f}')
 
 # 4. Value Demonstration (BEACON)
 print('💰 Value Demonstration Engine...')
@@ -57,9 +57,9 @@ erip_cost = 185000  # Annual platform cost
 roi_value = reduced_ale - erip_cost
 roi_percentage = (roi_value / erip_cost) * 100
 
-print(f'  ✅ Risk Reduction Value: ${reduced_ale:,.0f}')
-print(f'  ✅ Platform Investment: ${erip_cost:,.0f}')
-print(f'  ✅ Net ROI: ${roi_value:,.0f} ({roi_percentage:.1f}%)')
+print(f'  ✅ Risk Reduction Value: €{reduced_ale:,.0f}')
+print(f'  ✅ Platform Investment: €{erip_cost:,.0f}')
+print(f'  ✅ Net ROI: €{roi_value:,.0f} ({roi_percentage:.1f}%)')
 
 # 5. Performance Validation
 print('⚡ Performance Validation...')

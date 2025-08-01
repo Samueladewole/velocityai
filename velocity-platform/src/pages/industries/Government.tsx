@@ -82,7 +82,7 @@ const Government: React.FC = () => {
                     <div className="text-sm text-slate-600">Control Automation</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600 mb-2">$2M+</div>
+                    <div className="text-3xl font-bold text-purple-600 mb-2">€2M+</div>
                     <div className="text-sm text-slate-600">Avg Cost Avoidance</div>
                   </div>
                 </div>
@@ -258,7 +258,7 @@ const Government: React.FC = () => {
                     <div className="text-sm text-slate-600">ATO Acceleration</div>
                   </div>
                   <div className="text-center p-3 bg-blue-50 rounded-lg">
-                    <div className="text-xl font-bold text-blue-600">$2.5M</div>
+                    <div className="text-xl font-bold text-blue-600">€2.5M</div>
                     <div className="text-sm text-slate-600">Cost Avoidance</div>
                   </div>
                 </div>
@@ -320,7 +320,7 @@ const Government: React.FC = () => {
               <div className="bg-white border border-slate-200 rounded-2xl p-8">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Government Basic</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$9,999</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">€9,999</div>
                   <div className="text-slate-600">/month</div>
                 </div>
                 
@@ -355,7 +355,7 @@ const Government: React.FC = () => {
                 
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Government Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$19,999</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">€19,999</div>
                   <div className="text-slate-600">/month</div>
                 </div>
                 
@@ -500,7 +500,7 @@ const Government: React.FC = () => {
                 <div className="text-sm text-slate-300">Control Automation</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-amber-400 mb-2">$2M+</div>
+                <div className="text-3xl font-bold text-amber-400 mb-2">€2M+</div>
                 <div className="text-sm text-slate-300">Cost Avoidance</div>
               </div>
             </div>
@@ -522,7 +522,7 @@ const Government: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white'
                     : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'

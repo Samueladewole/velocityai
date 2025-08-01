@@ -116,7 +116,7 @@ export const FeaturePageTemplate: React.FC<FeaturePageTemplateProps> = ({
                 {metric.value}
               </p>
               {metric.trend && (
-                <p className={`mt-1 text-sm ${
+                <p className={`mt-1 text-sm €{
                   metric.trend === 'up' ? 'text-green-600' :
                   metric.trend === 'down' ? 'text-red-600' :
                   'text-slate-600'

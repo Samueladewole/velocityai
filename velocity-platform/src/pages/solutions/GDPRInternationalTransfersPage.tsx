@@ -33,7 +33,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [showGuideModal, setShowGuideModal] = useState(false);
   const [isEULocation, setIsEULocation] = useState(false);
-  const [currency, setCurrency] = useState('$');
+  const [currency, setCurrency] = useState('€');
   const [formData, setFormData] = useState({
     name: '',
     company: '',
@@ -109,7 +109,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
   const costComparison = [
     { 
       provider: "Velocity AI International Transfers", 
-      cost: isEULocation ? "€32,000" : "$35,000", 
+      cost: isEULocation ? "€32,000" : "€35,000", 
       timeline: "3 weeks", 
       coverage: "100%",
       automation: "94%",
@@ -117,7 +117,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
     },
     { 
       provider: "Traditional Provider A", 
-      cost: isEULocation ? "€165,000" : "$180,000", 
+      cost: isEULocation ? "€165,000" : "€180,000", 
       timeline: "18+ weeks", 
       coverage: "75%",
       automation: "45%",
@@ -125,7 +125,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
     },
     { 
       provider: "Traditional Company B", 
-      cost: isEULocation ? "€151,000" : "$165,000", 
+      cost: isEULocation ? "€151,000" : "€165,000", 
       timeline: "16+ weeks", 
       coverage: "70%",
       automation: "40%",
@@ -133,7 +133,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
     },
     { 
       provider: "Traditional Company C", 
-      cost: isEULocation ? "€133,000" : "$145,000", 
+      cost: isEULocation ? "€133,000" : "€145,000", 
       timeline: "14+ weeks", 
       coverage: "65%",
       automation: "35%",
@@ -215,8 +215,8 @@ const GDPRInternationalTransfersPage: React.FC = () => {
       metric: "100+ cloud services supported"
     },
     {
-      title: `Save ${isEULocation ? "€133K" : "$145K"} Per Year`,
-      description: "Stop paying lawyers $300/hour. Our AI does the work for pennies on the dollar",
+      title: `Save €{isEULocation ? "€133K" : "€145K"} Per Year`,
+      description: "Stop paying lawyers €300/hour. Our AI does the work for pennies on the dollar",
       metric: "81% cheaper than law firms"
     },
     {
@@ -322,7 +322,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 pt-16">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-          <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`text-center transition-all duration-1000 €{isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="flex items-center justify-center mb-6">
               <div className="p-3 bg-emerald-500 rounded-full mr-4">
                 <Globe className="w-8 h-8 text-white" />
@@ -399,7 +399,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                     activeTab === tab.id
                       ? 'bg-blue-50 text-blue-600 border border-blue-200'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -427,7 +427,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
               </h2>
               <p className="text-lg text-slate-600 max-w-4xl mx-auto">
                 Every day, companies get hit with GDPR enforcement actions for using Microsoft 365, AWS, and Google Cloud wrong. 
-                Traditional lawyers charge $300/hour and still can't keep up. Our AI agents work 24/7 to keep you safe.
+                Traditional lawyers charge €300/hour and still can't keep up. Our AI agents work 24/7 to keep you safe.
               </p>
             </div>
 
@@ -458,16 +458,16 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                   const Icon = agent.icon;
                   const isNew = agent.status === 'under_development';
                   return (
-                    <div key={index} className={`border rounded-lg p-4 hover:border-blue-300 transition-colors ${
+                    <div key={index} className={`border rounded-lg p-4 hover:border-blue-300 transition-colors €{
                       isNew ? 'border-emerald-300 bg-emerald-50' : 'border-slate-200'
                     }`}>
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`p-2 rounded-lg ${isNew ? 'bg-emerald-100' : 'bg-blue-100'}`}>
-                          <Icon className={`w-5 h-5 ${isNew ? 'text-emerald-600' : 'text-blue-600'}`} />
+                        <div className={`p-2 rounded-lg €{isNew ? 'bg-emerald-100' : 'bg-blue-100'}`}>
+                          <Icon className={`w-5 h-5 €{isNew ? 'text-emerald-600' : 'text-blue-600'}`} />
                         </div>
                         <div className="flex-1">
                           <h4 className="font-semibold text-slate-900 text-sm">{agent.name}</h4>
-                          <div className={`font-bold text-sm ${isNew ? 'text-emerald-600' : 'text-emerald-600'}`}>
+                          <div className={`font-bold text-sm €{isNew ? 'text-emerald-600' : 'text-emerald-600'}`}>
                             {agent.automation}
                           </div>
                           {isNew && (
@@ -478,7 +478,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                         </div>
                       </div>
                       <p className="text-slate-600 text-sm mb-2">{agent.description}</p>
-                      <div className={`text-xs px-2 py-1 rounded ${
+                      <div className={`text-xs px-2 py-1 rounded €{
                         isNew ? 'bg-emerald-100 text-emerald-600' : 'bg-blue-50 text-blue-600'
                       }`}>
                         {agent.specialty}
@@ -684,19 +684,19 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-slate-600">Software License</span>
-                    <span className="font-medium">{isEULocation ? "€20,200" : "$22,000"}</span>
+                    <span className="font-medium">{isEULocation ? "€20,200" : "€22,000"}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Implementation</span>
-                    <span className="font-medium">{isEULocation ? "€7,300" : "$8,000"}</span>
+                    <span className="font-medium">{isEULocation ? "€7,300" : "€8,000"}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Training & Support</span>
-                    <span className="font-medium">{isEULocation ? "€4,500" : "$5,000"}</span>
+                    <span className="font-medium">{isEULocation ? "€4,500" : "€5,000"}</span>
                   </div>
                   <div className="border-t border-slate-200 pt-3 flex justify-between">
                     <span className="font-semibold text-slate-900">Total Year 1</span>
-                    <span className="font-bold text-emerald-600">{isEULocation ? "€32,000" : "$35,000"}</span>
+                    <span className="font-bold text-emerald-600">{isEULocation ? "€32,000" : "€35,000"}</span>
                   </div>
                 </div>
               </div>
@@ -706,19 +706,19 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                 <div className="space-y-3">
                   <div className="flex justify-between">
                     <span className="text-slate-600">Software License</span>
-                    <span className="font-medium">{isEULocation ? "€96,000" : "$105,000"}</span>
+                    <span className="font-medium">{isEULocation ? "€96,000" : "€105,000"}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Implementation</span>
-                    <span className="font-medium">{isEULocation ? "€46,000" : "$50,000"}</span>
+                    <span className="font-medium">{isEULocation ? "€46,000" : "€50,000"}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-600">Training & Support</span>
-                    <span className="font-medium">{isEULocation ? "€23,000" : "$25,000"}</span>
+                    <span className="font-medium">{isEULocation ? "€23,000" : "€25,000"}</span>
                   </div>
                   <div className="border-t border-slate-200 pt-3 flex justify-between">
                     <span className="font-semibold text-slate-900">Total Year 1</span>
-                    <span className="font-bold text-red-600">{isEULocation ? "€165,000" : "$180,000"}</span>
+                    <span className="font-bold text-red-600">{isEULocation ? "€165,000" : "€180,000"}</span>
                   </div>
                 </div>
               </div>
@@ -726,7 +726,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
 
             {/* Savings Calculator */}
             <div className="bg-gradient-to-r from-emerald-500 to-blue-600 rounded-xl p-8 text-white text-center">
-              <h3 className="text-2xl font-bold mb-4">Your Potential Savings: {isEULocation ? "€133,000" : "$145,000"}</h3>
+              <h3 className="text-2xl font-bold mb-4">Your Potential Savings: {isEULocation ? "€133,000" : "€145,000"}</h3>
               <p className="text-emerald-100 mb-6">
                 Based on industry average implementation costs for international transfer compliance
               </p>

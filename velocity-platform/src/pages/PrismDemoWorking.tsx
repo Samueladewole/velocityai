@@ -137,7 +137,7 @@ export function PrismDemoWorking() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                P10 (90% confident it's higher): ${estimate.p10.toLocaleString()}
+                P10 (90% confident it's higher): €{estimate.p10.toLocaleString()}
               </label>
               <input
                 type="range"
@@ -151,7 +151,7 @@ export function PrismDemoWorking() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                P30: ${estimate.p30.toLocaleString()}
+                P30: €{estimate.p30.toLocaleString()}
               </label>
               <input
                 type="range"
@@ -165,7 +165,7 @@ export function PrismDemoWorking() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                P50 (Median): ${estimate.p50.toLocaleString()}
+                P50 (Median): €{estimate.p50.toLocaleString()}
               </label>
               <input
                 type="range"
@@ -179,7 +179,7 @@ export function PrismDemoWorking() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                P70: ${estimate.p70.toLocaleString()}
+                P70: €{estimate.p70.toLocaleString()}
               </label>
               <input
                 type="range"
@@ -193,7 +193,7 @@ export function PrismDemoWorking() {
             
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                P90 (90% confident it's lower): ${estimate.p90.toLocaleString()}
+                P90 (90% confident it's lower): €{estimate.p90.toLocaleString()}
               </label>
               <input
                 type="range"
@@ -233,15 +233,15 @@ export function PrismDemoWorking() {
                 <div className="grid grid-cols-2 gap-4 text-sm">
                   <div>
                     <span className="text-gray-600">Expected Loss:</span>
-                    <div className="font-bold text-lg">${simulationResults.mean.toLocaleString()}</div>
+                    <div className="font-bold text-lg">€{simulationResults.mean.toLocaleString()}</div>
                   </div>
                   <div>
                     <span className="text-gray-600">95th Percentile:</span>
-                    <div className="font-bold text-lg text-orange-600">${simulationResults.p95.toLocaleString()}</div>
+                    <div className="font-bold text-lg text-orange-600">€{simulationResults.p95.toLocaleString()}</div>
                   </div>
                   <div>
                     <span className="text-gray-600">99th Percentile:</span>
-                    <div className="font-bold text-lg text-red-600">${simulationResults.p99.toLocaleString()}</div>
+                    <div className="font-bold text-lg text-red-600">€{simulationResults.p99.toLocaleString()}</div>
                   </div>
                   <div>
                     <span className="text-gray-600">Simulations:</span>
@@ -253,9 +253,9 @@ export function PrismDemoWorking() {
               <div className="bg-green-50 p-4 rounded-lg">
                 <h3 className="font-semibold text-green-900 mb-2">✅ Executive Summary</h3>
                 <ul className="text-sm space-y-1">
-                  <li>• Expected annual risk exposure: ${simulationResults.mean.toLocaleString()}</li>
-                  <li>• 95% confidence: losses won't exceed ${simulationResults.p95.toLocaleString()}</li>
-                  <li>• Extreme scenario (99th percentile): ${simulationResults.p99.toLocaleString()}</li>
+                  <li>• Expected annual risk exposure: €{simulationResults.mean.toLocaleString()}</li>
+                  <li>• 95% confidence: losses won't exceed €{simulationResults.p95.toLocaleString()}</li>
+                  <li>• Extreme scenario (99th percentile): €{simulationResults.p99.toLocaleString()}</li>
                   <li>• Risk analysis based on {simulationResults.iterations.toLocaleString()} Monte Carlo simulations</li>
                 </ul>
               </div>
@@ -273,26 +273,26 @@ export function PrismDemoWorking() {
                 <h3 className="font-semibold text-blue-900 mb-3">📖 What These Results Mean</h3>
                 <div className="space-y-3 text-sm text-blue-800">
                   <div>
-                    <strong>Expected Loss (${simulationResults.mean.toLocaleString()}):</strong>
+                    <strong>Expected Loss (€{simulationResults.mean.toLocaleString()}):</strong>
                     <p>The average annual financial risk exposure your organization should budget for. This is your baseline planning number.</p>
                   </div>
                   
                   <div>
-                    <strong>95th Percentile (${simulationResults.p95.toLocaleString()}):</strong>
+                    <strong>95th Percentile (€{simulationResults.p95.toLocaleString()}):</strong>
                     <p>There's a 95% chance your actual losses will be below this amount. Use this for stress testing and capital reserve planning.</p>
                   </div>
                   
                   <div>
-                    <strong>99th Percentile (${simulationResults.p99.toLocaleString()}):</strong>
+                    <strong>99th Percentile (€{simulationResults.p99.toLocaleString()}):</strong>
                     <p>This represents extreme scenarios. Only 1% of outcomes exceed this value. Critical for crisis planning and insurance decisions.</p>
                   </div>
                   
                   <div className="bg-white p-3 rounded border-l-4 border-blue-500">
                     <strong>📊 Business Impact:</strong>
                     <ul className="mt-2 space-y-1 text-xs">
-                      <li>• Budget ${simulationResults.mean.toLocaleString()} annually for security/risk management</li>
-                      <li>• Ensure liquidity/insurance covers up to ${simulationResults.p95.toLocaleString()}</li>
-                      <li>• Have crisis response plan for scenarios exceeding ${simulationResults.p99.toLocaleString()}</li>
+                      <li>• Budget €{simulationResults.mean.toLocaleString()} annually for security/risk management</li>
+                      <li>• Ensure liquidity/insurance covers up to €{simulationResults.p95.toLocaleString()}</li>
+                      <li>• Have crisis response plan for scenarios exceeding €{simulationResults.p99.toLocaleString()}</li>
                       <li>• This replaces subjective "high/medium/low" with quantified financial targets</li>
                     </ul>
                   </div>

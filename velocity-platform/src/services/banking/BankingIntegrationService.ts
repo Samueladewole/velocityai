@@ -202,7 +202,7 @@ class BankingIntegrationService {
   public async connectToSystem(systemId: string): Promise<boolean> {
     const system = this.systems.get(systemId);
     if (!system) {
-      throw new Error(`System ${systemId} not found`);
+      throw new Error(`System €{systemId} not found`);
     }
 
     // Simulate connection process
@@ -222,7 +222,7 @@ class BankingIntegrationService {
   public async collectEvidence(systemId: string): Promise<EvidenceItem[]> {
     const system = this.systems.get(systemId);
     if (!system || system.status !== 'connected') {
-      throw new Error(`System ${systemId} is not connected`);
+      throw new Error(`System €{systemId} is not connected`);
     }
 
     // Simulate evidence collection
@@ -234,7 +234,7 @@ class BankingIntegrationService {
       const controlId = Array.from(this.isaeControls.keys())[Math.floor(Math.random() * this.isaeControls.size)];
       
       const evidence: EvidenceItem = {
-        id: `${systemId}-${Date.now()}-${i}`,
+        id: `€{systemId}-€{Date.now()}-€{i}`,
         systemId,
         type: evidenceType,
         category: this.categorizeEvidence(evidenceType),
@@ -247,7 +247,7 @@ class BankingIntegrationService {
           timestamp: new Date(),
           action: 'evidence-collected',
           userId: 'system-agent',
-          details: `Automatically collected from ${system.name}`
+          details: `Automatically collected from €{system.name}`
         }]
       };
 
@@ -283,20 +283,20 @@ class BankingIntegrationService {
 
   private generateEvidenceDescription(systemName: string, evidenceType: string): string {
     const descriptions: Record<string, string> = {
-      'transaction-logs': `Transaction processing logs from ${systemName} - automated validation of processing controls`,
-      'account-changes': `Account modification records from ${systemName} - authorization and approval evidence`,
-      'system-controls': `System configuration and control settings from ${systemName}`,
-      'access-logs': `User access and authentication logs from ${systemName}`,
-      'credit-decisions': `Automated credit decision records from ${systemName} - risk assessment evidence`,
-      'approval-workflows': `Credit approval workflow documentation from ${systemName}`,
-      'risk-assessments': `Risk calculation and assessment records from ${systemName}`,
-      'journal-entries': `General ledger journal entries from ${systemName} - financial control evidence`,
-      'reconciliations': `Account reconciliation records from ${systemName}`,
-      'regulatory-filings': `Regulatory reporting submissions from ${systemName}`,
-      'compliance-screening': `Transaction compliance screening results from ${systemName}`
+      'transaction-logs': `Transaction processing logs from €{systemName} - automated validation of processing controls`,
+      'account-changes': `Account modification records from €{systemName} - authorization and approval evidence`,
+      'system-controls': `System configuration and control settings from €{systemName}`,
+      'access-logs': `User access and authentication logs from €{systemName}`,
+      'credit-decisions': `Automated credit decision records from €{systemName} - risk assessment evidence`,
+      'approval-workflows': `Credit approval workflow documentation from €{systemName}`,
+      'risk-assessments': `Risk calculation and assessment records from €{systemName}`,
+      'journal-entries': `General ledger journal entries from €{systemName} - financial control evidence`,
+      'reconciliations': `Account reconciliation records from €{systemName}`,
+      'regulatory-filings': `Regulatory reporting submissions from €{systemName}`,
+      'compliance-screening': `Transaction compliance screening results from €{systemName}`
     };
 
-    return descriptions[evidenceType] || `Evidence collected from ${systemName}`;
+    return descriptions[evidenceType] || `Evidence collected from €{systemName}`;
   }
 
   private generateHash(): string {

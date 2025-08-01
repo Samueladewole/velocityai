@@ -154,7 +154,7 @@ export const IntelligenceInsights: React.FC = () => {
                 className="group p-4 rounded-xl border border-slate-100 hover:border-slate-200 hover:shadow-md transition-all duration-200 cursor-pointer"
               >
                 <div className="flex items-start gap-4">
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${rec.color} text-white flex-shrink-0`}>
+                  <div className={`p-2 rounded-lg bg-gradient-to-r €{rec.color} text-white flex-shrink-0`}>
                     {rec.icon}
                   </div>
                   <div className="flex-1">
@@ -167,7 +167,7 @@ export const IntelligenceInsights: React.FC = () => {
                           <span className="text-slate-600">Effort: <span className="font-semibold text-slate-900">{rec.effort}</span></span>
                         </div>
                       </div>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${typeConfig[rec.type].bg} ${typeConfig[rec.type].text}`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium €{typeConfig[rec.type].bg} €{typeConfig[rec.type].text}`}>
                         {typeConfig[rec.type].label}
                       </span>
                     </div>
@@ -211,7 +211,7 @@ export const IntelligenceInsights: React.FC = () => {
                   <div className="w-full bg-slate-100 rounded-full h-1">
                     <div 
                       className="bg-gradient-to-r from-purple-400 to-purple-600 h-1 rounded-full"
-                      style={{ width: `${pred.confidence}%` }}
+                      style={{ width: `€{pred.confidence}%` }}
                     />
                   </div>
                 </div>
@@ -247,7 +247,7 @@ export const IntelligenceInsights: React.FC = () => {
                     <div className="w-full bg-slate-100 rounded-full h-2">
                       <div 
                         className="bg-gradient-to-r from-teal-400 to-teal-600 h-2 rounded-full"
-                        style={{ width: `${bench.percentile}%` }}
+                        style={{ width: `€{bench.percentile}%` }}
                       />
                     </div>
                     <div className="absolute right-0 top-0 h-2 w-px bg-slate-300" />

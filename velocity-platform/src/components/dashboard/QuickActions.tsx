@@ -85,7 +85,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) =>
   }, []);
 
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div className={`space-y-4 €{className}`}>
       {/* Quick Actions Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
@@ -114,7 +114,7 @@ export const QuickActions: React.FC<QuickActionsProps> = ({ className = '' }) =>
             <div className="absolute inset-0 bg-gradient-to-br from-transparent to-slate-100/30" />
             <CardContent className="relative p-6">
               <div className="flex flex-col items-center text-center gap-3">
-                <div className={`p-3 rounded-xl bg-gradient-to-r ${action.color} text-white group-hover:scale-110 transition-transform duration-300`}>
+                <div className={`p-3 rounded-xl bg-gradient-to-r €{action.color} text-white group-hover:scale-110 transition-transform duration-300`}>
                   {action.icon}
                 </div>
                 <div>

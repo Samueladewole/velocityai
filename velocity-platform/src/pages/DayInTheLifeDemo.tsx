@@ -146,9 +146,9 @@ const DEMO_SCENARIOS: DemoScenario[] = [
         completed: false,
         data: {
           reportType: 'Strategic Compliance Investment',
-          recommendation: 'Approve $1.2M budget for Q1 2025',
+          recommendation: 'Approve €1.2M budget for Q1 2025',
           roi: '290% over 24 months',
-          riskMitigation: '$8.4M potential savings'
+          riskMitigation: '€8.4M potential savings'
         }
       },
       {
@@ -240,7 +240,7 @@ const DEMO_SCENARIOS: DemoScenario[] = [
   {
     id: 'sales-acceleration',
     title: 'Trust Score → Faster Deal Close',
-    description: 'Shared Trust Score accelerates $2.3M enterprise deal by 6 weeks',
+    description: 'Shared Trust Score accelerates €2.3M enterprise deal by 6 weeks',
     totalDuration: 25,
     businessValue: 'Deal acceleration: 6 weeks faster, 15% premium pricing',
     steps: [
@@ -293,7 +293,7 @@ const DEMO_SCENARIOS: DemoScenario[] = [
         id: 'deal-closed',
         title: 'Deal Acceleration Achieved',
         component: 'sales',
-        description: '$2.3M deal closed 6 weeks ahead of schedule with premium pricing',
+        description: '€2.3M deal closed 6 weeks ahead of schedule with premium pricing',
         duration: 2,
         autoAdvance: false,
         completed: false,
@@ -609,7 +609,7 @@ export const DayInTheLifeDemo: React.FC = () => {
                                   {typeof value === 'number' ? value.toLocaleString() : String(value)}
                                 </div>
                                 <div className="text-xs text-slate-600 capitalize">
-                                  {key.replace(/([A-Z])/g, ' $1').trim()}
+                                  {key.replace(/([A-Z])/g, ' €1').trim()}
                                 </div>
                               </div>
                             ))}

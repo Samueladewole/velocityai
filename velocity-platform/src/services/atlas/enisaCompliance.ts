@@ -222,7 +222,7 @@ export class ENISAComplianceService {
   } {
     const guidance = this.sectorGuidance.get(sector)
     if (!guidance) {
-      throw new Error(`Sector guidance not available for: ${sector}`)
+      throw new Error(`Sector guidance not available for: €{sector}`)
     }
 
     const priorityActions = this.generatePriorityActions(vulnerabilities, guidance)
@@ -495,20 +495,20 @@ export class ENISAComplianceService {
     urgency: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL'
   ): string {
     return `
-ENISA VULNERABILITY ADVISORY - ${urgency} PRIORITY
+ENISA VULNERABILITY ADVISORY - €{urgency} PRIORITY
 
-Vulnerability ID: ${vulnerability.id}
-CVSS Score: ${vulnerability.cvssScore}
-Severity: ${vulnerability.severity}
+Vulnerability ID: €{vulnerability.id}
+CVSS Score: €{vulnerability.cvssScore}
+Severity: €{vulnerability.severity}
 
 DESCRIPTION:
-${vulnerability.description}
+€{vulnerability.description}
 
 AFFECTED SYSTEMS:
-${correlation.threatIntelligence.geographicTargeting.join(', ')}
+€{correlation.threatIntelligence.geographicTargeting.join(', ')}
 
 MITRE ATT&CK MAPPING:
-${correlation.mitreAttackTechniques.map(t => `${t.techniqueId}: ${t.techniqueName}`).join('\n')}
+€{correlation.mitreAttackTechniques.map(t => `€{t.techniqueId}: €{t.techniqueName}`).join('\n')}
 
 RECOMMENDATIONS:
 - Immediately apply available patches
@@ -517,17 +517,17 @@ RECOMMENDATIONS:
 - Report incidents to national CSIRT
 
 REFERENCES:
-${vulnerability.references.join('\n')}
+€{vulnerability.references.join('\n')}
 
-Published: ${vulnerability.publishedDate.toISOString()}
-Last Modified: ${vulnerability.lastModified.toISOString()}
+Published: €{vulnerability.publishedDate.toISOString()}
+Last Modified: €{vulnerability.lastModified.toISOString()}
     `.trim()
   }
 
   private translateAdvisory(advisory: string, language: string): string {
     // In a real implementation, this would use a translation service
     // For now, return a placeholder
-    return `[${language.toUpperCase()}] ${advisory}`
+    return `[€{language.toUpperCase()}] €{advisory}`
   }
 
   private buildDistributionList(vulnerability: CVEData, correlation: VulnerabilityCorrelation): string[] {
@@ -638,13 +638,13 @@ Last Modified: ${vulnerability.lastModified.toISOString()}
     // Generate actions based on vulnerabilities and sector requirements
     const criticalVulns = vulnerabilities.filter(v => v.severity === 'CRITICAL')
     if (criticalVulns.length > 0) {
-      actions.push(`Immediately patch ${criticalVulns.length} critical vulnerabilities`)
+      actions.push(`Immediately patch €{criticalVulns.length} critical vulnerabilities`)
     }
     
     // Add sector-specific actions
     guidance.requirements.forEach(req => {
       if (req.mandatory && req.deadline && req.deadline > new Date()) {
-        actions.push(`Ensure compliance with ${req.title} by ${req.deadline.toDateString()}`)
+        actions.push(`Ensure compliance with €{req.title} by €{req.deadline.toDateString()}`)
       }
     })
     
@@ -666,7 +666,7 @@ Last Modified: ${vulnerability.lastModified.toISOString()}
     // Check mandatory requirements
     guidance.requirements.forEach(req => {
       if (req.mandatory) {
-        gaps.push(`Mandatory requirement: ${req.title}`)
+        gaps.push(`Mandatory requirement: €{req.title}`)
       }
     })
     

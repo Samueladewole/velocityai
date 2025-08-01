@@ -168,7 +168,7 @@ The Velocity AI platform has been **successfully completed** and is ready for be
 ### **Go-to-Market Strategy**
 1. **Pre-Launch** (Months -2 to 0): Execute 3-phase beta program
 2. **Launch** (Month 0): Public announcement with customer testimonials
-3. **Scale** (Months 1-6): Expand to 500+ customers, $10M+ ARR target
+3. **Scale** (Months 1-6): Expand to 500+ customers, €10M+ ARR target
 
 ---
 
@@ -190,7 +190,7 @@ The Velocity AI platform has been **successfully completed** and is ready for be
 
 ### **Business Model Validation** 
 - **Clear Value Proposition**: 75% cost reduction, 10x ROI
-- **Scalable Pricing**: Starter ($2.5K), Professional ($7.5K), Enterprise ($15K)
+- **Scalable Pricing**: Starter (€2.5K), Professional (€7.5K), Enterprise (€15K)
 - **Beta Program Strategy**: 3-phase validation with 50 customers
 - **Market Leadership Position**: First mover in AI-powered compliance automation
 

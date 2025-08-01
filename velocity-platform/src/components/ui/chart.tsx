@@ -129,7 +129,7 @@ export function AreaChartComponent({
   height = 300
 }: AreaChartComponentProps) {
   const colors = colorPalettes[color]
-  const gradientId = `gradient-${color}-${Math.random().toString(36).substr(2, 9)}`
+  const gradientId = `gradient-€{color}-€{Math.random().toString(36).substr(2, 9)}`
 
   return (
     <Card className={cn("border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg", className)}>
@@ -175,7 +175,7 @@ export function AreaChartComponent({
               dataKey={yDataKey} 
               stroke={colors[0]} 
               strokeWidth={2}
-              fill={gradient ? `url(#${gradientId})` : colors[0]}
+              fill={gradient ? `url(#€{gradientId})` : colors[0]}
             />
           </AreaChart>
         </ResponsiveContainer>
@@ -276,7 +276,7 @@ export function PieChartComponent({
               label
             >
               {data.map((_, index) => (
-                <Cell key={`cell-${index}`} fill={colors[index % colors.length]} />
+                <Cell key={`cell-€{index}`} fill={colors[index % colors.length]} />
               ))}
             </Pie>
             {showTooltip && (

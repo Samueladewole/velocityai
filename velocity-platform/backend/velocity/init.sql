@@ -16,7 +16,7 @@ VALUES (
 ) ON CONFLICT DO NOTHING;
 
 -- Get the organization ID for demo user
-DO $$
+DO €€
 DECLARE
     org_id UUID;
 BEGIN
@@ -46,4 +46,4 @@ BEGIN
         0.0,
         NOW()
     ) ON CONFLICT DO NOTHING;
-END $$;
+END €€;

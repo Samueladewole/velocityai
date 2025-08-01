@@ -150,7 +150,7 @@ export const PrismWorking: React.FC = () => {
   };
 
   const formatPercentage = (decimal: number) => {
-    return `${(decimal * 100).toFixed(1)}%`;
+    return `€{(decimal * 100).toFixed(1)}%`;
   };
 
   const getRiskLevel = (ale: number) => {
@@ -334,7 +334,7 @@ export const PrismWorking: React.FC = () => {
                           </p>
                         </div>
                       </div>
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${riskLevel.color}`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border €{riskLevel.color}`}>
                         {riskLevel.level} Risk
                       </div>
                     </div>
@@ -403,7 +403,7 @@ export const PrismWorking: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="font-semibold text-slate-900">{simulation.name}</h3>
-                        <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                        <div className={`px-2 py-1 rounded-full text-xs font-medium €{
                           simulation.status === 'completed' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' :
                           simulation.status === 'in-progress' ? 'bg-blue-50 text-blue-700 border border-blue-200' :
                           'bg-slate-50 text-slate-700 border border-slate-200'
@@ -428,7 +428,7 @@ export const PrismWorking: React.FC = () => {
                           <div className="w-full bg-slate-100 rounded-full h-2">
                             <div
                               className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
-                              style={{ width: `${simulation.progress}%` }}
+                              style={{ width: `€{simulation.progress}%` }}
                             />
                           </div>
                         </div>
@@ -456,11 +456,11 @@ export const PrismWorking: React.FC = () => {
                       
                       <div className="text-xs text-slate-500 mt-2">
                         {simulation.status === 'completed' && simulation.completedDate && 
-                          `Completed: ${new Date(simulation.completedDate).toLocaleDateString()}`}
+                          `Completed: €{new Date(simulation.completedDate).toLocaleDateString()}`}
                         {simulation.status === 'in-progress' && simulation.estimatedCompletion && 
-                          `Est. completion: ${new Date(simulation.estimatedCompletion).toLocaleDateString()}`}
+                          `Est. completion: €{new Date(simulation.estimatedCompletion).toLocaleDateString()}`}
                         {simulation.status === 'scheduled' && simulation.scheduledDate && 
-                          `Scheduled: ${new Date(simulation.scheduledDate).toLocaleDateString()}`}
+                          `Scheduled: €{new Date(simulation.scheduledDate).toLocaleDateString()}`}
                       </div>
                     </div>
                   </div>
@@ -502,13 +502,13 @@ export const PrismWorking: React.FC = () => {
                   <div className="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
                     <div 
                       className="bg-gradient-to-r from-emerald-500 to-emerald-600 h-4 rounded-full shadow-sm transition-all duration-1000" 
-                      style={{ width: `${(portfolioMetrics.totalALE / portfolioMetrics.riskTolerance) * 100}%` }} 
+                      style={{ width: `€{(portfolioMetrics.totalALE / portfolioMetrics.riskTolerance) * 100}%` }} 
                     />
                   </div>
                   <div className="absolute left-1/2 top-0 h-4 w-px bg-amber-500" title="Risk Appetite" />
                 </div>
                 <div className="flex justify-between text-xs text-slate-500 mt-1">
-                  <span>$0</span>
+                  <span>€0</span>
                   <span className="text-amber-600 font-medium">Appetite: {formatCurrency(portfolioMetrics.riskAppetite)}</span>
                   <span>Tolerance: {formatCurrency(portfolioMetrics.riskTolerance)}</span>
                 </div>

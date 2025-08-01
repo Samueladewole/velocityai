@@ -91,7 +91,7 @@ const LiveVelocityDashboard: React.FC = () => {
     <div className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className={`w-12 h-12 rounded-lg bg-${color}-100 flex items-center justify-center`}>
+          <div className={`w-12 h-12 rounded-lg bg-€{color}-100 flex items-center justify-center`}>
             {icon}
           </div>
           <div>
@@ -102,7 +102,7 @@ const LiveVelocityDashboard: React.FC = () => {
           </div>
         </div>
         {trend && (
-          <div className={`text-sm font-medium ${trend > 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <div className={`text-sm font-medium €{trend > 0 ? 'text-green-600' : 'text-red-600'}`}>
             {trend > 0 ? '+' : ''}{trend}%
           </div>
         )}
@@ -130,7 +130,7 @@ const LiveVelocityDashboard: React.FC = () => {
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-1">
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium €{
                     evidence.status === 'validated' ? 'bg-green-100 text-green-800' :
                     evidence.status === 'validating' ? 'bg-yellow-100 text-yellow-800' :
                     evidence.status === 'collecting' ? 'bg-blue-100 text-blue-800' :
@@ -169,7 +169,7 @@ const LiveVelocityDashboard: React.FC = () => {
     <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <div className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center ${getStatusColor(agent.status)}`}>
+          <div className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center €{getStatusColor(agent.status)}`}>
             {getStatusIcon(agent.status)}
           </div>
           <div>
@@ -217,7 +217,7 @@ const LiveVelocityDashboard: React.FC = () => {
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
               className="bg-blue-600 h-2 rounded-full transition-all duration-500" 
-              style={{ width: `${agent.progress}%` }}
+              style={{ width: `€{agent.progress}%` }}
             ></div>
           </div>
           <div className="text-xs text-gray-500 mt-1">{agent.currentActivity}</div>
@@ -261,11 +261,11 @@ const LiveVelocityDashboard: React.FC = () => {
                 <label className="text-sm text-gray-600">Auto-refresh</label>
                 <button
                   onClick={() => setAutoRefresh(!autoRefresh)}
-                  className={`w-10 h-6 rounded-full transition-colors ${
+                  className={`w-10 h-6 rounded-full transition-colors €{
                     autoRefresh ? 'bg-blue-600' : 'bg-gray-300'
                   }`}
                 >
-                  <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
+                  <div className={`w-4 h-4 bg-white rounded-full transition-transform €{
                     autoRefresh ? 'translate-x-5' : 'translate-x-1'
                   }`}></div>
                 </button>
@@ -323,7 +323,7 @@ const LiveVelocityDashboard: React.FC = () => {
                   <button
                     key={range}
                     onClick={() => setSelectedTimeRange(range)}
-                    className={`px-3 py-1 text-xs rounded-full ${
+                    className={`px-3 py-1 text-xs rounded-full €{
                       selectedTimeRange === range 
                         ? 'bg-blue-100 text-blue-700' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -413,7 +413,7 @@ const LiveVelocityDashboard: React.FC = () => {
                     <div className="w-16 bg-gray-200 rounded-full h-2">
                       <div 
                         className="bg-blue-600 h-2 rounded-full" 
-                        style={{ width: `${25 + Math.random() * 50}%` }}
+                        style={{ width: `€{25 + Math.random() * 50}%` }}
                       ></div>
                     </div>
                     <span className="font-medium w-8 text-right">{Math.floor(25 + Math.random() * 50)}%</span>

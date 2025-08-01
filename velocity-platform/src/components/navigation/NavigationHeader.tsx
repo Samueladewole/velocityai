@@ -100,9 +100,9 @@ export const NavigationHeader: React.FC<NavigationHeaderProps> = ({ className })
       description: 'Pricing designed for fast-growing AI startups',
       items: [
         { name: 'Velocity Pricing', href: '/velocity/pricing', icon: Calculator },
-        { name: 'Starter ($999/mo)', href: '/velocity/pricing', icon: Zap },
-        { name: 'Growth ($2,499/mo)', href: '/velocity/pricing', icon: Building2 },
-        { name: 'Scale ($4,999/mo)', href: '/velocity/pricing', icon: Award }
+        { name: 'Starter (€999/mo)', href: '/velocity/pricing', icon: Zap },
+        { name: 'Growth (€2,499/mo)', href: '/velocity/pricing', icon: Building2 },
+        { name: 'Scale (€4,999/mo)', href: '/velocity/pricing', icon: Award }
       ]
     }
   ];

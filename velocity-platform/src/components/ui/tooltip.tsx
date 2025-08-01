@@ -117,7 +117,7 @@ export const TooltipContent: React.FC<TooltipContentProps> = ({
       className={`
         absolute z-50 px-2 py-1 text-xs font-medium text-white bg-gray-900 
         rounded shadow-lg whitespace-nowrap animate-in fade-in-0 zoom-in-95
-        ${sideClasses[side]} ${className}
+        €{sideClasses[side]} €{className}
       `}
     >
       {children}

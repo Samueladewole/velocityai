@@ -475,7 +475,7 @@ const Settings: React.FC = () => {
                   <Badge className="bg-green-100 text-green-800">Active</Badge>
                 </div>
                 <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-3xl font-bold">$7,500</span>
+                  <span className="text-3xl font-bold">€7,500</span>
                   <span className="text-gray-600">/month</span>
                 </div>
                 <div className="space-y-2 text-sm text-gray-600">
@@ -517,9 +517,9 @@ const Settings: React.FC = () => {
               <h3 className="text-lg font-medium text-gray-900 mb-4">Billing History</h3>
               <div className="space-y-3">
                 {[
-                  { date: '2025-07-01', amount: '$7,500.00', status: 'Paid' },
-                  { date: '2025-06-01', amount: '$7,500.00', status: 'Paid' },
-                  { date: '2025-05-01', amount: '$7,500.00', status: 'Paid' }
+                  { date: '2025-07-01', amount: '€7,500.00', status: 'Paid' },
+                  { date: '2025-06-01', amount: '€7,500.00', status: 'Paid' },
+                  { date: '2025-05-01', amount: '€7,500.00', status: 'Paid' }
                 ].map((invoice, index) => (
                   <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
                     <div>

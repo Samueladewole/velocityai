@@ -95,12 +95,12 @@ export class ObservableISACADigitalTrustService extends ISACADigitalTrustService
     }
   }> {
     const startTime = Date.now()
-    const assessmentId = `assessment_${Date.now()}_${framework}`
+    const assessmentId = `assessment_€{Date.now()}_€{framework}`
 
     // Monitor AI decision for assessment
     const aiDecision = aiAgentMonitoring.monitorAIDecision(
       'ISACA_Assessment',
-      `Conduct ${framework} assessment for organization ${organizationId}`,
+      `Conduct €{framework} assessment for organization €{organizationId}`,
       '', // Will be filled with results
       0.9, // High confidence for professional assessment
       'isaca-assessment-v1',
@@ -149,7 +149,7 @@ export class ObservableISACADigitalTrustService extends ISACADigitalTrustService
       const processingTime = Date.now() - startTime
 
       // Update AI decision with results
-      aiDecision.response = `Assessment completed: ${assessment.overallMaturity} maturity, ${assessment.trustScore} trust score`
+      aiDecision.response = `Assessment completed: €{assessment.overallMaturity} maturity, €{assessment.trustScore} trust score`
       aiDecision.confidence = assessment.trustScore > 80 ? 0.95 : assessment.trustScore > 60 ? 0.85 : 0.75
       aiDecision.latency = processingTime
 
@@ -272,7 +272,7 @@ export class ObservableISACADigitalTrustService extends ISACADigitalTrustService
       const digitalTrustInsights = this.generateDigitalTrustInsights(assessment)
 
       // Update AI decision
-      aiDecision.response = `DTEF Assessment: ${assessment.trustScore} trust score, ${assessment.overallMaturity} maturity`
+      aiDecision.response = `DTEF Assessment: €{assessment.trustScore} trust score, €{assessment.overallMaturity} maturity`
       aiDecision.confidence = 0.95 // Highest confidence for world's first implementation
       aiDecision.latency = processingTime
 
@@ -556,11 +556,11 @@ export class ObservableISACADigitalTrustService extends ISACADigitalTrustService
           domainId: domain.id,
           score: domain.processes.reduce((sum, p) => sum + p.currentMaturity, 0) / domain.processes.length,
           aiDecisions: [{
-            decision: `Automated ${domain.name} assessment`,
+            decision: `Automated €{domain.name} assessment`,
             confidence: 0.95,
-            reasoning: [`Comprehensive ${domain.description} analysis`]
+            reasoning: [`Comprehensive €{domain.description} analysis`]
           }],
-          evidenceUsed: [`${domain.name} evidence automation`],
+          evidenceUsed: [`€{domain.name} evidence automation`],
           gapsIdentified: domain.processes.filter(p => p.currentMaturity < p.maturityTarget)
         })),
         overallMaturity: assessment.overallMaturity,
@@ -626,7 +626,7 @@ export class ObservableISACADigitalTrustService extends ISACADigitalTrustService
     return recommendations.map(rec => ({
       id: rec.id,
       requirement: rec.description,
-      description: `Gap identified in ${rec.domain}`,
+      description: `Gap identified in €{rec.domain}`,
       severity: rec.priority.toLowerCase(),
       currentState: 'needs_improvement',
       requiredState: 'compliant',

@@ -297,7 +297,7 @@ async def get_integration_dashboard(
                 "total_integrations_today": 12,
                 "data_quality_score": 94.2,
                 "automation_efficiency": "78% of workflows automated",
-                "cross_component_value": "$125,000 additional value through integration"
+                "cross_component_value": "€125,000 additional value through integration"
             },
             "performance_metrics": {
                 "integration_latency": "1.8s average",

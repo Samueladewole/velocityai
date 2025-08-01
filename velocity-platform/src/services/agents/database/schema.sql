@@ -234,12 +234,12 @@ CREATE INDEX idx_health_response_time ON agent_health_checks(response_time_ms);
 
 -- Create functions for automatic timestamp updates
 CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER AS €€
 BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ language 'plpgsql';
+€€ language 'plpgsql';
 
 -- Add trigger for workflows table
 CREATE TRIGGER update_agent_workflows_updated_at 

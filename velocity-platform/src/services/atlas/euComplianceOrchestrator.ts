@@ -253,7 +253,7 @@ export class EUComplianceOrchestrator {
   }> {
     const assessment = this.assessmentCache.get(vulnerabilityId)
     if (!assessment) {
-      throw new Error(`Assessment not found for vulnerability: ${vulnerabilityId}`)
+      throw new Error(`Assessment not found for vulnerability: €{vulnerabilityId}`)
     }
 
     const results = {
@@ -326,7 +326,7 @@ export class EUComplianceOrchestrator {
     // Set framework deadlines
     Object.entries(assessment.frameworkCompliance).forEach(([framework, compliance]) => {
       if ((compliance as any).applicable) {
-        results.timeline.set(`${framework.toUpperCase()} Compliance`, (compliance as any).timeline)
+        results.timeline.set(`€{framework.toUpperCase()} Compliance`, (compliance as any).timeline)
       }
     })
 
@@ -400,7 +400,7 @@ export class EUComplianceOrchestrator {
   } {
     const action = this.actionRegistry.get(actionId)
     if (!action) {
-      throw new Error(`Action not found: ${actionId}`)
+      throw new Error(`Action not found: €{actionId}`)
     }
 
     // Update progress
@@ -445,7 +445,7 @@ export class EUComplianceOrchestrator {
   ): Promise<any> {
     // Generate mock vulnerability disclosure for assessment
     const mockDisclosure: VulnerabilityDisclosure = {
-      id: `DISC_${vulnerability.id}`,
+      id: `DISC_€{vulnerability.id}`,
       vulnerabilityId: vulnerability.id,
       disclosureStatus: 'COORDINATED',
       timeline: {
@@ -628,13 +628,13 @@ export class EUComplianceOrchestrator {
     // GDPR actions
     if (assessment.gdprImplications.personalDataBreach) {
       actions.push({
-        id: `GDPR_${Date.now()}`,
+        id: `GDPR_€{Date.now()}`,
         type: 'notification',
         priority: 'CRITICAL',
         deadline: assessment.gdprImplications.notificationRequired.timeline,
         responsible: 'Data Protection Officer',
         status: 'PENDING',
-        description: `Submit GDPR breach notification for vulnerability ${assessment.vulnerabilityId}`,
+        description: `Submit GDPR breach notification for vulnerability €{assessment.vulnerabilityId}`,
         framework: ['GDPR'],
         estimatedEffort: '4 hours',
         dependencies: ['Legal review', 'Impact assessment'],
@@ -656,20 +656,20 @@ export class EUComplianceOrchestrator {
     // Multi-language actions
     if (assessment.languageRequirements.requiredLanguages.length > 0) {
       actions.push({
-        id: `LANG_${Date.now()}`,
+        id: `LANG_€{Date.now()}`,
         type: 'translation',
         priority: 'MEDIUM',
         deadline: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
         responsible: 'Communications Team',
         status: 'PENDING',
-        description: `Translate vulnerability advisory to ${assessment.languageRequirements.requiredLanguages.length} EU languages`,
+        description: `Translate vulnerability advisory to €{assessment.languageRequirements.requiredLanguages.length} EU languages`,
         framework: ['ENISA'],
-        estimatedEffort: `${assessment.languageRequirements.requiredLanguages.length * 8} hours`,
+        estimatedEffort: `€{assessment.languageRequirements.requiredLanguages.length * 8} hours`,
         dependencies: ['Advisory content approval'],
         progress: {
           completed: 0,
           milestones: assessment.languageRequirements.requiredLanguages.map(lang => ({
-            name: `${lang.toUpperCase()} translation`,
+            name: `€{lang.toUpperCase()} translation`,
             date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
             status: 'PENDING' as const
           }))
@@ -690,12 +690,12 @@ export class EUComplianceOrchestrator {
     organizationContext: any
   ): ThreatIntelligenceReport {
     return {
-      id: `THREAT_${assessment.vulnerabilityId}`,
+      id: `THREAT_€{assessment.vulnerabilityId}`,
       type: 'vulnerability',
       classification: assessment.informationSharing.classification,
       urgency: assessment.overallCompliance.riskLevel === 'CRITICAL' ? 'CRITICAL' : 'HIGH',
       content: {
-        title: `Vulnerability ${assessment.vulnerabilityId}`,
+        title: `Vulnerability €{assessment.vulnerabilityId}`,
         description: 'Critical vulnerability requiring EU coordination',
         technicalDetails: 'Technical analysis and exploitation details',
         indicators: [],
@@ -742,7 +742,7 @@ export class EUComplianceOrchestrator {
   private calculateGDPRPenalties(riskLevel: string, annualRevenue: number): string {
     if (riskLevel === 'HIGH') {
       const penalty = Math.min(20000000, annualRevenue * 0.04) // 4% or €20M
-      return `Up to €${penalty.toLocaleString()}`
+      return `Up to €€{penalty.toLocaleString()}`
     }
     return 'Administrative measures'
   }
@@ -841,7 +841,7 @@ export class EUComplianceOrchestrator {
     return sectors.map(sector => ({
       sector,
       compliance: Math.random() * 40 + 60,
-      specificRequirements: [`${sector.toUpperCase()} specific controls`, `Incident reporting`],
+      specificRequirements: [`€{sector.toUpperCase()} specific controls`, `Incident reporting`],
       riskLevel: ['LOW', 'MEDIUM', 'HIGH'][Math.floor(Math.random() * 3)] as any
     }))
   }

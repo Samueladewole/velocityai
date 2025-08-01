@@ -138,7 +138,7 @@ export const Pricing: React.FC = () => {
             {plans.map((plan, index) => (
               <Card 
                 key={index} 
-                className={`relative p-8 ${plan.popular ? 'border-purple-500 shadow-xl scale-105' : 'border-slate-200'}`}
+                className={`relative p-8 €{plan.popular ? 'border-purple-500 shadow-xl scale-105' : 'border-slate-200'}`}
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -150,8 +150,8 @@ export const Pricing: React.FC = () => {
                 )}
 
                 <div className="text-center mb-6">
-                  <div className={`inline-flex h-12 w-12 items-center justify-center rounded-lg bg-${plan.color}-100 mb-4`}>
-                    <plan.icon className={`h-6 w-6 text-${plan.color}-600`} />
+                  <div className={`inline-flex h-12 w-12 items-center justify-center rounded-lg bg-€{plan.color}-100 mb-4`}>
+                    <plan.icon className={`h-6 w-6 text-€{plan.color}-600`} />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
                   <div className="flex items-baseline justify-center gap-1 mb-3">
@@ -177,7 +177,7 @@ export const Pricing: React.FC = () => {
                 </div>
 
                 <Button 
-                  className={`w-full ${plan.popular ? 'erip-gradient-primary' : ''}`}
+                  className={`w-full €{plan.popular ? 'erip-gradient-primary' : ''}`}
                   variant={plan.popular ? 'default' : 'outline'}
                   onClick={() => navigate(plan.name === 'Enterprise' ? '/company/contact' : '/demo')}
                 >

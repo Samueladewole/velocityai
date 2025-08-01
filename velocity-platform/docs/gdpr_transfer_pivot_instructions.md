@@ -30,8 +30,8 @@ interface MarketOpportunity {
 ### **The Microsoft 365 Crisis:**
 - **EDPS forced EU Commission to stop using Microsoft 365** due to transfer violations
 - **Every company using US cloud services** faces the same risk
-- **88% of companies spend $1M+ annually** on GDPR compliance
-- **40% spend over $10M annually** - mostly on transfer compliance
+- **88% of companies spend €1M+ annually** on GDPR compliance
+- **40% spend over €10M annually** - mostly on transfer compliance
 
 ---
 
@@ -59,8 +59,8 @@ interface TransferSolution {
 ## **💰 MASSIVE MARKET VALIDATION**
 
 ### **Key Statistics from Research:**
-- **88% of global companies** spend over $1M annually on GDPR compliance
-- **40% spend over $10M** annually (mostly on transfer compliance)
+- **88% of global companies** spend over €1M annually on GDPR compliance
+- **40% spend over €10M** annually (mostly on transfer compliance)
 - **Microsoft 365 decision affects millions** of companies using US cloud services
 - **Every AWS, Google Cloud, Azure user** needs transfer compliance
 - **No automated solution exists** for transfer impact assessments
@@ -161,7 +161,7 @@ EXECUTE COMPLETE ROPA REMOVAL AND INTERNATIONAL TRANSFER PIVOT NOW
 ```typescript
 interface TIAAutomation {
   what_it_does: "AI automatically conducts Transfer Impact Assessments for every cross-border data flow",
-  current_pain: "Companies spend $50K-200K per TIA with law firms",
+  current_pain: "Companies spend €50K-200K per TIA with law firms",
   velocity_solution: "Automated TIAs in minutes, not months",
   business_value: "90% cost reduction, continuous monitoring vs point-in-time assessment"
 }

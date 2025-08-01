@@ -130,7 +130,7 @@ export const EnhancedDashboard: React.FC = () => {
         },
         {
           title: 'ROI Generated',
-          value: '$2.4M',
+          value: '€2.4M',
           change: '+18%',
           icon: <DollarSign className="h-4 w-4" />,
           trend: 'up'
@@ -288,7 +288,7 @@ export const EnhancedDashboard: React.FC = () => {
                 className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-200"
                 disabled={loading}
               >
-                <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`h-4 w-4 €{loading ? 'animate-spin' : ''}`} />
                 <span className="text-sm">Refresh</span>
               </button>
             </div>
@@ -334,7 +334,7 @@ export const EnhancedDashboard: React.FC = () => {
             <CardContent className="relative">
               <div className="text-3xl font-bold text-slate-900 mb-2">{metric.value}</div>
               {metric.change && (
-                <div className={`flex items-center gap-1 text-sm font-medium ${
+                <div className={`flex items-center gap-1 text-sm font-medium €{
                   metric.trend === 'up' ? 'text-green-700' : 
                   metric.trend === 'down' ? 'text-red-700' : 
                   'text-slate-600'
@@ -374,7 +374,7 @@ export const EnhancedDashboard: React.FC = () => {
               {activities.map((activity, index) => (
                 <div key={activity.id} className="group flex items-start space-x-4 p-3 rounded-xl hover:bg-slate-50/80 transition-all duration-200">
                   <div className="flex flex-col items-center mt-1">
-                    <div className={`h-3 w-3 rounded-full ring-4 ring-white shadow-sm ${
+                    <div className={`h-3 w-3 rounded-full ring-4 ring-white shadow-sm €{
                       activity.severity === 'high' ? 'bg-red-500' :
                       activity.severity === 'medium' ? 'bg-amber-500' :
                       'bg-emerald-500'
@@ -435,12 +435,12 @@ export const EnhancedDashboard: React.FC = () => {
                   <div className="relative">
                     <div className="w-full bg-slate-100 rounded-full h-3 overflow-hidden">
                       <div 
-                        className={`h-3 rounded-full shadow-sm transition-all duration-1000 ${
+                        className={`h-3 rounded-full shadow-sm transition-all duration-1000 €{
                           risk.status === 'safe' ? 'bg-gradient-to-r from-green-500 to-green-600' :
                           risk.status === 'warning' ? 'bg-gradient-to-r from-amber-500 to-orange-500' :
                           'bg-gradient-to-r from-red-500 to-red-600'
                         }`}
-                        style={{ width: `${risk.current}%` }}
+                        style={{ width: `€{risk.current}%` }}
                       />
                     </div>
                     <div className="absolute right-0 top-0 h-3 w-px bg-slate-300" />
@@ -559,7 +559,7 @@ export const EnhancedDashboard: React.FC = () => {
                     dataKey="value"
                   >
                     {chartData.pieChartData?.map((entry: any, index: number) => (
-                      <Cell key={`cell-${index}`} fill={entry.color} />
+                      <Cell key={`cell-€{index}`} fill={entry.color} />
                     ))}
                   </Pie>
                   <Tooltip 

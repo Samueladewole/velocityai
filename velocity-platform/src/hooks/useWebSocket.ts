@@ -40,7 +40,7 @@ export const useWebSocket = (url: string): UseWebSocketReturn => {
         // Attempt to reconnect if not intentionally closed
         if (event.code !== 1000 && reconnectCount < maxReconnectAttempts) {
           const timeout = Math.min(1000 * Math.pow(2, reconnectCount), 30000);
-          console.log(`Attempting to reconnect in ${timeout}ms (attempt ${reconnectCount + 1})`);
+          console.log(`Attempting to reconnect in €{timeout}ms (attempt €{reconnectCount + 1})`);
           
           reconnectTimeoutRef.current = setTimeout(() => {
             setReconnectCount(prev => prev + 1);

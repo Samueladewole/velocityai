@@ -144,8 +144,8 @@ class SAPConnector(CloudConnector):
             
             url = f"{self.config.host_url}{endpoint}"
             params = {
-                '$filter': f"PostingDate ge datetime'{start_date.isoformat()}' and PostingDate le datetime'{end_date.isoformat()}'",
-                '$format': 'json'
+                '€filter': f"PostingDate ge datetime'{start_date.isoformat()}' and PostingDate le datetime'{end_date.isoformat()}'",
+                '€format': 'json'
             }
             
             headers = {

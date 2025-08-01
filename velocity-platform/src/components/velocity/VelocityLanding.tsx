@@ -134,7 +134,7 @@ const EnhancedHero = () => {
                       strokeWidth="8" 
                       fill="none" 
                       className="text-emerald-400"
-                      strokeDasharray={`${trustScore * 2.51} 251`}
+                      strokeDasharray={`€{trustScore * 2.51} 251`}
                       style={{ transition: 'stroke-dasharray 2s ease-out' }}
                     />
                   </svg>
@@ -212,9 +212,9 @@ const DashboardPreview = () => {
               key={i}
               className="bg-emerald-400/60 rounded-sm animate-pulse"
               style={{ 
-                height: `${Math.random() * 60 + 20}%`,
+                height: `€{Math.random() * 60 + 20}%`,
                 width: '6px',
-                animationDelay: `${i * 100}ms`
+                animationDelay: `€{i * 100}ms`
               }}
             ></div>
           ))}
@@ -237,19 +237,19 @@ const MetricCard = ({ metric, isActive, onClick }) => {
     <div 
       className={`
         group relative cursor-pointer transition-all duration-300 transform hover:scale-105
-        ${isActive ? 'scale-105' : ''}
+        €{isActive ? 'scale-105' : ''}
       `}
       onClick={onClick}
     >
       {/* Gradient border effect */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${colorClasses[metric.color]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+      <div className={`absolute inset-0 bg-gradient-to-br €{colorClasses[metric.color]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
       
       <div className="relative bg-white/5 backdrop-blur-sm p-4 rounded-xl border border-white/10 group-hover:border-transparent transition-all duration-300">
         <div className="flex items-center justify-between mb-3">
-          <div className={`p-2 bg-${metric.color}-500/10 rounded-lg`}>
+          <div className={`p-2 bg-€{metric.color}-500/10 rounded-lg`}>
             {metric.icon}
           </div>
-          <span className={`text-xs font-medium ${metric.trend.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+          <span className={`text-xs font-medium €{metric.trend.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
             {metric.trend}
           </span>
         </div>
@@ -268,7 +268,7 @@ const FeatureCards = () => {
   const features = [
     {
       title: 'Your Personal Compliance Team',
-      description: '12 AI agents handle the boring stuff: AWS security checks ✓ GitHub vulnerabilities fixed ✓ GDPR records updated ✓ You focus on what matters.',
+      description: '13 AI agents handle the boring stuff: AWS security checks ✓ GitHub vulnerabilities fixed ✓ GDPR records updated ✓ You focus on what matters.',
       icon: <Settings className="w-6 h-6" />,
       color: 'emerald'
     },
@@ -279,7 +279,7 @@ const FeatureCards = () => {
       color: 'blue'
     },
     {
-      title: 'Save $500K+ Annually',
+      title: 'Save €500K+ Annually',
       description: '83% cheaper than OneTrust. 88% less than Big 4 consulting. Revolutionary GDPR RoPA automation that actually works.',
       icon: <Zap className="w-6 h-6" />,
       color: 'amber'
@@ -323,13 +323,13 @@ const FeatureCard = ({ feature, index }) => {
     >
       {/* Animated background */}
       <div className={`
-        absolute inset-0 bg-gradient-to-br from-${feature.color}-500/10 to-${feature.color}-600/10 
+        absolute inset-0 bg-gradient-to-br from-€{feature.color}-500/10 to-€{feature.color}-600/10 
         rounded-2xl transition-all duration-500 transform 
-        ${isHovered ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}
+        €{isHovered ? 'scale-105 opacity-100' : 'scale-100 opacity-0'}
       `} />
       
       <div className="relative bg-white/5 backdrop-blur-sm p-8 rounded-2xl border border-white/10 transition-all duration-300 group-hover:border-white/20">
-        <div className={`w-12 h-12 bg-${feature.color}-500/10 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110`}>
+        <div className={`w-12 h-12 bg-€{feature.color}-500/10 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110`}>
           {feature.icon}
         </div>
         
@@ -356,7 +356,7 @@ const NavigationDropdown = ({ title, items, isOpen, onToggle, navigate }) => {
         className="flex items-center gap-1 text-slate-300 hover:text-white transition-colors duration-200 font-medium relative group"
       >
         {title}
-        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-4 h-4 transition-transform duration-200 €{isOpen ? 'rotate-180' : ''}`} />
         <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-emerald-400 group-hover:w-full transition-all duration-300"></span>
       </button>
       
@@ -378,7 +378,7 @@ const NavigationDropdown = ({ title, items, isOpen, onToggle, navigate }) => {
                 className="w-full px-6 py-3 text-left hover:bg-slate-700/50 transition-colors duration-200 group/item"
               >
                 <div className="flex items-start gap-3">
-                  <div className={`p-2 rounded-lg bg-${item.color || 'emerald'}-500/10 group-hover/item:bg-${item.color || 'emerald'}-500/20 transition-colors duration-200`}>
+                  <div className={`p-2 rounded-lg bg-€{item.color || 'emerald'}-500/10 group-hover/item:bg-€{item.color || 'emerald'}-500/20 transition-colors duration-200`}>
                     {item.icon}
                   </div>
                   <div className="flex-1">
@@ -550,7 +550,7 @@ const EnhancedNavigation = () => {
   return (
     <nav className={`
       fixed top-0 w-full z-50 transition-all duration-300
-      ${isScrolled 
+      €{isScrolled 
         ? 'bg-slate-900/90 backdrop-blur-xl border-b border-slate-800/50' 
         : 'bg-transparent'
       }

@@ -182,8 +182,8 @@ const FeaturesPage: React.FC = () => {
             {coreFeatures.map((feature, index) => (
               <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className={`p-3 bg-${feature.color}-500/20 rounded-lg`}>
-                    <feature.icon className={`w-6 h-6 text-${feature.color}-400`} />
+                  <div className={`p-3 bg-€{feature.color}-500/20 rounded-lg`}>
+                    <feature.icon className={`w-6 h-6 text-€{feature.color}-400`} />
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white">{feature.title}</h3>
@@ -249,8 +249,8 @@ const FeaturesPage: React.FC = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
               {integrationStats.map((platform, index) => (
                 <div key={index} className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10 text-center">
-                  <div className={`w-12 h-12 bg-${platform.color}-500/20 rounded-lg flex items-center justify-center mx-auto mb-4`}>
-                    <span className={`text-${platform.color}-400 font-bold text-sm`}>{platform.platform}</span>
+                  <div className={`w-12 h-12 bg-€{platform.color}-500/20 rounded-lg flex items-center justify-center mx-auto mb-4`}>
+                    <span className={`text-€{platform.color}-400 font-bold text-sm`}>{platform.platform}</span>
                   </div>
                   <div className="text-white font-medium mb-1">{platform.platform}</div>
                   <div className="text-slate-400 text-sm mb-2">{platform.evidenceTypes} evidence types</div>

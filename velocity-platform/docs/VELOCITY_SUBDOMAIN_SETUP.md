@@ -187,11 +187,11 @@ Set up monitoring for:
 ## Cost Implications
 
 AWS Amplify pricing for custom domains:
-- **Custom Domain**: $0.025 per domain per month
+- **Custom Domain**: €0.025 per domain per month
 - **SSL Certificate**: Free (AWS Certificate Manager)
 - **Bandwidth**: Standard Amplify rates apply
 
-Estimated monthly cost: ~$0.25 for the subdomain itself.
+Estimated monthly cost: ~€0.25 for the subdomain itself.
 
 ---
 

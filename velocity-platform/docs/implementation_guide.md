@@ -119,7 +119,7 @@ export const Button = ({ variant = 'primary', size = 'md', children, ...props })
   
   return (
     <button 
-      className={`${variants[variant]} ${sizes[size]} focus:outline-none focus:ring-2 focus:ring-emerald-500/50`}
+      className={`€{variants[variant]} €{sizes[size]} focus:outline-none focus:ring-2 focus:ring-emerald-500/50`}
       {...props}
     >
       {children}
@@ -136,8 +136,8 @@ export const EnhancedCard = ({ children, className = '', hover = true, ...props 
     <div 
       className={`
         group relative overflow-hidden
-        ${hover ? 'transition-all duration-300 hover:scale-105' : ''}
-        ${className}
+        €{hover ? 'transition-all duration-300 hover:scale-105' : ''}
+        €{className}
       `}
       {...props}
     >
@@ -231,12 +231,12 @@ export const InteractiveCard = ({ children }) => {
     >
       <div className={`
         transition-all duration-300 transform
-        ${isHovered ? 'scale-105 shadow-2xl' : 'scale-100'}
+        €{isHovered ? 'scale-105 shadow-2xl' : 'scale-100'}
       `}>
         {/* Add subtle animations based on hover state */}
         <div className={`
           transition-all duration-500
-          ${isHovered ? 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10' : 'bg-white/5'}
+          €{isHovered ? 'bg-gradient-to-r from-emerald-500/10 to-amber-500/10' : 'bg-white/5'}
         `}>
           {children}
         </div>

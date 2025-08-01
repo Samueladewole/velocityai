@@ -26,7 +26,7 @@ const PricingPage: React.FC = () => {
       popular: false,
       icon: Rocket,
       color: "emerald",
-      savingsMessage: "Replaces $50K+ in consulting fees annually",
+      savingsMessage: "Replaces €50K+ in consulting fees annually",
       competitorComparison: "40% cheaper than traditional solutions",
       features: [
         "5 AI Agents (AWS, GCP, Trust Score, Monitor, QIE)",
@@ -52,7 +52,7 @@ const PricingPage: React.FC = () => {
       popular: true,
       icon: Trophy,
       color: "blue",
-      savingsMessage: "Replaces $120K+ in consulting fees annually",
+      savingsMessage: "Replaces €120K+ in consulting fees annually",
       competitorComparison: "35% cheaper with revolutionary AI automation",
       features: [
         "8 AI Agents (AWS, GCP, Azure, GitHub, Trust Score, Monitor, QIE, DocGen)",
@@ -79,8 +79,8 @@ const PricingPage: React.FC = () => {
       popular: false,
       icon: Crown,
       color: "purple",
-      savingsMessage: "Replaces $200K+ in consulting fees annually",
-      competitorComparison: "30% cheaper than competitors ($7K-10K elsewhere)",
+      savingsMessage: "Replaces €200K+ in consulting fees annually",
+      competitorComparison: "30% cheaper than competitors (€7K-10K elsewhere)",
       features: [
         "ALL 10 AI Agents (complete automation suite - only platform with 10 visible agents)",
         "Cryptographic verification no competitor offers",
@@ -147,18 +147,18 @@ const PricingPage: React.FC = () => {
             
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm €{billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
                 Monthly
               </span>
               <button
                 onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'annual' : 'monthly')}
                 className="relative w-12 h-6 bg-slate-700 rounded-full transition-colors duration-300"
               >
-                <div className={`absolute top-1 w-4 h-4 bg-emerald-500 rounded-full transition-transform duration-300 ${
+                <div className={`absolute top-1 w-4 h-4 bg-emerald-500 rounded-full transition-transform duration-300 €{
                   billingPeriod === 'annual' ? 'translate-x-7' : 'translate-x-1'
                 }`} />
               </button>
-              <span className={`text-sm ${billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm €{billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
                 Annual
               </span>
               {billingPeriod === 'annual' && (
@@ -181,7 +181,7 @@ const PricingPage: React.FC = () => {
               return (
                 <div 
                   key={index} 
-                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 hover:scale-105 ${
+                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 hover:scale-105 €{
                     tier.popular 
                       ? 'border-blue-500/50 shadow-xl shadow-blue-500/20' 
                       : 'border-white/10 hover:border-emerald-500/30'
@@ -197,8 +197,8 @@ const PricingPage: React.FC = () => {
                   )}
                   
                   <div className="text-center mb-8">
-                    <div className={`p-4 bg-${tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
-                      <tier.icon className={`w-8 h-8 text-${tier.color}-400`} />
+                    <div className={`p-4 bg-€{tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
+                      <tier.icon className={`w-8 h-8 text-€{tier.color}-400`} />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm mb-6">{tier.description}</p>
@@ -206,13 +206,13 @@ const PricingPage: React.FC = () => {
                     <div className="mb-6">
                       <div className="flex items-baseline justify-center gap-1">
                         <span className="text-4xl font-bold text-white">
-                          ${billingPeriod === 'monthly' ? tier.price.monthly.toLocaleString() : Math.round(tier.price.annual / 12).toLocaleString()}
+                          €{billingPeriod === 'monthly' ? tier.price.monthly.toLocaleString() : Math.round(tier.price.annual / 12).toLocaleString()}
                         </span>
                         <span className="text-slate-400">/month</span>
                       </div>
                       {billingPeriod === 'annual' && (
                         <div className="text-emerald-400 text-sm mt-2">
-                          Save ${savings.savings.toLocaleString()}/year ({savings.percentage}% off)
+                          Save €{savings.savings.toLocaleString()}/year ({savings.percentage}% off)
                         </div>
                       )}
                       
@@ -232,7 +232,7 @@ const PricingPage: React.FC = () => {
                     
                     <button
                       onClick={() => navigate('/velocity/assessment')}
-                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 €{
                         tier.popular
                           ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white hover:from-blue-600 hover:to-blue-700 shadow-lg hover:shadow-xl'
                           : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
@@ -246,7 +246,7 @@ const PricingPage: React.FC = () => {
                     <div className="text-white font-medium mb-3">What's included:</div>
                     {tier.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start gap-3">
-                        <CheckCircle className={`w-4 h-4 text-${tier.color}-400 mt-0.5 flex-shrink-0`} />
+                        <CheckCircle className={`w-4 h-4 text-€{tier.color}-400 mt-0.5 flex-shrink-0`} />
                         <span className="text-slate-300 text-sm">{feature}</span>
                       </div>
                     ))}
@@ -281,7 +281,7 @@ const PricingPage: React.FC = () => {
                 <div key={index} className="bg-white/5 backdrop-blur-sm rounded-lg p-6 border border-white/10">
                   <h3 className="font-semibold text-white mb-2">{addon.name}</h3>
                   <div className="text-2xl font-bold text-emerald-400 mb-2">
-                    ${addon.price}
+                    €{addon.price}
                   </div>
                   <p className="text-slate-400 text-sm">{addon.description}</p>
                   <button className="w-full mt-4 px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg text-sm font-medium transition-colors">
@@ -337,8 +337,8 @@ const PricingPage: React.FC = () => {
                   </div>
                   <h3 className="text-xl font-bold text-white mb-3">30-40% Cheaper Than Competitors</h3>
                   <p className="text-slate-300 text-sm mb-4">
-                    Traditional solutions cost $7K-10K/month for Enterprise. 
-                    Velocity delivers revolutionary capabilities at $4,999/month.
+                    Traditional solutions cost €7K-10K/month for Enterprise. 
+                    Velocity delivers revolutionary capabilities at €4,999/month.
                   </p>
                   <div className="text-amber-400 font-medium">Massive Cost Savings</div>
                 </div>

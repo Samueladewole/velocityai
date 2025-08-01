@@ -185,7 +185,7 @@ class BlockchainComplianceVerification extends EventEmitter {
     const verificationSignature = this.signData(blockchainHash);
     
     // Create audit trail entry
-    const auditEntry = this.createAuditEntry('proof-created', 'system', `Compliance proof created for ${entityId}`);
+    const auditEntry = this.createAuditEntry('proof-created', 'system', `Compliance proof created for €{entityId}`);
     
     // Process cross-industry attestation if provided
     let crossIndustryAttestationFull: CrossIndustryAttestation | undefined;
@@ -229,7 +229,7 @@ class BlockchainComplianceVerification extends EventEmitter {
   public async verifyComplianceProof(proofId: string): Promise<VerificationResult> {
     const proof = this.proofs.get(proofId);
     if (!proof) {
-      throw new Error(`Proof ${proofId} not found`);
+      throw new Error(`Proof €{proofId} not found`);
     }
 
     const verificationDetails = {
@@ -275,7 +275,7 @@ class BlockchainComplianceVerification extends EventEmitter {
     const result: VerificationResult = {
       isValid,
       proofId,
-      verificationHash: this.generateHash(`verification-${proofId}-${Date.now()}`),
+      verificationHash: this.generateHash(`verification-€{proofId}-€{Date.now()}`),
       chainOfTrust,
       consensusValidation,
       trustScore,
@@ -284,7 +284,7 @@ class BlockchainComplianceVerification extends EventEmitter {
     };
 
     // Add audit entry
-    const auditEntry = this.createAuditEntry('proof-verified', 'system', `Proof verification completed: ${isValid ? 'VALID' : 'INVALID'}`);
+    const auditEntry = this.createAuditEntry('proof-verified', 'system', `Proof verification completed: €{isValid ? 'VALID' : 'INVALID'}`);
     proof.auditTrail.push(auditEntry);
 
     this.emit('proof-verified', result);
@@ -325,12 +325,12 @@ class BlockchainComplianceVerification extends EventEmitter {
     frameworkType: string,
     partners: TrustedPartnerVerification[]
   ): Promise<NetworkConsensus> {
-    const consensusData = `${entityId}-${frameworkType}-${Date.now()}`;
+    const consensusData = `€{entityId}-€{frameworkType}-€{Date.now()}`;
     const consensusHash = this.generateHash(consensusData);
     
     // Generate signatures from network participants
     const participantSignatures = partners.map(partner => 
-      this.signData(`${consensusHash}-${partner.partnerId}`)
+      this.signData(`€{consensusHash}-€{partner.partnerId}`)
     );
 
     const consensusThreshold = Math.ceil(partners.length * 0.67); // 67% consensus
@@ -492,11 +492,11 @@ class BlockchainComplianceVerification extends EventEmitter {
     
     if (proof.crossIndustryAttestation) {
       proof.crossIndustryAttestation.trustedPartnerVerifications.forEach(partner => {
-        chain.push(`${partner.partnerType}-${partner.partnerId}`);
+        chain.push(`€{partner.partnerType}-€{partner.partnerId}`);
       });
     }
 
-    chain.push(`compliance-proof-${proof.id}`);
+    chain.push(`compliance-proof-€{proof.id}`);
     return chain;
   }
 
@@ -504,7 +504,7 @@ class BlockchainComplianceVerification extends EventEmitter {
    * Utility methods
    */
   private generateProofId(entityId: string, frameworkType: string): string {
-    return `proof-${entityId}-${frameworkType}-${Date.now()}`;
+    return `proof-€{entityId}-€{frameworkType}-€{Date.now()}`;
   }
 
   private generateHash(data: string): string {
@@ -524,13 +524,13 @@ class BlockchainComplianceVerification extends EventEmitter {
   }
 
   private createBlockchainHash(entityId: string, frameworkType: string, data: ComplianceData, merkleRoot: string): string {
-    const combinedData = `${entityId}${frameworkType}${JSON.stringify(data)}${merkleRoot}${Date.now()}`;
+    const combinedData = `€{entityId}€{frameworkType}€{JSON.stringify(data)}€{merkleRoot}€{Date.now()}`;
     return this.generateHash(combinedData);
   }
 
   private createAuditEntry(action: string, actor: string, details: string): AuditEntry {
     const timestamp = new Date();
-    const entryData = `${timestamp.toISOString()}${action}${actor}${details}`;
+    const entryData = `€{timestamp.toISOString()}€{action}€{actor}€{details}`;
     const hash = this.generateHash(entryData);
     const previousHash = this.auditChain.length > 0 ? this.auditChain[this.auditChain.length - 1].hash : '0';
 

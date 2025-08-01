@@ -108,11 +108,11 @@ export const DateProvider: React.FC<DateProviderProps> = ({
     if (diffMinutes < 1) {
       return 'Just now';
     } else if (diffMinutes < 60) {
-      return `${diffMinutes} minute${diffMinutes === 1 ? '' : 's'} ago`;
+      return `€{diffMinutes} minute€{diffMinutes === 1 ? '' : 's'} ago`;
     } else if (diffHours < 24) {
-      return `${diffHours} hour${diffHours === 1 ? '' : 's'} ago`;
+      return `€{diffHours} hour€{diffHours === 1 ? '' : 's'} ago`;
     } else if (diffDays < 7) {
-      return `${diffDays} day${diffDays === 1 ? '' : 's'} ago`;
+      return `€{diffDays} day€{diffDays === 1 ? '' : 's'} ago`;
     } else {
       return formatDate(dateObj, 'short');
     }

@@ -95,8 +95,8 @@ const TrustScoreWidget = () => {
               stroke="url(#trustGradient)"
               strokeWidth="8"
               fill="none"
-              strokeDasharray={`${2 * Math.PI * 40}`}
-              strokeDashoffset={`${2 * Math.PI * 40 * (1 - score / 100)}`}
+              strokeDasharray={`€{2 * Math.PI * 40}`}
+              strokeDashoffset={`€{2 * Math.PI * 40 * (1 - score / 100)}`}
               className="transition-all duration-1000 ease-out"
               strokeLinecap="round"
               transform="rotate(-90 50 50)"
@@ -142,15 +142,15 @@ const MetricCard = ({ title, value, subtitle, trend, icon: Icon, color = 'emeral
       className="group relative cursor-pointer"
       onClick={onClick}
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${colorClasses[color].split(' ')[0] + ' ' + colorClasses[color].split(' ')[1]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+      <div className={`absolute inset-0 bg-gradient-to-br €{colorClasses[color].split(' ')[0] + ' ' + colorClasses[color].split(' ')[1]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
       
       <div className="relative bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 group-hover:border-transparent transition-all duration-300">
         <div className="flex items-start justify-between mb-4">
-          <div className={`p-3 bg-${color}-500/10 rounded-lg`}>
-            <Icon className={`w-6 h-6 ${colorClasses[color].split(' ')[2]}`} />
+          <div className={`p-3 bg-€{color}-500/10 rounded-lg`}>
+            <Icon className={`w-6 h-6 €{colorClasses[color].split(' ')[2]}`} />
           </div>
           {trend && (
-            <div className={`text-sm font-medium ${trend.startsWith('+') ? 'text-emerald-400' : trend.startsWith('-') ? 'text-red-400' : 'text-slate-400'}`}>
+            <div className={`text-sm font-medium €{trend.startsWith('+') ? 'text-emerald-400' : trend.startsWith('-') ? 'text-red-400' : 'text-slate-400'}`}>
               {trend}
             </div>
           )}
@@ -274,14 +274,14 @@ const AIAgentsGrid = () => {
           <div 
             key={agent.id}
             className="bg-white/5 rounded-lg p-4 border border-white/5 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer group"
-            onClick={() => navigate(`/velocity/agents/${agent.id}`)}
+            onClick={() => navigate(`/velocity/agents/€{agent.id}`)}
           >
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <Bot className="w-5 h-5 text-emerald-400" />
                 <span className="font-mono text-sm font-bold text-white">{agent.name}</span>
               </div>
-              <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs ${getStatusColor(agent.status)}`}>
+              <div className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs €{getStatusColor(agent.status)}`}>
                 {getStatusIcon(agent.status)}
                 {agent.status}
               </div>
@@ -400,7 +400,7 @@ const RecentEvidenceSection = () => {
           <div 
             key={item.id}
             className="flex items-center justify-between p-4 bg-white/5 rounded-lg border border-white/5 hover:border-blue-500/30 transition-all duration-300 cursor-pointer group"
-            onClick={() => navigate(`/velocity/evidence/${item.id}`)}
+            onClick={() => navigate(`/velocity/evidence/€{item.id}`)}
           >
             <div className="flex items-center gap-4">
               <div className="p-2 bg-blue-500/10 rounded-lg">
@@ -420,7 +420,7 @@ const RecentEvidenceSection = () => {
             
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <span className={`text-xs px-2 py-1 rounded-full ${getStatusColor(item.status)}`}>
+                <span className={`text-xs px-2 py-1 rounded-full €{getStatusColor(item.status)}`}>
                   {item.status.replace('_', ' ')}
                 </span>
                 <span className="text-xs px-2 py-1 bg-purple-500/20 text-purple-400 rounded">
@@ -486,10 +486,10 @@ const QuickActionsPanel = () => {
           <button
             key={index}
             onClick={action.action}
-            className={`group p-4 bg-white/5 rounded-lg border border-white/5 hover:border-${action.color}-500/30 transition-all duration-300 text-left`}
+            className={`group p-4 bg-white/5 rounded-lg border border-white/5 hover:border-€{action.color}-500/30 transition-all duration-300 text-left`}
           >
-            <div className={`p-2 bg-${action.color}-500/10 rounded-lg w-fit mb-3`}>
-              <action.icon className={`w-5 h-5 text-${action.color}-400`} />
+            <div className={`p-2 bg-€{action.color}-500/10 rounded-lg w-fit mb-3`}>
+              <action.icon className={`w-5 h-5 text-€{action.color}-400`} />
             </div>
             <h4 className="text-sm font-medium text-white mb-1">{action.title}</h4>
             <p className="text-xs text-slate-400">{action.description}</p>
@@ -628,7 +628,7 @@ const VelocityDashboardComplete: React.FC = () => {
                         <p className="text-sm text-white">{item.task}</p>
                         <p className="text-xs text-slate-400">{item.due}</p>
                       </div>
-                      <div className={`text-xs px-2 py-1 rounded ${
+                      <div className={`text-xs px-2 py-1 rounded €{
                         item.priority === 'high' ? 'bg-red-500/20 text-red-400' :
                         item.priority === 'medium' ? 'bg-amber-500/20 text-amber-400' :
                         'bg-blue-500/20 text-blue-400'

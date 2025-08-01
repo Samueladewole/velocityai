@@ -315,7 +315,7 @@ export const MVPDashboard: React.FC = () => {
                   {tierInfo.name} Tier
                 </Badge>
                 <h3 className="text-xl font-semibold text-slate-900 mb-2">
-                  {tierInfo.nextTier ? `${tierInfo.pointsToNext} points to ${tierInfo.nextTier}` : 'Maximum Tier Achieved! 🎉'}
+                  {tierInfo.nextTier ? `€{tierInfo.pointsToNext} points to €{tierInfo.nextTier}` : 'Maximum Tier Achieved! 🎉'}
                 </h3>
                 <p className="text-slate-600 mb-4">
                   {tierInfo.nextTier 

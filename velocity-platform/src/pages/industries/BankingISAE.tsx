@@ -98,10 +98,10 @@ const BankingISAE: React.FC = () => {
   ];
 
   const costBreakdown = [
-    { category: "External Audit Fees", traditional: "$180,000", velocity: "$25,000", savings: "86%" },
-    { category: "Internal Resources", traditional: "$120,000", velocity: "$15,000", savings: "88%" },
-    { category: "System Integration", traditional: "$45,000", velocity: "$5,000", savings: "89%" },
-    { category: "Documentation", traditional: "$35,000", velocity: "Included", savings: "100%" },
+    { category: "External Audit Fees", traditional: "€180,000", velocity: "€25,000", savings: "86%" },
+    { category: "Internal Resources", traditional: "€120,000", velocity: "€15,000", savings: "88%" },
+    { category: "System Integration", traditional: "€45,000", velocity: "€5,000", savings: "89%" },
+    { category: "Documentation", traditional: "€35,000", velocity: "Included", savings: "100%" },
   ];
 
   const evidenceCategories = [
@@ -198,19 +198,19 @@ const BankingISAE: React.FC = () => {
           <div className="bg-white/5 backdrop-blur-sm rounded-lg p-8 border border-white/10">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
               <div className="text-center">
-                <div className="text-3xl font-bold text-indigo-400 mb-2">$380K</div>
+                <div className="text-3xl font-bold text-indigo-400 mb-2">€380K</div>
                 <div className="text-white font-medium mb-1">Traditional Cost</div>
                 <div className="text-slate-400 text-sm">Big 4 Consulting</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-emerald-400 mb-2">$45K</div>
+                <div className="text-3xl font-bold text-emerald-400 mb-2">€45K</div>
                 <div className="text-white font-medium mb-1">Velocity Cost</div>
                 <div className="text-slate-400 text-sm">AI Automation</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-amber-400 mb-2">88%</div>
                 <div className="text-white font-medium mb-1">Cost Savings</div>
-                <div className="text-slate-400 text-sm">$335K Saved</div>
+                <div className="text-slate-400 text-sm">€335K Saved</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-400 mb-2">6 Weeks</div>
@@ -236,7 +236,7 @@ const BankingISAE: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-300 €{
                   activeTab === tab.id
                     ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30'
                     : 'bg-white/5 text-slate-300 border border-white/10 hover:bg-white/10'
@@ -389,8 +389,8 @@ const BankingISAE: React.FC = () => {
                 <div className="p-6 bg-emerald-900/20 border-t border-emerald-500/30">
                   <div className="grid grid-cols-4 gap-4">
                     <div className="font-bold text-white">Total Investment</div>
-                    <div className="text-center text-red-400 font-bold text-lg">$380,000</div>
-                    <div className="text-center text-emerald-400 font-bold text-lg">$45,000</div>
+                    <div className="text-center text-red-400 font-bold text-lg">€380,000</div>
+                    <div className="text-center text-emerald-400 font-bold text-lg">€45,000</div>
                     <div className="text-center text-amber-400 font-bold text-xl">88%</div>
                   </div>
                 </div>

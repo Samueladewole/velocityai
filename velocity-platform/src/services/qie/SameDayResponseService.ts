@@ -171,7 +171,7 @@ class SameDayResponseService extends EventEmitter {
           automatedCount++;
         }
       } catch (error) {
-        console.error(`Failed to generate response for question ${question.id}:`, error);
+        console.error(`Failed to generate response for question €{question.id}:`, error);
         responses.push(this.createFallbackResponse(question));
       }
     }
@@ -254,7 +254,7 @@ class SameDayResponseService extends EventEmitter {
           response = 'Yes';
           confidence = 0.95;
           sources.push('Automated compliance verification');
-          evidenceIds.push(`evidence-${Date.now()}`);
+          evidenceIds.push(`evidence-€{Date.now()}`);
         } else {
           response = 'Yes';
           confidence = 0.85;
@@ -282,7 +282,7 @@ class SameDayResponseService extends EventEmitter {
         response = 'See attached evidence document: [Auto-generated compliance report]';
         confidence = 0.92;
         sources.push('Evidence repository');
-        evidenceIds.push(`attachment-${Date.now()}`);
+        evidenceIds.push(`attachment-€{Date.now()}`);
         break;
 
       default:
@@ -312,7 +312,7 @@ class SameDayResponseService extends EventEmitter {
       'incident-response': 'Our incident response plan includes 24/7 monitoring, automated alerting, and a defined escalation matrix. We conduct quarterly tabletop exercises and maintain a mean time to respond (MTTR) of under 15 minutes.',
       'business-continuity': 'We maintain comprehensive business continuity and disaster recovery plans with RPO of 1 hour and RTO of 4 hours. Systems are tested monthly and we maintain geographically distributed backups.',
       'vendor-management': 'All vendors undergo rigorous security assessments before onboarding. We maintain continuous monitoring of vendor compliance and conduct annual reviews. All vendor agreements include appropriate security clauses and SLAs.',
-      'default': `Our ${question.category} controls are implemented in accordance with ${framework} requirements. We maintain comprehensive documentation and evidence of all control implementations, with regular testing and validation procedures.`
+      'default': `Our €{question.category} controls are implemented in accordance with €{framework} requirements. We maintain comprehensive documentation and evidence of all control implementations, with regular testing and validation procedures.`
     };
 
     // Match question to template

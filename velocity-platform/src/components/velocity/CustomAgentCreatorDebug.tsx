@@ -41,7 +41,7 @@ const CustomAgentCreatorDebug: React.FC = () => {
       const assistantMessage: ChatMessage = {
         id: (Date.now() + 1).toString(),
         type: 'assistant',
-        content: `I understand you want: "${input}". This would create an agent with 95% automation level. Click Deploy to continue.`,
+        content: `I understand you want: "€{input}". This would create an agent with 95% automation level. Click Deploy to continue.`,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, assistantMessage]);
@@ -69,13 +69,13 @@ const CustomAgentCreatorDebug: React.FC = () => {
         <div className="flex-1 bg-white p-6 overflow-y-auto">
           <div className="space-y-4">
             {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
+              <div key={message.id} className={`flex €{message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
                 {message.type !== 'user' && (
                   <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
                 )}
-                <div className={`max-w-md p-4 rounded-lg ${
+                <div className={`max-w-md p-4 rounded-lg €{
                   message.type === 'user' 
                     ? 'bg-blue-600 text-white' 
                     : 'bg-gray-100 text-gray-900'

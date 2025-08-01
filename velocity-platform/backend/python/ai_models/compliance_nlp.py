@@ -200,7 +200,7 @@ class ComplianceKeywordLibrary:
         
         return {
             "dates": r'\b\d{1,2}[/-]\d{1,2}[/-]\d{2,4}\b|\b\d{4}[/-]\d{1,2}[/-]\d{1,2}\b',
-            "monetary": r'\$[\d,]+\.?\d*|\b\d+\.\d{2}\s*(dollars?|USD)\b',
+            "monetary": r'\€[\d,]+\.?\d*|\b\d+\.\d{2}\s*(dollars?|USD)\b',
             "percentages": r'\b\d+\.?\d*\s*%\b|\b\d+\.?\d*\s*percent\b',
             "requirements": r'\b(?:must|shall|should|required?|mandatory|obligated?)\b',
             "prohibitions": r'\b(?:shall not|must not|cannot|prohibited|forbidden|banned)\b',

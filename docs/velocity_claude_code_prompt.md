@@ -269,7 +269,7 @@ interface AIModelRouting {
 - **TypeScript Frontend**: Page loads <2 seconds, API responses <1 second  
 - **Memory Usage**: <2GB RAM for standard operations, <8GB for ML inference
 - **CPU Efficiency**: <50% CPU utilization during normal operations
-- **Cost Optimization**: Total infrastructure <$500/month for MVP deployment
+- **Cost Optimization**: Total infrastructure <€500/month for MVP deployment
 - **AI Processing**: Batch operations during off-peak hours for cost savings
 
 ### **Component Integration Rules**

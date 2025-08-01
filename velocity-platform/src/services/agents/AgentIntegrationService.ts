@@ -105,7 +105,7 @@ export class AgentIntegrationService extends EventEmitter {
       this.broadcastAgentStatus(ws)
     })
 
-    console.log(`🌐 WebSocket server listening on port ${this.wsPort}`)
+    console.log(`🌐 WebSocket server listening on port €{this.wsPort}`)
   }
 
   /**
@@ -204,7 +204,7 @@ export class AgentIntegrationService extends EventEmitter {
    * Create a new agent instance
    */
   async createAgent(agentType: string, config: Record<string, any>): Promise<AgentConfig> {
-    const agentId = `${agentType}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    const agentId = `€{agentType}_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
     
     // Determine Python script path based on agent type
     const scriptPaths: Record<string, string> = {
@@ -240,7 +240,7 @@ export class AgentIntegrationService extends EventEmitter {
       lastHeartbeat: new Date()
     })
 
-    console.log(`✨ Created agent ${agentId} of type ${agentType}`)
+    console.log(`✨ Created agent €{agentId} of type €{agentType}`)
     
     // Emit event
     this.emit('agent_created', agentConfig)
@@ -254,17 +254,17 @@ export class AgentIntegrationService extends EventEmitter {
   async startAgent(agentId: string, config?: Record<string, any>): Promise<boolean> {
     const agent = this.agents.get(agentId)
     if (!agent) {
-      console.error(`❌ Agent ${agentId} not found`)
+      console.error(`❌ Agent €{agentId} not found`)
       return false
     }
 
     if (agent.process) {
-      console.log(`⚡ Agent ${agentId} already running`)
+      console.log(`⚡ Agent €{agentId} already running`)
       return true
     }
 
     try {
-      console.log(`🚀 Starting agent ${agentId}`)
+      console.log(`🚀 Starting agent €{agentId}`)
       
       // Update status
       agent.status.status = 'starting'
@@ -276,7 +276,7 @@ export class AgentIntegrationService extends EventEmitter {
         : 'python3'
 
       // Create configuration file for the agent
-      const agentConfigPath = `/tmp/agent_config_${agentId}.json`
+      const agentConfigPath = `/tmp/agent_config_€{agentId}.json`
       require('fs').writeFileSync(agentConfigPath, JSON.stringify(agent.config.config, null, 2))
 
       // Spawn Python process
@@ -299,7 +299,7 @@ export class AgentIntegrationService extends EventEmitter {
       // Handle process events
       agent.process.stdout?.on('data', (data) => {
         const output = data.toString().trim()
-        console.log(`[${agentId}] ${output}`)
+        console.log(`[€{agentId}] €{output}`)
         
         // Parse agent heartbeat/metrics if JSON
         try {
@@ -315,11 +315,11 @@ export class AgentIntegrationService extends EventEmitter {
       })
 
       agent.process.stderr?.on('data', (data) => {
-        console.error(`[${agentId}] ERROR: ${data.toString().trim()}`)
+        console.error(`[€{agentId}] ERROR: €{data.toString().trim()}`)
       })
 
       agent.process.on('close', (code) => {
-        console.log(`🛑 Agent ${agentId} process exited with code ${code}`)
+        console.log(`🛑 Agent €{agentId} process exited with code €{code}`)
         
         if (agent) {
           agent.process = null
@@ -330,7 +330,7 @@ export class AgentIntegrationService extends EventEmitter {
       })
 
       agent.process.on('error', (error) => {
-        console.error(`❌ Agent ${agentId} process error:`, error)
+        console.error(`❌ Agent €{agentId} process error:`, error)
         if (agent) {
           agent.status.status = 'error'
           this.broadcastAgentStatus()
@@ -345,7 +345,7 @@ export class AgentIntegrationService extends EventEmitter {
       agent.lastHeartbeat = new Date()
       this.broadcastAgentStatus()
 
-      console.log(`✅ Agent ${agentId} started successfully (PID: ${agent.process.pid})`)
+      console.log(`✅ Agent €{agentId} started successfully (PID: €{agent.process.pid})`)
       
       // Emit event
       this.emit('agent_started', { agent_id: agentId, pid: agent.process.pid })
@@ -353,7 +353,7 @@ export class AgentIntegrationService extends EventEmitter {
       return true
 
     } catch (error) {
-      console.error(`❌ Failed to start agent ${agentId}:`, error)
+      console.error(`❌ Failed to start agent €{agentId}:`, error)
       
       if (agent) {
         agent.status.status = 'error'
@@ -371,17 +371,17 @@ export class AgentIntegrationService extends EventEmitter {
   async stopAgent(agentId: string, graceful: boolean = true): Promise<boolean> {
     const agent = this.agents.get(agentId)
     if (!agent) {
-      console.error(`❌ Agent ${agentId} not found`)
+      console.error(`❌ Agent €{agentId} not found`)
       return false
     }
 
     if (!agent.process) {
-      console.log(`⚡ Agent ${agentId} already stopped`)
+      console.log(`⚡ Agent €{agentId} already stopped`)
       return true
     }
 
     try {
-      console.log(`🛑 Stopping agent ${agentId} ${graceful ? 'gracefully' : 'forcefully'}`)
+      console.log(`🛑 Stopping agent €{agentId} €{graceful ? 'gracefully' : 'forcefully'}`)
       
       if (graceful) {
         // Send SIGTERM for graceful shutdown
@@ -391,7 +391,7 @@ export class AgentIntegrationService extends EventEmitter {
         await new Promise((resolve) => {
           const timeout = setTimeout(() => {
             if (agent.process) {
-              console.log(`⚠️ Agent ${agentId} didn't stop gracefully, forcing...`)
+              console.log(`⚠️ Agent €{agentId} didn't stop gracefully, forcing...`)
               agent.process.kill('SIGKILL')
             }
             resolve(void 0)
@@ -413,7 +413,7 @@ export class AgentIntegrationService extends EventEmitter {
       agent.status.pid = undefined
       this.broadcastAgentStatus()
 
-      console.log(`✅ Agent ${agentId} stopped`)
+      console.log(`✅ Agent €{agentId} stopped`)
       
       // Emit event
       this.emit('agent_stopped', { agent_id: agentId, graceful })
@@ -421,7 +421,7 @@ export class AgentIntegrationService extends EventEmitter {
       return true
 
     } catch (error) {
-      console.error(`❌ Failed to stop agent ${agentId}:`, error)
+      console.error(`❌ Failed to stop agent €{agentId}:`, error)
       return false
     }
   }
@@ -487,7 +487,7 @@ export class AgentIntegrationService extends EventEmitter {
    * Handle evidence collection from agents
    */
   private handleEvidenceCollection(agentId: string, evidenceData: any) {
-    console.log(`📊 Evidence collected from agent ${agentId}:`, evidenceData.evidence_type)
+    console.log(`📊 Evidence collected from agent €{agentId}:`, evidenceData.evidence_type)
     
     // Broadcast evidence update
     if (this.wss) {
@@ -524,7 +524,7 @@ export class AgentIntegrationService extends EventEmitter {
           const timeSinceHeartbeat = now.getTime() - agent.lastHeartbeat.getTime()
           
           if (timeSinceHeartbeat > 120000) { // 2 minutes
-            console.warn(`⚠️ Agent ${agentId} hasn't sent heartbeat for ${Math.floor(timeSinceHeartbeat / 1000)}s`)
+            console.warn(`⚠️ Agent €{agentId} hasn't sent heartbeat for €{Math.floor(timeSinceHeartbeat / 1000)}s`)
             agent.status.status = 'error'
             this.broadcastAgentStatus()
           }

@@ -115,10 +115,10 @@ export class MetricsCollector {
   private createKey(name: string, labels: Record<string, string>): string {
     const labelStr = Object.entries(labels)
       .sort(([a], [b]) => a.localeCompare(b))
-      .map(([k, v]) => `${k}="${v}"`)
+      .map(([k, v]) => `€{k}="€{v}"`)
       .join(',')
     
-    return labelStr ? `${name}{${labelStr}}` : name
+    return labelStr ? `€{name}{€{labelStr}}` : name
   }
 
   private exportMetrics(): void {
@@ -126,19 +126,19 @@ export class MetricsCollector {
     
     // Export counters
     for (const [key, counter] of this.counters.entries()) {
-      console.log(`[METRIC] ${timestamp} COUNTER ${key} ${counter.value}`)
+      console.log(`[METRIC] €{timestamp} COUNTER €{key} €{counter.value}`)
     }
     
     // Export histograms
     for (const [key, histogram] of this.histograms.entries()) {
-      console.log(`[METRIC] ${timestamp} HISTOGRAM ${key}_sum ${histogram.sum}`)
-      console.log(`[METRIC] ${timestamp} HISTOGRAM ${key}_count ${histogram.count}`)
+      console.log(`[METRIC] €{timestamp} HISTOGRAM €{key}_sum €{histogram.sum}`)
+      console.log(`[METRIC] €{timestamp} HISTOGRAM €{key}_count €{histogram.count}`)
       
       if (histogram.count > 0) {
-        console.log(`[METRIC] ${timestamp} HISTOGRAM ${key}_avg ${histogram.sum / histogram.count}`)
-        console.log(`[METRIC] ${timestamp} HISTOGRAM ${key}_p50 ${this.getHistogramPercentile(key.split('{')[0], 50)}`)
-        console.log(`[METRIC] ${timestamp} HISTOGRAM ${key}_p95 ${this.getHistogramPercentile(key.split('{')[0], 95)}`)
-        console.log(`[METRIC] ${timestamp} HISTOGRAM ${key}_p99 ${this.getHistogramPercentile(key.split('{')[0], 99)}`)
+        console.log(`[METRIC] €{timestamp} HISTOGRAM €{key}_avg €{histogram.sum / histogram.count}`)
+        console.log(`[METRIC] €{timestamp} HISTOGRAM €{key}_p50 €{this.getHistogramPercentile(key.split('{')[0], 50)}`)
+        console.log(`[METRIC] €{timestamp} HISTOGRAM €{key}_p95 €{this.getHistogramPercentile(key.split('{')[0], 95)}`)
+        console.log(`[METRIC] €{timestamp} HISTOGRAM €{key}_p99 €{this.getHistogramPercentile(key.split('{')[0], 99)}`)
       }
     }
   }

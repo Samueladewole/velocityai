@@ -133,7 +133,7 @@ export const ActivityStream: React.FC<ActivityStreamProps> = ({ className = '' }
   const [filter, setFilter] = React.useState<'all' | 'my-team' | 'following' | 'mentions'>('all');
 
   return (
-    <Card className={`border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg ${className}`}>
+    <Card className={`border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg €{className}`}>
       <CardHeader className="border-b border-slate-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -147,7 +147,7 @@ export const ActivityStream: React.FC<ActivityStreamProps> = ({ className = '' }
               <button
                 key={filterOption}
                 onClick={() => setFilter(filterOption)}
-                className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors ${
+                className={`px-3 py-1 rounded-lg text-sm font-medium transition-colors €{
                   filter === filterOption
                     ? 'bg-slate-900 text-white'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -166,7 +166,7 @@ export const ActivityStream: React.FC<ActivityStreamProps> = ({ className = '' }
               <div className="flex items-start gap-4">
                 {/* Timeline indicator */}
                 <div className="flex flex-col items-center">
-                  <div className={`p-2 rounded-lg ${typeConfig[activity.type].bg} ${typeConfig[activity.type].color}`}>
+                  <div className={`p-2 rounded-lg €{typeConfig[activity.type].bg} €{typeConfig[activity.type].color}`}>
                     {typeConfig[activity.type].icon}
                   </div>
                   {index < activities.length - 1 && (
@@ -192,7 +192,7 @@ export const ActivityStream: React.FC<ActivityStreamProps> = ({ className = '' }
                       </div>
                       {activity.severity && (
                         <div className="flex items-center gap-2">
-                          <div className={`h-2 w-2 rounded-full ${severityColors[activity.severity]}`} />
+                          <div className={`h-2 w-2 rounded-full €{severityColors[activity.severity]}`} />
                           <span className="text-xs text-slate-500 capitalize">{activity.severity}</span>
                         </div>
                       )}

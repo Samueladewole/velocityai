@@ -387,7 +387,7 @@ export class HorizontalScaler extends EventEmitter {
         toReplicas: decision.targetReplicas,
         duration,
         success: false,
-        reason: `Scaling failed: ${error}`,
+        reason: `Scaling failed: €{error}`,
         timestamp: new Date()
       }
 
@@ -476,7 +476,7 @@ export class HorizontalScaler extends EventEmitter {
       action: 'scale_up',
       currentReplicas: this.currentReplicas,
       targetReplicas: Math.min(this.currentReplicas + 2, this.config.kubernetes.maxReplicas),
-      reason: `External trigger: ${reason} (${value})`,
+      reason: `External trigger: €{reason} (€{value})`,
       confidence: 0.9,
       metrics: await this.collectMetrics(),
       timestamp: new Date()
@@ -497,7 +497,7 @@ export class HorizontalScaler extends EventEmitter {
       action: 'scale_down',
       currentReplicas: this.currentReplicas,
       targetReplicas: Math.max(this.currentReplicas - 1, this.config.kubernetes.minReplicas),
-      reason: `External trigger: ${reason} (${value})`,
+      reason: `External trigger: €{reason} (€{value})`,
       confidence: 0.8,
       metrics: await this.collectMetrics(),
       timestamp: new Date()
@@ -528,7 +528,7 @@ export class HorizontalScaler extends EventEmitter {
       action: 'scale_up',
       currentReplicas: this.currentReplicas,
       targetReplicas,
-      reason: `Emergency: Only ${healthyCount} healthy instances, need ${required}`,
+      reason: `Emergency: Only €{healthyCount} healthy instances, need €{required}`,
       confidence: 1.0,
       metrics: await this.collectMetrics(),
       timestamp: new Date()
@@ -592,16 +592,16 @@ export class HorizontalScaler extends EventEmitter {
 
   private buildScaleUpReason(cpu: number, memory: number, responseTime: number, errorRate: number): string {
     const reasons = []
-    if (cpu > this.config.kubernetes.targetCpuUtilization) reasons.push(`CPU: ${cpu.toFixed(1)}%`)
-    if (memory > this.config.kubernetes.targetMemoryUtilization) reasons.push(`Memory: ${memory.toFixed(1)}%`)
-    if (responseTime > 5000) reasons.push(`Response time: ${responseTime.toFixed(0)}ms`)
-    if (errorRate > 0.02) reasons.push(`Error rate: ${(errorRate * 100).toFixed(2)}%`)
+    if (cpu > this.config.kubernetes.targetCpuUtilization) reasons.push(`CPU: €{cpu.toFixed(1)}%`)
+    if (memory > this.config.kubernetes.targetMemoryUtilization) reasons.push(`Memory: €{memory.toFixed(1)}%`)
+    if (responseTime > 5000) reasons.push(`Response time: €{responseTime.toFixed(0)}ms`)
+    if (errorRate > 0.02) reasons.push(`Error rate: €{(errorRate * 100).toFixed(2)}%`)
     
-    return `High utilization detected: ${reasons.join(', ')}`
+    return `High utilization detected: €{reasons.join(', ')}`
   }
 
   private buildScaleDownReason(cpu: number, memory: number, responseTime: number): string {
-    return `Low utilization detected: CPU: ${cpu.toFixed(1)}%, Memory: ${memory.toFixed(1)}%, Response time: ${responseTime.toFixed(0)}ms`
+    return `Low utilization detected: CPU: €{cpu.toFixed(1)}%, Memory: €{memory.toFixed(1)}%, Response time: €{responseTime.toFixed(0)}ms`
   }
 
   private createNewServiceInstance(): Omit<ServiceInstance, 'id' | 'healthy' | 'currentConnections' | 'lastHealthCheck' | 'errorCount'> {
@@ -650,7 +650,7 @@ export class HorizontalScaler extends EventEmitter {
   }
 
   private generateEventId(): string {
-    return `scale_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `scale_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**
@@ -675,14 +675,14 @@ export class HorizontalScaler extends EventEmitter {
   public async forceScale(targetReplicas: number, reason: string = 'Manual scaling'): Promise<void> {
     if (targetReplicas < this.config.kubernetes.minReplicas || 
         targetReplicas > this.config.kubernetes.maxReplicas) {
-      throw new Error(`Target replicas must be between ${this.config.kubernetes.minReplicas} and ${this.config.kubernetes.maxReplicas}`)
+      throw new Error(`Target replicas must be between €{this.config.kubernetes.minReplicas} and €{this.config.kubernetes.maxReplicas}`)
     }
 
     const decision: ScalingDecision = {
       action: targetReplicas > this.currentReplicas ? 'scale_up' : 'scale_down',
       currentReplicas: this.currentReplicas,
       targetReplicas,
-      reason: `Manual scaling: ${reason}`,
+      reason: `Manual scaling: €{reason}`,
       confidence: 1.0,
       metrics: await this.collectMetrics(),
       timestamp: new Date()

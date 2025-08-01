@@ -581,7 +581,7 @@ const EvidenceCollection: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                   activeTab === tab.id
                     ? 'bg-purple-600 text-white'
                     : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'

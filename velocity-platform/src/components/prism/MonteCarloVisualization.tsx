@@ -209,7 +209,7 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
 
       toast({
         title: 'Simulation Complete',
-        description: `Completed ${parameters.iterations.toLocaleString()} iterations in ${(results.executionTime / 1000).toFixed(1)}s`
+        description: `Completed €{parameters.iterations.toLocaleString()} iterations in €{(results.executionTime / 1000).toFixed(1)}s`
       })
 
     } catch (error) {
@@ -296,10 +296,10 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
 
   const formatTime = (ms: number) => {
     const seconds = ms / 1000
-    if (seconds < 60) return `${seconds.toFixed(1)}s`
+    if (seconds < 60) return `€{seconds.toFixed(1)}s`
     const minutes = Math.floor(seconds / 60)
     const remainingSeconds = Math.floor(seconds % 60)
-    return `${minutes}m ${remainingSeconds}s`
+    return `€{minutes}m €{remainingSeconds}s`
   }
 
   // Prepare distribution data for visualization
@@ -421,7 +421,7 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
                       <YAxis tickFormatter={(value) => formatCurrency(value)} />
                       <Tooltip 
                         formatter={(value: number) => [formatCurrency(value), 'Loss']}
-                        labelFormatter={(label) => `Iteration ${label}`}
+                        labelFormatter={(label) => `Iteration €{label}`}
                       />
                       <Line 
                         type="monotone" 
@@ -525,8 +525,8 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
                       label={{ value: 'Probability Density', angle: -90, position: 'insideLeft' }}
                     />
                     <Tooltip 
-                      formatter={(value: number) => [`${(value * 100).toFixed(3)}%`, 'Probability']}
-                      labelFormatter={(label) => `Loss: ${formatCurrency(Number(label))}`}
+                      formatter={(value: number) => [`€{(value * 100).toFixed(3)}%`, 'Probability']}
+                      labelFormatter={(label) => `Loss: €{formatCurrency(Number(label))}`}
                     />
                     <Area 
                       type="monotone" 
@@ -678,13 +678,13 @@ export function MonteCarloVisualization({ scenarios, onResultsUpdate }: MonteCar
                         cx="50%"
                         cy="50%"
                         labelLine={false}
-                        label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                        label={({ name, percent }) => `€{name}: €{(percent * 100).toFixed(0)}%`}
                         outerRadius={80}
                         fill="#8884d8"
                         dataKey="value"
                       >
                         {scenarios.map((_, index) => (
-                          <Cell key={`cell-${index}`} fill={VISUALIZATION_COLORS[index % VISUALIZATION_COLORS.length]} />
+                          <Cell key={`cell-€{index}`} fill={VISUALIZATION_COLORS[index % VISUALIZATION_COLORS.length]} />
                         ))}
                       </Pie>
                       <Tooltip formatter={(value: number) => [formatCurrency(value), 'Expected Loss']} />

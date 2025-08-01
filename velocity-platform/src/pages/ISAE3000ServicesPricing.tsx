@@ -39,7 +39,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
       icon: Database,
       color: "emerald",
       serviceType: "automation",
-      savingsMessage: "88% cheaper than Big 4 consulting ($380K+ saved annually)",
+      savingsMessage: "88% cheaper than Big 4 consulting (€380K+ saved annually)",
       competitorComparison: "6 weeks vs 22+ weeks with traditional consultants",
       timeline: "6 weeks to audit-ready",
       coverage: "100% ISAE 3000 controls",
@@ -75,7 +75,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
       icon: Users,
       color: "blue",
       serviceType: "managed",
-      savingsMessage: "75% cheaper than Big 4 with dedicated team ($290K+ saved annually)",
+      savingsMessage: "75% cheaper than Big 4 with dedicated team (€290K+ saved annually)",
       competitorComparison: "Full service with 4x faster delivery than traditional firms",
       timeline: "4 weeks to audit-ready",
       coverage: "100% ISAE 3000 + additional banking frameworks",
@@ -174,7 +174,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
   const competitorComparison = [
     {
       provider: "Velocity ISAE 3000",
-      cost: "$60K/year",
+      cost: "€60K/year",
       timeline: "6 weeks",
       coverage: "100%",
       automation: "95%",
@@ -182,7 +182,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
     },
     {
       provider: "Deloitte",
-      cost: "$380K/year",
+      cost: "€380K/year",
       timeline: "22+ weeks",
       coverage: "85%",
       automation: "20%",
@@ -190,7 +190,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
     },
     {
       provider: "PwC",
-      cost: "$420K/year",
+      cost: "€420K/year",
       timeline: "26+ weeks",
       coverage: "80%",
       automation: "15%",
@@ -198,7 +198,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
     },
     {
       provider: "KPMG",
-      cost: "$350K/year",
+      cost: "€350K/year",
       timeline: "20+ weeks",
       coverage: "82%",
       automation: "25%",
@@ -286,7 +286,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                   <button
                     key={type.id}
                     onClick={() => setServiceType(type.id as any)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all €{
                       serviceType === type.id
                         ? 'bg-emerald-500 text-white'
                         : 'text-slate-300 hover:text-white'
@@ -301,18 +301,18 @@ const ISAE3000ServicesPricing: React.FC = () => {
             
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm €{billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
                 Monthly
               </span>
               <button
                 onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'annual' : 'monthly')}
                 className="relative w-12 h-6 bg-slate-700 rounded-full transition-colors duration-300"
               >
-                <div className={`absolute top-1 w-4 h-4 bg-emerald-500 rounded-full transition-transform duration-300 ${
+                <div className={`absolute top-1 w-4 h-4 bg-emerald-500 rounded-full transition-transform duration-300 €{
                   billingPeriod === 'annual' ? 'translate-x-7' : 'translate-x-1'
                 }`} />
               </button>
-              <span className={`text-sm ${billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm €{billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
                 Annual
               </span>
               {billingPeriod === 'annual' && (
@@ -339,7 +339,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
               return (
                 <div 
                   key={index} 
-                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 ${
+                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 €{
                     isSelected
                       ? 'border-emerald-500/70 shadow-2xl shadow-emerald-500/30 scale-105' 
                       : tier.popular 
@@ -357,8 +357,8 @@ const ISAE3000ServicesPricing: React.FC = () => {
                   )}
                   
                   <div className="text-center mb-8">
-                    <div className={`p-4 bg-${tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
-                      <tier.icon className={`w-8 h-8 text-${tier.color}-400`} />
+                    <div className={`p-4 bg-€{tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
+                      <tier.icon className={`w-8 h-8 text-€{tier.color}-400`} />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm mb-6">{tier.description}</p>
@@ -366,13 +366,13 @@ const ISAE3000ServicesPricing: React.FC = () => {
                     <div className="mb-6">
                       <div className="flex items-baseline justify-center gap-1">
                         <span className="text-4xl font-bold text-white">
-                          ${billingPeriod === 'monthly' ? tier.price.monthly.toLocaleString() : Math.round(tier.price.annual / 12).toLocaleString()}
+                          €{billingPeriod === 'monthly' ? tier.price.monthly.toLocaleString() : Math.round(tier.price.annual / 12).toLocaleString()}
                         </span>
                         <span className="text-slate-400">/month</span>
                       </div>
                       {billingPeriod === 'annual' && (
                         <div className="text-emerald-400 text-sm mt-2">
-                          Save ${savings.savings.toLocaleString()}/year ({savings.percentage}% off)
+                          Save €{savings.savings.toLocaleString()}/year ({savings.percentage}% off)
                         </div>
                       )}
                       
@@ -404,7 +404,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                     
                     <button
                       onClick={() => navigate('/solutions/isae-3000')}
-                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
+                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 €{
                         tier.popular || isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 shadow-lg hover:shadow-xl'
                           : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
@@ -428,7 +428,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                     <div className="text-white font-medium mt-6 mb-3">Service Features:</div>
                     {tier.features.slice(0, 8).map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start gap-3">
-                        <CheckCircle className={`w-4 h-4 text-${tier.color}-400 mt-0.5 flex-shrink-0`} />
+                        <CheckCircle className={`w-4 h-4 text-€{tier.color}-400 mt-0.5 flex-shrink-0`} />
                         <span className="text-slate-300 text-sm">{feature}</span>
                       </div>
                     ))}
@@ -550,7 +550,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                     <h3 className="font-semibold text-white">{addon.name}</h3>
                   </div>
                   <div className="text-2xl font-bold text-emerald-400 mb-2">
-                    ${addon.price.toLocaleString()}
+                    €{addon.price.toLocaleString()}
                   </div>
                   <p className="text-slate-400 text-sm mb-4">{addon.description}</p>
                   <button className="w-full px-4 py-2 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 rounded-lg text-sm font-medium transition-colors">

@@ -77,7 +77,7 @@ export function HubbardCalibrationWidget({
       
       toast({
         title: 'Calibration Training Complete',
-        description: `You achieved ${Math.round(score * 100)}% accuracy. ${score >= 0.8 ? 'Excellent calibration!' : 'Consider wider ranges for better accuracy.'}`
+        description: `You achieved €{Math.round(score * 100)}% accuracy. €{score >= 0.8 ? 'Excellent calibration!' : 'Consider wider ranges for better accuracy.'}`
       })
     } catch (error) {
       toast({
@@ -106,7 +106,7 @@ export function HubbardCalibrationWidget({
     }
 
     const fullEstimate: HubbardEstimate = {
-      id: `hubbard_${Date.now()}`,
+      id: `hubbard_€{Date.now()}`,
       parameter,
       estimator,
       timestamp: new Date(),
@@ -306,7 +306,7 @@ export function HubbardCalibrationWidget({
                   <div className="space-y-2">
                     <h4 className="font-medium">Question Results:</h4>
                     {calibrationSession.calibrationExercises.map((exercise, index) => (
-                      <div key={index} className={`p-3 rounded-lg border ${exercise.wasCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
+                      <div key={index} className={`p-3 rounded-lg border €{exercise.wasCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-2">
                             {exercise.wasCorrect ? 

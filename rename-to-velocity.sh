@@ -8,13 +8,13 @@ set -e  # Exit on any error
 echo "🚀 Starting ERIP to Velocity transformation..."
 
 # Change to project root
-cd "$(dirname "$0")"
-PROJECT_ROOT="$(pwd)"
+cd "€(dirname "€0")"
+PROJECT_ROOT="€(pwd)"
 
-echo "📁 Current directory: $PROJECT_ROOT"
+echo "📁 Current directory: €PROJECT_ROOT"
 
 # 1. Rename the main project folder (if needed)
-if [[ "$PROJECT_ROOT" == *"Velocity-app" ]]; then
+if [[ "€PROJECT_ROOT" == *"Velocity-app" ]]; then
     echo "⚠️  Note: Main project folder still named Velocity-app"
     echo "   You may want to rename this manually to Velocity-app"
 fi
@@ -43,10 +43,10 @@ fi
 
 # Rename all velocity_*.md files in docs/
 for file in docs/velocity_*.md; do
-    if [[ -f "$file" ]]; then
-        new_name=$(echo "$file" | sed 's/velocity_/velocity_/')
-        echo "   Renaming $(basename "$file") → $(basename "$new_name")"
-        mv "$file" "$new_name"
+    if [[ -f "€file" ]]; then
+        new_name=€(echo "€file" | sed 's/velocity_/velocity_/')
+        echo "   Renaming €(basename "€file") → €(basename "€new_name")"
+        mv "€file" "€new_name"
     fi
 done
 
@@ -68,11 +68,11 @@ echo "🔍 Updating file contents..."
 
 # Function to update content in files
 update_file_content() {
-    local file="$1"
-    local temp_file="${file}.tmp"
+    local file="€1"
+    local temp_file="€{file}.tmp"
     
     # Skip binary files, node_modules, .git, and other non-text files
-    if file "$file" | grep -q "text\|empty"; then
+    if file "€file" | grep -q "text\|empty"; then
         # Replace ERIP references
         sed -e 's/Velocity-app/Velocity-app/g' \
             -e 's/velocity-platform/velocity-platform/g' \
@@ -85,14 +85,14 @@ update_file_content() {
             -e 's/app\.eripapp\.com/app.velocityai.com/g' \
             -e 's/erip\.eripapp\.com/velocity.velocityai.com/g' \
             -e 's/gbm_velocity/gbm_velocity/g' \
-            "$file" > "$temp_file"
+            "€file" > "€temp_file"
         
         # Only replace if content actually changed
-        if ! cmp -s "$file" "$temp_file"; then
-            mv "$temp_file" "$file"
-            echo "   Updated: $file"
+        if ! cmp -s "€file" "€temp_file"; then
+            mv "€temp_file" "€file"
+            echo "   Updated: €file"
         else
-            rm "$temp_file"
+            rm "€temp_file"
         fi
     fi
 }
@@ -117,7 +117,7 @@ find . -type f \
     -not -name "*.ttf" \
     -not -name "*.svg" \
     -print0 | while IFS= read -r -d '' file; do
-    update_file_content "$file"
+    update_file_content "€file"
 done
 
 # 5. Special handling for configuration files that need domain updates
@@ -125,14 +125,14 @@ echo "🔧 Updating domain configurations..."
 
 # Update amplify.yml files
 for file in amplify.yml velocity-platform/amplify.yml; do
-    if [[ -f "$file" ]]; then
-        echo "   Updating domains in $file"
+    if [[ -f "€file" ]]; then
+        echo "   Updating domains in €file"
         sed -i.bak \
             -e 's/eripapp\.com/velocityai.com/g' \
             -e 's/api\.eripapp\.com/api.velocityai.com/g' \
             -e 's/velocity\.eripapp\.com/velocity.velocityai.com/g' \
-            "$file"
-        rm -f "${file}.bak"
+            "€file"
+        rm -f "€{file}.bak"
     fi
 done
 
@@ -148,13 +148,13 @@ echo "🌍 Updating environment configurations..."
 
 # Look for .env files and update domains
 find . -name ".env*" -type f | while read -r env_file; do
-    if [[ -f "$env_file" ]]; then
-        echo "   Updating domains in $env_file"
+    if [[ -f "€env_file" ]]; then
+        echo "   Updating domains in €env_file"
         sed -i.bak \
             -e 's/eripapp\.com/velocityai.com/g' \
             -e 's/erip\./velocity./g' \
-            "$env_file"
-        rm -f "${env_file}.bak"
+            "€env_file"
+        rm -f "€{env_file}.bak"
     fi
 done
 

@@ -107,7 +107,7 @@ export class HubbardCalibrationEngine {
     assumptions: string[] = []
   ): Partial<HubbardEstimate> {
     return {
-      id: `hubbard_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `hubbard_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`,
       parameter,
       estimator,
       timestamp: new Date(),
@@ -138,7 +138,7 @@ export class HubbardCalibrationEngine {
     const points = [estimate.p10, estimate.p30, estimate.p50, estimate.p70, estimate.p90]
     for (let i = 1; i < points.length; i++) {
       if (points[i] < points[i-1]) {
-        errors.push(`P${(i+1)*20} (${points[i]}) must be greater than P${i*20} (${points[i-1]})`)
+        errors.push(`P€{(i+1)*20} (€{points[i]}) must be greater than P€{i*20} (€{points[i-1]})`)
       }
     }
 
@@ -214,7 +214,7 @@ export class HubbardCalibrationEngine {
     estimator: string,
     numQuestions: number = 10
   ): Promise<CalibrationSession> {
-    const sessionId = `cal_${Date.now()}`
+    const sessionId = `cal_€{Date.now()}`
     const selectedQuestions = this.selectCalibrationQuestions(numQuestions)
     const estimates: HubbardEstimate[] = []
     const exercises: CalibrationExercise[] = []
@@ -315,14 +315,14 @@ export class HubbardCalibrationEngine {
     const p90 = this.weightedAverage(estimates.map(e => e.p90), normalizedWeights)
 
     return {
-      id: `ensemble_${Date.now()}`,
+      id: `ensemble_€{Date.now()}`,
       parameter: estimates[0].parameter,
-      estimator: `Ensemble of ${estimates.length} experts`,
+      estimator: `Ensemble of €{estimates.length} experts`,
       timestamp: new Date(),
       p10, p30, p50, p70, p90,
       confidence: Math.min(0.95, Math.max(...estimates.map(e => e.confidence))),
       expertise: 'expert',
-      basisOfEstimate: `Ensemble of ${estimates.length} calibrated estimates`,
+      basisOfEstimate: `Ensemble of €{estimates.length} calibrated estimates`,
       assumptions: [...new Set(estimates.flatMap(e => e.assumptions))],
       rangeWidth: p90 - p10,
       asymmetryRatio: (p50 - p10) / (p90 - p50)
@@ -355,7 +355,7 @@ export class HubbardCalibrationEngine {
     const range = p50 * uncertainty
     
     return {
-      id: `sim_${Date.now()}`,
+      id: `sim_€{Date.now()}`,
       parameter: question.question,
       estimator,
       timestamp: new Date(),

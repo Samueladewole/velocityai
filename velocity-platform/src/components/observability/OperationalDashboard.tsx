@@ -99,7 +99,7 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
           timestamp: e.timestamp,
           type: e.type,
           component: e.component,
-          message: `${e.source}: ${JSON.stringify(e.data).substring(0, 50)}...`,
+          message: `€{e.source}: €{JSON.stringify(e.data).substring(0, 50)}...`,
           severity: e.severity
         }))
       })
@@ -194,7 +194,7 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
         </div>
         <div className="bg-white p-4 rounded-lg shadow border">
           <div className="text-sm text-gray-600">Error Rate</div>
-          <div className={`text-2xl font-bold ${
+          <div className={`text-2xl font-bold €{
             dashboardData.realtimeMetrics.errorRate > 0.01 ? 'text-red-600' : 'text-green-600'
           }`}>
             {(dashboardData.realtimeMetrics.errorRate * 100).toFixed(2)}%
@@ -208,7 +208,7 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
         </div>
         <div className="bg-white p-4 rounded-lg shadow border">
           <div className="text-sm text-gray-600">System Load</div>
-          <div className={`text-2xl font-bold ${
+          <div className={`text-2xl font-bold €{
             dashboardData.realtimeMetrics.systemLoad > 0.7 ? 'text-red-600' : 'text-green-600'
           }`}>
             {(dashboardData.realtimeMetrics.systemLoad * 100).toFixed(0)}%
@@ -223,7 +223,7 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
           {dashboardData.agentHealth.map((agent) => (
             <div
               key={agent.agentType}
-              className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+              className={`p-4 rounded-lg border-2 cursor-pointer transition-all €{
                 selectedAgent === agent.agentType
                   ? 'border-blue-500 bg-blue-50'
                   : 'border-gray-200 hover:border-gray-300'
@@ -234,7 +234,7 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
             >
               <div className="flex justify-between items-start mb-2">
                 <h4 className="font-medium text-gray-900">{agent.agentType}</h4>
-                <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(agent.status)}`}>
+                <span className={`px-2 py-1 rounded-full text-xs font-medium €{getStatusColor(agent.status)}`}>
                   {agent.status}
                 </span>
               </div>
@@ -273,8 +273,8 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div
-                  className={`h-2 rounded-full transition-all duration-300 ${getResourceColor(value)}`}
-                  style={{ width: `${value}%` }}
+                  className={`h-2 rounded-full transition-all duration-300 €{getResourceColor(value)}`}
+                  style={{ width: `€{value}%` }}
                 ></div>
               </div>
             </div>
@@ -294,13 +294,13 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
             ) : (
               dashboardData.performanceAlerts.map((alert) => (
                 <div key={alert.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <div className={`w-2 h-2 rounded-full mt-2 ${
+                  <div className={`w-2 h-2 rounded-full mt-2 €{
                     alert.severity === 'critical' ? 'bg-red-500' :
                     alert.severity === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'
                   }`}></div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center justify-between">
-                      <p className={`text-sm font-medium ${getSeverityColor(alert.severity)}`}>
+                      <p className={`text-sm font-medium €{getSeverityColor(alert.severity)}`}>
                         {alert.type}
                       </p>
                       <span className="text-xs text-gray-500">
@@ -327,7 +327,7 @@ export const OperationalDashboard: React.FC<{ organizationId: string }> = ({ org
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center space-x-2">
-                    <span className={`text-xs px-2 py-1 rounded-full font-medium ${
+                    <span className={`text-xs px-2 py-1 rounded-full font-medium €{
                       event.severity === 'error' ? 'bg-red-100 text-red-800' :
                       event.severity === 'warn' ? 'bg-yellow-100 text-yellow-800' :
                       'bg-blue-100 text-blue-800'

@@ -325,7 +325,7 @@ const IntelligentAssessment: React.FC<IntelligentAssessmentProps> = ({
           {/* Question */}
           <div className="p-6 bg-blue-50 rounded-lg border border-blue-200">
             <div className="flex items-start gap-3">
-              <div className={`p-2 rounded-lg ${
+              <div className={`p-2 rounded-lg €{
                 currentQuestion.criticality === 'critical' ? 'bg-red-100 text-red-600' :
                 currentQuestion.criticality === 'high' ? 'bg-orange-100 text-orange-600' :
                 currentQuestion.criticality === 'medium' ? 'bg-yellow-100 text-yellow-600' :
@@ -549,7 +549,7 @@ const IntelligentAssessment: React.FC<IntelligentAssessmentProps> = ({
                       <h4 className="font-semibold text-slate-900">{gap.framework}</h4>
                       <p className="text-sm text-slate-600">{gap.requirement}</p>
                     </div>
-                    <div className={`px-2 py-1 rounded text-xs font-medium ${
+                    <div className={`px-2 py-1 rounded text-xs font-medium €{
                       gap.severity === 'critical' ? 'bg-red-100 text-red-700' :
                       gap.severity === 'high' ? 'bg-orange-100 text-orange-700' :
                       gap.severity === 'medium' ? 'bg-yellow-100 text-yellow-700' :

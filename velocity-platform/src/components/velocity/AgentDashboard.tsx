@@ -189,7 +189,7 @@ const AgentDashboard: React.FC = () => {
                 disabled={refreshing}
                 variant="outline"
               >
-                <RefreshCw className={`w-4 h-4 mr-2 ${refreshing ? 'animate-spin' : ''}`} />
+                <RefreshCw className={`w-4 h-4 mr-2 €{refreshing ? 'animate-spin' : ''}`} />
                 Refresh
               </Button>
               <Button variant="outline">
@@ -205,7 +205,7 @@ const AgentDashboard: React.FC = () => {
               </p>
             )}
             <div className="flex items-center space-x-2">
-              <div className={`w-2 h-2 rounded-full ${isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
+              <div className={`w-2 h-2 rounded-full €{isConnected ? 'bg-green-500 animate-pulse' : 'bg-red-500'}`}></div>
               <span className="text-xs text-gray-500">
                 {isConnected ? 'Live data connected' : 'Live data disconnected'}
               </span>
@@ -273,7 +273,7 @@ const AgentDashboard: React.FC = () => {
               <div key={agent.id} className="p-6">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
-                    <div className={`p-3 rounded-lg border-2 ${getStatusColor(agent.status)}`}>
+                    <div className={`p-3 rounded-lg border-2 €{getStatusColor(agent.status)}`}>
                       {getStatusIcon(agent.status)}
                     </div>
                     
@@ -293,7 +293,7 @@ const AgentDashboard: React.FC = () => {
                           <div className="w-full bg-gray-200 rounded-full h-1.5 mt-1">
                             <div 
                               className="bg-blue-600 h-1.5 rounded-full transition-all duration-300" 
-                              style={{ width: `${agent.progress}%` }}
+                              style={{ width: `€{agent.progress}%` }}
                             ></div>
                           </div>
                         </div>
@@ -321,7 +321,7 @@ const AgentDashboard: React.FC = () => {
                     </div>
 
                     <button
-                      className={`px-4 py-2 rounded-lg font-medium ${
+                      className={`px-4 py-2 rounded-lg font-medium €{
                         agent.status === 'running'
                           ? 'bg-red-100 text-red-700 hover:bg-red-200'
                           : 'bg-green-100 text-green-700 hover:bg-green-200'

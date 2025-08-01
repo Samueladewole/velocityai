@@ -299,7 +299,7 @@ export class TrustEquityEngine {
   async calculateTrustScore(entityId: string, entityType: EntityType): Promise<TrustScore> {
     
     // Check cache first
-    const cacheKey = `${entityId}-${entityType}`
+    const cacheKey = `€{entityId}-€{entityType}`
     const cached = this.scoreCache.get(cacheKey)
     if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
       return cached.score
@@ -628,7 +628,7 @@ export class TrustEquityEngine {
     timeframe?: { start: Date; end: Date }
   ): Promise<TrustEquityMetrics> {
     
-    const cacheKey = `metrics-${entityId}-${entityType}-${timeframe?.start}-${timeframe?.end}`
+    const cacheKey = `metrics-€{entityId}-€{entityType}-€{timeframe?.start}-€{timeframe?.end}`
     const cached = this.metricsCache.get(cacheKey)
     if (cached && Date.now() - cached.timestamp < this.CACHE_TTL) {
       return cached.metrics
@@ -691,7 +691,7 @@ export class TrustEquityEngine {
     startDate?: Date,
     endDate?: Date
   ): Promise<TrustEquityTransaction[]> {
-    const cacheKey = `tx-${entityId}-${entityType}-${startDate}-${endDate}`
+    const cacheKey = `tx-€{entityId}-€{entityType}-€{startDate}-€{endDate}`
     const cached = this.transactionCache.get(cacheKey)
     if (cached) return cached
 
@@ -836,14 +836,14 @@ export class TrustEquityEngine {
   }
 
   private invalidateScoreCache(entityId: string, entityType: EntityType): void {
-    const cacheKey = `${entityId}-${entityType}`
+    const cacheKey = `€{entityId}-€{entityType}`
     this.scoreCache.delete(cacheKey)
   }
 
   private invalidateTransactionCache(entityId: string, entityType: EntityType): void {
     // Remove all cache entries for this entity
     const keysToDelete = Array.from(this.transactionCache.keys()).filter(key => 
-      key.startsWith(`tx-${entityId}-${entityType}`)
+      key.startsWith(`tx-€{entityId}-€{entityType}`)
     )
     keysToDelete.forEach(key => this.transactionCache.delete(key))
   }
@@ -872,8 +872,8 @@ export class TrustEquityEngine {
           points: event.data.trustEquityEarned || 50,
           source: 'compass',
           category: 'compliance',
-          description: `Completed questionnaire: ${event.data.questionnaireId}`,
-          evidence: [`questionnaire-${event.data.questionnaireId}`],
+          description: `Completed questionnaire: €{event.data.questionnaireId}`,
+          evidence: [`questionnaire-€{event.data.questionnaireId}`],
           multiplier: event.data.averageConfidence / 100
         })
         break
@@ -887,7 +887,7 @@ export class TrustEquityEngine {
             points: -20,
             source: 'atlas',
             category: 'security',
-            description: `Critical vulnerability discovered: ${event.data.vulnerabilityId}`,
+            description: `Critical vulnerability discovered: €{event.data.vulnerabilityId}`,
             multiplier: 1.0
           })
         }
@@ -900,7 +900,7 @@ export class TrustEquityEngine {
           points: event.data.trustEquityChange || 0,
           source: 'atlas',
           category: 'security',
-          description: `Security posture updated: ${event.data.assessmentId}`,
+          description: `Security posture updated: €{event.data.assessmentId}`,
           multiplier: event.data.overallScore / 100
         })
         break
@@ -946,7 +946,7 @@ export class TrustEquityEngine {
         points: -tx.amount, // Negative to remove points
         source: tx.source,
         category: tx.category,
-        description: `Expired points from: ${tx.description}`,
+        description: `Expired points from: €{tx.description}`,
         multiplier: 1.0
       })
     }
@@ -989,14 +989,14 @@ export class TrustEquityEngine {
 
   // Utility methods for ID generation
   private generateTransactionId(): string {
-    return `tx_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `tx_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateSourceId(): string {
-    return `src_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `src_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateEventId(): string {
-    return `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `evt_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 }

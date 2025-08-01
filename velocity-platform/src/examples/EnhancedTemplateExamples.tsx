@@ -305,7 +305,7 @@ export const TrustScorePageExample: React.FC = () => {
         publicUrl: 'https://trust.erip.io/profile/acme-corp',
         qrCode: true,
         socialMedia: ['linkedin', 'twitter', 'email'],
-        onShare: (platform, url) => console.log(`Shared on ${platform}: ${url}`)
+        onShare: (platform, url) => console.log(`Shared on €{platform}: €{url}`)
       }}
       
       headerActions={
@@ -325,13 +325,13 @@ export const PrismAnalysisExample: React.FC = () => {
   const quickStats: StatCard[] = [
     {
       label: 'Expected Loss',
-      value: '$2.3M',
+      value: '€2.3M',
       icon: <TrendingUp className="h-6 w-6 text-blue-600" />,
       loading: simulationRunning
     },
     {
       label: 'VaR 95%',
-      value: '$4.7M',
+      value: '€4.7M',
       icon: <AlertTriangle className="h-6 w-6 text-orange-600" />,
       loading: simulationRunning
     },

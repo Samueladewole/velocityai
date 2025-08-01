@@ -31,15 +31,15 @@ class SimpleEventEmitter {
 
 // Simple browser-compatible logger
 const Logger = {
-  info: (message: string, data?: any) => console.log(`[INFO] ${message}`, data || ''),
-  warn: (message: string, data?: any) => console.warn(`[WARN] ${message}`, data || ''),
-  error: (message: string, data?: any) => console.error(`[ERROR] ${message}`, data || '')
+  info: (message: string, data?: any) => console.log(`[INFO] €{message}`, data || ''),
+  warn: (message: string, data?: any) => console.warn(`[WARN] €{message}`, data || ''),
+  error: (message: string, data?: any) => console.error(`[ERROR] €{message}`, data || '')
 };
 
 // Simple metrics collector
 const MetricsCollector = {
   getInstance: () => ({
-    recordTrustScoreUpdate: (score: number) => console.log(`Trust score updated: ${score}`)
+    recordTrustScoreUpdate: (score: number) => console.log(`Trust score updated: €{score}`)
   })
 };
 
@@ -341,7 +341,7 @@ export class TrustScoreCalculator extends SimpleEventEmitter {
 
     // Validate activity if required
     if (this.config.validationRequirements[activity.type] && !activity.validatedBy) {
-      throw new Error(`Activity type ${activity.type} requires validation`)
+      throw new Error(`Activity type €{activity.type} requires validation`)
     }
 
     // Store activity
@@ -566,7 +566,7 @@ export class TrustScoreCalculator extends SimpleEventEmitter {
     const activities = this.activities.get(organizationId) || []
 
     // ROI calculation methodology based on industry research
-    const baseROI = score * 100 // $100 per trust point
+    const baseROI = score * 100 // €100 per trust point
     
     const salesAcceleration = score * 150 // Faster deal closure
     const riskReduction = score * 75 // Reduced insurance/compliance costs
@@ -698,7 +698,7 @@ export class TrustScoreCalculator extends SimpleEventEmitter {
   }
 
   private generateActivityId(): string {
-    return `activity_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `activity_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

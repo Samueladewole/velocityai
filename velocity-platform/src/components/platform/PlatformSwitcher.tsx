@@ -45,13 +45,13 @@ const PlatformSwitcher: React.FC<PlatformSwitcherProps> = ({
       if (hostname.includes('localhost')) {
         navigate('/velocity');
       } else {
-        window.location.href = `${protocol}//velocity.eripapp.com`;
+        window.location.href = `€{protocol}//velocity.eripapp.com`;
       }
     } else {
       if (hostname.includes('localhost')) {
         navigate('/');
       } else {
-        window.location.href = `${protocol}//app.eripapp.com`;
+        window.location.href = `€{protocol}//app.eripapp.com`;
       }
     }
   };
@@ -89,7 +89,7 @@ const PlatformSwitcher: React.FC<PlatformSwitcherProps> = ({
   }
   
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative €{className}`}>
       <Button
         variant="outline"
         onClick={() => setIsOpen(!isOpen)}
@@ -97,13 +97,13 @@ const PlatformSwitcher: React.FC<PlatformSwitcherProps> = ({
       >
         {currentPlatformData && (
           <>
-            <div className={`w-4 h-4 rounded bg-gradient-to-r ${currentPlatformData.color} flex items-center justify-center`}>
+            <div className={`w-4 h-4 rounded bg-gradient-to-r €{currentPlatformData.color} flex items-center justify-center`}>
               <currentPlatformData.icon className="w-2.5 h-2.5 text-white" />
             </div>
             <span className="text-sm font-medium">{currentPlatformData.name}</span>
           </>
         )}
-        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-4 h-4 transition-transform €{isOpen ? 'rotate-180' : ''}`} />
       </Button>
       
       {isOpen && (
@@ -133,7 +133,7 @@ const PlatformSwitcher: React.FC<PlatformSwitcherProps> = ({
                       setIsOpen(false);
                     }}
                     disabled={!platform.enabled}
-                    className={`w-full p-3 rounded-lg border-2 transition-all text-left ${
+                    className={`w-full p-3 rounded-lg border-2 transition-all text-left €{
                       platform.current 
                         ? 'border-blue-500 bg-blue-50' 
                         : platform.enabled
@@ -142,7 +142,7 @@ const PlatformSwitcher: React.FC<PlatformSwitcherProps> = ({
                     }`}
                   >
                     <div className="flex items-start gap-3">
-                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${platform.color} flex items-center justify-center flex-shrink-0`}>
+                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-r €{platform.color} flex items-center justify-center flex-shrink-0`}>
                         <platform.icon className="w-4 h-4 text-white" />
                       </div>
                       <div className="flex-1 min-w-0">

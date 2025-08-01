@@ -333,15 +333,15 @@ export const AIGovernance: React.FC = () => {
     {
       label: 'AI Systems',
       value: totalSystems,
-      change: `+${compliantSystems}`,
+      change: `+€{compliantSystems}`,
       trend: 'up',
       icon: <Bot className="h-6 w-6 text-blue-600" />,
-      description: `${compliantSystems} compliant`,
+      description: `€{compliantSystems} compliant`,
       color: 'text-blue-600'
     },
     {
       label: 'ISO 42001 Controls',
-      value: `${implementedControls}/${iso42001Controls.length}`,
+      value: `€{implementedControls}/€{iso42001Controls.length}`,
       change: '+2',
       trend: 'up',
       icon: <Shield className="h-6 w-6 text-green-600" />,
@@ -359,7 +359,7 @@ export const AIGovernance: React.FC = () => {
     },
     {
       label: 'Training Completion',
-      value: `${avgTrainingCompletion}%`,
+      value: `€{avgTrainingCompletion}%`,
       change: '+12%',
       trend: 'up',
       icon: <GraduationCap className="h-6 w-6 text-purple-600" />,
@@ -373,7 +373,7 @@ export const AIGovernance: React.FC = () => {
     {
       id: 'iso42001',
       label: 'ISO 42001 Compliance',
-      badge: `${implementedControls}/${iso42001Controls.length}`,
+      badge: `€{implementedControls}/€{iso42001Controls.length}`,
       content: (
         <div className="space-y-6">
           <Card className="card-professional">
@@ -651,7 +651,7 @@ export const AIGovernance: React.FC = () => {
     {
       id: 'training',
       label: 'Responsible AI Training',
-      badge: `${avgTrainingCompletion}%`,
+      badge: `€{avgTrainingCompletion}%`,
       content: (
         <div className="space-y-6">
           <div className="flex items-center justify-between">

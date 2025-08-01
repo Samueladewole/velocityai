@@ -261,7 +261,7 @@ const PCIDSSPage: React.FC = () => {
                   <div className="text-red-400 font-bold text-xl mb-2">{level.level}</div>
                   <div className="text-white font-medium mb-2">{level.transactions}</div>
                   <div className="text-slate-400 text-sm mb-3">{level.validation}</div>
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  <div className={`px-3 py-1 rounded-full text-xs font-medium €{
                     level.complexity === 'High' ? 'bg-red-500/20 text-red-400' :
                     level.complexity === 'Medium' ? 'bg-amber-500/20 text-amber-400' :
                     'bg-emerald-500/20 text-emerald-400'

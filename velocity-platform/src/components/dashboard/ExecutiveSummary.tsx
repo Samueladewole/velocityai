@@ -81,7 +81,7 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
             <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white" data-tour="trust-score">
               <CardContent className="p-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`p-2 rounded-lg bg-gradient-to-r ${tierStyle.color}`}>
+                  <div className={`p-2 rounded-lg bg-gradient-to-r €{tierStyle.color}`}>
                     <Award className="h-6 w-6 text-white" />
                   </div>
                   <div>
@@ -100,7 +100,7 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
                     ) : (
                       <Target className="h-5 w-5 text-blue-400" />
                     )}
-                    <span className={`text-sm font-medium ${
+                    <span className={`text-sm font-medium €{
                       trustScore.trend === 'up' ? 'text-green-400' : 
                       trustScore.trend === 'down' ? 'text-red-400' : 
                       'text-blue-400'
@@ -115,8 +115,8 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
                 {/* Trust Score Progress */}
                 <div className="w-full bg-white/20 rounded-full h-2 mb-2">
                   <div 
-                    className={`bg-gradient-to-r ${tierStyle.color} h-2 rounded-full transition-all duration-1000`}
-                    style={{ width: `${trustScore.current}%` }}
+                    className={`bg-gradient-to-r €{tierStyle.color} h-2 rounded-full transition-all duration-1000`}
+                    style={{ width: `€{trustScore.current}%` }}
                   />
                 </div>
                 <div className="flex justify-between text-xs text-blue-200">
@@ -137,7 +137,7 @@ export const ExecutiveSummary: React.FC<ExecutiveSummaryProps> = ({
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="text-sm font-medium text-blue-100">{metric.label}</h4>
-                      <div className={`w-2 h-2 rounded-full bg-${metric.color}-400`} />
+                      <div className={`w-2 h-2 rounded-full bg-€{metric.color}-400`} />
                     </div>
                     <div className="flex items-baseline gap-2 mb-1">
                       <span className="text-2xl font-bold">{metric.value}</span>

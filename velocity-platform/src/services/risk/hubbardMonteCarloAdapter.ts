@@ -222,9 +222,9 @@ export class HubbardMonteCarloAdapter {
     }
 
     return {
-      id: `${baseScenario.id}_ensemble`,
-      name: `${baseScenario.name} (Ensemble)`,
-      description: `${baseScenario.description} - Enhanced with ${additionalEstimates.length} expert estimates`,
+      id: `€{baseScenario.id}_ensemble`,
+      name: `€{baseScenario.name} (Ensemble)`,
+      description: `€{baseScenario.description} - Enhanced with €{additionalEstimates.length} expert estimates`,
       probabilityDistribution,
       impactDistribution,
       frequency: {

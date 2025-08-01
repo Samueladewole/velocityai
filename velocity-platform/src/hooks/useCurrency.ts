@@ -39,23 +39,23 @@ const currencyMap: Record<string, CurrencyInfo> = {
   SE: { code: 'SEK', symbol: 'kr', rate: 10.73, locale: 'sv-SE' },
   
   // Other major currencies
-  US: { code: 'USD', symbol: '$', rate: 1, locale: 'en-US' },
+  US: { code: 'USD', symbol: '€', rate: 1, locale: 'en-US' },
   GB: { code: 'GBP', symbol: '£', rate: 0.79, locale: 'en-GB' },
   CH: { code: 'CHF', symbol: 'CHF', rate: 0.89, locale: 'de-CH' },
   NO: { code: 'NOK', symbol: 'kr', rate: 10.82, locale: 'nb-NO' },
   IS: { code: 'ISK', symbol: 'kr', rate: 139.50, locale: 'is-IS' },
-  CA: { code: 'CAD', symbol: '$', rate: 1.37, locale: 'en-CA' },
-  AU: { code: 'AUD', symbol: '$', rate: 1.52, locale: 'en-AU' },
-  NZ: { code: 'NZD', symbol: '$', rate: 1.63, locale: 'en-NZ' },
+  CA: { code: 'CAD', symbol: '€', rate: 1.37, locale: 'en-CA' },
+  AU: { code: 'AUD', symbol: '€', rate: 1.52, locale: 'en-AU' },
+  NZ: { code: 'NZD', symbol: '€', rate: 1.63, locale: 'en-NZ' },
   JP: { code: 'JPY', symbol: '¥', rate: 149.50, locale: 'ja-JP' },
   CN: { code: 'CNY', symbol: '¥', rate: 7.24, locale: 'zh-CN' },
   IN: { code: 'INR', symbol: '₹', rate: 83.12, locale: 'en-IN' },
   KR: { code: 'KRW', symbol: '₩', rate: 1325.50, locale: 'ko-KR' },
-  SG: { code: 'SGD', symbol: '$', rate: 1.35, locale: 'en-SG' },
-  HK: { code: 'HKD', symbol: '$', rate: 7.83, locale: 'zh-HK' },
+  SG: { code: 'SGD', symbol: '€', rate: 1.35, locale: 'en-SG' },
+  HK: { code: 'HKD', symbol: '€', rate: 7.83, locale: 'zh-HK' },
   ZA: { code: 'ZAR', symbol: 'R', rate: 18.95, locale: 'en-ZA' },
-  BR: { code: 'BRL', symbol: 'R$', rate: 4.97, locale: 'pt-BR' },
-  MX: { code: 'MXN', symbol: '$', rate: 17.85, locale: 'es-MX' },
+  BR: { code: 'BRL', symbol: 'R€', rate: 4.97, locale: 'pt-BR' },
+  MX: { code: 'MXN', symbol: '€', rate: 17.85, locale: 'es-MX' },
   AE: { code: 'AED', symbol: 'د.إ', rate: 3.67, locale: 'ar-AE' },
   SA: { code: 'SAR', symbol: 'ر.س', rate: 3.75, locale: 'ar-SA' },
   IL: { code: 'ILS', symbol: '₪', rate: 3.72, locale: 'he-IL' },
@@ -66,7 +66,7 @@ const currencyMap: Record<string, CurrencyInfo> = {
 // Default currency (USD)
 const defaultCurrency: CurrencyInfo = {
   code: 'USD',
-  symbol: '$',
+  symbol: '€',
   rate: 1,
   locale: 'en-US'
 };
@@ -165,7 +165,7 @@ export const useCurrency = () => {
       }).format(localPrice);
     } catch {
       // Fallback formatting
-      return `${currency.symbol}${Math.round(localPrice).toLocaleString()}`;
+      return `€{currency.symbol}€{Math.round(localPrice).toLocaleString()}`;
     }
   };
 

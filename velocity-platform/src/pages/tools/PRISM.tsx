@@ -103,9 +103,9 @@ export const PRISM: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -166,15 +166,15 @@ export const PRISM: React.FC = () => {
             {roiMetrics.map((metric, index) => (
               <Card key={index} className="text-center border-0 shadow-lg">
                 <CardContent className="p-6">
-                  <div className={`text-4xl font-bold mb-2 ${metric.color}`}>
+                  <div className={`text-4xl font-bold mb-2 €{metric.color}`}>
                     {metric.value}
                   </div>
                   <div className="text-sm text-slate-600 mb-2">{metric.metric}</div>
                   <div className="flex items-center justify-center gap-1">
                     {metric.trend === 'up' ? (
-                      <TrendingUp className={`h-4 w-4 ${metric.color}`} />
+                      <TrendingUp className={`h-4 w-4 €{metric.color}`} />
                     ) : (
-                      <TrendingDown className={`h-4 w-4 ${metric.color}`} />
+                      <TrendingDown className={`h-4 w-4 €{metric.color}`} />
                     )}
                     <span className="text-xs text-slate-500">vs current state</span>
                   </div>
@@ -281,7 +281,7 @@ export const PRISM: React.FC = () => {
                       dataKey="value"
                     >
                       {riskCategories.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
+                        <Cell key={`cell-€{index}`} fill={entry.color} />
                       ))}
                     </Pie>
                     <Tooltip formatter={(value: number) => formatCurrency(value)} />

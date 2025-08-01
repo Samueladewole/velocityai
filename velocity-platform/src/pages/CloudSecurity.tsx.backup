@@ -184,10 +184,10 @@ export const CloudSecurity: React.FC = () => {
                 {cloudProviders.map((provider) => (
                   <div key={provider.name} className="flex items-center justify-between p-4 rounded-lg bg-slate-50">
                     <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-lg ${
+                      <div className={`p-3 rounded-lg €{
                         provider.status === 'Connected' ? 'bg-green-100' : 'bg-gray-100'
                       }`}>
-                        <provider.icon className={`h-6 w-6 ${
+                        <provider.icon className={`h-6 w-6 €{
                           provider.status === 'Connected' ? 'text-green-600' : 'text-gray-400'
                         }`} />
                       </div>
@@ -234,7 +234,7 @@ export const CloudSecurity: React.FC = () => {
                   <Card key={finding.severity} className="border-0 shadow-md">
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between mb-2">
-                        <Badge className={`bg-gradient-to-r ${finding.color} text-white`}>
+                        <Badge className={`bg-gradient-to-r €{finding.color} text-white`}>
                           {finding.severity}
                         </Badge>
                         <span className="text-2xl font-bold">{finding.count}</span>

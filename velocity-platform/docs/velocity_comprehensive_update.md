@@ -266,7 +266,7 @@ interface SolutionsShowcase {
       title: "GDPR RoPA Automation",
       description: "83% cheaper than OneTrust with automated Records of Processing Activities",
       key_benefits: ["Automated data flow mapping", "Real-time RoPA updates", "Article 30 compliance"],
-      savings: "$545K-995K vs OneTrust",
+      savings: "€545K-995K vs OneTrust",
       timeline: "30 days vs 6-12 months",
       cta: "Explore GDPR Solution → /solutions/gdpr-ropa"
     },
@@ -274,7 +274,7 @@ interface SolutionsShowcase {
       title: "ISAE 3000 Evidence Collection", 
       description: "88% cost reduction vs Big 4 auditors with automated evidence gathering",
       key_benefits: ["Multi-system integration", "Continuous evidence collection", "Audit-ready packages"],
-      savings: "$525K+ vs Deloitte annually",
+      savings: "€525K+ vs Deloitte annually",
       timeline: "6 weeks vs 22+ weeks",
       cta: "Explore ISAE 3000 → /solutions/isae-3000"
     },
@@ -298,7 +298,7 @@ interface SolutionsShowcase {
 ```typescript
 interface IndustrySection {
   headline: "Trusted by Leading Industries Worldwide",
-  subheadline: "Specialized compliance automation for regulated industries with $50B+ market opportunity",
+  subheadline: "Specialized compliance automation for regulated industries with €50B+ market opportunity",
   
   industries: [
     {
@@ -306,7 +306,7 @@ interface IndustrySection {
       icon: "🏦",
       description: "Banking, insurance, fintech GDPR RoPA and ISAE 3000 automation",
       specializations: ["Core banking integration", "Regulatory reporting", "Multi-jurisdiction compliance"],
-      market_size: "$14B annual opportunity",
+      market_size: "€14B annual opportunity",
       cta: "Banking Solutions → /industries/banking"
     },
     {
@@ -314,7 +314,7 @@ interface IndustrySection {
       icon: "🏥",
       description: "HIPAA + ISAE 3000 automation for hospitals, EHR providers, pharma",
       specializations: ["PHI protection", "Clinical system integration", "FDA compliance"],
-      market_size: "$6B annual opportunity", 
+      market_size: "€6B annual opportunity", 
       cta: "Healthcare Solutions → /industries/healthcare"
     },
     {
@@ -322,7 +322,7 @@ interface IndustrySection {
       icon: "☁️", 
       description: "SOC 2 + ISAE 3000 for cloud providers and SaaS companies",
       specializations: ["Infrastructure automation", "DevOps integration", "Customer trust"],
-      market_size: "$8B annual opportunity",
+      market_size: "€8B annual opportunity",
       cta: "SaaS Solutions → /industries/saas-cloud"
     },
     {
@@ -330,7 +330,7 @@ interface IndustrySection {
       icon: "🏭",
       description: "ISO certifications + ISAE 3000 for automotive, aerospace, chemicals",
       specializations: ["Quality systems", "Supply chain", "Environmental compliance"],
-      market_size: "$4B annual opportunity",
+      market_size: "€4B annual opportunity",
       cta: "Manufacturing → /industries/manufacturing"
     },
     {
@@ -338,7 +338,7 @@ interface IndustrySection {
       icon: "🏛️",
       description: "FISMA + NIST + ISAE 3000 for federal, state, and defense contractors",
       specializations: ["Security clearance", "CMMC compliance", "Federal requirements"],
-      market_size: "$5B annual opportunity",
+      market_size: "€5B annual opportunity",
       cta: "Government → /industries/government"
     },
     {
@@ -346,7 +346,7 @@ interface IndustrySection {
       icon: "⚡",
       description: "NERC CIP + ISAE 3000 for power companies and energy providers",
       specializations: ["Critical infrastructure", "Grid security", "Environmental"],
-      market_size: "$3B annual opportunity",
+      market_size: "€3B annual opportunity",
       cta: "Energy → /industries/energy"
     }
   ]
@@ -492,8 +492,8 @@ SOLUTIONS SECTION UPDATE:
 
 INDUSTRY FOCUS SECTION:
 ✅ 6 major industries with market size opportunities
-✅ Financial Services ($14B), Healthcare ($6B), Cloud/SaaS ($8B)
-✅ Manufacturing ($4B), Government ($5B), Energy ($3B)
+✅ Financial Services (€14B), Healthcare (€6B), Cloud/SaaS (€8B)
+✅ Manufacturing (€4B), Government (€5B), Energy (€3B)
 ✅ Specialized features and compliance requirements per industry
 
 FOOTER COMPLETE OVERHAUL:
@@ -528,7 +528,7 @@ EXECUTE COMPREHENSIVE SITE UPDATE NOW
 1. **"12 AI Agents Automate Your Compliance"** - Unique differentiator
 2. **"83% Cheaper Than OneTrust for GDPR RoPA"** - Specific competitive advantage  
 3. **"88% Cost Reduction vs Big 4 for ISAE 3000"** - Major audit savings
-4. **"$50B+ Multi-Industry Market Opportunity"** - Scale and ambition
+4. **"€50B+ Multi-Industry Market Opportunity"** - Scale and ambition
 5. **"Same-Day Questionnaire Responses"** - Speed advantage
 
 ### **Trust & Credibility Elements:**

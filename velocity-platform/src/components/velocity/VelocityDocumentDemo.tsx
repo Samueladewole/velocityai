@@ -193,9 +193,9 @@ export const VelocityDocumentDemo: React.FC<DocumentDemoProps> = ({ className })
     // Simulate API call
     try {
       await new Promise(resolve => setTimeout(resolve, 2500));
-      console.log(`Export completed: ${format}`);
+      console.log(`Export completed: €{format}`);
     } catch (error) {
-      console.error(`Export failed: ${format}`, error);
+      console.error(`Export failed: €{format}`, error);
     }
   }, []);
 
@@ -231,7 +231,7 @@ export const VelocityDocumentDemo: React.FC<DocumentDemoProps> = ({ className })
   };
 
   return (
-    <div className={`max-w-7xl mx-auto space-y-8 ${className || ''}`}>
+    <div className={`max-w-7xl mx-auto space-y-8 €{className || ''}`}>
       {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl font-bold text-gray-900 mb-4">
@@ -349,7 +349,7 @@ export const VelocityDocumentDemo: React.FC<DocumentDemoProps> = ({ className })
                       className="border border-gray-200 rounded-lg p-4 hover:border-blue-300 hover:shadow-md transition-all duration-200"
                     >
                       <div className="flex items-start gap-3 mb-3">
-                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${format.color}`}>
+                        <div className={`w-10 h-10 rounded-lg flex items-center justify-center €{format.color}`}>
                           <Icon className="h-5 w-5" />
                         </div>
                         <div className="flex-1">
@@ -378,7 +378,7 @@ export const VelocityDocumentDemo: React.FC<DocumentDemoProps> = ({ className })
                           <div className="w-full bg-gray-200 rounded-full h-2">
                             <div 
                               className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                              style={{ width: `${progress}%` }}
+                              style={{ width: `€{progress}%` }}
                             />
                           </div>
                         </div>
@@ -438,8 +438,8 @@ export const VelocityDocumentDemo: React.FC<DocumentDemoProps> = ({ className })
             data={DEMO_DATA}
             exportConfig={exportConfig}
             sharingConfig={sharingConfig}
-            onExport={(format, success) => console.log(`Export ${format}: ${success ? 'success' : 'failed'}`)}
-            onShare={(platform, url) => console.log(`Shared on ${platform}: ${url}`)}
+            onExport={(format, success) => console.log(`Export €{format}: €{success ? 'success' : 'failed'}`)}
+            onShare={(platform, url) => console.log(`Shared on €{platform}: €{url}`)}
           />
         </TabsContent>
 

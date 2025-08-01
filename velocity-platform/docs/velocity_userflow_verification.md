@@ -233,7 +233,7 @@ const handleExport = (type: string) => {
       if (options.delivery === 'email') {
         await emailService.send({
           recipients: options.recipients,
-          subject: `Velocity Compliance Report - ${format}`,
+          subject: `Velocity Compliance Report - €{format}`,
           attachments: [result.fileUrl],
           message: options.message
         });
@@ -279,7 +279,7 @@ const DocumentUpload = ({ type, onUpload }) => {
         onUpload([file]);
         
       } catch (error) {
-        showError(`Failed to upload ${file.name}: ${error.message}`);
+        showError(`Failed to upload €{file.name}: €{error.message}`);
       }
     }
   };

@@ -157,7 +157,7 @@ A visual, drag-and-drop interface that allows users to design their compliance a
 ## Business Impact Analysis
 
 ### Revenue Opportunities
-1. **Enterprise Tier Pricing**: $5,000-15,000/month for canvas features
+1. **Enterprise Tier Pricing**: €5,000-15,000/month for canvas features
 2. **Professional Services**: Compliance architecture consulting
 3. **Template Marketplace**: Pre-built industry compliance designs
 4. **Training & Certification**: Visual compliance design methodology
@@ -166,11 +166,11 @@ A visual, drag-and-drop interface that allows users to design their compliance a
 - **Development Time**: 6-9 months (3 engineers)
 - **Design Investment**: 2-3 months (UX team)
 - **Market Research**: 1-2 months (Product team)
-- **Total Investment**: $400,000-600,000
+- **Total Investment**: €400,000-600,000
 
 ### ROI Projections
-- **Year 1**: 10-15 enterprise customers @ $100K ARR each
-- **Year 2**: 50+ enterprise customers @ $150K ARR average
+- **Year 1**: 10-15 enterprise customers @ €100K ARR each
+- **Year 2**: 50+ enterprise customers @ €150K ARR average
 - **Break-even**: Month 8-12 post-launch
 
 ---

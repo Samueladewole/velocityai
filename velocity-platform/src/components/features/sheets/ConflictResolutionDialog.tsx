@@ -118,8 +118,8 @@ export const ConflictResolutionDialog: React.FC<ConflictResolutionDialogProps> =
             <div className="space-y-2">
               {conflict.user_edits.map((edit, index) => (
                 <div
-                  key={`${edit.user_id}-${index}`}
-                  className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                  key={`€{edit.user_id}-€{index}`}
+                  className={`p-3 border rounded-lg cursor-pointer transition-colors €{
                     selectedEdit === edit
                       ? 'border-blue-500 bg-blue-50'
                       : 'border-gray-200 hover:border-gray-300'

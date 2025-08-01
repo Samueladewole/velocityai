@@ -394,7 +394,7 @@ export class PulseMonitoringService extends EventEmitter {
    * Update component activity tracking
    */
   private updateComponentActivity(source: string, eventType: string): void {
-    const key = `${source}:${eventType}`
+    const key = `€{source}:€{eventType}`
     const now = Date.now()
     
     // Update request per second calculation
@@ -404,7 +404,7 @@ export class PulseMonitoringService extends EventEmitter {
     })
 
     // Track for RPS calculation
-    const rpsKey = `rps:${source}`
+    const rpsKey = `rps:€{source}`
     let rpsData = this.baselines.get(rpsKey) || []
     rpsData.push(now)
     
@@ -426,8 +426,8 @@ export class PulseMonitoringService extends EventEmitter {
       await this.createAlert({
         severity: this.getErrorSeverity(event),
         component: event.source,
-        title: `Error detected in ${event.source}`,
-        description: `Error event: ${event.type}`,
+        title: `Error detected in €{event.source}`,
+        description: `Error event: €{event.type}`,
         metadata: { event }
       })
     }
@@ -438,7 +438,7 @@ export class PulseMonitoringService extends EventEmitter {
         severity: 'warning',
         component: event.source,
         title: `High-risk event detected`,
-        description: `High-risk event: ${event.type} from ${event.source}`,
+        description: `High-risk event: €{event.type} from €{event.source}`,
         metadata: { event }
       })
     }
@@ -451,7 +451,7 @@ export class PulseMonitoringService extends EventEmitter {
           severity: 'warning',
           component: event.source,
           title: `Slow response detected`,
-          description: `Processing time (${processingTime}ms) exceeded threshold (${this.config.thresholds.responseTimeMs}ms)`,
+          description: `Processing time (€{processingTime}ms) exceeded threshold (€{this.config.thresholds.responseTimeMs}ms)`,
           metadata: { processingTime, threshold: this.config.thresholds.responseTimeMs }
         })
       }
@@ -539,7 +539,7 @@ export class PulseMonitoringService extends EventEmitter {
           severity: 'warning',
           component: 'trust-engine',
           title: 'Trust Score Below Threshold',
-          description: `System trust score (${trustScore}) is below minimum threshold (${this.config.thresholds.trustScoreMinimum})`,
+          description: `System trust score (€{trustScore}) is below minimum threshold (€{this.config.thresholds.trustScoreMinimum})`,
           metadata: { trustScore, threshold: this.config.thresholds.trustScoreMinimum }
         })
       }
@@ -620,8 +620,8 @@ export class PulseMonitoringService extends EventEmitter {
     await this.createAlert({
       severity: anomaly.confidence > 0.8 ? 'error' : 'warning',
       component: 'anomaly-detection',
-      title: `Anomaly detected in ${anomaly.metric}`,
-      description: `Metric ${anomaly.metric} deviated significantly from baseline. Expected: ${anomaly.expected.toFixed(2)}, Actual: ${anomaly.actual.toFixed(2)}`,
+      title: `Anomaly detected in €{anomaly.metric}`,
+      description: `Metric €{anomaly.metric} deviated significantly from baseline. Expected: €{anomaly.expected.toFixed(2)}, Actual: €{anomaly.actual.toFixed(2)}`,
       metadata: anomaly
     })
 
@@ -664,7 +664,7 @@ export class PulseMonitoringService extends EventEmitter {
 
     // Publish alert event
     await this.eventBus.publish({
-      eventId: `alert_${alert.id}`,
+      eventId: `alert_€{alert.id}`,
       timestamp: alert.timestamp,
       type: 'monitoring.alert',
       source: 'pulse',
@@ -714,7 +714,7 @@ export class PulseMonitoringService extends EventEmitter {
       }
 
       if (metrics.errorRate > this.config.thresholds.errorRatePercent) {
-        return { status: 'unhealthy', details: `High error rate: ${metrics.errorRate}%` }
+        return { status: 'unhealthy', details: `High error rate: €{metrics.errorRate}%` }
       }
 
       return { status: 'healthy' }
@@ -773,8 +773,8 @@ export class PulseMonitoringService extends EventEmitter {
       await this.createAlert({
         severity: status.status === 'unhealthy' ? 'critical' : 'warning',
         component: 'system',
-        title: `System health ${status.status}`,
-        description: `Health checks failing: ${unhealthyChecks.map(c => c.name).join(', ')}`,
+        title: `System health €{status.status}`,
+        description: `Health checks failing: €{unhealthyChecks.map(c => c.name).join(', ')}`,
         metadata: { healthStatus: status }
       })
     }
@@ -977,7 +977,7 @@ export class PulseMonitoringService extends EventEmitter {
   }
 
   private generateAlertId(): string {
-    return `alert_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `alert_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

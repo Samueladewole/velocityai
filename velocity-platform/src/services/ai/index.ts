@@ -245,7 +245,7 @@ export class MockAIService implements AIService {
     this.router.updateUsageMetrics(model, tokens);
     
     return {
-      id: `req_${Date.now()}`,
+      id: `req_€{Date.now()}`,
       model,
       prompt: request.prompt || '',
       context: request.context,
@@ -268,7 +268,7 @@ export class MockAIService implements AIService {
   
   private generateMockResponse(prompt: string, model: AIModel): string {
     // Mock responses based on model and prompt
-    return `Mock response from ${model.name} for: ${prompt.substring(0, 50)}...`;
+    return `Mock response from €{model.name} for: €{prompt.substring(0, 50)}...`;
   }
   
   private estimateTokens(prompt: string, response: string): number {

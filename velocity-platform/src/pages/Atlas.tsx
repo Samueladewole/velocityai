@@ -422,7 +422,7 @@ export const Atlas: React.FC = () => {
                             control.effectiveness >= 90 ? "bg-green-500" :
                             control.effectiveness >= 70 ? "bg-amber-500" : "bg-red-500"
                           )}
-                          style={{ width: `${control.effectiveness}%` }}
+                          style={{ width: `€{control.effectiveness}%` }}
                         />
                       </div>
                     </div>

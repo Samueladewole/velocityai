@@ -750,7 +750,7 @@ With proper execution of this roadmap, Velocity.ai will achieve:
 - **30-minute onboarding vs. industry 2-4 weeks**
 - **95%+ evidence automation with cryptographic verification**
 - **Enterprise-grade transparency and observability**
-- **$100M+ valuation potential as compliance infrastructure layer**
+- **€100M+ valuation potential as compliance infrastructure layer**
 
 ---
 

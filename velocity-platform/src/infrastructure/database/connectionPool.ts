@@ -141,7 +141,7 @@ export class EnterpriseConnectionPool extends EventEmitter {
     if (this.config.replicas.length > 0 && this.config.readWrite.enabled) {
       for (const replica of this.config.replicas) {
         await this.createConnections('replica', replica, Math.ceil(this.config.pool.minConnections / 2))
-        this.replicaHealth.set(`${replica.host}:${replica.port}`, true)
+        this.replicaHealth.set(`€{replica.host}:€{replica.port}`, true)
       }
     }
 
@@ -170,12 +170,12 @@ export class EnterpriseConnectionPool extends EventEmitter {
         }
         
       } catch (error) {
-        this.logger.error(`Failed to create ${type} connection`, { error, config: { host: config.host, port: config.port } })
+        this.logger.error(`Failed to create €{type} connection`, { error, config: { host: config.host, port: config.port } })
         
         if (type === 'primary') {
           this.primaryHealthy = false
         } else {
-          this.replicaHealth.set(`${config.host}:${config.port}`, false)
+          this.replicaHealth.set(`€{config.host}:€{config.port}`, false)
         }
       }
     }
@@ -511,7 +511,7 @@ export class EnterpriseConnectionPool extends EventEmitter {
   }
 
   private async checkReplicaHealth(replica: DatabaseConfig): Promise<void> {
-    const replicaKey = `${replica.host}:${replica.port}`
+    const replicaKey = `€{replica.host}:€{replica.port}`
     
     try {
       const replicaConnections = Array.from(this.replicaConnections.values())
@@ -672,7 +672,7 @@ export class EnterpriseConnectionPool extends EventEmitter {
   private getHealthyReplica(): DatabaseConfig | null {
     for (let i = 0; i < this.config.replicas.length; i++) {
       const replica = this.config.replicas[i]
-      const replicaKey = `${replica.host}:${replica.port}`
+      const replicaKey = `€{replica.host}:€{replica.port}`
       
       if (this.replicaHealth.get(replicaKey)) {
         return replica
@@ -782,7 +782,7 @@ export class EnterpriseConnectionPool extends EventEmitter {
   }
 
   private generateConnectionId(type: 'primary' | 'replica'): string {
-    return `${type}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `€{type}_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

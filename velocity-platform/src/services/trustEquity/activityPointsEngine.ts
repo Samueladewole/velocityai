@@ -295,7 +295,7 @@ export class ActivityPointsEngine extends EventEmitter {
       points,
       evidence: {
         type: 'document',
-        url: `/evidence/${evidence.id}`,
+        url: `/evidence/€{evidence.id}`,
         metadata: evidence.metadata
       },
       source: 'file_upload',
@@ -369,7 +369,7 @@ export class ActivityPointsEngine extends EventEmitter {
       organizationId,
       evidence: {
         type: 'assessment',
-        url: `/assessments/${assessment.assessmentId}`,
+        url: `/assessments/€{assessment.assessmentId}`,
         metadata: {
           framework: assessment.framework,
           score: assessment.score,
@@ -450,7 +450,7 @@ export class ActivityPointsEngine extends EventEmitter {
           organizationId,
           evidence: {
             type: 'assessment',
-            url: `/monitoring/${monitoringMetric.id}`,
+            url: `/monitoring/€{monitoringMetric.id}`,
             metadata: {
               metricType: metric.type,
               value: metric.value,
@@ -524,7 +524,7 @@ export class ActivityPointsEngine extends EventEmitter {
       organizationId,
       evidence: {
         type: 'document',
-        url: `/contributions/${expertContribution.id}`,
+        url: `/contributions/€{expertContribution.id}`,
         metadata: {
           contributionType: contribution.type,
           framework: contribution.framework,
@@ -760,15 +760,15 @@ export class ActivityPointsEngine extends EventEmitter {
   }
 
   private generateEvidenceId(): string {
-    return `evidence_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `evidence_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateMetricId(): string {
-    return `metric_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `metric_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateContributionId(): string {
-    return `contribution_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `contribution_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

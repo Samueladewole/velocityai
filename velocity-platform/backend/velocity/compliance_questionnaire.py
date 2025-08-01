@@ -516,7 +516,7 @@ class ComplianceQuestionnaire:
                     "Create deprovisioning checklist",
                     "Establish periodic access reviews"
                 ],
-                cost_estimate="$5,000 - $15,000"
+                cost_estimate="€5,000 - €15,000"
             ))
         
         # MFA Gap Analysis
@@ -538,7 +538,7 @@ class ComplianceQuestionnaire:
                     "Configure conditional access policies",
                     "Provide MFA training to users"
                 ],
-                cost_estimate="$10,000 - $25,000"
+                cost_estimate="€10,000 - €25,000"
             ))
         
         # Monitoring Gap Analysis
@@ -558,7 +558,7 @@ class ComplianceQuestionnaire:
                     "Establish incident response procedures",
                     "Set up log aggregation and analysis"
                 ],
-                cost_estimate="$15,000 - $50,000"
+                cost_estimate="€15,000 - €50,000"
             ))
         
         return gaps
@@ -585,7 +585,7 @@ class ComplianceQuestionnaire:
                     "Establish DPO independence",
                     "Integrate DPO into decision-making processes"
                 ],
-                cost_estimate="$30,000 - $100,000 annually"
+                cost_estimate="€30,000 - €100,000 annually"
             ))
         
         # Consent Mechanism Gap
@@ -605,7 +605,7 @@ class ComplianceQuestionnaire:
                     "Automate consent status tracking",
                     "Update privacy notices with withdrawal instructions"
                 ],
-                cost_estimate="$8,000 - $20,000"
+                cost_estimate="€8,000 - €20,000"
             ))
         
         return gaps
@@ -632,7 +632,7 @@ class ComplianceQuestionnaire:
                     "Review and update existing BAAs",
                     "Establish BAA management process"
                 ],
-                cost_estimate="$5,000 - $15,000"
+                cost_estimate="€5,000 - €15,000"
             ))
         
         # Encryption Gap Analysis
@@ -652,7 +652,7 @@ class ComplianceQuestionnaire:
                     "Encrypt backup files",
                     "Implement key management system"
                 ],
-                cost_estimate="$10,000 - $30,000"
+                cost_estimate="€10,000 - €30,000"
             ))
         
         return gaps
@@ -750,7 +750,7 @@ class ComplianceQuestionnaire:
             ],
             "total_investment_estimate": self._calculate_total_investment(gaps),
             "roi_projection": {
-                "annual_compliance_costs_avoided": "$50,000 - $200,000",
+                "annual_compliance_costs_avoided": "€50,000 - €200,000",
                 "audit_time_savings": "60-80% reduction",
                 "security_incident_risk_reduction": "70-90%",
                 "trust_score_improvement": f"+{assessment.trust_score_impact} points"
@@ -772,7 +772,7 @@ class ComplianceQuestionnaire:
         total_min = base_cost + critical_cost + high_cost + medium_cost
         total_max = int(total_min * 1.5)  # Add 50% buffer
         
-        return f"${total_min:,} - ${total_max:,}"
+        return f"€{total_min:,} - €{total_max:,}"
     
     def export_assessment_report(self, assessment: ComplianceAssessment) -> str:
         """Export comprehensive assessment report"""

@@ -161,7 +161,7 @@ class AdvancedInstrumentsManager:
             INSERT INTO financial_instruments 
             (instrument_id, isin_code, instrument_name, instrument_type, asset_class,
              currency, country_code, exchange_code, is_active, metadata)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10)
             ON CONFLICT (instrument_id) DO UPDATE SET
                 instrument_name = EXCLUDED.instrument_name,
                 is_active = EXCLUDED.is_active,
@@ -203,7 +203,7 @@ class AdvancedInstrumentsManager:
              strike_price, expiration_date, contract_size, premium, implied_volatility,
              delta_greek, gamma_greek, theta_greek, vega_greek, rho_greek,
              open_interest, volume, currency, metadata)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11, €12, €13, €14, €15, €16, €17, €18, €19)
             """
             
             async with self.db.pool.acquire() as conn:
@@ -249,7 +249,7 @@ class AdvancedInstrumentsManager:
             (time, future_id, underlying_instrument_id, underlying_asset_type,
              contract_month, expiration_date, contract_size, tick_size, tick_value,
              settlement_price, initial_margin, maintenance_margin, exchange_code, currency)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11, €12, €13, €14)
             """
             
             async with self.db.pool.acquire() as conn:
@@ -290,7 +290,7 @@ class AdvancedInstrumentsManager:
             (time, swap_id, swap_type, notional_amount, currency, start_date,
              maturity_date, fixed_rate, floating_rate_index, floating_spread,
              present_value, dv01, counterparty_id, is_cleared)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11, €12, €13, €14)
             """
             
             async with self.db.pool.acquire() as conn:
@@ -331,7 +331,7 @@ class AdvancedInstrumentsManager:
             (time, position_id, portfolio_id, instrument_id, quantity, average_cost,
              market_value, unrealized_pnl, realized_pnl, var_1_day, var_10_day,
              beta, currency)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11, €12, €13)
             """
             
             async with self.db.pool.acquire() as conn:
@@ -375,7 +375,7 @@ class AdvancedInstrumentsManager:
                 SUM(var_1_day) as portfolio_var_1_day,
                 AVG(beta) as weighted_beta
             FROM portfolio_positions 
-            WHERE portfolio_id = $1 
+            WHERE portfolio_id = €1 
                 AND time >= NOW() - INTERVAL '1 day'
             GROUP BY portfolio_id
             """
@@ -474,7 +474,7 @@ class AdvancedInstrumentsManager:
                 var_1_day,
                 beta
             FROM portfolio_positions 
-            WHERE portfolio_id = $1 
+            WHERE portfolio_id = €1 
                 AND time >= NOW() - INTERVAL '1 day'
                 AND quantity != 0
             """
@@ -521,11 +521,11 @@ class AdvancedInstrumentsManager:
     ) -> List[Dict[str, Any]]:
         """Get options chain for underlying instrument"""
         try:
-            conditions = ["underlying_instrument_id = $1"]
+            conditions = ["underlying_instrument_id = €1"]
             params = [underlying_instrument_id]
             
             if expiration_date:
-                conditions.append("expiration_date = $2")
+                conditions.append("expiration_date = €2")
                 params.append(expiration_date)
             
             where_clause = " AND ".join(conditions)
@@ -593,7 +593,7 @@ class AdvancedInstrumentsManager:
                 SUM(p.quantity * COALESCE(o.rho_greek, 0) * o.contract_size) as portfolio_rho
             FROM portfolio_positions p
             JOIN options_contracts o ON p.instrument_id = o.option_id
-            WHERE p.portfolio_id = $1 
+            WHERE p.portfolio_id = €1 
                 AND p.time >= NOW() - INTERVAL '1 day'
                 AND o.time >= NOW() - INTERVAL '1 day'
             """
@@ -642,7 +642,7 @@ class StructuredProductsManager:
             (time, product_id, product_type, notional_amount, currency,
              tranche_name, seniority_level, attachment_point, detachment_point,
              expected_loss, loss_given_default, rating_1, metadata)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11, €12, €13)
             """
             
             async with self.db.pool.acquire() as conn:

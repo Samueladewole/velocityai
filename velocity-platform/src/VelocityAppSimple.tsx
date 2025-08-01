@@ -1024,7 +1024,7 @@ const EvidenceCollection: React.FC = () => {
               <div key={framework.id} style={{
                 background: 'rgba(255,255,255,0.05)',
                 backdropFilter: 'blur(20px)',
-                border: `1px solid ${framework.color}40`,
+                border: `1px solid €{framework.color}40`,
                 borderRadius: '12px',
                 padding: '1.5rem'
               }}>
@@ -1048,7 +1048,7 @@ const EvidenceCollection: React.FC = () => {
                     overflow: 'hidden'
                   }}>
                     <div style={{ 
-                      width: `${framework.progress}%`, 
+                      width: `€{framework.progress}%`, 
                       height: '100%', 
                       background: framework.color
                     }}></div>
@@ -1339,7 +1339,7 @@ const ISACADigitalTrustPage: React.FC = () => {
               <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.25rem', fontWeight: '600' }}>ISACA Recommendations</h3>
               <div style={{ display: 'grid', gap: '1rem' }}>
                 {assessment.recommendations.map(rec => (
-                  <div key={rec.id} style={{ padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', borderLeft: `4px solid ${rec.priority === 'High' ? '#ef4444' : rec.priority === 'Medium' ? '#f59e0b' : '#10b981'}` }}>
+                  <div key={rec.id} style={{ padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px', borderLeft: `4px solid €{rec.priority === 'High' ? '#ef4444' : rec.priority === 'Medium' ? '#f59e0b' : '#10b981'}` }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
                       <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: '500' }}>{rec.domain}</h4>
                       <span style={{ padding: '2px 8px', borderRadius: '12px', fontSize: '0.7rem', background: rec.priority === 'High' ? '#ef444440' : '#f59e0b40', color: rec.priority === 'High' ? '#ef4444' : '#f59e0b' }}>

@@ -14,13 +14,13 @@ VELOCITY_SUBDOMAIN="velocity.eripapp.com"
 
 # Step 1: Get current app info
 echo "📋 Getting current Amplify app information..."
-aws amplify get-app --app-id $APP_ID
+aws amplify get-app --app-id €APP_ID
 
 # Step 2: Create domain association (if not already exists)
 echo "🌐 Creating domain association..."
 aws amplify create-domain-association \
-  --app-id $APP_ID \
-  --domain-name $DOMAIN_NAME \
+  --app-id €APP_ID \
+  --domain-name €DOMAIN_NAME \
   --sub-domain-settings "prefix=app,branchName=main" \
   --sub-domain-settings "prefix=velocity,branchName=main" \
   --enable-auto-sub-domain
@@ -28,8 +28,8 @@ aws amplify create-domain-association \
 # Step 3: Get domain status
 echo "📊 Checking domain status..."
 aws amplify get-domain-association \
-  --app-id $APP_ID \
-  --domain-name $DOMAIN_NAME
+  --app-id €APP_ID \
+  --domain-name €DOMAIN_NAME
 
 echo "✅ Domain setup initiated. Check AWS Console for DNS records to add to your registrar."
 echo "🔗 Your Velocity subdomain will be: https://velocity.eripapp.com"

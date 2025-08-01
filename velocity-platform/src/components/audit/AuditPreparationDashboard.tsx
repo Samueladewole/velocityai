@@ -134,13 +134,13 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
 
   const formatTimeAgo = (date: Date) => {
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-    if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 60) return `€{seconds}s ago`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m ago`;
+    if (minutes < 60) return `€{minutes}m ago`;
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h ago`;
+    if (hours < 24) return `€{hours}h ago`;
     const days = Math.floor(hours / 24);
-    return `${days}d ago`;
+    return `€{days}d ago`;
   };
 
   const filteredPackages = auditPackages.filter(pkg => {
@@ -151,7 +151,7 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center p-12 ${className}`}>
+      <div className={`flex items-center justify-center p-12 €{className}`}>
         <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
         <span className="ml-3 text-slate-600">Loading audit preparation data...</span>
       </div>
@@ -159,7 +159,7 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
@@ -195,7 +195,7 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors €{
                   activeTab === tab.id
                     ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
@@ -308,7 +308,7 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
                         <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">
                           {auditPackage.auditType}
                         </span>
-                        <span className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full font-medium border ${getStatusColor(auditPackage.status)}`}>
+                        <span className={`flex items-center gap-1 px-2 py-1 text-xs rounded-full font-medium border €{getStatusColor(auditPackage.status)}`}>
                           {getStatusIcon(auditPackage.status)}
                           <span className="capitalize">{auditPackage.status.replace('-', ' ')}</span>
                         </span>
@@ -336,11 +336,11 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
                           <div className="w-full bg-slate-200 rounded-full h-2">
                             <div 
                               className="bg-gradient-to-r from-blue-500 to-emerald-500 h-2 rounded-full transition-all duration-300"
-                              style={{ width: `${auditPackage.completionPercentage}%` }}
+                              style={{ width: `€{auditPackage.completionPercentage}%` }}
                             ></div>
                           </div>
                         </div>
-                        <div className={`px-2 py-1 text-xs rounded-full font-medium ${getRiskColor(auditPackage.riskAssessment)}`}>
+                        <div className={`px-2 py-1 text-xs rounded-full font-medium €{getRiskColor(auditPackage.riskAssessment)}`}>
                           {auditPackage.riskAssessment.toUpperCase()} RISK
                         </div>
                       </div>
@@ -395,7 +395,7 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
                       <div className="flex-1">
                         <div className="flex items-center gap-2 mb-2">
                           <h4 className="font-medium text-slate-900">{finding.title}</h4>
-                          <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                          <span className={`px-2 py-1 text-xs rounded-full font-medium €{
                             finding.severity === 'critical' ? 'bg-red-100 text-red-700' :
                             finding.severity === 'high' ? 'bg-orange-100 text-orange-700' :
                             finding.severity === 'medium' ? 'bg-amber-100 text-amber-700' :
@@ -415,7 +415,7 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                      <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium €{
                         finding.status === 'resolved' ? 'bg-emerald-50 text-emerald-600' :
                         finding.status === 'in-progress' ? 'bg-blue-50 text-blue-600' :
                         'bg-amber-50 text-amber-600'
@@ -497,8 +497,8 @@ const AuditPreparationDashboard: React.FC<AuditPreparationDashboardProps> = ({ c
                 const IconComponent = report.icon;
                 return (
                   <div key={index} className="border border-slate-200 rounded-lg p-6 hover:border-slate-300 transition-colors cursor-pointer">
-                    <div className={`p-3 rounded-lg mb-4 bg-${report.color}-100`}>
-                      <IconComponent className={`w-6 h-6 text-${report.color}-600`} />
+                    <div className={`p-3 rounded-lg mb-4 bg-€{report.color}-100`}>
+                      <IconComponent className={`w-6 h-6 text-€{report.color}-600`} />
                     </div>
                     <h3 className="font-medium text-slate-900 mb-2">{report.title}</h3>
                     <p className="text-sm text-slate-600 mb-4">{report.description}</p>

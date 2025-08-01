@@ -111,13 +111,13 @@ export const FrameworkCoverageChart: React.FC<{ data: any[] }> = ({ data }) => {
           cx="50%"
           cy="50%"
           labelLine={false}
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          label={({ name, percent }) => `€{name} €{(percent * 100).toFixed(0)}%`}
           outerRadius={80}
           fill="#8884d8"
           dataKey="value"
         >
           {data.map((entry, index) => (
-            <Cell key={`cell-${index}`} fill={COLORS.primary[index % COLORS.primary.length]} />
+            <Cell key={`cell-€{index}`} fill={COLORS.primary[index % COLORS.primary.length]} />
           ))}
         </Pie>
         <Tooltip />
@@ -160,10 +160,10 @@ export const FinancialImpactChart: React.FC<{ data: any[] }> = ({ data }) => {
         </defs>
         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
         <XAxis dataKey="month" stroke="#6b7280" fontSize={12} />
-        <YAxis stroke="#6b7280" fontSize={12} tickFormatter={(value) => `$${value/1000}k`} />
+        <YAxis stroke="#6b7280" fontSize={12} tickFormatter={(value) => `€€{value/1000}k`} />
         <Tooltip 
           contentStyle={{ backgroundColor: 'white', border: '1px solid #e5e7eb', borderRadius: '8px' }}
-          formatter={(value: any) => `$${(value/1000).toFixed(0)}k`}
+          formatter={(value: any) => `€€{(value/1000).toFixed(0)}k`}
         />
         <Legend />
         <Area type="monotone" dataKey="prevented" stackId="1" stroke="#10b981" fill="url(#greenGradient)" />

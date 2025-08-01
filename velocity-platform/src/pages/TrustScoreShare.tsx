@@ -94,7 +94,7 @@ export const TrustScoreShare: React.FC = () => {
     if (sharingSettings.certificationList) params.append('certs', 'true');
     if (sharingSettings.contactInfo) params.append('contact', 'true');
     
-    const url = `${baseUrl}${profileId}?${params.toString()}`;
+    const url = `€{baseUrl}€{profileId}?€{params.toString()}`;
     setShareUrl(url);
     return url;
   };
@@ -123,17 +123,17 @@ export const TrustScoreShare: React.FC = () => {
 
   const shareToSocial = (platform: string) => {
     const url = shareUrl || generateShareUrl();
-    const text = `Check out our Trust Score of ${trustProfile.trustScore}% - ${trustProfile.trustTier} tier! We're committed to security excellence.`;
+    const text = `Check out our Trust Score of €{trustProfile.trustScore}% - €{trustProfile.trustTier} tier! We're committed to security excellence.`;
     
     switch (platform) {
       case 'linkedin':
-        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`);
+        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=€{encodeURIComponent(url)}&text=€{encodeURIComponent(text)}`);
         break;
       case 'twitter':
-        window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`);
+        window.open(`https://twitter.com/intent/tweet?url=€{encodeURIComponent(url)}&text=€{encodeURIComponent(text)}`);
         break;
       case 'email':
-        window.open(`mailto:?subject=Our Trust Score&body=${encodeURIComponent(text + '\n\n' + url)}`);
+        window.open(`mailto:?subject=Our Trust Score&body=€{encodeURIComponent(text + '\n\n' + url)}`);
         break;
     }
   };
@@ -152,10 +152,10 @@ export const TrustScoreShare: React.FC = () => {
             </p>
           </div>
           <div className="text-center">
-            <div className={`text-4xl font-bold bg-gradient-to-r ${getTrustTierColor(trustProfile.trustTier)} bg-clip-text text-transparent mb-1`}>
+            <div className={`text-4xl font-bold bg-gradient-to-r €{getTrustTierColor(trustProfile.trustTier)} bg-clip-text text-transparent mb-1`}>
               {trustProfile.trustScore}%
             </div>
-            <Badge className={`bg-gradient-to-r ${getTrustTierColor(trustProfile.trustTier)} text-white`}>
+            <Badge className={`bg-gradient-to-r €{getTrustTierColor(trustProfile.trustTier)} text-white`}>
               {trustProfile.trustTier} Tier
             </Badge>
           </div>
@@ -186,7 +186,7 @@ export const TrustScoreShare: React.FC = () => {
             <Card className="card-professional">
               <CardContent className="p-8">
                 <div className="text-center mb-8">
-                  <div className={`inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-r ${getTrustTierColor(trustProfile.trustTier)} mb-4`}>
+                  <div className={`inline-flex items-center justify-center w-32 h-32 rounded-full bg-gradient-to-r €{getTrustTierColor(trustProfile.trustTier)} mb-4`}>
                     <div className="w-28 h-28 rounded-full bg-white flex items-center justify-center">
                       <div className="text-center">
                         <div className="text-3xl font-bold text-slate-900">{trustProfile.trustScore}%</div>

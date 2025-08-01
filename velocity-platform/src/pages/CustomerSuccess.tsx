@@ -386,9 +386,9 @@ export const CustomerSuccess: React.FC = () => {
     const now = new Date()
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60))
     
-    if (diffInMinutes < 60) return `${diffInMinutes}m ago`
-    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`
-    return `${Math.floor(diffInMinutes / 1440)}d ago`
+    if (diffInMinutes < 60) return `€{diffInMinutes}m ago`
+    if (diffInMinutes < 1440) return `€{Math.floor(diffInMinutes / 60)}h ago`
+    return `€{Math.floor(diffInMinutes / 1440)}d ago`
   }
 
   const completedSteps = ONBOARDING_STEPS.filter(step => step.completed).length
@@ -420,7 +420,7 @@ export const CustomerSuccess: React.FC = () => {
                     {metric.trend === 'up' ? <TrendingUp className="h-4 w-4" /> :
                      metric.trend === 'down' ? <TrendingDown className="h-4 w-4" /> :
                      <div className="w-4 h-1 bg-gray-400 rounded"></div>}
-                    {metric.change !== 0 && `${metric.change > 0 ? '+' : ''}${metric.change}%`}
+                    {metric.change !== 0 && `€{metric.change > 0 ? '+' : ''}€{metric.change}%`}
                   </div>
                 </div>
                 <div className="text-2xl font-bold mb-3" style={{ color: metric.color }}>
@@ -872,7 +872,7 @@ export const CustomerSuccess: React.FC = () => {
                       <div className="text-sm text-purple-800">Avg Response Time</div>
                     </div>
                     <div className="text-center p-4 bg-orange-50 rounded-lg">
-                      <div className="text-2xl font-bold text-orange-600">$2.3M</div>
+                      <div className="text-2xl font-bold text-orange-600">€2.3M</div>
                       <div className="text-sm text-orange-800">Annual Revenue</div>
                     </div>
                   </div>

@@ -53,7 +53,7 @@ const Team: React.FC = () => {
                 <a href={member.twitter} className="text-gray-400 hover:text-blue-600">
                   <Twitter className="w-5 h-5" />
                 </a>
-                <a href={`mailto:${member.email}`} className="text-gray-400 hover:text-blue-600">
+                <a href={`mailto:€{member.email}`} className="text-gray-400 hover:text-blue-600">
                   <Mail className="w-5 h-5" />
                 </a>
               </div>
@@ -70,17 +70,17 @@ EOF
 
 # Create other company pages
 for page in Careers Press Partners Investors; do
-cat > "src/pages/company/${page}.tsx" << EOF
+cat > "src/pages/company/€{page}.tsx" << EOF
 import React from 'react';
 
-const ${page}: React.FC = () => {
+const €{page}: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">${page}</h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">€{page}</h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            ${page} page coming soon. Stay tuned for updates.
+            €{page} page coming soon. Stay tuned for updates.
           </p>
         </div>
         <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-8 text-center">
@@ -99,27 +99,27 @@ const ${page}: React.FC = () => {
   );
 };
 
-export default ${page};
+export default €{page};
 EOF
 done
 
 # Create resource pages
 for page in ApiDocs Blog Webinars CaseStudies Help; do
-cat > "src/pages/resources/${page}.tsx" << EOF
+cat > "src/pages/resources/€{page}.tsx" << EOF
 import React from 'react';
 import { BookOpen } from 'lucide-react';
 
-const ${page}: React.FC = () => {
+const €{page}: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <BookOpen className="w-12 h-12 text-blue-600" />
-            <h1 className="text-4xl font-bold text-gray-900">${page}</h1>
+            <h1 className="text-4xl font-bold text-gray-900">€{page}</h1>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            ${page} resources coming soon.
+            €{page} resources coming soon.
           </p>
         </div>
       </div>
@@ -127,24 +127,24 @@ const ${page}: React.FC = () => {
   );
 };
 
-export default ${page};
+export default €{page};
 EOF
 done
 
 # Create legal pages
 for page in Terms DPA Cookies Security Compliance; do
-cat > "src/pages/legal/${page}.tsx" << EOF
+cat > "src/pages/legal/€{page}.tsx" << EOF
 import React from 'react';
 import { Shield } from 'lucide-react';
 
-const ${page}: React.FC = () => {
+const €{page}: React.FC = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="container mx-auto px-4 py-16 max-w-4xl">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Shield className="w-12 h-12 text-blue-600" />
-            <h1 className="text-4xl font-bold text-gray-900">${page}</h1>
+            <h1 className="text-4xl font-bold text-gray-900">€{page}</h1>
           </div>
           <p className="text-lg text-gray-600">
             Last updated: July 28, 2025
@@ -153,10 +153,10 @@ const ${page}: React.FC = () => {
         
         <div className="bg-blue-50 p-8 rounded-lg text-center">
           <h2 className="text-2xl font-semibold text-blue-900 mb-4">
-            ${page} Documentation
+            €{page} Documentation
           </h2>
           <p className="text-blue-800 mb-6">
-            This page is being updated with comprehensive ${page.toLowerCase()} information.
+            This page is being updated with comprehensive €{page.toLowerCase()} information.
           </p>
           <p className="text-blue-700">
             For immediate assistance, contact us at{' '}
@@ -170,27 +170,27 @@ const ${page}: React.FC = () => {
   );
 };
 
-export default ${page};
+export default €{page};
 EOF
 done
 
 # Create certification pages
 for page in Soc2 Iso27001 Gdpr Tisax; do
-cat > "src/pages/certifications/${page}.tsx" << EOF
+cat > "src/pages/certifications/€{page}.tsx" << EOF
 import React from 'react';
 import { Award, Shield, CheckCircle } from 'lucide-react';
 
-const ${page}: React.FC = () => {
+const €{page}: React.FC = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-16">
           <div className="flex items-center justify-center gap-3 mb-4">
             <Award className="w-12 h-12 text-blue-600" />
-            <h1 className="text-4xl font-bold text-gray-900">${page} Certification</h1>
+            <h1 className="text-4xl font-bold text-gray-900">€{page} Certification</h1>
           </div>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Learn about our ${page} compliance and certification status.
+            Learn about our €{page} compliance and certification status.
           </p>
         </div>
         
@@ -201,7 +201,7 @@ const ${page}: React.FC = () => {
                 <CheckCircle className="w-8 h-8 text-green-600" />
               </div>
               <div>
-                <h2 className="text-2xl font-semibold text-gray-900">${page} Compliant</h2>
+                <h2 className="text-2xl font-semibold text-gray-900">€{page} Compliant</h2>
                 <p className="text-gray-600">Certified and audited by independent third parties</p>
               </div>
             </div>
@@ -220,7 +220,7 @@ const ${page}: React.FC = () => {
               <div className="bg-blue-50 p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-blue-900 mb-3">What This Means</h3>
                 <p className="text-blue-800 text-sm">
-                  Our ${page} certification demonstrates our commitment to maintaining 
+                  Our €{page} certification demonstrates our commitment to maintaining 
                   the highest standards of security, privacy, and compliance for our customers.
                 </p>
               </div>
@@ -232,7 +232,7 @@ const ${page}: React.FC = () => {
   );
 };
 
-export default ${page};
+export default €{page};
 EOF
 done
 

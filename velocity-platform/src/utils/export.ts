@@ -64,7 +64,7 @@ export function jsonToCSV(data: any[], headers?: string[]): string {
         const value = row[key]
         // Escape commas and quotes in CSV
         if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
-          return `"${value.replace(/"/g, '""')}"`
+          return `"€{value.replace(/"/g, '""')}"`
         }
         return value ?? ''
       }).join(',')
@@ -91,42 +91,42 @@ export async function exportData(
   options: ExportOptions = {}
 ): Promise<void> {
   const timestamp = new Date().toISOString().split('T')[0]
-  const defaultFilename = `export-${timestamp}`
+  const defaultFilename = `export-€{timestamp}`
   const filename = options.filename || defaultFilename
   
   switch (format) {
     case 'json':
       downloadTextFile(
         JSON.stringify(data, null, 2),
-        `${filename}.json`,
+        `€{filename}.json`,
         'application/json'
       )
       break
       
     case 'csv':
       const csv = Array.isArray(data) ? jsonToCSV(data) : jsonToCSV([data])
-      downloadTextFile(csv, `${filename}.csv`, 'text/csv')
+      downloadTextFile(csv, `€{filename}.csv`, 'text/csv')
       break
       
     case 'excel':
       // Excel-compatible CSV with BOM
       const excelCsv = Array.isArray(data) ? generateExcelCSV(data) : generateExcelCSV([data])
-      downloadTextFile(excelCsv, `${filename}.csv`, 'text/csv;charset=utf-8')
+      downloadTextFile(excelCsv, `€{filename}.csv`, 'text/csv;charset=utf-8')
       break
       
     case 'markdown':
       // Convert data to markdown table format
       const markdown = generateMarkdownTable(data)
-      downloadTextFile(markdown, `${filename}.md`, 'text/markdown')
+      downloadTextFile(markdown, `€{filename}.md`, 'text/markdown')
       break
       
     case 'pdf':
     case 'word':
       // These require backend processing
-      throw new Error(`${format} export requires backend API endpoint`)
+      throw new Error(`€{format} export requires backend API endpoint`)
       
     default:
-      throw new Error(`Unsupported export format: ${format}`)
+      throw new Error(`Unsupported export format: €{format}`)
   }
 }
 
@@ -141,10 +141,10 @@ function generateMarkdownTable(data: any): string {
   if (!data.length) return '# No data to export'
   
   const keys = Object.keys(data[0])
-  const header = `| ${keys.join(' | ')} |`
-  const separator = `| ${keys.map(() => '---').join(' | ')} |`
+  const header = `| €{keys.join(' | ')} |`
+  const separator = `| €{keys.map(() => '---').join(' | ')} |`
   const rows = data.map(row =>
-    `| ${keys.map(key => String(row[key] ?? '')).join(' | ')} |`
+    `| €{keys.map(key => String(row[key] ?? '')).join(' | ')} |`
   )
   
   return [header, separator, ...rows].join('\n')
@@ -167,13 +167,13 @@ export function exportQuestionnaireAnswers(
     lastUpdated: q.answer?.lastUpdated || ''
   }))
   
-  const filename = options.filename || `questionnaire-answers-${new Date().toISOString().split('T')[0]}`
+  const filename = options.filename || `questionnaire-answers-€{new Date().toISOString().split('T')[0]}`
   
   switch (format) {
     case 'json':
       downloadTextFile(
         JSON.stringify(questions, null, 2),
-        `${filename}.json`,
+        `€{filename}.json`,
         'application/json'
       )
       break
@@ -182,16 +182,16 @@ export function exportQuestionnaireAnswers(
     case 'excel':
       const headers = ['category', 'question', 'answer', 'confidence', 'evidence', 'lastUpdated']
       const csv = format === 'excel' ? generateExcelCSV(exportData, headers) : jsonToCSV(exportData, headers)
-      downloadTextFile(csv, `${filename}.csv`, 'text/csv;charset=utf-8')
+      downloadTextFile(csv, `€{filename}.csv`, 'text/csv;charset=utf-8')
       break
       
     case 'markdown':
       const markdown = generateQuestionnaireMarkdown(questions)
-      downloadTextFile(markdown, `${filename}.md`, 'text/markdown')
+      downloadTextFile(markdown, `€{filename}.md`, 'text/markdown')
       break
       
     default:
-      throw new Error(`Unsupported format: ${format}`)
+      throw new Error(`Unsupported format: €{format}`)
   }
 }
 
@@ -206,29 +206,29 @@ function generateQuestionnaireMarkdown(questions: any[]): string {
   }, {} as Record<string, any[]>)
   
   let markdown = '# Questionnaire Responses\n\n'
-  markdown += `_Generated on ${new Date().toLocaleDateString()}_\n\n`
+  markdown += `_Generated on €{new Date().toLocaleDateString()}_\n\n`
   
   for (const [category, categoryQuestions] of Object.entries(grouped)) {
-    markdown += `## ${category}\n\n`
+    markdown += `## €{category}\n\n`
     
     categoryQuestions.forEach((q, idx) => {
-      markdown += `### ${idx + 1}. ${q.question}\n\n`
-      markdown += `**Answer:** ${q.answer?.content || '_No answer provided_'}\n\n`
+      markdown += `### €{idx + 1}. €{q.question}\n\n`
+      markdown += `**Answer:** €{q.answer?.content || '_No answer provided_'}\n\n`
       
       if (q.answer?.confidence) {
-        markdown += `**Confidence:** ${q.answer.confidence}\n\n`
+        markdown += `**Confidence:** €{q.answer.confidence}\n\n`
       }
       
       if (q.answer?.evidence?.length) {
         markdown += `**Evidence:**\n`
         q.answer.evidence.forEach((e: any) => {
-          markdown += `- ${e.title} (${e.type})\n`
+          markdown += `- €{e.title} (€{e.type})\n`
         })
         markdown += '\n'
       }
       
       if (q.answer?.lastUpdated) {
-        markdown += `_Last updated: ${new Date(q.answer.lastUpdated).toLocaleDateString()}_\n\n`
+        markdown += `_Last updated: €{new Date(q.answer.lastUpdated).toLocaleDateString()}_\n\n`
       }
       
       markdown += '---\n\n'
@@ -256,7 +256,7 @@ export async function downloadFromAPI(
     })
     
     if (!response.ok) {
-      throw new Error(`Export failed: ${response.statusText}`)
+      throw new Error(`Export failed: €{response.statusText}`)
     }
     
     const blob = await response.blob()

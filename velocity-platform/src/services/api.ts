@@ -81,12 +81,12 @@ class ApiService {
     endpoint: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const url = `${API_BASE_URL}${endpoint}`;
+    const url = `€{API_BASE_URL}€{endpoint}`;
     
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
-        ...(this.token && { Authorization: `Bearer ${this.token}` }),
+        ...(this.token && { Authorization: `Bearer €{this.token}` }),
         ...options.headers,
       },
       ...options,
@@ -97,12 +97,12 @@ class ApiService {
       
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
-        throw new Error(errorData.detail || `HTTP ${response.status}: ${response.statusText}`);
+        throw new Error(errorData.detail || `HTTP €{response.status}: €{response.statusText}`);
       }
 
       return await response.json();
     } catch (error) {
-      console.error(`API Error (${endpoint}):`, error);
+      console.error(`API Error (€{endpoint}):`, error);
       throw error;
     }
   }
@@ -156,7 +156,7 @@ class ApiService {
   }
 
   async getAgentEvidence(agentId: string): Promise<Evidence[]> {
-    return this.request<Evidence[]>(`/agents/${agentId}/evidence`);
+    return this.request<Evidence[]>(`/agents/€{agentId}/evidence`);
   }
 
   // Dashboard

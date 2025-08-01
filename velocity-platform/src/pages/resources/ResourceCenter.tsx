@@ -215,7 +215,7 @@ const TabInterface: React.FC<{
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
+            className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors €{
               activeTab === tab.id
                 ? 'border-emerald-500 text-emerald-400'
                 : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-600'
@@ -474,12 +474,12 @@ const ComplianceGuides: React.FC<{ searchTerm: string; selectedCategory: string 
       {filteredGuides.map((guide) => (
         <div
           key={guide.id}
-          className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 ${colorClasses[guide.color as keyof typeof colorClasses]}`}
-          onClick={() => navigate(`/velocity/resources/guides/${guide.id}`)}
+          className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 €{colorClasses[guide.color as keyof typeof colorClasses]}`}
+          onClick={() => navigate(`/velocity/resources/guides/€{guide.id}`)}
         >
           <div className="flex items-start justify-between mb-4">
             <div className="text-3xl">{guide.icon}</div>
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[guide.difficulty as keyof typeof difficultyColors]}`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium €{difficultyColors[guide.difficulty as keyof typeof difficultyColors]}`}>
               {guide.difficulty}
             </span>
           </div>

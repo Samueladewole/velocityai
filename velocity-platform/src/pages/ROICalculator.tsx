@@ -210,7 +210,7 @@ export const ROICalculator: React.FC = () => {
     // ERIP implementation cost (based on company size and complexity)
     const implementationCost = Math.min(
       companyProfile.employees * 150 + companyProfile.currentFrameworks.length * 25000,
-      500000 // Cap at $500k
+      500000 // Cap at €500k
     )
     
     // Calculate savings based on ERIP's efficiency improvements
@@ -278,14 +278,14 @@ export const ROICalculator: React.FC = () => {
   }
 
   const formatPercent = (value: number) => {
-    return `${value > 0 ? '+' : ''}${value.toFixed(1)}%`
+    return `€{value > 0 ? '+' : ''}€{value.toFixed(1)}%`
   }
 
   const generateYearlyProjection = () => {
     if (!roiCalculation) return []
     
     return Array.from({ length: 5 }, (_, i) => ({
-      year: `Year ${i + 1}`,
+      year: `Year €{i + 1}`,
       savings: roiCalculation.savings.annual.total * (i + 1),
       cumulative: roiCalculation.savings.annual.total * (i + 1) - roiCalculation.implementation.cost,
       roi: ((roiCalculation.savings.annual.total * (i + 1) - roiCalculation.implementation.cost) / roiCalculation.implementation.cost) * 100
@@ -372,7 +372,7 @@ export const ROICalculator: React.FC = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <Label htmlFor="revenue">Annual Revenue ($)</Label>
+                    <Label htmlFor="revenue">Annual Revenue (€)</Label>
                     <Input
                       id="revenue"
                       type="number"
@@ -427,7 +427,7 @@ export const ROICalculator: React.FC = () => {
 
                 <div className="grid md:grid-cols-3 gap-6">
                   <div>
-                    <Label htmlFor="compliance-budget">Annual Compliance Budget ($)</Label>
+                    <Label htmlFor="compliance-budget">Annual Compliance Budget (€)</Label>
                     <Input
                       id="compliance-budget"
                       type="number"
@@ -438,7 +438,7 @@ export const ROICalculator: React.FC = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="security-budget">Annual Security Budget ($)</Label>
+                    <Label htmlFor="security-budget">Annual Security Budget (€)</Label>
                     <Input
                       id="security-budget"
                       type="number"
@@ -449,7 +449,7 @@ export const ROICalculator: React.FC = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="it-budget">Annual IT Budget ($)</Label>
+                    <Label htmlFor="it-budget">Annual IT Budget (€)</Label>
                     <Input
                       id="it-budget"
                       type="number"
@@ -709,10 +709,10 @@ export const ROICalculator: React.FC = () => {
                               cy="50%"
                               outerRadius={80}
                               dataKey="value"
-                              label={(entry) => `${entry.name}: ${formatCurrency(entry.value)}`}
+                              label={(entry) => `€{entry.name}: €{formatCurrency(entry.value)}`}
                             >
                               {savingsBreakdown.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={entry.color} />
+                                <Cell key={`cell-€{index}`} fill={entry.color} />
                               ))}
                             </Pie>
                             <Tooltip formatter={(value) => formatCurrency(value as number)} />
@@ -735,7 +735,7 @@ export const ROICalculator: React.FC = () => {
                         <div key={key} className="text-center">
                           <div className="text-2xl font-bold text-blue-600 mb-2">{value}%</div>
                           <div className="text-sm text-slate-600 capitalize">
-                            {key.replace(/([A-Z])/g, ' $1').trim()}
+                            {key.replace(/([A-Z])/g, ' €1').trim()}
                           </div>
                           <Progress value={value} className="h-2 mt-2" />
                         </div>

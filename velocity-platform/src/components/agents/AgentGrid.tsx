@@ -235,20 +235,20 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
 
   const formatTimeAgo = (date: Date) => {
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-    if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 60) return `€{seconds}s ago`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m ago`;
+    if (minutes < 60) return `€{minutes}m ago`;
     const hours = Math.floor(minutes / 60);
-    return `${hours}h ago`;
+    return `€{hours}h ago`;
   };
 
   const formatTimeUntil = (date: Date) => {
     const seconds = Math.floor((date.getTime() - Date.now()) / 1000);
-    if (seconds < 60) return `${seconds}s`;
+    if (seconds < 60) return `€{seconds}s`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m`;
+    if (minutes < 60) return `€{minutes}m`;
     const hours = Math.floor(minutes / 60);
-    return `${hours}h`;
+    return `€{hours}h`;
   };
 
   const getDefaultTaskForAgent = (type: Agent['type']): string => {
@@ -321,7 +321,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
     }
 
     // TODO: Connect to actual backend API
-    console.log(`Agent ${agentId}: ${action}`);
+    console.log(`Agent €{agentId}: €{action}`);
   };
 
   const getStatusIcon = (status: string) => {
@@ -340,7 +340,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
   const avgSuccessRate = agents.reduce((sum, agent) => sum + agent.successRate, 0) / agents.length;
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Hero Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200">
@@ -419,7 +419,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
           return (
             <Card 
               key={agent.id} 
-              className={`h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:scale-105 ${STATUS_STYLES[agent.status]}`}
+              className={`h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:scale-105 €{STATUS_STYLES[agent.status]}`}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">

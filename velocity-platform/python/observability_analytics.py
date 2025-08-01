@@ -336,12 +336,12 @@ class ObservabilityAnalytics:
         manual_processing_time = 300  # Assume 5 minutes manual processing per decision
         
         time_saved_hours = (total_decisions * manual_processing_time) / 3600
-        cost_per_hour = 50  # Assume $50/hour labor cost
+        cost_per_hour = 50  # Assume €50/hour labor cost
         automation_savings = time_saved_hours * cost_per_hour
         
         # Risk reduction value
         compliance_score = compliance_data.get('completion_percentage', 0)
-        risk_reduction_value = compliance_score * 1000  # $1000 per compliance percentage point
+        risk_reduction_value = compliance_score * 1000  # €1000 per compliance percentage point
         
         # Efficiency gains
         confidence_score = performance_data.get('avg_confidence', 0)

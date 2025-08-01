@@ -191,7 +191,7 @@ def generate_risk_analysis(count: int = 3) -> List[RiskAnalysis]:
             "impact": 8.5,
             "mitigation_cost": 125000,
             "business_impact": (
-                "Potential $2.3M in regulatory fines, customer churn, "
+                "Potential €2.3M in regulatory fines, customer churn, "
                 "and reputation damage"
             )
         },
@@ -201,7 +201,7 @@ def generate_risk_analysis(count: int = 3) -> List[RiskAnalysis]:
             "impact": 9.2,
             "mitigation_cost": 85000,
             "business_impact": (
-                "Estimated $4.1M in downtime, data recovery, and ransom "
+                "Estimated €4.1M in downtime, data recovery, and ransom "
                 "payments"
             )
         },
@@ -211,7 +211,7 @@ def generate_risk_analysis(count: int = 3) -> List[RiskAnalysis]:
             "impact": 7.8,
             "mitigation_cost": 65000,
             "business_impact": (
-                "Potential $1.8M in IP theft and competitive intelligence "
+                "Potential €1.8M in IP theft and competitive intelligence "
                 "loss"
             )
         }
@@ -578,7 +578,7 @@ async def run_compliance_assessment(assessment_request: Dict[str, Any]):
             "severity": "Medium",
             "framework_section": "Operations Security",
             "remediation_effort": "2-3 weeks",
-            "business_impact": "$50K potential audit findings"
+            "business_impact": "€50K potential audit findings"
         },
         {
             "control_id": "A.9.2.3",
@@ -590,7 +590,7 @@ async def run_compliance_assessment(assessment_request: Dict[str, Any]):
             "severity": "High",
             "framework_section": "Access Control",
             "remediation_effort": "4-6 weeks",
-            "business_impact": "$200K potential security incident"
+            "business_impact": "€200K potential security incident"
         }
     ]
 

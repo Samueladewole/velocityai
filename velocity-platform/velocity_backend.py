@@ -140,7 +140,7 @@ async def signup(user: UserCreate):
     """User registration"""
     async with db_pool.acquire() as conn:
         # Check if user already exists
-        existing = await conn.fetchrow("SELECT id FROM users WHERE email = $1", user.email)
+        existing = await conn.fetchrow("SELECT id FROM users WHERE email = €1", user.email)
         if existing:
             raise HTTPException(status_code=400, detail="Email already registered")
         
@@ -148,7 +148,7 @@ async def signup(user: UserCreate):
         hashed_password = hash_password(user.password)
         user_id = await conn.fetchval("""
             INSERT INTO users (email, hashed_password, first_name, last_name, company)
-            VALUES ($1, $2, $3, $4, $5)
+            VALUES (€1, €2, €3, €4, €5)
             RETURNING id
         """, user.email, hashed_password, user.first_name, user.last_name, user.company)
         
@@ -176,7 +176,7 @@ async def login(credentials: UserLogin):
     async with db_pool.acquire() as conn:
         user = await conn.fetchrow("""
             SELECT id, email, hashed_password, first_name, last_name, company
-            FROM users WHERE email = $1 AND is_active = TRUE
+            FROM users WHERE email = €1 AND is_active = TRUE
         """, credentials.email)
         
         if not user or not verify_password(credentials.password, user['hashed_password']):
@@ -206,7 +206,7 @@ async def get_me(current_user = Depends(get_current_user)):
     async with db_pool.acquire() as conn:
         user = await conn.fetchrow("""
             SELECT id, email, first_name, last_name, company, created_at
-            FROM users WHERE id = $1
+            FROM users WHERE id = €1
         """, uuid.UUID(current_user["user_id"]))
         
         if not user:
@@ -226,7 +226,7 @@ async def create_agent(agent: AgentCreate, current_user = Depends(get_current_us
     async with db_pool.acquire() as conn:
         agent_id = await conn.fetchval("""
             INSERT INTO agents (user_id, name, description, platform, framework, automation_level)
-            VALUES ($1, $2, $3, $4, $5, $6)
+            VALUES (€1, €2, €3, €4, €5, €6)
             RETURNING id
         """, uuid.UUID(current_user["user_id"]), agent.name, agent.description, 
             agent.platform, agent.framework, agent.automation_level)
@@ -242,7 +242,7 @@ async def create_agent(agent: AgentCreate, current_user = Depends(get_current_us
         for control_id, control_name, evidence_type in evidence_templates:
             await conn.execute("""
                 INSERT INTO evidence (agent_id, control_id, control_name, evidence_type, data)
-                VALUES ($1, $2, $3, $4, $5)
+                VALUES (€1, €2, €3, €4, €5)
             """, agent_id, control_id, control_name, evidence_type, {
                 "source": f"Mock {evidence_type} data for {control_id}",
                 "compliance_status": "compliant",
@@ -254,7 +254,7 @@ async def create_agent(agent: AgentCreate, current_user = Depends(get_current_us
             SELECT a.*, COUNT(e.id) as evidence_count
             FROM agents a
             LEFT JOIN evidence e ON a.id = e.agent_id
-            WHERE a.id = $1
+            WHERE a.id = €1
             GROUP BY a.id
         """, agent_id)
         
@@ -278,7 +278,7 @@ async def get_agents(current_user = Depends(get_current_user)):
             SELECT a.*, COUNT(e.id) as evidence_count
             FROM agents a
             LEFT JOIN evidence e ON a.id = e.agent_id
-            WHERE a.user_id = $1
+            WHERE a.user_id = €1
             GROUP BY a.id
             ORDER BY a.created_at DESC
         """, uuid.UUID(current_user["user_id"]))
@@ -301,14 +301,14 @@ async def get_agent_evidence(agent_id: str, current_user = Depends(get_current_u
     async with db_pool.acquire() as conn:
         # Verify agent belongs to user
         agent = await conn.fetchrow("""
-            SELECT id FROM agents WHERE id = $1 AND user_id = $2
+            SELECT id FROM agents WHERE id = €1 AND user_id = €2
         """, uuid.UUID(agent_id), uuid.UUID(current_user["user_id"]))
         
         if not agent:
             raise HTTPException(status_code=404, detail="Agent not found")
         
         evidence = await conn.fetch("""
-            SELECT * FROM evidence WHERE agent_id = $1 ORDER BY collected_at DESC
+            SELECT * FROM evidence WHERE agent_id = €1 ORDER BY collected_at DESC
         """, uuid.UUID(agent_id))
         
         return [Evidence(
@@ -333,7 +333,7 @@ async def get_dashboard_stats(current_user = Depends(get_current_user)):
                 COUNT(DISTINCT CASE WHEN a.status = 'active' THEN a.id END) as active_agents
             FROM agents a
             LEFT JOIN evidence e ON a.id = e.agent_id
-            WHERE a.user_id = $1
+            WHERE a.user_id = €1
         """, uuid.UUID(current_user["user_id"]))
         
         return {

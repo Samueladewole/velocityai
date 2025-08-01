@@ -244,7 +244,7 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
   const categories = Array.from(new Set(components.map(c => c.category)));
 
   return (
-    <div className={`space-y-8 ${className}`}>
+    <div className={`space-y-8 €{className}`}>
       <div className="flex items-center justify-between">
         <div>
           <h2 className="text-2xl font-bold text-slate-900">Platform Components</h2>
@@ -266,7 +266,7 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
       {categories.map(category => (
         <div key={category} className="space-y-4">
           <div className="flex items-center gap-3">
-            <div className={`h-1 w-8 rounded-full bg-gradient-to-r ${categoryColors[category as keyof typeof categoryColors]}`} />
+            <div className={`h-1 w-8 rounded-full bg-gradient-to-r €{categoryColors[category as keyof typeof categoryColors]}`} />
             <h3 className="text-lg font-semibold text-slate-800">{category}</h3>
             <span className="text-sm text-slate-500">
               {components.filter(c => c.category === category).length} components
@@ -287,7 +287,7 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
                     {/* Header */}
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-3">
-                        <div className={`p-2 rounded-lg bg-gradient-to-r ${component.color} text-white`}>
+                        <div className={`p-2 rounded-lg bg-gradient-to-r €{component.color} text-white`}>
                           {component.icon}
                         </div>
                         <div>
@@ -296,7 +296,7 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <div className={`h-2 w-2 rounded-full ${statusConfig[component.status].color}`} />
+                        <div className={`h-2 w-2 rounded-full €{statusConfig[component.status].color}`} />
                         <span className="text-xs text-slate-600">{statusConfig[component.status].label}</span>
                       </div>
                     </div>
@@ -309,8 +309,8 @@ export const ComponentGrid: React.FC<ComponentGridProps> = ({ className = '' }) 
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-2">
                         <div 
-                          className={`bg-gradient-to-r ${component.color} h-2 rounded-full transition-all duration-1000`}
-                          style={{ width: `${component.health}%` }}
+                          className={`bg-gradient-to-r €{component.color} h-2 rounded-full transition-all duration-1000`}
+                          style={{ width: `€{component.health}%` }}
                         />
                       </div>
                     </div>

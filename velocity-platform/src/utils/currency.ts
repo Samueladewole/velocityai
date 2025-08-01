@@ -11,7 +11,7 @@ interface CurrencyConfig {
 const currencyConfigs: Record<string, CurrencyConfig> = {
   USD: {
     code: 'USD',
-    symbol: '$',
+    symbol: '€',
     locale: 'en-US',
     format: {
       style: 'currency',
@@ -44,7 +44,7 @@ const currencyConfigs: Record<string, CurrencyConfig> = {
   },
   CAD: {
     code: 'CAD',
-    symbol: 'CA$',
+    symbol: 'CA€',
     locale: 'en-CA',
     format: {
       style: 'currency',
@@ -55,7 +55,7 @@ const currencyConfigs: Record<string, CurrencyConfig> = {
   },
   AUD: {
     code: 'AUD',
-    symbol: 'A$',
+    symbol: 'A€',
     locale: 'en-AU',
     format: {
       style: 'currency',
@@ -302,7 +302,7 @@ export const convertCurrency = (amount: number, fromCurrency: string, toCurrency
 
 // Get currency symbol
 export const getCurrencySymbol = (currency: string): string => {
-  return currencyConfigs[currency]?.symbol || '$';
+  return currencyConfigs[currency]?.symbol || '€';
 };
 
 // Get all supported currencies

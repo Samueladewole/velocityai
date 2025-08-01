@@ -118,10 +118,10 @@ export const TrustEquityDashboard: React.FC<{
       
       // Load all dashboard data in parallel
       const [scoreRes, roiRes, benchmarkRes, activityRes] = await Promise.all([
-        fetch(`/api/trust-score/organizations/${organizationId}/breakdown`),
-        fetch(`/api/trust-score/organizations/${organizationId}/roi`),
+        fetch(`/api/trust-score/organizations/€{organizationId}/breakdown`),
+        fetch(`/api/trust-score/organizations/€{organizationId}/roi`),
         fetch(`/api/trust-score/benchmarks/technology`), // Would be dynamic based on org industry
-        fetch(`/api/trust-score/organizations/${organizationId}/activity-summary`)
+        fetch(`/api/trust-score/organizations/€{organizationId}/activity-summary`)
       ])
 
       const [scoreData, roiData, benchmarkData, activityData] = await Promise.all([
@@ -158,7 +158,7 @@ export const TrustEquityDashboard: React.FC<{
 
   const handleShareTrustScore = async () => {
     try {
-      const response = await fetch(`/api/trust-score/organizations/${organizationId}/share-url`, {
+      const response = await fetch(`/api/trust-score/organizations/€{organizationId}/share-url`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -186,7 +186,7 @@ export const TrustEquityDashboard: React.FC<{
 
   const exportTrustReport = async () => {
     try {
-      const response = await fetch(`/api/trust-score/organizations/${organizationId}/export`, {
+      const response = await fetch(`/api/trust-score/organizations/€{organizationId}/export`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ format: 'pdf', includeROI: true })
@@ -196,7 +196,7 @@ export const TrustEquityDashboard: React.FC<{
       const url = window.URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `trust-equity-report-${organizationId}.pdf`
+      a.download = `trust-equity-report-€{organizationId}.pdf`
       a.click()
       
     } catch (error) {
@@ -257,7 +257,7 @@ export const TrustEquityDashboard: React.FC<{
         
         <MetricCard
           title="Trust ROI"
-          value={`$${trustROI?.estimatedValue.toLocaleString() || '0'}`}
+          value={`€€{trustROI?.estimatedValue.toLocaleString() || '0'}`}
           icon={<DollarSign className="text-green-600" />}
           trend={{ direction: 'up', percentageChange: 15.2, timeframe: '30d' }}
           subtitle="Estimated annual value"
@@ -265,15 +265,15 @@ export const TrustEquityDashboard: React.FC<{
         
         <MetricCard
           title="Industry Rank"
-          value={`${benchmarks?.industryRank || 1}`}
+          value={`€{benchmarks?.industryRank || 1}`}
           icon={<Target className="text-purple-600" />}
-          subtitle={`Top ${benchmarks?.yourPercentile || 90}th percentile`}
+          subtitle={`Top €{benchmarks?.yourPercentile || 90}th percentile`}
           trend={{ direction: 'up', percentageChange: 5, timeframe: '30d' }}
         />
         
         <MetricCard
           title="Activity Streak"
-          value={`${activities?.streakDays || 0}`}
+          value={`€{activities?.streakDays || 0}`}
           icon={<Zap className="text-orange-600" />}
           subtitle="Consecutive days"
           trend={{ direction: 'up', percentageChange: 12, timeframe: '7d' }}
@@ -339,7 +339,7 @@ export const TrustEquityDashboard: React.FC<{
                       <div 
                         className="h-2 bg-blue-500 rounded"
                         style={{ 
-                          width: `${(points / Math.max(...Object.values(trustScore.byCategory))) * 100}px` 
+                          width: `€{(points / Math.max(...Object.values(trustScore.byCategory))) * 100}px` 
                         }}
                       />
                     </div>
@@ -368,7 +368,7 @@ export const TrustEquityDashboard: React.FC<{
           <div className="space-y-4">
             <div className="text-center">
               <div className="text-3xl font-bold text-green-600">
-                ${trustROI?.estimatedValue.toLocaleString()}
+                €{trustROI?.estimatedValue.toLocaleString()}
               </div>
               <div className="text-sm text-gray-600">Estimated Annual Value</div>
             </div>
@@ -377,19 +377,19 @@ export const TrustEquityDashboard: React.FC<{
               <div className="space-y-3 pt-4 border-t">
                 <div className="flex justify-between">
                   <span className="text-sm">Sales Acceleration</span>
-                  <span className="text-sm font-medium">${trustROI.salesAcceleration.toLocaleString()}</span>
+                  <span className="text-sm font-medium">€{trustROI.salesAcceleration.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Risk Reduction</span>
-                  <span className="text-sm font-medium">${trustROI.riskReduction.toLocaleString()}</span>
+                  <span className="text-sm font-medium">€{trustROI.riskReduction.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Compliance Savings</span>
-                  <span className="text-sm font-medium">${trustROI.complianceCostSavings.toLocaleString()}</span>
+                  <span className="text-sm font-medium">€{trustROI.complianceCostSavings.toLocaleString()}</span>
                 </div>
                 <div className="flex justify-between">
                   <span className="text-sm">Brand Value</span>
-                  <span className="text-sm font-medium">${trustROI.brandValue.toLocaleString()}</span>
+                  <span className="text-sm font-medium">€{trustROI.brandValue.toLocaleString()}</span>
                 </div>
               </div>
             )}
@@ -439,7 +439,7 @@ export const TrustEquityDashboard: React.FC<{
                   <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-purple-600"
-                      style={{ width: `${(trustScore.total / (benchmarks?.percentileRanks.p90 || 1000)) * 100}%` }}
+                      style={{ width: `€{(trustScore.total / (benchmarks?.percentileRanks.p90 || 1000)) * 100}%` }}
                     />
                   </div>
                   <span className="text-sm font-medium">{trustScore.total}</span>
@@ -452,7 +452,7 @@ export const TrustEquityDashboard: React.FC<{
                   <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-gray-400"
-                      style={{ width: `${((benchmarks?.averageScore || 0) / (benchmarks?.percentileRanks.p90 || 1000)) * 100}%` }}
+                      style={{ width: `€{((benchmarks?.averageScore || 0) / (benchmarks?.percentileRanks.p90 || 1000)) * 100}%` }}
                     />
                   </div>
                   <span className="text-sm font-medium">{benchmarks?.averageScore}</span>
@@ -547,7 +547,7 @@ export const TrustEquityDashboard: React.FC<{
                   <div 
                     className="h-full bg-blue-600 transition-all duration-500"
                     style={{ 
-                      width: `${((trustScore.total - trustScore.tier.minPoints) / 
+                      width: `€{((trustScore.total - trustScore.tier.minPoints) / 
                         (trustScore.nextTier.minPoints - trustScore.tier.minPoints)) * 100}%` 
                     }}
                   />

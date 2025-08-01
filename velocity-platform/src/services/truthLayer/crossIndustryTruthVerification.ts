@@ -244,7 +244,7 @@ export class CrossIndustryTruthVerificationEngine {
     clinicalData?: any[]
   ): Promise<HealthcareComplianceVerification> {
     
-    const verificationId = `healthcare_verification_${randomUUID()}`
+    const verificationId = `healthcare_verification_€{randomUUID()}`
     
     // Deploy Polygon healthcare contract
     const polygonContract = await this.deployPolygonHealthcareContract(healthcareEntityId)
@@ -284,7 +284,7 @@ export class CrossIndustryTruthVerificationEngine {
 
     this.healthcareVerifications.set(verificationId, verification)
     
-    console.log(`🏥 Healthcare Compliance Verified: ${entityType} (${healthcareEntityId})`)
+    console.log(`🏥 Healthcare Compliance Verified: €{entityType} (€{healthcareEntityId})`)
     return verification
   }
 
@@ -297,7 +297,7 @@ export class CrossIndustryTruthVerificationEngine {
     primaryRegulatorsInput: string[]
   ): Promise<FinancialServicesCompliance> {
     
-    const verificationId = `financial_verification_${randomUUID()}`
+    const verificationId = `financial_verification_€{randomUUID()}`
     
     // Deploy Polygon financial contract
     const polygonContract = await this.deployPolygonFinancialContract(financialEntityId)
@@ -344,7 +344,7 @@ export class CrossIndustryTruthVerificationEngine {
 
     this.financialVerifications.set(verificationId, verification)
     
-    console.log(`🏦 Financial Services Compliance Verified: ${entityType} (${financialEntityId})`)
+    console.log(`🏦 Financial Services Compliance Verified: €{entityType} (€{financialEntityId})`)
     return verification
   }
 
@@ -357,7 +357,7 @@ export class CrossIndustryTruthVerificationEngine {
     dataProcessingScope: string[]
   ): Promise<TechnologySectorCompliance> {
     
-    const verificationId = `tech_verification_${randomUUID()}`
+    const verificationId = `tech_verification_€{randomUUID()}`
     
     // Deploy Polygon tech contract
     const polygonContract = await this.deployPolygonTechContract(techEntityId)
@@ -407,7 +407,7 @@ export class CrossIndustryTruthVerificationEngine {
 
     this.technologyVerifications.set(verificationId, verification)
     
-    console.log(`💻 Technology Sector Compliance Verified: ${entityType} (${techEntityId})`)
+    console.log(`💻 Technology Sector Compliance Verified: €{entityType} (€{techEntityId})`)
     return verification
   }
 
@@ -481,9 +481,9 @@ export class CrossIndustryTruthVerificationEngine {
   // Private helper methods for Healthcare
 
   private async deployPolygonHealthcareContract(entityId: string): Promise<string> {
-    const contractData = `healthcare_contract_${entityId}_${Date.now()}`
+    const contractData = `healthcare_contract_€{entityId}_€{Date.now()}`
     const contractAddress = '0x' + createHash('sha256').update(contractData).digest('hex').slice(0, 40)
-    this.industrySpecificContracts.set(`healthcare_${entityId}`, contractAddress)
+    this.industrySpecificContracts.set(`healthcare_€{entityId}`, contractAddress)
     return contractAddress
   }
 
@@ -509,8 +509,8 @@ export class CrossIndustryTruthVerificationEngine {
       last_assessment: new Date().toISOString(),
       requirements_met: Math.floor(score * 10),
       total_requirements: 10,
-      deficiencies: score < 0.9 ? [`Minor deficiency in ${name.toLowerCase()}`] : [],
-      remediation_plan: score < 0.9 ? `Improve ${name.toLowerCase()} controls` : undefined
+      deficiencies: score < 0.9 ? [`Minor deficiency in €{name.toLowerCase()}`] : [],
+      remediation_plan: score < 0.9 ? `Improve €{name.toLowerCase()} controls` : undefined
     }
   }
 
@@ -518,15 +518,15 @@ export class CrossIndustryTruthVerificationEngine {
     if (entityType === 'device_manufacturer' || entityType === 'pharmaceutical') {
       return [
         {
-          certification_id: `fda_cert_${randomUUID()}`,
+          certification_id: `fda_cert_€{randomUUID()}`,
           device_classification: 'Class_II',
-          fda_clearance_number: `K${Date.now().toString().slice(-6)}`,
+          fda_clearance_number: `K€{Date.now().toString().slice(-6)}`,
           clearance_date: new Date().toISOString(),
           clinical_data_integrity: true,
           post_market_surveillance: await this.createPostMarketSurveillance(),
           adverse_event_reporting: await this.createAdverseEventReporting(),
           quality_system_compliance: true,
-          blockchain_certification_hash: createHash('sha256').update(`fda_cert_${entityId}`).digest('hex')
+          blockchain_certification_hash: createHash('sha256').update(`fda_cert_€{entityId}`).digest('hex')
         }
       ]
     }
@@ -556,9 +556,9 @@ export class CrossIndustryTruthVerificationEngine {
   // Private helper methods for Financial Services
 
   private async deployPolygonFinancialContract(entityId: string): Promise<string> {
-    const contractData = `financial_contract_${entityId}_${Date.now()}`
+    const contractData = `financial_contract_€{entityId}_€{Date.now()}`
     const contractAddress = '0x' + createHash('sha256').update(contractData).digest('hex').slice(0, 40)
-    this.industrySpecificContracts.set(`financial_${entityId}`, contractAddress)
+    this.industrySpecificContracts.set(`financial_€{entityId}`, contractAddress)
     return contractAddress
   }
 
@@ -572,7 +572,7 @@ export class CrossIndustryTruthVerificationEngine {
       sanctions_screening: await this.createSanctionsScreening(),
       transaction_monitoring: await this.createTransactionMonitoring(),
       risk_assessment_current: true,
-      bsa_compliance_officer: `bsa_officer_${entityId}`,
+      bsa_compliance_officer: `bsa_officer_€{entityId}`,
       training_completion_rate: 0.96
     }
   }
@@ -589,9 +589,9 @@ export class CrossIndustryTruthVerificationEngine {
   // Private helper methods for Technology Sector
 
   private async deployPolygonTechContract(entityId: string): Promise<string> {
-    const contractData = `tech_contract_${entityId}_${Date.now()}`
+    const contractData = `tech_contract_€{entityId}_€{Date.now()}`
     const contractAddress = '0x' + createHash('sha256').update(contractData).digest('hex').slice(0, 40)
-    this.industrySpecificContracts.set(`technology_${entityId}`, contractAddress)
+    this.industrySpecificContracts.set(`technology_€{entityId}`, contractAddress)
     return contractAddress
   }
 
@@ -695,10 +695,10 @@ export class CrossIndustryTruthVerificationEngine {
     if (!clinicalData || clinicalData.length === 0) return []
     
     return clinicalData.map(trial => ({
-      trial_id: `trial_${randomUUID()}`,
-      nct_number: `NCT${Date.now().toString().slice(-8)}`,
+      trial_id: `trial_€{randomUUID()}`,
+      nct_number: `NCT€{Date.now().toString().slice(-8)}`,
       trial_phase: trial.phase || 'Phase_II',
-      protocol_hash: createHash('sha256').update(`protocol_${trial.id || randomUUID()}`).digest('hex'),
+      protocol_hash: createHash('sha256').update(`protocol_€{trial.id || randomUUID()}`).digest('hex'),
       participant_count: trial.participants || 100,
       data_integrity_verification: {
         data_validation_procedures: true,
@@ -717,15 +717,15 @@ export class CrossIndustryTruthVerificationEngine {
         submission_type: 'IND',
         submission_date: new Date().toISOString(),
         approval_status: 'approved',
-        reference_number: `IND${Date.now().toString().slice(-6)}`
+        reference_number: `IND€{Date.now().toString().slice(-6)}`
       }],
-      blockchain_trial_hash: createHash('sha256').update(`trial_${entityId}_${trial.id || randomUUID()}`).digest('hex')
+      blockchain_trial_hash: createHash('sha256').update(`trial_€{entityId}_€{trial.id || randomUUID()}`).digest('hex')
     }))
   }
 
   private async verifyPharmaceuticalSupplyChain(entityId: string): Promise<PharmaceuticalSupplyChain> {
     return {
-      supply_chain_id: `pharma_supply_${randomUUID()}`,
+      supply_chain_id: `pharma_supply_€{randomUUID()}`,
       manufacturer_verification: true,
       distributor_verification: true,
       pharmacy_verification: true,
@@ -734,7 +734,7 @@ export class CrossIndustryTruthVerificationEngine {
       chain_of_custody_complete: true,
       serialization_compliance: true,
       track_and_trace_enabled: true,
-      blockchain_provenance_hash: createHash('sha256').update(`supply_${entityId}`).digest('hex')
+      blockchain_provenance_hash: createHash('sha256').update(`supply_€{entityId}`).digest('hex')
     }
   }
 
@@ -776,8 +776,8 @@ export class CrossIndustryTruthVerificationEngine {
       next_audit_due: new Date(Date.now() + 185 * 24 * 60 * 60 * 1000).toISOString(),
       compliance_score: 0.92 + Math.random() * 0.06,
       key_requirements: [{
-        requirement_id: `req_${randomUUID()}`,
-        description: `${framework} core requirement`,
+        requirement_id: `req_€{randomUUID()}`,
+        description: `€{framework} core requirement`,
         compliance_status: 'met',
         evidence_provided: true
       }],
@@ -909,7 +909,7 @@ export class CrossIndustryTruthVerificationEngine {
 
   private async getExaminationHistory(entityId: string): Promise<RegulatoryExamination[]> {
     return [{
-      examination_id: `exam_${randomUUID()}`,
+      examination_id: `exam_€{randomUUID()}`,
       examination_type: 'safety_and_soundness',
       examination_date: new Date(Date.now() - 12 * 30 * 24 * 60 * 60 * 1000).toISOString(),
       examiner_agency: 'OCC',
@@ -1123,7 +1123,7 @@ export class CrossIndustryTruthVerificationEngine {
 
   private async getThirdPartyAudits(entityId: string): Promise<ThirdPartyAudit[]> {
     return [{
-      audit_id: `audit_${randomUUID()}`,
+      audit_id: `audit_€{randomUUID()}`,
       audit_firm: 'Deloitte Cyber',
       audit_type: 'penetration_testing',
       audit_date: new Date(Date.now() - 3 * 30 * 24 * 60 * 60 * 1000).toISOString(),

@@ -373,7 +373,7 @@ export const CompassWorking: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(framework.status)}`}>
+                    <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getStatusColor(framework.status)}`}>
                       {framework.status}
                     </div>
                   </div>
@@ -386,12 +386,12 @@ export const CompassWorking: React.FC = () => {
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-3 mb-2">
                         <div
-                          className={`h-3 rounded-full transition-all duration-1000 ${
+                          className={`h-3 rounded-full transition-all duration-1000 €{
                             framework.score >= 90 ? "bg-gradient-to-r from-emerald-500 to-emerald-600" :
                             framework.score >= 70 ? "bg-gradient-to-r from-amber-500 to-orange-500" : 
                             "bg-gradient-to-r from-red-500 to-red-600"
                           }`}
-                          style={{ width: `${framework.score}%` }}
+                          style={{ width: `€{framework.score}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-slate-500">
@@ -436,7 +436,7 @@ export const CompassWorking: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="font-semibold text-slate-900">{change.title}</h3>
-                        <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getImpactColor(change.impact)}`}>
+                        <div className={`px-2 py-1 rounded-full text-xs font-medium border €{getImpactColor(change.impact)}`}>
                           {change.impact} impact
                         </div>
                       </div>

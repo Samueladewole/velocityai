@@ -134,7 +134,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center p-12 ${className}`}>
+      <div className={`flex items-center justify-center p-12 €{className}`}>
         <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
         <span className="ml-3 text-slate-600">Loading SOX coordination data...</span>
       </div>
@@ -142,7 +142,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
@@ -178,7 +178,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors €{
                   activeTab === tab.id
                     ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
@@ -215,7 +215,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                 <div className="p-2 bg-emerald-100 rounded-lg">
                   <DollarSign className="w-5 h-5 text-emerald-600" />
                 </div>
-                <span className="text-2xl font-bold text-slate-900">${(metrics.costSavings / 1000).toFixed(0)}K</span>
+                <span className="text-2xl font-bold text-slate-900">€{(metrics.costSavings / 1000).toFixed(0)}K</span>
               </div>
               <h3 className="text-sm font-medium text-slate-600">Cost Savings</h3>
               <p className="text-xs text-emerald-600 mt-1">Annual coordination benefit</p>
@@ -310,7 +310,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                       </div>
                       <div className="text-right">
                         {mapping && (
-                          <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${getMappingTypeColor(mapping.mappingType)}`}>
+                          <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium €{getMappingTypeColor(mapping.mappingType)}`}>
                             {mapping.overlapPercentage}% Overlap
                           </div>
                         )}
@@ -351,7 +351,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                         <span className="text-slate-400">↔</span>
                         <span className="font-medium text-slate-900">{mapping.isaeControlId}</span>
                       </div>
-                      <div className={`px-2 py-1 rounded-full text-xs font-medium ${getMappingTypeColor(mapping.mappingType)}`}>
+                      <div className={`px-2 py-1 rounded-full text-xs font-medium €{getMappingTypeColor(mapping.mappingType)}`}>
                         {mapping.mappingType.toUpperCase()}
                       </div>
                     </div>
@@ -386,7 +386,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                     <div className="mt-3 w-20 h-2 bg-slate-200 rounded-full">
                       <div 
                         className="h-2 bg-gradient-to-r from-blue-500 to-emerald-500 rounded-full"
-                        style={{ width: `${mapping.overlapPercentage}%` }}
+                        style={{ width: `€{mapping.overlapPercentage}%` }}
                       ></div>
                     </div>
                   </div>
@@ -424,7 +424,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h4 className="font-medium text-slate-900">Gap in {gap.controlId}</h4>
-                        <span className={`px-2 py-1 text-xs rounded-full font-medium border ${getGapSeverityColor(gap.severity)}`}>
+                        <span className={`px-2 py-1 text-xs rounded-full font-medium border €{getGapSeverityColor(gap.severity)}`}>
                           {gap.severity.toUpperCase()}
                         </span>
                         <span className="px-2 py-1 bg-slate-100 text-slate-700 text-xs rounded">
@@ -444,7 +444,7 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium €{
                       gap.status === 'resolved' ? 'bg-emerald-50 text-emerald-600' :
                       gap.status === 'in-progress' ? 'bg-amber-50 text-amber-600' :
                       'bg-red-50 text-red-600'
@@ -509,14 +509,14 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                   description: 'Identified gaps and remediation progress tracking',
                   icon: AlertTriangle,
                   color: 'amber',
-                  metrics: [`${complianceGaps.length} gaps identified`, `${complianceGaps.filter(g => g.status === 'resolved').length} resolved`, `${complianceGaps.filter(g => g.status !== 'resolved').length} remaining`]
+                  metrics: [`€{complianceGaps.length} gaps identified`, `€{complianceGaps.filter(g => g.status === 'resolved').length} resolved`, `€{complianceGaps.filter(g => g.status !== 'resolved').length} remaining`]
                 },
                 {
                   title: 'Cost Benefit Analysis',
                   description: 'Financial impact of coordinated compliance approach',
                   icon: DollarSign,
                   color: 'green',
-                  metrics: [`$${(metrics?.costSavings || 0 / 1000).toFixed(0)}K saved`, `${(metrics?.timeReduction || 0).toFixed(0)} days reduced`, '35% ROI improvement']
+                  metrics: [`€€{(metrics?.costSavings || 0 / 1000).toFixed(0)}K saved`, `€{(metrics?.timeReduction || 0).toFixed(0)} days reduced`, '35% ROI improvement']
                 },
                 {
                   title: 'Auditor Coordination Report',
@@ -529,8 +529,8 @@ const SOXCoordinationDashboard: React.FC<SOXCoordinationDashboardProps> = ({ cla
                 const IconComponent = report.icon;
                 return (
                   <div key={index} className="border border-slate-200 rounded-lg p-6 hover:border-slate-300 transition-colors cursor-pointer">
-                    <div className={`p-3 rounded-lg mb-4 bg-${report.color}-100`}>
-                      <IconComponent className={`w-6 h-6 text-${report.color}-600`} />
+                    <div className={`p-3 rounded-lg mb-4 bg-€{report.color}-100`}>
+                      <IconComponent className={`w-6 h-6 text-€{report.color}-600`} />
                     </div>
                     <h3 className="font-medium text-slate-900 mb-2">{report.title}</h3>
                     <p className="text-sm text-slate-600 mb-4">{report.description}</p>

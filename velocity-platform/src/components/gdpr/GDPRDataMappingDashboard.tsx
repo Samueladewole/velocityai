@@ -118,7 +118,7 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center p-12 ${className}`}>
+      <div className={`flex items-center justify-center p-12 €{className}`}>
         <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
         <span className="ml-3 text-slate-600">Loading GDPR data mapping...</span>
       </div>
@@ -126,7 +126,7 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Header */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
@@ -162,7 +162,7 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors ${
+                className={`flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-colors €{
                   activeTab === tab.id
                     ? 'bg-white text-slate-900 shadow-sm'
                     : 'text-slate-600 hover:text-slate-900'
@@ -365,10 +365,10 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h3 className="font-medium text-slate-900">{activity.name}</h3>
-                      <span className={`px-2 py-1 text-xs rounded-full font-medium border ${getRiskColor(activity.riskAssessment.overallRisk)}`}>
+                      <span className={`px-2 py-1 text-xs rounded-full font-medium border €{getRiskColor(activity.riskAssessment.overallRisk)}`}>
                         {activity.riskAssessment.overallRisk.toUpperCase()} RISK
                       </span>
-                      <span className={`px-2 py-1 text-xs rounded-full font-medium ${getStatusColor(activity.status)}`}>
+                      <span className={`px-2 py-1 text-xs rounded-full font-medium €{getStatusColor(activity.status)}`}>
                         {activity.status.toUpperCase()}
                       </span>
                     </div>
@@ -546,7 +546,7 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
             <div className="w-full bg-slate-200 rounded-full h-3 mb-6">
               <div 
                 className="bg-gradient-to-r from-emerald-500 to-blue-500 h-3 rounded-full transition-all duration-500"
-                style={{ width: `${metrics.complianceScore}%` }}
+                style={{ width: `€{metrics.complianceScore}%` }}
               ></div>
             </div>
 
@@ -589,7 +589,7 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
                 <div className="w-full bg-slate-200 rounded-full h-2">
                   <div 
                     className="bg-emerald-500 h-2 rounded-full"
-                    style={{ width: `${(metrics.requestsWithinDeadline / Math.max(1, metrics.dataSubjectRequests)) * 100}%` }}
+                    style={{ width: `€{(metrics.requestsWithinDeadline / Math.max(1, metrics.dataSubjectRequests)) * 100}%` }}
                   ></div>
                 </div>
               </div>
@@ -613,7 +613,7 @@ const GDPRDataMappingDashboard: React.FC<GDPRDataMappingDashboardProps> = ({ cla
                 <div className="w-full bg-slate-200 rounded-full h-2">
                   <div 
                     className="bg-blue-500 h-2 rounded-full"
-                    style={{ width: `${(metrics.activeConsents / Math.max(1, metrics.consentRecords)) * 100}%` }}
+                    style={{ width: `€{(metrics.activeConsents / Math.max(1, metrics.consentRecords)) * 100}%` }}
                   ></div>
                 </div>
               </div>

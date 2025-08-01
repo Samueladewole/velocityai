@@ -36,14 +36,14 @@ const VelocitySignup: React.FC = () => {
     {
       value: 'starter',
       label: 'Starter',
-      price: '$249/month',
+      price: '€249/month',
       description: 'Perfect for small teams',
       features: ['Up to 5 integrations', 'Basic compliance frameworks', 'Email support']
     },
     {
       value: 'growth',
       label: 'Growth',
-      price: '$549/month',
+      price: '€549/month',
       description: 'For growing organizations',
       popular: true,
       features: ['Unlimited integrations', 'All compliance frameworks', 'Priority support', 'Custom agents']
@@ -51,7 +51,7 @@ const VelocitySignup: React.FC = () => {
     {
       value: 'enterprise',
       label: 'Enterprise',
-      price: '$1,249/month',
+      price: '€1,249/month',
       description: 'For large enterprises',
       features: ['White-label solution', 'Dedicated success manager', 'SLA guarantee', 'Custom deployment']
     }
@@ -176,7 +176,7 @@ const VelocitySignup: React.FC = () => {
                     {tiers.map((tier) => (
                       <div
                         key={tier.value}
-                        className={`relative border-2 rounded-xl p-4 cursor-pointer transition-all duration-300 ${
+                        className={`relative border-2 rounded-xl p-4 cursor-pointer transition-all duration-300 €{
                           formData.tier === tier.value
                             ? 'border-emerald-400 bg-emerald-500/10'
                             : 'border-white/20 hover:border-white/40 bg-white/5'

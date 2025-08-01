@@ -1425,7 +1425,7 @@ The AI Agent Creator democratizes compliance automation, allowing anyone to crea
                   <div key={section.id}>
                     <button
                       onClick={() => setActiveSection(section.id)}
-                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors ${
+                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-lg text-left transition-colors €{
                         activeSection === section.id
                           ? 'bg-blue-100 text-blue-700 border border-blue-200'
                           : 'text-gray-700 hover:bg-gray-100'
@@ -1512,7 +1512,7 @@ The AI Agent Creator democratizes compliance automation, allowing anyone to crea
                                     <Clock className="w-3 h-3 mr-1" />
                                     {article.readTime} min read
                                   </span>
-                                  <span className={`px-2 py-1 rounded-full ${
+                                  <span className={`px-2 py-1 rounded-full €{
                                     article.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
                                     article.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
                                     'bg-red-100 text-red-700'
@@ -1577,7 +1577,7 @@ The AI Agent Creator democratizes compliance automation, allowing anyone to crea
                                   <Clock className="w-3 h-3 mr-1" />
                                   {article.readTime} min
                                 </span>
-                                <span className={`px-2 py-1 rounded-full ${
+                                <span className={`px-2 py-1 rounded-full €{
                                   article.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
                                   article.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
                                   'bg-red-100 text-red-700'
@@ -1621,7 +1621,7 @@ The AI Agent Creator democratizes compliance automation, allowing anyone to crea
                                     <Clock className="w-3 h-3 mr-1" />
                                     {article.readTime} min read
                                   </span>
-                                  <span className={`px-2 py-1 rounded-full ${
+                                  <span className={`px-2 py-1 rounded-full €{
                                     article.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
                                     article.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
                                     'bg-red-100 text-red-700'
@@ -1730,7 +1730,7 @@ The AI Agent Creator democratizes compliance automation, allowing anyone to crea
                         <Clock className="w-4 h-4 mr-1" />
                         {selectedArticle.readTime} min read
                       </span>
-                      <span className={`px-2 py-1 rounded-full ${
+                      <span className={`px-2 py-1 rounded-full €{
                         selectedArticle.difficulty === 'beginner' ? 'bg-green-100 text-green-700' :
                         selectedArticle.difficulty === 'intermediate' ? 'bg-yellow-100 text-yellow-700' :
                         'bg-red-100 text-red-700'

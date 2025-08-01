@@ -444,7 +444,7 @@ const HeroTrustScore = () => {
   }, []);
 
   return (
-    <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    <div className={`transition-all duration-1000 €{isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
       <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
         <div className="flex items-center gap-4">
           <div className="relative">
@@ -464,8 +464,8 @@ const HeroTrustScore = () => {
                 stroke="url(#heroGradient)"
                 strokeWidth="6"
                 fill="none"
-                strokeDasharray={`${2 * Math.PI * 35}`}
-                strokeDashoffset={`${2 * Math.PI * 35 * (1 - score / 100)}`}
+                strokeDasharray={`€{2 * Math.PI * 35}`}
+                strokeDashoffset={`€{2 * Math.PI * 35 * (1 - score / 100)}`}
                 className="transition-all duration-2000 ease-out"
                 strokeLinecap="round"
                 transform="rotate(-90 50 50)"
@@ -632,7 +632,7 @@ const ImpactMetricsSection = () => {
   
   const metrics = [
     {
-      value: '$120K',
+      value: '€120K',
       label: 'Average Annual Savings',
       description: 'Per customer in first year',
       icon: '💰',
@@ -680,7 +680,7 @@ const ImpactMetricsSection = () => {
               className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
             >
               <div className="text-4xl mb-4">{metric.icon}</div>
-              <div className={`text-3xl font-bold bg-gradient-to-r ${metric.color} bg-clip-text text-transparent mb-2`}>
+              <div className={`text-3xl font-bold bg-gradient-to-r €{metric.color} bg-clip-text text-transparent mb-2`}>
                 {metric.value}
               </div>
               <div className="text-white font-semibold mb-1">
@@ -772,8 +772,8 @@ const TrustFirstSection = () => {
               )}
               
               <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
-                <div className={`p-3 bg-${stage.color}-500/10 rounded-lg w-fit mb-4`}>
-                  {React.createElement(stage.icon, { className: `w-6 h-6 text-${stage.color}-400` })}
+                <div className={`p-3 bg-€{stage.color}-500/10 rounded-lg w-fit mb-4`}>
+                  {React.createElement(stage.icon, { className: `w-6 h-6 text-€{stage.color}-400` })}
                 </div>
                 
                 <div className="mb-4">
@@ -790,7 +790,7 @@ const TrustFirstSection = () => {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-500">Risk Level</span>
-                    <span className={`text-${stage.color}-400`}>{stage.risk}</span>
+                    <span className={`text-€{stage.color}-400`}>{stage.risk}</span>
                   </div>
                 </div>
               </div>
@@ -947,7 +947,7 @@ const AIAgentsSection = () => {
         <div className="text-center">
           <button className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
             <Bot className="w-5 h-5" />
-            Explore All 10 Agents
+            Explore All 13 Agents
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
@@ -1012,19 +1012,19 @@ const EvidenceCollectionSection = () => {
                 <button
                   key={index}
                   onClick={() => setActiveTab(index)}
-                  className={`p-4 rounded-xl text-left transition-all duration-300 ${
+                  className={`p-4 rounded-xl text-left transition-all duration-300 €{
                     activeTab === index
                       ? 'bg-emerald-500/20 border border-emerald-500/50'
                       : 'bg-white/5 border border-white/10 hover:bg-white/10'
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    {React.createElement(type.icon, { className: `w-5 h-5 ${activeTab === index ? 'text-emerald-400' : 'text-slate-400'}` })}
-                    <span className={`font-medium ${activeTab === index ? 'text-emerald-400' : 'text-white'}`}>
+                    {React.createElement(type.icon, { className: `w-5 h-5 €{activeTab === index ? 'text-emerald-400' : 'text-slate-400'}` })}
+                    <span className={`font-medium €{activeTab === index ? 'text-emerald-400' : 'text-white'}`}>
                       {type.title}
                     </span>
                   </div>
-                  <div className={`text-2xl font-bold font-mono mb-1 ${activeTab === index ? 'text-emerald-400' : 'text-slate-300'}`}>
+                  <div className={`text-2xl font-bold font-mono mb-1 €{activeTab === index ? 'text-emerald-400' : 'text-slate-300'}`}>
                     {type.count}
                   </div>
                   <div className="text-xs text-slate-400">{type.description}</div>
@@ -1213,7 +1213,7 @@ const CompetitiveAdvantagesSection = () => {
   const advantages = [
     {
       title: "83% vs Traditional GDPR Solutions",
-      metric: "$137K+ Saved Annually",
+      metric: "€137K+ Saved Annually",
       description: "Revolutionary GDPR international transfer automation vs traditional compliance providers",
       icon: DollarSign,
       color: "emerald"
@@ -1258,13 +1258,13 @@ const CompetitiveAdvantagesSection = () => {
           {advantages.map((advantage, index) => {
             const Icon = advantage.icon;
             return (
-              <div key={index} className={`bg-gradient-to-br from-${advantage.color}-500/10 to-${advantage.color}-600/5 rounded-2xl p-6 border border-${advantage.color}-500/20 hover:border-${advantage.color}-500/40 transition-all duration-300`}>
+              <div key={index} className={`bg-gradient-to-br from-€{advantage.color}-500/10 to-€{advantage.color}-600/5 rounded-2xl p-6 border border-€{advantage.color}-500/20 hover:border-€{advantage.color}-500/40 transition-all duration-300`}>
                 <div className="text-center">
-                  <div className={`w-12 h-12 bg-${advantage.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                    <Icon className={`w-6 h-6 text-${advantage.color}-400`} />
+                  <div className={`w-12 h-12 bg-€{advantage.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <Icon className={`w-6 h-6 text-€{advantage.color}-400`} />
                   </div>
                   <h3 className="font-bold text-white mb-2 text-sm">{advantage.title}</h3>
-                  <div className={`text-2xl font-bold text-${advantage.color}-400 mb-3 font-mono`}>
+                  <div className={`text-2xl font-bold text-€{advantage.color}-400 mb-3 font-mono`}>
                     {advantage.metric}
                   </div>
                   <p className="text-slate-400 text-sm leading-relaxed">{advantage.description}</p>
@@ -1285,17 +1285,17 @@ const CompetitiveAdvantagesSection = () => {
           
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="text-center p-6 bg-slate-800/50 rounded-xl">
-              <div className="text-3xl font-bold text-red-400 mb-2">$380K+</div>
+              <div className="text-3xl font-bold text-red-400 mb-2">€380K+</div>
               <div className="text-slate-300 text-sm mb-1">Traditional GDPR + ISAE 3000</div>
               <div className="text-xs text-slate-500">Annual consulting costs</div>
             </div>
             <div className="text-center p-6 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
-              <div className="text-3xl font-bold text-emerald-400 mb-2">$60K</div>
+              <div className="text-3xl font-bold text-emerald-400 mb-2">€60K</div>
               <div className="text-slate-300 text-sm mb-1">Velocity Complete Solution</div>
               <div className="text-xs text-emerald-400">All frameworks included</div>
             </div>
             <div className="text-center p-6 bg-slate-800/50 rounded-xl">
-              <div className="text-3xl font-bold text-emerald-400 mb-2">$320K+</div>
+              <div className="text-3xl font-bold text-emerald-400 mb-2">€320K+</div>
               <div className="text-slate-300 text-sm mb-1">Annual Savings</div>
               <div className="text-xs text-slate-500">84% cost reduction</div>
             </div>
@@ -1391,12 +1391,12 @@ const IndustryShowcaseSection = () => {
             return (
               <div 
                 key={index} 
-                className={`group bg-gradient-to-br from-${industry.color}-500/5 to-${industry.color}-600/5 rounded-2xl p-6 border border-${industry.color}-500/20 hover:border-${industry.color}-500/40 transition-all duration-300 cursor-pointer`}
+                className={`group bg-gradient-to-br from-€{industry.color}-500/5 to-€{industry.color}-600/5 rounded-2xl p-6 border border-€{industry.color}-500/20 hover:border-€{industry.color}-500/40 transition-all duration-300 cursor-pointer`}
                 onClick={() => navigate(industry.path)}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 bg-${industry.color}-500/10 rounded-lg`}>
-                    <Icon className={`w-6 h-6 text-${industry.color}-400`} />
+                  <div className={`p-3 bg-€{industry.color}-500/10 rounded-lg`}>
+                    <Icon className={`w-6 h-6 text-€{industry.color}-400`} />
                   </div>
                   <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </div>
@@ -1407,7 +1407,7 @@ const IndustryShowcaseSection = () => {
                 <div className="space-y-2">
                   {industry.metrics.map((metric, idx) => (
                     <div key={idx} className="flex items-center gap-2">
-                      <CheckCircle className={`w-3 h-3 text-${industry.color}-400 flex-shrink-0`} />
+                      <CheckCircle className={`w-3 h-3 text-€{industry.color}-400 flex-shrink-0`} />
                       <span className="text-xs text-slate-300">{metric}</span>
                     </div>
                   ))}

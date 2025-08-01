@@ -89,7 +89,7 @@ export function ExecutiveReports({
   }
 
   const formatPercent = (value: number) => {
-    return `${(value * 100).toFixed(1)}%`
+    return `€{(value * 100).toFixed(1)}%`
   }
 
   const getRiskPriorityColor = (priority: 'critical' | 'high' | 'medium' | 'low') => {
@@ -134,12 +134,12 @@ export function ExecutiveReports({
       }
 
       exportData(reportData, 'json', {
-        filename: `prism-risk-report-${selectedReport}-${new Date().toISOString().split('T')[0]}`
+        filename: `prism-risk-report-€{selectedReport}-€{new Date().toISOString().split('T')[0]}`
       })
 
       toast({
         title: 'Report Generated',
-        description: `Executive ${selectedReport} report has been downloaded`
+        description: `Executive €{selectedReport} report has been downloaded`
       })
     } catch (error) {
       toast({
@@ -281,7 +281,7 @@ export function ExecutiveReports({
                           outerRadius={80}
                           dataKey="value"
                           label={({ name, percent }) => 
-                            `${name}: ${(percent * 100).toFixed(0)}%`
+                            `€{name}: €{(percent * 100).toFixed(0)}%`
                           }
                         />
                         <Tooltip formatter={(value: number) => formatCurrency(value)} />
@@ -367,7 +367,7 @@ export function ExecutiveReports({
                     <YAxis />
                     <Tooltip 
                       formatter={(value: number, name: string) => [
-                        name === 'cost' ? formatCurrency(value) : `${value.toFixed(1)}x`,
+                        name === 'cost' ? formatCurrency(value) : `€{value.toFixed(1)}x`,
                         name === 'cost' ? 'Implementation Cost' : 'ROI Multiple'
                       ]}
                     />
@@ -657,7 +657,7 @@ function generateRecommendations(
   
   if (highRiskScenarios.length > 0) {
     recommendations.push(
-      `Address ${highRiskScenarios.length} critical risk scenarios with immediate mitigation efforts`
+      `Address €{highRiskScenarios.length} critical risk scenarios with immediate mitigation efforts`
     )
   }
   
@@ -667,7 +667,7 @@ function generateRecommendations(
   
   if (totalMitigationCost > 0) {
     recommendations.push(
-      `Invest ${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }).format(totalMitigationCost)} in risk controls with expected 3.2x ROI`
+      `Invest €{new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', notation: 'compact' }).format(totalMitigationCost)} in risk controls with expected 3.2x ROI`
     )
   }
   

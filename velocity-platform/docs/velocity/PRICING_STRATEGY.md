@@ -19,7 +19,7 @@ Velocity's pricing strategy balances market penetration with premium positioning
 
 ```
 VELOCITY STARTER          VELOCITY PROFESSIONAL     VELOCITY ENTERPRISE
-$2,500/month             $7,500/month              $15,000+/month
+€2,500/month             €7,500/month              €15,000+/month
 └─ Up to 50 employees    └─ Up to 200 employees    └─ Unlimited employees
 ```
 
@@ -33,12 +33,12 @@ $2,500/month             $7,500/month              $15,000+/month
 
 ## 📊 Detailed Pricing Tiers
 
-### **Velocity Starter** - $2,500/month ($30,000 annually)
+### **Velocity Starter** - €2,500/month (€30,000 annually)
 *Perfect for Series A/B companies beginning their compliance journey*
 
 **Target Customer Profile:**
 - 25-50 employees
-- $5M-$25M ARR
+- €5M-€25M ARR
 - First-time SOC 2 certification
 - Limited compliance team (1-2 people)
 - AWS or single-cloud infrastructure
@@ -62,17 +62,17 @@ $2,500/month             $7,500/month              $15,000+/month
 
 **Value Proposition:**
 - **ROI**: 200-250% in first year
-- **Cost Savings**: $120,000 vs. traditional approach
+- **Cost Savings**: €120,000 vs. traditional approach
 - **Time Savings**: 200+ hours of manual work eliminated
 
 ---
 
-### **Velocity Professional** - $7,500/month ($90,000 annually)
+### **Velocity Professional** - €7,500/month (€90,000 annually)
 *Designed for growing SaaS companies with complex compliance needs*
 
 **Target Customer Profile:**
 - 50-200 employees
-- $25M-$100M ARR
+- €25M-€100M ARR
 - Multiple compliance frameworks required
 - Dedicated compliance team (2-5 people)
 - Multi-cloud infrastructure
@@ -97,18 +97,18 @@ $2,500/month             $7,500/month              $15,000+/month
 
 **Value Proposition:**
 - **ROI**: 250-300% in first year
-- **Cost Savings**: $200,000+ vs. traditional approach
+- **Cost Savings**: €200,000+ vs. traditional approach
 - **Time Savings**: 400+ hours of manual work eliminated
 - **Trust Score Improvement**: 20+ point average increase
 
 ---
 
-### **Velocity Enterprise** - $15,000+/month (Custom Pricing)
+### **Velocity Enterprise** - €15,000+/month (Custom Pricing)
 *Enterprise-grade platform for large organizations with complex requirements*
 
 **Target Customer Profile:**
 - 200+ employees
-- $100M+ ARR
+- €100M+ ARR
 - Multiple business units/subsidiaries
 - Large compliance teams (5+ people)
 - Complex, hybrid infrastructure
@@ -134,7 +134,7 @@ $2,500/month             $7,500/month              $15,000+/month
 
 **Value Proposition:**
 - **ROI**: 300-500% in first year
-- **Cost Savings**: $500,000+ vs. traditional approach
+- **Cost Savings**: €500,000+ vs. traditional approach
 - **Time Savings**: 1,000+ hours of manual work eliminated
 - **Risk Reduction**: Quantifiable compliance risk mitigation
 
@@ -146,11 +146,11 @@ $2,500/month             $7,500/month              $15,000+/month
 
 | Solution | Entry | Professional | Enterprise | Velocity Advantage |
 |----------|-------|--------------|------------|-------------------|
-| **Velocity** | $30K/year | $90K/year | $180K+/year | AI automation, 30-min setup |
-| **Vanta** | $43K/year | $100K/year | $240K+/year | Manual processes, weeks setup |
-| **Drata** | $24K/year | $72K/year | $180K+/year | Static monitoring, basic AI |
-| **SecureFrame** | $18K/year | $54K/year | $120K+/year | SOC 2 only, manual evidence |
-| **Hyperproof** | $60K/year | $144K/year | $360K+/year | Complex setup, workflow focus |
+| **Velocity** | €30K/year | €90K/year | €180K+/year | AI automation, 30-min setup |
+| **Vanta** | €43K/year | €100K/year | €240K+/year | Manual processes, weeks setup |
+| **Drata** | €24K/year | €72K/year | €180K+/year | Static monitoring, basic AI |
+| **SecureFrame** | €18K/year | €54K/year | €120K+/year | SOC 2 only, manual evidence |
+| **Hyperproof** | €60K/year | €144K/year | €360K+/year | Complex setup, workflow focus |
 
 ### Pricing Justification
 - **10-20% premium** over basic competitors justified by AI capabilities
@@ -166,13 +166,13 @@ $2,500/month             $7,500/month              $15,000+/month
 ```
 Annual Compliance Costs (Traditional Approach):
 ┌─────────────────────────────────┐
-│ Compliance Consultants: $150K  │
-│ Manual Labor (internal): $100K │
-│ Audit Prep & Support: $75K     │
-│ Tool Licensing: $25K            │
-│ Remediation Costs: $50K        │
+│ Compliance Consultants: €150K  │
+│ Manual Labor (internal): €100K │
+│ Audit Prep & Support: €75K     │
+│ Tool Licensing: €25K            │
+│ Remediation Costs: €50K        │
 ├─────────────────────────────────┤
-│ TOTAL ANNUAL COST: $400K       │
+│ TOTAL ANNUAL COST: €400K       │
 └─────────────────────────────────┘
 ```
 
@@ -180,13 +180,13 @@ Annual Compliance Costs (Traditional Approach):
 ```
 Velocity Professional Annual Costs:
 ┌─────────────────────────────────┐
-│ Velocity License: $90K          │
-│ Implementation: $10K (one-time) │
-│ Internal Oversight: $25K        │
-│ Reduced Audit Prep: $15K       │
+│ Velocity License: €90K          │
+│ Implementation: €10K (one-time) │
+│ Internal Oversight: €25K        │
+│ Reduced Audit Prep: €15K       │
 ├─────────────────────────────────┤
-│ TOTAL ANNUAL COST: $130K       │
-│ ANNUAL SAVINGS: $270K          │
+│ TOTAL ANNUAL COST: €130K       │
+│ ANNUAL SAVINGS: €270K          │
 │ ROI: 300%                       │
 └─────────────────────────────────┘
 ```
@@ -200,10 +200,10 @@ Velocity Professional Annual Costs:
 
 **Cost Savings Calculation:**
 - **Total Time Saved**: 685 hours annually
-- **Average Compliance Professional Rate**: $150/hour
-- **Direct Labor Savings**: $102,750
-- **Consultant Reduction**: $150,000
-- **Total Annual Savings**: $252,750+
+- **Average Compliance Professional Rate**: €150/hour
+- **Direct Labor Savings**: €102,750
+- **Consultant Reduction**: €150,000
+- **Total Annual Savings**: €252,750+
 
 ---
 
@@ -216,9 +216,9 @@ Velocity Professional Annual Costs:
 |----------------|---------|--------------|------------|
 | 1-25 | Included | Included | Included |
 | 26-50 | Included | Included | Included |
-| 51-100 | +$1,000/mo | Included | Included |
+| 51-100 | +€1,000/mo | Included | Included |
 | 101-200 | Not available | Included | Included |
-| 201-500 | Not available | +$2,500/mo | Included |
+| 201-500 | Not available | +€2,500/mo | Included |
 | 500+ | Not available | Custom | Custom |
 
 ### Evidence Volume Scaling
@@ -227,9 +227,9 @@ Velocity Professional Annual Costs:
 | Evidence Items/Month | Starter | Professional | Enterprise |
 |----------------------|---------|--------------|------------|
 | 0-1,000 | Included | Included | Included |
-| 1,001-2,500 | +$500/mo | Included | Included |
-| 2,501-5,000 | +$1,000/mo | Included | Included |
-| 5,001-10,000 | Not available | +$1,500/mo | Included |
+| 1,001-2,500 | +€500/mo | Included | Included |
+| 2,501-5,000 | +€1,000/mo | Included | Included |
+| 5,001-10,000 | Not available | +€1,500/mo | Included |
 | 10,000+ | Not available | Custom | Custom |
 
 ### Framework-Based Pricing
@@ -237,41 +237,41 @@ Velocity Professional Annual Costs:
 
 | Additional Frameworks | All Tiers |
 |----------------------|-----------|
-| PCI DSS | +$1,000/month |
-| HIPAA | +$1,500/month |
-| FedRAMP | +$2,500/month |
-| Custom Framework | +$2,000/month |
+| PCI DSS | +€1,000/month |
+| HIPAA | +€1,500/month |
+| FedRAMP | +€2,500/month |
+| Custom Framework | +€2,000/month |
 
 ---
 
 ## 🎯 Pricing Strategy by Customer Segment
 
 ### Series A/B SaaS Companies
-**Target Price Point**: $30K-$60K annually
+**Target Price Point**: €30K-€60K annually
 **Strategy**: Land with Starter, expand to Professional
 **Value Messaging**: "Cost-effective path to SOC 2 certification"
 **Key Differentiators**: 
 - 30-minute setup vs. weeks of consultant time
 - 95% automation vs. manual evidence collection
-- $120K savings vs. traditional compliance approach
+- €120K savings vs. traditional compliance approach
 
 ### Series C/D SaaS Companies  
-**Target Price Point**: $90K-$150K annually
+**Target Price Point**: €90K-€150K annually
 **Strategy**: Professional as entry point, Enterprise for complex needs
 **Value Messaging**: "Scale compliance without scaling headcount"
 **Key Differentiators**:
 - Multi-framework support for expanding compliance requirements
 - Advanced analytics for compliance program optimization
-- $200K+ annual savings vs. consultant-heavy approach
+- €200K+ annual savings vs. consultant-heavy approach
 
 ### Enterprise Organizations
-**Target Price Point**: $180K-$500K annually
+**Target Price Point**: €180K-€500K annually
 **Strategy**: Custom Enterprise solutions with professional services
 **Value Messaging**: "Transform compliance from cost center to competitive advantage"
 **Key Differentiators**:
 - White-label capabilities for customer-facing compliance
 - Dedicated infrastructure and support
-- $500K+ annual savings vs. traditional enterprise compliance
+- €500K+ annual savings vs. traditional enterprise compliance
 
 ---
 
@@ -282,7 +282,7 @@ Velocity Professional Annual Costs:
 ```
               ⭐ MOST POPULAR
    Starter    Professional    Enterprise
-   $2,500        $7,500        $15,000+
+   €2,500        €7,500        €15,000+
     /month        /month        /month
 ```
 
@@ -297,13 +297,13 @@ Velocity Professional Annual Costs:
    "Traditional compliance is expensive and time-consuming"
 
 2. Cost of Inaction
-   "$400K+ annual compliance costs, weeks of manual work"
+   "€400K+ annual compliance costs, weeks of manual work"
 
 3. Solution Value
-   "95% automation, 30-minute setup, $270K annual savings"
+   "95% automation, 30-minute setup, €270K annual savings"
 
 4. Price Anchoring
-   "Professional tier delivers 300% ROI at $90K annually"
+   "Professional tier delivers 300% ROI at €90K annually"
 
 5. Risk Mitigation
    "30-day free trial, implementation guarantee"
@@ -376,30 +376,30 @@ Velocity Professional Annual Costs:
 ### Revenue Mix Projections (Year 1-3)
 
 **Year 1 Revenue Mix:**
-- Starter (40%): $1.0M from 40 customers
-- Professional (50%): $1.25M from 15 customers  
-- Enterprise (10%): $250K from 2 customers
-- **Total**: $2.5M ARR
+- Starter (40%): €1.0M from 40 customers
+- Professional (50%): €1.25M from 15 customers  
+- Enterprise (10%): €250K from 2 customers
+- **Total**: €2.5M ARR
 
 **Year 2 Revenue Mix:**
-- Starter (25%): $3.75M from 125 customers
-- Professional (60%): $9M from 100 customers
-- Enterprise (15%): $2.25M from 15 customers
-- **Total**: $15M ARR
+- Starter (25%): €3.75M from 125 customers
+- Professional (60%): €9M from 100 customers
+- Enterprise (15%): €2.25M from 15 customers
+- **Total**: €15M ARR
 
 **Year 3 Revenue Mix:**
-- Starter (20%): $10M from 333 customers
-- Professional (55%): $27.5M from 306 customers
-- Enterprise (25%): $12.5M from 83 customers
-- **Total**: $50M ARR
+- Starter (20%): €10M from 333 customers
+- Professional (55%): €27.5M from 306 customers
+- Enterprise (25%): €12.5M from 83 customers
+- **Total**: €50M ARR
 
 ### Unit Economics by Tier
 
 | Tier | ACV | CAC | LTV | LTV:CAC | Payback |
 |------|-----|-----|-----|---------|---------|
-| Starter | $30K | $8K | $120K | 15:1 | 3.2 months |
-| Professional | $90K | $15K | $360K | 24:1 | 2.0 months |
-| Enterprise | $240K | $35K | $960K | 27:1 | 1.75 months |
+| Starter | €30K | €8K | €120K | 15:1 | 3.2 months |
+| Professional | €90K | €15K | €360K | 24:1 | 2.0 months |
+| Enterprise | €240K | €35K | €960K | 27:1 | 1.75 months |
 
 ---
 

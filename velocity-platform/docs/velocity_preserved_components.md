@@ -3,7 +3,7 @@
 ## 🎯 **Strategic Components to Preserve & Enhance**
 
 ### **1. Questionnaire Intelligence Engine (QIE)**
-**Why Keep**: This is a **$10M+ feature** that solves the #1 enterprise sales blocker - security questionnaires.
+**Why Keep**: This is a **€10M+ feature** that solves the #1 enterprise sales blocker - security questionnaires.
 
 #### **QIE Value Proposition**
 - **Traditional**: 40 hours per questionnaire, 2-week turnaround
@@ -213,19 +213,19 @@ interface CompetitiveMoat {
 ```typescript
 interface EnhancedPricing {
   startup_tier: {
-    price: "$299/month",
+    price: "€299/month",
     includes: "Basic QIE (5 questionnaires/month)",
     value_prop: "Transform questionnaire burden into sales advantage"
   },
   
   growth_tier: {
-    price: "$799/month", 
+    price: "€799/month", 
     includes: "Advanced QIE (unlimited) + ISACA assessments",
     value_prop: "Professional governance + questionnaire mastery"
   },
   
   enterprise_tier: {
-    price: "$1,999/month",
+    price: "€1,999/month",
     includes: "Full QIE + ISACA + custom frameworks + buyer portal",
     value_prop: "Complete digital trust platform with questionnaire excellence"
   }
@@ -235,9 +235,9 @@ interface EnhancedPricing {
 ## 📊 **Business Impact Projections**
 
 ### **QIE Revenue Impact**
-- **Average enterprise deal**: $100K-$1M
-- **Questionnaire delay cost**: 2-4 weeks = $50K-$200K opportunity cost
-- **QIE value per customer**: $500K+ annually in faster sales cycles
+- **Average enterprise deal**: €100K-€1M
+- **Questionnaire delay cost**: 2-4 weeks = €50K-€200K opportunity cost
+- **QIE value per customer**: €500K+ annually in faster sales cycles
 - **Pricing premium justified**: 3-5x higher than basic compliance tools
 
 ### **ISACA Credibility Impact**

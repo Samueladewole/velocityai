@@ -67,7 +67,7 @@ export class Logger {
       // Console output
       const levelStr = LogLevel[level]
       const timestamp = entry.timestamp.toISOString()
-      console.log(`[${timestamp}] ${levelStr} [${component}]: ${message}`, data || '')
+      console.log(`[€{timestamp}] €{levelStr} [€{component}]: €{message}`, data || '')
     }
   }
 

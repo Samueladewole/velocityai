@@ -12,7 +12,7 @@ groups:
           severity: critical
         annotations:
           summary: "ERIP Backend is down"
-          description: "ERIP Backend instance {{ $labels.instance }} has been down for more than 1 minute."
+          description: "ERIP Backend instance {{ €labels.instance }} has been down for more than 1 minute."
 
       - alert: ERIPHighResponseTime
         expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="erip-backend"}[5m])) > 2
@@ -21,7 +21,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Backend high response time"
-          description: "95th percentile response time is {{ $value }}s for instance {{ $labels.instance }}."
+          description: "95th percentile response time is {{ €value }}s for instance {{ €labels.instance }}."
 
       - alert: ERIPHighErrorRate
         expr: (rate(http_requests_total{job="erip-backend",status=~"5.."}[5m]) / rate(http_requests_total{job="erip-backend"}[5m])) > 0.05
@@ -30,7 +30,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Backend high error rate"
-          description: "Error rate is {{ $value | humanizePercentage }} for instance {{ $labels.instance }}."
+          description: "Error rate is {{ €value | humanizePercentage }} for instance {{ €labels.instance }}."
 
       # Resource Usage
       - alert: ERIPHighCPUUsage
@@ -40,7 +40,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Backend high CPU usage"
-          description: "CPU usage is {{ $value | humanizePercentage }} for container {{ $labels.name }}."
+          description: "CPU usage is {{ €value | humanizePercentage }} for container {{ €labels.name }}."
 
       - alert: ERIPHighMemoryUsage
         expr: (container_memory_usage_bytes{name=~".*erip-backend.*"} / container_spec_memory_limit_bytes{name=~".*erip-backend.*"}) > 0.9
@@ -49,7 +49,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Backend high memory usage"
-          description: "Memory usage is {{ $value | humanizePercentage }} for container {{ $labels.name }}."
+          description: "Memory usage is {{ €value | humanizePercentage }} for container {{ €labels.name }}."
 
       # AI Integration Alerts
       - alert: ERIPAIServiceErrors
@@ -59,7 +59,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP AI service errors"
-          description: "AI service errors increased by {{ $value }} in the last 5 minutes."
+          description: "AI service errors increased by {{ €value }} in the last 5 minutes."
 
       - alert: ERIPAIServiceSlowResponse
         expr: histogram_quantile(0.95, rate(erip_ai_request_duration_seconds_bucket[5m])) > 30
@@ -68,7 +68,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP AI service slow response"
-          description: "95th percentile AI service response time is {{ $value }}s."
+          description: "95th percentile AI service response time is {{ €value }}s."
 
   - name: erip-infrastructure
     rules:
@@ -89,7 +89,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Database high connection usage"
-          description: "Database connection usage is {{ $value | humanizePercentage }}."
+          description: "Database connection usage is {{ €value | humanizePercentage }}."
 
       - alert: ERIPDatabaseSlowQueries
         expr: rate(pg_stat_activity_max_tx_duration[5m]) > 300
@@ -117,7 +117,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Redis high memory usage"
-          description: "Redis memory usage is {{ $value | humanizePercentage }}."
+          description: "Redis memory usage is {{ €value | humanizePercentage }}."
 
       # Load Balancer Alerts
       - alert: ERIPLoadBalancerHighLatency
@@ -127,7 +127,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP Load Balancer high latency"
-          description: "ALB 95th percentile latency is {{ $value }}s."
+          description: "ALB 95th percentile latency is {{ €value }}s."
 
       - alert: ERIPLoadBalancerUnhealthyTargets
         expr: aws_alb_unhealthy_host_count > 0
@@ -136,7 +136,7 @@ groups:
           severity: critical
         annotations:
           summary: "ERIP Load Balancer unhealthy targets"
-          description: "{{ $value }} unhealthy targets behind the load balancer."
+          description: "{{ €value }} unhealthy targets behind the load balancer."
 
   - name: erip-business-metrics
     rules:
@@ -148,7 +148,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP COMPASS analysis failures"
-          description: "{{ $value }} COMPASS analysis failures in the last 5 minutes."
+          description: "{{ €value }} COMPASS analysis failures in the last 5 minutes."
 
       - alert: ERIPATLASAssessmentFailures
         expr: increase(erip_atlas_assessment_failures_total[5m]) > 3
@@ -157,7 +157,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP ATLAS assessment failures"
-          description: "{{ $value }} ATLAS security assessment failures in the last 5 minutes."
+          description: "{{ €value }} ATLAS security assessment failures in the last 5 minutes."
 
       - alert: ERIPIntegrationFlowFailures
         expr: increase(erip_integration_flow_failures_total[10m]) > 5
@@ -166,7 +166,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP integration flow failures"
-          description: "{{ $value }} integration flow failures in the last 10 minutes."
+          description: "{{ €value }} integration flow failures in the last 10 minutes."
 
       # User Experience Alerts
       - alert: ERIPLowUserSatisfaction
@@ -186,7 +186,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP ROI calculation errors"
-          description: "{{ $value }} ROI calculation errors in the last 15 minutes."
+          description: "{{ €value }} ROI calculation errors in the last 15 minutes."
 
   - name: erip-security
     rules:
@@ -198,7 +198,7 @@ groups:
           severity: critical
         annotations:
           summary: "ERIP critical security findings"
-          description: "{{ $value }} critical security findings detected."
+          description: "{{ €value }} critical security findings detected."
 
       - alert: ERIPAuthenticationFailures
         expr: increase(erip_auth_failures_total[5m]) > 20
@@ -207,7 +207,7 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP high authentication failures"
-          description: "{{ $value }} authentication failures in the last 5 minutes."
+          description: "{{ €value }} authentication failures in the last 5 minutes."
 
       - alert: ERIPSuspiciousAPIActivity
         expr: rate(http_requests_total{job="erip-backend",status="403"}[5m]) > 5
@@ -216,4 +216,4 @@ groups:
           severity: warning
         annotations:
           summary: "ERIP suspicious API activity"
-          description: "High rate of 403 Forbidden responses: {{ $value }} per second."
+          description: "High rate of 403 Forbidden responses: {{ €value }} per second."

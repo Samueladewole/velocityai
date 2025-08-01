@@ -141,7 +141,7 @@ export class VelocityWebSocketService {
   private handleReconnect() {
     if (this.reconnectAttempt < this.maxReconnectAttempts) {
       this.reconnectAttempt++
-      console.log(`🔄 Attempting WebSocket reconnection ${this.reconnectAttempt}/${this.maxReconnectAttempts}`)
+      console.log(`🔄 Attempting WebSocket reconnection €{this.reconnectAttempt}/€{this.maxReconnectAttempts}`)
       
       setTimeout(() => {
         this.connect()
@@ -194,7 +194,7 @@ export class VelocityWebSocketService {
         try {
           callback(data)
         } catch (error) {
-          console.error(`❌ Error in WebSocket subscriber for ${channel}:`, error)
+          console.error(`❌ Error in WebSocket subscriber for €{channel}:`, error)
         }
       })
     }

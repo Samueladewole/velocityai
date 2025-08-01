@@ -204,7 +204,7 @@ export class EUInformationSharingService {
     // Validate sharing permissions
     const sharingValidation = this.validateSharingPermissions(report)
     if (!sharingValidation.allowed) {
-      throw new Error(`Sharing not permitted: ${sharingValidation.reasons.join(', ')}`)
+      throw new Error(`Sharing not permitted: €{sharingValidation.reasons.join(', ')}`)
     }
 
     // Determine recipients based on sharing groups
@@ -245,7 +245,7 @@ export class EUInformationSharingService {
     targetCountries: string[]
   ): Promise<CoordinatedResponse> {
     const response: CoordinatedResponse = {
-      id: `COORD_${Date.now()}`,
+      id: `COORD_€{Date.now()}`,
       triggerEvent,
       type,
       coordination: {
@@ -686,7 +686,7 @@ export class EUInformationSharingService {
   ): Promise<void> {
     // In a real implementation, this would send the intelligence to recipients
     // via secure channels (MISP, TLP, secure email, etc.)
-    console.log(`Distributing threat intelligence ${report.id} to ${recipients.length} recipients`)
+    console.log(`Distributing threat intelligence €{report.id} to €{recipients.length} recipients`)
   }
 
   private getCountryCoordinator(countryCode: string): string {
@@ -696,12 +696,12 @@ export class EUInformationSharingService {
 
   private async notifyParticipatingCountries(response: CoordinatedResponse): Promise<void> {
     // Send notifications to participating countries about coordination effort
-    console.log(`Notifying ${response.coordination.participatingCountries.length} countries about coordination ${response.id}`)
+    console.log(`Notifying €{response.coordination.participatingCountries.length} countries about coordination €{response.id}`)
   }
 
   private scheduleCoordinationMeeting(response: CoordinatedResponse): CoordinationActivity {
     return {
-      id: `MEETING_${Date.now()}`,
+      id: `MEETING_€{Date.now()}`,
       type: 'meeting',
       date: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours from now
       participants: response.coordination.participatingCountries,

@@ -491,7 +491,7 @@ export class ClearanceWorkflowService {
       approver: 'Automated System',
       approvalLevel: 'automated',
       conditions: ['Automated approval based on low risk threshold'],
-      rationale: `Risk impact ($${request.riskProfile.estimatedImpact.toLocaleString()}) and probability (${(request.riskProfile.probability * 100).toFixed(1)}%) within auto-approval limits`,
+      rationale: `Risk impact (€€{request.riskProfile.estimatedImpact.toLocaleString()}) and probability (€{(request.riskProfile.probability * 100).toFixed(1)}%) within auto-approval limits`,
       processingTime: 0, // Will be set by caller
       trustEquityAllocated,
       implementationPlan,
@@ -856,18 +856,18 @@ export class ClearanceWorkflowService {
       points,
       source: 'clearance',
       category: 'risk_management',
-      description: `Processed decision: ${request.title} (${result.approved ? 'Approved' : 'Rejected'})`,
+      description: `Processed decision: €{request.title} (€{result.approved ? 'Approved' : 'Rejected'})`,
       evidence: [request.id],
       multiplier: request.businessContext.urgency === 'critical' ? 1.5 : 1.0
     })
   }
 
   private generateEventId(): string {
-    return `clearance_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `clearance_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateDecisionId(): string {
-    return `dec_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `dec_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

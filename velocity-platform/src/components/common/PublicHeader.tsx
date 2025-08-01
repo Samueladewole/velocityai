@@ -35,7 +35,7 @@ export const PublicHeader: React.FC = () => {
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Platform Overview</div>
-                  <div className="text-xs text-slate-400">12 AI agents & features</div>
+                  <div className="text-xs text-slate-400">13 AI agents & features</div>
                 </button>
                 <button 
                   onClick={() => navigate('/platform/dashboard')}

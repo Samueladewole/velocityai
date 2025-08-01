@@ -266,9 +266,9 @@ export const CIPHER: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -466,7 +466,7 @@ export const CIPHER: React.FC = () => {
                         </td>
                         <td className="py-3 px-4 text-center">
                           <Badge 
-                            className={`${
+                            className={`€{
                               category.priority === 'Critical' ? 'bg-red-100 text-red-700' :
                               category.priority === 'High' ? 'bg-orange-100 text-orange-700' :
                               'bg-yellow-100 text-yellow-700'
@@ -554,8 +554,8 @@ export const CIPHER: React.FC = () => {
                     <AreaChart data={generationMetrics}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
-                      <YAxis tickFormatter={(value) => `${value}h`} />
-                      <Tooltip formatter={(value) => [`${value} hours`, '']} />
+                      <YAxis tickFormatter={(value) => `€{value}h`} />
+                      <Tooltip formatter={(value) => [`€{value} hours`, '']} />
                       <Area 
                         type="monotone" 
                         dataKey="manual" 
@@ -589,7 +589,7 @@ export const CIPHER: React.FC = () => {
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis type="number" domain={[0, 100]} />
                       <YAxis dataKey="category" type="category" width={120} tick={{ fontSize: 10 }} />
-                      <Tooltip formatter={(value) => [`${value}%`, 'Risk Reduction']} />
+                      <Tooltip formatter={(value) => [`€{value}%`, 'Risk Reduction']} />
                       <Bar dataKey="reduction" fill="#ec4899" />
                     </BarChart>
                   </ResponsiveContainer>

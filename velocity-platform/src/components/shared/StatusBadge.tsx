@@ -39,7 +39,7 @@ export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, className = ''
   };
 
   return (
-    <Badge className={`${getStatusColor(status)} ${className}`}>
+    <Badge className={`€{getStatusColor(status)} €{className}`}>
       {status.replace('_', ' ').toUpperCase()}
     </Badge>
   );

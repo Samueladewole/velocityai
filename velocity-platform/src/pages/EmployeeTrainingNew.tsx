@@ -879,7 +879,7 @@ export const EmployeeTrainingNew: React.FC = () => {
     },
     {
       label: 'Completion Rate',
-      value: `${averageCompletion}%`,
+      value: `€{averageCompletion}%`,
       change: '+5% vs last month',
       trend: 'up',
       icon: <CheckCircle className="h-6 w-6 text-green-600" />,
@@ -906,7 +906,7 @@ export const EmployeeTrainingNew: React.FC = () => {
     },
     {
       label: 'Learning Hours',
-      value: `${totalHoursCompleted.toLocaleString()}h`,
+      value: `€{totalHoursCompleted.toLocaleString()}h`,
       change: '+15% vs last month',
       trend: 'up',
       icon: <Clock className="h-6 w-6 text-teal-600" />,
@@ -1242,7 +1242,7 @@ export const EmployeeTrainingNew: React.FC = () => {
                       <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-3xl shadow-lg">
                         {learner.avatar}
                       </div>
-                      <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white ${
+                      <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold text-white €{
                         index === 0 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
                         index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
                         'bg-gradient-to-r from-orange-500 to-orange-600'
@@ -1257,7 +1257,7 @@ export const EmployeeTrainingNew: React.FC = () => {
                     </div>
                     <p className="text-xs text-slate-500">Trust Points</p>
                   </div>
-                  <div className={`${podiumHeights[actualIndex]} w-24 bg-gradient-to-t from-blue-200 to-blue-300 rounded-t-lg flex items-end justify-center pb-2`}>
+                  <div className={`€{podiumHeights[actualIndex]} w-24 bg-gradient-to-t from-blue-200 to-blue-300 rounded-t-lg flex items-end justify-center pb-2`}>
                     <span className="text-2xl font-bold text-blue-800">#{index + 1}</span>
                   </div>
                 </div>
@@ -1278,7 +1278,7 @@ export const EmployeeTrainingNew: React.FC = () => {
                     <div className="w-16 h-16 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center text-2xl">
                       {learner.avatar}
                     </div>
-                    <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white ${
+                    <div className={`absolute -top-1 -right-1 w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white €{
                       index === 0 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
                       index === 1 ? 'bg-gradient-to-r from-gray-400 to-gray-500' :
                       index === 2 ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
@@ -1453,7 +1453,7 @@ export const EmployeeTrainingNew: React.FC = () => {
                   <div className={cn(
                     "w-16 h-16 rounded-xl flex items-center justify-center transition-all duration-300",
                     isUnlocked 
-                      ? `bg-gradient-to-r ${achievement.color} shadow-lg` 
+                      ? `bg-gradient-to-r €{achievement.color} shadow-lg` 
                       : "bg-gradient-to-r from-slate-300 to-slate-400"
                   )}>
                     <IconComponent className={cn(
@@ -1465,7 +1465,7 @@ export const EmployeeTrainingNew: React.FC = () => {
                     <Badge className={cn(
                       "text-white border-0",
                       isUnlocked 
-                        ? `bg-gradient-to-r ${getRarityColor(achievement.rarity)}`
+                        ? `bg-gradient-to-r €{getRarityColor(achievement.rarity)}`
                         : "bg-gradient-to-r from-slate-400 to-slate-500"
                     )}>
                       {achievement.rarity}

@@ -83,7 +83,7 @@ export const useComponentPageTemplate = (): UseComponentPageTemplate => {
           // Implement JSON export
           break;
         default:
-          throw new Error(`Unsupported export format: ${format}`);
+          throw new Error(`Unsupported export format: €{format}`);
       }
       
       trackEvent('export_success', { format, timestamp: new Date() });
@@ -103,14 +103,14 @@ export const useComponentPageTemplate = (): UseComponentPageTemplate => {
       timestamp: new Date().toISOString()
     });
     
-    return `${baseUrl}?${shareParams.toString()}`;
+    return `€{baseUrl}?€{shareParams.toString()}`;
   }, []);
   
   const generateQRCode = useCallback((): string => {
     const shareUrl = generateShareLink();
     // This would generate an actual QR code
     // For now, return a placeholder
-    return `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="10">QR Code for: ${encodeURIComponent(shareUrl)}</text></svg>`;
+    return `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y="50" font-size="10">QR Code for: €{encodeURIComponent(shareUrl)}</text></svg>`;
   }, [generateShareLink]);
   
   // Real-time functions
@@ -128,7 +128,7 @@ export const useComponentPageTemplate = (): UseComponentPageTemplate => {
   
   // Notification functions
   const showNotification = useCallback((type: string, message: string, options?: any) => {
-    const id = `notification-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const id = `notification-€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`;
     const notification = { id, type, message, options };
     
     setNotifications(prev => [...prev, notification]);

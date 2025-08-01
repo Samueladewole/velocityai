@@ -111,10 +111,10 @@ const CustomAgentCreator: React.FC = () => {
     const credentials = generateCredentials(platform);
 
     return {
-      name: `${platform.toUpperCase()} ${framework.toUpperCase()} Agent`,
+      name: `€{platform.toUpperCase()} €{framework.toUpperCase()} Agent`,
       platform: platform,
       framework: framework,
-      description: `Automated compliance agent for ${framework.toUpperCase()} on ${platform.toUpperCase()} platform. ${generateDescription(platform, framework)}`,
+      description: `Automated compliance agent for €{framework.toUpperCase()} on €{platform.toUpperCase()} platform. €{generateDescription(platform, framework)}`,
       schedule: schedule,
       controls: controls,
       credentials: credentials,
@@ -207,13 +207,13 @@ const CustomAgentCreator: React.FC = () => {
       'gcp_eu_ai_act': 'Governs ML model operations, AI ethics compliance, and automated decision monitoring.'
     };
 
-    return descriptions[`${platform}_${framework}`] || 'Provides automated compliance monitoring and evidence collection.';
+    return descriptions[`€{platform}_€{framework}`] || 'Provides automated compliance monitoring and evidence collection.';
   };
 
   const calculateRuntime = (platform: string, controlCount: number): string => {
     const baseTime = platform === 'aws' ? 15 : platform === 'github' ? 8 : 12;
     const totalTime = baseTime + (controlCount * 2);
-    return `${totalTime}-${totalTime + 5} minutes`;
+    return `€{totalTime}-€{totalTime + 5} minutes`;
   };
 
   const calculateAutomationLevel = (platform: string, framework: string): number => {
@@ -224,7 +224,7 @@ const CustomAgentCreator: React.FC = () => {
       'gcp_soc2': 93, 'gcp_iso27001': 88, 'gcp_cis': 96, 'gcp_nis2': 92, 'gcp_dora': 88, 'gcp_eu_ai_act': 84
     };
 
-    return automationMap[`${platform}_${framework}`] || 85;
+    return automationMap[`€{platform}_€{framework}`] || 85;
   };
 
   const handleSendMessage = async () => {
@@ -251,13 +251,13 @@ const CustomAgentCreator: React.FC = () => {
           type: 'assistant',
           content: `✨ Perfect! I've created a custom agent configuration based on your requirements. Here's what I understood:
 
-**${config.name}**
-• Platform: ${config.platform.toUpperCase()}
-• Framework: ${config.framework.toUpperCase()}
-• Schedule: Every ${config.schedule}
-• Automation Level: ${config.automationLevel}%
+**€{config.name}**
+• Platform: €{config.platform.toUpperCase()}
+• Framework: €{config.framework.toUpperCase()}
+• Schedule: Every €{config.schedule}
+• Automation Level: €{config.automationLevel}%
 
-The agent will monitor ${config.controls.length} controls and collect evidence automatically. Would you like to review the detailed configuration?`,
+The agent will monitor €{config.controls.length} controls and collect evidence automatically. Would you like to review the detailed configuration?`,
           timestamp: new Date(),
           agentConfig: config,
           suggestions: [
@@ -336,7 +336,7 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
       const deployMessage: ChatMessage = {
         id: Date.now().toString(),
         type: 'system',
-        content: `🚀 Agent "${generatedConfig.name}" has been successfully deployed!\n\n✅ Agent ID: ${createdAgent.id}\n✅ Evidence items: ${createdAgent.evidence_count}\n✅ Success rate: ${createdAgent.success_rate}%\n✅ Status: ${createdAgent.status}\n\nYour agent is now active and collecting compliance evidence. You can monitor its progress in the Agent Dashboard.`,
+        content: `🚀 Agent "€{generatedConfig.name}" has been successfully deployed!\n\n✅ Agent ID: €{createdAgent.id}\n✅ Evidence items: €{createdAgent.evidence_count}\n✅ Success rate: €{createdAgent.success_rate}%\n✅ Status: €{createdAgent.status}\n\nYour agent is now active and collecting compliance evidence. You can monitor its progress in the Agent Dashboard.`,
         timestamp: new Date()
       };
 
@@ -351,7 +351,7 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
       const errorMessage: ChatMessage = {
         id: Date.now().toString(),
         type: 'system',
-        content: `❌ Failed to deploy agent: ${error.message}\n\nPlease make sure you're logged in and try again.`,
+        content: `❌ Failed to deploy agent: €{error.message}\n\nPlease make sure you're logged in and try again.`,
         timestamp: new Date()
       };
       setMessages(prev => [...prev, errorMessage]);
@@ -391,13 +391,13 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
         {/* Enhanced Messages */}
         <div className="flex-1 overflow-y-auto p-8 space-y-6 bg-gradient-to-b from-slate-50/30 to-transparent">
           {messages.map((message) => (
-            <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'} items-end space-x-3`}>
+            <div key={message.id} className={`flex €{message.type === 'user' ? 'justify-end' : 'justify-start'} items-end space-x-3`}>
               {message.type !== 'user' && (
                 <div className="flex-shrink-0 w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center mb-1">
                   <Sparkles className="w-4 h-4 text-white" />
                 </div>
               )}
-              <div className={`max-w-2xl rounded-2xl px-6 py-4 shadow-sm ${
+              <div className={`max-w-2xl rounded-2xl px-6 py-4 shadow-sm €{
                 message.type === 'user' 
                   ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white ml-12' 
                   : message.type === 'system'
@@ -445,7 +445,7 @@ The agent will monitor ${config.controls.length} controls and collect evidence a
                       <button
                         key={index}
                         onClick={() => handleSuggestionClick(suggestion)}
-                        className={`text-xs px-4 py-2 rounded-full transition-all hover:scale-105 ${
+                        className={`text-xs px-4 py-2 rounded-full transition-all hover:scale-105 €{
                           message.type === 'user' 
                             ? 'bg-white/20 hover:bg-white/30 text-white border border-white/20' 
                             : 'bg-gradient-to-r from-blue-50 to-indigo-50 hover:from-blue-100 hover:to-indigo-100 text-blue-700 border border-blue-200'

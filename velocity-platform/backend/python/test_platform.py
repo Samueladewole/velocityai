@@ -203,7 +203,7 @@ def integration_test():
     # Use risk data in value calculation
     annual_loss = risk_stats['statistics']['mean']
     
-    print(f"  ✅ Risk calculation: ${annual_loss:,.0f} annual loss expectancy")
+    print(f"  ✅ Risk calculation: €{annual_loss:,.0f} annual loss expectancy")
     print(f"  ✅ Data flow between PRISM and BEACON validated")
     
     return True

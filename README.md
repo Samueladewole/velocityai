@@ -31,7 +31,7 @@ Velocity.ai is the world's first comprehensive **AI-powered compliance automatio
 - **Time to compliance**: < 7 days (vs industry 3-6 months)
 - **Evidence automation**: 95%+ collection rate
 - **Customer acquisition**: 100 customers in 90 days
-- **Revenue target**: $1M ARR in 12 months
+- **Revenue target**: €1M ARR in 12 months
 
 ## 🤖 13 Specialized AI Agents
 
@@ -146,7 +146,7 @@ interface MonitoringSystem {
 - **Industry Specific**: Financial services, healthcare, SaaS, manufacturing solutions
 
 ### **🌟 Specialized: GDPR International Transfers**
-- **81% Cost Savings** vs traditional solutions (€32,000 EU vs $35,000 US)
+- **81% Cost Savings** vs traditional solutions (€32,000 EU vs €35,000 US)
 - **Microsoft 365 Protection**: Prevent enforcement actions like the EDPS decision
 - **Transfer Impact Assessments**: Automated TIA generation and management
 - **Cross-Border Monitoring**: 24/7 surveillance of international data movements
@@ -235,21 +235,21 @@ Real-time Collaboration → Final Report → Certification
 - Community support
 - 30-day evidence retention
 
-### **Startup Tier ($299/month)**
+### **Startup Tier (€299/month)**
 - 2 frameworks included
 - Advanced evidence automation
 - Email + chat support
 - 12-month evidence retention
 - Basic integrations
 
-### **Growth Tier ($799/month)**
+### **Growth Tier (€799/month)**
 - All frameworks included
 - Priority evidence processing
 - Phone + email support
 - Unlimited evidence retention
 - Advanced integrations + API
 
-### **Enterprise Tier ($1,999/month)**
+### **Enterprise Tier (€1,999/month)**
 - Custom framework support
 - Dedicated success manager
 - SLA guarantees
@@ -277,13 +277,13 @@ Real-time Collaboration → Final Report → Certification
 ## 📈 Business Value
 
 ### **For Startups & SMEs**
-- **Traditional Cost**: $275K+/year (consultant + tools + assessments)
-- **Velocity Value**: $36K/year platform cost
+- **Traditional Cost**: €275K+/year (consultant + tools + assessments)
+- **Velocity Value**: €36K/year platform cost
 - **Net ROI**: 850%+ through time savings and risk reduction
 
 ### **For Enterprises**  
-- **Traditional Cost**: $1.8M+/year (GRC platform + consulting + resources)
-- **Velocity Value**: $240K/year platform cost
+- **Traditional Cost**: €1.8M+/year (GRC platform + consulting + resources)
+- **Velocity Value**: €240K/year platform cost
 - **Net ROI**: 1,200%+ through efficiency gains and risk reduction
 
 ## 🏛️ Technical Stack
@@ -299,7 +299,7 @@ Real-time Collaboration → Final Report → Certification
 
 ## 🌍 AWS Amplify MVP Deployment
 
-### **Bootstrap-Friendly Setup ($50-250/month)**
+### **Bootstrap-Friendly Setup (€50-250/month)**
 
 ```bash
 # Quick Deploy (30 minutes to production)
@@ -363,7 +363,7 @@ Move beyond static compliance reports to **dynamic trust scores** that reflect y
 Complete ecosystem of agents working together, not disconnected point solutions.
 
 ### **Bootstrap Friendly**
-Designed for fast-growing companies with **$50-250/month operational costs** until revenue scales.
+Designed for fast-growing companies with **€50-250/month operational costs** until revenue scales.
 
 ## 🔥 Revenue-First Features (MVP Launch)
 
@@ -373,9 +373,9 @@ Designed for fast-growing companies with **$50-250/month operational costs** unt
 - ✅ **Trust Score Assessment** (instant credibility metrics)
 
 ### **Subscription Tiers**
-- **Starter**: $299/month (Single framework, basic automation)
-- **Growth**: $799/month (All frameworks, advanced features)
-- **Enterprise**: $1,999/month (Custom frameworks, dedicated support)
+- **Starter**: €299/month (Single framework, basic automation)
+- **Growth**: €799/month (All frameworks, advanced features)
+- **Enterprise**: €1,999/month (Custom frameworks, dedicated support)
 
 ## 🤝 Contact
 

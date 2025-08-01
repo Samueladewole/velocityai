@@ -84,11 +84,11 @@ export function AnswerReview({ questions, onUpdate, onComplete, organizationId }
   const handleExport = (format: ExportFormat) => {
     try {
       exportQuestionnaireAnswers(questions, format, {
-        filename: `questionnaire-review-${organizationId}`
+        filename: `questionnaire-review-€{organizationId}`
       })
       toast({
         title: 'Export Successful',
-        description: `Questionnaire exported as ${format.toUpperCase()}`
+        description: `Questionnaire exported as €{format.toUpperCase()}`
       })
     } catch (error) {
       toast({
@@ -126,7 +126,7 @@ export function AnswerReview({ questions, onUpdate, onComplete, organizationId }
           <div className="mt-2 bg-gray-200 rounded-full h-2">
             <div 
               className="bg-blue-600 h-2 rounded-full transition-all"
-              style={{ width: `${progress}%` }}
+              style={{ width: `€{progress}%` }}
             />
           </div>
         </div>
@@ -146,7 +146,7 @@ export function AnswerReview({ questions, onUpdate, onComplete, organizationId }
                 {categoryQuestions.map(question => (
                   <Card
                     key={question.id}
-                    className={`p-3 cursor-pointer transition-colors ${
+                    className={`p-3 cursor-pointer transition-colors €{
                       selectedQuestion?.id === question.id ? 'border-blue-500 bg-blue-50' : 'hover:bg-gray-50'
                     }`}
                     onClick={() => {
@@ -161,7 +161,7 @@ export function AnswerReview({ questions, onUpdate, onComplete, organizationId }
                         <p className="text-sm font-medium line-clamp-2">{question.question}</p>
                         {question.answer && (
                           <div className="flex items-center gap-2 mt-1">
-                            <Badge className={`text-xs ${getConfidenceBadgeColor(question.answer.confidence)}`}>
+                            <Badge className={`text-xs €{getConfidenceBadgeColor(question.answer.confidence)}`}>
                               {question.answer.confidence}
                             </Badge>
                             {question.answer.evidence && question.answer.evidence.length > 0 && (

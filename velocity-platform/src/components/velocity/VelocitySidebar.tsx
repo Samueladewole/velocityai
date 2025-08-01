@@ -54,12 +54,12 @@ export const VelocitySidebar: React.FC<VelocitySidebarProps> = ({ className }) =
   const navigationItems: NavItem[] = [
     {
       label: 'Dashboard',
-      path: `${routePrefix}/dashboard`,
+      path: `€{routePrefix}/dashboard`,
       icon: Home,
     },
     {
       label: 'Live Monitor',
-      path: `${routePrefix}/live`,
+      path: `€{routePrefix}/live`,
       icon: Activity,
       badge: 'Live',
     },
@@ -67,54 +67,54 @@ export const VelocitySidebar: React.FC<VelocitySidebarProps> = ({ className }) =
       label: 'AI Agents',
       icon: Bot,
       children: [
-        { label: 'Active Agents', path: `${routePrefix}/agents`, icon: CheckCircle },
-        { label: 'Agent Creator', path: `${routePrefix}/creator`, icon: Package },
-        { label: 'Scheduled Tasks', path: `${routePrefix}/scheduled`, icon: Clock },
-        { label: 'Agent Logs', path: `${routePrefix}/logs`, icon: FileCheck },
+        { label: 'Active Agents', path: `€{routePrefix}/agents`, icon: CheckCircle },
+        { label: 'Agent Creator', path: `€{routePrefix}/creator`, icon: Package },
+        { label: 'Scheduled Tasks', path: `€{routePrefix}/scheduled`, icon: Clock },
+        { label: 'Agent Logs', path: `€{routePrefix}/logs`, icon: FileCheck },
       ],
     },
     {
       label: 'Evidence',
       icon: FileCheck,
       children: [
-        { label: 'Evidence Review', path: `${routePrefix}/evidence`, icon: FileCheck },
-        { label: 'Validation Queue', path: `${routePrefix}/validation`, icon: AlertCircle },
-        { label: 'Export Center', path: `${routePrefix}/export`, icon: Package },
+        { label: 'Evidence Review', path: `€{routePrefix}/evidence`, icon: FileCheck },
+        { label: 'Validation Queue', path: `€{routePrefix}/validation`, icon: AlertCircle },
+        { label: 'Export Center', path: `€{routePrefix}/export`, icon: Package },
       ],
     },
     {
       label: 'Integrations',
       icon: Database,
       children: [
-        { label: 'Cloud Platforms', path: `${routePrefix}/integration`, icon: Cloud },
-        { label: 'AWS', path: `${routePrefix}/integration/aws`, icon: Cloud },
-        { label: 'Google Cloud', path: `${routePrefix}/integration/gcp`, icon: Globe },
-        { label: 'Azure', path: `${routePrefix}/integration/azure`, icon: Cloud },
-        { label: 'GitHub', path: `${routePrefix}/integration/github`, icon: Github },
-        { label: 'API Keys', path: `${routePrefix}/integration/keys`, icon: Key },
+        { label: 'Cloud Platforms', path: `€{routePrefix}/integration`, icon: Cloud },
+        { label: 'AWS', path: `€{routePrefix}/integration/aws`, icon: Cloud },
+        { label: 'Google Cloud', path: `€{routePrefix}/integration/gcp`, icon: Globe },
+        { label: 'Azure', path: `€{routePrefix}/integration/azure`, icon: Cloud },
+        { label: 'GitHub', path: `€{routePrefix}/integration/github`, icon: Github },
+        { label: 'API Keys', path: `€{routePrefix}/integration/keys`, icon: Key },
       ],
     },
     {
       label: 'Compliance',
       icon: Shield,
       children: [
-        { label: 'Trust Score', path: `${routePrefix}/trust-score`, icon: TrendingUp },
-        { label: 'SOC 2', path: `${routePrefix}/compliance/soc2`, icon: Shield },
-        { label: 'ISO 27001', path: `${routePrefix}/compliance/iso27001`, icon: Shield },
-        { label: 'CIS Controls', path: `${routePrefix}/compliance/cis`, icon: Shield },
-        { label: 'GDPR', path: `${routePrefix}/compliance/gdpr`, icon: Shield },
-        { label: 'HIPAA', path: `${routePrefix}/compliance/hipaa`, icon: Shield },
-        { label: 'Custom Frameworks', path: `${routePrefix}/compliance/custom`, icon: Settings },
+        { label: 'Trust Score', path: `€{routePrefix}/trust-score`, icon: TrendingUp },
+        { label: 'SOC 2', path: `€{routePrefix}/compliance/soc2`, icon: Shield },
+        { label: 'ISO 27001', path: `€{routePrefix}/compliance/iso27001`, icon: Shield },
+        { label: 'CIS Controls', path: `€{routePrefix}/compliance/cis`, icon: Shield },
+        { label: 'GDPR', path: `€{routePrefix}/compliance/gdpr`, icon: Shield },
+        { label: 'HIPAA', path: `€{routePrefix}/compliance/hipaa`, icon: Shield },
+        { label: 'Custom Frameworks', path: `€{routePrefix}/compliance/custom`, icon: Settings },
       ],
     },
     {
       label: 'Analytics',
-      path: `${routePrefix}/analytics`,
+      path: `€{routePrefix}/analytics`,
       icon: BarChart3,
     },
     {
       label: 'Workflows',
-      path: `${routePrefix}/workflows`,
+      path: `€{routePrefix}/workflows`,
       icon: Workflow,
     },
   ];
@@ -122,27 +122,27 @@ export const VelocitySidebar: React.FC<VelocitySidebarProps> = ({ className }) =
   const bottomNavigationItems: NavItem[] = [
     {
       label: 'API Reference',
-      path: `${routePrefix}/api`,
+      path: `€{routePrefix}/api`,
       icon: Code2,
     },
     {
       label: 'Documentation',
-      path: `${routePrefix}/docs`,
+      path: `€{routePrefix}/docs`,
       icon: BookOpen,
     },
     {
       label: 'Support',
-      path: `${routePrefix}/support`,
+      path: `€{routePrefix}/support`,
       icon: HelpCircle,
     },
     {
       label: 'Team & Billing',
-      path: `${routePrefix}/billing`,
+      path: `€{routePrefix}/billing`,
       icon: Users,
     },
     {
       label: 'Settings',
-      path: `${routePrefix}/settings`,
+      path: `€{routePrefix}/settings`,
       icon: Settings,
     },
   ];
@@ -224,7 +224,7 @@ export const VelocitySidebar: React.FC<VelocitySidebarProps> = ({ className }) =
     <aside className={cn('w-64 bg-white border-r border-gray-200 flex flex-col', className)}>
       {/* Logo */}
       <div className="px-4 py-4 border-b border-gray-200">
-        <Link to={`${routePrefix}/`} className="flex items-center gap-2">
+        <Link to={`€{routePrefix}/`} className="flex items-center gap-2">
           <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
             <Zap className="w-5 h-5 text-white" />
           </div>

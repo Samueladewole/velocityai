@@ -16,7 +16,7 @@ The AI Agents & Velocity Tier feature is now fully integrated into the ERIP plat
 #### **Pricing Page**
 - **URL**: `http://localhost:5173/velocity/pricing`
 - **Features**: 
-  - Velocity Starter ($999/month), Growth ($2,499/month), Scale ($4,999/month)
+  - Velocity Starter (€999/month), Growth (€2,499/month), Scale (€4,999/month)
   - Feature comparison tables
   - Trial signup and Stripe integration
 
@@ -136,7 +136,7 @@ The feature demonstrates:
 - **30 minutes** from signup to Trust Score
 - **3x Trust Points** for AI-collected evidence
 - **387.5 hours** manual time saved per month
-- **$15,500** cost savings per customer
+- **€15,500** cost savings per customer
 - **92%** onboarding time reduction
 
 ## 🎨 UI/UX Highlights

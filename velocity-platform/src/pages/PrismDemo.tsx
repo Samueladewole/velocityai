@@ -278,15 +278,15 @@ export function PrismDemo() {
               <Progress value={demoProgress} className="h-3" />
               
               <div className="grid grid-cols-3 gap-4 text-sm">
-                <div className={`flex items-center gap-2 ${completedSteps.scenarios ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 €{completedSteps.scenarios ? 'text-green-600' : 'text-gray-500'}`}>
                   {completedSteps.scenarios ? <CheckCircle className="h-4 w-4" /> : <div className="h-4 w-4 border-2 border-gray-300 rounded-full" />}
                   <span>Build Scenarios</span>
                 </div>
-                <div className={`flex items-center gap-2 ${completedSteps.simulation ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 €{completedSteps.simulation ? 'text-green-600' : 'text-gray-500'}`}>
                   {completedSteps.simulation ? <CheckCircle className="h-4 w-4" /> : <div className="h-4 w-4 border-2 border-gray-300 rounded-full" />}
                   <span>Run Simulation</span>
                 </div>
-                <div className={`flex items-center gap-2 ${completedSteps.reports ? 'text-green-600' : 'text-gray-500'}`}>
+                <div className={`flex items-center gap-2 €{completedSteps.reports ? 'text-green-600' : 'text-gray-500'}`}>
                   {completedSteps.reports ? <CheckCircle className="h-4 w-4" /> : <div className="h-4 w-4 border-2 border-gray-300 rounded-full" />}
                   <span>Generate Reports</span>
                 </div>
@@ -358,7 +358,7 @@ export function PrismDemo() {
                   </div>
                   <div className="text-center p-3 bg-green-50 rounded-lg">
                     <div className="text-2xl font-bold text-green-900">
-                      {totalExposure > 0 ? formatCurrency(totalExposure) : '$0'}
+                      {totalExposure > 0 ? formatCurrency(totalExposure) : '€0'}
                     </div>
                     <div className="text-sm text-green-700">Total Exposure</div>
                   </div>
@@ -557,7 +557,7 @@ export function PrismDemo() {
               <div>
                 <div className="text-2xl font-bold text-orange-600">
                   {simulationResults ? 
-                    `${Math.round(simulationResults.statistics.mean / totalExposure * 100)}%` : 
+                    `€{Math.round(simulationResults.statistics.mean / totalExposure * 100)}%` : 
                     'Pending'
                   }
                 </div>

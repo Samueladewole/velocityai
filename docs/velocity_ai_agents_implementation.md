@@ -115,19 +115,19 @@ interface ERIPVelocity {
   
   pricing: {
     starter: {
-      price: "$999/month",
+      price: "€999/month",
       users: 5,
       frameworks: 2,
       support: "Email + docs"
     },
     growth: {
-      price: "$2,499/month",
+      price: "€2,499/month",
       users: 15,
       frameworks: 4,
       support: "Priority + chat"
     },
     scale: {
-      price: "$4,999/month",
+      price: "€4,999/month",
       users: "Unlimited",
       frameworks: "All",
       support: "Dedicated CSM"
@@ -493,7 +493,7 @@ interface RolloutStrategy {
 
 ### Business Metrics
 - 100 Velocity customers in 3 months
-- $1M ARR from Velocity tier
+- €1M ARR from Velocity tier
 - 50% convert to higher tiers
 - NPS > 70 for Velocity customers
 

@@ -126,7 +126,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
         }] : []),
         ...(complianceHealth.criticalGaps > 5 ? [{
           severity: 'warning' as const,
-          message: `${complianceHealth.criticalGaps} critical compliance gaps require attention`,
+          message: `€{complianceHealth.criticalGaps} critical compliance gaps require attention`,
           timestamp: new Date()
         }] : []),
         ...(aiPerformance.averageConfidence < 0.7 ? [{
@@ -197,7 +197,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
             <button
               key={range}
               onClick={() => setTimeRange(range)}
-              className={`px-3 py-1 rounded text-sm ${
+              className={`px-3 py-1 rounded text-sm €{
                 timeRange === range
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
@@ -220,7 +220,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
               <div className="mt-2 text-sm text-yellow-700">
                 {dashboardData.alerts.map((alert, index) => (
                   <p key={index} className="mb-1">
-                    <span className={`font-medium ${
+                    <span className={`font-medium €{
                       alert.severity === 'critical' ? 'text-red-600' : 
                       alert.severity === 'warning' ? 'text-yellow-600' : 'text-blue-600'
                     }`}>
@@ -241,7 +241,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
           <div className="flex items-center justify-between">
             <div>
               <p className="text-sm font-medium text-gray-600">System Health</p>
-              <p className={`text-2xl font-bold ${getStatusColor(dashboardData.systemHealth.status)}`}>
+              <p className={`text-2xl font-bold €{getStatusColor(dashboardData.systemHealth.status)}`}>
                 {dashboardData.systemHealth.overallScore}%
               </p>
             </div>
@@ -290,7 +290,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
             <div>
               <p className="text-sm font-medium text-gray-600">Automation ROI</p>
               <p className="text-2xl font-bold text-purple-600">
-                ${dashboardData.businessImpact.automationROI.toLocaleString()}
+                €{dashboardData.businessImpact.automationROI.toLocaleString()}
               </p>
             </div>
             <div className="text-3xl">💰</div>
@@ -323,7 +323,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Cost Efficiency</span>
               <span className="font-medium">
-                {dashboardData.aiPerformance.costEfficiency.toFixed(1)} decisions/$
+                {dashboardData.aiPerformance.costEfficiency.toFixed(1)} decisions/€
                 <span className="ml-2">{getTrendIcon(dashboardData.trends.costTrend)}</span>
               </span>
             </div>
@@ -343,7 +343,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm text-gray-600">Critical Gaps</span>
-              <span className={`font-medium ${
+              <span className={`font-medium €{
                 dashboardData.complianceHealth.criticalGaps > 5 ? 'text-red-600' : 'text-green-600'
               }`}>
                 {dashboardData.complianceHealth.criticalGaps}
@@ -365,7 +365,7 @@ export const ExecutiveDashboard: React.FC<{ organizationId: string }> = ({ organ
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="text-center">
             <p className="text-2xl font-bold text-green-600">
-              ${dashboardData.businessImpact.automationROI.toLocaleString()}
+              €{dashboardData.businessImpact.automationROI.toLocaleString()}
             </p>
             <p className="text-sm text-gray-600">Automation ROI</p>
           </div>

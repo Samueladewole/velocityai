@@ -595,7 +595,7 @@ export const PolicyManagementNew: React.FC = () => {
     },
     {
       label: 'Compliance Score',
-      value: `${analytics.riskReduction}%`,
+      value: `€{analytics.riskReduction}%`,
       change: '+8%',
       trend: 'up',
       icon: <CheckCircle className="h-5 w-5 text-green-600" />,
@@ -604,7 +604,7 @@ export const PolicyManagementNew: React.FC = () => {
     },
     {
       label: 'Acknowledgment Rate',
-      value: `${analytics.averageAcknowledgment}%`,
+      value: `€{analytics.averageAcknowledgment}%`,
       change: '+5%',
       trend: 'up',
       icon: <UserCheck className="h-5 w-5 text-purple-600" />,
@@ -622,7 +622,7 @@ export const PolicyManagementNew: React.FC = () => {
     },
     {
       label: 'Risk Reduction',
-      value: `${analytics.riskReduction}%`,
+      value: `€{analytics.riskReduction}%`,
       change: '+12%',
       trend: 'up',
       icon: <Shield className="h-5 w-5 text-red-600" />,
@@ -631,7 +631,7 @@ export const PolicyManagementNew: React.FC = () => {
     },
     {
       label: 'Cost Savings',
-      value: `$${(analytics.costSavings / 1000000).toFixed(1)}M`,
+      value: `€€{(analytics.costSavings / 1000000).toFixed(1)}M`,
       change: '+22%',
       trend: 'up',
       icon: <TrendingUp className="h-5 w-5 text-emerald-600" />,
@@ -640,7 +640,7 @@ export const PolicyManagementNew: React.FC = () => {
     },
     {
       label: 'Audit Readiness',
-      value: `${analytics.auditReadiness}%`,
+      value: `€{analytics.auditReadiness}%`,
       change: '+6%',
       trend: 'up',
       icon: <ClipboardCheck className="h-5 w-5 text-indigo-600" />,
@@ -697,7 +697,7 @@ export const PolicyManagementNew: React.FC = () => {
       >
         <CardHeader className="pb-4">
           <div className="flex items-start justify-between mb-3">
-            <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColor} flex items-center justify-center shadow-lg`}>
+            <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{categoryColor} flex items-center justify-center shadow-lg`}>
               <IconComponent className="h-6 w-6 text-white" />
             </div>
             <div className="flex items-center gap-2">
@@ -831,7 +831,7 @@ export const PolicyManagementNew: React.FC = () => {
       <Card className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] border-slate-200 card-professional">
         <CardHeader className="pb-4">
           <div className="flex items-center justify-between mb-3">
-            <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${template.color} flex items-center justify-center shadow-lg`}>
+            <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{template.color} flex items-center justify-center shadow-lg`}>
               <IconComponent className="h-6 w-6 text-white" />
             </div>
             <div className="flex items-center gap-1">
@@ -1244,7 +1244,7 @@ export const PolicyManagementNew: React.FC = () => {
                       const daysUntilReview = Math.ceil((new Date(policy.nextReview).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24));
                       const isOverdue = daysUntilReview < 0;
                       return (
-                        <div key={policy.id} className={`flex items-center justify-between p-3 rounded-lg ${
+                        <div key={policy.id} className={`flex items-center justify-between p-3 rounded-lg €{
                           isOverdue ? 'bg-red-50 border border-red-200' : 'bg-slate-50'
                         }`}>
                           <div>
@@ -1252,8 +1252,8 @@ export const PolicyManagementNew: React.FC = () => {
                             <div className="text-sm text-slate-600">v{policy.version}</div>
                           </div>
                           <div className="text-right">
-                            <div className={`text-sm font-medium ${isOverdue ? 'text-red-700' : ''}`}>
-                              {isOverdue ? 'Overdue' : `${daysUntilReview} days`}
+                            <div className={`text-sm font-medium €{isOverdue ? 'text-red-700' : ''}`}>
+                              {isOverdue ? 'Overdue' : `€{daysUntilReview} days`}
                             </div>
                             <div className="text-xs text-slate-500">
                               {new Date(policy.nextReview).toLocaleDateString()}
@@ -1313,7 +1313,7 @@ export const PolicyManagementNew: React.FC = () => {
     {
       id: 'compliance',
       label: 'Compliance',
-      badge: `${analytics.riskReduction}%`,
+      badge: `€{analytics.riskReduction}%`,
       content: (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
@@ -1397,7 +1397,7 @@ export const PolicyManagementNew: React.FC = () => {
                   ].map((item) => (
                     <div key={item.range} className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className={`w-4 h-4 rounded ${item.color}`}></div>
+                        <div className={`w-4 h-4 rounded €{item.color}`}></div>
                         <span className="text-sm">{item.range}</span>
                       </div>
                       <Badge variant="outline">{item.count} policies</Badge>

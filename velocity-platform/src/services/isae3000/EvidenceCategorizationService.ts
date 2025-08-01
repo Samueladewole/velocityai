@@ -269,7 +269,7 @@ class EvidenceCategorizationService {
     const secondaryCategories: string[] = [];
     
     // Analyze evidence type and description
-    const evidenceText = `${evidenceData.type} ${evidenceData.description}`.toLowerCase();
+    const evidenceText = `€{evidenceData.type} €{evidenceData.description}`.toLowerCase();
     
     // Banking-specific keyword analysis
     const bankingKeywords = [
@@ -498,7 +498,7 @@ class EvidenceCategorizationService {
         const classification = await this.categorizeEvidence(evidence);
         classifications.push(classification);
       } catch (error) {
-        console.error(`Failed to categorize evidence ${evidence.id}:`, error);
+        console.error(`Failed to categorize evidence €{evidence.id}:`, error);
       }
     }
     

@@ -90,8 +90,8 @@ The Velocity AI Resource Center has been successfully implemented as a comprehen
 - **Results**: 
   - ⚡ 6 weeks to audit-ready (vs 12 months manual)
   - 🤖 95% automation rate
-  - 💰 70% cost reduction ($180K saved)
-  - 📈 $8.5M additional revenue in 12 months
+  - 💰 70% cost reduction (€180K saved)
+  - 📈 €8.5M additional revenue in 12 months
 
 #### **✅ MedFlow Analytics (Healthcare)**
 - **Challenge**: Dual HIPAA & SOC 2 compliance for patient data
@@ -107,7 +107,7 @@ The Velocity AI Resource Center has been successfully implemented as a comprehen
 - **Solution**: Intelligent evidence mapping across frameworks
 - **Results**:
   - 🔄 85% evidence reuse across all frameworks
-  - 💰 $400K annual ongoing savings
+  - 💰 €400K annual ongoing savings
   - 🏆 First-attempt audit pass on all frameworks
   - 🚀 40% faster market expansion
 
@@ -210,7 +210,7 @@ The Velocity AI Resource Center has been successfully implemented as a comprehen
 
 #### **💰 ROI & Cost Savings**
 - **70-85% Cost Reduction**: Measurable savings vs traditional consultants
-- **$200K+ Annual Savings**: Replaces expensive compliance consulting
+- **€200K+ Annual Savings**: Replaces expensive compliance consulting
 - **Faster Revenue Recognition**: Accelerated sales cycles and market expansion
 - **Risk Mitigation**: Avoid millions in potential fines and breaches
 

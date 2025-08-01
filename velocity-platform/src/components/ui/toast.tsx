@@ -166,7 +166,7 @@ export function toast({ title, description, variant = "default" }: {
   description?: string
   variant?: "default" | "destructive" | "success" | "warning" | "info"
 }) {
-  console.log(`Toast: ${title}`, description)
+  console.log(`Toast: €{title}`, description)
   return { id: Date.now().toString() }
 }
 

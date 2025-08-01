@@ -33,7 +33,7 @@ export const TrustPointsDisplay: React.FC<TrustPointsDisplayProps> = ({
   };
 
   return (
-    <div className={`flex items-center gap-1 ${getColor()} ${getSizeClasses()} ${className}`}>
+    <div className={`flex items-center gap-1 €{getColor()} €{getSizeClasses()} €{className}`}>
       {showIcon && <Star className="h-3 w-3" />}
       <span>
         {points > 0 ? '+' : ''}{points} Trust Points

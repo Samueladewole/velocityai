@@ -3,30 +3,30 @@
 
 ## 🎯 Executive Summary
 
-The Velocity AI Platform represents a paradigm shift in compliance automation, transforming quarterly manual processes into continuous, AI-powered monitoring. This GTM strategy outlines our path to capture significant market share in the $8.5B GRC software market through targeted enterprise sales, strategic partnerships, and demonstrable ROI.
+The Velocity AI Platform represents a paradigm shift in compliance automation, transforming quarterly manual processes into continuous, AI-powered monitoring. This GTM strategy outlines our path to capture significant market share in the €8.5B GRC software market through targeted enterprise sales, strategic partnerships, and demonstrable ROI.
 
 ### Key Success Metrics
-- **Year 1 Target**: $2.5M ARR with 50 enterprise customers
-- **Year 2 Target**: $12M ARR with 200+ customers  
-- **Year 3 Target**: $35M ARR with 500+ customers and market leadership
+- **Year 1 Target**: €2.5M ARR with 50 enterprise customers
+- **Year 2 Target**: €12M ARR with 200+ customers  
+- **Year 3 Target**: €35M ARR with 500+ customers and market leadership
 
 ---
 
 ## 📊 Market Analysis
 
 ### Total Addressable Market (TAM)
-- **Global GRC Software Market**: $33.5B (2025)
-- **Compliance Automation Segment**: $8.5B
-- **AI-Powered Compliance Tools**: $1.2B (emerging)
+- **Global GRC Software Market**: €33.5B (2025)
+- **Compliance Automation Segment**: €8.5B
+- **AI-Powered Compliance Tools**: €1.2B (emerging)
 
 ### Serviceable Addressable Market (SAM)
-- **Mid-Market SaaS Companies**: $2.1B
-- **North American Focus**: $850M
-- **SOC 2/ISO 27001 Certification Market**: $320M
+- **Mid-Market SaaS Companies**: €2.1B
+- **North American Focus**: €850M
+- **SOC 2/ISO 27001 Certification Market**: €320M
 
 ### Serviceable Obtainable Market (SOM)
-- **3-Year Realistic Capture**: $35M (11% of SAM)
-- **Conservative Estimate**: $25M (8% of SAM)
+- **3-Year Realistic Capture**: €35M (11% of SAM)
+- **Conservative Estimate**: €25M (8% of SAM)
 
 ### Market Drivers
 1. **Regulatory Complexity Increase**: 40% YoY growth in compliance requirements
@@ -61,13 +61,13 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 ### Primary Target: Mid-Market SaaS (100-1000 employees)
 **Profile**: Growing SaaS companies pursuing SOC 2 Type II certification
 - **Pain Points**: Manual compliance processes, expensive consultants, resource constraints
-- **Budget**: $50K-$200K annually for compliance tools
+- **Budget**: €50K-€200K annually for compliance tools
 - **Decision Makers**: CTO, CISO, VP of Security, VP of Operations
 - **Buying Cycle**: 3-6 months
 
 **Ideal Customer Profile (ICP)**:
 - Series B-D SaaS companies
-- $10M-$100M ARR
+- €10M-€100M ARR
 - 50-500 employees
 - AWS/GCP infrastructure
 - Pursuing or maintaining SOC 2/ISO 27001
@@ -76,14 +76,14 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 ### Secondary Target: Enterprise Organizations (1000+ employees)
 **Profile**: Large enterprises with complex compliance requirements
 - **Pain Points**: Multi-framework compliance, scale challenges, audit fatigue
-- **Budget**: $200K-$1M+ annually
+- **Budget**: €200K-€1M+ annually
 - **Decision Makers**: Chief Compliance Officer, VP Risk Management
 - **Buying Cycle**: 6-12 months
 
 ### Tertiary Target: Compliance Consulting Firms
 **Profile**: Firms managing multiple client compliance programs
 - **Pain Points**: Scaling manual processes, consultant utilization
-- **Budget**: $100K-$500K annually
+- **Budget**: €100K-€500K annually
 - **Business Model**: White-label or reseller partnership
 
 ---
@@ -95,7 +95,7 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 ✅ **22+ point Trust Score improvement** on average
 ✅ **95%+ automation rate** achieved consistently
 ✅ **30-minute setup** validated across 20+ deployments
-✅ **$15,500 cost savings** in first 30 days
+✅ **€15,500 cost savings** in first 30 days
 ✅ **NPS Score of 78** from beta customers
 
 ### Customer Validation Quotes
@@ -109,14 +109,14 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 
 ### Tiered SaaS Model
 
-#### **Velocity Starter** - $2,500/month
+#### **Velocity Starter** - €2,500/month
 - Up to 50 employees
 - 3 compliance frameworks
 - Basic AI agents (AWS, Google Workspace)
 - Standard support
 - **Target**: Series A/B companies
 
-#### **Velocity Professional** - $7,500/month  
+#### **Velocity Professional** - €7,500/month  
 - Up to 200 employees
 - 5 compliance frameworks
 - Full AI agent suite
@@ -124,7 +124,7 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 - Priority support + CSM
 - **Target**: Series B/C companies
 
-#### **Velocity Enterprise** - $15,000+/month
+#### **Velocity Enterprise** - €15,000+/month
 - Unlimited employees
 - All compliance frameworks
 - White-label options
@@ -133,8 +133,8 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 - **Target**: Series D+ and Fortune 1000
 
 ### Value-Based Pricing Justification
-- **Traditional Approach Cost**: $200K-$500K annually (consultants + tools)
-- **Velocity Cost**: $30K-$180K annually
+- **Traditional Approach Cost**: €200K-€500K annually (consultants + tools)
+- **Velocity Cost**: €30K-€180K annually
 - **ROI**: 150-300% in first year
 - **Payback Period**: 2-4 months
 
@@ -147,20 +147,20 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 #### Phase 1: Direct Sales (Months 1-6)
 - **Team**: 2 AEs, 1 Sales Engineer, 1 SDR
 - **Target**: 15 deals/quarter
-- **ACV**: $50K average
+- **ACV**: €50K average
 - **Focus**: Product-market fit refinement
 
 #### Phase 2: Scale Sales (Months 7-18)
 - **Team**: 5 AEs, 2 SEs, 3 SDRs, 1 Sales Manager
 - **Target**: 35 deals/quarter  
-- **ACV**: $75K average
+- **ACV**: €75K average
 - **Focus**: Process optimization, tool stack
 
 #### Phase 3: Channel + Enterprise (Months 19-36)
 - **Team**: 8 AEs, 3 SEs, 5 SDRs, 2 Enterprise AEs
 - **Channel Partners**: Big 4 consulting, systems integrators
 - **Target**: 60 deals/quarter
-- **ACV**: $100K average
+- **ACV**: €100K average
 
 ### Sales Process
 1. **Lead Qualification** (SDR) - BANT + compliance maturity
@@ -216,7 +216,7 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 | MQLs | 200 | 500 | 800 | 1,200 |
 | SQLs | 50 | 125 | 200 | 300 |
 | Conversion Rate | 25% | 25% | 25% | 25% |
-| CAC | $15K | $12K | $10K | $8K |
+| CAC | €15K | €12K | €10K | €8K |
 
 ---
 
@@ -306,39 +306,39 @@ The Velocity AI Platform represents a paradigm shift in compliance automation, t
 ```
 Year 1 (2025):
 - New Customers: 50
-- Average ACV: $50K
-- New ARR: $2.5M
-- Expansion ARR: $250K
-- Total ARR: $2.75M
+- Average ACV: €50K
+- New ARR: €2.5M
+- Expansion ARR: €250K
+- Total ARR: €2.75M
 
 Year 2 (2026):
 - New Customers: 150
-- Average ACV: $75K  
-- New ARR: $11.25M
-- Expansion ARR: $1.1M
-- Total ARR: $15.1M
+- Average ACV: €75K  
+- New ARR: €11.25M
+- Expansion ARR: €1.1M
+- Total ARR: €15.1M
 
 Year 3 (2027):
 - New Customers: 300
-- Average ACV: $100K
-- New ARR: $30M
-- Expansion ARR: $4.5M
-- Total ARR: $49.6M
+- Average ACV: €100K
+- New ARR: €30M
+- Expansion ARR: €4.5M
+- Total ARR: €49.6M
 ```
 
 ### Unit Economics
-- **Customer Acquisition Cost (CAC)**: $10K
-- **Lifetime Value (LTV)**: $150K
+- **Customer Acquisition Cost (CAC)**: €10K
+- **Lifetime Value (LTV)**: €150K
 - **LTV:CAC Ratio**: 15:1
 - **Gross Margin**: 85%
 - **Net Revenue Retention**: 130%
 - **Churn Rate**: 5% annually
 
 ### Investment Requirements
-**Year 1**: $8M total funding needed
-- **Sales & Marketing**: $4.5M (56%)
-- **R&D**: $2.5M (31%)
-- **Operations**: $1M (13%)
+**Year 1**: €8M total funding needed
+- **Sales & Marketing**: €4.5M (56%)
+- **R&D**: €2.5M (31%)
+- **Operations**: €1M (13%)
 
 ---
 
@@ -347,7 +347,7 @@ Year 3 (2027):
 ### Phase 1: Stealth Launch (Q3 2025)
 **Objectives**: Validate PMF, refine messaging, build initial customer base
 - **Duration**: 3 months
-- **Target**: 15 customers, $750K ARR
+- **Target**: 15 customers, €750K ARR
 - **Activities**: 
   - Closed beta with 50 prospects
   - Product refinement based on feedback
@@ -363,7 +363,7 @@ Year 3 (2027):
 ### Phase 2: Public Launch (Q4 2025)
 **Objectives**: Market awareness, demand generation, sales scale
 - **Duration**: 3 months  
-- **Target**: 35 additional customers, $2M total ARR
+- **Target**: 35 additional customers, €2M total ARR
 - **Activities**:
   - Public launch campaign
   - Conference speaking engagements
@@ -379,7 +379,7 @@ Year 3 (2027):
 ### Phase 3: Scale & Expand (Q1-Q2 2026)
 **Objectives**: Market leadership, channel partnerships, product expansion
 - **Duration**: 6 months
-- **Target**: 100 additional customers, $8M total ARR
+- **Target**: 100 additional customers, €8M total ARR
 - **Activities**:
   - Enterprise sales team expansion
   - Channel partner recruitment
@@ -389,7 +389,7 @@ Year 3 (2027):
 **Success Criteria**:
 - ✅ Market leadership recognition
 - ✅ 3 strategic partnerships signed
-- ✅ $1M+ monthly recurring revenue
+- ✅ €1M+ monthly recurring revenue
 - ✅ 120% net revenue retention
 
 ---
@@ -454,7 +454,7 @@ Year 3 (2027):
 
 ## 🎪 Conclusion
 
-The Velocity AI Platform is positioned to capture significant market share in the rapidly growing compliance automation market. With strong product-market fit, differentiated AI capabilities, and a comprehensive go-to-market strategy, we project $35M ARR within 3 years.
+The Velocity AI Platform is positioned to capture significant market share in the rapidly growing compliance automation market. With strong product-market fit, differentiated AI capabilities, and a comprehensive go-to-market strategy, we project €35M ARR within 3 years.
 
 **Key Success Factors**:
 1. **Maintain Technical Leadership**: 18-month innovation lead over competitors

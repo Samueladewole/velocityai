@@ -69,7 +69,7 @@ Discovery (0% risk) → Pilot (5% risk) → Rollout (20% risk) → Production (t
 
 ### **4. Value Quantification**
 - Time savings: 80-95% automation
-- Cost reduction: $100K+ annually
+- Cost reduction: €100K+ annually
 - Risk mitigation: 70-90% reduction
 - ROI: 300%+ in first year
 
@@ -84,7 +84,7 @@ Discovery (0% risk) → Pilot (5% risk) → Rollout (20% risk) → Production (t
 | **Initial Risk** | Full system access | Zero - questionnaire only | 100% safer |
 | **Time to Value** | Weeks | 30 minutes | 50x faster |
 | **Trust Building** | All or nothing | 5-stage progression | Gradual confidence |
-| **Pricing Model** | $20K-100K upfront | Value-based progression | Lower barrier |
+| **Pricing Model** | €20K-100K upfront | Value-based progression | Lower barrier |
 | **Exit Strategy** | Vendor lock-in | 30-day export | Customer control |
 
 ### **Market Differentiation**
@@ -101,7 +101,7 @@ Discovery (0% risk) → Pilot (5% risk) → Rollout (20% risk) → Production (t
 - **Lower CAC**: No trust barrier to overcome
 - **Higher Conversion**: 30% vs 5% industry average
 - **Faster Sales Cycle**: 30 days vs 90 days
-- **Larger TAM**: +$10B from risk-averse segment
+- **Larger TAM**: +€10B from risk-averse segment
 
 ### **Customer Success**
 - **Faster Time-to-Value**: 30 minutes vs weeks
@@ -196,7 +196,7 @@ Loyalty: "Become a strategic partner"
 ### **90-Day Targets**
 1. [ ] 500 assessments → 50 pilots
 2. [ ] 10 production deployments
-3. [ ] $1M ARR achieved
+3. [ ] €1M ARR achieved
 4. [ ] 95% customer satisfaction
 5. [ ] Series A fundraising
 

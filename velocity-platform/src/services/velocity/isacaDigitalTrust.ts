@@ -382,7 +382,7 @@ export class ISACADigitalTrustService {
     const trustScore = this.calculateDigitalTrustScore(overallMaturity, riskScore);
 
     return {
-      id: `assessment_${Date.now()}`,
+      id: `assessment_€{Date.now()}`,
       organizationId,
       framework: cobitFramework,
       assessmentDate: new Date().toISOString(),
@@ -411,7 +411,7 @@ export class ISACADigitalTrustService {
     const trustScore = this.calculateDTEFTrustScore(overallMaturity, trustEcosystemScore);
 
     return {
-      id: `dtef_assessment_${Date.now()}`,
+      id: `dtef_assessment_€{Date.now()}`,
       organizationId,
       framework: dtefFramework,
       assessmentDate: new Date().toISOString(),
@@ -433,11 +433,11 @@ export class ISACADigitalTrustService {
     Object.entries(domainScores).forEach(([domain, score]) => {
       if (score < 3) {
         recommendations.push({
-          id: `rec_${domain}_${Date.now()}`,
+          id: `rec_€{domain}_€{Date.now()}`,
           priority: 'High',
           domain,
           process: 'Process Improvement',
-          description: `Improve ${domain} maturity through structured process enhancement`,
+          description: `Improve €{domain} maturity through structured process enhancement`,
           effort: 'Medium',
           impact: 'High',
           timeline: '3-6 months'
@@ -625,7 +625,7 @@ export class ISACADigitalTrustService {
       answer: this.generateISACAAlignedAnswer(question, relevantProcess),
       confidence: 85,
       evidence: relevantProcess?.controlObjectives.map(co => co.description) || [],
-      isaacAlignment: relevantProcess ? `${relevantProcess.code}: ${relevantProcess.name}` : 'General ISACA alignment'
+      isaacAlignment: relevantProcess ? `€{relevantProcess.code}: €{relevantProcess.name}` : 'General ISACA alignment'
     };
   }
 
@@ -655,7 +655,7 @@ export class ISACADigitalTrustService {
       return 'We maintain enterprise governance practices aligned with ISACA best practices and industry standards.';
     }
 
-    return `Our organization implements ${process.name} (${process.code}) in accordance with ISACA ${process.code.startsWith('EDM') ? 'COBIT' : 'Risk IT'} framework. We maintain documented processes, regular assessments, and continuous improvement practices to ensure alignment with enterprise governance standards. Current maturity level: ${process.currentMaturity}/5 with target of ${process.maturityTarget}/5.`;
+    return `Our organization implements €{process.name} (€{process.code}) in accordance with ISACA €{process.code.startsWith('EDM') ? 'COBIT' : 'Risk IT'} framework. We maintain documented processes, regular assessments, and continuous improvement practices to ensure alignment with enterprise governance standards. Current maturity level: €{process.currentMaturity}/5 with target of €{process.maturityTarget}/5.`;
   }
 }
 

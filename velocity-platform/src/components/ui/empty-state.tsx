@@ -109,7 +109,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
               loading={action.loading}
               variant={action.variant || 'default'}
               size={size === 'sm' ? 'sm' : 'default'}
-              ariaLabel={`${action.label} - ${title}`}
+              ariaLabel={`€{action.label} - €{title}`}
             >
               {action.label}
             </AccessibleButton>
@@ -120,7 +120,7 @@ export const EmptyState: React.FC<EmptyStateProps> = ({
               onClick={secondaryAction.onClick}
               variant={secondaryAction.variant || 'outline'}
               size={size === 'sm' ? 'sm' : 'default'}
-              ariaLabel={`${secondaryAction.label} - ${title}`}
+              ariaLabel={`€{secondaryAction.label} - €{title}`}
             >
               {secondaryAction.label}
             </AccessibleButton>
@@ -165,7 +165,7 @@ export const SearchNotFound: React.FC<{
       </svg>
     }
     title="No Results Found"
-    description={`We couldn't find anything matching "${searchTerm}". Try adjusting your search terms.`}
+    description={`We couldn't find anything matching "€{searchTerm}". Try adjusting your search terms.`}
     action={onClear ? {
       label: 'Clear Search',
       onClick: onClear,
@@ -208,8 +208,8 @@ export const UnderConstruction: React.FC<{
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
       </svg>
     }
-    title={`${feature} Coming Soon`}
-    description={`We're working hard to bring you ${feature.toLowerCase()}. ${expectedDate ? `Expected launch: ${expectedDate}` : 'Stay tuned for updates!'}`}
+    title={`€{feature} Coming Soon`}
+    description={`We're working hard to bring you €{feature.toLowerCase()}. €{expectedDate ? `Expected launch: €{expectedDate}` : 'Stay tuned for updates!'}`}
     variant="illustration"
     className={className}
   />
@@ -227,7 +227,7 @@ export const NoPermissions: React.FC<{
       </svg>
     }
     title="Access Restricted"
-    description={`You don't have permission to view ${resource}. Please contact your administrator for access.`}
+    description={`You don't have permission to view €{resource}. Please contact your administrator for access.`}
     action={onContact ? {
       label: 'Request Access',
       onClick: onContact,
@@ -250,8 +250,8 @@ export const FirstTimeSetup: React.FC<{
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     }
-    title={`Welcome to ${feature}`}
-    description={`Get started by setting up your ${feature.toLowerCase()} configuration. It only takes a few minutes!`}
+    title={`Welcome to €{feature}`}
+    description={`Get started by setting up your €{feature.toLowerCase()} configuration. It only takes a few minutes!`}
     action={{
       label: 'Get Started',
       onClick: onGetStarted,

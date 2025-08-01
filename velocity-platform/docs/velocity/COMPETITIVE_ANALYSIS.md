@@ -43,7 +43,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 ## 🥊 Direct Competitor Analysis
 
 ### 1. Vanta - Market Leader
-**Founded**: 2018 | **Funding**: $253M | **Valuation**: $2.45B | **Employees**: 500+
+**Founded**: 2018 | **Funding**: €253M | **Valuation**: €2.45B | **Employees**: 500+
 
 #### Strengths
 - **Brand Leadership**: Strong brand recognition in SOC 2 space
@@ -61,7 +61,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 
 #### Market Position
 - **ICP**: Series B-D SaaS companies
-- **Pricing**: $3,000-$15,000/month
+- **Pricing**: €3,000-€15,000/month
 - **Differentiation**: "SOC 2 made simple"
 
 **Velocity vs. Vanta:**
@@ -74,7 +74,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 ---
 
 ### 2. Drata - Fast Growing Challenger
-**Founded**: 2020 | **Funding**: $200M | **Valuation**: $1.2B | **Employees**: 300+
+**Founded**: 2020 | **Funding**: €200M | **Valuation**: €1.2B | **Employees**: 300+
 
 #### Strengths
 - **Modern UX**: Clean, intuitive user interface
@@ -92,7 +92,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 
 #### Market Position
 - **ICP**: Series A-C SaaS companies
-- **Pricing**: $2,000-$12,000/month
+- **Pricing**: €2,000-€12,000/month
 - **Differentiation**: "Compliance automation that doesn't suck"
 
 **Velocity vs. Drata:**
@@ -105,7 +105,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 ---
 
 ### 3. SecureFrame - SOC 2 Specialist
-**Founded**: 2020 | **Funding**: $18M | **Valuation**: $100M | **Employees**: 75+
+**Founded**: 2020 | **Funding**: €18M | **Valuation**: €100M | **Employees**: 75+
 
 #### Strengths
 - **SOC 2 Focus**: Deep SOC 2 Type II expertise
@@ -123,7 +123,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 
 #### Market Position
 - **ICP**: Series A-B SaaS companies
-- **Pricing**: $1,500-$8,000/month
+- **Pricing**: €1,500-€8,000/month
 - **Differentiation**: "Affordable SOC 2 compliance"
 
 **Velocity vs. SecureFrame:**
@@ -136,7 +136,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 ---
 
 ### 4. Hyperproof - Workflow-Focused GRC
-**Founded**: 2018 | **Funding**: $40M | **Valuation**: $200M | **Employees**: 150+
+**Founded**: 2018 | **Funding**: €40M | **Valuation**: €200M | **Employees**: 150+
 
 #### Strengths
 - **Workflow Management**: Strong process automation capabilities
@@ -154,7 +154,7 @@ The compliance automation market is experiencing rapid growth with traditional p
 
 #### Market Position
 - **ICP**: Mid-market to enterprise companies
-- **Pricing**: $5,000-$25,000/month
+- **Pricing**: €5,000-€25,000/month
 - **Differentiation**: "GRC workflows that scale"
 
 **Velocity vs. Hyperproof:**
@@ -217,11 +217,11 @@ Risk of major cloud providers expanding into compliance:
 
 | Solution | Entry Level | Professional | Enterprise |
 |----------|-------------|--------------|------------|
-| **Velocity** | $2,500/mo | $7,500/mo | $15,000+/mo |
-| **Vanta** | $3,600/mo | $8,400/mo | $20,000+/mo |
-| **Drata** | $2,000/mo | $6,000/mo | $15,000+/mo |
-| **SecureFrame** | $1,500/mo | $4,500/mo | $10,000+/mo |
-| **Hyperproof** | $5,000/mo | $12,000/mo | $30,000+/mo |
+| **Velocity** | €2,500/mo | €7,500/mo | €15,000+/mo |
+| **Vanta** | €3,600/mo | €8,400/mo | €20,000+/mo |
+| **Drata** | €2,000/mo | €6,000/mo | €15,000+/mo |
+| **SecureFrame** | €1,500/mo | €4,500/mo | €10,000+/mo |
+| **Hyperproof** | €5,000/mo | €12,000/mo | €30,000+/mo |
 
 ### Value Proposition Analysis
 **Velocity's Pricing Strategy:**
@@ -316,17 +316,17 @@ Risk of major cloud providers expanding into compliance:
 #### Year 1: Establish Foothold
 - **Target**: 5% of addressable SOC 2 automation market
 - **Strategy**: Direct sales to early adopters, build reference customers
-- **Metrics**: 50 customers, $2.5M ARR
+- **Metrics**: 50 customers, €2.5M ARR
 
 #### Year 2: Scale & Expand
 - **Target**: 15% market share in AI-powered compliance
 - **Strategy**: Channel partnerships, multi-framework expansion
-- **Metrics**: 200 customers, $15M ARR
+- **Metrics**: 200 customers, €15M ARR
 
 #### Year 3: Market Leadership
 - **Target**: 25% market share, recognized leader
 - **Strategy**: Enterprise expansion, international markets
-- **Metrics**: 500 customers, $50M ARR
+- **Metrics**: 500 customers, €50M ARR
 
 ### Competitive Displacement Strategy
 1. **Target Competitor Weaknesses**: Focus on manual processes, slow setup times

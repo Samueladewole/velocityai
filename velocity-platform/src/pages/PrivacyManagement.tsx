@@ -268,37 +268,37 @@ export const PrivacyManagement: React.FC = () => {
     {
       label: 'Shadow IT Apps',
       value: shadowITApps.length,
-      change: `+${highRiskApps}`,
+      change: `+€{highRiskApps}`,
       trend: highRiskApps > 0 ? 'down' : 'up',
       icon: <Search className="h-6 w-6 text-blue-600" />,
-      description: `${highRiskApps} high risk`,
+      description: `€{highRiskApps} high risk`,
       color: 'text-blue-600'
     },
     {
       label: 'DSAR Requests',
       value: dsarRequests.length,
-      change: `${overdueRequests}`,
+      change: `€{overdueRequests}`,
       trend: overdueRequests > 0 ? 'down' : 'up',
       icon: <UserX className="h-6 w-6 text-green-600" />,
-      description: `${overdueRequests} overdue`,
+      description: `€{overdueRequests} overdue`,
       color: 'text-green-600'
     },
     {
       label: 'RoPA Records',
       value: ropaRecords.length,
-      change: `+${compliantRecords}`,
+      change: `+€{compliantRecords}`,
       trend: 'up',
       icon: <Database className="h-6 w-6 text-purple-600" />,
-      description: `${compliantRecords} compliant`,
+      description: `€{compliantRecords} compliant`,
       color: 'text-purple-600'
     },
     {
       label: 'DPIAs Active',
       value: dpiaAssessments.length,
-      change: `+${approvedDPIAs}`,
+      change: `+€{approvedDPIAs}`,
       trend: 'up',
       icon: <FileCheck className="h-6 w-6 text-orange-600" />,
-      description: `${approvedDPIAs} approved`,
+      description: `€{approvedDPIAs} approved`,
       color: 'text-orange-600'
     }
   ];

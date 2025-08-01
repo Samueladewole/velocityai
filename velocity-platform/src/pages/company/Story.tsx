@@ -87,7 +87,7 @@ const Story: React.FC = () => {
                   60% reduction in compliance costs, and 3x faster partnership development.
                 </p>
                 <p className="text-gray-600">
-                  We've processed over $50M in Trust Equity™ and helped organizations 
+                  We've processed over €50M in Trust Equity™ and helped organizations 
                   share trust with thousands of prospects and partners.
                 </p>
               </div>

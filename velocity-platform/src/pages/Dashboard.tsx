@@ -126,16 +126,16 @@ export const Dashboard: React.FC = () => {
                   <span className="text-3xl font-bold text-slate-900">
                     {metric.unit === 'hours' 
                       ? metric.value.toLocaleString()
-                      : `€${(metric.value / 1000000).toFixed(1)}M`
+                      : `€€{(metric.value / 1000000).toFixed(1)}M`
                     }
                   </span>
                   {metric.unit === 'hours' && <span className="text-sm text-slate-600">hrs</span>}
-                  <div className={`flex items-center gap-1 ${metric.trend === 'up' ? 'text-green-600' : 'text-blue-600'}`}>
+                  <div className={`flex items-center gap-1 €{metric.trend === 'up' ? 'text-green-600' : 'text-blue-600'}`}>
                     {metric.trend === 'up' ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
                     <span className="text-sm font-medium">
                       {metric.unit === 'hours' 
-                        ? `${metric.change > 0 ? '+' : ''}${metric.change}`
-                        : `${metric.change > 0 ? '+' : ''}€${Math.abs(metric.change / 1000000).toFixed(1)}M`
+                        ? `€{metric.change > 0 ? '+' : ''}€{metric.change}`
+                        : `€{metric.change > 0 ? '+' : ''}€€{Math.abs(metric.change / 1000000).toFixed(1)}M`
                       }
                     </span>
                   </div>

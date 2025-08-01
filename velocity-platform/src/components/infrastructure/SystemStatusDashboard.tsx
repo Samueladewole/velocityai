@@ -126,7 +126,7 @@ export function SystemStatusDashboard() {
       // In a real implementation, this would fetch from the health API
       const response = await fetch('/health/detailed')
       if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`)
+        throw new Error(`HTTP €{response.status}: €{response.statusText}`)
       }
       
       const healthData = await response.json()
@@ -195,14 +195,14 @@ export function SystemStatusDashboard() {
     const hours = Math.floor((uptimeMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
     const minutes = Math.floor((uptimeMs % (1000 * 60 * 60)) / (1000 * 60))
     
-    if (days > 0) return `${days}d ${hours}h`
-    if (hours > 0) return `${hours}h ${minutes}m`
-    return `${minutes}m`
+    if (days > 0) return `€{days}d €{hours}h`
+    if (hours > 0) return `€{hours}h €{minutes}m`
+    return `€{minutes}m`
   }
 
   const formatResponseTime = (timeMs: number) => {
-    if (timeMs >= 1000) return `${(timeMs / 1000).toFixed(1)}s`
-    return `${Math.round(timeMs)}ms`
+    if (timeMs >= 1000) return `€{(timeMs / 1000).toFixed(1)}s`
+    return `€{Math.round(timeMs)}ms`
   }
 
   if (loading && !systemHealth) {
@@ -404,7 +404,7 @@ export function SystemStatusDashboard() {
                   </div>
                   <div className="flex-1">
                     <div className="font-medium text-slate-900 capitalize">
-                      {key.replace(/([A-Z])/g, ' $1').trim()}
+                      {key.replace(/([A-Z])/g, ' €1').trim()}
                     </div>
                     <div className="text-sm text-slate-500">
                       {formatResponseTime(check.responseTime)}
@@ -498,11 +498,11 @@ export function SystemStatusDashboard() {
                                     check.status === 'warn' ? "bg-yellow-400" :
                                     "bg-red-400"
                                   )}
-                                  title={`${check.name}: ${check.status}`}
+                                  title={`€{check.name}: €{check.status}`}
                                 />
                               ))}
                               {component.checks.length > 8 && (
-                                <div className="w-2 h-2 rounded-full bg-gray-300" title={`+${component.checks.length - 8} more`} />
+                                <div className="w-2 h-2 rounded-full bg-gray-300" title={`+€{component.checks.length - 8} more`} />
                               )}
                             </div>
                           </div>

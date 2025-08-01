@@ -47,7 +47,7 @@ The Velocity AI Beta Program is designed to onboard select enterprise customers 
 ### Beta Customer Selection Criteria
 
 #### Tier 1 (High Priority)
-- **Revenue Size**: $10M - $100M ARR
+- **Revenue Size**: €10M - €100M ARR
 - **Compliance Need**: Active SOC 2, ISO 27001, or GDPR initiative
 - **Technical Maturity**: Established DevOps/Security teams
 - **Infrastructure**: Multi-cloud or complex AWS/GCP setup
@@ -55,7 +55,7 @@ The Velocity AI Beta Program is designed to onboard select enterprise customers 
 - **Willingness to Provide Feedback**: Committed to weekly feedback sessions
 
 #### Tier 2 (Medium Priority)
-- **Revenue Size**: $5M - $50M ARR
+- **Revenue Size**: €5M - €50M ARR
 - **Compliance Need**: Preparing for first certification
 - **Technical Maturity**: Basic cloud infrastructure management
 - **Infrastructure**: Single cloud provider with moderate complexity
@@ -65,7 +65,7 @@ The Velocity AI Beta Program is designed to onboard select enterprise customers 
 ### Beta Program Benefits
 
 #### For Customers
-- **Free Access** to Velocity AI platform (3-month license worth $15K)
+- **Free Access** to Velocity AI platform (3-month license worth €15K)
 - **Priority Support** - Dedicated customer success manager
 - **Custom Onboarding** - White-glove setup assistance
 - **Feature Influence** - Direct input on product roadmap
@@ -180,7 +180,7 @@ estimated_time: 4_hours
 
 ### Business Metrics
 - **Beta to Paid Conversion Rate**: Target > 85%
-- **Customer Lifetime Value**: Projected $150K over 3 years
+- **Customer Lifetime Value**: Projected €150K over 3 years
 - **Sales Cycle Reduction**: 40% faster than traditional GRC sales
 - **Reference Customer Rate**: > 70% willing to provide references
 
@@ -239,20 +239,20 @@ estimated_time: 4_hours
 
 #### Commercial Pricing (Post-Beta)
 ```
-Velocity Starter: $2,500/month
+Velocity Starter: €2,500/month
 - Up to 3 cloud platforms
 - 5 active agents
 - Standard frameworks (SOC2, ISO27001, GDPR)
 - Basic reporting and exports
 
-Velocity Professional: $7,500/month
+Velocity Professional: €7,500/month
 - Unlimited platforms
 - 20 active agents
 - All frameworks + custom frameworks
 - Advanced analytics and reporting
 - Priority support
 
-Velocity Enterprise: $15,000/month
+Velocity Enterprise: €15,000/month
 - Unlimited everything
 - Custom agent development
 - Professional services included
@@ -271,7 +271,7 @@ Velocity Enterprise: $15,000/month
 ### Challenge
 - **Manual Process**: X hours per week on evidence collection
 - **Error Rate**: Y% of evidence required manual rework
-- **Audit Costs**: $Z in consultant fees for evidence preparation
+- **Audit Costs**: €Z in consultant fees for evidence preparation
 
 ### Solution
 - **Deployment**: X agents across Y platforms monitoring Z controls
@@ -280,7 +280,7 @@ Velocity Enterprise: $15,000/month
 
 ### Results
 - **Time Savings**: X% reduction in compliance team workload
-- **Cost Savings**: $Y savings in audit preparation costs
+- **Cost Savings**: €Y savings in audit preparation costs
 - **Quality Improvement**: Z% improvement in evidence completeness and accuracy
 - **Trust Score**: Baseline X → Current Y (Z point improvement)
 
@@ -306,7 +306,7 @@ Velocity Enterprise: $15,000/month
 1. **Commercial Launch** - Public availability with proven product-market fit
 2. **Market Leadership** - Recognized as category leader in AI-powered compliance
 3. **Platform Expansion** - Additional frameworks, integrations, and automation capabilities
-4. **Scale Achievement** - 500+ customers, $10M+ ARR, proven ROI at scale
+4. **Scale Achievement** - 500+ customers, €10M+ ARR, proven ROI at scale
 
 ---
 

@@ -147,13 +147,13 @@ const BankingSystemsDashboard: React.FC<BankingSystemsDashboardProps> = ({ class
 
   const formatTimeAgo = (date: Date) => {
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-    if (seconds < 60) return `${seconds}s ago`;
+    if (seconds < 60) return `€{seconds}s ago`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `${minutes}m ago`;
+    if (minutes < 60) return `€{minutes}m ago`;
     const hours = Math.floor(minutes / 60);
-    if (hours < 24) return `${hours}h ago`;
+    if (hours < 24) return `€{hours}h ago`;
     const days = Math.floor(hours / 24);
-    return `${days}d ago`;
+    return `€{days}d ago`;
   };
 
   const getCategoryIcon = (category: EvidenceItem['category']) => {
@@ -173,7 +173,7 @@ const BankingSystemsDashboard: React.FC<BankingSystemsDashboardProps> = ({ class
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center p-12 ${className}`}>
+      <div className={`flex items-center justify-center p-12 €{className}`}>
         <Loader className="w-8 h-8 text-blue-500 animate-spin" />
         <span className="ml-3 text-slate-600">Loading banking systems...</span>
       </div>
@@ -181,7 +181,7 @@ const BankingSystemsDashboard: React.FC<BankingSystemsDashboardProps> = ({ class
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Metrics Overview */}
       {metrics && (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -267,7 +267,7 @@ const BankingSystemsDashboard: React.FC<BankingSystemsDashboardProps> = ({ class
                     </div>
                   </div>
                 </div>
-                <div className={`flex items-center gap-1 px-2 py-1 rounded-full border text-xs font-medium ${getStatusColor(system.status)}`}>
+                <div className={`flex items-center gap-1 px-2 py-1 rounded-full border text-xs font-medium €{getStatusColor(system.status)}`}>
                   {getStatusIcon(system.status)}
                   <span className="capitalize">{system.status}</span>
                 </div>
@@ -354,7 +354,7 @@ const BankingSystemsDashboard: React.FC<BankingSystemsDashboardProps> = ({ class
                     </div>
                   </div>
                   <div className="text-right">
-                    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium ${
+                    <div className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs font-medium €{
                       evidence.verificationStatus === 'verified' 
                         ? 'bg-emerald-50 text-emerald-600' 
                         : evidence.verificationStatus === 'pending'

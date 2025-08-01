@@ -628,7 +628,7 @@ class GitHubAnalyzer:
                     
                     # Check for hardcoded secrets
                     if any(keyword in content.lower() for keyword in ['password', 'api_key', 'secret', 'token']):
-                        if not '${{' in content:  # No variable substitution
+                        if not '€{{' in content:  # No variable substitution
                             security_issues.append('Potential hardcoded secrets detected')
                     
                     # Check for unsafe actions

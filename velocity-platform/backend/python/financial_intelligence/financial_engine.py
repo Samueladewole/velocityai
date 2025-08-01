@@ -39,7 +39,7 @@ class CompanyProfile(BaseModel):
     employee_count: int
     industry: str
     region: str = "EU"
-    risk_tolerance: str = Field(..., regex="^(low|medium|high)$")
+    risk_tolerance: str = Field(..., regex="^(low|medium|high)€")
     
 class FinancialRisk(BaseModel):
     """Financial risk assessment results"""

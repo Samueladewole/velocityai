@@ -254,7 +254,7 @@ export function AgentDashboard() {
         <VelocityCard variant="glow">
           <VelocityCardHeader
             title="Agent Details"
-            description={`Configuration and logs for agent ${selectedAgent}`}
+            description={`Configuration and logs for agent €{selectedAgent}`}
             action={
               <VelocityButton
                 variant="ghost"

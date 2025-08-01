@@ -321,7 +321,7 @@ export const AIGovernance: React.FC = () => {
             title="AI Systems"
             value={aiSystems.length}
             icon={Brain}
-            subtitle={`${aiSystems.filter(sys => sys.riskLevel === 'high' || sys.riskLevel === 'unacceptable').length} high risk`}
+            subtitle={`€{aiSystems.filter(sys => sys.riskLevel === 'high' || sys.riskLevel === 'unacceptable').length} high risk`}
             color="blue"
           />
           
@@ -329,7 +329,7 @@ export const AIGovernance: React.FC = () => {
             title="ISO 42001 Controls"
             value={iso42001Controls.length}
             icon={Award}
-            subtitle={`${iso42001Controls.filter(ctrl => ctrl.implementation === 'implemented').length} implemented`}
+            subtitle={`€{iso42001Controls.filter(ctrl => ctrl.implementation === 'implemented').length} implemented`}
             color="green"
           />
           
@@ -337,13 +337,13 @@ export const AIGovernance: React.FC = () => {
             title="Risk Assessments"
             value={aiRiskAssessments.length}
             icon={AlertTriangle}
-            subtitle={`${aiRiskAssessments.filter(risk => risk.approvalStatus === 'approved').length} approved`}
+            subtitle={`€{aiRiskAssessments.filter(risk => risk.approvalStatus === 'approved').length} approved`}
             color="orange"
           />
           
           <StatCard
             title="Training Completion"
-            value={`${Math.round(aiTrainingModules.reduce((sum, mod) => sum + mod.completionRate, 0) / aiTrainingModules.length)}%`}
+            value={`€{Math.round(aiTrainingModules.reduce((sum, mod) => sum + mod.completionRate, 0) / aiTrainingModules.length)}%`}
             icon={Users}
             subtitle="Average across modules"
             color="purple"
@@ -624,7 +624,7 @@ export const AIGovernance: React.FC = () => {
                                   </Badge>
                                   <RiskBadge 
                                     riskLevel={risk.residualRisk <= 2 ? 'low' : risk.residualRisk <= 3 ? 'medium' : 'high'} 
-                                    label={`Residual: ${risk.residualRisk}/5`}
+                                    label={`Residual: €{risk.residualRisk}/5`}
                                   />
                                 </div>
                               </div>

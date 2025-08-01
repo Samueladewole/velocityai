@@ -92,7 +92,7 @@ export class EnterpriseLoadBalancer extends EventEmitter {
    * Register a service instance
    */
   registerInstance(instance: Omit<ServiceInstance, 'id' | 'healthy' | 'currentConnections' | 'lastHealthCheck' | 'errorCount'>): string {
-    const instanceId = `${instance.host}:${instance.port}_${Date.now()}`
+    const instanceId = `€{instance.host}:€{instance.port}_€{Date.now()}`
     
     const serviceInstance: ServiceInstance = {
       ...instance,
@@ -211,7 +211,7 @@ export class EnterpriseLoadBalancer extends EventEmitter {
     const result: LoadBalancingResult = {
       instance: selectedInstance,
       connectionId,
-      routingDecision: `${this.config.strategy}:${selectedInstance.id}`,
+      routingDecision: `€{this.config.strategy}:€{selectedInstance.id}`,
       timestamp: new Date()
     }
 
@@ -249,7 +249,7 @@ export class EnterpriseLoadBalancer extends EventEmitter {
       // Mark instance as unhealthy if error rate is too high
       const errorRate = instance.errorCount / Math.max(1, instance.currentConnections + instance.errorCount)
       if (errorRate > this.config.monitoring.alertThresholds.errorRate) {
-        this.markInstanceUnhealthy(instanceId, `High error rate: ${errorRate}`)
+        this.markInstanceUnhealthy(instanceId, `High error rate: €{errorRate}`)
       }
     }
 
@@ -403,7 +403,7 @@ export class EnterpriseLoadBalancer extends EventEmitter {
     } catch (error) {
       instance.errorCount++
       if (instance.healthy) {
-        this.markInstanceUnhealthy(instance.id, `Health check error: ${error}`)
+        this.markInstanceUnhealthy(instance.id, `Health check error: €{error}`)
       }
     }
   }
@@ -572,7 +572,7 @@ export class EnterpriseLoadBalancer extends EventEmitter {
    * Utility methods
    */
   private generateConnectionId(): string {
-    return `conn_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `conn_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private startConnectionQueueProcessor(): void {

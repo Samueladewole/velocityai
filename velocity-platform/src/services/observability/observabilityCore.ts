@@ -422,7 +422,7 @@ export class ObservabilityCore {
   }
 
   private generateId(type: string): string {
-    return `${type}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `€{type}_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

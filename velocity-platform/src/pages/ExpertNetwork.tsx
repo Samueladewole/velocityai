@@ -337,7 +337,7 @@ export const ExpertNetwork: React.FC = () => {
       id: (consultations.length + 1).toString(),
       expertId: selectedExpert.id,
       expertName: selectedExpert.name,
-      title: `${expertRequest.framework} Consultation`,
+      title: `€{expertRequest.framework} Consultation`,
       description: expertRequest.description,
       framework: expertRequest.framework,
       duration: 60,
@@ -352,7 +352,7 @@ export const ExpertNetwork: React.FC = () => {
     
     toast({
       title: 'Consultation Booked',
-      description: `Your consultation with ${selectedExpert.name} has been scheduled.`
+      description: `Your consultation with €{selectedExpert.name} has been scheduled.`
     })
   }
 
@@ -730,11 +730,11 @@ export const ExpertNetwork: React.FC = () => {
                       className="w-full px-3 py-2 border border-gray-300 rounded-md"
                     >
                       <option value="">Select budget range</option>
-                      <option value="under-500">Under $500</option>
-                      <option value="500-1000">$500 - $1,000</option>
-                      <option value="1000-2500">$1,000 - $2,500</option>
-                      <option value="2500-5000">$2,500 - $5,000</option>
-                      <option value="over-5000">Over $5,000</option>
+                      <option value="under-500">Under €500</option>
+                      <option value="500-1000">€500 - €1,000</option>
+                      <option value="1000-2500">€1,000 - €2,500</option>
+                      <option value="2500-5000">€2,500 - €5,000</option>
+                      <option value="over-5000">Over €5,000</option>
                     </select>
                   </div>
                   <div>

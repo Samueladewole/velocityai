@@ -26,7 +26,7 @@ export const RiskBadge: React.FC<RiskBadgeProps> = ({ level, className = '' }) =
   };
 
   return (
-    <Badge className={`${getRiskColor(level)} ${className}`}>
+    <Badge className={`€{getRiskColor(level)} €{className}`}>
       {level.toUpperCase()}
     </Badge>
   );

@@ -687,12 +687,12 @@ HAVING COUNT(*) >= 252; -- At least 1 year of data
 
 -- Function to update timestamp
 CREATE OR REPLACE FUNCTION update_modified_column()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER AS €€
 BEGIN
     NEW.updated_at = NOW();
     RETURN NEW;
 END;
-$$ language 'plpgsql';
+€€ language 'plpgsql';
 
 -- Trigger for financial_instruments
 CREATE TRIGGER update_financial_instruments_modtime 

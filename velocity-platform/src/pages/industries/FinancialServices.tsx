@@ -33,7 +33,7 @@ const FinancialServices: React.FC = () => {
     },
     {
       title: "High Consulting Costs",
-      description: "Traditional Big 4 consulting costs $380K+ annually for comprehensive compliance",
+      description: "Traditional Big 4 consulting costs €380K+ annually for comprehensive compliance",
       icon: DollarSign,
       solution: "83-88% cost reduction with AI automation"
     },
@@ -58,7 +58,7 @@ const FinancialServices: React.FC = () => {
       savings: "83% vs OneTrust",
       timeline: "4 weeks",
       features: ["Customer data mapping", "Cross-border transfer automation", "Breach notification (72-hour)", "Privacy impact assessments"],
-      price: "$28K vs $165K traditional"
+      price: "€28K vs €165K traditional"
     },
     {
       name: "ISAE 3000 Evidence Collection",
@@ -66,7 +66,7 @@ const FinancialServices: React.FC = () => {
       savings: "88% vs Big 4",
       timeline: "6 weeks",
       features: ["Core banking integration", "Control evidence automation", "SOX 404 coordination", "Audit trail generation"],
-      price: "$60K vs $380K Big 4"
+      price: "€60K vs €380K Big 4"
     },
     {
       name: "Basel III Operational Risk",
@@ -80,24 +80,24 @@ const FinancialServices: React.FC = () => {
 
   const caseStudies = [
     {
-      company: "Regional Bank ($15B Assets)",
+      company: "Regional Bank (€15B Assets)",
       challenge: "GDPR compliance for 2.5M customers across 12 EU countries",
       solution: "Velocity GDPR RoPA automation with core banking integration",
-      results: ["$150K saved vs traditional solution", "4-week implementation", "100% GDPR audit pass", "Zero privacy breaches"],
+      results: ["€150K saved vs traditional solution", "4-week implementation", "100% GDPR audit pass", "Zero privacy breaches"],
       industry: "Community Banking"
     },
     {
       company: "Digital Bank (Fintech)",
       challenge: "SOC 2 Type II + ISAE 3000 for cloud-native banking platform",
       solution: "Complete Velocity platform with specialized banking agents",
-      results: ["$280K saved annually", "6-week dual certification", "96.8% audit success rate", "Real-time compliance monitoring"],
+      results: ["€280K saved annually", "6-week dual certification", "96.8% audit success rate", "Real-time compliance monitoring"],
       industry: "Digital Banking"
     },
     {
-      company: "Investment Bank ($50B Assets)",
+      company: "Investment Bank (€50B Assets)",
       challenge: "Multi-jurisdictional compliance (US, EU, APAC) with complex trading systems",
       solution: "Velocity Enterprise with custom banking agents and global compliance",
-      results: ["$500K+ saved vs Big 4", "25-country compliance", "Real-time risk monitoring", "Automated regulatory reporting"],
+      results: ["€500K+ saved vs Big 4", "25-country compliance", "Real-time risk monitoring", "Automated regulatory reporting"],
       industry: "Investment Banking"
     }
   ];
@@ -105,24 +105,24 @@ const FinancialServices: React.FC = () => {
   const competitorComparison = [
     {
       provider: "Velocity Banking Solution",
-      gdprCost: "$28K",
-      isaeCost: "$60K",
+      gdprCost: "€28K",
+      isaeCost: "€60K",
       timeline: "6 weeks",
       automation: "95%",
       bankingIntegration: "Native"
     },
     {
       provider: "OneTrust + Big 4 Consulting",
-      gdprCost: "$165K",
-      isaeCost: "$380K",
+      gdprCost: "€165K",
+      isaeCost: "€380K",
       timeline: "22+ weeks",
       automation: "20%",
       bankingIntegration: "Custom"
     },
     {
       provider: "ServiceNow GRC + Consulting",
-      gdprCost: "$145K",
-      isaeCost: "$350K",
+      gdprCost: "€145K",
+      isaeCost: "€350K",
       timeline: "18+ weeks",
       automation: "25%",
       bankingIntegration: "Limited"
@@ -210,7 +210,7 @@ const FinancialServices: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                     activeTab === tab.id
                       ? 'bg-blue-50 text-blue-600 border border-blue-200'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -279,7 +279,7 @@ const FinancialServices: React.FC = () => {
                   <div className="text-xs text-slate-500 mt-1">Including Top 10 banks</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">$2.1M</div>
+                  <div className="text-3xl font-bold text-emerald-600 mb-2">€2.1M</div>
                   <div className="text-slate-600">Average 3-Year Savings</div>
                   <div className="text-xs text-slate-500 mt-1">Regional bank average</div>
                 </div>

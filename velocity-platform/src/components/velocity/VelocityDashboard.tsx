@@ -244,14 +244,14 @@ const DashboardMetricCard = ({ title, value, trend, icon: Icon, color }) => {
   return (
     <div className="group relative">
       {/* Gradient border effect */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${colorClasses[color]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+      <div className={`absolute inset-0 bg-gradient-to-br €{colorClasses[color]} rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
       
       <div className="relative bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-white/10 group-hover:border-transparent transition-all duration-300">
         <div className="flex items-center justify-between mb-4">
-          <div className={`p-3 bg-${color}-500/10 rounded-lg`}>
+          <div className={`p-3 bg-€{color}-500/10 rounded-lg`}>
             <Icon className="w-6 h-6 text-emerald-400" />
           </div>
-          <span className={`text-sm font-medium ${trend?.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
+          <span className={`text-sm font-medium €{trend?.startsWith('+') ? 'text-emerald-400' : 'text-red-400'}`}>
             {trend}
           </span>
         </div>
@@ -306,7 +306,7 @@ const ActiveAgentsSection = () => {
         {agents.map((agent) => (
           <div key={agent.id} className="flex items-center justify-between p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-colors">
             <div className="flex items-center gap-4">
-              <div className={`p-2 bg-slate-800 rounded-lg ${getStatusColor(agent.status)}`}>
+              <div className={`p-2 bg-slate-800 rounded-lg €{getStatusColor(agent.status)}`}>
                 {getStatusIcon(agent.status)}
               </div>
               <div>
@@ -315,7 +315,7 @@ const ActiveAgentsSection = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium capitalize ${getStatusColor(agent.status)}`}>
+              <span className={`text-sm font-medium capitalize €{getStatusColor(agent.status)}`}>
                 {agent.status}
               </span>
               <ArrowRight className="w-4 h-4 text-slate-400" />
@@ -366,7 +366,7 @@ const QuickActionsSection = () => {
             onClick={action.action}
             className="group flex items-center gap-4 p-4 bg-white/5 rounded-xl hover:bg-white/10 transition-all duration-300 text-left"
           >
-            <div className={`p-3 bg-${action.color}-500/10 rounded-lg group-hover:scale-110 transition-transform`}>
+            <div className={`p-3 bg-€{action.color}-500/10 rounded-lg group-hover:scale-110 transition-transform`}>
               <action.icon className="w-5 h-5 text-emerald-400" />
             </div>
             <div className="flex-1">
@@ -453,7 +453,7 @@ const VelocityDashboard: React.FC = () => {
             />
             <DashboardMetricCard
               title="Automation Rate"
-              value={`${metrics.automationRate}%`}
+              value={`€{metrics.automationRate}%`}
               trend="+3%"
               icon={TrendingUp}
               color="purple"

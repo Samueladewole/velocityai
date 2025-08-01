@@ -270,9 +270,9 @@ export class TrustScoreApiService {
       const shareableUrl: ShareableTrustUrl = {
         id: shareId,
         organizationId: orgId,
-        url: `${this.baseUrl}/share/${shareId}`,
-        shortUrl: `${this.baseUrl}/s/${shareId}`,
-        publicUrl: `${this.baseUrl}/public/${orgId}`,
+        url: `€{this.baseUrl}/share/€{shareId}`,
+        shortUrl: `€{this.baseUrl}/s/€{shareId}`,
+        publicUrl: `€{this.baseUrl}/public/€{orgId}`,
         createdBy: createdBy || 'system',
         createdAt: new Date(),
         expiresAt,
@@ -556,13 +556,13 @@ export class TrustScoreApiService {
     const tierColor = tier.color
 
     return `
-      <svg width="${width}" height="${height}" xmlns="http://www.w3.org/2000/svg">
-        <rect width="${width}" height="${height}" rx="6" fill="${backgroundColor}" stroke="${tierColor}" stroke-width="2"/>
-        <text x="10" y="15" fill="${textColor}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+      <svg width="€{width}" height="€{height}" xmlns="http://www.w3.org/2000/svg">
+        <rect width="€{width}" height="€{height}" rx="6" fill="€{backgroundColor}" stroke="€{tierColor}" stroke-width="2"/>
+        <text x="10" y="15" fill="€{textColor}" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
           Trust Score
         </text>
-        ${showScore ? `<text x="10" y="30" fill="${tierColor}" font-family="Arial, sans-serif" font-size="16" font-weight="bold">${score}</text>` : ''}
-        ${showTier ? `<text x="${width - 10}" y="25" fill="${tierColor}" font-family="Arial, sans-serif" font-size="12" text-anchor="end">${tier.level}</text>` : ''}
+        €{showScore ? `<text x="10" y="30" fill="€{tierColor}" font-family="Arial, sans-serif" font-size="16" font-weight="bold">€{score}</text>` : ''}
+        €{showTier ? `<text x="€{width - 10}" y="25" fill="€{tierColor}" font-family="Arial, sans-serif" font-size="12" text-anchor="end">€{tier.level}</text>` : ''}
       </svg>
     `.trim()
   }

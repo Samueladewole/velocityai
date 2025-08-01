@@ -199,7 +199,7 @@ class AuditPreparationService {
     auditPeriod: { startDate: Date; endDate: Date };
     auditor: AuditPackage['auditor'];
   }): Promise<AuditPackage> {
-    const packageId = `audit-${new Date().getFullYear()}-${packageData.auditType.toLowerCase()}-${String(this.auditPackages.size + 1).padStart(3, '0')}`;
+    const packageId = `audit-€{new Date().getFullYear()}-€{packageData.auditType.toLowerCase()}-€{String(this.auditPackages.size + 1).padStart(3, '0')}`;
     
     const auditPackage: AuditPackage = {
       id: packageId,
@@ -225,7 +225,7 @@ class AuditPreparationService {
   public async updateAuditPackage(packageId: string, updates: Partial<AuditPackage>): Promise<AuditPackage> {
     const existingPackage = this.auditPackages.get(packageId);
     if (!existingPackage) {
-      throw new Error(`Audit package ${packageId} not found`);
+      throw new Error(`Audit package €{packageId} not found`);
     }
 
     const updatedPackage = {
@@ -242,7 +242,7 @@ class AuditPreparationService {
   public async addEvidenceToPackage(packageId: string, evidenceIds: string[]): Promise<AuditPackage> {
     const auditPackage = this.auditPackages.get(packageId);
     if (!auditPackage) {
-      throw new Error(`Audit package ${packageId} not found`);
+      throw new Error(`Audit package €{packageId} not found`);
     }
 
     const updatedEvidenceItems = [...new Set([...auditPackage.evidenceItems, ...evidenceIds])];
@@ -261,10 +261,10 @@ class AuditPreparationService {
   ): Promise<ManagementReport> {
     const auditPackage = this.auditPackages.get(auditPackageId);
     if (!auditPackage) {
-      throw new Error(`Audit package ${auditPackageId} not found`);
+      throw new Error(`Audit package €{auditPackageId} not found`);
     }
 
-    const reportId = `report-${Date.now()}-${reportType}`;
+    const reportId = `report-€{Date.now()}-€{reportType}`;
     
     const sections = this.generateReportSections(auditPackage, reportType);
     const metrics = this.calculateReportMetrics(auditPackage);
@@ -292,7 +292,7 @@ class AuditPreparationService {
       case 'executive-summary':
         sections.push({
           title: 'Executive Summary',
-          content: `The ${auditPackage.auditType} audit preparation for the period ${auditPackage.auditPeriod.startDate.toDateString()} to ${auditPackage.auditPeriod.endDate.toDateString()} is ${auditPackage.completionPercentage}% complete. Overall risk assessment: ${auditPackage.riskAssessment}.`,
+          content: `The €{auditPackage.auditType} audit preparation for the period €{auditPackage.auditPeriod.startDate.toDateString()} to €{auditPackage.auditPeriod.endDate.toDateString()} is €{auditPackage.completionPercentage}% complete. Overall risk assessment: €{auditPackage.riskAssessment}.`,
           priority: 'high'
         });
         break;
@@ -300,7 +300,7 @@ class AuditPreparationService {
       case 'detailed-findings':
         sections.push({
           title: 'Audit Findings',
-          content: `Detailed analysis of ${auditPackage.findings.length} findings identified during the audit preparation process.`,
+          content: `Detailed analysis of €{auditPackage.findings.length} findings identified during the audit preparation process.`,
           tables: [{
             title: 'Findings Summary',
             headers: ['Finding ID', 'Control', 'Severity', 'Status', 'Target Date'],
@@ -319,7 +319,7 @@ class AuditPreparationService {
       case 'compliance-status':
         sections.push({
           title: 'Compliance Status Overview',
-          content: `Current compliance status across ${auditPackage.controlsCovered.length} controls with ${auditPackage.evidenceItems.length} evidence items collected.`,
+          content: `Current compliance status across €{auditPackage.controlsCovered.length} controls with €{auditPackage.evidenceItems.length} evidence items collected.`,
           charts: [{
             type: 'gauge',
             title: 'Overall Compliance Score',
@@ -333,7 +333,7 @@ class AuditPreparationService {
       case 'management-letter':
         sections.push({
           title: 'Management Letter',
-          content: `This management letter summarizes the key findings and recommendations from the ${auditPackage.auditType} audit preparation process.`,
+          content: `This management letter summarizes the key findings and recommendations from the €{auditPackage.auditType} audit preparation process.`,
           priority: 'high'
         });
         break;
@@ -358,7 +358,7 @@ class AuditPreparationService {
   }
 
   public async createAuditFinding(findingData: Omit<AuditFinding, 'id' | 'createdAt' | 'updatedAt'>): Promise<AuditFinding> {
-    const findingId = `finding-${Date.now()}`;
+    const findingId = `finding-€{Date.now()}`;
     
     const finding: AuditFinding = {
       ...findingData,
@@ -374,7 +374,7 @@ class AuditPreparationService {
   public async updateAuditFinding(findingId: string, updates: Partial<AuditFinding>): Promise<AuditFinding> {
     const existingFinding = this.auditFindings.get(findingId);
     if (!existingFinding) {
-      throw new Error(`Audit finding ${findingId} not found`);
+      throw new Error(`Audit finding €{findingId} not found`);
     }
 
     const updatedFinding = {
@@ -462,7 +462,7 @@ class AuditPreparationService {
   public async exportAuditPackage(packageId: string, format: 'pdf' | 'excel' | 'json'): Promise<string> {
     const auditPackage = this.auditPackages.get(packageId);
     if (!auditPackage) {
-      throw new Error(`Audit package ${packageId} not found`);
+      throw new Error(`Audit package €{packageId} not found`);
     }
 
     // Simulate export process
@@ -476,7 +476,7 @@ class AuditPreparationService {
     };
 
     // In real implementation, this would generate actual files
-    return `export-${packageId}-${Date.now()}.${format}`;
+    return `export-€{packageId}-€{Date.now()}.€{format}`;
   }
 }
 

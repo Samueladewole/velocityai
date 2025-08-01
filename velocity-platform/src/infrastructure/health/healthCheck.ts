@@ -158,7 +158,7 @@ export class ERIPHealthCheck {
         if (!health) {
           res.status(404).json({
             status: 'fail',
-            message: `Component ${component} not found`
+            message: `Component €{component} not found`
           })
           return
         }
@@ -463,7 +463,7 @@ export class ERIPHealthCheck {
         name: 'database',
         status: queryTime < 100 ? 'pass' : queryTime < 500 ? 'warn' : 'fail',
         responseTime,
-        message: `Database query completed in ${queryTime}ms`,
+        message: `Database query completed in €{queryTime}ms`,
         data: {
           queryTime,
           connectionPool: await this.database.getConnectionPoolStats()
@@ -500,7 +500,7 @@ export class ERIPHealthCheck {
     try {
       // Test event bus connectivity by publishing a test event
       await this.eventBus.publish({
-        eventId: `health_check_${Date.now()}`,
+        eventId: `health_check_€{Date.now()}`,
         source: 'health_check',
         type: 'health.test',
         timestamp: new Date().toISOString(),
@@ -513,7 +513,7 @@ export class ERIPHealthCheck {
         name: 'eventBus',
         status: responseTime < 50 ? 'pass' : responseTime < 200 ? 'warn' : 'fail',
         responseTime,
-        message: `Event bus responding in ${responseTime}ms`,
+        message: `Event bus responding in €{responseTime}ms`,
         data: {
           publishTime: responseTime
         },
@@ -554,7 +554,7 @@ export class ERIPHealthCheck {
         name: 'serviceRegistry',
         status: responseTime < 100 ? 'pass' : responseTime < 300 ? 'warn' : 'fail',
         responseTime,
-        message: `Service registry has ${stats.totalServices} registered services`,
+        message: `Service registry has €{stats.totalServices} registered services`,
         data: stats,
         timestamp: new Date()
       }
@@ -597,7 +597,7 @@ export class ERIPHealthCheck {
         name: 'trustEngine',
         status: responseTime < 200 ? 'pass' : responseTime < 500 ? 'warn' : 'fail',
         responseTime,
-        message: `Trust engine responding in ${responseTime}ms`,
+        message: `Trust engine responding in €{responseTime}ms`,
         data: {
           calculationTime: responseTime
         },

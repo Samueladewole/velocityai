@@ -195,21 +195,21 @@ const EvidenceExportDialog: React.FC<EvidenceExportDialogProps> = ({
 
       // Generate mock URLs
       const timestamp = new Date().toISOString().split('T')[0];
-      const filename = `velocity-evidence-${timestamp}`;
+      const filename = `velocity-evidence-€{timestamp}`;
       
       let result;
       if (exportConfig.format === 'link') {
         const shareId = Math.random().toString(36).substr(2, 9);
         result = {
           success: true,
-          shareUrl: `https://app.erip.ai/shared/evidence/${shareId}`,
+          shareUrl: `https://app.erip.ai/shared/evidence/€{shareId}`,
           message: 'Shareable link generated successfully'
         };
       } else {
         result = {
           success: true,
-          downloadUrl: `https://exports.erip.ai/${filename}.${exportConfig.format}`,
-          message: `${exportConfig.format.toUpperCase()} export completed successfully`
+          downloadUrl: `https://exports.erip.ai/€{filename}.€{exportConfig.format}`,
+          message: `€{exportConfig.format.toUpperCase()} export completed successfully`
         };
       }
 
@@ -254,7 +254,7 @@ const EvidenceExportDialog: React.FC<EvidenceExportDialogProps> = ({
               {exportFormats.map(format => (
                 <div
                   key={format.id}
-                  className={`border rounded-lg p-4 cursor-pointer transition-all ${
+                  className={`border rounded-lg p-4 cursor-pointer transition-all €{
                     exportConfig.format === format.id
                       ? 'border-blue-500 bg-blue-50 ring-2 ring-blue-200'
                       : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
@@ -521,7 +521,7 @@ const EvidenceExportDialog: React.FC<EvidenceExportDialogProps> = ({
               <div className="w-full bg-blue-200 rounded-full h-2">
                 <div 
                   className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
-                  style={{ width: `${exportProgress}%` }}
+                  style={{ width: `€{exportProgress}%` }}
                 ></div>
               </div>
               <div className="text-xs text-blue-700 mt-2">{Math.round(exportProgress)}% complete</div>
@@ -530,7 +530,7 @@ const EvidenceExportDialog: React.FC<EvidenceExportDialogProps> = ({
 
           {/* Export Result */}
           {exportResult && (
-            <div className={`border rounded-lg p-4 ${
+            <div className={`border rounded-lg p-4 €{
               exportResult.success 
                 ? 'bg-green-50 border-green-200' 
                 : 'bg-red-50 border-red-200'
@@ -541,7 +541,7 @@ const EvidenceExportDialog: React.FC<EvidenceExportDialogProps> = ({
                 ) : (
                   <X className="w-5 h-5 text-red-600" />
                 )}
-                <span className={`font-medium ${
+                <span className={`font-medium €{
                   exportResult.success ? 'text-green-900' : 'text-red-900'
                 }`}>
                   {exportResult.message}

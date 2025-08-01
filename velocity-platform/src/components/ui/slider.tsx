@@ -42,7 +42,7 @@ export function Slider({
         <div className="h-2 bg-gray-200 rounded-full">
           <div 
             className="h-2 bg-blue-600 rounded-full"
-            style={{ width: `${percentage}%` }}
+            style={{ width: `€{percentage}%` }}
           />
         </div>
         <input
@@ -56,7 +56,7 @@ export function Slider({
         />
         <div 
           className="absolute top-1/2 w-4 h-4 bg-blue-600 border-2 border-white rounded-full shadow transform -translate-y-1/2"
-          style={{ left: `calc(${percentage}% - 8px)` }}
+          style={{ left: `calc(€{percentage}% - 8px)` }}
         />
       </div>
     </div>

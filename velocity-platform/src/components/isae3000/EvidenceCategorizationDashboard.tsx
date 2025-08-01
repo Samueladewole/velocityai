@@ -119,7 +119,7 @@ const EvidenceCategorizationDashboard: React.FC<EvidenceCategorizationDashboardP
 
   if (loading) {
     return (
-      <div className={`flex items-center justify-center p-12 ${className}`}>
+      <div className={`flex items-center justify-center p-12 €{className}`}>
         <RefreshCw className="w-8 h-8 text-blue-500 animate-spin" />
         <span className="ml-3 text-slate-600">Loading categorization data...</span>
       </div>
@@ -127,7 +127,7 @@ const EvidenceCategorizationDashboard: React.FC<EvidenceCategorizationDashboardP
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 €{className}`}>
       {/* Header with Search and Filters */}
       <div className="bg-white border border-slate-200 rounded-lg p-6">
         <div className="flex items-center justify-between mb-4">
@@ -274,7 +274,7 @@ const EvidenceCategorizationDashboard: React.FC<EvidenceCategorizationDashboardP
                               Banking Specific
                             </span>
                           )}
-                          <span className={`px-2 py-1 text-xs rounded-full font-medium ${
+                          <span className={`px-2 py-1 text-xs rounded-full font-medium €{
                             control.riskLevel === 'high' ? 'bg-red-100 text-red-700' :
                             control.riskLevel === 'medium' ? 'bg-amber-100 text-amber-700' :
                             'bg-green-100 text-green-700'
@@ -294,7 +294,7 @@ const EvidenceCategorizationDashboard: React.FC<EvidenceCategorizationDashboardP
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium ${getCoverageColor(evidenceCount)}`}>
+                      <div className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-sm font-medium €{getCoverageColor(evidenceCount)}`}>
                         {evidenceCount} Evidence Items
                       </div>
                       <p className="text-xs text-slate-500 mt-1 capitalize">{coverageLevel} Coverage</p>
@@ -330,7 +330,7 @@ const EvidenceCategorizationDashboard: React.FC<EvidenceCategorizationDashboardP
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-2">
                       <h4 className="font-medium text-slate-900">{classification.evidenceId}</h4>
-                      <span className={`px-2 py-1 text-xs rounded-full font-medium ${getConfidenceColor(classification.confidenceScore)}`}>
+                      <span className={`px-2 py-1 text-xs rounded-full font-medium €{getConfidenceColor(classification.confidenceScore)}`}>
                         {(classification.confidenceScore * 100).toFixed(0)}% Confidence
                       </span>
                     </div>

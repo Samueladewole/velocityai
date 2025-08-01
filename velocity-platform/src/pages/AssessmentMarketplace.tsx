@@ -319,8 +319,8 @@ export const AssessmentMarketplace: React.FC = () => {
 
   const formatPrice = (price: number, priceType: string) => {
     if (priceType === 'free') return 'Free';
-    if (priceType === 'subscription') return `€${price}/month`;
-    return `€${price}`;
+    if (priceType === 'subscription') return `€€{price}/month`;
+    return `€€{price}`;
   };
 
   return (
@@ -456,7 +456,7 @@ export const AssessmentMarketplace: React.FC = () => {
                     <CardHeader className="pb-4">
                       <div className="flex items-start justify-between mb-3">
                         <div className="flex items-center gap-3">
-                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColor} flex items-center justify-center`}>
+                          <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{categoryColor} flex items-center justify-center`}>
                             <IconComponent className="h-6 w-6 text-white" />
                           </div>
                           <div>
@@ -475,7 +475,7 @@ export const AssessmentMarketplace: React.FC = () => {
                         </div>
                         <div className="flex items-center gap-2">
                           <Button variant="ghost" size="sm">
-                            <Heart className={`h-4 w-4 ${assessment.isFavorite ? 'text-red-500 fill-current' : 'text-slate-400'}`} />
+                            <Heart className={`h-4 w-4 €{assessment.isFavorite ? 'text-red-500 fill-current' : 'text-slate-400'}`} />
                           </Button>
                           <Button variant="ghost" size="sm">
                             <Share2 className="h-4 w-4 text-slate-400" />
@@ -525,7 +525,7 @@ export const AssessmentMarketplace: React.FC = () => {
                               {[1, 2, 3, 4, 5].map((star) => (
                                 <Star 
                                   key={star} 
-                                  className={`h-3 w-3 ${star <= assessment.rating ? 'text-yellow-500 fill-current' : 'text-slate-300'}`} 
+                                  className={`h-3 w-3 €{star <= assessment.rating ? 'text-yellow-500 fill-current' : 'text-slate-300'}`} 
                                 />
                               ))}
                             </div>
@@ -611,7 +611,7 @@ export const AssessmentMarketplace: React.FC = () => {
                   <Card key={assessment.id} className="border-slate-200">
                     <CardHeader className="pb-4">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${categoryColor} flex items-center justify-center`}>
+                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r €{categoryColor} flex items-center justify-center`}>
                           <IconComponent className="h-5 w-5 text-white" />
                         </div>
                         <Badge className="bg-green-100 text-green-800">
@@ -657,7 +657,7 @@ export const AssessmentMarketplace: React.FC = () => {
                     <CardHeader className="pb-4">
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-3">
-                          <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${categoryColor} flex items-center justify-center`}>
+                          <div className={`w-10 h-10 rounded-lg bg-gradient-to-r €{categoryColor} flex items-center justify-center`}>
                             <IconComponent className="h-5 w-5 text-white" />
                           </div>
                           <Badge variant="outline">{assessment.category}</Badge>

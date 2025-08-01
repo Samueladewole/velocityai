@@ -162,7 +162,7 @@ class AutomatedProposalEngine:
                 ],
                 implementation_timeline="4-6 weeks",
                 compliance_benefits=[
-                    "Protect against penalties up to $1.5M per incident",
+                    "Protect against penalties up to €1.5M per incident",
                     "Ensure patient trust and reputation protection",
                     "Streamline healthcare operations",
                     "Enable secure health information exchange"

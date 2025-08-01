@@ -313,7 +313,7 @@ export const SeedPitch: React.FC = () => {
                       <Tooltip />
                       <Bar dataKey="value" fill="#3B82F6">
                         {marketGrowthData.map((entry, index) => (
-                          <Cell key={`cell-${index}`} fill={index === 4 ? '#10B981' : '#3B82F6'} />
+                          <Cell key={`cell-€{index}`} fill={index === 4 ? '#10B981' : '#3B82F6'} />
                         ))}
                       </Bar>
                     </BarChart>
@@ -501,7 +501,7 @@ export const SeedPitch: React.FC = () => {
                         cx="50%"
                         cy="50%"
                         labelLine={false}
-                        label={({ name, value }) => `${name}: ${value}%`}
+                        label={({ name, value }) => `€{name}: €{value}%`}
                         outerRadius={100}
                         fill="#8884d8"
                         dataKey="value"
@@ -524,7 +524,7 @@ export const SeedPitch: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   {fundingAllocation.map((item) => (
-                    <div key={item.name} className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: `${item.color}20` }}>
+                    <div key={item.name} className="flex items-center justify-between p-3 rounded-lg" style={{ backgroundColor: `€{item.color}20` }}>
                       <div>
                         <div className="font-semibold" style={{ color: item.color }}>{item.name}</div>
                         <div className="text-sm text-slate-600">{item.amount}</div>
@@ -1660,7 +1660,7 @@ export const SeedPitch: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 ${isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
+    <div className={`min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 €{isFullscreen ? 'fixed inset-0 z-50' : ''}`}>
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-slate-200 p-4">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
@@ -1771,7 +1771,7 @@ export const SeedPitch: React.FC = () => {
                   onClick={() => setCurrentSlide(index)}
                   className={`
                     p-3 rounded-lg text-sm font-medium transition-all text-left border-2
-                    ${currentSlide === index 
+                    €{currentSlide === index 
                       ? 'bg-blue-600 text-white shadow-lg border-blue-600 scale-105' 
                       : 'bg-white text-slate-700 hover:bg-blue-50 hover:border-blue-200 border-slate-200'
                     }

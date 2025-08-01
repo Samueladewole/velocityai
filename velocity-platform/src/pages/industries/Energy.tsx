@@ -256,7 +256,7 @@ const Energy: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                    <div className="text-xl font-bold text-emerald-600">$500K</div>
+                    <div className="text-xl font-bold text-emerald-600">€500K</div>
                     <div className="text-sm text-slate-600">Annual Compliance Savings</div>
                   </div>
                   <div className="text-center p-3 bg-amber-50 rounded-lg">
@@ -322,7 +322,7 @@ const Energy: React.FC = () => {
               <div className="bg-white border border-slate-200 rounded-2xl p-8">
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Energy Starter</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$8,999</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">€8,999</div>
                   <div className="text-slate-600">/month</div>
                 </div>
                 
@@ -357,7 +357,7 @@ const Energy: React.FC = () => {
                 
                 <div className="text-center mb-6">
                   <h3 className="text-2xl font-bold text-slate-900 mb-2">Energy Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">$19,999</div>
+                  <div className="text-4xl font-bold text-blue-600 mb-2">€19,999</div>
                   <div className="text-slate-600">/month</div>
                 </div>
                 
@@ -524,7 +524,7 @@ const Energy: React.FC = () => {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white'
                     : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'

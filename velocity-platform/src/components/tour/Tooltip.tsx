@@ -31,8 +31,8 @@ export const Tooltip: React.FC = () => {
     <Card 
       className="fixed z-50 w-64 shadow-xl border-slate-200 bg-white"
       style={{
-        top: `${tooltipPosition.top}px`,
-        left: `${tooltipPosition.left}px`,
+        top: `€{tooltipPosition.top}px`,
+        left: `€{tooltipPosition.left}px`,
         transform: 'translateX(-50%)'
       }}
     >

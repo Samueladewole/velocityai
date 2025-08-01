@@ -290,7 +290,7 @@ export const IndustrySelection: React.FC = () => {
               {industries.map((industry) => (
                 <Card
                   key={industry.id}
-                  className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
+                  className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 €{
                     selectedIndustries.includes(industry.id)
                       ? 'ring-2 ring-blue-500 bg-blue-50/50'
                       : 'hover:shadow-md'
@@ -308,7 +308,7 @@ export const IndustrySelection: React.FC = () => {
                           )}
                         </CardTitle>
                         <div className="flex items-center gap-2 mt-1">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getRiskBadge(industry.riskLevel)}`}>
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium border €{getRiskBadge(industry.riskLevel)}`}>
                             {industry.riskLevel} risk
                           </span>
                           <div className="flex items-center gap-1">
@@ -359,7 +359,7 @@ export const IndustrySelection: React.FC = () => {
               {regionalLandscapes.map((landscape) => (
                 <Card
                   key={landscape.region}
-                  className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 ${
+                  className={`cursor-pointer transition-all duration-200 hover:shadow-lg hover:-translate-y-1 €{
                     selectedRegions.includes(landscape.region)
                       ? 'ring-2 ring-green-500 bg-green-50/50'
                       : 'hover:shadow-md'
@@ -376,7 +376,7 @@ export const IndustrySelection: React.FC = () => {
                             <CheckCircle2 className="h-5 w-5 text-green-600" />
                           )}
                         </CardTitle>
-                        <div className={`inline-flex px-2 py-1 rounded-full text-xs font-medium border mt-1 ${getRiskBadge(landscape.complianceComplexity)}`}>
+                        <div className={`inline-flex px-2 py-1 rounded-full text-xs font-medium border mt-1 €{getRiskBadge(landscape.complianceComplexity)}`}>
                           {landscape.complianceComplexity} complexity
                         </div>
                       </div>

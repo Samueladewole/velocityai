@@ -660,7 +660,7 @@ class ReverseStressTester:
         breaking_scenario = StressScenario(
             scenario_id="breaking_point",
             scenario_name="Portfolio Breaking Point",
-            description=f"Scenario causing ${target_loss:,.0f} loss",
+            description=f"Scenario causing €{target_loss:,.0f} loss",
             scenario_type=StressTestType.REVERSE_STRESS,
             severity=ScenarioSeverity.EXTREME,
             time_horizon=1.0,

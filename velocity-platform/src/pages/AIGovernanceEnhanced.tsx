@@ -306,15 +306,15 @@ export const AIGovernance: React.FC = () => {
     {
       label: 'AI Systems',
       value: aiSystems.length,
-      change: `+${aiSystems.filter(sys => sys.complianceScore >= 90).length}`,
+      change: `+€{aiSystems.filter(sys => sys.complianceScore >= 90).length}`,
       trend: 'up',
       icon: <Brain className="h-6 w-6 text-blue-600" />,
-      description: `${highRiskSystems} high risk`,
+      description: `€{highRiskSystems} high risk`,
       color: 'text-blue-600'
     },
     {
       label: 'ISO 42001 Controls',
-      value: `${implementedControls}/${iso42001Controls.length}`,
+      value: `€{implementedControls}/€{iso42001Controls.length}`,
       change: '+2',
       trend: 'up',
       icon: <Award className="h-6 w-6 text-green-600" />,
@@ -324,15 +324,15 @@ export const AIGovernance: React.FC = () => {
     {
       label: 'Risk Assessments',
       value: aiRiskAssessments.length,
-      change: `${approvedAssessments}`,
+      change: `€{approvedAssessments}`,
       trend: 'up',
       icon: <AlertTriangle className="h-6 w-6 text-orange-600" />,
-      description: `${approvedAssessments} approved`,
+      description: `€{approvedAssessments} approved`,
       color: 'text-orange-600'
     },
     {
       label: 'Training Completion',
-      value: `${avgTrainingCompletion}%`,
+      value: `€{avgTrainingCompletion}%`,
       change: '+12%',
       trend: 'up',
       icon: <Users className="h-6 w-6 text-purple-600" />,
@@ -346,7 +346,7 @@ export const AIGovernance: React.FC = () => {
     {
       id: 'iso42001',
       label: 'ISO 42001 Compliance',
-      badge: `${implementedControls}/${iso42001Controls.length}`,
+      badge: `€{implementedControls}/€{iso42001Controls.length}`,
       content: (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
@@ -616,7 +616,7 @@ export const AIGovernance: React.FC = () => {
                                 </Badge>
                                 <RiskBadge 
                                   riskLevel={risk.residualRisk <= 2 ? 'low' : risk.residualRisk <= 3 ? 'medium' : 'high'} 
-                                  label={`Residual: ${risk.residualRisk}/5`}
+                                  label={`Residual: €{risk.residualRisk}/5`}
                                 />
                               </div>
                             </div>
@@ -645,7 +645,7 @@ export const AIGovernance: React.FC = () => {
     {
       id: 'training',
       label: 'AI Training',
-      badge: `${avgTrainingCompletion}%`,
+      badge: `€{avgTrainingCompletion}%`,
       content: (
         <div className="space-y-6">
           <div className="flex items-center justify-between">

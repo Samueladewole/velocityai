@@ -50,7 +50,7 @@ const TrustScoreCard = () => {
               </div>
               <div className="flex items-center gap-1">
                 <Activity className="h-4 w-4" />
-                <span>10 Agents Active</span>
+                <span>13 Agents Active</span>
               </div>
               <div className="flex items-center gap-1">
                 <Database className="h-4 w-4" />
@@ -100,8 +100,8 @@ const ComplianceStatus = () => {
               </div>
               <div className="w-full bg-slate-200 rounded-full h-2">
                 <div 
-                  className={`bg-${framework.color}-500 h-2 rounded-full transition-all duration-300`}
-                  style={{ width: `${framework.status}%` }}
+                  className={`bg-€{framework.color}-500 h-2 rounded-full transition-all duration-300`}
+                  style={{ width: `€{framework.status}%` }}
                 ></div>
               </div>
             </div>
@@ -170,8 +170,8 @@ const RecentActivity = () => {
         <div className="space-y-4">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
-              <div className={`p-2 rounded-lg bg-${activity.color}-100`}>
-                <activity.icon className={`h-4 w-4 text-${activity.color}-600`} />
+              <div className={`p-2 rounded-lg bg-€{activity.color}-100`}>
+                <activity.icon className={`h-4 w-4 text-€{activity.color}-600`} />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-slate-900">{activity.message}</p>
@@ -196,7 +196,7 @@ const SimpleLineChart = ({ data, color = "emerald", height = "h-32" }: {
   const range = max - min || 1;
   
   return (
-    <div className={`${height} relative`}>
+    <div className={`€{height} relative`}>
       <svg className="w-full h-full" viewBox="0 0 100 40">
         <polyline
           fill="none"
@@ -205,7 +205,7 @@ const SimpleLineChart = ({ data, color = "emerald", height = "h-32" }: {
           points={data.map((value, index) => {
             const x = (index / (data.length - 1)) * 100;
             const y = 40 - ((value - min) / range) * 30;
-            return `${x},${y}`;
+            return `€{x},€{y}`;
           }).join(' ')}
         />
         {data.map((value, index) => {
@@ -320,8 +320,8 @@ const EvidenceCollectionChart = () => {
                 </div>
                 <div className="w-full bg-slate-200 rounded-full h-2">
                   <div 
-                    className={`bg-${item.color}-500 h-2 rounded-full transition-all duration-500`}
-                    style={{ width: `${(item.count / totalEvidence) * 100}%` }}
+                    className={`bg-€{item.color}-500 h-2 rounded-full transition-all duration-500`}
+                    style={{ width: `€{(item.count / totalEvidence) * 100}%` }}
                   ></div>
                 </div>
               </div>
@@ -441,7 +441,7 @@ const ComplianceDonutChart = () => {
           <div className="grid grid-cols-2 gap-4">
             {frameworks.map((framework) => (
               <div key={framework.name} className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full bg-${framework.color}-500`}></div>
+                <div className={`w-3 h-3 rounded-full bg-€{framework.color}-500`}></div>
                 <span className="text-sm font-medium">{framework.name}</span>
                 <span className="text-sm text-slate-600 ml-auto">{framework.progress}%</span>
               </div>
@@ -500,7 +500,7 @@ const ActivityFeed = () => {
         <div className="space-y-4">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start gap-3">
-              <div className={`w-2 h-2 rounded-full mt-2 ${getActivityColor(activity.type).split(' ')[1]}`}></div>
+              <div className={`w-2 h-2 rounded-full mt-2 €{getActivityColor(activity.type).split(' ')[1]}`}></div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-sm">{activity.agent}</span>
@@ -534,7 +534,7 @@ const FrameworkManager = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-lg">{framework.name}</h3>
-                <div className={`w-3 h-3 rounded-full ${framework.enabled ? 'bg-emerald-500' : 'bg-slate-300'}`}></div>
+                <div className={`w-3 h-3 rounded-full €{framework.enabled ? 'bg-emerald-500' : 'bg-slate-300'}`}></div>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">

@@ -154,7 +154,7 @@ const SANDBOX_SCENARIOS: SandboxScenario[] = [
     outcomes: [
       'Trust Score improved from 420 to 650 (+230 points)',
       'Compliance timeline reduced from 12 to 3 months',
-      'Projected cost savings: $180,000',
+      'Projected cost savings: €180,000',
       'Ready for SOC 2 audit in Q2 2025'
     ]
   },
@@ -864,15 +864,15 @@ export const InteractiveSandbox: React.FC = () => {
                         <div className="space-y-2">
                           <div className="flex justify-between">
                             <span>Annual Compliance Costs:</span>
-                            <span className="font-medium text-green-600">$180K saved</span>
+                            <span className="font-medium text-green-600">€180K saved</span>
                           </div>
                           <div className="flex justify-between">
                             <span>External Consultant Fees:</span>
-                            <span className="font-medium text-green-600">$120K saved</span>
+                            <span className="font-medium text-green-600">€120K saved</span>
                           </div>
                           <div className="flex justify-between">
                             <span>Penalty Avoidance:</span>
-                            <span className="font-medium text-green-600">$500K protected</span>
+                            <span className="font-medium text-green-600">€500K protected</span>
                           </div>
                         </div>
                       </div>

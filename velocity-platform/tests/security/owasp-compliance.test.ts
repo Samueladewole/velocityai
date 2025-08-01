@@ -230,7 +230,7 @@ describe('OWASP Top 10 Security Compliance', () => {
       const token = mockAuthService.generateSecureToken();
 
       expect(token).toHaveLength(tokenLength * 2); // hex encoding doubles length
-      expect(token).toMatch(/^[0-9a-f]+$/); // only hex characters
+      expect(token).toMatch(/^[0-9a-f]+€/); // only hex characters
     });
   });
 
@@ -258,11 +258,11 @@ describe('OWASP Top 10 Security Compliance', () => {
     });
 
     it('should prevent NoSQL injection in MongoDB queries', async () => {
-      const maliciousQuery = { $where: 'function() { return true; }' };
+      const maliciousQuery = { €where: 'function() { return true; }' };
       const safeQuery = { agentId: 'agent-123' };
 
       const validateNoSQLQuery = (query: any) => {
-        const dangerous = ['$where', '$regex', '$text'];
+        const dangerous = ['€where', '€regex', '€text'];
         return !dangerous.some(op => query.hasOwnProperty(op));
       };
 
@@ -275,7 +275,7 @@ describe('OWASP Top 10 Security Compliance', () => {
       const safeInput = 'agent-config.json';
 
       const validateFilename = (filename: string) => {
-        const dangerousChars = /[;&|`$(){}[\]]/;
+        const dangerousChars = /[;&|`€(){}[\]]/;
         return !dangerousChars.test(filename);
       };
 
@@ -486,7 +486,7 @@ describe('OWASP Top 10 Security Compliance', () => {
         const hasUppercase = /[A-Z]/.test(password);
         const hasLowercase = /[a-z]/.test(password);
         const hasNumbers = /\d/.test(password);
-        const hasSpecialChars = /[!@#$%^&*]/.test(password);
+        const hasSpecialChars = /[!@#€%^&*]/.test(password);
 
         return {
           valid: minLength && hasUppercase && hasLowercase && hasNumbers && hasSpecialChars,
@@ -518,7 +518,7 @@ describe('OWASP Top 10 Security Compliance', () => {
         await mockAuditService.logSecurityEvent(event, {
           userId: 'user-123',
           timestamp: new Date().toISOString(),
-          details: `Test ${event}`
+          details: `Test €{event}`
         });
       }
 
@@ -609,7 +609,7 @@ describe('OWASP Top 10 Security Compliance', () => {
             /^192\.168\./, // Private Class C
             /^172\.(1[6-9]|2[0-9]|3[0-1])\./, // Private Class B
             /^169\.254\./, // Link-local
-            /^::1$/, // IPv6 loopback
+            /^::1€/, // IPv6 loopback
             /^fe80:/ // IPv6 link-local
           ];
 

@@ -440,7 +440,7 @@ class SecurityMiddleware(BaseHTTPMiddleware):
             "url": {
                 "sql_injection": r"(\bunion\b|\bselect\b|\binsert\b|\bupdate\b|\bdelete\b|\bdrop\b).*(\bfrom\b|\bwhere\b|\binto\b)",
                 "xss": r"(<script|javascript:|onerror=|onload=|alert\(|confirm\()",
-                "command_injection": r"(;|\||&|\$\(|\`).*(ls|cat|whoami|id|pwd|nc|curl|wget)",
+                "command_injection": r"(;|\||&|\€\(|\`).*(ls|cat|whoami|id|pwd|nc|curl|wget)",
                 "path_traversal": r"(\.{2}[\/\\]|%2e%2e[\/\\]|\.\.%2f|\.\.%5c)",
                 "ldap_injection": r"(\(|\)|\*|\||&|!|=|<|>|~|%28|%29)"
             },

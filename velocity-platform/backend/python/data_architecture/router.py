@@ -442,7 +442,7 @@ async def assess_data_quality(
             quality_monitor.add_validation_rule(UniquenessRule())
             quality_monitor.add_validation_rule(ValidityRule(
                 column_types={'id': 'int', 'age': 'int', 'email': 'email'},
-                patterns={'email': r'^[^@]+@[^@]+\.[^@]+$'}
+                patterns={'email': r'^[^@]+@[^@]+\.[^@]+€'}
             ))
         
         # Perform quality assessment
@@ -589,7 +589,7 @@ async def search_data_assets(
 @router.get("/catalog/assets/{asset_id}/lineage")
 async def get_asset_lineage(
     asset_id: str,
-    direction: str = Query("both", regex="^(upstream|downstream|both)$"),
+    direction: str = Query("both", regex="^(upstream|downstream|both)€"),
     max_depth: int = Query(3, ge=1, le=10),
     current_user: TokenData = Depends(require_permission(ComponentPermissions.COMPASS))
 ):

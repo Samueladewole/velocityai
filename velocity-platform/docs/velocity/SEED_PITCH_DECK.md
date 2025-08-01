@@ -10,7 +10,7 @@
 
 **Transforming quarterly compliance hell into continuous, automated monitoring**
 
-*Seed Round: $8M to capture the $8.5B compliance automation market*
+*Seed Round: €8M to capture the €8.5B compliance automation market*
 
 **Team:** ERIP Engineering | **Date:** July 2025
 
@@ -22,7 +22,7 @@
 
 #### **The Current Reality:**
 - 📊 **6 months** average SOC 2 certification timeline
-- 💰 **$400K+** annual compliance costs (consultants + tools + labor)
+- 💰 **€400K+** annual compliance costs (consultants + tools + labor)
 - ⏰ **800+ hours** of manual evidence collection per year
 - 😤 **73%** of CTOs report compliance as biggest operational burden
 - 🔄 **Quarterly panic cycles** instead of continuous monitoring
@@ -59,7 +59,7 @@
 
 #### **Customer Impact:**
 - **90% time reduction** in compliance processes
-- **$270K annual savings** vs traditional approach
+- **€270K annual savings** vs traditional approach
 - **22+ point Trust Score improvement** on average
 - **2-4 month ROI payback** period
 
@@ -70,14 +70,14 @@
 ### **Massive & Growing Market**
 
 #### **Total Addressable Market (TAM):**
-- **Global GRC Software Market**: $33.5B (2025)
-- **Compliance Automation Segment**: $8.5B
-- **AI-Powered Compliance**: $1.2B (emerging, 40% CAGR)
+- **Global GRC Software Market**: €33.5B (2025)
+- **Compliance Automation Segment**: €8.5B
+- **AI-Powered Compliance**: €1.2B (emerging, 40% CAGR)
 
 #### **Serviceable Addressable Market (SAM):**
-- **Mid-Market SaaS Companies**: $2.1B
-- **North American Focus**: $850M
-- **SOC 2/ISO Certification Market**: $320M
+- **Mid-Market SaaS Companies**: €2.1B
+- **North American Focus**: €850M
+- **SOC 2/ISO Certification Market**: €320M
 
 #### **Market Drivers:**
 - 📈 **40% YoY growth** in compliance requirements
@@ -86,9 +86,9 @@
 - 💰 **28% annual increase** in compliance costs
 
 #### **3-Year Market Capture:**
-- **Year 1**: 5% of addressable market → $2.5M ARR
-- **Year 2**: 15% of AI compliance market → $15M ARR  
-- **Year 3**: 25% market leadership → $50M ARR
+- **Year 1**: 5% of addressable market → €2.5M ARR
+- **Year 2**: 15% of AI compliance market → €15M ARR  
+- **Year 3**: 25% market leadership → €50M ARR
 
 ---
 
@@ -105,9 +105,9 @@
 | **Multi-Framework** | ✅ 6+ | ⚠️ Limited | ✅ 4 | ❌ SOC 2 only |
 
 #### **Market Position:**
-- **Vanta** ($2.45B valuation): Market leader but manual-heavy
-- **Drata** ($1.2B valuation): Good UX but static monitoring  
-- **SecureFrame** ($100M valuation): SOC 2 focused, limited scale
+- **Vanta** (€2.45B valuation): Market leader but manual-heavy
+- **Drata** (€1.2B valuation): Good UX but static monitoring  
+- **SecureFrame** (€100M valuation): SOC 2 focused, limited scale
 
 #### **Our Moat:**
 - **18-month technical lead** in AI capabilities
@@ -122,20 +122,20 @@
 ### **SaaS Model with Strong Unit Economics**
 
 #### **Pricing Tiers:**
-- **Starter**: $30K/year (50 employees)
-- **Professional**: $90K/year (200 employees)  
-- **Enterprise**: $180K+/year (unlimited)
+- **Starter**: €30K/year (50 employees)
+- **Professional**: €90K/year (200 employees)  
+- **Enterprise**: €180K+/year (unlimited)
 
 #### **Revenue Projections:**
 ```
-Year 1: 50 customers × $50K ACV = $2.5M ARR
-Year 2: 200 customers × $75K ACV = $15M ARR
-Year 3: 500 customers × $100K ACV = $50M ARR
+Year 1: 50 customers × €50K ACV = €2.5M ARR
+Year 2: 200 customers × €75K ACV = €15M ARR
+Year 3: 500 customers × €100K ACV = €50M ARR
 ```
 
 #### **Unit Economics:**
-- **Customer Acquisition Cost (CAC)**: $10K
-- **Lifetime Value (LTV)**: $150K
+- **Customer Acquisition Cost (CAC)**: €10K
+- **Lifetime Value (LTV)**: €150K
 - **LTV:CAC Ratio**: 15:1
 - **Gross Margin**: 85%
 - **Payback Period**: 3.2 months
@@ -156,19 +156,19 @@ Year 3: 500 customers × $100K ACV = $50M ARR
 - 🎯 **25 Enterprise Customers** in private beta
 - 📊 **90% Customer Retention** rate
 - ⭐ **NPS Score of 78** (industry average: 31)
-- 💰 **$750K ARR** from beta customers
+- 💰 **€750K ARR** from beta customers
 - 🚀 **95%+ Automation Rate** achieved consistently
 
 #### **Customer Validation:**
 > *"Velocity reduced our SOC 2 prep from 6 months to 2 weeks. ROI was immediate."*  
-> — CTO, $50M ARR Fintech
+> — CTO, €50M ARR Fintech
 
 > *"First time we've had real-time compliance visibility. Game changer."*  
 > — CISO, Series C SaaS
 
 #### **Key Metrics:**
 - **30-minute average setup time** validated across 20+ deployments
-- **$15,500 average cost savings** in first 30 days
+- **€15,500 average cost savings** in first 30 days
 - **22+ point Trust Score improvement** per customer
 - **95% feature adoption rate** within 60 days
 
@@ -212,23 +212,23 @@ Year 3: 500 customers × $100K ACV = $50M ARR
 
 ## 💰 **SLIDE 9: FUNDING & USE OF FUNDS**
 
-### **$8M Seed Round to Capture Market Leadership**
+### **€8M Seed Round to Capture Market Leadership**
 
 #### **Use of Funds:**
 ```
-Sales & Marketing (50% - $4M):
+Sales & Marketing (50% - €4M):
 - 5 Enterprise AEs + 3 Sales Engineers
 - Demand generation and content marketing
 - Conference presence and thought leadership
 - Customer success and onboarding teams
 
-Product Development (30% - $2.4M):
+Product Development (30% - €2.4M):
 - 8 additional engineers (AI/ML focus)
 - Advanced analytics and reporting
 - Enterprise security certifications
 - Mobile and API platform expansion
 
-Operations & Infrastructure (20% - $1.6M):
+Operations & Infrastructure (20% - €1.6M):
 - Cloud infrastructure scaling
 - Security and compliance operations
 - Legal, finance, and HR scaling
@@ -236,15 +236,15 @@ Operations & Infrastructure (20% - $1.6M):
 ```
 
 #### **Key Milestones (18 Months):**
-- 📊 **$15M ARR** with 200 enterprise customers
+- 📊 **€15M ARR** with 200 enterprise customers
 - 🏆 **Market leadership** in AI compliance automation
 - 🤝 **Strategic partnerships** with Big 4 and cloud providers
-- 🚀 **Series A readiness** at $30M+ ARR run rate
+- 🚀 **Series A readiness** at €30M+ ARR run rate
 
 #### **Previous Funding:**
-- **Pre-seed**: $2M from ERIP founding team and angels
+- **Pre-seed**: €2M from ERIP founding team and angels
 - **Current Runway**: 12 months at current burn rate
-- **Revenue Milestones**: $750K ARR achieved, $2.5M by EOY
+- **Revenue Milestones**: €750K ARR achieved, €2.5M by EOY
 
 ---
 
@@ -339,8 +339,8 @@ Operations & Infrastructure (20% - $1.6M):
 - Patent-pending innovations in evidence collection
 
 #### **📈 Massive Market Opportunity:**
-- $8.5B addressable market growing at 25% CAGR
-- Clear path to $50M ARR within 3 years
+- €8.5B addressable market growing at 25% CAGR
+- Clear path to €50M ARR within 3 years
 - Multiple expansion opportunities (international, adjacent markets)
 - Platform scalability to support unicorn-level growth
 
@@ -397,7 +397,7 @@ Operations & Infrastructure (20% - $1.6M):
 
 #### **Funding Timeline:**
 - **Target Close**: September 2025
-- **Lead Investor**: $3-5M commitment preferred  
+- **Lead Investor**: €3-5M commitment preferred  
 - **Strategic Investors**: Cloud providers, compliance firms
 - **Follow-on Capacity**: Series A within 18 months
 
@@ -417,7 +417,7 @@ Operations & Infrastructure (20% - $1.6M):
 ### **Velocity is Perfectly Positioned to Lead**
 
 #### **The Opportunity:**
-- **$8.5B market** ready for AI-powered disruption
+- **€8.5B market** ready for AI-powered disruption
 - **Proven product-market fit** with 90% customer retention
 - **Clear competitive advantages** that are defensible and scalable
 - **World-class team** with deep domain expertise
@@ -426,7 +426,7 @@ Operations & Infrastructure (20% - $1.6M):
 Transform compliance from a quarterly burden into a continuous competitive advantage through AI automation.
 
 #### **The Ask:**
-**$8M Seed Round** to capture market leadership and build the definitive AI-native compliance platform.
+**€8M Seed Round** to capture market leadership and build the definitive AI-native compliance platform.
 
 ---
 

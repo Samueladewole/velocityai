@@ -257,9 +257,9 @@ export const ToolsOverview: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   const phases = Array.from(new Set(coreTools.map(tool => tool.phase)));
@@ -338,10 +338,10 @@ export const ToolsOverview: React.FC = () => {
         const phaseTools = coreTools.filter(tool => tool.phase === phase);
         
         return (
-          <section key={phase} className={`py-16 ${phaseIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
+          <section key={phase} className={`py-16 €{phaseIndex % 2 === 0 ? 'bg-white' : 'bg-slate-50'}`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="text-center mb-12">
-                <div className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r ${phaseColors[phase as keyof typeof phaseColors]} text-white text-sm font-semibold mb-4`}>
+                <div className={`inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r €{phaseColors[phase as keyof typeof phaseColors]} text-white text-sm font-semibold mb-4`}>
                   {phase}
                 </div>
                 <h2 className="text-3xl font-bold text-slate-900 mb-4">
@@ -362,16 +362,16 @@ export const ToolsOverview: React.FC = () => {
                 {phaseTools.map((tool) => (
                   <Card 
                     key={tool.id}
-                    className={`group relative overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full ${
+                    className={`group relative overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 flex flex-col h-full €{
                       tool.available ? 'cursor-pointer' : 'opacity-75'
                     }`}
                     onClick={() => tool.available && navigate(tool.route)}
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br ${tool.bgColor} opacity-50`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br €{tool.bgColor} opacity-50`} />
                     <CardHeader className="relative">
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-3">
-                          <div className={`p-3 rounded-xl bg-gradient-to-r ${tool.color} text-white group-hover:scale-110 transition-transform duration-300`}>
+                          <div className={`p-3 rounded-xl bg-gradient-to-r €{tool.color} text-white group-hover:scale-110 transition-transform duration-300`}>
                             <tool.icon className="h-6 w-6" />
                           </div>
                           <div>
@@ -394,7 +394,7 @@ export const ToolsOverview: React.FC = () => {
                     </CardHeader>
                     
                     <CardContent className="relative flex-grow flex flex-col pb-6">
-                      <div className={`text-2xl font-bold mb-3 ${tool.textColor}`}>
+                      <div className={`text-2xl font-bold mb-3 €{tool.textColor}`}>
                         {tool.valueProposition}
                       </div>
                       <p className="text-slate-700 mb-4">{tool.description}</p>
@@ -432,7 +432,7 @@ export const ToolsOverview: React.FC = () => {
                       <div className="flex items-center justify-between gap-4">
                         {tool.available ? (
                           <Button 
-                            className={`bg-gradient-to-r ${tool.color} hover:scale-105 transition-transform flex-1 min-h-[44px]`}
+                            className={`bg-gradient-to-r €{tool.color} hover:scale-105 transition-transform flex-1 min-h-[44px]`}
                             onClick={(e) => {
                               e.stopPropagation();
                               navigate(tool.route);

@@ -95,7 +95,7 @@ async def test_quality_assessment_flow():
         monitor.add_validation_rule(UniquenessRule())
         monitor.add_validation_rule(ValidityRule(
             column_types={'id': 'int', 'age': 'int', 'email': 'email'},
-            patterns={'email': r'^[^@]+@[^@]+\.[^@]+$'}
+            patterns={'email': r'^[^@]+@[^@]+\.[^@]+€'}
         ))
         
         # Run quality assessment

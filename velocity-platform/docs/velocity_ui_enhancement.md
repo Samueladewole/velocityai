@@ -120,7 +120,7 @@ const CustomButton = ({ variant, children, ...props }) => {
   };
   
   return (
-    <button className={`px-6 py-3 rounded-xl ${variants[variant]}`} {...props}>
+    <button className={`px-6 py-3 rounded-xl €{variants[variant]}`} {...props}>
       {children}
     </button>
   );

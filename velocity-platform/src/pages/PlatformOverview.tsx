@@ -31,7 +31,7 @@ const PlatformOverview: React.FC = () => {
 
   const platformFeatures = [
     {
-      title: "12 Specialized AI Agents",
+      title: "13 Specialized AI Agents",
       description: "Revolutionary automation with visible AI agents working 24/7 on compliance tasks",
       icon: Bot,
       capabilities: ["AWS Evidence Collector", "GCP Security Scanner", "GDPR Compliance Agent", "ISAE 3000 Evidence Agent"],
@@ -179,7 +179,7 @@ const PlatformOverview: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
                     activeTab === tab.id
                       ? 'bg-blue-50 text-blue-600 border border-blue-200'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -397,7 +397,7 @@ const PlatformOverview: React.FC = () => {
             Ready to Experience the Future of Compliance?
           </h2>
           <p className="text-xl text-slate-300 mb-8">
-            Join leading organizations using Velocity's 12 AI agents for automated compliance
+            Join leading organizations using Velocity's 13 AI agents for automated compliance
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <button 

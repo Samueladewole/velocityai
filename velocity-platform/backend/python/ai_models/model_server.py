@@ -133,7 +133,7 @@ class ModelRouter:
             return f"Security assessment via {model}: The identified vulnerabilities require immediate patching, enhanced monitoring, and updated access controls to meet compliance standards."
         
         elif request.task_type == "financial":
-            return f"Financial analysis using {model}: The risk quantification shows an Annual Loss Expectancy of $2.4M with 95% confidence interval between $1.8M and $3.1M."
+            return f"Financial analysis using {model}: The risk quantification shows an Annual Loss Expectancy of €2.4M with 95% confidence interval between €1.8M and €3.1M."
         
         else:
             return f"Analysis completed using {model}: {request.prompt[:50]}... [Processed with high accuracy and business context]"
@@ -179,7 +179,7 @@ async def get_model_status():
         "cost_optimization": {
             "premium_usage_target": "< 20%",
             "current_premium_usage": f"{model_router.usage_stats['premium_usage_ratio']:.1%}",
-            "cost_per_request": "$0.0023",
+            "cost_per_request": "€0.0023",
             "monthly_savings": "67% vs pure premium"
         }
     }

@@ -146,8 +146,8 @@ const IntegrationsPage: React.FC = () => {
               <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
                 <div className="flex items-center justify-between mb-6">
                   <div className="flex items-center gap-4">
-                    <div className={`w-12 h-12 bg-${platform.color}-500/20 rounded-lg flex items-center justify-center`}>
-                      <span className={`text-${platform.color}-400 font-bold text-sm`}>{platform.logo}</span>
+                    <div className={`w-12 h-12 bg-€{platform.color}-500/20 rounded-lg flex items-center justify-center`}>
+                      <span className={`text-€{platform.color}-400 font-bold text-sm`}>{platform.logo}</span>
                     </div>
                     <div>
                       <h3 className="text-xl font-semibold text-white">{platform.name}</h3>

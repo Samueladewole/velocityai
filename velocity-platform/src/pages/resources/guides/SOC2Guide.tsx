@@ -73,7 +73,7 @@ const SOC2Guide: React.FC = () => {
                 <h3 className="text-lg font-semibold text-emerald-400 mb-2">Traditional SOC 2</h3>
                 <ul className="text-slate-300 space-y-1 text-sm">
                   <li>• 6-12 months implementation</li>
-                  <li>• $50K-$200K+ in costs</li>
+                  <li>• €50K-€200K+ in costs</li>
                   <li>• 80% manual evidence collection</li>
                   <li>• High risk of audit findings</li>
                   <li>• Requires 2-3 FTE resources</li>
@@ -514,21 +514,21 @@ const SOC2Guide: React.FC = () => {
                 <div>
                   <h4 className="font-semibold text-white mb-3">Traditional SOC 2 Costs:</h4>
                   <ul className="text-slate-300 space-y-2">
-                    <li>• External consultants: $80K-$150K</li>
-                    <li>• Internal resources: $60K-$100K</li>
-                    <li>• Audit fees: $25K-$50K</li>
-                    <li>• Tool licensing: $20K-$40K</li>
-                    <li><strong>Total: $185K-$340K</strong></li>
+                    <li>• External consultants: €80K-€150K</li>
+                    <li>• Internal resources: €60K-€100K</li>
+                    <li>• Audit fees: €25K-€50K</li>
+                    <li>• Tool licensing: €20K-€40K</li>
+                    <li><strong>Total: €185K-€340K</strong></li>
                   </ul>
                 </div>
                 <div>
                   <h4 className="font-semibold text-emerald-400 mb-3">Velocity AI Costs:</h4>
                   <ul className="text-emerald-300 space-y-2">
-                    <li>• Velocity platform: $36K/year</li>
-                    <li>• Implementation: $15K</li>
-                    <li>• Audit fees: $25K-$50K</li>
-                    <li>• Internal oversight: $20K</li>
-                    <li><strong>Total: $96K-$121K</strong></li>
+                    <li>• Velocity platform: €36K/year</li>
+                    <li>• Implementation: €15K</li>
+                    <li>• Audit fees: €25K-€50K</li>
+                    <li>• Internal oversight: €20K</li>
+                    <li><strong>Total: €96K-€121K</strong></li>
                   </ul>
                 </div>
               </div>

@@ -250,9 +250,9 @@ export const PULSE: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -440,7 +440,7 @@ export const PULSE: React.FC = () => {
                         </td>
                         <td className="py-3 px-4 text-center">
                           <Badge 
-                            className={`${
+                            className={`€{
                               control.priority === 'Critical' ? 'bg-red-100 text-red-700' :
                               control.priority === 'High' ? 'bg-orange-100 text-orange-700' :
                               'bg-yellow-100 text-yellow-700'
@@ -485,11 +485,11 @@ export const PULSE: React.FC = () => {
                     <ComposedChart data={riskTrends}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="time" />
-                      <YAxis yAxisId="left" tickFormatter={(value) => `€${(value/1000000).toFixed(1)}M`} />
+                      <YAxis yAxisId="left" tickFormatter={(value) => `€€{(value/1000000).toFixed(1)}M`} />
                       <YAxis yAxisId="right" orientation="right" />
                       <Tooltip 
                         formatter={(value, name) => [
-                          name === 'exposure' ? `€${(Number(value)/1000000).toFixed(1)}M` : value,
+                          name === 'exposure' ? `€€{(Number(value)/1000000).toFixed(1)}M` : value,
                           name === 'exposure' ? 'Risk Exposure' : name === 'incidents' ? 'Active Incidents' : 'Active Alerts'
                         ]} 
                       />
@@ -550,8 +550,8 @@ export const PULSE: React.FC = () => {
                   <AreaChart data={investigationMetrics}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="month" />
-                    <YAxis tickFormatter={(value) => `${value}h`} />
-                    <Tooltip formatter={(value) => [`${value} hours`, '']} />
+                    <YAxis tickFormatter={(value) => `€{value}h`} />
+                    <Tooltip formatter={(value) => [`€{value} hours`, '']} />
                     <Area 
                       type="monotone" 
                       dataKey="traditional" 

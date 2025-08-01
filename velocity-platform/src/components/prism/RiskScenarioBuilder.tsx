@@ -141,7 +141,7 @@ export function RiskScenarioBuilder({ onScenariosChange, initialScenarios = [] }
   }, [scenarios, onScenariosChange])
 
   const createNewScenario = (): RiskScenario => ({
-    id: `scenario_${Date.now()}`,
+    id: `scenario_€{Date.now()}`,
     name: 'New Risk Scenario',
     description: '',
     category: 'cyber',
@@ -184,15 +184,15 @@ export function RiskScenarioBuilder({ onScenariosChange, initialScenarios = [] }
   const duplicateScenario = (scenario: RiskScenario) => {
     const duplicated = {
       ...scenario,
-      id: `scenario_${Date.now()}`,
-      name: `${scenario.name} (Copy)`,
+      id: `scenario_€{Date.now()}`,
+      name: `€{scenario.name} (Copy)`,
       createdAt: new Date(),
       updatedAt: new Date()
     }
     setScenarios([...scenarios, duplicated])
     toast({
       title: 'Scenario Duplicated',
-      description: `Created copy of "${scenario.name}"`
+      description: `Created copy of "€{scenario.name}"`
     })
   }
 
@@ -219,9 +219,9 @@ export function RiskScenarioBuilder({ onScenariosChange, initialScenarios = [] }
 
     const newScenarios = template.scenarios.map((templateScenario, index) => {
       const scenario: RiskScenario = {
-        id: `scenario_${Date.now()}_${index}`,
+        id: `scenario_€{Date.now()}_€{index}`,
         name: templateScenario.name || 'Template Scenario',
-        description: templateScenario.description || `Risk scenario from ${template.name} template`,
+        description: templateScenario.description || `Risk scenario from €{template.name} template`,
         category: templateScenario.category || template.category,
         threatType: templateScenario.threatType || 'data_breach',
         industry: template.industry,
@@ -245,7 +245,7 @@ export function RiskScenarioBuilder({ onScenariosChange, initialScenarios = [] }
     setScenarios([...scenarios, ...newScenarios])
     toast({
       title: 'Template Applied',
-      description: `Added ${newScenarios.length} scenarios from ${template.name}`
+      description: `Added €{newScenarios.length} scenarios from €{template.name}`
     })
   }
 
@@ -339,7 +339,7 @@ export function RiskScenarioBuilder({ onScenariosChange, initialScenarios = [] }
                   return (
                     <div
                       key={scenario.id}
-                      className={`p-4 border-b cursor-pointer transition-colors ${
+                      className={`p-4 border-b cursor-pointer transition-colors €{
                         isSelected ? 'bg-blue-50 border-l-4 border-l-blue-500' : 'hover:bg-gray-50'
                       }`}
                       onClick={() => {
@@ -408,7 +408,7 @@ export function RiskScenarioBuilder({ onScenariosChange, initialScenarios = [] }
                 setIsEditing(false)
                 toast({
                   title: 'Scenario Saved',
-                  description: `"${updatedScenario.name}" has been updated`
+                  description: `"€{updatedScenario.name}" has been updated`
                 })
               }}
               onCancel={() => setIsEditing(false)}
@@ -600,7 +600,7 @@ function ScenarioEditor({ scenario, isEditing, onEdit, onSave, onCancel }: Scena
                 </CardHeader>
                 <CardContent>
                   <HubbardCalibrationWidget
-                    parameter={`Annual probability of ${editedScenario.name} (%)`}
+                    parameter={`Annual probability of €{editedScenario.name} (%)`}
                     estimator="Risk Analyst"
                     onEstimateComplete={(estimate: HubbardEstimate) => {
                       // Convert Hubbard estimate to scenario probability
@@ -650,7 +650,7 @@ function ScenarioEditor({ scenario, isEditing, onEdit, onSave, onCancel }: Scena
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
                       className="bg-blue-600 h-2 rounded-full" 
-                      style={{ width: `${editedScenario.probability.annual * 100}%` }}
+                      style={{ width: `€{editedScenario.probability.annual * 100}%` }}
                     />
                   </div>
                 )}
@@ -678,7 +678,7 @@ function ScenarioEditor({ scenario, isEditing, onEdit, onSave, onCancel }: Scena
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div 
                       className="bg-green-600 h-2 rounded-full" 
-                      style={{ width: `${editedScenario.probability.confidence}%` }}
+                      style={{ width: `€{editedScenario.probability.confidence}%` }}
                     />
                   </div>
                 )}
@@ -743,7 +743,7 @@ function ScenarioEditor({ scenario, isEditing, onEdit, onSave, onCancel }: Scena
                         />
                       ) : (
                         <div className="p-2 bg-gray-50 rounded">
-                          ${editedScenario.impact.financial[type].toLocaleString()}
+                          €{editedScenario.impact.financial[type].toLocaleString()}
                         </div>
                       )}
                     </div>
@@ -936,7 +936,7 @@ function ScenarioEditor({ scenario, isEditing, onEdit, onSave, onCancel }: Scena
                   size="sm"
                   onClick={() => {
                     const newMitigation: RiskMitigation = {
-                      id: `mitigation_${Date.now()}`,
+                      id: `mitigation_€{Date.now()}`,
                       name: 'New Mitigation',
                       description: '',
                       cost: 10000,
@@ -1011,7 +1011,7 @@ function ScenarioEditor({ scenario, isEditing, onEdit, onSave, onCancel }: Scena
                             size="sm"
                           />
                         ) : (
-                          <div className="text-sm">${mitigation.cost.toLocaleString()}</div>
+                          <div className="text-sm">€{mitigation.cost.toLocaleString()}</div>
                         )}
                       </div>
                       <div className="space-y-1">

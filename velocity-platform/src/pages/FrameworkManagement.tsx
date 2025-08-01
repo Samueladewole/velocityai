@@ -228,7 +228,7 @@ export const FrameworkManagement: React.FC = () => {
   const quickStats: StatCard[] = [
     {
       label: 'Average Progress',
-      value: `${avgProgress}%`,
+      value: `€{avgProgress}%`,
       change: '+12%',
       trend: 'up',
       icon: <TrendingUp className="h-6 w-6 text-blue-600" />,
@@ -237,7 +237,7 @@ export const FrameworkManagement: React.FC = () => {
     },
     {
       label: 'Overlap Optimization',
-      value: `${overlapOptimization}%`,
+      value: `€{overlapOptimization}%`,
       change: '+8%',
       trend: 'up',
       icon: <Network className="h-6 w-6 text-green-600" />,
@@ -246,7 +246,7 @@ export const FrameworkManagement: React.FC = () => {
     },
     {
       label: 'Total Controls',
-      value: `${implementedControls}/${totalControls}`,
+      value: `€{implementedControls}/€{totalControls}`,
       change: '+15%',
       trend: 'up',
       icon: <Shield className="h-6 w-6 text-purple-600" />,
@@ -303,7 +303,7 @@ export const FrameworkManagement: React.FC = () => {
                   >
                     <CardHeader className="pb-4">
                       <div className="flex items-center justify-between mb-3">
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${framework.color} flex items-center justify-center`}>
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{framework.color} flex items-center justify-center`}>
                           <IconComponent className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex items-center gap-2">
@@ -356,7 +356,7 @@ export const FrameworkManagement: React.FC = () => {
     {
       id: 'mappings',
       label: 'Control Mappings',
-      badge: `${overlapOptimization}%`,
+      badge: `€{overlapOptimization}%`,
       content: (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -511,7 +511,7 @@ export const FrameworkManagement: React.FC = () => {
                           </div>
                           <div className="flex-1">
                             <div className="flex items-center gap-3 mb-2">
-                              <div className={`w-8 h-8 rounded-lg bg-gradient-to-r ${framework.color} flex items-center justify-center`}>
+                              <div className={`w-8 h-8 rounded-lg bg-gradient-to-r €{framework.color} flex items-center justify-center`}>
                                 <IconComponent className="h-4 w-4 text-white" />
                               </div>
                               <h4 className="font-semibold">{framework.name}</h4>

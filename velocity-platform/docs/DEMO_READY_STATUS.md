@@ -187,7 +187,7 @@ Scenario: "Fortune 500 Multi-Cloud Security Review"
 • Run live scan showing 146+ cloud resources  
 • Display 5 critical vulnerabilities with risk scores
 • Show AI-powered remediation recommendations
-• Calculate business impact: $7.2M total risk exposure
+• Calculate business impact: €7.2M total risk exposure
 Demo Impact: Executive-ready security intelligence
 ```
 
@@ -213,7 +213,7 @@ Demo Impact: Sales team can show quantified trust
 
 ### **Business Value Demonstration:**
 - **Live vulnerability detection:** 5 realistic security findings
-- **Risk quantification:** $7.2M exposure with remediation costs
+- **Risk quantification:** €7.2M exposure with remediation costs
 - **Trust scoring:** 8.7/10 security posture with ROI metrics
 - **Multi-cloud coverage:** 146 resources across AWS/Azure/GCP
 

@@ -257,7 +257,7 @@ Coverage: 91% of cloud functions
    - Scan 500+ AWS resources in 15 seconds
    - Detect 12 critical vulnerabilities
    - Generate AI-enhanced remediation plan
-   - Calculate $2.3M potential risk exposure
+   - Calculate €2.3M potential risk exposure
    - Demo Time: 5 minutes
    Result: Executive-ready demonstration validated
 ```

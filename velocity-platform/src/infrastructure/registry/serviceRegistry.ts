@@ -243,28 +243,28 @@ export class ERIPServiceRegistry {
     try {
       // Store in Redis with TTL
       await this.redis.setex(
-        `service:${serviceId}`,
+        `service:€{serviceId}`,
         Math.ceil(this.config.serviceTimeout / 1000),
         JSON.stringify(serviceInstance)
       )
       
       // Add to component index
-      await this.redis.sadd(`component:${service.component}`, serviceId)
+      await this.redis.sadd(`component:€{service.component}`, serviceId)
       
       // Add to region index
-      await this.redis.sadd(`region:${service.metadata.region}`, serviceId)
+      await this.redis.sadd(`region:€{service.metadata.region}`, serviceId)
       
       // Add to environment index
-      await this.redis.sadd(`environment:${service.metadata.environment}`, serviceId)
+      await this.redis.sadd(`environment:€{service.metadata.environment}`, serviceId)
       
       // Add capability indexes
       for (const capability of service.metadata.capabilities) {
-        await this.redis.sadd(`capability:${capability}`, serviceId)
+        await this.redis.sadd(`capability:€{capability}`, serviceId)
       }
       
       // Add tag indexes
       for (const [key, value] of Object.entries(service.metadata.tags)) {
-        await this.redis.sadd(`tag:${key}:${value}`, serviceId)
+        await this.redis.sadd(`tag:€{key}:€{value}`, serviceId)
       }
       
       // Clear cache
@@ -308,9 +308,9 @@ export class ERIPServiceRegistry {
     metadata?: Partial<ServiceInstance['metadata']>
   ): Promise<void> {
     try {
-      const serviceData = await this.redis.get(`service:${serviceId}`)
+      const serviceData = await this.redis.get(`service:€{serviceId}`)
       if (!serviceData) {
-        throw new Error(`Service ${serviceId} not found`)
+        throw new Error(`Service €{serviceId} not found`)
       }
       
       const service: ServiceInstance = JSON.parse(serviceData)
@@ -322,7 +322,7 @@ export class ERIPServiceRegistry {
       
       // Update with extended TTL
       await this.redis.setex(
-        `service:${serviceId}`,
+        `service:€{serviceId}`,
         Math.ceil(this.config.serviceTimeout / 1000),
         JSON.stringify(service)
       )
@@ -340,7 +340,7 @@ export class ERIPServiceRegistry {
    */
   async deregisterService(serviceId: string): Promise<void> {
     try {
-      const serviceData = await this.redis.get(`service:${serviceId}`)
+      const serviceData = await this.redis.get(`service:€{serviceId}`)
       if (!serviceData) {
         this.logger.warn('Attempted to deregister non-existent service', { serviceId })
         return
@@ -350,15 +350,15 @@ export class ERIPServiceRegistry {
       
       // Remove from all indexes
       await Promise.all([
-        this.redis.del(`service:${serviceId}`),
-        this.redis.srem(`component:${service.component}`, serviceId),
-        this.redis.srem(`region:${service.metadata.region}`, serviceId),
-        this.redis.srem(`environment:${service.metadata.environment}`, serviceId),
+        this.redis.del(`service:€{serviceId}`),
+        this.redis.srem(`component:€{service.component}`, serviceId),
+        this.redis.srem(`region:€{service.metadata.region}`, serviceId),
+        this.redis.srem(`environment:€{service.metadata.environment}`, serviceId),
         ...service.metadata.capabilities.map(cap => 
-          this.redis.srem(`capability:${cap}`, serviceId)
+          this.redis.srem(`capability:€{cap}`, serviceId)
         ),
         ...Object.entries(service.metadata.tags).map(([key, value]) =>
-          this.redis.srem(`tag:${key}:${value}`, serviceId)
+          this.redis.srem(`tag:€{key}:€{value}`, serviceId)
         )
       ])
       
@@ -405,7 +405,7 @@ export class ERIPServiceRegistry {
       let serviceIds: string[] = []
       
       if (query.component) {
-        serviceIds = await this.redis.smembers(`component:${query.component}`)
+        serviceIds = await this.redis.smembers(`component:€{query.component}`)
       } else {
         // Get all services if no component specified
         const keys = await this.redis.keys('service:*')
@@ -415,25 +415,25 @@ export class ERIPServiceRegistry {
       // Apply filters
       if (query.capabilities && query.capabilities.length > 0) {
         const capabilityIntersections = await Promise.all(
-          query.capabilities.map(cap => this.redis.smembers(`capability:${cap}`))
+          query.capabilities.map(cap => this.redis.smembers(`capability:€{cap}`))
         )
         serviceIds = this.intersectArrays([serviceIds, ...capabilityIntersections])
       }
       
       if (query.region) {
-        const regionServices = await this.redis.smembers(`region:${query.region}`)
+        const regionServices = await this.redis.smembers(`region:€{query.region}`)
         serviceIds = this.intersectArrays([serviceIds, regionServices])
       }
       
       if (query.environment) {
-        const envServices = await this.redis.smembers(`environment:${query.environment}`)
+        const envServices = await this.redis.smembers(`environment:€{query.environment}`)
         serviceIds = this.intersectArrays([serviceIds, envServices])
       }
       
       if (query.tags) {
         const tagIntersections = await Promise.all(
           Object.entries(query.tags).map(([key, value]) =>
-            this.redis.smembers(`tag:${key}:${value}`)
+            this.redis.smembers(`tag:€{key}:€{value}`)
           )
         )
         serviceIds = this.intersectArrays([serviceIds, ...tagIntersections])
@@ -442,7 +442,7 @@ export class ERIPServiceRegistry {
       // Get service details
       const services: ServiceInstance[] = []
       const pipeline = this.redis.pipeline()
-      serviceIds.forEach(id => pipeline.get(`service:${id}`))
+      serviceIds.forEach(id => pipeline.get(`service:€{id}`))
       
       const results = await pipeline.exec()
       
@@ -480,7 +480,7 @@ export class ERIPServiceRegistry {
    */
   async getService(serviceId: string): Promise<ServiceInstance | null> {
     try {
-      const serviceData = await this.redis.get(`service:${serviceId}`)
+      const serviceData = await this.redis.get(`service:€{serviceId}`)
       return serviceData ? JSON.parse(serviceData) : null
     } catch (error) {
       this.logger.error('Failed to get service', { serviceId, error })
@@ -502,7 +502,7 @@ export class ERIPServiceRegistry {
     try {
       const service = await this.getService(serviceId)
       if (!service) {
-        throw new Error(`Service ${serviceId} not found`)
+        throw new Error(`Service €{serviceId} not found`)
       }
       
       const fullHealthCheck: HealthCheck = {
@@ -518,19 +518,19 @@ export class ERIPServiceRegistry {
       
       // Store updated service
       await this.redis.setex(
-        `service:${serviceId}`,
+        `service:€{serviceId}`,
         Math.ceil(this.config.serviceTimeout / 1000),
         JSON.stringify(service)
       )
       
       // Store health check history
       await this.redis.lpush(
-        `health:${serviceId}`,
+        `health:€{serviceId}`,
         JSON.stringify(fullHealthCheck)
       )
       
       // Keep only last 50 health checks
-      await this.redis.ltrim(`health:${serviceId}`, 0, 49)
+      await this.redis.ltrim(`health:€{serviceId}`, 0, 49)
       
       this.clearCache()
       
@@ -560,7 +560,7 @@ export class ERIPServiceRegistry {
    */
   async getHealthHistory(serviceId: string, limit: number = 10): Promise<HealthCheck[]> {
     try {
-      const healthData = await this.redis.lrange(`health:${serviceId}`, 0, limit - 1)
+      const healthData = await this.redis.lrange(`health:€{serviceId}`, 0, limit - 1)
       return healthData.map(data => JSON.parse(data))
     } catch (error) {
       this.logger.error('Failed to get health history', { serviceId, error })
@@ -654,7 +654,7 @@ export class ERIPServiceRegistry {
       if (service.status === 'healthy') {
         service.status = 'degraded'
         await this.redis.setex(
-          `service:${service.id}`,
+          `service:€{service.id}`,
           Math.ceil(this.config.serviceTimeout / 1000),
           JSON.stringify(service)
         )
@@ -716,7 +716,7 @@ export class ERIPServiceRegistry {
     
     try {
       // Perform HTTP health check
-      const response = await fetch(`${service.protocol}://${service.host}:${service.port}${service.healthCheckUrl}`, {
+      const response = await fetch(`€{service.protocol}://€{service.host}:€{service.port}€{service.healthCheckUrl}`, {
         method: 'GET',
         timeout: 5000,
         headers: {
@@ -740,7 +740,7 @@ export class ERIPServiceRegistry {
           name: 'http_connectivity',
           status: isHealthy ? 'pass' : 'fail',
           responseTime,
-          message: isHealthy ? 'Service responding' : `HTTP ${response.status}: ${response.statusText}`
+          message: isHealthy ? 'Service responding' : `HTTP €{response.status}: €{response.statusText}`
         }
       ]
       
@@ -836,11 +836,11 @@ export class ERIPServiceRegistry {
   private generateServiceId(component: ERIPComponent, name: string): string {
     const timestamp = Date.now()
     const random = Math.random().toString(36).substr(2, 9)
-    return `${component}-${name}-${timestamp}-${random}`
+    return `€{component}-€{name}-€{timestamp}-€{random}`
   }
 
   private generateEventId(): string {
-    return `reg_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `reg_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

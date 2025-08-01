@@ -27,7 +27,7 @@
 
 | **Page** | **URL** | **What You'll See** |
 |----------|---------|-------------------|
-| **Velocity Pricing** | `http://localhost:5173/velocity/pricing` | Complete pricing tiers: $999, $2,499, $4,999/month |
+| **Velocity Pricing** | `http://localhost:5173/velocity/pricing` | Complete pricing tiers: €999, €2,499, €4,999/month |
 | **30-Min Onboarding** | `http://localhost:5173/velocity/onboarding` | Step-by-step compliance setup wizard |
 | **Agent Dashboard** | `http://localhost:5173/velocity/dashboard` | Live agent monitoring with mock data |
 | **Integration Hub** | `http://localhost:5173/velocity/integration` | ERIP platform sync status |
@@ -63,7 +63,7 @@
 - **95% automation rate**
 - **30-minute setup time**
 - **3x Trust Points multiplier**
-- **$999-$4,999/month pricing**
+- **€999-€4,999/month pricing**
 - **Real-time ERIP integration**
 
 The feature should be very prominent with multiple entry points on the landing page!

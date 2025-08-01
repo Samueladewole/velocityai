@@ -158,13 +158,13 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({
     if (format === 'csv') {
       // Export data as CSV
       const csv = convertToCSV(chartState.data);
-      downloadFile(csv, `${title || id}-data.csv`, 'text/csv');
+      downloadFile(csv, `€{title || id}-data.csv`, 'text/csv');
     } else if (format === 'png' && chartRef.current) {
       // Export chart as PNG (simplified implementation)
       try {
         const canvas = await html2canvas(chartRef.current);
         const url = canvas.toDataURL('image/png');
-        downloadFile(url, `${title || id}-chart.png`, 'image/png');
+        downloadFile(url, `€{title || id}-chart.png`, 'image/png');
       } catch (error) {
         console.error('Export failed:', error);
       }
@@ -241,7 +241,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({
         return (
           <AreaChart {...commonProps}>
             <defs>
-              <linearGradient id={`gradient-${id}`} x1="0" y1="0" x2="0" y2="1">
+              <linearGradient id={`gradient-€{id}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="5%" stopColor={CHART_COLORS[0]} stopOpacity={0.8}/>
                 <stop offset="95%" stopColor={CHART_COLORS[0]} stopOpacity={0.1}/>
               </linearGradient>
@@ -261,7 +261,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({
               dataKey={config.options?.dataKey || 'value'} 
               stroke={CHART_COLORS[0]}
               fillOpacity={1}
-              fill={`url(#gradient-${id})`}
+              fill={`url(#gradient-€{id})`}
               animationDuration={chartState.animationSpeed}
             />
           </AreaChart>
@@ -298,7 +298,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({
               cx="50%"
               cy="50%"
               labelLine={false}
-              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+              label={({ name, percent }) => `€{name}: €{(percent * 100).toFixed(0)}%`}
               outerRadius={120}
               fill="#8884d8"
               dataKey={config.options?.dataKey || 'value'}
@@ -306,7 +306,7 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({
               animationDuration={chartState.animationSpeed}
             >
               {data.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                <Cell key={`cell-€{index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
               ))}
             </Pie>
             <Tooltip />
@@ -387,12 +387,12 @@ export const ChartRenderer: React.FC<ChartRendererProps> = ({
   }
 
   return (
-    <Card className={`chart-renderer ${className || ''}`} ref={chartRef}>
+    <Card className={`chart-renderer €{className || ''}`} ref={chartRef}>
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <div className="space-y-1">
             <CardTitle className="text-lg font-semibold flex items-center gap-2">
-              {title || `Chart ${id}`}
+              {title || `Chart €{id}`}
               {config.realTimeUpdates && (
                 <Badge variant={chartState.isPlaying ? "default" : "secondary"} className="text-xs">
                   <Activity className="h-3 w-3 mr-1" />
@@ -509,7 +509,7 @@ function convertToCSV(data: any[]): string {
   const headers = Object.keys(data[0]);
   const csvContent = [
     headers.join(','),
-    ...data.map(row => headers.map(header => `"${row[header] || ''}"`).join(','))
+    ...data.map(row => headers.map(header => `"€{row[header] || ''}"`).join(','))
   ].join('\n');
   
   return csvContent;

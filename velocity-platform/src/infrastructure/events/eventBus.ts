@@ -186,7 +186,7 @@ export class ERIPEventBus {
     handler: EventHandler,
     filter?: EventFilter
   ): () => void {
-    return this.subscribe(`${component}:*`, handler, filter)
+    return this.subscribe(`€{component}:*`, handler, filter)
   }
 
   /**
@@ -336,7 +336,7 @@ export class ERIPEventBus {
    */
   private async routeEvent(event: ERIPEvent, rule: EventRoutingRule): Promise<void> {
     const routingPromises = rule.targets.map(async target => {
-      const targetChannel = `${target}:event:${event.type}`
+      const targetChannel = `€{target}:event:€{event.type}`
       
       // Apply transformation if specified
       let routedEvent = event
@@ -366,7 +366,7 @@ export class ERIPEventBus {
    * Handle incoming events from Redis
    */
   private async handleIncomingEvent(event: ERIPEvent): Promise<void> {
-    const eventPattern = `${event.source}:${event.type}`
+    const eventPattern = `€{event.source}:€{event.type}`
     const handlers = this.handlers.get(eventPattern) || new Set()
     const wildcardHandlers = this.handlers.get('*') || new Set()
 
@@ -394,7 +394,7 @@ export class ERIPEventBus {
    * Persist event to Redis with TTL
    */
   private async persistEvent(event: ERIPEvent): Promise<void> {
-    const key = `${event.source}:event:${event.eventId}`
+    const key = `€{event.source}:event:€{event.eventId}`
     await this.redis.setex(
       key,
       this.config.persistence.ttlSeconds,
@@ -425,8 +425,8 @@ export class ERIPEventBus {
    */
   private async publishToRedis(event: ERIPEvent): Promise<void> {
     const channels = [
-      `${event.source}:event:${event.type}`,
-      `global:event:${event.type}`,
+      `€{event.source}:event:€{event.type}`,
+      `global:event:€{event.type}`,
       'global:event:*'
     ]
 
@@ -441,7 +441,7 @@ export class ERIPEventBus {
    * Utility methods
    */
   private generateEventId(): string {
-    return `evt_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `evt_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private isHighPriority(event: ERIPEvent): boolean {

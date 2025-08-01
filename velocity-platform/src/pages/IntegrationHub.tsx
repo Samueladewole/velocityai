@@ -333,12 +333,12 @@ export const IntegrationHub: React.FC = () => {
       
       toast({
         title: 'Integration Connected',
-        description: `Successfully connected ${integration.name}`
+        description: `Successfully connected €{integration.name}`
       })
     } catch (error) {
       toast({
         title: 'Connection Failed',
-        description: `Failed to connect to ${integration.name}`,
+        description: `Failed to connect to €{integration.name}`,
         variant: 'destructive'
       })
     } finally {
@@ -357,7 +357,7 @@ export const IntegrationHub: React.FC = () => {
     
     toast({
       title: 'Integration Disconnected',
-      description: `${integration.name} has been disconnected`
+      description: `€{integration.name} has been disconnected`
     })
   }
 
@@ -369,9 +369,9 @@ export const IntegrationHub: React.FC = () => {
     const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60))
     
     if (diffInMinutes < 1) return 'Just now'
-    if (diffInMinutes < 60) return `${diffInMinutes}m ago`
-    if (diffInMinutes < 1440) return `${Math.floor(diffInMinutes / 60)}h ago`
-    return `${Math.floor(diffInMinutes / 1440)}d ago`
+    if (diffInMinutes < 60) return `€{diffInMinutes}m ago`
+    if (diffInMinutes < 1440) return `€{Math.floor(diffInMinutes / 60)}h ago`
+    return `€{Math.floor(diffInMinutes / 1440)}d ago`
   }
 
   return (

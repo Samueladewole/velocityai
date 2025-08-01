@@ -164,7 +164,7 @@ export class WorkflowOrchestrator {
       }),
       retryableErrors: ['TIMEOUT', 'CONNECTION_ERROR', 'TEMPORARY_FAILURE'],
       onRetry: (error, attempt) => {
-        this.logger.warn(`Retrying workflow step (attempt ${attempt})`, { error: error.message })
+        this.logger.warn(`Retrying workflow step (attempt €{attempt})`, { error: error.message })
       }
     }))
   }
@@ -331,7 +331,7 @@ export class WorkflowOrchestrator {
         points: this.calculateBreachResponsePoints(context, execution),
         source: 'workflow_orchestrator',
         category: 'intelligence',
-        description: `Proactive competitor breach response: ${context.breachId}`,
+        description: `Proactive competitor breach response: €{context.breachId}`,
         evidence: [workflowId],
         multiplier: context.severity === 'critical' ? 2.0 : 1.5
       })
@@ -494,7 +494,7 @@ export class WorkflowOrchestrator {
         points: 75,
         source: 'workflow_orchestrator',
         category: 'automation',
-        description: `Trust score generation for ${context.requestType}`,
+        description: `Trust score generation for €{context.requestType}`,
         evidence: [workflowId],
         multiplier: context.scope.shareableUrl ? 1.2 : 1.0
       })
@@ -574,7 +574,7 @@ export class WorkflowOrchestrator {
 
       // Publish step completion event for monitoring
       await this.eventBus.publish({
-        eventId: `workflow_step_${step.stepId}`,
+        eventId: `workflow_step_€{step.stepId}`,
         timestamp: step.endTime,
         type: 'workflow.step.completed',
         source: 'workflow_orchestrator' as any,
@@ -596,7 +596,7 @@ export class WorkflowOrchestrator {
 
       // Publish step failure event
       await this.eventBus.publish({
-        eventId: `workflow_step_error_${step.stepId}`,
+        eventId: `workflow_step_error_€{step.stepId}`,
         timestamp: step.endTime,
         type: 'workflow.step.failed',
         source: 'workflow_orchestrator' as any,
@@ -662,7 +662,7 @@ export class WorkflowOrchestrator {
     const actionFunction = actionMap[actionKey]
 
     if (!actionFunction) {
-      throw new Error(`Unknown action: ${actionKey} for component: ${step.component}`)
+      throw new Error(`Unknown action: €{actionKey} for component: €{step.component}`)
     }
 
     return await actionFunction()
@@ -877,7 +877,7 @@ export class WorkflowOrchestrator {
     return {
       presentation: {
         id: this.generatePresentationId(),
-        title: `Trust Score Report - ${new Date().toLocaleDateString()}`,
+        title: `Trust Score Report - €{new Date().toLocaleDateString()}`,
         sections: [
           {
             name: 'Executive Summary',
@@ -911,7 +911,7 @@ export class WorkflowOrchestrator {
     const shareableId = Math.random().toString(36).substr(2, 12)
     return {
       shareableUrl: {
-        url: `https://trust.erip.platform/share/${shareableId}`,
+        url: `https://trust.erip.platform/share/€{shareableId}`,
         id: shareableId,
         expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
         accessControl: input.accessControl,
@@ -1033,7 +1033,7 @@ export class WorkflowOrchestrator {
   private getWorkflowActions(execution: WorkflowExecution): string[] {
     return execution.steps
       .filter(s => s.status === 'completed')
-      .map(s => `${s.component}:${s.action}`)
+      .map(s => `€{s.component}:€{s.action}`)
   }
 
   private generateBreachResponseSummary(execution: WorkflowExecution): any {
@@ -1128,7 +1128,7 @@ export class WorkflowOrchestrator {
 
   private createWorkflowFallback(component: string): (error: Error) => Promise<any> {
     return async (error: Error) => {
-      this.logger.warn(`Using fallback for ${component}`, { error: error.message })
+      this.logger.warn(`Using fallback for €{component}`, { error: error.message })
       return {
         fallback: true,
         component,
@@ -1143,15 +1143,15 @@ export class WorkflowOrchestrator {
   }
 
   private generateWorkflowId(type: string): string {
-    return `workflow_${type}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `workflow_€{type}_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generateRequestId(): string {
-    return `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `req_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   private generatePresentationId(): string {
-    return `pres_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+    return `pres_€{Date.now()}_€{Math.random().toString(36).substr(2, 9)}`
   }
 
   /**

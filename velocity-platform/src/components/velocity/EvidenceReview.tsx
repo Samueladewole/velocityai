@@ -235,7 +235,7 @@ export const EvidenceReview: React.FC = () => {
   };
 
   const handleBulkAction = (action: string) => {
-    console.log(`Performing ${action} on items:`, Array.from(selectedItems));
+    console.log(`Performing €{action} on items:`, Array.from(selectedItems));
     // Implement bulk actions here
   };
 
@@ -254,7 +254,7 @@ export const EvidenceReview: React.FC = () => {
             variant="outline"
             className="flex items-center gap-2"
           >
-            <RefreshCw className={`w-4 h-4 ${isRefreshing ? 'animate-spin' : ''}`} />
+            <RefreshCw className={`w-4 h-4 €{isRefreshing ? 'animate-spin' : ''}`} />
             Refresh
           </Button>
           <Button className="bg-purple-600 hover:bg-purple-700">

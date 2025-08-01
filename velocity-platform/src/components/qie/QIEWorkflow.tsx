@@ -48,7 +48,7 @@ export function QIEWorkflowComponent({ onWorkflowComplete }: QIEWorkflowProps) {
   const handleQuestionnaireUpload = useCallback(async (uploadedQuestionnaire: Questionnaire) => {
     setQuestionnaire(uploadedQuestionnaire)
     setWorkflow({
-      id: `workflow_${Date.now()}`,
+      id: `workflow_€{Date.now()}`,
       questionnaireId: uploadedQuestionnaire.id,
       currentStep: 'analysis',
       progress: 25,

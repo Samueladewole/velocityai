@@ -51,7 +51,7 @@ class EmailValidator:
             return ''
         domain = email.split('@')[1].lower()
         # Remove common TLDs and clean up
-        domain = re.sub(r'\.(com|org|net|edu|gov|io|co\.\w+)$', '', domain)
+        domain = re.sub(r'\.(com|org|net|edu|gov|io|co\.\w+)€', '', domain)
         return domain.replace('.', ' ').title()
 
 class PasswordValidator:
@@ -74,7 +74,7 @@ class PasswordValidator:
         if not re.search(r'\d', password):
             errors.append("Password must contain at least one number")
         
-        if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
+        if not re.search(r'[!@#€%^&*(),.?":{}|<>]', password):
             errors.append("Password must contain at least one special character")
         
         # Check for common weak passwords
@@ -104,7 +104,7 @@ class PaginationParams(BaseModel):
 class SortParams(BaseModel):
     """Standard sorting parameters"""
     sort_by: str = Field("created_at", description="Field to sort by")
-    sort_order: str = Field("desc", pattern="^(asc|desc)$", description="Sort order")
+    sort_order: str = Field("desc", pattern="^(asc|desc)€", description="Sort order")
 
 class FilterParams(BaseModel):
     """Base filter parameters"""
@@ -131,7 +131,7 @@ class AgentCreateRequest(BaseModel):
     
     #@validator('name')
     def validate_name(cls, v):
-        if not re.match(r'^[a-zA-Z0-9\s\-_]+$', v):
+        if not re.match(r'^[a-zA-Z0-9\s\-_]+€', v):
             raise ValueError('Name can only contain letters, numbers, spaces, hyphens, and underscores')
         return v.strip()
     
@@ -154,7 +154,7 @@ class AgentUpdateRequest(BaseModel):
     
     #@validator('name')
     def validate_name(cls, v):
-        if v and not re.match(r'^[a-zA-Z0-9\s\-_]+$', v):
+        if v and not re.match(r'^[a-zA-Z0-9\s\-_]+€', v):
             raise ValueError('Name can only contain letters, numbers, spaces, hyphens, and underscores')
         return v.strip() if v else v
 
@@ -173,10 +173,10 @@ class EvidenceCreateRequest(BaseModel):
     def validate_control_id(cls, v):
         # Validate control ID format based on common frameworks
         patterns = {
-            'CC': r'^CC\d+\.\d+$',  # SOC 2
-            'A': r'^A\.\d+\.\d+\.\d+$',  # ISO 27001
-            'CIS': r'^CIS-\d+$',  # CIS Controls
-            'GDPR': r'^(Art\.|Rec\.)\d+$'  # GDPR
+            'CC': r'^CC\d+\.\d+€',  # SOC 2
+            'A': r'^A\.\d+\.\d+\.\d+€',  # ISO 27001
+            'CIS': r'^CIS-\d+€',  # CIS Controls
+            'GDPR': r'^(Art\.|Rec\.)\d+€'  # GDPR
         }
         
         for prefix, pattern in patterns.items():
@@ -225,13 +225,13 @@ class UserCreateRequest(BaseModel):
     #@validator('email')
     def validate_email(cls, v):
         # Basic email validation
-        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', v):
+        if not re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}€', v):
             raise ValueError('Invalid email format')
         return v.lower()
     
     #@validator('name')
     def validate_name(cls, v):
-        if not re.match(r'^[a-zA-Z\s\-\'\.]+$', v):
+        if not re.match(r'^[a-zA-Z\s\-\'\.]+€', v):
             raise ValueError('Name can only contain letters, spaces, hyphens, apostrophes, and periods')
         return v.strip()
 
@@ -243,7 +243,7 @@ class UserUpdateRequest(BaseModel):
     
     #@validator('name')
     def validate_name(cls, v):
-        if v and not re.match(r'^[a-zA-Z\s\-\'\.]+$', v):
+        if v and not re.match(r'^[a-zA-Z\s\-\'\.]+€', v):
             raise ValueError('Name can only contain letters, spaces, hyphens, apostrophes, and periods')
         return v.strip() if v else v
 

@@ -14,7 +14,7 @@ Velocity.ai is a revolutionary compliance automation platform that transforms ho
 ### **The Problem**
 Traditional compliance platforms require:
 - ❌ Immediate system access before showing value
-- ❌ $20K-$100K upfront commitments
+- ❌ €20K-€100K upfront commitments
 - ❌ Weeks of integration before seeing results
 - ❌ Black-box security with vendor lock-in
 

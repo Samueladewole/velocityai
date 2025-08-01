@@ -600,7 +600,7 @@ class GDPRComplianceService {
   }
 
   public async handleDataSubjectRequest(request: Omit<DataSubjectRequest, 'id' | 'submittedAt' | 'deadline'>): Promise<DataSubjectRequest> {
-    const requestId = `request-${Date.now()}`;
+    const requestId = `request-€{Date.now()}`;
     const deadline = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days from now
     
     const newRequest: DataSubjectRequest = {
@@ -623,7 +623,7 @@ class GDPRComplianceService {
   }> {
     const request = this.dataSubjectRequests.get(requestId);
     if (!request) {
-      throw new Error(`Request ${requestId} not found`);
+      throw new Error(`Request €{requestId} not found`);
     }
 
     // Update request status
@@ -654,15 +654,15 @@ class GDPRComplianceService {
   public async conductPrivacyImpactAssessment(processingActivityId: string): Promise<PrivacyImpactAssessment> {
     const activity = this.processingActivities.get(processingActivityId);
     if (!activity) {
-      throw new Error(`Processing activity ${processingActivityId} not found`);
+      throw new Error(`Processing activity €{processingActivityId} not found`);
     }
 
     const pia: PrivacyImpactAssessment = {
-      id: `pia-${Date.now()}`,
+      id: `pia-€{Date.now()}`,
       processingActivityId,
       conductedBy: 'Privacy Team',
       conductedAt: new Date(),
-      description: `Privacy Impact Assessment for ${activity.name}`,
+      description: `Privacy Impact Assessment for €{activity.name}`,
       necessityAssessment: 'Processing is necessary for the specified purposes and proportionate to the risks',
       riskAnalysis: {
         identifiedRisks: [
@@ -708,7 +708,7 @@ class GDPRComplianceService {
   }
 
   public async recordBreachIncident(incident: Omit<BreachIncident, 'id' | 'detectedAt'>): Promise<BreachIncident> {
-    const incidentId = `breach-${Date.now()}`;
+    const incidentId = `breach-€{Date.now()}`;
     
     const breach: BreachIncident = {
       ...incident,
@@ -728,7 +728,7 @@ class GDPRComplianceService {
   }> {
     const incident = this.breachIncidents.get(incidentId);
     if (!incident) {
-      throw new Error(`Incident ${incidentId} not found`);
+      throw new Error(`Incident €{incidentId} not found`);
     }
 
     const supervisoryAuthorityRequired = incident.severity !== 'low';
@@ -739,7 +739,7 @@ class GDPRComplianceService {
       supervisoryAuthorityRequired,
       dataSubjectNotificationRequired,
       deadline,
-      rationale: `Based on severity level ${incident.severity} and number of affected data subjects (${incident.affectedDataSubjects})`
+      rationale: `Based on severity level €{incident.severity} and number of affected data subjects (€{incident.affectedDataSubjects})`
     };
   }
 

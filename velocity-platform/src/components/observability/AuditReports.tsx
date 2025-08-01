@@ -89,7 +89,7 @@ export const AuditReports: React.FC<{ organizationId: string }> = ({ organizatio
   const generateAuditReport = async () => {
     setGenerating(true)
     try {
-      const reportId = `audit_${Date.now()}`
+      const reportId = `audit_€{Date.now()}`
       
       // Collect data for the report
       const auditTrail = observabilityCore.exportAuditTrail(organizationId, timeRange)
@@ -108,7 +108,7 @@ export const AuditReports: React.FC<{ organizationId: string }> = ({ organizatio
 
       const newReport: AuditReport = {
         id: reportId,
-        title: `${getReportTitle(reportType)} - ${new Date().toLocaleDateString()}`,
+        title: `€{getReportTitle(reportType)} - €{new Date().toLocaleDateString()}`,
         type: reportType,
         generatedAt: new Date(),
         timeRange,
@@ -173,8 +173,8 @@ export const AuditReports: React.FC<{ organizationId: string }> = ({ organizatio
       findings.push({
         severity: 'high',
         category: 'Compliance',
-        description: `Overall compliance score of ${complianceDashboard.overallScore.toFixed(1)}% is below recommended threshold of 80%`,
-        evidence: [`${complianceDashboard.criticalGaps.length} critical gaps identified`],
+        description: `Overall compliance score of €{complianceDashboard.overallScore.toFixed(1)}% is below recommended threshold of 80%`,
+        evidence: [`€{complianceDashboard.criticalGaps.length} critical gaps identified`],
         recommendation: 'Prioritize addressing critical compliance gaps',
         remediation: {
           steps: ['Review critical gaps', 'Develop remediation plan', 'Implement controls'],
@@ -188,8 +188,8 @@ export const AuditReports: React.FC<{ organizationId: string }> = ({ organizatio
       findings.push({
         severity: 'medium',
         category: 'AI Performance',
-        description: `AI agent confidence level of ${(avgConfidence * 100).toFixed(1)}% is below optimal threshold`,
-        evidence: [`Based on ${totalDecisions} decisions across ${agentMetrics.length} agents`],
+        description: `AI agent confidence level of €{(avgConfidence * 100).toFixed(1)}% is below optimal threshold`,
+        evidence: [`Based on €{totalDecisions} decisions across €{agentMetrics.length} agents`],
         recommendation: 'Review and optimize AI agent performance',
         remediation: {
           steps: ['Analyze low-confidence decisions', 'Retrain models', 'Update prompts'],
@@ -202,22 +202,22 @@ export const AuditReports: React.FC<{ organizationId: string }> = ({ organizatio
     return {
       title: 'Executive Summary',
       content: `
-This audit report covers the period from ${timeRange.start.toLocaleDateString()} to ${timeRange.end.toLocaleDateString()}.
+This audit report covers the period from €{timeRange.start.toLocaleDateString()} to €{timeRange.end.toLocaleDateString()}.
 
 **Key Metrics:**
-- Total AI decisions processed: ${totalDecisions.toLocaleString()}
-- Average AI confidence: ${(avgConfidence * 100).toFixed(1)}%
-- Overall compliance score: ${complianceDashboard.overallScore.toFixed(1)}%
-- Critical compliance gaps: ${complianceDashboard.criticalGaps.length}
-- System events logged: ${auditTrail.summary.totalEvents.toLocaleString()}
+- Total AI decisions processed: €{totalDecisions.toLocaleString()}
+- Average AI confidence: €{(avgConfidence * 100).toFixed(1)}%
+- Overall compliance score: €{complianceDashboard.overallScore.toFixed(1)}%
+- Critical compliance gaps: €{complianceDashboard.criticalGaps.length}
+- System events logged: €{auditTrail.summary.totalEvents.toLocaleString()}
 
 **Audit Scope:**
 This comprehensive audit examines AI decision-making processes, compliance adherence, and system operations to ensure transparency, accountability, and regulatory compliance.
       `,
       data: [
         { metric: 'AI Decisions', value: totalDecisions },
-        { metric: 'Avg Confidence', value: `${(avgConfidence * 100).toFixed(1)}%` },
-        { metric: 'Compliance Score', value: `${complianceDashboard.overallScore.toFixed(1)}%` },
+        { metric: 'Avg Confidence', value: `€{(avgConfidence * 100).toFixed(1)}%` },
+        { metric: 'Compliance Score', value: `€{complianceDashboard.overallScore.toFixed(1)}%` },
         { metric: 'Critical Gaps', value: complianceDashboard.criticalGaps.length }
       ],
       findings
@@ -233,10 +233,10 @@ This comprehensive audit examines AI decision-making processes, compliance adher
       findings.push({
         severity: 'medium',
         category: 'Decision Quality',
-        description: `${lowConfidenceDecisions.length} decisions (${((lowConfidenceDecisions.length / aiDecisions.length) * 100).toFixed(1)}%) had confidence below 70%`,
+        description: `€{lowConfidenceDecisions.length} decisions (€{((lowConfidenceDecisions.length / aiDecisions.length) * 100).toFixed(1)}%) had confidence below 70%`,
         evidence: [
-          `Decision IDs: ${lowConfidenceDecisions.slice(0, 5).map(d => d.id).join(', ')}...`,
-          `Most common agents: ${[...new Set(lowConfidenceDecisions.map(d => d.agentType))].join(', ')}`
+          `Decision IDs: €{lowConfidenceDecisions.slice(0, 5).map(d => d.id).join(', ')}...`,
+          `Most common agents: €{[...new Set(lowConfidenceDecisions.map(d => d.agentType))].join(', ')}`
         ],
         recommendation: 'Review and improve low-confidence decision patterns'
       })
@@ -252,10 +252,10 @@ This section provides detailed analysis of all AI decisions made during the audi
 Every AI decision is logged with complete context, reasoning, and confidence scores to ensure full auditability.
 
 **Quality Metrics:**
-- Total decisions: ${aiDecisions.length.toLocaleString()}
-- Average confidence: ${aiDecisions.length > 0 ? (aiDecisions.reduce((sum, d) => sum + d.confidence, 0) / aiDecisions.length * 100).toFixed(1) : 0}%
-- High confidence decisions (>80%): ${aiDecisions.filter(d => d.confidence > 0.8).length.toLocaleString()}
-- Low confidence decisions (<70%): ${lowConfidenceDecisions.length.toLocaleString()}
+- Total decisions: €{aiDecisions.length.toLocaleString()}
+- Average confidence: €{aiDecisions.length > 0 ? (aiDecisions.reduce((sum, d) => sum + d.confidence, 0) / aiDecisions.length * 100).toFixed(1) : 0}%
+- High confidence decisions (>80%): €{aiDecisions.filter(d => d.confidence > 0.8).length.toLocaleString()}
+- Low confidence decisions (<70%): €{lowConfidenceDecisions.length.toLocaleString()}
       `,
       data: aiDecisions.slice(0, 100).map(d => ({
         timestamp: d.timestamp,
@@ -277,8 +277,8 @@ Every AI decision is logged with complete context, reasoning, and confidence sco
         findings.push({
           severity: 'medium',
           category: 'Performance',
-          description: `${agent.agentType} has high average latency of ${agent.metrics.averageLatency}ms`,
-          evidence: [`Based on ${agent.metrics.totalDecisions} decisions`],
+          description: `€{agent.agentType} has high average latency of €{agent.metrics.averageLatency}ms`,
+          evidence: [`Based on €{agent.metrics.totalDecisions} decisions`],
           recommendation: 'Optimize agent performance to reduce response time'
         })
       }
@@ -291,12 +291,12 @@ Every AI decision is logged with complete context, reasoning, and confidence sco
 Analysis of AI agent performance metrics including latency, throughput, and quality scores.
 
 **Agent Comparison:**
-${agentComparison.comparison.map((agent, index) => 
-  `${index + 1}. ${agent.agentType} - Overall rank: ${agent.rank}`
+€{agentComparison.comparison.map((agent, index) => 
+  `€{index + 1}. €{agent.agentType} - Overall rank: €{agent.rank}`
 ).join('\n')}
 
 **Performance Recommendations:**
-${agentComparison.recommendations.join('\n- ')}
+€{agentComparison.recommendations.join('\n- ')}
       `,
       data: agentMetrics.map(m => ({
         agentType: m.agentType,
@@ -327,18 +327,18 @@ ${agentComparison.recommendations.join('\n- ')}
       title: 'Compliance Audit',
       content: `
 **Compliance Status:**
-Overall compliance score: ${complianceDashboard.overallScore.toFixed(1)}%
+Overall compliance score: €{complianceDashboard.overallScore.toFixed(1)}%
 
 **Framework Analysis:**
-${Object.entries(complianceDashboard.frameworkScores).map(([framework, score]) => 
-  `- ${framework}: ${(score as number).toFixed(1)}%`
+€{Object.entries(complianceDashboard.frameworkScores).map(([framework, score]) => 
+  `- €{framework}: €{(score as number).toFixed(1)}%`
 ).join('\n')}
 
 **Critical Gaps:**
-${complianceDashboard.criticalGaps.length} critical gaps require immediate attention.
+€{complianceDashboard.criticalGaps.length} critical gaps require immediate attention.
 
 **Recent Activity:**
-${complianceEvents.length} compliance events recorded during audit period.
+€{complianceEvents.length} compliance events recorded during audit period.
       `,
       data: complianceEvents.slice(0, 50).map(e => ({
         timestamp: e.timestamp,
@@ -387,8 +387,8 @@ This section documents compliance with applicable regulatory requirements.
       findings.push({
         severity: 'medium',
         category: 'System Health',
-        description: `High error rate detected: ${errorEvents.length} errors out of ${systemEvents.length} events`,
-        evidence: [`Error rate: ${((errorEvents.length / systemEvents.length) * 100).toFixed(2)}%`],
+        description: `High error rate detected: €{errorEvents.length} errors out of €{systemEvents.length} events`,
+        evidence: [`Error rate: €{((errorEvents.length / systemEvents.length) * 100).toFixed(2)}%`],
         recommendation: 'Investigate and resolve system errors'
       })
     }
@@ -397,18 +397,18 @@ This section documents compliance with applicable regulatory requirements.
       title: 'System Health Analysis',
       content: `
 **System Events Overview:**
-- Total events: ${systemEvents.length.toLocaleString()}
-- Error events: ${errorEvents.length.toLocaleString()}
+- Total events: €{systemEvents.length.toLocaleString()}
+- Error events: €{errorEvents.length.toLocaleString()}
 - System uptime: 99.9%
 - Performance metrics within acceptable ranges
 
 **Event Categories:**
-${Object.entries(
+€{Object.entries(
   systemEvents.reduce((acc, e) => {
     acc[e.type] = (acc[e.type] || 0) + 1
     return acc
   }, {} as Record<string, number>)
-).map(([type, count]) => `- ${type}: ${count}`).join('\n')}
+).map(([type, count]) => `- €{type}: €{count}`).join('\n')}
       `,
       data: systemEvents.slice(0, 100).map(e => ({
         timestamp: e.timestamp,
@@ -451,7 +451,7 @@ Analysis of security-related events and access patterns.
       findings.push({
         severity: 'high',
         category: 'Risk Management',
-        description: `High risk score of ${riskScore.toFixed(1)} identified`,
+        description: `High risk score of €{riskScore.toFixed(1)} identified`,
         evidence: [`Based on compliance gaps and system performance`],
         recommendation: 'Implement comprehensive risk mitigation strategy'
       })
@@ -463,11 +463,11 @@ Analysis of security-related events and access patterns.
 **Risk Analysis:**
 Comprehensive assessment of operational, compliance, and technical risks.
 
-**Risk Score:** ${riskScore.toFixed(1)}/100
+**Risk Score:** €{riskScore.toFixed(1)}/100
 
 **Key Risk Areas:**
-- Compliance gaps: ${complianceDashboard.criticalGaps.length} critical items
-- AI performance risks: ${agentMetrics.filter(m => m.metrics.averageConfidence < 0.7).length} underperforming agents
+- Compliance gaps: €{complianceDashboard.criticalGaps.length} critical items
+- AI performance risks: €{agentMetrics.filter(m => m.metrics.averageConfidence < 0.7).length} underperforming agents
 - System reliability: Monitored and within acceptable parameters
 
 **Mitigation Strategies:**
@@ -495,7 +495,7 @@ Comprehensive assessment of operational, compliance, and technical risks.
       content: `
 **Priority Recommendations:**
 
-${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
+€{recommendations.map((rec, index) => `€{index + 1}. €{rec}`).join('\n')}
 
 **Implementation Timeline:**
 - Immediate (0-30 days): Address critical compliance gaps
@@ -538,29 +538,29 @@ ${recommendations.map((rec, index) => `${index + 1}. ${rec}`).join('\n')}
   const exportReport = (report: AuditReport) => {
     // Generate exportable report content
     const reportContent = `
-# ${report.title}
+# €{report.title}
 
-**Generated:** ${report.generatedAt.toLocaleString()}  
-**Time Range:** ${report.timeRange.start.toLocaleDateString()} - ${report.timeRange.end.toLocaleDateString()}  
-**Organization:** ${report.organizationId}
+**Generated:** €{report.generatedAt.toLocaleString()}  
+**Time Range:** €{report.timeRange.start.toLocaleDateString()} - €{report.timeRange.end.toLocaleDateString()}  
+**Organization:** €{report.organizationId}
 
 ## Summary
-- Total Events: ${report.summary.totalEvents.toLocaleString()}
-- Critical Findings: ${report.summary.criticalFindings}
-- Compliance Score: ${report.summary.complianceScore.toFixed(1)}%
-- Recommendations: ${report.summary.recommendations}
+- Total Events: €{report.summary.totalEvents.toLocaleString()}
+- Critical Findings: €{report.summary.criticalFindings}
+- Compliance Score: €{report.summary.complianceScore.toFixed(1)}%
+- Recommendations: €{report.summary.recommendations}
 
-${report.sections.map(section => `
-## ${section.title}
+€{report.sections.map(section => `
+## €{section.title}
 
-${section.content}
+€{section.content}
 
-${section.findings.length > 0 ? `
+€{section.findings.length > 0 ? `
 ### Findings:
-${section.findings.map(f => `
-- **${f.severity.toUpperCase()}** (${f.category}): ${f.description}
-  - Evidence: ${f.evidence.join(', ')}
-  - Recommendation: ${f.recommendation}
+€{section.findings.map(f => `
+- **€{f.severity.toUpperCase()}** (€{f.category}): €{f.description}
+  - Evidence: €{f.evidence.join(', ')}
+  - Recommendation: €{f.recommendation}
 `).join('')}
 ` : ''}
 `).join('')}
@@ -574,7 +574,7 @@ ${section.findings.map(f => `
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `${report.title.replace(/\s+/g, '_')}.md`
+    a.download = `€{report.title.replace(/\s+/g, '_')}.md`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)
@@ -723,7 +723,7 @@ ${section.findings.map(f => `
                       {section.findings.map((finding, fidx) => (
                         <div key={fidx} className="pl-4 border-l-2 border-gray-200">
                           <div className="flex items-start space-x-2">
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getSeverityColor(finding.severity)}`}>
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium €{getSeverityColor(finding.severity)}`}>
                               {finding.severity.toUpperCase()}
                             </span>
                             <div className="flex-1">

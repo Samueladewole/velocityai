@@ -266,7 +266,7 @@ class RedisStreamProcessor(StreamProcessor):
         try:
             # Read from stream
             messages = await self.redis_client.xread(
-                {topic: '$'},
+                {topic: '€'},
                 count=1,
                 block=int(timeout * 1000) if timeout else 0
             )

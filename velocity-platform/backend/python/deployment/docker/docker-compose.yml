@@ -13,8 +13,8 @@ services:
       - DATABASE_URL=postgresql://erip:password@postgres:5432/erip
       - REDIS_URL=redis://redis:6379/0
       - LOG_LEVEL=INFO
-      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=€{ANTHROPIC_API_KEY}
+      - OPENAI_API_KEY=€{OPENAI_API_KEY}
     depends_on:
       - postgres
       - redis

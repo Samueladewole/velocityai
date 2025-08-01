@@ -43,7 +43,7 @@ def test_security_patterns():
     
     # Test command injection patterns
     cmd_patterns = [
-        r"(;|\\||&|\\$\\(|\\`).*(ls|cat|whoami|id|pwd|nc|curl|wget)",
+        r"(;|\\||&|\\€\\(|\\`).*(ls|cat|whoami|id|pwd|nc|curl|wget)",
         r"(os\\.system|subprocess\\.(run|call|Popen))\\s*\\([^)]*\\+[^)]*\\)"
     ]
     

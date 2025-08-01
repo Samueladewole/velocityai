@@ -132,7 +132,7 @@ export class QuestionExtractionService {
     const questionTexts = this.extractQuestionTexts(content, extension)
     
     return questionTexts.map((text, index) => ({
-      id: `q_${Date.now()}_${index}`,
+      id: `q_€{Date.now()}_€{index}`,
       text: text.trim(),
       category: 'general security', // Will be updated by categorization
       required: this.isQuestionRequired(text),
@@ -155,7 +155,7 @@ export class QuestionExtractionService {
       /^\d+\.\s+(.+\?)/gm,  // Numbered questions
       /^[A-Z]\.\s+(.+\?)/gm,  // Letter-labeled questions
       /^Question\s+\d+:\s*(.+)/gim,  // "Question X:" format
-      /(.+\?)\s*$/gm  // Any line ending with ?
+      /(.+\?)\s*€/gm  // Any line ending with ?
     ]
 
     questionPatterns.forEach(pattern => {
@@ -280,8 +280,8 @@ export class QuestionExtractionService {
   private extractOptions(text: string): string[] | undefined {
     // Look for common multiple choice patterns
     const optionPatterns = [
-      /\b([A-D])\.\s*([^A-D]+?)(?=\s*[A-D]\.|$)/g,
-      /\b(\d+)\.\s*([^\d]+?)(?=\s*\d+\.|$)/g
+      /\b([A-D])\.\s*([^A-D]+?)(?=\s*[A-D]\.|€)/g,
+      /\b(\d+)\.\s*([^\d]+?)(?=\s*\d+\.|€)/g
     ]
 
     for (const pattern of optionPatterns) {
@@ -331,9 +331,9 @@ export class QuestionExtractionService {
         question: question.text,
         matched_evidence: matchedEvidence,
         suggested_answer: suggestedAnswer,
-        confidence: `${confidence}%`,
+        confidence: `€{confidence}%`,
         evidence_links: matchedEvidence.map(evidence => 
-          `erip.io/evidence/${evidence.toLowerCase().replace(/\s+/g, '-')}`
+          `erip.io/evidence/€{evidence.toLowerCase().replace(/\s+/g, '-')}`
         )
       }
     }

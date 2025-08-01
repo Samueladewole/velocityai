@@ -8,7 +8,7 @@ const caseStudies = [
     company: 'TechCorp Solutions',
     industry: 'SaaS',
     size: '500 employees',
-    revenue: '$50M ARR',
+    revenue: '€50M ARR',
     challenge: 'First-time SOC 2 Type II certification blocking enterprise deals',
     framework: 'SOC 2 Type II',
     timeline: '6 weeks',
@@ -16,17 +16,17 @@ const caseStudies = [
     color: 'emerald',
     metrics: {
       implementationTime: { before: '12 months', after: '6 weeks', improvement: '95%' },
-      cost: { before: '$280K', after: '$85K', improvement: '70%' },
+      cost: { before: '€280K', after: '€85K', improvement: '70%' },
       automationRate: '95%',
       dealVelocity: '+120%',
-      revenueImpact: '+$8.5M',
+      revenueImpact: '+€8.5M',
       trustScore: '94/100'
     },
     results: [
       'Achieved SOC 2 Type II certification in 6 weeks vs industry average of 12 months',
       'Reduced compliance costs by 70% through AI automation',
       'Accelerated enterprise deal closure by 120%',
-      'Generated $8.5M in additional revenue within 12 months',
+      'Generated €8.5M in additional revenue within 12 months',
       'Maintained 95% automation rate for ongoing compliance'
     ],
     testimonial: {
@@ -40,7 +40,7 @@ const caseStudies = [
     company: 'MedFlow Analytics',
     industry: 'Healthcare Technology',
     size: '250 employees',
-    revenue: '$25M ARR',
+    revenue: '€25M ARR',
     challenge: 'HIPAA compliance for AI-powered medical analytics platform',
     framework: 'HIPAA + SOC 2',
     timeline: '8 weeks',
@@ -48,7 +48,7 @@ const caseStudies = [
     color: 'blue',
     metrics: {
       implementationTime: { before: '18 months', after: '8 weeks', improvement: '89%' },
-      cost: { before: '$320K', after: '$95K', improvement: '70%' },
+      cost: { before: '€320K', after: '€95K', improvement: '70%' },
       automationRate: '91%',
       auditPrep: '2 weeks vs 6 months',
       riskReduction: '85%',
@@ -83,7 +83,7 @@ const CaseStudyCard: React.FC<{
 
   return (
     <div
-      className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300 cursor-pointer transform hover:scale-105 ${colorClasses[study.color as keyof typeof colorClasses]}`}
+      className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border transition-all duration-300 cursor-pointer transform hover:scale-105 €{colorClasses[study.color as keyof typeof colorClasses]}`}
       onClick={onClick}
     >
       <div className="flex items-start justify-between mb-4">
@@ -160,7 +160,7 @@ const CaseStudies: React.FC<{ searchTerm?: string; selectedCategory?: string }> 
             <div className="text-slate-400 text-sm">Average Automation Rate</div>
           </div>
           <div>
-            <div className="text-3xl font-bold text-emerald-400 mb-2">$23M</div>
+            <div className="text-3xl font-bold text-emerald-400 mb-2">€23M</div>
             <div className="text-slate-400 text-sm">Total Revenue Impact</div>
           </div>
         </div>

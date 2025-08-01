@@ -225,9 +225,9 @@ export const ATLAS: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -414,7 +414,7 @@ export const ATLAS: React.FC = () => {
                         </td>
                         <td className="py-3 px-4 text-center">
                           <Badge 
-                            className={`${
+                            className={`€{
                               vuln.priority === 'Critical' ? 'bg-red-100 text-red-700' :
                               vuln.priority === 'High' ? 'bg-orange-100 text-orange-700' :
                               vuln.priority === 'Medium' ? 'bg-yellow-100 text-yellow-700' :
@@ -460,8 +460,8 @@ export const ATLAS: React.FC = () => {
                     <AreaChart data={costComparison}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
-                      <YAxis tickFormatter={(value) => `${(value/1000000).toFixed(1)}M`} />
-                      <Tooltip formatter={(value) => [`€${(Number(value)/1000000).toFixed(1)}M`, '']} />
+                      <YAxis tickFormatter={(value) => `€{(value/1000000).toFixed(1)}M`} />
+                      <Tooltip formatter={(value) => [`€€{(Number(value)/1000000).toFixed(1)}M`, '']} />
                       <Area 
                         type="monotone" 
                         dataKey="traditional" 

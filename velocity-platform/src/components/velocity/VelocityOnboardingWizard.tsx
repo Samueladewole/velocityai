@@ -351,7 +351,7 @@ const VelocityOnboardingWizard: React.FC = () => {
     selectedPlatforms.forEach(platform => {
       selectedFrameworks.forEach(framework => {
         configs.push({
-          name: `${platform.name} ${framework.name} Agent`,
+          name: `€{platform.name} €{framework.name} Agent`,
           platform: platform.id,
           framework: framework.id,
           schedule: 'Every 4 hours',
@@ -495,7 +495,7 @@ const VelocityOnboardingWizard: React.FC = () => {
               {platforms.map(platform => (
                 <div 
                   key={platform.id}
-                  className={`border-2 rounded-lg p-6 transition-all cursor-pointer ${
+                  className={`border-2 rounded-lg p-6 transition-all cursor-pointer €{
                     platform.selected 
                       ? 'border-blue-500 bg-blue-50' 
                       : 'border-gray-200 hover:border-gray-300'
@@ -560,7 +560,7 @@ const VelocityOnboardingWizard: React.FC = () => {
               {frameworks.map(framework => (
                 <div 
                   key={framework.id}
-                  className={`border-2 rounded-lg p-4 transition-all cursor-pointer ${
+                  className={`border-2 rounded-lg p-4 transition-all cursor-pointer €{
                     framework.selected 
                       ? 'border-green-500 bg-green-50' 
                       : 'border-gray-200 hover:border-gray-300'
@@ -614,7 +614,7 @@ const VelocityOnboardingWizard: React.FC = () => {
                       <Bot className="w-5 h-5 text-purple-600" />
                       <h3 className="font-semibold text-gray-900">{agent.name}</h3>
                     </div>
-                    <span className={`px-2 py-1 text-xs rounded-full ${
+                    <span className={`px-2 py-1 text-xs rounded-full €{
                       agent.priority === 'high' ? 'bg-red-100 text-red-800' :
                       agent.priority === 'medium' ? 'bg-yellow-100 text-yellow-800' :
                       'bg-green-100 text-green-800'
@@ -819,7 +819,7 @@ const VelocityOnboardingWizard: React.FC = () => {
           <div className="flex items-center space-x-2">
             {steps.map((step, index) => (
               <div key={step.id} className="flex items-center">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium ${
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium €{
                   index < currentStep 
                     ? 'bg-green-600 text-white' 
                     : index === currentStep 
@@ -833,7 +833,7 @@ const VelocityOnboardingWizard: React.FC = () => {
                   )}
                 </div>
                 {index < steps.length - 1 && (
-                  <div className={`w-16 h-1 mx-2 ${
+                  <div className={`w-16 h-1 mx-2 €{
                     index < currentStep ? 'bg-green-600' : 'bg-gray-200'
                   }`} />
                 )}

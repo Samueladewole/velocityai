@@ -401,7 +401,7 @@ export const IndustryCertifications: React.FC = () => {
                     <CardHeader>
                       <div className="flex items-start justify-between">
                         <div className="flex items-center gap-3">
-                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br ${
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center bg-gradient-to-br €{
                             cert.id === 'TISAX' ? 'from-blue-500 to-indigo-600' :
                             cert.id === 'ISO27701' ? 'from-purple-500 to-violet-600' :
                             cert.id === 'SOC2' ? 'from-green-500 to-emerald-600' :
@@ -755,7 +755,7 @@ export const IndustryCertifications: React.FC = () => {
                   <div className="space-y-8">
                     {certificationPhases.map((phase, index) => (
                       <div key={phase.id} className="flex items-start gap-4">
-                        <div className={`w-16 h-16 rounded-full flex items-center justify-center relative z-10 ${
+                        <div className={`w-16 h-16 rounded-full flex items-center justify-center relative z-10 €{
                           phase.status === 'completed' ? 'bg-green-100' :
                           phase.status === 'in_progress' ? 'bg-blue-100' :
                           'bg-slate-100'
@@ -791,7 +791,7 @@ export const IndustryCertifications: React.FC = () => {
                             <p className="text-sm font-medium text-slate-700">Key Deliverables:</p>
                             {phase.keyDeliverables.map((deliverable, idx) => (
                               <div key={idx} className="flex items-center gap-2 text-sm text-slate-600">
-                                <CheckCircle className={`h-3 w-3 ${
+                                <CheckCircle className={`h-3 w-3 €{
                                   phase.status === 'completed' ? 'text-green-500' : 'text-slate-400'
                                 }`} />
                                 {deliverable}
@@ -892,7 +892,7 @@ export const IndustryCertifications: React.FC = () => {
                           </div>
                           <div>
                             <p className="text-slate-600">Cost Reduction</p>
-                            <p className="font-medium">${(savings * 1200).toLocaleString()}</p>
+                            <p className="font-medium">€{(savings * 1200).toLocaleString()}</p>
                           </div>
                           <div>
                             <p className="text-slate-600">Accuracy</p>

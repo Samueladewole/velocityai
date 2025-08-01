@@ -56,7 +56,7 @@ Velocity transforms manual quarterly compliance processes into continuous, autom
 ## 📊 Business Impact
 
 - **90% Time Reduction** - From quarterly manual processes to continuous automation
-- **$15,500+ Cost Savings** - Per customer in first 30 days
+- **€15,500+ Cost Savings** - Per customer in first 30 days
 - **95%+ Automation Rate** - Minimal manual oversight required
 - **22+ Point Trust Score Improvement** - Measurable compliance enhancement
 

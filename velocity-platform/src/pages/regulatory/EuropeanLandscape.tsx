@@ -421,11 +421,11 @@ export const EuropeanLandscape: React.FC = () => {
               .map((regulation, index) => (
               <div key={regulation.id} className="flex gap-4">
                 <div className="flex flex-col items-center">
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center €{
                     regulation.status === 'active' ? 'bg-green-100' :
                     regulation.status === 'upcoming' ? 'bg-blue-100' : 'bg-gray-100'
                   }`}>
-                    <div className={`w-3 h-3 rounded-full ${
+                    <div className={`w-3 h-3 rounded-full €{
                       regulation.status === 'active' ? 'bg-green-600' :
                       regulation.status === 'upcoming' ? 'bg-blue-600' : 'bg-gray-600'
                     }`} />
@@ -436,7 +436,7 @@ export const EuropeanLandscape: React.FC = () => {
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-semibold text-slate-900">{regulation.name}</h4>
                     <div className="flex items-center gap-2">
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getStatusBadge(regulation.status)}`}>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium border €{getStatusBadge(regulation.status)}`}>
                         {regulation.status}
                       </span>
                       <span className="text-sm text-slate-500">
@@ -523,7 +523,7 @@ export const EuropeanLandscape: React.FC = () => {
         {euRegulations.map((regulation) => (
           <Card 
             key={regulation.id}
-            className={`cursor-pointer transition-all hover:shadow-lg ${
+            className={`cursor-pointer transition-all hover:shadow-lg €{
               selectedRegulation === regulation.id ? 'ring-2 ring-blue-500' : ''
             }`}
             onClick={() => setSelectedRegulation(
@@ -540,13 +540,13 @@ export const EuropeanLandscape: React.FC = () => {
                   <CardDescription>{regulation.description}</CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium border ${getStatusBadge(regulation.status)}`}>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium border €{getStatusBadge(regulation.status)}`}>
                     {regulation.status}
                   </span>
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${getComplexityBadge(regulation.complexityLevel)}`}>
+                  <span className={`px-2 py-1 rounded text-xs font-medium €{getComplexityBadge(regulation.complexityLevel)}`}>
                     {regulation.complexityLevel} complexity
                   </span>
-                  <span className={`px-2 py-1 rounded text-xs font-medium ${getImpactBadge(regulation.impact)}`}>
+                  <span className={`px-2 py-1 rounded text-xs font-medium €{getImpactBadge(regulation.impact)}`}>
                     {regulation.impact} impact
                   </span>
                 </div>
@@ -598,7 +598,7 @@ export const EuropeanLandscape: React.FC = () => {
                 <div className="flex gap-3 pt-4 border-t">
                   <Button 
                     size="sm"
-                    onClick={() => navigate(`/tools/compass?regulation=${regulation.id}`)}
+                    onClick={() => navigate(`/tools/compass?regulation=€{regulation.id}`)}
                   >
                     <Target className="h-4 w-4 mr-2" />
                     Assess Compliance
@@ -632,7 +632,7 @@ export const EuropeanLandscape: React.FC = () => {
         {industryMappings.map((industry) => (
           <Card 
             key={industry.industry}
-            className={`cursor-pointer transition-all hover:shadow-lg ${
+            className={`cursor-pointer transition-all hover:shadow-lg €{
               selectedIndustry === industry.industry ? 'ring-2 ring-green-500' : ''
             }`}
             onClick={() => setSelectedIndustry(
@@ -650,7 +650,7 @@ export const EuropeanLandscape: React.FC = () => {
                     </CardDescription>
                   </div>
                 </div>
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${getRiskBadge(industry.riskProfile)}`}>
+                <span className={`px-3 py-1 rounded-full text-sm font-medium €{getRiskBadge(industry.riskProfile)}`}>
                   {industry.riskProfile} risk
                 </span>
               </div>
@@ -667,7 +667,7 @@ export const EuropeanLandscape: React.FC = () => {
                         return regulation ? (
                           <div key={regId} className="flex items-center justify-between p-2 bg-slate-50 rounded">
                             <span className="font-medium text-slate-900">{regulation.name}</span>
-                            <span className={`px-2 py-1 rounded text-xs ${getStatusBadge(regulation.status)}`}>
+                            <span className={`px-2 py-1 rounded text-xs €{getStatusBadge(regulation.status)}`}>
                               {regulation.status}
                             </span>
                           </div>
@@ -704,7 +704,7 @@ export const EuropeanLandscape: React.FC = () => {
                 <div className="flex gap-3 pt-4 border-t">
                   <Button 
                     size="sm"
-                    onClick={() => navigate(`/tools/compass?industry=${industry.industry.toLowerCase().replace(' ', '-')}`)}
+                    onClick={() => navigate(`/tools/compass?industry=€{industry.industry.toLowerCase().replace(' ', '-')}`)}
                   >
                     <Brain className="h-4 w-4 mr-2" />
                     Start Assessment

@@ -96,7 +96,7 @@ const EvidenceAutomation: React.FC = () => {
       source: "Core Banking",
       type: "Transaction Log",
       category: "Processing Controls",
-      description: "Daily transaction processing validation - $2.4M processed",
+      description: "Daily transaction processing validation - €2.4M processed",
       controlId: "ISAE-CC6.1"
     },
     {
@@ -120,7 +120,7 @@ const EvidenceAutomation: React.FC = () => {
       source: "Payment System",
       type: "Settlement Record",
       category: "Operational Controls",
-      description: "SWIFT payment settlement - $890K processed securely",
+      description: "SWIFT payment settlement - €890K processed securely",
       controlId: "ISAE-CC8.1"
     },
     {
@@ -287,7 +287,7 @@ const EvidenceAutomation: React.FC = () => {
               {demoSteps.map((step, index) => (
                 <div
                   key={index}
-                  className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 ${
+                  className={`flex items-center gap-3 p-3 rounded-lg transition-all duration-300 €{
                     index <= currentStep
                       ? 'bg-emerald-500/10 border border-emerald-500/20'
                       : 'bg-white/5 border border-white/10'
@@ -300,7 +300,7 @@ const EvidenceAutomation: React.FC = () => {
                   ) : (
                     <div className="w-5 h-5 rounded-full border-2 border-slate-600"></div>
                   )}
-                  <span className={`${index <= currentStep ? 'text-emerald-400' : 'text-slate-400'}`}>
+                  <span className={`€{index <= currentStep ? 'text-emerald-400' : 'text-slate-400'}`}>
                     {step}
                   </span>
                 </div>
@@ -372,12 +372,12 @@ const EvidenceAutomation: React.FC = () => {
                 <div className="h-80 overflow-y-auto">
                   {evidenceItems.map((item, index) => (
                     <div
-                      key={`${item.id}-${index}`}
+                      key={`€{item.id}-€{index}`}
                       className="p-4 border-b border-white/5 hover:bg-white/5 transition-colors animate-fadeIn"
                     >
                       <div className="flex items-start justify-between mb-2">
                         <h4 className="text-white text-sm font-medium">{item.id}</h4>
-                        <span className={`px-2 py-1 rounded-full text-xs ${
+                        <span className={`px-2 py-1 rounded-full text-xs €{
                           item.status === 'completed' ? 'bg-emerald-500/20 text-emerald-400' :
                           item.status === 'validating' ? 'bg-amber-500/20 text-amber-400' :
                           item.status === 'collecting' ? 'bg-blue-500/20 text-blue-400' :

@@ -50,8 +50,8 @@ class VelocityBillingService:
         self.tier_configs = {
             VelocityTier.STARTER: TierConfig(
                 name="Velocity Starter",
-                monthly_price=99900,  # $999.00
-                annual_price=959904,  # $9,599.04 (20% discount)
+                monthly_price=99900,  # €999.00
+                annual_price=959904,  # €9,599.04 (20% discount)
                 max_users=5,
                 max_frameworks=2,
                 max_evidence_items=1000,
@@ -65,8 +65,8 @@ class VelocityBillingService:
             ),
             VelocityTier.GROWTH: TierConfig(
                 name="Velocity Growth", 
-                monthly_price=249900,  # $2,499.00
-                annual_price=2399904,  # $23,999.04 (20% discount)
+                monthly_price=249900,  # €2,499.00
+                annual_price=2399904,  # €23,999.04 (20% discount)
                 max_users=15,
                 max_frameworks=4, 
                 max_evidence_items=5000,
@@ -81,8 +81,8 @@ class VelocityBillingService:
             ),
             VelocityTier.SCALE: TierConfig(
                 name="Velocity Scale",
-                monthly_price=499900,  # $4,999.00  
-                annual_price=4799904,  # $47,999.04 (20% discount)
+                monthly_price=499900,  # €4,999.00  
+                annual_price=4799904,  # €47,999.04 (20% discount)
                 max_users=-1,  # unlimited
                 max_frameworks=-1,  # all
                 max_evidence_items=50000,
@@ -322,11 +322,11 @@ class VelocityBillingService:
         
         # Define overage pricing (in cents)
         overage_pricing = {
-            'users': 5000,        # $50 per additional user
-            'frameworks': 10000,   # $100 per additional framework
-            'evidence_items': 5,   # $0.05 per additional evidence item
-            'api_calls': 1,        # $0.01 per additional API call
-            'storage_gb': 200      # $2 per additional GB
+            'users': 5000,        # €50 per additional user
+            'frameworks': 10000,   # €100 per additional framework
+            'evidence_items': 5,   # €0.05 per additional evidence item
+            'api_calls': 1,        # €0.01 per additional API call
+            'storage_gb': 200      # €2 per additional GB
         }
         
         for resource, data in usage_check['limits'].items():

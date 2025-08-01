@@ -69,10 +69,10 @@ const CompetitiveAdvantageShowcase: React.FC = () => {
     },
     {
       feature: 'Annual Platform Cost',
-      velocity: '$120K',
-      competitor1: '$200K+',
-      competitor2: '$180K+',
-      competitor3: '$250K+',
+      velocity: '€120K',
+      competitor1: '€200K+',
+      competitor2: '€180K+',
+      competitor3: '€250K+',
       advantage: '40% more cost-effective'
     },
     {
@@ -273,14 +273,14 @@ const CompetitiveAdvantageShowcase: React.FC = () => {
                     <div className="flex items-center space-x-3 mb-6">
                       <div className="text-3xl">{advantage.icon}</div>
                       <div>
-                        <h3 className={`text-xl font-bold bg-gradient-to-r ${gradientColors[advantage.color as keyof typeof gradientColors]} bg-clip-text text-transparent`}>
+                        <h3 className={`text-xl font-bold bg-gradient-to-r €{gradientColors[advantage.color as keyof typeof gradientColors]} bg-clip-text text-transparent`}>
                           {advantage.title}
                         </h3>
                         <p className="text-slate-400 text-sm mt-1">{advantage.description}</p>
                       </div>
                     </div>
                     
-                    <div className={`text-lg font-bold bg-gradient-to-r ${gradientColors[advantage.color as keyof typeof gradientColors]} bg-clip-text text-transparent mb-4`}>
+                    <div className={`text-lg font-bold bg-gradient-to-r €{gradientColors[advantage.color as keyof typeof gradientColors]} bg-clip-text text-transparent mb-4`}>
                       {advantage.impact}
                     </div>
                     

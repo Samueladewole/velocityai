@@ -338,14 +338,14 @@ export const PolicyManagement: React.FC = () => {
           />
           <StatCard
             title="Published"
-            value={`${publishedPolicies}/${totalPolicies}`}
+            value={`€{publishedPolicies}/€{totalPolicies}`}
             icon={CheckCircle}
             trend={{ value: 8, isPositive: true }}
             className="bg-gradient-to-br from-green-50 to-green-100 border-green-200"
           />
           <StatCard
             title="Acknowledgment Rate"
-            value={`${averageAcknowledgment}%`}
+            value={`€{averageAcknowledgment}%`}
             icon={Users}
             trend={{ value: 5, isPositive: true }}
             className="bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200"
@@ -413,7 +413,7 @@ export const PolicyManagement: React.FC = () => {
                   >
                     <CardHeader className="pb-4">
                       <div className="flex items-start justify-between mb-3">
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${categoryColor} flex items-center justify-center`}>
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{categoryColor} flex items-center justify-center`}>
                           <IconComponent className="h-6 w-6 text-white" />
                         </div>
                         <div className="flex items-center gap-2">
@@ -513,7 +513,7 @@ export const PolicyManagement: React.FC = () => {
                   <Card key={template.id} className="cursor-pointer transition-all duration-200 hover:shadow-xl hover:scale-105 border-slate-200">
                     <CardHeader className="pb-4">
                       <div className="flex items-center justify-between mb-3">
-                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${template.color} flex items-center justify-center`}>
+                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-r €{template.color} flex items-center justify-center`}>
                           <IconComponent className="h-6 w-6 text-white" />
                         </div>
                         <Badge variant="outline" className="text-xs">
@@ -617,7 +617,7 @@ export const PolicyManagement: React.FC = () => {
                             </div>
                             <div className="text-right">
                               <div className="text-sm font-medium">
-                                {daysUntilReview > 0 ? `${daysUntilReview} days` : 'Overdue'}
+                                {daysUntilReview > 0 ? `€{daysUntilReview} days` : 'Overdue'}
                               </div>
                               <div className="text-xs text-slate-500">
                                 {new Date(policy.nextReview).toLocaleDateString()}

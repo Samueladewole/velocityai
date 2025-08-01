@@ -92,7 +92,7 @@ export const useNotificationStore = create<NotificationState>()(
           ...state.notifications,
           {
             ...notification,
-            id: `notif_${Date.now()}`,
+            id: `notif_€{Date.now()}`,
             timestamp: new Date(),
           },
         ],

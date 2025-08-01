@@ -98,7 +98,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ page, autoStart 
     if (!autoStart || !user) return;
 
     // Check if user has seen this tour before
-    const hasSeenTour = localStorage.getItem(`erip-tour-${page}`);
+    const hasSeenTour = localStorage.getItem(`erip-tour-€{page}`);
     if (hasSeenTour) return;
 
     // Start tour after a short delay to ensure DOM is ready
@@ -115,7 +115,7 @@ export const OnboardingFlow: React.FC<OnboardingFlowProps> = ({ page, autoStart 
       }
       
       // Mark tour as seen
-      localStorage.setItem(`erip-tour-${page}`, 'true');
+      localStorage.setItem(`erip-tour-€{page}`, 'true');
     }, 1000);
 
     return () => clearTimeout(timer);

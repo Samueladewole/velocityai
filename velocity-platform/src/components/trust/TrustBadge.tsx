@@ -35,7 +35,7 @@ export const TrustBadge: React.FC<TrustBadgeProps> = ({
   theme = 'light'
 }) => {
   const tierStyle = tierConfig[tier];
-  const trustCenterUrl = `https://trust.erip.io/${companySlug}`;
+  const trustCenterUrl = `https://trust.erip.io/€{companySlug}`;
 
   if (style === 'minimal') {
     return (
@@ -43,13 +43,13 @@ export const TrustBadge: React.FC<TrustBadgeProps> = ({
         href={trustCenterUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-105 ${
+        className={`inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-all hover:scale-105 €{
           theme === 'dark' 
             ? 'bg-slate-800 text-white hover:bg-slate-700' 
             : 'bg-white text-slate-900 hover:bg-slate-50 shadow-sm border border-slate-200'
         }`}
       >
-        <div className={`p-1 rounded bg-gradient-to-r ${tierStyle.gradient}`}>
+        <div className={`p-1 rounded bg-gradient-to-r €{tierStyle.gradient}`}>
           <Shield className="h-3 w-3 text-white" />
         </div>
         <span className="text-sm font-medium">Trust Score: {trustScore}</span>
@@ -66,20 +66,20 @@ export const TrustBadge: React.FC<TrustBadgeProps> = ({
         rel="noopener noreferrer"
         className="block max-w-xs hover:scale-105 transition-transform"
       >
-        <Card className={`${
+        <Card className={`€{
           theme === 'dark' 
             ? 'bg-slate-800 border-slate-700 text-white' 
             : 'bg-white border-slate-200'
         } shadow-lg hover:shadow-xl transition-shadow`}>
           <CardContent className="p-4">
             <div className="flex items-center gap-3">
-              <div className={`p-2 rounded-lg bg-gradient-to-r ${tierStyle.gradient}`}>
+              <div className={`p-2 rounded-lg bg-gradient-to-r €{tierStyle.gradient}`}>
                 <Award className="h-5 w-5 text-white" />
               </div>
               <div className="flex-1">
                 <div className="flex items-center gap-2">
                   <span className="text-xl font-bold">{trustScore}</span>
-                  <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r ${tierStyle.gradient} text-white font-medium`}>
+                  <span className={`text-xs px-2 py-1 rounded-full bg-gradient-to-r €{tierStyle.gradient} text-white font-medium`}>
                     {tier}
                   </span>
                 </div>
@@ -101,20 +101,20 @@ export const TrustBadge: React.FC<TrustBadgeProps> = ({
       rel="noopener noreferrer"
       className="block max-w-sm hover:scale-105 transition-transform"
     >
-      <Card className={`${
+      <Card className={`€{
         theme === 'dark' 
           ? 'bg-slate-800 border-slate-700 text-white' 
           : 'bg-white border-slate-200'
       } shadow-lg hover:shadow-xl transition-shadow`}>
         <CardContent className="p-6">
           <div className="text-center">
-            <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r ${tierStyle.gradient} text-white font-semibold mb-4`}>
+            <div className={`inline-flex items-center gap-2 px-3 py-2 rounded-full bg-gradient-to-r €{tierStyle.gradient} text-white font-semibold mb-4`}>
               <Shield className="h-4 w-4" />
               ERIP Verified
             </div>
             
             <div className="text-4xl font-bold mb-2">{trustScore}</div>
-            <div className={`text-sm font-medium mb-1 bg-gradient-to-r ${tierStyle.gradient} bg-clip-text text-transparent`}>
+            <div className={`text-sm font-medium mb-1 bg-gradient-to-r €{tierStyle.gradient} bg-clip-text text-transparent`}>
               {tier} Tier Trust Score
             </div>
             <p className="text-xs text-slate-500 mb-4">
@@ -148,9 +148,9 @@ export const TrustBadgeGenerator: React.FC = () => {
 <script src="https://trust.erip.io/embed.js"></script>
 <div 
   data-erip-trust-badge
-  data-company="${mockProps.companySlug}"
-  data-style="${style}"
-  data-theme="${theme}"
+  data-company="€{mockProps.companySlug}"
+  data-style="€{style}"
+  data-theme="€{theme}"
 ></div>`;
   };
 
@@ -158,11 +158,11 @@ export const TrustBadgeGenerator: React.FC = () => {
     return `import { TrustBadge } from '@erip/trust-badge';
 
 <TrustBadge
-  companySlug="${mockProps.companySlug}"
-  trustScore={${mockProps.trustScore}}
-  tier="${mockProps.tier}"
-  style="${style}"
-  theme="${theme}"
+  companySlug="€{mockProps.companySlug}"
+  trustScore={€{mockProps.trustScore}}
+  tier="€{mockProps.tier}"
+  style="€{style}"
+  theme="€{theme}"
 />`;
   };
 
@@ -194,7 +194,7 @@ export const TrustBadgeGenerator: React.FC = () => {
                       <button
                         key={style}
                         onClick={() => setSelectedStyle(style as any)}
-                        className={`px-3 py-2 text-sm rounded-lg border transition-colors ${
+                        className={`px-3 py-2 text-sm rounded-lg border transition-colors €{
                           selectedStyle === style
                             ? 'bg-blue-50 border-blue-200 text-blue-700'
                             : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -213,7 +213,7 @@ export const TrustBadgeGenerator: React.FC = () => {
                       <button
                         key={theme}
                         onClick={() => setSelectedTheme(theme as any)}
-                        className={`px-3 py-2 text-sm rounded-lg border transition-colors ${
+                        className={`px-3 py-2 text-sm rounded-lg border transition-colors €{
                           selectedTheme === theme
                             ? 'bg-blue-50 border-blue-200 text-blue-700'
                             : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -280,7 +280,7 @@ export const TrustBadgeGenerator: React.FC = () => {
             <CardContent className="p-6">
               <h3 className="text-lg font-semibold text-slate-900 mb-4">Preview</h3>
               
-              <div className={`p-6 rounded-lg ${selectedTheme === 'dark' ? 'bg-slate-900' : 'bg-slate-100'} flex items-center justify-center`}>
+              <div className={`p-6 rounded-lg €{selectedTheme === 'dark' ? 'bg-slate-900' : 'bg-slate-100'} flex items-center justify-center`}>
                 <TrustBadge
                   {...mockProps}
                   style={selectedStyle}

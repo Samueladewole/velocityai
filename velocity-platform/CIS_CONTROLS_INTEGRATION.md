@@ -204,8 +204,8 @@ Evidence Type: Configuration Compliance Dashboard
 - **Time Saved**: 95% reduction in compliance overhead
 
 ### **Cost Savings**
-- **Security Consultant**: $15,000 for CIS assessment
-- **Velocity Tier**: $999/month includes automated CIS + SOC2
+- **Security Consultant**: €15,000 for CIS assessment
+- **Velocity Tier**: €999/month includes automated CIS + SOC2
 - **ROI**: Break-even in first month, 90% savings annually
 
 ### **Risk Reduction**

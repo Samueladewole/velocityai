@@ -688,7 +688,7 @@ CREATE INDEX idx_requirements_search ON framework_requirements USING GIN(search_
 
 -- Trigger function for updating search vectors
 CREATE OR REPLACE FUNCTION update_search_vector()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER AS €€
 BEGIN
     IF TG_TABLE_NAME = 'regulatory_frameworks' THEN
         NEW.search_vector := to_tsvector('english', 
@@ -712,7 +712,7 @@ BEGIN
     
     RETURN NEW;
 END;
-$$ LANGUAGE plpgsql;
+€€ LANGUAGE plpgsql;
 
 -- Create triggers
 CREATE TRIGGER regulatory_frameworks_search_vector_update
@@ -733,7 +733,7 @@ CREATE TRIGGER evidence_search_vector_update
 
 -- Function to calculate trust score from transactions
 CREATE OR REPLACE FUNCTION calculate_trust_score(p_entity_id UUID, p_entity_type entity_type)
-RETURNS INTEGER AS $$
+RETURNS INTEGER AS €€
 DECLARE
     v_total_score INTEGER := 0;
     v_compliance INTEGER := 0;
@@ -760,7 +760,7 @@ BEGIN
     
     RETURN GREATEST(0, LEAST(1000, v_total_score));
 END;
-$$ LANGUAGE plpgsql;
+€€ LANGUAGE plpgsql;
 
 -- ===============================
 -- Views for Common Queries

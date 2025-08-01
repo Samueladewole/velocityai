@@ -282,9 +282,9 @@ export const CLEARANCE: React.FC = () => {
 
   const formatCurrency = (amount: number) => {
     if (amount >= 1000000) {
-      return `€${(amount / 1000000).toFixed(1)}M`;
+      return `€€{(amount / 1000000).toFixed(1)}M`;
     }
-    return `€${(amount / 1000).toFixed(0)}K`;
+    return `€€{(amount / 1000).toFixed(0)}K`;
   };
 
   return (
@@ -546,8 +546,8 @@ export const CLEARANCE: React.FC = () => {
                     <AreaChart data={automationSavings}>
                       <CartesianGrid strokeDasharray="3 3" />
                       <XAxis dataKey="month" />
-                      <YAxis tickFormatter={(value) => `€${(value/1000000).toFixed(1)}M`} />
-                      <Tooltip formatter={(value) => [`€${(Number(value)/1000000).toFixed(1)}M`, '']} />
+                      <YAxis tickFormatter={(value) => `€€{(value/1000000).toFixed(1)}M`} />
+                      <Tooltip formatter={(value) => [`€€{(Number(value)/1000000).toFixed(1)}M`, '']} />
                       <Area 
                         type="monotone" 
                         dataKey="manual" 

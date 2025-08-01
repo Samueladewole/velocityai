@@ -333,7 +333,7 @@ class TimescaleFinancialDB:
             INSERT INTO financial_metrics 
             (time, metric_id, customer_id, metric_type, value, currency, 
              metadata, tags, source_system, confidence_level)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10)
             ON CONFLICT (time, metric_id) DO UPDATE SET
                 value = EXCLUDED.value,
                 metadata = EXCLUDED.metadata,
@@ -375,7 +375,7 @@ class TimescaleFinancialDB:
             INSERT INTO monte_carlo_results 
             (time, simulation_id, customer_id, iteration_number, scenario_name,
              risk_value, probability, input_parameters, output_metrics)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9)
             """
             
             async with self.pool.acquire() as conn:
@@ -407,7 +407,7 @@ class TimescaleFinancialDB:
             INSERT INTO compliance_costs 
             (time, cost_id, customer_id, framework, cost_category, amount,
              currency, period_start, period_end, is_recurring, cost_center)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11)
             ON CONFLICT (time, cost_id) DO UPDATE SET
                 amount = EXCLUDED.amount,
                 cost_category = EXCLUDED.cost_category
@@ -444,7 +444,7 @@ class TimescaleFinancialDB:
             INSERT INTO roi_calculations 
             (time, calculation_id, customer_id, investment_amount, savings_amount,
              roi_percentage, npv, irr, payback_months, projection_months, discount_rate)
-            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+            VALUES (€1, €2, €3, €4, €5, €6, €7, €8, €9, €10, €11)
             """
             
             async with self.pool.acquire() as conn:
@@ -481,23 +481,23 @@ class TimescaleFinancialDB:
     ) -> List[FinancialMetric]:
         """Retrieve financial metrics with filtering"""
         try:
-            conditions = ["customer_id = $1"]
+            conditions = ["customer_id = €1"]
             params = [customer_id]
             param_count = 1
             
             if metric_types:
                 param_count += 1
-                conditions.append(f"metric_type = ANY(${param_count})")
+                conditions.append(f"metric_type = ANY(€{param_count})")
                 params.append([mt.value for mt in metric_types])
             
             if start_time:
                 param_count += 1
-                conditions.append(f"time >= ${param_count}")
+                conditions.append(f"time >= €{param_count}")
                 params.append(start_time)
             
             if end_time:
                 param_count += 1
-                conditions.append(f"time <= ${param_count}")
+                conditions.append(f"time <= €{param_count}")
                 params.append(end_time)
             
             where_clause = " AND ".join(conditions)
@@ -549,12 +549,12 @@ class TimescaleFinancialDB:
             params = [customer_id, interval.value]
             
             if start_time and end_time:
-                time_filter = "AND time >= $3 AND time <= $4"
+                time_filter = "AND time >= €3 AND time <= €4"
                 params.extend([start_time, end_time])
             
             query = f"""
             SELECT 
-                time_bucket($2, time) as bucket,
+                time_bucket(€2, time) as bucket,
                 AVG(CASE WHEN metric_type = 'roi' THEN value END) as avg_roi,
                 SUM(CASE WHEN metric_type = 'savings_realized' THEN value END) as total_savings,
                 SUM(CASE WHEN metric_type = 'compliance_cost' THEN value END) as total_costs,
@@ -562,7 +562,7 @@ class TimescaleFinancialDB:
                 AVG(CASE WHEN metric_type = 'trust_score' THEN value END) as avg_trust_score,
                 COUNT(*) as metrics_count
             FROM financial_metrics
-            WHERE customer_id = $1 {time_filter}
+            WHERE customer_id = €1 {time_filter}
             GROUP BY bucket
             ORDER BY bucket DESC
             """
@@ -602,11 +602,11 @@ class TimescaleFinancialDB:
     ) -> Dict[str, Any]:
         """Get Monte Carlo simulation analysis"""
         try:
-            conditions = ["customer_id = $1", "simulation_id = $2"]
+            conditions = ["customer_id = €1", "simulation_id = €2"]
             params = [customer_id, simulation_id]
             
             if scenario_name:
-                conditions.append("scenario_name = $3")
+                conditions.append("scenario_name = €3")
                 params.append(scenario_name)
             
             where_clause = " AND ".join(conditions)
@@ -665,7 +665,7 @@ class TimescaleFinancialDB:
             query = """
             WITH recent_metrics AS (
                 SELECT * FROM financial_metrics 
-                WHERE customer_id = $1 
+                WHERE customer_id = €1 
                 AND time >= NOW() - INTERVAL '30 days'
             ),
             roi_metrics AS (

@@ -22,7 +22,7 @@ export const CurrencySelector: React.FC<{ className?: string }> = ({ className }
   const { currency, setCurrency } = useCurrency();
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
+    <div className={`flex items-center gap-2 €{className}`}>
       <Globe className="w-4 h-4 text-gray-500" />
       <Select value={currency} onValueChange={setCurrency}>
         <SelectTrigger className="w-[140px]">

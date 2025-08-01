@@ -64,28 +64,28 @@ const SOCIAL_PLATFORMS = {
     label: 'LinkedIn', 
     color: 'bg-blue-600',
     shareUrl: (url: string, title: string) => 
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`
+      `https://www.linkedin.com/sharing/share-offsite/?url=€{encodeURIComponent(url)}&title=€{encodeURIComponent(title)}`
   },
   twitter: { 
     icon: ExternalLink, 
     label: 'Twitter', 
     color: 'bg-sky-500',
     shareUrl: (url: string, title: string) => 
-      `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`
+      `https://twitter.com/intent/tweet?url=€{encodeURIComponent(url)}&text=€{encodeURIComponent(title)}`
   },
   email: { 
     icon: Mail, 
     label: 'Email', 
     color: 'bg-gray-600',
     shareUrl: (url: string, title: string) => 
-      `mailto:?subject=${encodeURIComponent(title)}&body=${encodeURIComponent(`Check out this report: ${url}`)}`
+      `mailto:?subject=€{encodeURIComponent(title)}&body=€{encodeURIComponent(`Check out this report: €{url}`)}`
   },
   teams: { 
     icon: Users, 
     label: 'Microsoft Teams', 
     color: 'bg-purple-600',
     shareUrl: (url: string, title: string) => 
-      `https://teams.microsoft.com/share?href=${encodeURIComponent(url)}&msgText=${encodeURIComponent(title)}`
+      `https://teams.microsoft.com/share?href=€{encodeURIComponent(url)}&msgText=€{encodeURIComponent(title)}`
   }
 };
 
@@ -174,15 +174,15 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
     try {
       // Mock PDF generation - in real implementation, use jsPDF or similar
       const content = `
-        ${title}
-        Generated: ${new Date().toLocaleString()}
+        €{title}
+        Generated: €{new Date().toLocaleString()}
         
         Data Summary:
-        ${JSON.stringify(data, null, 2)}
+        €{JSON.stringify(data, null, 2)}
       `;
       
       const blob = new Blob([content], { type: 'application/pdf' });
-      downloadBlob(blob, `${filename}.pdf`);
+      downloadBlob(blob, `€{filename}.pdf`);
       return true;
     } catch (error) {
       console.error('PDF export failed:', error);
@@ -206,7 +206,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
               const value = row[header];
               // Escape quotes and wrap in quotes if contains comma
               return typeof value === 'string' && value.includes(',') 
-                ? `"${value.replace(/"/g, '""')}"` 
+                ? `"€{value.replace(/"/g, '""')}"` 
                 : value;
             });
             csvContent += values.join(',') + '\n';
@@ -216,12 +216,12 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
         // Convert object to CSV
         csvContent = 'Key,Value\n';
         Object.entries(data).forEach(([key, value]) => {
-          csvContent += `${key},${value}\n`;
+          csvContent += `€{key},€{value}\n`;
         });
       }
       
       const blob = new Blob([csvContent], { type: 'text/csv' });
-      downloadBlob(blob, `${filename}.csv`);
+      downloadBlob(blob, `€{filename}.csv`);
       return true;
     } catch (error) {
       console.error('CSV export failed:', error);
@@ -245,7 +245,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
     try {
       const jsonContent = JSON.stringify(data, null, 2);
       const blob = new Blob([jsonContent], { type: 'application/json' });
-      downloadBlob(blob, `${filename}.json`);
+      downloadBlob(blob, `€{filename}.json`);
       return true;
     } catch (error) {
       console.error('JSON export failed:', error);
@@ -268,12 +268,12 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
       ctx.fillRect(0, 0, canvas.width, canvas.height);
       ctx.fillStyle = 'black';
       ctx.font = '16px Arial';
-      ctx.fillText(`${title} - Screenshot`, 50, 50);
-      ctx.fillText(`Generated: ${new Date().toLocaleString()}`, 50, 80);
+      ctx.fillText(`€{title} - Screenshot`, 50, 50);
+      ctx.fillText(`Generated: €{new Date().toLocaleString()}`, 50, 80);
       
       canvas.toBlob((blob) => {
         if (blob) {
-          downloadBlob(blob, `${filename}.png`);
+          downloadBlob(blob, `€{filename}.png`);
         }
       }, 'image/png');
       
@@ -292,7 +292,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>${title}</title>
+          <title>€{title}</title>
           <style>
             body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 20px; background: #f8f9fa; }
             .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
@@ -308,13 +308,13 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
         <body>
           <div class="container">
             <div class="header">
-              <h1 class="title">${title}</h1>
-              <p class="subtitle">Generated on ${new Date().toLocaleString()}</p>
+              <h1 class="title">€{title}</h1>
+              <p class="subtitle">Generated on €{new Date().toLocaleString()}</p>
             </div>
             <div class="data-section">
               <h2 class="data-title">Report Data</h2>
               <div class="data-content">
-                <pre>${JSON.stringify(data, null, 2)}</pre>
+                <pre>€{JSON.stringify(data, null, 2)}</pre>
               </div>
             </div>
           </div>
@@ -323,7 +323,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
       `;
       
       const blob = new Blob([htmlContent], { type: 'text/html' });
-      downloadBlob(blob, `${filename}.html`);
+      downloadBlob(blob, `€{filename}.html`);
       return true;
     } catch (error) {
       console.error('HTML export failed:', error);
@@ -343,7 +343,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
     });
 
     try {
-      const filename = exportConfig.filename || `${title.replace(/\s+/g, '-').toLowerCase()}-${Date.now()}`;
+      const filename = exportConfig.filename || `€{title.replace(/\s+/g, '-').toLowerCase()}-€{Date.now()}`;
 
       // Progress simulation
       const progressInterval = setInterval(() => {
@@ -353,7 +353,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
         }));
       }, 300);
 
-      setExportProgress(prev => ({ ...prev, message: `Generating ${format.toUpperCase()}...` }));
+      setExportProgress(prev => ({ ...prev, message: `Generating €{format.toUpperCase()}...` }));
 
       let success = false;
       let downloadUrl = '';
@@ -378,7 +378,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${localStorage.getItem('token')}`
+              'Authorization': `Bearer €{localStorage.getItem('token')}`
             },
             body: JSON.stringify(exportRequest)
           });
@@ -391,7 +391,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
             // Trigger download
             const link = document.createElement('a');
             link.href = downloadUrl;
-            link.download = `${filename}.${format}`;
+            link.download = `€{filename}.€{format}`;
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
@@ -454,10 +454,10 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
         case 'html':
           return await exportToHTML(data, filename);
         default:
-          throw new Error(`Unsupported format: ${format}`);
+          throw new Error(`Unsupported format: €{format}`);
       }
     } catch (error) {
-      console.error(`Fallback export failed for ${format}:`, error);
+      console.error(`Fallback export failed for €{format}:`, error);
       return false;
     }
   }, [exportToPDF, exportToCSV, exportToExcel, exportToJSON, exportToPNG]);
@@ -475,7 +475,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
       params.set('permissions', sharingConfig.accessControls.permissions.join(','));
     }
     
-    return params.toString() ? `${baseUrl}?${params.toString()}` : baseUrl;
+    return params.toString() ? `€{baseUrl}?€{params.toString()}` : baseUrl;
   }, [sharingConfig]);
 
   const generateQRCode = useCallback((url: string) => {
@@ -551,7 +551,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
   };
 
   return (
-    <div className={`export-system space-y-4 ${className || ''}`}>
+    <div className={`export-system space-y-4 €{className || ''}`}>
       {/* Export Section */}
       {exportConfig.enabled && (
         <Card>
@@ -575,7 +575,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
                 <div className="w-full bg-slate-200 rounded-full h-2">
                   <div 
                     className="bg-blue-600 h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${exportProgress.progress}%` }}
+                    style={{ width: `€{exportProgress.progress}%` }}
                   />
                 </div>
                 <p className="text-sm text-slate-600">{exportProgress.message}</p>
@@ -783,7 +783,7 @@ export const ExportSystem: React.FC<ExportSystemProps> = ({
                         variant="outline"
                         size="sm"
                         onClick={() => handleShare(platform)}
-                        className={`flex items-center gap-2 ${config?.color || 'bg-gray-600'} text-white hover:opacity-90`}
+                        className={`flex items-center gap-2 €{config?.color || 'bg-gray-600'} text-white hover:opacity-90`}
                       >
                         <PlatformIcon className="h-4 w-4" />
                         {config?.label || platform}

@@ -231,9 +231,9 @@ export const ModalSystem: React.FC<ModalSystemProps> = ({
         {/* Modal */}
         <div
           ref={el => modalRefs.current[modalId] = el}
-          className={`relative bg-white rounded-lg shadow-2xl ${config.className || ''}`}
+          className={`relative bg-white rounded-lg shadow-2xl €{config.className || ''}`}
           style={{
-            transform: `translate(${state.position.x}px, ${state.position.y}px)`,
+            transform: `translate(€{state.position.x}px, €{state.position.y}px)`,
             width: state.size.width,
             height: state.size.height,
             maxWidth: '95vw',
@@ -379,7 +379,7 @@ export const ModalSystem: React.FC<ModalSystemProps> = ({
   };
 
   return (
-    <div className={`modal-system ${className || ''}`}>
+    <div className={`modal-system €{className || ''}`}>
       {/* Render all modals */}
       {Object.entries(modals).map(([modalId, config]) => 
         renderModal(modalId, config)

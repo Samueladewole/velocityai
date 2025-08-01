@@ -190,7 +190,7 @@ export const TrustCenter: React.FC = () => {
             <div className="flex items-center gap-4">
               <img 
                 src={company.logo} 
-                alt={`${company.name} logo`}
+                alt={`€{company.name} logo`}
                 className="h-8 w-auto"
               />
               <div>
@@ -203,7 +203,7 @@ export const TrustCenter: React.FC = () => {
                 <button
                   key={section.id}
                   onClick={() => setActiveSection(section.id)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors €{
                     activeSection === section.id
                       ? 'bg-blue-50 text-blue-700'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
@@ -234,10 +234,10 @@ export const TrustCenter: React.FC = () => {
                     <div className="flex items-center gap-4 mb-6">
                       <img 
                         src={company.logo} 
-                        alt={`${company.name} logo`}
+                        alt={`€{company.name} logo`}
                         className="h-12 w-auto filter brightness-0 invert"
                       />
-                      <div className={`px-3 py-1 rounded-full bg-gradient-to-r ${tierStyle.gradient} text-white text-sm font-medium`}>
+                      <div className={`px-3 py-1 rounded-full bg-gradient-to-r €{tierStyle.gradient} text-white text-sm font-medium`}>
                         ✓ ERIP Verified
                       </div>
                     </div>
@@ -259,7 +259,7 @@ export const TrustCenter: React.FC = () => {
                       <div className="flex items-center gap-2">
                         <Clock className="h-4 w-4 text-blue-200" />
                         <span className="text-blue-100">
-                          Last updated: {hoursAgo < 1 ? 'Less than an hour ago' : `${hoursAgo} hours ago`}
+                          Last updated: {hoursAgo < 1 ? 'Less than an hour ago' : `€{hoursAgo} hours ago`}
                         </span>
                       </div>
                     </div>
@@ -279,7 +279,7 @@ export const TrustCenter: React.FC = () => {
                   <div className="flex justify-center">
                     <Card className="bg-white/10 backdrop-blur-sm border-white/20 text-white p-8">
                       <CardContent className="text-center">
-                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${tierStyle.gradient} text-white font-semibold mb-6`}>
+                        <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r €{tierStyle.gradient} text-white font-semibold mb-6`}>
                           <Award className="h-5 w-5" />
                           {company.trustScore.tier} Tier
                         </div>
@@ -494,7 +494,7 @@ export const TrustCenter: React.FC = () => {
                   <div className="space-y-6">
                     {complianceTimeline.map((item, index) => (
                       <div key={index} className="relative flex items-center gap-6">
-                        <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center ${
+                        <div className={`relative z-10 w-8 h-8 rounded-full flex items-center justify-center €{
                           item.status === 'completed' 
                             ? 'bg-green-100 text-green-600' 
                             : item.status === 'upcoming'

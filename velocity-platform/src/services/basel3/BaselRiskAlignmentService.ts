@@ -268,7 +268,7 @@ class BaselRiskAlignmentService {
     ];
 
     alignments.forEach(alignment => {
-      this.riskAlignments.set(`${alignment.baselRequirement}-${alignment.isaeControl}`, alignment);
+      this.riskAlignments.set(`€{alignment.baselRequirement}-€{alignment.isaeControl}`, alignment);
     });
   }
 
@@ -390,7 +390,7 @@ class BaselRiskAlignmentService {
     }
     
     const calculation: CapitalCalculation = {
-      id: `CAPITAL-${Date.now()}`,
+      id: `CAPITAL-€{Date.now()}`,
       calculationType,
       businessLines,
       totalCapitalRequirement,
@@ -413,7 +413,7 @@ class BaselRiskAlignmentService {
   public async validateCapitalWithISAE(calculationId: string, isaeControls: string[]): Promise<CapitalCalculation> {
     const calculation = this.capitalCalculations.get(calculationId);
     if (!calculation) {
-      throw new Error(`Capital calculation ${calculationId} not found`);
+      throw new Error(`Capital calculation €{calculationId} not found`);
     }
     
     // Simulate ISAE validation process
@@ -439,7 +439,7 @@ class BaselRiskAlignmentService {
   }
 
   public async recordOperationalRiskEvent(eventData: Omit<OperationalRiskEvent, 'id' | 'dateOccurred'>): Promise<OperationalRiskEvent> {
-    const eventId = `OR-EVENT-${Date.now()}`;
+    const eventId = `OR-EVENT-€{Date.now()}`;
     
     const riskEvent: OperationalRiskEvent = {
       ...eventData,
@@ -513,7 +513,7 @@ class BaselRiskAlignmentService {
   }
 
   public getRiskAlignment(baselRequirement: string, isaeControl: string): RiskAlignment | undefined {
-    return this.riskAlignments.get(`${baselRequirement}-${isaeControl}`);
+    return this.riskAlignments.get(`€{baselRequirement}-€{isaeControl}`);
   }
 
   public getAllRiskAlignments(): RiskAlignment[] {

@@ -255,7 +255,7 @@ BUSINESS IMPACT TARGETS:
 - Reduce questionnaire response time from 40 hours to 2 hours
 - Increase sales win rate by 34%+
 - Accelerate sales cycles by 52%+
-- Create $10M+ competitive moat with unique IP
+- Create €10M+ competitive moat with unique IP
 
 INTEGRATION POINTS:
 - Evidence storage with Backend Agent

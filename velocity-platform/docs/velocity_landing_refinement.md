@@ -41,7 +41,7 @@ interface HumanizedHero2 {
   headline: "Turn Compliance Into Your Competitive Advantage",
   subheadline: "While competitors spend months on audits, you'll respond to security questionnaires the same day. Our AI agents handle the tedious work so you can focus on growing your business.",
   
-  description: "Automate GDPR RoPA creation, ISAE 3000 evidence collection, and multi-framework compliance. Save $500K+ annually while impressing prospects with instant audit readiness.",
+  description: "Automate GDPR RoPA creation, ISAE 3000 evidence collection, and multi-framework compliance. Save €500K+ annually while impressing prospects with instant audit readiness.",
   
   primary_cta: "Watch AI Agents Demo",
   secondary_cta: "Start Free Assessment"

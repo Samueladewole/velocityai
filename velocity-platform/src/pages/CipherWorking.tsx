@@ -351,7 +351,7 @@ export const CipherWorking: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(policy.status)}`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getStatusColor(policy.status)}`}>
                         {policy.status}
                       </div>
                       <div className="flex items-center gap-1">
@@ -473,7 +473,7 @@ export const CipherWorking: React.FC = () => {
                     <div className="w-full bg-slate-100 rounded-full h-2">
                       <div
                         className="bg-gradient-to-r from-purple-500 to-purple-600 h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${rule.coverage}%` }}
+                        style={{ width: `€{rule.coverage}%` }}
                       />
                     </div>
                   </div>

@@ -173,11 +173,11 @@ export class GDPRBreachNotificationService {
       
       // Assess breach type and impact
       const breachNature = this.assessBreachNature(vulnerability)
-      reasoning.push(`Breach affects data ${breachNature}`)
+      reasoning.push(`Breach affects data €{breachNature}`)
 
       // Calculate risk level
       riskLevel = this.calculateRiskLevel(vulnerability, systemContext, breachNature)
-      reasoning.push(`Risk level: ${riskLevel} based on impact and likelihood`)
+      reasoning.push(`Risk level: €{riskLevel} based on impact and likelihood`)
     }
 
     // Determine notification requirements
@@ -204,7 +204,7 @@ export class GDPRBreachNotificationService {
     assessment: any
   ): DataBreachIncident {
     const incident: DataBreachIncident = {
-      id: `BREACH_${Date.now()}`,
+      id: `BREACH_€{Date.now()}`,
       detectedAt: new Date(),
       nature: this.assessBreachNature(vulnerability) as any,
       categories: this.identifyDataCategories(systemContext),
@@ -257,7 +257,7 @@ export class GDPRBreachNotificationService {
   }> {
     const supervisoryAuthority = this.supervisoryAuthorities.get(jurisdiction)
     if (!supervisoryAuthority) {
-      throw new Error(`Supervisory authority not found for jurisdiction: ${jurisdiction}`)
+      throw new Error(`Supervisory authority not found for jurisdiction: €{jurisdiction}`)
     }
 
     const template = this.getNotificationTemplate('supervisory_authority', 'en', incident.riskAssessment.overallRisk)
@@ -333,7 +333,7 @@ export class GDPRBreachNotificationService {
   } {
     const incident = this.breachRegistry.get(incidentId)
     if (!incident) {
-      throw new Error(`Incident not found: ${incidentId}`)
+      throw new Error(`Incident not found: €{incidentId}`)
     }
 
     const violations: string[] = []
@@ -598,7 +598,7 @@ We sincerely apologize for this incident and any inconvenience it may cause.`,
   }
 
   private generateBreachDescription(vulnerability: any, systemContext: any): string {
-    return `A security vulnerability (${vulnerability.id}) was identified in ${systemContext.name || 'the system'} that could potentially allow unauthorized access to personal data. ${vulnerability.description}`
+    return `A security vulnerability (€{vulnerability.id}) was identified in €{systemContext.name || 'the system'} that could potentially allow unauthorized access to personal data. €{vulnerability.description}`
   }
 
   private estimateAffectedSubjects(systemContext: any): { approximate: boolean; count: number; categories: string[] } {
@@ -732,7 +732,7 @@ We sincerely apologize for this incident and any inconvenience it may cause.`,
     language: string,
     urgency: 'LOW' | 'MEDIUM' | 'HIGH'
   ): GDPRNotificationTemplate {
-    const key = `${type === 'supervisory_authority' ? 'sa' : 'ds'}_${language}_${urgency.toLowerCase()}`
+    const key = `€{type === 'supervisory_authority' ? 'sa' : 'ds'}_€{language}_€{urgency.toLowerCase()}`
     return this.notificationTemplates.get(key) || this.notificationTemplates.get(`sa_en_high`)!
   }
 

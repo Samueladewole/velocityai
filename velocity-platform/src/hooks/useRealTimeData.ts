@@ -193,7 +193,7 @@ export const useRealTimeData = (options: UseRealTimeDataOptions): UseRealTimeDat
         setState(prev => ({ 
           ...prev, 
           connectionStatus: 'error',
-          error: `Connection failed: ${error}`
+          error: `Connection failed: €{error}`
         }));
         onConnectionChange?.('error');
       }
@@ -292,7 +292,7 @@ export const useRealTimeData = (options: UseRealTimeDataOptions): UseRealTimeDat
       } else {
         setState(prev => ({ 
           ...prev, 
-          error: `Failed to reconnect after ${reconnectAttempts} attempts` 
+          error: `Failed to reconnect after €{reconnectAttempts} attempts` 
         }));
       }
     }, delay);
@@ -339,7 +339,7 @@ export const useRealTimeData = (options: UseRealTimeDataOptions): UseRealTimeDat
         setState(prev => ({ 
           ...prev, 
           connectionStatus: 'error',
-          error: `Polling failed: ${error}`
+          error: `Polling failed: €{error}`
         }));
       }
 

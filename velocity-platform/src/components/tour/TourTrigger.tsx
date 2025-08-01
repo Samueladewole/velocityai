@@ -46,7 +46,7 @@ export const TourTrigger: React.FC<TourTriggerProps> = ({
         variant="ghost"
         size="sm"
         onClick={handleStartTour}
-        className={`p-2 ${className}`}
+        className={`p-2 €{className}`}
         title={getTourLabel()}
       >
         <HelpCircle className="h-4 w-4" />
@@ -58,7 +58,7 @@ export const TourTrigger: React.FC<TourTriggerProps> = ({
     return (
       <button
         onClick={handleStartTour}
-        className={`text-sm text-blue-600 hover:text-blue-700 underline flex items-center gap-1 ${className}`}
+        className={`text-sm text-blue-600 hover:text-blue-700 underline flex items-center gap-1 €{className}`}
       >
         <Play className="h-3 w-3" />
         {getTourLabel()}
@@ -71,7 +71,7 @@ export const TourTrigger: React.FC<TourTriggerProps> = ({
       variant="outline"
       size={size}
       onClick={handleStartTour}
-      className={`flex items-center gap-2 ${className}`}
+      className={`flex items-center gap-2 €{className}`}
     >
       <Play className="h-4 w-4" />
       {getTourLabel()}

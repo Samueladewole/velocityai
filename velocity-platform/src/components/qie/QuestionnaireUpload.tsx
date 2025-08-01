@@ -60,7 +60,7 @@ export function QuestionnaireUpload({
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const newFiles: UploadedFile[] = acceptedFiles.map(file => ({
       file,
-      id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+      id: `€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`,
       status: 'uploading',
       progress: 0
     }))
@@ -123,8 +123,8 @@ export function QuestionnaireUpload({
       // Create questionnaire object
       const questionnaire: Questionnaire = {
         id: uploadedFile.id,
-        title: uploadedFile.file.name.replace(/\.[^/.]+$/, ''),
-        description: `Uploaded questionnaire with ${extractedQuestions} questions`,
+        title: uploadedFile.file.name.replace(/\.[^/.]+€/, ''),
+        description: `Uploaded questionnaire with €{extractedQuestions} questions`,
         source: uploadedFile.file.name,
         uploadDate: new Date(),
         status: 'ready',
@@ -344,10 +344,10 @@ export function QuestionnaireUpload({
                     <div className="flex justify-between text-xs text-slate-500 mt-2">
                       <span>
                         {uploadedFile.status === 'completed' && uploadedFile.extractedQuestions && (
-                          `${uploadedFile.extractedQuestions} questions extracted`
+                          `€{uploadedFile.extractedQuestions} questions extracted`
                         )}
                         {uploadedFile.status === 'processing' && 'AI analyzing content...'}
-                        {uploadedFile.status === 'uploading' && `${uploadedFile.progress}% uploaded`}
+                        {uploadedFile.status === 'uploading' && `€{uploadedFile.progress}% uploaded`}
                         {uploadedFile.status === 'error' && uploadedFile.errorMessage}
                       </span>
                       <span>{(uploadedFile.file.size / 1024 / 1024).toFixed(1)} MB</span>

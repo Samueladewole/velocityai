@@ -429,7 +429,7 @@ export const AtlasWorking: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(control.status)}`}>
+                    <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getStatusColor(control.status)}`}>
                       {control.status}
                     </div>
                   </div>
@@ -442,12 +442,12 @@ export const AtlasWorking: React.FC = () => {
                       </div>
                       <div className="w-full bg-slate-100 rounded-full h-3 mb-2">
                         <div
-                          className={`h-3 rounded-full transition-all duration-1000 ${
+                          className={`h-3 rounded-full transition-all duration-1000 €{
                             control.score >= 90 ? "bg-gradient-to-r from-emerald-500 to-emerald-600" :
                             control.score >= 70 ? "bg-gradient-to-r from-amber-500 to-orange-500" : 
                             "bg-gradient-to-r from-red-500 to-red-600"
                           }`}
-                          style={{ width: `${control.score}%` }}
+                          style={{ width: `€{control.score}%` }}
                         />
                       </div>
                       <div className="flex justify-between text-xs text-slate-500">
@@ -477,7 +477,7 @@ export const AtlasWorking: React.FC = () => {
                   </CardDescription>
                 </div>
                 <div className="flex items-center gap-2">
-                  <div className={`px-3 py-1 rounded-full text-xs font-medium border ${
+                  <div className={`px-3 py-1 rounded-full text-xs font-medium border €{
                     scanResults.overall_score >= 8 ? 'text-emerald-700 bg-emerald-50 border-emerald-200' :
                     scanResults.overall_score >= 6 ? 'text-amber-700 bg-amber-50 border-amber-200' :
                     'text-red-700 bg-red-50 border-red-200'
@@ -521,7 +521,7 @@ export const AtlasWorking: React.FC = () => {
                         <h5 className="font-semibold text-slate-900">{finding.title}</h5>
                         <p className="text-sm text-slate-600 mt-1">{finding.description}</p>
                       </div>
-                      <div className={`px-2 py-1 rounded text-xs font-medium ${
+                      <div className={`px-2 py-1 rounded text-xs font-medium €{
                         finding.severity === 'CRITICAL' ? 'bg-red-100 text-red-800' :
                         finding.severity === 'HIGH' ? 'bg-orange-100 text-orange-800' :
                         'bg-amber-100 text-amber-800'
@@ -635,7 +635,7 @@ export const AtlasWorking: React.FC = () => {
                     <div className="flex-1">
                       <div className="flex items-center gap-2 mb-2">
                         <h3 className="font-semibold text-slate-900">{vuln.title}</h3>
-                        <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getSeverityColor(vuln.severity)}`}>
+                        <div className={`px-2 py-1 rounded-full text-xs font-medium border €{getSeverityColor(vuln.severity)}`}>
                           {vuln.severity}
                         </div>
                         <span className="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">
@@ -700,7 +700,7 @@ export const AtlasWorking: React.FC = () => {
                     <h3 className="font-semibold text-slate-900 mb-1">{assessment.name}</h3>
                     <p className="text-sm text-slate-600">{assessment.type} Assessment</p>
                   </div>
-                  <div className={`px-2 py-1 rounded-full text-xs font-medium ${
+                  <div className={`px-2 py-1 rounded-full text-xs font-medium €{
                     assessment.status === 'completed' ? 'bg-emerald-50 text-emerald-700' :
                     assessment.status === 'in-progress' ? 'bg-blue-50 text-blue-700' :
                     'bg-slate-50 text-slate-700'
@@ -718,7 +718,7 @@ export const AtlasWorking: React.FC = () => {
                     <div className="w-full bg-slate-100 rounded-full h-2">
                       <div
                         className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-500"
-                        style={{ width: `${assessment.progress}%` }}
+                        style={{ width: `€{assessment.progress}%` }}
                       />
                     </div>
                   </div>

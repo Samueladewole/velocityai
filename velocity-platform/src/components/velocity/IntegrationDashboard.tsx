@@ -201,7 +201,7 @@ const IntegrationDashboard: React.FC = () => {
               disabled={syncing}
               className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-4 py-2 rounded-lg flex items-center"
             >
-              <RefreshCw className={`w-4 h-4 mr-2 ${syncing ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`w-4 h-4 mr-2 €{syncing ? 'animate-spin' : ''}`} />
               {syncing ? 'Syncing...' : 'Force Sync'}
             </button>
           </div>
@@ -261,7 +261,7 @@ const IntegrationDashboard: React.FC = () => {
             return (
               <div
                 key={component}
-                className={`bg-white rounded-lg shadow border-2 ${getStatusColor(status.status)} p-6`}
+                className={`bg-white rounded-lg shadow border-2 €{getStatusColor(status.status)} p-6`}
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center">
@@ -280,7 +280,7 @@ const IntegrationDashboard: React.FC = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-sm text-gray-600">Errors:</span>
-                    <span className={`text-sm font-medium ${status.errors > 0 ? 'text-red-600' : 'text-green-600'}`}>
+                    <span className={`text-sm font-medium €{status.errors > 0 ? 'text-red-600' : 'text-green-600'}`}>
                       {status.errors}
                     </span>
                   </div>
@@ -331,7 +331,7 @@ const IntegrationDashboard: React.FC = () => {
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
                     className="bg-green-600 h-2 rounded-full"
-                    style={{ width: `${performanceReport.evidence_collection.automation_rate}%` }}
+                    style={{ width: `€{performanceReport.evidence_collection.automation_rate}%` }}
                   ></div>
                 </div>
               </div>
@@ -392,7 +392,7 @@ const IntegrationDashboard: React.FC = () => {
                     <div className="w-full bg-gray-200 rounded-full h-2">
                       <div
                         className="bg-blue-600 h-2 rounded-full"
-                        style={{ width: `${data.coverage}%` }}
+                        style={{ width: `€{data.coverage}%` }}
                       ></div>
                     </div>
                     <div className="text-xs text-gray-500 mt-1">
@@ -420,7 +420,7 @@ const IntegrationDashboard: React.FC = () => {
                 
                 <div className="text-center">
                   <div className="text-3xl font-bold text-blue-600">
-                    ${performanceReport.time_savings.cost_savings_usd.toLocaleString()}
+                    €{performanceReport.time_savings.cost_savings_usd.toLocaleString()}
                   </div>
                   <div className="text-sm text-gray-600">Cost Savings</div>
                 </div>

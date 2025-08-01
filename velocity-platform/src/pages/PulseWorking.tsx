@@ -208,9 +208,9 @@ export const PulseWorking: React.FC = () => {
   };
 
   const formatMetric = (value: number, unit: string) => {
-    if (unit === '%') return `${value}%`;
-    if (unit === 'min') return `${value} min`;
-    if (unit === 'events') return `${value}`;
+    if (unit === '%') return `€{value}%`;
+    if (unit === 'min') return `€{value} min`;
+    if (unit === 'events') return `€{value}`;
     return value.toString();
   };
 
@@ -336,10 +336,10 @@ export const PulseWorking: React.FC = () => {
                       </div>
                     </div>
                     <div className="flex flex-col gap-2">
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getSeverityColor(alert.severity)}`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getSeverityColor(alert.severity)}`}>
                         {alert.severity} severity
                       </div>
-                      <div className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(alert.status)}`}>
+                      <div className={`px-3 py-1 rounded-full text-xs font-medium border €{getStatusColor(alert.status)}`}>
                         {alert.status}
                       </div>
                     </div>
@@ -415,7 +415,7 @@ export const PulseWorking: React.FC = () => {
                         </p>
                       </div>
                     </div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-medium border ${
+                    <div className={`px-3 py-1 rounded-full text-xs font-medium border €{
                       source.status === 'healthy' ? 'text-emerald-700 bg-emerald-50 border-emerald-200' :
                       source.status === 'warning' ? 'text-amber-700 bg-amber-50 border-amber-200' :
                       'text-red-700 bg-red-50 border-red-200'
@@ -435,12 +435,12 @@ export const PulseWorking: React.FC = () => {
                         <div className="flex-1">
                           <div className="w-full bg-slate-100 rounded-full h-2">
                             <div
-                              className={`h-2 rounded-full transition-all duration-500 ${
+                              className={`h-2 rounded-full transition-all duration-500 €{
                                 source.coverage >= 95 ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' :
                                 source.coverage >= 85 ? 'bg-gradient-to-r from-amber-500 to-orange-500' :
                                 'bg-gradient-to-r from-red-500 to-red-600'
                               }`}
-                              style={{ width: `${source.coverage}%` }}
+                              style={{ width: `€{source.coverage}%` }}
                             />
                           </div>
                         </div>

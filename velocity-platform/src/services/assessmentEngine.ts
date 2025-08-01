@@ -466,7 +466,7 @@ class ResponseAnalyzer {
     if (!isNonCompliant) return null;
 
     return {
-      id: `gap-${framework}-${Date.now()}`,
+      id: `gap-€{framework}-€{Date.now()}`,
       framework,
       requirement: question.text,
       currentState: this.describeCurrentState(response),
@@ -559,7 +559,7 @@ class ResponseAnalyzer {
   private generateGapRecommendations(response: AssessmentResponse, question: AssessmentQuestion): string[] {
     // Generate context-specific recommendations
     const baseRecommendations = [
-      `Review and implement requirements for: ${question.text}`,
+      `Review and implement requirements for: €{question.text}`,
       'Conduct staff training on compliance requirements',
       'Establish monitoring and review processes'
     ];
@@ -582,11 +582,11 @@ class ResponseAnalyzer {
   }
 
   private describeCurrentState(response: AssessmentResponse): string {
-    return `Current implementation: ${response.answer}`;
+    return `Current implementation: €{response.answer}`;
   }
 
   private describeRequiredState(question: AssessmentQuestion): string {
-    return `Full compliance with: ${question.text}`;
+    return `Full compliance with: €{question.text}`;
   }
 }
 
@@ -637,9 +637,9 @@ class RecommendationEngine {
     const criticalGaps = gaps.filter(g => g.severity === 'critical');
     if (criticalGaps.length > 0) {
       recommendations.push({
-        id: `rec-${framework}-critical`,
-        title: `Address Critical ${framework} Compliance Gaps`,
-        description: `Immediate action required for ${criticalGaps.length} critical compliance gaps`,
+        id: `rec-€{framework}-critical`,
+        title: `Address Critical €{framework} Compliance Gaps`,
+        description: `Immediate action required for €{criticalGaps.length} critical compliance gaps`,
         priority: 'critical',
         effort: 'high',
         timeline: '30-60 days',
@@ -655,8 +655,8 @@ class RecommendationEngine {
     // Process improvement recommendations
     if (gaps.length > 3) {
       recommendations.push({
-        id: `rec-${framework}-process`,
-        title: `Implement ${framework} Compliance Management Process`,
+        id: `rec-€{framework}-process`,
+        title: `Implement €{framework} Compliance Management Process`,
         description: 'Establish systematic approach to ongoing compliance management',
         priority: 'high',
         effort: 'medium',
@@ -810,7 +810,7 @@ class RecommendationEngine {
 
   private generateCriticalSteps(gaps: ComplianceGap[]): string[] {
     return [
-      `Review ${gaps.length} critical compliance requirements`,
+      `Review €{gaps.length} critical compliance requirements`,
       'Assign immediate ownership and accountability',
       'Implement temporary controls if needed',
       'Develop permanent solution plans',
@@ -857,7 +857,7 @@ export class IntelligentAssessmentEngine {
     profile: OrganizationProfile;
     firstQuestion: AssessmentQuestion | null;
   } {
-    const sessionId = `assessment-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    const sessionId = `assessment-€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`;
     const profile = this.contextAnalyzer.analyzeOrganization(organizationData);
     const firstQuestion = this.questionSelector.selectNextQuestion(profile, []);
 

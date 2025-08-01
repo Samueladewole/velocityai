@@ -21,7 +21,7 @@
 - Time to compliance: < 7 days (vs industry 3-6 months)
 - Evidence automation: 95%+ collection rate
 - Customer acquisition: 100 customers in 90 days
-- Revenue target: $1M ARR in 12 months
+- Revenue target: €1M ARR in 12 months
 - Market expansion: EU + Americas launch
 
 ## Target Market & Personas
@@ -32,14 +32,14 @@
 - 10-200 employees
 - Need compliance for enterprise deals
 - Limited compliance expertise
-- Budget: $1K-$5K/month for compliance tools
+- Budget: €1K-€5K/month for compliance tools
 
 ### User Personas
 
 #### 1. **Chief Technology Officer (Primary)**
 - **Pain**: Blocked enterprise deals due to compliance gaps
 - **Goal**: Achieve SOC 2 / GDPR compliance quickly
-- **Success**: Unblock $500K+ enterprise deals
+- **Success**: Unblock €500K+ enterprise deals
 
 #### 2. **Head of Security (Secondary)**  
 - **Pain**: Manual evidence collection takes weeks
@@ -315,21 +315,21 @@ Time: 2-3 days vs 2-3 weeks
 - Community support
 - 30-day evidence retention
 
-#### Startup Tier ($299/month)
+#### Startup Tier (€299/month)
 - 2 frameworks included
 - Advanced evidence automation
 - Email + chat support
 - 12-month evidence retention
 - Basic integrations
 
-#### Growth Tier ($799/month)
+#### Growth Tier (€799/month)
 - All frameworks included
 - Priority evidence processing
 - Phone + email support
 - Unlimited evidence retention
 - Advanced integrations + API
 
-#### Enterprise Tier ($1,999/month)
+#### Enterprise Tier (€1,999/month)
 - Custom framework support
 - Dedicated success manager
 - SLA guarantees
@@ -346,9 +346,9 @@ Time: 2-3 days vs 2-3 weeks
 - **Customer Satisfaction**: NPS > 70
 
 ### Business Metrics
-- **Monthly Recurring Revenue**: $1M ARR by month 12
-- **Customer Acquisition Cost**: < $2,000
-- **Customer Lifetime Value**: > $20,000
+- **Monthly Recurring Revenue**: €1M ARR by month 12
+- **Customer Acquisition Cost**: < €2,000
+- **Customer Lifetime Value**: > €20,000
 - **Churn Rate**: < 5% monthly
 - **Gross Margin**: > 80%
 

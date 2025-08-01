@@ -328,7 +328,7 @@ class RiskMetricsCalculator:
             )
             
             # Component VaR = Marginal VaR * Weight * Portfolio Value
-            component_var[asset] = marginal_var[asset] * weights[asset] * 100  # Assuming $100 portfolio
+            component_var[asset] = marginal_var[asset] * weights[asset] * 100  # Assuming €100 portfolio
         
         # Diversification ratio
         individual_volatilities = [np.std(asset_returns[asset]) for asset in asset_returns.keys()]

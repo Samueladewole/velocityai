@@ -78,7 +78,7 @@ export const useWebSocketClient = ({
     // Build WebSocket URL
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const host = process.env.NODE_ENV === 'development' ? 'localhost:8001' : window.location.host;
-    const wsUrl = `${protocol}//${host}/sheets/workbooks/${workbookId}/worksheets/${worksheetId}/collaborate?user_id=${userId}&email=${encodeURIComponent(userEmail)}`;
+    const wsUrl = `€{protocol}//€{host}/sheets/workbooks/€{workbookId}/worksheets/€{worksheetId}/collaborate?user_id=€{userId}&email=€{encodeURIComponent(userEmail)}`;
     
     ws.current = new WebSocket(wsUrl);
 
@@ -116,7 +116,7 @@ export const useWebSocketClient = ({
             onUserJoin(message.payload);
             toast({
               title: 'User Joined',
-              description: `${message.payload.email} joined the collaboration`,
+              description: `€{message.payload.email} joined the collaboration`,
               variant: 'default'
             });
             break;
@@ -153,7 +153,7 @@ export const useWebSocketClient = ({
           case 'conflict_resolution':
             toast({
               title: 'Conflict Resolved',
-              description: `Edit conflict resolved using ${message.payload.resolution_strategy}`,
+              description: `Edit conflict resolved using €{message.payload.resolution_strategy}`,
               variant: 'default'
             });
             break;
@@ -192,13 +192,13 @@ export const useWebSocketClient = ({
         reconnectAttempts.current++;
         
         reconnectTimeout.current = setTimeout(() => {
-          console.log(`Attempting to reconnect (${reconnectAttempts.current}/${maxReconnectAttempts})`);
+          console.log(`Attempting to reconnect (€{reconnectAttempts.current}/€{maxReconnectAttempts})`);
           connect();
         }, delay);
         
         toast({
           title: 'Connection Lost',
-          description: `Attempting to reconnect... (${reconnectAttempts.current}/${maxReconnectAttempts})`,
+          description: `Attempting to reconnect... (€{reconnectAttempts.current}/€{maxReconnectAttempts})`,
           variant: 'default'
         });
       } else if (reconnectAttempts.current >= maxReconnectAttempts) {
@@ -240,7 +240,7 @@ export const useWebSocketClient = ({
     if (ws.current?.readyState === WebSocket.OPEN) {
       const fullMessage: WebSocketMessage = {
         ...message,
-        message_id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+        message_id: `€{Date.now()}-€{Math.random().toString(36).substr(2, 9)}`
       };
       ws.current.send(JSON.stringify(fullMessage));
       return true;
@@ -352,7 +352,7 @@ export const WebSocketClient: React.FC<WebSocketClientComponentProps> = ({
     <div className="websocket-client">
       {children}
       {/* Connection status indicator */}
-      <div className={`fixed bottom-4 right-4 px-3 py-1 rounded-full text-xs font-medium transition-colors ${
+      <div className={`fixed bottom-4 right-4 px-3 py-1 rounded-full text-xs font-medium transition-colors €{
         client.isConnected 
           ? 'bg-green-100 text-green-800 border border-green-200' 
           : 'bg-red-100 text-red-800 border border-red-200'

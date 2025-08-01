@@ -98,7 +98,7 @@ class PDFParser implements DocumentParser {
       console.error('PDF parsing error:', error)
       // Fallback to mock data for demo purposes
       return `
-      Security Questionnaire - ${filename}
+      Security Questionnaire - €{filename}
       
       1. Do you encrypt data at rest using AES-256 or equivalent encryption?
       2. Describe your access control policies and procedures.
@@ -128,7 +128,7 @@ class ExcelParser implements DocumentParser {
       workbook.SheetNames.forEach(sheetName => {
         const worksheet = workbook.Sheets[sheetName]
         const csvData = mockXLSX.utils.sheet_to_json(worksheet)
-        allText += `Sheet: ${sheetName}\n${csvData}\n\n`
+        allText += `Sheet: €{sheetName}\n€{csvData}\n\n`
       })
       
       return allText
@@ -315,7 +315,7 @@ export class EnhancedQuestionExtractionService {
     const parser = this.parsers.get(extension)
     
     if (!parser) {
-      throw new Error(`Unsupported file format: ${extension}`)
+      throw new Error(`Unsupported file format: €{extension}`)
     }
 
     const buffer = file instanceof Buffer ? file : await this.fileToBuffer(file)
@@ -334,15 +334,15 @@ export class EnhancedQuestionExtractionService {
     
     const questionPatterns = [
       // Numbered questions (1., 2., etc.)
-      /^(\d+)\.\s*(.+\?)\s*$/i,
+      /^(\d+)\.\s*(.+\?)\s*€/i,
       // Lettered questions (A., B., etc.)
-      /^([A-Z])\.\s*(.+\?)\s*$/i,
+      /^([A-Z])\.\s*(.+\?)\s*€/i,
       // Subsection questions (A.1, B.2, etc.)
-      /^([A-Z]\.\d+)\s+(.+\?)\s*$/i,
+      /^([A-Z]\.\d+)\s+(.+\?)\s*€/i,
       // Question prefix
       /^Question\s+\d+:\s*(.+)/i,
       // Direct questions
-      /^(.+\?)\s*$/i
+      /^(.+\?)\s*€/i
     ]
 
     lines.forEach((line, index) => {
@@ -356,7 +356,7 @@ export class EnhancedQuestionExtractionService {
           
           if (this.isValidQuestion(questionText)) {
             questions.push({
-              id: `q_${Date.now()}_${index}`,
+              id: `q_€{Date.now()}_€{index}`,
               text: questionText.trim(),
               category: 'general security',
               required: this.isQuestionRequired(questionText),

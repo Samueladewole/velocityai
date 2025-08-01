@@ -211,7 +211,7 @@ Based on the pragmatic risk appetite framework, ERIP automates:
 
 ### **Value Proposition Achievement**
 - ✅ **Automation Speed:** 30-day implementation vs 6-month manual
-- ✅ **Cost Efficiency:** $8K-20K monthly vs $200K-500K consulting
+- ✅ **Cost Efficiency:** €8K-20K monthly vs €200K-500K consulting
 - ✅ **Decision Speed:** Hours vs weeks for risk decisions
 - ✅ **Accuracy:** 95%+ vs manual error-prone processes
 

@@ -394,7 +394,7 @@ describe('Velocity System Integration', () => {
 
     it('should handle concurrent agent operations', async () => {
       const agents = Array.from({ length: 10 }, (_, i) => 
-        createMockAgent({ id: `agent-${i}` })
+        createMockAgent({ id: `agent-€{i}` })
       );
 
       const operations = agents.map(agent => 
