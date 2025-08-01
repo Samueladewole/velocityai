@@ -693,13 +693,13 @@ business_continuity:
 ```yaml
 compliance_frameworks:
   implemented:
-    - SOC2_Type_II: "In progress - Q2 2024 certification"
-    - ISO27001: "Planning phase - Q3 2024 target"
+    - SOC2_Type_II: "In progress - Q2 2025 certification"
+    - ISO27001: "Planning phase - Q3 2025 target"
     - GDPR: "Fully compliant - ongoing maintenance"
     - CCPA: "Fully compliant - automated processes"
   
   planned:
-    - FedRAMP: "Q4 2024 - government market entry"
+    - FedRAMP: "Q4 2025 - government market entry"
     - HIPAA: "Q1 2025 - healthcare sector expansion"  
     - PCI_DSS: "Q2 2025 - payment processing integration"
     - AI_Act: "Q3 2025 - EU AI regulation compliance"

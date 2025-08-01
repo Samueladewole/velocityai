@@ -442,7 +442,7 @@ interface NewFooter {
   },
   
   bottom_bar: {
-    copyright: "© 2024 Velocity.ai. All rights reserved.",
+    copyright: "© 2025 Velocity.ai. All rights reserved.",
     compliance_badges: [
       "SOC 2 Type II Certified",
       "GDPR Compliant", 

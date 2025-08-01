@@ -117,14 +117,14 @@ class AuditPreparationService {
   private initializeSampleData() {
     // Sample audit package for ISAE 3000
     const samplePackage: AuditPackage = {
-      id: 'audit-2024-isae3000-001',
+      id: 'audit-2025-isae3000-001',
       auditType: 'ISAE3000',
       status: 'ready',
       createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000), // 30 days ago
       lastUpdated: new Date(Date.now() - 2 * 60 * 60 * 1000), // 2 hours ago
       auditPeriod: {
-        startDate: new Date(2024, 0, 1), // Jan 1, 2024
-        endDate: new Date(2024, 11, 31)  // Dec 31, 2024
+        startDate: new Date(2025, 0, 1), // Jan 1, 2025
+        endDate: new Date(2025, 11, 31)  // Dec 31, 2025
       },
       auditor: {
         firm: 'Deloitte & Touche LLP',
@@ -133,8 +133,8 @@ class AuditPreparationService {
         phone: '+1 (555) 123-4567'
       },
       evidenceItems: [
-        'banking-transactions-2024', 'access-logs-q4', 'reconciliation-reports-2024',
-        'credit-approvals-2024', 'system-configs-current', 'change-management-logs'
+        'banking-transactions-2025', 'access-logs-q4', 'reconciliation-reports-2025',
+        'credit-approvals-2025', 'system-configs-current', 'change-management-logs'
       ],
       controlsCovered: ['CC1.1', 'CC2.1', 'CC5.1', 'CC6.1', 'CC7.1', 'CC7.2', 'CC8.1'],
       completionPercentage: 94,
@@ -173,7 +173,7 @@ class AuditPreparationService {
         status: 'in-progress',
         title: 'Credit Committee Meeting Documentation',
         description: 'Some credit committee meetings lacked complete documentation of decision rationale.',
-        evidence: ['committee-minutes-may-2024', 'credit-decisions-may-2024'],
+        evidence: ['committee-minutes-may-2025', 'credit-decisions-may-2025'],
         remediation: 'Updated meeting templates to include mandatory decision rationale fields.',
         targetDate: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
         assignedTo: 'Credit Risk Team',

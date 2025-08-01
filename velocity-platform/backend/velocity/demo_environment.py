@@ -533,11 +533,11 @@ class DemoEnvironmentGenerator:
                     "default_deny": True,
                     "ingress_rules": 23,
                     "egress_rules": 15,
-                    "last_reviewed": "2024-07-15"
+                    "last_reviewed": "2025-07-15"
                 }
             },
             {
-                "title": "Access Review Results - Q3 2024",
+                "title": "Access Review Results - Q3 2025",
                 "control_id": "CC6.2",
                 "evidence_type": EvidenceType.POLICY_DOCUMENT,
                 "confidence_score": 0.96,
@@ -561,7 +561,7 @@ class DemoEnvironmentGenerator:
                     "restore_test_passed": True,
                     "rto_target": "4 hours",
                     "rpo_target": "1 hour",
-                    "last_tested": "2024-07-20"
+                    "last_tested": "2025-07-20"
                 }
             }
         ]
@@ -797,7 +797,7 @@ class DemoEnvironmentGenerator:
                 "title": "ICT Risk Management Framework",
                 "control_id": "DORA_ART_5",
                 "evidence_type": EvidenceType.POLICY_DOCUMENT,
-                "data": {"framework_status": "implemented", "last_review": "2024-06-15"}
+                "data": {"framework_status": "implemented", "last_review": "2025-06-15"}
             },
             {
                 "title": "Payment Processing Security Scan",

@@ -535,8 +535,8 @@ export const ReportsNew: React.FC = () => {
   // Generated Reports with Enhanced Metadata
   const generatedReports: GeneratedReport[] = [
     {
-      id: 'exec-q4-2024',
-      name: 'Q4 2024 Executive Summary',
+      id: 'exec-q4-2025',
+      name: 'Q4 2025 Executive Summary',
       template: 'executive-dashboard',
       type: 'executive',
       generatedBy: 'John Smith',
@@ -549,7 +549,7 @@ export const ReportsNew: React.FC = () => {
       downloads: 23,
       views: 67,
       sharing: {
-        link: 'https://secure.erip.com/reports/exec-q4-2024',
+        link: 'https://secure.erip.com/reports/exec-q4-2025',
         expiresAt: 'In 28 days',
         passwordProtected: true,
         allowDownload: true
@@ -559,7 +559,7 @@ export const ReportsNew: React.FC = () => {
         charts: 12,
         tables: 6,
         dataPoints: 1247,
-        timeRange: 'Q4 2024',
+        timeRange: 'Q4 2025',
         version: '1.2'
       },
       feedback: {
@@ -593,7 +593,7 @@ export const ReportsNew: React.FC = () => {
         charts: 8,
         tables: 15,
         dataPoints: 2156,
-        timeRange: 'December 2024',
+        timeRange: 'December 2025',
         version: '2.1'
       },
       feedback: {
@@ -632,7 +632,7 @@ export const ReportsNew: React.FC = () => {
         charts: 15,
         tables: 12,
         dataPoints: 1834,
-        timeRange: 'December 2024',
+        timeRange: 'December 2025',
         version: '1.5'
       },
       feedback: {
@@ -729,7 +729,7 @@ export const ReportsNew: React.FC = () => {
       performance: {
         averageGenerationTime: 25,
         successRate: 96.2,
-        lastErrors: ['Data source timeout on 2024-11-15']
+        lastErrors: ['Data source timeout on 2025-11-15']
       },
       trustPoints: 125,
       creator: 'alice.smith@company.com',

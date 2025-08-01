@@ -214,7 +214,7 @@ interface SCCsManagement {
 5. **Universal Need:** Every global company needs this
 
 ### **Market Timing:**
-- **EDPS Microsoft 365 decision** in March 2024 created massive awareness
+- **EDPS Microsoft 365 decision** in March 2025 created massive awareness
 - **Post-Schrems II uncertainty** still unresolved for most companies
 - **Escalating enforcement** creates urgency
 - **No comprehensive automated solution** exists in market

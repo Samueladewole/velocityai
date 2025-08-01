@@ -131,7 +131,7 @@ export const AIGovernance: React.FC = () => {
       owner: 'John Smith',
       department: 'Customer Success',
       status: 'production',
-      lastAssessed: '2024-01-20',
+      lastAssessed: '2025-01-20',
       complianceScore: 92,
       trustImpact: 45,
       dataTypes: ['Personal Data'],
@@ -146,7 +146,7 @@ export const AIGovernance: React.FC = () => {
       owner: 'Sarah Johnson',
       department: 'Human Resources',
       status: 'testing',
-      lastAssessed: '2024-01-18',
+      lastAssessed: '2025-01-18',
       complianceScore: 78,
       trustImpact: 120,
       dataTypes: ['Personal Data', 'Sensitive Data'],
@@ -161,7 +161,7 @@ export const AIGovernance: React.FC = () => {
       owner: 'Mike Chen',
       department: 'Finance',
       status: 'production',
-      lastAssessed: '2024-01-15',
+      lastAssessed: '2025-01-15',
       complianceScore: 96,
       trustImpact: 200,
       dataTypes: ['Financial Data'],
@@ -177,7 +177,7 @@ export const AIGovernance: React.FC = () => {
       description: 'Top management demonstrates leadership and commitment to the AI management system',
       implementation: 'implemented',
       evidence: ['AI Governance Policy', 'Management Review Records'],
-      lastReviewed: '2024-01-15',
+      lastReviewed: '2025-01-15',
       responsibleParty: 'Chief AI Officer',
       trustPoints: 50
     },
@@ -188,7 +188,7 @@ export const AIGovernance: React.FC = () => {
       description: 'Systematic identification and assessment of AI system risks',
       implementation: 'partial',
       evidence: ['Risk Assessment Template', 'Preliminary Risk Analysis'],
-      lastReviewed: '2024-01-10',
+      lastReviewed: '2025-01-10',
       responsibleParty: 'AI Risk Manager',
       trustPoints: 30
     },
@@ -199,7 +199,7 @@ export const AIGovernance: React.FC = () => {
       description: 'Controlled development process for AI systems',
       implementation: 'implemented',
       evidence: ['Development Procedures', 'Code Review Records', 'Testing Documentation'],
-      lastReviewed: '2024-01-20',
+      lastReviewed: '2025-01-20',
       responsibleParty: 'AI Development Team',
       trustPoints: 75
     }
@@ -229,8 +229,8 @@ export const AIGovernance: React.FC = () => {
         }
       ],
       overallRiskLevel: 'high' as RiskLevel,
-      assessmentDate: '2024-01-18',
-      nextReview: '2024-04-18',
+      assessmentDate: '2025-01-18',
+      nextReview: '2025-04-18',
       approvalStatus: 'pending',
       trustEquityImpact: 120
     }
@@ -244,7 +244,7 @@ export const AIGovernance: React.FC = () => {
       duration: 45,
       completionRate: 87,
       participants: 156,
-      lastUpdated: '2024-01-15',
+      lastUpdated: '2025-01-15',
       trustPoints: 25,
       mandatory: true
     },
@@ -255,7 +255,7 @@ export const AIGovernance: React.FC = () => {
       duration: 30,
       completionRate: 72,
       participants: 98,
-      lastUpdated: '2024-01-10',
+      lastUpdated: '2025-01-10',
       trustPoints: 20,
       mandatory: true
     },
@@ -266,7 +266,7 @@ export const AIGovernance: React.FC = () => {
       duration: 60,
       completionRate: 65,
       participants: 89,
-      lastUpdated: '2024-01-08',
+      lastUpdated: '2025-01-08',
       trustPoints: 30,
       mandatory: false
     }

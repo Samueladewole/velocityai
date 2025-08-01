@@ -108,7 +108,7 @@ export const AssessmentMarketplace: React.FC = () => {
         rating: 4.9
       },
       tags: ['iso27001', 'security', 'certification', 'gap-analysis'],
-      lastUpdated: '2024-01-15',
+      lastUpdated: '2025-01-15',
       features: ['Automated scoring', 'Gap analysis', 'Remediation plan', 'Trust Points rewards'],
       isFavorite: false,
       isOwned: false,
@@ -137,7 +137,7 @@ export const AssessmentMarketplace: React.FC = () => {
         rating: 4.7
       },
       tags: ['gdpr', 'privacy', 'compliance', 'audit'],
-      lastUpdated: '2024-01-20',
+      lastUpdated: '2025-01-20',
       features: ['DPIA templates', 'Legal guidance', 'Compliance dashboard', 'Action items'],
       isFavorite: true,
       isOwned: false,
@@ -166,7 +166,7 @@ export const AssessmentMarketplace: React.FC = () => {
         rating: 4.8
       },
       tags: ['soc2', 'audit', 'compliance', 'controls'],
-      lastUpdated: '2024-01-18',
+      lastUpdated: '2025-01-18',
       features: ['Control testing', 'Evidence collection', 'Audit preparation', 'Continuous monitoring'],
       isFavorite: false,
       isOwned: true,
@@ -195,7 +195,7 @@ export const AssessmentMarketplace: React.FC = () => {
         rating: 4.6
       },
       tags: ['ai', 'risk', 'governance', 'eu-ai-act'],
-      lastUpdated: '2024-01-22',
+      lastUpdated: '2025-01-22',
       features: ['Risk categorization', 'Mitigation planning', 'Compliance mapping', 'AI system registry'],
       isFavorite: false,
       isOwned: false,
@@ -224,7 +224,7 @@ export const AssessmentMarketplace: React.FC = () => {
         rating: 4.4
       },
       tags: ['cloud', 'security', 'aws', 'azure', 'gcp'],
-      lastUpdated: '2024-01-12',
+      lastUpdated: '2025-01-12',
       features: ['Multi-cloud support', 'Best practices', 'Automated checks', 'Remediation guides'],
       isFavorite: true,
       isOwned: false,
@@ -253,7 +253,7 @@ export const AssessmentMarketplace: React.FC = () => {
         rating: 4.2
       },
       tags: ['nist', 'maturity', 'cybersecurity', 'framework'],
-      lastUpdated: '2024-01-10',
+      lastUpdated: '2025-01-10',
       features: ['Maturity scoring', 'Roadmap planning', 'Benchmark comparison', 'Progress tracking'],
       isFavorite: false,
       isOwned: false,

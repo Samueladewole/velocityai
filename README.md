@@ -54,7 +54,7 @@ Velocity.ai is the world's first comprehensive **AI-powered compliance automatio
 12. **COMPASS Regulatory Intelligence Agent** - AI-powered regulation analysis and framework mapping
 
 ### **🌟 NEW: International Transfer Compliance Agent (Agent #13)**
-**Coming Q2 2024** - Cross-border data flow monitoring and Transfer Impact Assessment automation for GDPR international transfers
+**Coming Q2 2025** - Cross-border data flow monitoring and Transfer Impact Assessment automation for GDPR international transfers
 
 ## 🏗️ Platform Architecture
 

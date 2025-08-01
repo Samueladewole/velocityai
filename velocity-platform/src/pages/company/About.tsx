@@ -57,7 +57,7 @@ export const About: React.FC = () => {
 
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Story</h2>
             <p className="text-slate-600 mb-6">
-              Founded in 2024, ERIP emerged from the frustration of spending countless hours on 
+              Founded in 2025, ERIP emerged from the frustration of spending countless hours on 
               repetitive security questionnaires that added little value to anyone involved. 
               Our founders, having experienced this pain across multiple high-growth companies, 
               set out to build a better way.

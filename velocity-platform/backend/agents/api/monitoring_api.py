@@ -197,7 +197,7 @@ async def get_alerts(
                 "current_value": 85.2,
                 "threshold_value": 80.0,
                 "customer_id": customer_id,
-                "created_at": "2024-01-15T10:30:00Z",
+                "created_at": "2025-01-15T10:30:00Z",
                 "resolved_at": None,
                 "status": "active"
             },
@@ -210,8 +210,8 @@ async def get_alerts(
                 "current_value": 88.7,
                 "threshold_value": 85.0,
                 "customer_id": customer_id,
-                "created_at": "2024-01-15T09:45:00Z",
-                "resolved_at": "2024-01-15T10:15:00Z",
+                "created_at": "2025-01-15T09:45:00Z",
+                "resolved_at": "2025-01-15T10:15:00Z",
                 "status": "resolved"
             }
         ]

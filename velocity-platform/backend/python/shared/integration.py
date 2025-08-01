@@ -556,7 +556,7 @@ class ERIPIntegrationEngine:
             "total_executions": sum(flow.execution_count for flow in self.data_flows.values()),
             "recent_integrations": len([
                 result for result in self.integration_history.values()
-                if (datetime.utcnow() - datetime.fromisoformat(result.source_data.get("timestamp", "2024-01-01T00:00:00"))).days <= 7
+                if (datetime.utcnow() - datetime.fromisoformat(result.source_data.get("timestamp", "2025-01-01T00:00:00"))).days <= 7
             ]),
             "integration_health": "healthy",
             "flows": [

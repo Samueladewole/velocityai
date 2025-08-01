@@ -144,7 +144,7 @@ export const CloudSecurity: React.FC = () => {
       category: 'Data Exposure',
       recommendation: 'Configure bucket ACL to restrict public access and enable bucket encryption',
       status: 'open',
-      discoveredDate: '2024-01-20',
+      discoveredDate: '2025-01-20',
       trustImpact: -50
     },
     {
@@ -158,7 +158,7 @@ export const CloudSecurity: React.FC = () => {
       category: 'Encryption',
       recommendation: 'Enable encryption at rest and in transit for RDS instance',
       status: 'investigating',
-      discoveredDate: '2024-01-19',
+      discoveredDate: '2025-01-19',
       trustImpact: -40
     },
     {
@@ -172,7 +172,7 @@ export const CloudSecurity: React.FC = () => {
       category: 'Access Control',
       recommendation: 'Apply principle of least privilege and review policy permissions',
       status: 'open',
-      discoveredDate: '2024-01-18',
+      discoveredDate: '2025-01-18',
       trustImpact: -30
     }
   ];
@@ -185,7 +185,7 @@ export const CloudSecurity: React.FC = () => {
       findings: 8,
       controls: 64,
       implemented: 59,
-      lastAssessment: '2024-01-15',
+      lastAssessment: '2025-01-15',
       trustPoints: 200
     },
     {
@@ -195,7 +195,7 @@ export const CloudSecurity: React.FC = () => {
       findings: 12,
       controls: 114,
       implemented: 100,
-      lastAssessment: '2024-01-10',
+      lastAssessment: '2025-01-10',
       trustPoints: 250
     },
     {
@@ -205,7 +205,7 @@ export const CloudSecurity: React.FC = () => {
       findings: 5,
       controls: 78,
       implemented: 74,
-      lastAssessment: '2024-01-20',
+      lastAssessment: '2025-01-20',
       trustPoints: 180
     },
     {
@@ -215,7 +215,7 @@ export const CloudSecurity: React.FC = () => {
       findings: 10,
       controls: 45,
       implemented: 40,
-      lastAssessment: '2024-01-12',
+      lastAssessment: '2025-01-12',
       trustPoints: 150
     }
   ];

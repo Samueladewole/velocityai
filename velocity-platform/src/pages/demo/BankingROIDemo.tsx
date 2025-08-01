@@ -62,7 +62,7 @@ const BankingROIDemo: React.FC = () => {
       automatedCost: 32000,
       timeSaved: '18 weeks annually',
       riskReduction: 85,
-      lastCalculated: new Date('2024-01-15')
+      lastCalculated: new Date('2025-01-15')
     },
     {
       id: '2',
@@ -72,7 +72,7 @@ const BankingROIDemo: React.FC = () => {
       automatedCost: 28000,
       timeSaved: '14 weeks annually',
       riskReduction: 78,
-      lastCalculated: new Date('2024-01-14')
+      lastCalculated: new Date('2025-01-14')
     },
     {
       id: '3',
@@ -82,7 +82,7 @@ const BankingROIDemo: React.FC = () => {
       automatedCost: 48000,
       timeSaved: '32 weeks annually',
       riskReduction: 92,
-      lastCalculated: new Date('2024-01-13')
+      lastCalculated: new Date('2025-01-13')
     },
     {
       id: '4',
@@ -92,7 +92,7 @@ const BankingROIDemo: React.FC = () => {
       automatedCost: 22000,
       timeSaved: '12 weeks annually',
       riskReduction: 88,
-      lastCalculated: new Date('2024-01-12')
+      lastCalculated: new Date('2025-01-12')
     }
   ]);
 

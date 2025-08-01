@@ -282,30 +282,30 @@ async def get_sync_status(
         # Mock sync status - replace with actual tracking
         sync_status = {
             'customer_id': customer_id,
-            'last_full_sync': '2024-01-15T10:30:00Z',
+            'last_full_sync': '2025-01-15T10:30:00Z',
             'sync_frequency_minutes': 15,
             'components': {
                 'trust_equity': {
                     'status': 'active',
-                    'last_sync': '2024-01-15T10:30:00Z',
+                    'last_sync': '2025-01-15T10:30:00Z',
                     'records_synced': 1547,
                     'errors': 0
                 },
                 'compass': {
                     'status': 'active',
-                    'last_sync': '2024-01-15T10:30:00Z',
+                    'last_sync': '2025-01-15T10:30:00Z',
                     'controls_synced': 64,
                     'errors': 0
                 },
                 'atlas': {
                     'status': 'active',
-                    'last_sync': '2024-01-15T10:30:00Z',
+                    'last_sync': '2025-01-15T10:30:00Z',
                     'events_reported': 23,
                     'errors': 0
                 }
             },
             'overall_health': 'healthy',
-            'next_scheduled_sync': '2024-01-15T10:45:00Z'
+            'next_scheduled_sync': '2025-01-15T10:45:00Z'
         }
         
         return sync_status

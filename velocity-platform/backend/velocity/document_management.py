@@ -840,7 +840,7 @@ class VelocityDocumentManager:
         html_content += """
                 <div class="footer">
                     <p>This report was generated automatically by Velocity AI</p>
-                    <p>© 2024 Velocity AI. All rights reserved.</p>
+                    <p>© 2025 Velocity AI. All rights reserved.</p>
                 </div>
             </div>
         </body>

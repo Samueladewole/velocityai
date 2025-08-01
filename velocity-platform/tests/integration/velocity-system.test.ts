@@ -236,7 +236,7 @@ describe('Velocity System Integration', () => {
         type: 'agent_progress',
         agentId: 'agent-123',
         progress: 67,
-        estimatedCompletion: '2024-01-15T14:30:00Z'
+        estimatedCompletion: '2025-01-15T14:30:00Z'
       });
 
       expect(updates).toHaveLength(3);

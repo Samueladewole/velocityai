@@ -70,7 +70,7 @@ export const TrustScoreShare: React.FC = () => {
     trustScore: 94,
     trustTier: 'Platinum',
     industry: 'Technology',
-    lastUpdated: '2024-01-20',
+    lastUpdated: '2025-01-20',
     certifications: ['ISO 27001', 'SOC 2 Type II', 'GDPR Compliant', 'TISAX'],
     keyMetrics: {
       complianceFrameworks: 12,
@@ -86,7 +86,7 @@ export const TrustScoreShare: React.FC = () => {
 
   const generateShareUrl = () => {
     const baseUrl = 'https://trust.erip.ai/profile/';
-    const profileId = 'nt-solutions-2024';
+    const profileId = 'nt-solutions-2025';
     const params = new URLSearchParams();
     
     if (sharingSettings.industryComparison) params.append('compare', 'industry');

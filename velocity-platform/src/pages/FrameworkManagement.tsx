@@ -76,7 +76,7 @@ export const FrameworkManagement: React.FC = () => {
       implementedControls: 73,
       overlapControls: 65,
       trustPoints: 1250,
-      complianceDate: '2024-06-30',
+      complianceDate: '2025-06-30',
       priority: 'critical',
       description: 'International standard for information security management systems',
       icon: Shield,
@@ -93,7 +93,7 @@ export const FrameworkManagement: React.FC = () => {
       implementedControls: 54,
       overlapControls: 58,
       trustPoints: 980,
-      complianceDate: '2024-03-15',
+      complianceDate: '2025-03-15',
       priority: 'critical',
       description: 'Audit standard for service organizations handling customer data',
       icon: Award,
@@ -127,7 +127,7 @@ export const FrameworkManagement: React.FC = () => {
       implementedControls: 23,
       overlapControls: 89,
       trustPoints: 180,
-      complianceDate: '2024-10-17',
+      complianceDate: '2025-10-17',
       priority: 'high',
       description: 'EU directive on security of network and information systems',
       icon: Network,
@@ -181,7 +181,7 @@ export const FrameworkManagement: React.FC = () => {
       overlapPercentage: 95,
       trustPoints: 45,
       evidence: ['Policy Document', 'Board Approval', 'Training Records'],
-      lastUpdated: '2024-01-15'
+      lastUpdated: '2025-01-15'
     },
     {
       id: 'cm-002',
@@ -194,7 +194,7 @@ export const FrameworkManagement: React.FC = () => {
       overlapPercentage: 88,
       trustPoints: 55,
       evidence: ['Access Control Matrix', 'User Reviews'],
-      lastUpdated: '2024-01-20'
+      lastUpdated: '2025-01-20'
     },
     {
       id: 'cm-003',
@@ -207,7 +207,7 @@ export const FrameworkManagement: React.FC = () => {
       overlapPercentage: 75,
       trustPoints: 40,
       evidence: ['Security Assessment', 'Encryption Standards'],
-      lastUpdated: '2024-01-10'
+      lastUpdated: '2025-01-10'
     }
   ];
 

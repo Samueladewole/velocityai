@@ -21,7 +21,7 @@ import {
   Eye
 } from 'lucide-react';
 
-// Industry data sources: IBM/Ponemon 2024, Forrester studies, Gartner research
+// Industry data sources: IBM/Ponemon 2025, Forrester studies, Gartner research
 // All figures based on documented case studies and industry benchmarks
 const coreTools = [
   // Phase 1: Immediate Value Discovery
@@ -41,7 +41,7 @@ const coreTools = [
     roi: '234%+',
     savings: 'Up to €4.9M*',
     timeToValue: '< 1 week',
-    industryBenchmark: 'Avg breach cost: €4.88M (IBM 2024)',
+    industryBenchmark: 'Avg breach cost: €4.88M (IBM 2025)',
     keyBenefits: [
       'Monte Carlo risk modeling in financial terms',
       'Reduce breach costs by €2.2M+ (IBM AI study)', 
@@ -237,7 +237,7 @@ export const ToolsOverview: React.FC = () => {
     const steps = 60;
     const increment = duration / steps;
     
-    const targetSavings = 4880000; // Based on IBM avg breach cost 2024
+    const targetSavings = 4880000; // Based on IBM avg breach cost 2025
     const targetAvailable = coreTools.filter(tool => tool.available).length;
     
     let step = 0;
@@ -508,7 +508,7 @@ export const ToolsOverview: React.FC = () => {
             <p className="font-semibold">Data Sources & Disclaimers:</p>
             <p>
               <strong>*Results vary by organization.</strong> Figures based on industry studies including:
-              IBM Cost of Data Breach Report 2024 (€4.88M avg breach cost), 
+              IBM Cost of Data Breach Report 2025 (€4.88M avg breach cost), 
               Forrester Total Economic Impact studies (234-426% ROI documented), 
               Microsoft Sentinel efficiency improvements (93% time reduction),
               Secureframe automation study (6 hrs/week saved per user).

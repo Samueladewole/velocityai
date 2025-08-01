@@ -370,7 +370,7 @@ Write for {customer.industry.value} industry decision makers who care about busi
 
         try:
             response = await self.anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-3-5-sonnet-20251022",
                 max_tokens=4000,
                 temperature=0.4,
                 messages=[{"role": "user", "content": prompt}]
@@ -637,7 +637,7 @@ Format as detailed paragraphs with clear structure."""
         
         try:
             response = await self.anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-3-5-sonnet-20251022",
                 max_tokens=2000,
                 temperature=0.3,
                 messages=[{"role": "user", "content": prompt}]

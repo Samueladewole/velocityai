@@ -86,7 +86,7 @@ interface DPIAAssessment {
 export const PrivacyManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState('shadow-it');
   const [scanning, setScanning] = useState(false);
-  const [lastScan, setLastScan] = useState('2024-01-23 14:30');
+  const [lastScan, setLastScan] = useState('2025-01-23 14:30');
 
   // Sample data
   const shadowITApps: ShadowITApp[] = [
@@ -97,7 +97,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'medium',
       dataTypes: ['Personal Data', 'Business Data', 'IP'],
       users: 23,
-      lastSeen: '2024-01-23',
+      lastSeen: '2025-01-23',
       compliance: { gdpr: true, soc2: true, iso27001: false },
     },
     {
@@ -107,7 +107,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'low',
       dataTypes: ['Personal Data', 'Communication Data'],
       users: 156,
-      lastSeen: '2024-01-23',
+      lastSeen: '2025-01-23',
       compliance: { gdpr: true, soc2: true, iso27001: true },
     },
     {
@@ -117,7 +117,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'high',
       dataTypes: ['Personal Data', 'Financial Data', 'Customer Data'],
       users: 8,
-      lastSeen: '2024-01-22',
+      lastSeen: '2025-01-22',
       compliance: { gdpr: false, soc2: true, iso27001: false },
     },
     {
@@ -127,7 +127,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'low',
       dataTypes: ['Business Data'],
       users: 45,
-      lastSeen: '2024-01-21',
+      lastSeen: '2025-01-21',
       compliance: { gdpr: true, soc2: false, iso27001: false },
     }
   ];
@@ -139,8 +139,8 @@ export const PrivacyManagement: React.FC = () => {
       requesterEmail: 'john.doe@example.com',
       type: 'access',
       status: 'pending',
-      submitted: '2024-01-20',
-      deadline: '2024-02-19',
+      submitted: '2025-01-20',
+      deadline: '2025-02-19',
       trustPoints: 50
     },
     {
@@ -149,8 +149,8 @@ export const PrivacyManagement: React.FC = () => {
       requesterEmail: 'jane.smith@example.com',
       type: 'erasure',
       status: 'in_progress',
-      submitted: '2024-01-18',
-      deadline: '2024-02-17',
+      submitted: '2025-01-18',
+      deadline: '2025-02-17',
       trustPoints: 75
     },
     {
@@ -159,8 +159,8 @@ export const PrivacyManagement: React.FC = () => {
       requesterEmail: 'mike.wilson@example.com',
       type: 'portability',
       status: 'overdue',
-      submitted: '2024-01-10',
-      deadline: '2024-02-09',
+      submitted: '2025-01-10',
+      deadline: '2025-02-09',
       trustPoints: 100
     }
   ];
@@ -175,7 +175,7 @@ export const PrivacyManagement: React.FC = () => {
       recipients: ['Sales Team', 'Customer Support'],
       retention: '7 years',
       status: 'compliant',
-      lastReviewed: '2024-01-15'
+      lastReviewed: '2025-01-15'
     },
     {
       id: 'ropa-2',
@@ -196,7 +196,7 @@ export const PrivacyManagement: React.FC = () => {
       project: 'Customer Analytics Platform',
       riskLevel: 'high',
       status: 'approved',
-      created: '2024-01-15',
+      created: '2025-01-15',
       reviewer: 'Privacy Officer',
       findings: 8,
       mitigation: 8
@@ -206,7 +206,7 @@ export const PrivacyManagement: React.FC = () => {
       project: 'Employee Wellness App',
       riskLevel: 'medium',
       status: 'review',
-      created: '2024-01-10',
+      created: '2025-01-10',
       reviewer: 'Legal Team',
       findings: 3,
       mitigation: 2

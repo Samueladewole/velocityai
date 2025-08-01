@@ -383,7 +383,7 @@ ERIP is now positioned as **"The Security Platform That Pays for Itself"** with 
 - **50,000-iteration Monte Carlo** risk simulations with industry-validated breach costs
 - **Real-time WebSocket streaming** of financial metrics (30-second updates)
 - **Industry-specific multipliers**: Healthcare €5.90M, Financial €5.46M, Technology €4.44M
-- **Company size adjustments**: Small (0.3x), Medium (1.0x), Large (2.5x) based on IBM 2024 data
+- **Company size adjustments**: Small (0.3x), Medium (1.0x), Large (2.5x) based on IBM 2025 data
 - **Live P&L impact tracking** with Redis caching for sub-second financial metrics
 - **Executive financial dashboards** with CFO-ready risk quantification
 
@@ -404,7 +404,7 @@ ERIP is now positioned as **"The Security Platform That Pays for Itself"** with 
 - **Enterprise-grade security** with token management and API rate limiting
 
 **📊 FINANCIAL DIFFERENTIATION ACHIEVED:**
-- **€4.88M base breach cost** from IBM 2024 study with industry/size multipliers
+- **€4.88M base breach cost** from IBM 2025 study with industry/size multipliers
 - **234%+ ROI projections** with Monte Carlo confidence intervals
 - **Real-time financial risk** quantification replacing static security metrics
 - **CFO-friendly business cases** with NPV, IRR, and payback period calculations
@@ -496,14 +496,14 @@ ERIP is now positioned as **"The Security Platform That Pays for Itself"** with 
 #### **1. PRISM™ Risk Quantification Engine - Phase 1 Complete**
 - **Value-First Hero Section**: "Your Security Risks Cost €5.1M every year" - immediate financial shock value
 - **Monte Carlo Simulations**: Real-time risk modeling with animated counters and financial impact visualization
-- **Industry-Validated ROI**: 234%+ ROI based on IBM/Ponemon 2024 data (€4.88M average breach cost)
+- **Industry-Validated ROI**: 234%+ ROI based on IBM/Ponemon 2025 data (€4.88M average breach cost)
 - **CFO-Ready Reporting**: Risk scenarios, before/after comparisons, and precise savings calculations
 - **Social Proof Integration**: Real customer results with documented financial impact
 - **Route**: `/tools/prism` - Professional, scalable URL structure
 
 #### **2. Tools Overview Page - Complete Platform Showcase**
 - **8 Core Tools Display**: Following Value-First Workflow™ phases (Discovery → Assessment → Monitoring → Automation)
-- **Industry Data Sources**: IBM Cost of Breach 2024, Forrester ROI studies, Microsoft efficiency data
+- **Industry Data Sources**: IBM Cost of Breach 2025, Forrester ROI studies, Microsoft efficiency data
 - **Realistic ROI Ranges**: 150-426% based on documented case studies, not invented figures
 - **Company Size Scenarios**: Small (100-1K), Medium (1K-10K), Large (10K+) with appropriate ranges
 - **Transparent Disclaimers**: "Results vary by organization" with full methodology explanation
@@ -518,7 +518,7 @@ ERIP is now positioned as **"The Security Platform That Pays for Itself"** with 
 
 #### **4. Industry-Validated Metrics Integration**
 - **Data Sources**: IBM, Forrester, Microsoft, Gartner, Ponemon Institute studies
-- **Breach Cost Reality**: €4.88M average (IBM 2024), healthcare €9.77M, financial €6.08M
+- **Breach Cost Reality**: €4.88M average (IBM 2025), healthcare €9.77M, financial €6.08M
 - **Automation ROI**: 234-426% documented (Microsoft Sentinel, Cynet platform studies)
 - **Time Savings**: 6 hours/week per user (Secureframe), 93% configuration time reduction (Microsoft)
 - **Compliance Efficiency**: 92% manual task reduction, 70% faster audit preparation

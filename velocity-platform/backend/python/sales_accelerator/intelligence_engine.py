@@ -225,7 +225,7 @@ Respond as a trusted compliance advisor who understands both regulatory requirem
 
         try:
             response = await self.anthropic_client.messages.create(
-                model="claude-3-5-sonnet-20241022",
+                model="claude-3-5-sonnet-20251022",
                 max_tokens=2000,
                 temperature=0.3,
                 messages=[{"role": "user", "content": prompt}]

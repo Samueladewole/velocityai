@@ -227,7 +227,7 @@ export class EnhancedQuestionExtractionService {
             effectiveness: 0.92,
             buyerFeedback: 4.5,
             usageCount: 23,
-            lastModified: new Date('2024-01-15')
+            lastModified: new Date('2025-01-15')
           },
           {
             text: 'We use industry-standard encryption (AES-256) for data at rest with centralized key management.',
@@ -656,7 +656,7 @@ export class EnhancedQuestionExtractionService {
         title: 'SOC 2 Type II Report',
         type: 'audit',
         relevanceScore: 0.89,
-        url: '/evidence/soc2-report-2024'
+        url: '/evidence/soc2-report-2025'
       }
     ]
 

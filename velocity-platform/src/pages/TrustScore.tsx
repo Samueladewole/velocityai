@@ -112,9 +112,9 @@ const trustDrivers = {
 
 // Achievements
 const achievements = [
-  { name: 'First Assessment', icon: Trophy, unlocked: true, date: '2024-01-15' },
-  { name: 'Compliance Champion', icon: Award, unlocked: true, date: '2024-03-22' },
-  { name: 'Security Master', icon: Shield, unlocked: true, date: '2024-05-10' },
+  { name: 'First Assessment', icon: Trophy, unlocked: true, date: '2025-01-15' },
+  { name: 'Compliance Champion', icon: Award, unlocked: true, date: '2025-03-22' },
+  { name: 'Security Master', icon: Shield, unlocked: true, date: '2025-05-10' },
   { name: 'Trust Leader', icon: Target, unlocked: false, requirement: 'Reach 85 Trust Score' }
 ];
 

@@ -269,14 +269,14 @@ export const AssessmentMarketplaceNew: React.FC = () => {
         memberSince: '2023-01-15'
       },
       tags: ['iso27001', 'security', 'certification', 'gap-analysis'],
-      lastUpdated: '2024-01-15',
+      lastUpdated: '2025-01-15',
       publishedDate: '2023-06-20',
       features: ['Automated scoring', 'Gap analysis', 'Remediation plan', 'Trust Points rewards'],
       isFavorite: false,
       isOwned: false,
       previewAvailable: true,
       versionHistory: [
-        { version: '2.1', date: '2024-01-15', changes: 'Updated control requirements' },
+        { version: '2.1', date: '2025-01-15', changes: 'Updated control requirements' },
         { version: '2.0', date: '2023-12-01', changes: 'Major framework update' }
       ],
       compatibility: ['Web', 'Mobile', 'API'],
@@ -339,14 +339,14 @@ export const AssessmentMarketplaceNew: React.FC = () => {
         memberSince: '2023-03-10'
       },
       tags: ['gdpr', 'privacy', 'compliance', 'audit'],
-      lastUpdated: '2024-01-20',
+      lastUpdated: '2025-01-20',
       publishedDate: '2023-07-15',
       features: ['DPIA templates', 'Legal guidance', 'Compliance dashboard', 'Action items'],
       isFavorite: true,
       isOwned: false,
       previewAvailable: true,
       versionHistory: [
-        { version: '1.5', date: '2024-01-20', changes: 'Added new DPIA requirements' },
+        { version: '1.5', date: '2025-01-20', changes: 'Added new DPIA requirements' },
         { version: '1.4', date: '2023-11-15', changes: 'Enhanced data mapping' }
       ],
       compatibility: ['Web', 'Mobile'],
@@ -409,14 +409,14 @@ export const AssessmentMarketplaceNew: React.FC = () => {
         memberSince: '2022-11-05'
       },
       tags: ['soc2', 'audit', 'compliance', 'controls'],
-      lastUpdated: '2024-01-18',
+      lastUpdated: '2025-01-18',
       publishedDate: '2023-05-10',
       features: ['Control testing', 'Evidence collection', 'Audit preparation', 'Continuous monitoring'],
       isFavorite: false,
       isOwned: true,
       previewAvailable: true,
       versionHistory: [
-        { version: '3.2', date: '2024-01-18', changes: 'Updated TSC criteria' },
+        { version: '3.2', date: '2025-01-18', changes: 'Updated TSC criteria' },
         { version: '3.1', date: '2023-10-20', changes: 'Enhanced control testing' }
       ],
       compatibility: ['Web', 'API'],
@@ -479,14 +479,14 @@ export const AssessmentMarketplaceNew: React.FC = () => {
         memberSince: '2023-08-22'
       },
       tags: ['ai', 'risk', 'governance', 'eu-ai-act'],
-      lastUpdated: '2024-01-22',
+      lastUpdated: '2025-01-22',
       publishedDate: '2023-09-01',
       features: ['Risk categorization', 'Mitigation planning', 'Compliance mapping', 'AI system registry'],
       isFavorite: false,
       isOwned: false,
       previewAvailable: true,
       versionHistory: [
-        { version: '1.3', date: '2024-01-22', changes: 'Updated for final AI Act' },
+        { version: '1.3', date: '2025-01-22', changes: 'Updated for final AI Act' },
         { version: '1.2', date: '2023-12-10', changes: 'Added bias detection' }
       ],
       compatibility: ['Web', 'API'],
@@ -549,14 +549,14 @@ export const AssessmentMarketplaceNew: React.FC = () => {
         memberSince: '2022-12-15'
       },
       tags: ['cloud', 'security', 'aws', 'azure', 'gcp'],
-      lastUpdated: '2024-01-12',
+      lastUpdated: '2025-01-12',
       publishedDate: '2023-04-20',
       features: ['Multi-cloud support', 'Best practices', 'Automated checks', 'Remediation guides'],
       isFavorite: true,
       isOwned: false,
       previewAvailable: true,
       versionHistory: [
-        { version: '2.4', date: '2024-01-12', changes: 'Added GCP support' },
+        { version: '2.4', date: '2025-01-12', changes: 'Added GCP support' },
         { version: '2.3', date: '2023-09-30', changes: 'Enhanced Azure coverage' }
       ],
       compatibility: ['Web', 'API', 'CLI'],
@@ -619,14 +619,14 @@ export const AssessmentMarketplaceNew: React.FC = () => {
         memberSince: '2023-10-01'
       },
       tags: ['nist', 'maturity', 'cybersecurity', 'framework'],
-      lastUpdated: '2024-01-10',
+      lastUpdated: '2025-01-10',
       publishedDate: '2023-10-15',
       features: ['Maturity scoring', 'Roadmap planning', 'Benchmark comparison', 'Progress tracking'],
       isFavorite: false,
       isOwned: false,
       previewAvailable: false,
       versionHistory: [
-        { version: '1.2', date: '2024-01-10', changes: 'Updated NIST 2.0 alignment' },
+        { version: '1.2', date: '2025-01-10', changes: 'Updated NIST 2.0 alignment' },
         { version: '1.1', date: '2023-11-20', changes: 'Added benchmarking' }
       ],
       compatibility: ['Web'],

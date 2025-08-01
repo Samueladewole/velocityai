@@ -268,7 +268,7 @@ ADD 13TH AGENT:
 ✅ Agent Name: 'International Transfer Compliance Agent'
 ✅ Specialization: 'Cross-border data flow monitoring and assessment'
 ✅ Capabilities: TIA automation, adequacy tracking, SCC management
-✅ Status: 'Under development - launching Q2 2024'
+✅ Status: 'Under development - launching Q2 2025'
 ✅ Automation Level: 95%
 
 HUMANIZE TECHNICAL TERMS:

@@ -543,7 +543,7 @@ class GDPRComplianceAgent:
             },
             "transaction_history": [
                 {
-                    "date": "2024-01-15",
+                    "date": "2025-01-15",
                     "description": "ATM Withdrawal",
                     "amount": -100.00,
                     "balance": 1500.00

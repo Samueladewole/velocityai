@@ -715,7 +715,7 @@ async def example_advanced_instruments():
         option_type=OptionType.CALL,
         option_style=OptionStyle.AMERICAN,
         strike_price=Decimal("150.00"),
-        expiration_date=date(2024, 3, 15),
+        expiration_date=date(2025, 3, 15),
         premium=Decimal("5.25"),
         delta_greek=Decimal("0.65")
     )

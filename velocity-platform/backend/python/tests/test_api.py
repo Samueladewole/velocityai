@@ -60,7 +60,7 @@ class TestAuthentication:
         """Test login with valid credentials"""
         login_data = {
             "email": "admin@erip.com",
-            "password": "erip-admin-2024"
+            "password": "erip-admin-2025"
         }
         
         response = client.post("/auth/login", json=login_data)
@@ -286,7 +286,7 @@ class TestBEACONAPI:
     def test_generate_report(self, client, admin_headers):
         """Test business impact report generation"""
         report_data = {
-            "reporting_period": "Q4 2024",
+            "reporting_period": "Q4 2025",
             "include_projections": True
         }
         

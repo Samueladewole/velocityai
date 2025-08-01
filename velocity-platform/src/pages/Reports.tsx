@@ -64,7 +64,7 @@ export const Reports: React.FC = () => {
 
   const recentReports = [
     {
-      name: 'Q4 2024 Executive Summary',
+      name: 'Q4 2025 Executive Summary',
       type: 'Executive',
       generated: '2 days ago',
       status: 'Ready',

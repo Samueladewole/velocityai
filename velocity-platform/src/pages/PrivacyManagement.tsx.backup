@@ -97,7 +97,7 @@ interface DPIAAssessment {
 export const PrivacyManagement: React.FC = () => {
   const [activeTab, setActiveTab] = useState('shadow-it');
   const [scanning, setScanning] = useState(false);
-  const [lastScan, setLastScan] = useState('2024-01-23 14:30');
+  const [lastScan, setLastScan] = useState('2025-01-23 14:30');
 
   // Sample data
   const shadowITApps: ShadowITApp[] = [
@@ -108,7 +108,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'medium',
       dataTypes: ['Personal Data', 'Business Data', 'IP'],
       users: 23,
-      lastSeen: '2024-01-23',
+      lastSeen: '2025-01-23',
       compliance: { gdpr: true, soc2: true, iso27001: false },
       trustImpact: -15
     },
@@ -119,7 +119,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'low',
       dataTypes: ['Business Data', 'IP'],
       users: 12,
-      lastSeen: '2024-01-23',
+      lastSeen: '2025-01-23',
       compliance: { gdpr: true, soc2: true, iso27001: true },
       trustImpact: -5
     },
@@ -130,7 +130,7 @@ export const PrivacyManagement: React.FC = () => {
       riskLevel: 'critical',
       dataTypes: ['Personal Data', 'Financial Data'],
       users: 5,
-      lastSeen: '2024-01-22',
+      lastSeen: '2025-01-22',
       compliance: { gdpr: false, soc2: false, iso27001: false },
       trustImpact: -50
     }
@@ -141,8 +141,8 @@ export const PrivacyManagement: React.FC = () => {
       id: 'dsar-1',
       requestType: 'access',
       requesterEmail: 'john.doe@example.com',
-      submissionDate: '2024-01-20',
-      dueDate: '2024-02-19',
+      submissionDate: '2025-01-20',
+      dueDate: '2025-02-19',
       status: 'processing',
       dataSubjects: ['john.doe@example.com'],
       estimatedRecords: 1247,
@@ -152,8 +152,8 @@ export const PrivacyManagement: React.FC = () => {
       id: 'dsar-2',
       requestType: 'deletion',
       requesterEmail: 'jane.smith@oldcompany.com',
-      submissionDate: '2024-01-18',
-      dueDate: '2024-02-17',
+      submissionDate: '2025-01-18',
+      dueDate: '2025-02-17',
       status: 'completed',
       dataSubjects: ['jane.smith@oldcompany.com'],
       estimatedRecords: 89,
@@ -163,8 +163,8 @@ export const PrivacyManagement: React.FC = () => {
       id: 'dsar-3',
       requestType: 'portability',
       requesterEmail: 'user@domain.com',
-      submissionDate: '2024-01-10',
-      dueDate: '2024-02-09',
+      submissionDate: '2025-01-10',
+      dueDate: '2025-02-09',
       status: 'overdue',
       dataSubjects: ['user@domain.com'],
       estimatedRecords: 2156,
@@ -183,7 +183,7 @@ export const PrivacyManagement: React.FC = () => {
       retentionPeriod: '7 years after contract end',
       legalBasis: 'Contract Performance (Art. 6(1)(b))',
       riskAssessment: 'medium',
-      lastReviewed: '2024-01-15',
+      lastReviewed: '2025-01-15',
       status: 'compliant'
     },
     {
@@ -196,7 +196,7 @@ export const PrivacyManagement: React.FC = () => {
       retentionPeriod: '10 years after employment end',
       legalBasis: 'Contract Performance (Art. 6(1)(b))',
       riskAssessment: 'high',
-      lastReviewed: '2024-01-10',
+      lastReviewed: '2025-01-10',
       status: 'needs_review'
     }
   ];
@@ -208,7 +208,7 @@ export const PrivacyManagement: React.FC = () => {
       assessmentType: 'mandatory',
       riskLevel: 'high',
       status: 'review',
-      createdDate: '2024-01-15',
+      createdDate: '2025-01-15',
       completionPercentage: 75,
       risks: [
         {
@@ -232,7 +232,7 @@ export const PrivacyManagement: React.FC = () => {
       assessmentType: 'mandatory',
       riskLevel: 'high',
       status: 'approved',
-      createdDate: '2024-01-08',
+      createdDate: '2025-01-08',
       completionPercentage: 100,
       risks: [
         {

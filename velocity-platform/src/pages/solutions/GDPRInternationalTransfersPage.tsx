@@ -230,7 +230,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
     {
       name: "International Transfer Compliance Agent",
       description: "Cross-border data flow monitoring and assessment",
-      automation: "Coming Q2 2024",
+      automation: "Coming Q2 2025",
       icon: Globe,
       specialty: "TIA automation, adequacy tracking, SCC management",
       status: "under_development"

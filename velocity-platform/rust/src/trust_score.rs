@@ -504,7 +504,7 @@ impl TrustScoreEngine {
     fn create_benchmark_verification(&self, calculation: &TrustScoreCalculation, org_id: &str) -> BenchmarkVerification {
         let industry_hash = {
             let mut hasher = Sha256::new();
-            hasher.update("industry_benchmark_2024_q4".as_bytes());
+            hasher.update("industry_benchmark_2025_q4".as_bytes());
             hex::encode(hasher.finalize())
         };
 
@@ -524,9 +524,9 @@ impl TrustScoreEngine {
 
     fn get_historical_trust_proofs(&self, org_id: &str) -> Vec<String> {
         vec![
-            format!("{}_2024_q1_trust_proof", org_id),
-            format!("{}_2024_q2_trust_proof", org_id),
-            format!("{}_2024_q3_trust_proof", org_id),
+            format!("{}_2025_q1_trust_proof", org_id),
+            format!("{}_2025_q2_trust_proof", org_id),
+            format!("{}_2025_q3_trust_proof", org_id),
         ]
     }
 

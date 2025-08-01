@@ -269,7 +269,7 @@ async def get_integration_dashboard(
             },
             "recent_integrations": [
                 {
-                    "timestamp": "2024-01-15T14:30:00Z",
+                    "timestamp": "2025-01-15T14:30:00Z",
                     "flow": "compliance_driven_security",
                     "source": "COMPASS",
                     "target": "ATLAS",
@@ -277,7 +277,7 @@ async def get_integration_dashboard(
                     "execution_time": 1.8
                 },
                 {
-                    "timestamp": "2024-01-15T13:45:00Z", 
+                    "timestamp": "2025-01-15T13:45:00Z", 
                     "flow": "security_roi_tracking",
                     "source": "ATLAS",
                     "target": "BEACON",
@@ -285,7 +285,7 @@ async def get_integration_dashboard(
                     "execution_time": 2.1
                 },
                 {
-                    "timestamp": "2024-01-15T12:15:00Z",
+                    "timestamp": "2025-01-15T12:15:00Z",
                     "flow": "threat_informed_assessment",
                     "source": "NEXUS",
                     "target": "ATLAS", 

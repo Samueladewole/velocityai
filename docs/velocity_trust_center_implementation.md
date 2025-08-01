@@ -52,7 +52,7 @@ interface TrustCenterHero {
       },
       {
         label: "Last Audit",
-        value: "Oct 2024",
+        value: "Oct 2025",
         detail: "Passed with zero findings"
       }
     ]

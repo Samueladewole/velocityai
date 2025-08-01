@@ -50,6 +50,7 @@ class Platform(enum.Enum):
     GITHUB = "github"
     GOOGLE_WORKSPACE = "google_workspace"
     SLACK = "slack"
+    GDPR = "gdpr"
     CUSTOM = "custom"
 
 class Framework(enum.Enum):

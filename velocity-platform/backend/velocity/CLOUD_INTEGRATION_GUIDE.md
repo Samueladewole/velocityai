@@ -80,7 +80,7 @@ GET /api/v1/integrations/cloud/{platform}/test?integration_id={id}
     "status": "healthy",
     "response_time_ms": 245.6,
     "error_message": null,
-    "last_checked": "2024-01-01T12:00:00Z",
+    "last_checked": "2025-01-01T12:00:00Z",
     "metadata": {
       "account_id": "123456789012",
       "region": "us-east-1"
@@ -120,7 +120,7 @@ GET /api/v1/integrations/cloud/status
         "platform": "aws",
         "db_status": "connected",
         "connection_status": "healthy",
-        "last_sync": "2024-01-01T11:30:00Z",
+        "last_sync": "2025-01-01T11:30:00Z",
         "supported_evidence_types": ["policies", "security_groups", "encryption_status"]
       }
     ],
@@ -315,12 +315,12 @@ Each evidence item contains:
   "data": {
     "policy_name": "example-policy",
     "policy_arn": "arn:aws:iam::123456789012:policy/example-policy",
-    "create_date": "2024-01-01T00:00:00Z"
+    "create_date": "2025-01-01T00:00:00Z"
   },
   "evidence_metadata": {
     "platform": "aws",
     "collection_type": "policies",
-    "collected_at": "2024-01-01T12:00:00Z"
+    "collected_at": "2025-01-01T12:00:00Z"
   },
   "confidence_score": 0.85,
   "trust_points": 10
@@ -359,7 +359,7 @@ Failed operations are automatically retried with exponential backoff:
       "field": "access_key_id"
     }
   ],
-  "timestamp": "2024-01-01T12:00:00Z"
+  "timestamp": "2025-01-01T12:00:00Z"
 }
 ```
 

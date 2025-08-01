@@ -67,7 +67,7 @@ const getCompanyData = (slug: string) => {
     quickStats: [
       { label: 'Frameworks', value: '12', detail: 'ISO 27001, SOC2, GDPR...' },
       { label: 'Uptime', value: '99.99%', detail: 'Last 90 days' },
-      { label: 'Last Audit', value: 'Oct 2024', detail: 'Passed with zero findings' }
+      { label: 'Last Audit', value: 'Oct 2025', detail: 'Passed with zero findings' }
     ]
   };
 
@@ -111,7 +111,7 @@ const complianceTimeline = [
   { date: '2022-08', event: 'SOC 2 Type II Achieved', type: 'certification', status: 'completed' },
   { date: '2023-01', event: 'GDPR Compliance Verified', type: 'compliance', status: 'completed' },
   { date: '2023-09', event: 'Penetration Test Completed', type: 'security', status: 'completed' },
-  { date: '2024-12', event: 'ISO 27001 Renewal', type: 'renewal', status: 'upcoming' },
+  { date: '2025-12', event: 'ISO 27001 Renewal', type: 'renewal', status: 'upcoming' },
   { date: '2025-06', event: 'ISO 27701 Certification', type: 'certification', status: 'planned' }
 ];
 
@@ -803,11 +803,11 @@ export const TrustCenter: React.FC = () => {
                 <CardContent>
                   <div className="space-y-3">
                     {[
-                      { name: 'Security Policy', access: 'public', updated: '2024-10-15' },
-                      { name: 'Privacy Policy', access: 'public', updated: '2024-11-01' },
-                      { name: 'Acceptable Use Policy', access: 'public', updated: '2024-09-20' },
-                      { name: 'Incident Response Plan', access: 'gated', updated: '2024-08-30' },
-                      { name: 'Data Processing Agreement', access: 'public', updated: '2024-10-01' }
+                      { name: 'Security Policy', access: 'public', updated: '2025-10-15' },
+                      { name: 'Privacy Policy', access: 'public', updated: '2025-11-01' },
+                      { name: 'Acceptable Use Policy', access: 'public', updated: '2025-09-20' },
+                      { name: 'Incident Response Plan', access: 'gated', updated: '2025-08-30' },
+                      { name: 'Data Processing Agreement', access: 'public', updated: '2025-10-01' }
                     ].map((doc, index) => (
                       <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-slate-50">
                         <div>
@@ -835,11 +835,11 @@ export const TrustCenter: React.FC = () => {
                 <CardContent>
                   <div className="space-y-3">
                     {[
-                      { name: 'SOC 2 Type II Report', access: 'restricted', date: 'Mar 2024' },
-                      { name: 'Penetration Test Summary', access: 'gated', date: 'Sep 2024' },
-                      { name: 'Vulnerability Scan Results', access: 'gated', date: 'Nov 2024' },
-                      { name: 'Compliance Assessment', access: 'gated', date: 'Oct 2024' },
-                      { name: 'Third-Party Risk Assessment', access: 'restricted', date: 'Aug 2024' }
+                      { name: 'SOC 2 Type II Report', access: 'restricted', date: 'Mar 2025' },
+                      { name: 'Penetration Test Summary', access: 'gated', date: 'Sep 2025' },
+                      { name: 'Vulnerability Scan Results', access: 'gated', date: 'Nov 2025' },
+                      { name: 'Compliance Assessment', access: 'gated', date: 'Oct 2025' },
+                      { name: 'Third-Party Risk Assessment', access: 'restricted', date: 'Aug 2025' }
                     ].map((report, index) => (
                       <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-slate-50">
                         <div>

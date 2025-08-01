@@ -47,7 +47,7 @@ import {
 
 // Market data
 const marketGrowthData = [
-  { year: '2024', value: 52, label: '€52B' },
+  { year: '2025', value: 52, label: '€52B' },
   { year: '2025', value: 61, label: '€61B' },
   { year: '2026', value: 71, label: '€71B' },
   { year: '2027', value: 83, label: '€83B' },
@@ -330,7 +330,7 @@ export const SeedPitch: React.FC = () => {
                 <CardContent className="space-y-3">
                   <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                     <span className="font-medium">NIS2 Directive</span>
-                    <Badge className="bg-blue-600">Oct 2024</Badge>
+                    <Badge className="bg-blue-600">Oct 2025</Badge>
                   </div>
                   <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <span className="font-medium">DORA</span>
@@ -1078,7 +1078,7 @@ export const SeedPitch: React.FC = () => {
                 <h3>Financial Pain Points</h3>
                 <ul>
                   <li>€2.3M average annual compliance spend per enterprise</li>
-                  <li>€4.88M average data breach cost (IBM 2024)</li>
+                  <li>€4.88M average data breach cost (IBM 2025)</li>
                   <li>86% of compliance activities create zero risk reduction</li>
                 </ul>
               </div>
@@ -1113,7 +1113,7 @@ export const SeedPitch: React.FC = () => {
             <div class="metric">
               <h3>Market Growth</h3>
               <ul>
-                <li>2024: €52B → 2028: €96B (85% growth)</li>
+                <li>2025: €52B → 2028: €96B (85% growth)</li>
                 <li>45,000 EU enterprises in target market</li>
                 <li>€2.3M average annual compliance spend</li>
                 <li>73% actively seeking solutions</li>
@@ -1122,7 +1122,7 @@ export const SeedPitch: React.FC = () => {
             <div class="metric">
               <h3>Regulatory Drivers</h3>
               <ul>
-                <li><strong>NIS2 Directive:</strong> October 2024 - massive compliance wave</li>
+                <li><strong>NIS2 Directive:</strong> October 2025 - massive compliance wave</li>
                 <li><strong>DORA:</strong> January 2025 - financial sector requirements</li>
                 <li><strong>EU AI Act:</strong> 2025-2027 - AI governance demand</li>
                 <li><strong>GDPR Enforcement:</strong> €1.7B fines in 2023</li>
@@ -1301,7 +1301,7 @@ export const SeedPitch: React.FC = () => {
       
       FINANCIAL PAIN POINTS:
       • €2.3M average annual compliance spend per enterprise
-      • €4.88M average data breach cost (IBM 2024)
+      • €4.88M average data breach cost (IBM 2025)
       • 86% of compliance activities create zero risk reduction
       
       OPERATIONAL PAIN POINTS:
@@ -1335,13 +1335,13 @@ export const SeedPitch: React.FC = () => {
       €96B European GRC Market by 2028
       
       MARKET GROWTH:
-      • 2024: €52B → 2028: €96B (85% growth)
+      • 2025: €52B → 2028: €96B (85% growth)
       • 45,000 EU enterprises in target market
       • €2.3M average annual compliance spend
       • 73% actively seeking solutions
       
       REGULATORY DRIVERS:
-      • NIS2 Directive (October 2024) - massive compliance wave
+      • NIS2 Directive (October 2025) - massive compliance wave
       • DORA (January 2025) - financial sector requirements
       • EU AI Act (2025-2027) - AI governance demand
       • GDPR Enforcement - €1.7B fines in 2023
@@ -1531,13 +1531,13 @@ export const SeedPitch: React.FC = () => {
       ===========================
       €96B European GRC Market by 2028
       
-      MARKET GROWTH: €52B (2024) → €96B (2028)
+      MARKET GROWTH: €52B (2025) → €96B (2028)
       TARGET: 45,000 EU enterprises
       SPEND: €2.3M average annual
       DEMAND: 73% actively seeking solutions
       
       REGULATORY DRIVERS:
-      • NIS2 Directive (Oct 2024)
+      • NIS2 Directive (Oct 2025)
       • DORA (Jan 2025)
       • EU AI Act (2025-2027)
       • GDPR Enforcement (€1.7B fines)

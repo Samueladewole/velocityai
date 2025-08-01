@@ -53,7 +53,7 @@ def demonstrate_api_usage():
             "platform": "aws",
             "status": "healthy",
             "response_time_ms": 245.6,
-            "last_checked": "2024-01-15T10:30:00Z",
+            "last_checked": "2025-01-15T10:30:00Z",
             "metadata": {
                 "account_id": "123456789012",
                 "region": "us-west-2"

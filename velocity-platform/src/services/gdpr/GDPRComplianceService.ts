@@ -265,16 +265,16 @@ class GDPRComplianceService {
             type: 'technical',
             measure: 'Encryption at rest and in transit',
             description: 'AES-256 encryption for stored data and TLS 1.3 for data transmission',
-            implementationDate: new Date(2024, 0, 1),
-            reviewDate: new Date(2024, 11, 31),
+            implementationDate: new Date(2025, 0, 1),
+            reviewDate: new Date(2025, 11, 31),
             responsible: 'IT Security Team'
           },
           {
             type: 'organisational',
             measure: 'Access controls and authentication',
             description: 'Role-based access control with multi-factor authentication',
-            implementationDate: new Date(2024, 0, 1),
-            reviewDate: new Date(2024, 5, 30),
+            implementationDate: new Date(2025, 0, 1),
+            reviewDate: new Date(2025, 5, 30),
             responsible: 'Identity and Access Management Team'
           }
         ],
@@ -294,11 +294,11 @@ class GDPRComplianceService {
           riskSources: ['Data breach', 'Unauthorized access', 'Third party processing'],
           mitigationMeasures: ['Strong encryption', 'Access controls', 'Regular audits', 'Staff training'],
           residualRisk: 'low',
-          lastAssessed: new Date(2024, 2, 15),
+          lastAssessed: new Date(2025, 2, 15),
           assessor: 'Data Protection Team'
         },
-        lastReviewed: new Date(2024, 2, 15),
-        nextReview: new Date(2024, 8, 15),
+        lastReviewed: new Date(2025, 2, 15),
+        nextReview: new Date(2025, 8, 15),
         status: 'active'
       },
       {
@@ -364,7 +364,7 @@ class GDPRComplianceService {
             measure: 'Payment card tokenization',
             description: 'Replacement of card details with secure tokens',
             implementationDate: new Date(2023, 6, 1),
-            reviewDate: new Date(2024, 6, 1),
+            reviewDate: new Date(2025, 6, 1),
             responsible: 'Payment Systems Team'
           },
           {
@@ -372,7 +372,7 @@ class GDPRComplianceService {
             measure: 'Real-time fraud monitoring',
             description: 'AI-powered transaction monitoring for fraud detection',
             implementationDate: new Date(2023, 8, 1),
-            reviewDate: new Date(2024, 8, 1),
+            reviewDate: new Date(2025, 8, 1),
             responsible: 'Fraud Prevention Team'
           }
         ],
@@ -392,11 +392,11 @@ class GDPRComplianceService {
           riskSources: ['Payment fraud', 'Data breach', 'System compromise', 'Third country transfers'],
           mitigationMeasures: ['Tokenization', 'End-to-end encryption', 'Fraud monitoring', 'PCI DSS compliance'],
           residualRisk: 'medium',
-          lastAssessed: new Date(2024, 1, 20),
+          lastAssessed: new Date(2025, 1, 20),
           assessor: 'Risk Management Team'
         },
-        lastReviewed: new Date(2024, 1, 20),
-        nextReview: new Date(2024, 7, 20),
+        lastReviewed: new Date(2025, 1, 20),
+        nextReview: new Date(2025, 7, 20),
         status: 'active'
       },
       {
@@ -456,7 +456,7 @@ class GDPRComplianceService {
             measure: 'Data anonymization',
             description: 'Removal or pseudonymization of directly identifying information',
             implementationDate: new Date(2023, 9, 1),
-            reviewDate: new Date(2024, 9, 1),
+            reviewDate: new Date(2025, 9, 1),
             responsible: 'Data Analytics Team'
           },
           {
@@ -464,7 +464,7 @@ class GDPRComplianceService {
             measure: 'Purpose limitation',
             description: 'Strict controls on data usage for specified purposes only',
             implementationDate: new Date(2023, 9, 1),
-            reviewDate: new Date(2024, 3, 1),
+            reviewDate: new Date(2025, 3, 1),
             responsible: 'Data Governance Team'
           }
         ],
@@ -476,11 +476,11 @@ class GDPRComplianceService {
           riskSources: ['Re-identification risk', 'Purpose creep', 'Third party access'],
           mitigationMeasures: ['Anonymization', 'Access controls', 'Purpose limitation', 'Regular audits'],
           residualRisk: 'low',
-          lastAssessed: new Date(2024, 0, 10),
+          lastAssessed: new Date(2025, 0, 10),
           assessor: 'Privacy Team'
         },
-        lastReviewed: new Date(2024, 0, 10),
-        nextReview: new Date(2024, 6, 10),
+        lastReviewed: new Date(2025, 0, 10),
+        nextReview: new Date(2025, 6, 10),
         status: 'active'
       }
     ];

@@ -968,7 +968,7 @@ const EvidenceCollection: React.FC = () => {
       status: 'verified',
       confidence: 98,
       platform: 'aws',
-      collectedAt: '2024-01-15T10:30:00Z'
+      collectedAt: '2025-01-15T10:30:00Z'
     },
     {
       id: '2', 
@@ -979,7 +979,7 @@ const EvidenceCollection: React.FC = () => {
       status: 'pending_review',
       confidence: 95,
       platform: 'manual',
-      collectedAt: '2024-01-15T09:15:00Z'
+      collectedAt: '2025-01-15T09:15:00Z'
     },
     {
       id: '3',
@@ -990,7 +990,7 @@ const EvidenceCollection: React.FC = () => {
       status: 'auto_approved',
       confidence: 100,
       platform: 'gcp',
-      collectedAt: '2024-01-15T08:45:00Z'
+      collectedAt: '2025-01-15T08:45:00Z'
     }
   ];
 

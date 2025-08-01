@@ -106,7 +106,7 @@ export const AIGovernance: React.FC = () => {
       owner: 'Product Team',
       dataTypes: ['Customer Data', 'Communication Logs'],
       complianceStatus: 'compliant',
-      lastAssessment: '2024-01-15',
+      lastAssessment: '2025-01-15',
       trustPoints: 150
     },
     {
@@ -118,7 +118,7 @@ export const AIGovernance: React.FC = () => {
       owner: 'Security Team',
       dataTypes: ['Financial Data', 'Transaction History', 'Personal Data'],
       complianceStatus: 'compliant',
-      lastAssessment: '2024-01-10',
+      lastAssessment: '2025-01-10',
       trustPoints: 300
     },
     {
@@ -130,7 +130,7 @@ export const AIGovernance: React.FC = () => {
       owner: 'Data Team',
       dataTypes: ['Business Documents', 'Metadata'],
       complianceStatus: 'pending_review',
-      lastAssessment: '2024-01-08',
+      lastAssessment: '2025-01-08',
       trustPoints: 75
     },
     {
@@ -156,7 +156,7 @@ export const AIGovernance: React.FC = () => {
       status: 'implemented',
       evidence: ['AI Policy Document v2.1', 'Board Approval Minutes'],
       responsible: 'AI Governance Board',
-      lastReview: '2024-01-15'
+      lastReview: '2025-01-15'
     },
     {
       id: 'iso-2',
@@ -166,7 +166,7 @@ export const AIGovernance: React.FC = () => {
       status: 'implemented',
       evidence: ['Risk Assessment Framework', 'Risk Register'],
       responsible: 'Chief Risk Officer',
-      lastReview: '2024-01-10'
+      lastReview: '2025-01-10'
     },
     {
       id: 'iso-3',
@@ -176,7 +176,7 @@ export const AIGovernance: React.FC = () => {
       status: 'partial',
       evidence: ['Data Quality Guidelines'],
       responsible: 'Data Protection Officer',
-      lastReview: '2024-01-05'
+      lastReview: '2025-01-05'
     },
     {
       id: 'iso-4',
@@ -195,7 +195,7 @@ export const AIGovernance: React.FC = () => {
       id: 'risk-1',
       systemId: 'ai-1',
       systemName: 'Customer Service Chatbot',
-      assessmentDate: '2024-01-15',
+      assessmentDate: '2025-01-15',
       assessor: 'AI Ethics Team',
       riskLevel: 'limited',
       mitigations: ['Output filtering', 'Human oversight', 'Data minimization'],
@@ -207,7 +207,7 @@ export const AIGovernance: React.FC = () => {
       id: 'risk-2',
       systemId: 'ai-2',
       systemName: 'Fraud Detection System',
-      assessmentDate: '2024-01-10',
+      assessmentDate: '2025-01-10',
       assessor: 'Security Team',
       riskLevel: 'high',
       mitigations: ['Explainability features', 'Bias testing', 'Regular audits'],

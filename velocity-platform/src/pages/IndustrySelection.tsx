@@ -134,7 +134,7 @@ const regionalLandscapes: RegionalLandscape[] = [
     description: 'Comprehensive regulatory framework with strict privacy and AI governance',
     keyFrameworks: ['GDPR', 'eIDAS', 'PSD2', 'AI Act', 'NIS2', 'DORA', 'DMA', 'DSA'],
     recentChanges: [
-      'AI Act implementation (2024-2025)',
+      'AI Act implementation (2025-2025)',
       'NIS2 Directive enforcement',
       'DORA operational resilience requirements'
     ],

@@ -168,10 +168,10 @@ export class ISACADigitalTrustService {
    */
   public getDTEFFramework(): ISACAFramework {
     return {
-      id: 'dtef-2024',
+      id: 'dtef-2025',
       name: 'ISACA Digital Trust Ecosystem Framework (DTEF)',
       type: 'DTEF',
-      version: '2024',
+      version: '2025',
       certification: {
         level: 'Certified',
         validUntil: '2025-12-31',

@@ -25,7 +25,7 @@ const Story: React.FC = () => {
               <div>
                 <h3 className="text-2xl font-semibold text-gray-900 mb-3">The Problem We Saw</h3>
                 <p className="text-gray-600 mb-4">
-                  In 2024, we witnessed organizations spending millions on compliance processes that 
+                  In 2025, we witnessed organizations spending millions on compliance processes that 
                   created zero competitive advantage. Companies were drowning in spreadsheets, 
                   manual audits, and consultant fees while their compliance efforts sat in silos.
                 </p>

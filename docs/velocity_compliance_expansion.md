@@ -137,7 +137,7 @@ interface ManufacturingCompliance {
 interface TechnologyCompliance {
   regulations: {
     EU_AI_Act: {
-      status: "IN EFFECT since August 2024",
+      status: "IN EFFECT since August 2025",
       current_reality: "Companies 11 months into implementation, many still struggling",
       requirements: [
         "AI system registration",

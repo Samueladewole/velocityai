@@ -694,9 +694,9 @@ class DataConnector:
         # Mock ATLAS data
         return [
             ["Control", "Status", "Score", "Last Assessment"],
-            ["Access Control", "Compliant", 95, "2024-01-15"],
-            ["Data Encryption", "Compliant", 98, "2024-01-14"],
-            ["Network Security", "Partial", 75, "2024-01-13"]
+            ["Access Control", "Compliant", 95, "2025-01-15"],
+            ["Data Encryption", "Compliant", 98, "2025-01-14"],
+            ["Network Security", "Partial", 75, "2025-01-13"]
         ]
     
     async def _fetch_compass_data(self, config: Dict[str, Any]) -> List[List[Any]]:
@@ -704,9 +704,9 @@ class DataConnector:
         # Mock COMPASS data
         return [
             ["Framework", "Status", "Compliance %", "Next Review"],
-            ["GDPR", "Active", 92, "2024-03-01"],
-            ["SOX", "Active", 88, "2024-02-15"],
-            ["HIPAA", "Planned", 0, "2024-04-01"]
+            ["GDPR", "Active", 92, "2025-03-01"],
+            ["SOX", "Active", 88, "2025-02-15"],
+            ["HIPAA", "Planned", 0, "2025-04-01"]
         ]
 
 class ExcelConverter:

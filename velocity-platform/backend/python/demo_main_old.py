@@ -83,7 +83,7 @@ def generate_security_findings(count: int = 5) -> List[SecurityFinding]:
             ),
             "severity": "CRITICAL",
             "affected_resources": [
-                "s3://company-data-prod", "s3://backup-bucket-2024"
+                "s3://company-data-prod", "s3://backup-bucket-2025"
             ],
             "risk_score": 9.2,
             "remediation_steps": [

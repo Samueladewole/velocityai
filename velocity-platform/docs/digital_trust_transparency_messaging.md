@@ -134,7 +134,7 @@ interface TransparentDigitalTrust {
 interface TransparentAgentActivity {
   what_customers_see: [
     {
-      timestamp: "2024-01-15 14:32:15 UTC",
+      timestamp: "2025-01-15 14:32:15 UTC",
       agent: "AWS Evidence Collector",
       action: "Verified MFA enforcement on all admin accounts",
       evidence: "Screenshot + configuration export",
@@ -142,7 +142,7 @@ interface TransparentAgentActivity {
       frameworks: ["SOC 2 CC6.1", "ISO 27001 A.9.4.2"]
     },
     {
-      timestamp: "2024-01-15 14:35:22 UTC", 
+      timestamp: "2025-01-15 14:35:22 UTC", 
       agent: "GitHub Security Analyzer",
       action: "Confirmed branch protection on all production repos",
       evidence: "API response + policy documentation", 

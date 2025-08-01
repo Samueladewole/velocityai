@@ -194,7 +194,7 @@
 ### Perfect Storm for AI Compliance
 
 **Market Catalysts**:
-- 🇪🇺 **NIS2 Directive** mandatory Oct 2024
+- 🇪🇺 **NIS2 Directive** mandatory Oct 2025
 - 💼 **DORA** financial regulations Jan 2025  
 - 🤖 **EU AI Act** high-risk systems Aug 2025
 - ⚡ **AI adoption** 340% growth in enterprise

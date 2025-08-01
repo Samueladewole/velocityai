@@ -246,7 +246,7 @@ export class ENISAComplianceService {
         requirement: 'Coordinate with vendors and security researchers before public disclosure',
         implementationLevel: 'MANDATORY',
         sector: ['all'],
-        lastUpdated: new Date('2024-01-15')
+        lastUpdated: new Date('2025-01-15')
       },
       {
         id: 'ENISA-VD-002',
@@ -255,7 +255,7 @@ export class ENISAComplianceService {
         requirement: '90-day disclosure timeline with possible extension for complex vulnerabilities',
         implementationLevel: 'RECOMMENDED',
         sector: ['all'],
-        lastUpdated: new Date('2024-01-15')
+        lastUpdated: new Date('2025-01-15')
       },
       {
         id: 'ENISA-VD-003',
@@ -264,7 +264,7 @@ export class ENISAComplianceService {
         requirement: 'Immediate notification to CERT-EU for critical infrastructure vulnerabilities',
         implementationLevel: 'MANDATORY',
         sector: ['energy', 'transport', 'banking', 'health'],
-        lastUpdated: new Date('2024-01-15')
+        lastUpdated: new Date('2025-01-15')
       },
       {
         id: 'ENISA-VD-004',
@@ -273,14 +273,14 @@ export class ENISAComplianceService {
         requirement: 'Provide vulnerability information in multiple EU languages for widespread impact',
         implementationLevel: 'RECOMMENDED',
         sector: ['all'],
-        lastUpdated: new Date('2024-01-15')
+        lastUpdated: new Date('2025-01-15')
       }
     ]
   }
 
   private loadThreatLandscape(): ENISAThreatLandscape {
     return {
-      year: 2024,
+      year: 2025,
       topThreats: [
         {
           rank: 1,
@@ -358,7 +358,7 @@ export class ENISAComplianceService {
           title: 'Cybersecurity Risk Management',
           description: 'Implement comprehensive cybersecurity risk management measures',
           mandatory: true,
-          deadline: new Date('2024-10-18'),
+          deadline: new Date('2025-10-18'),
           penalties: 'Up to €10 million or 2% of annual turnover'
         },
         {
@@ -406,7 +406,7 @@ export class ENISAComplianceService {
           title: 'OT Security Measures',
           description: 'Implement operational technology security measures',
           mandatory: true,
-          deadline: new Date('2024-10-18'),
+          deadline: new Date('2025-10-18'),
           penalties: 'Up to €10 million or 2% of annual turnover'
         }
       ],

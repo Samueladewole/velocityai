@@ -597,7 +597,7 @@ class ISAE3000EvidenceAgent:
                 "last_review_date": (datetime.now() - timedelta(days=90)).isoformat(),
                 "next_review_date": (datetime.now() + timedelta(days=275)).isoformat(),
                 "approval_status": "approved",
-                "version": "2024.1",
+                "version": "2025.1",
                 "applicable_regulations": ["Basel III", "SOX", "GDPR"]
             },
             validation_status="validated",

@@ -673,7 +673,7 @@ class SOC2EvidenceAutomation:
         return {
             "user_access_report": "automated_user_access_report.pdf",
             "mfa_compliance_report": "mfa_compliance_status.pdf",
-            "access_review_results": "quarterly_access_review_q1_2024.pdf",
+            "access_review_results": "quarterly_access_review_q1_2025.pdf",
             "privileged_access_log": "privileged_access_activities.log"
         }
     
@@ -681,7 +681,7 @@ class SOC2EvidenceAutomation:
         """Collect evidence for monitoring (CC7.x) controls"""
         return {
             "security_event_dashboard": "security_monitoring_dashboard.png",
-            "incident_response_log": "incident_response_log_2024.pdf",
+            "incident_response_log": "incident_response_log_2025.pdf",
             "vulnerability_scan_results": "monthly_vulnerability_scan.pdf",
             "log_retention_policy": "log_retention_configuration.pdf"
         }
@@ -689,7 +689,7 @@ class SOC2EvidenceAutomation:
     async def _collect_change_management_evidence(self) -> Dict[str, Any]:
         """Collect evidence for change management (CC8.x) controls"""
         return {
-            "change_approval_records": "change_approvals_q1_2024.pdf",
+            "change_approval_records": "change_approvals_q1_2025.pdf",
             "deployment_logs": "production_deployment_logs.log",
             "rollback_procedures": "emergency_rollback_procedures.pdf",
             "testing_results": "pre_production_testing_results.pdf"

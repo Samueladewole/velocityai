@@ -546,18 +546,18 @@ export class VelocityCryptographicCore {
 
   private getHistoricalTrustProofs(organizationId: string): string[] {
     return [
-      `€{organizationId}_2024_01_proof`,
-      `€{organizationId}_2024_02_proof`,
-      `€{organizationId}_2024_03_proof`
+      `€{organizationId}_2025_01_proof`,
+      `€{organizationId}_2025_02_proof`,
+      `€{organizationId}_2025_03_proof`
     ]
   }
 
   private generateIndustryBenchmarkHash(): string {
-    return this.generateSecureHash('industry_benchmark_2024_q1')
+    return this.generateSecureHash('industry_benchmark_2025_q1')
   }
 
   private generateComparativeProof(trustScore: number): string {
-    return this.generateSecureHash({ trustScore, industry: 'technology', quarter: 'Q1_2024' })
+    return this.generateSecureHash({ trustScore, industry: 'technology', quarter: 'Q1_2025' })
   }
 
   private generateMockIPFSHash(data: string): string {

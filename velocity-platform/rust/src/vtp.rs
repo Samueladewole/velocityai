@@ -734,7 +734,7 @@ impl VTPEngine {
         match oracle.oracle_type {
             OracleType::ComplianceData => {
                 response_data.insert("compliance_score".to_string(), serde_json::json!(0.85));
-                response_data.insert("last_audit_date".to_string(), serde_json::json!("2024-01-15"));
+                response_data.insert("last_audit_date".to_string(), serde_json::json!("2025-01-15"));
             },
             OracleType::TrustScoreFeeds => {
                 response_data.insert("industry_average".to_string(), serde_json::json!(0.72));

@@ -485,7 +485,7 @@ const EvidenceCollection: React.FC = () => {
   "type": "access_log",
   "source": "okta",
   "data": {...},
-  "timestamp": "2024-01-15T10:30:00Z"
+  "timestamp": "2025-01-15T10:30:00Z"
 }`}</div>
                   </div>
                 </div>

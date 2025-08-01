@@ -80,7 +80,7 @@ class FinancialIntelligenceEngine:
         self.value_engine = ValueDemonstrationEngine()
         self.websocket_connections = {}
         
-        # Industry breach cost multipliers (based on IBM 2024 data)
+        # Industry breach cost multipliers (based on IBM 2025 data)
         self.industry_multipliers = {
             "healthcare": 1.21,  # €5.90M average
             "financial": 1.12,   # €5.46M average  
@@ -103,7 +103,7 @@ class FinancialIntelligenceEngine:
         """Calculate comprehensive financial risk using enhanced Monte Carlo"""
         
         try:
-            # Base breach cost from IBM 2024 study (€4.88M)
+            # Base breach cost from IBM 2025 study (€4.88M)
             base_breach_cost = 4880000
             
             # Apply industry and size multipliers

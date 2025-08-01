@@ -178,9 +178,9 @@ export const PolicyManagementNew: React.FC = () => {
       reviewers: ['Mike Johnson', 'Lisa Wang', 'David Kim'],
       approvers: ['Chief Security Officer', 'Chief Compliance Officer'],
       version: '2.1',
-      effectiveDate: '2024-01-15',
-      nextReview: '2024-07-15',
-      lastUpdated: '2024-01-10',
+      effectiveDate: '2025-01-15',
+      nextReview: '2025-07-15',
+      lastUpdated: '2025-01-10',
       compliance: ['ISO 27001', 'SOC 2', 'GDPR', 'NIST CSF'],
       trustPoints: 250,
       readCount: 156,
@@ -192,7 +192,7 @@ export const PolicyManagementNew: React.FC = () => {
       estimatedReadTime: 15,
       businessImpact: 'critical',
       lastAudit: '2023-12-01',
-      nextAudit: '2024-06-01',
+      nextAudit: '2025-06-01',
       trainingRequired: true,
       digitalSignatureRequired: true,
       automaticReminders: true,
@@ -200,8 +200,8 @@ export const PolicyManagementNew: React.FC = () => {
       attachments: 3,
       comments: 8,
       approvalHistory: [
-        { approver: 'Chief Security Officer', date: '2024-01-08', action: 'approved' },
-        { approver: 'Chief Compliance Officer', date: '2024-01-09', action: 'approved' }
+        { approver: 'Chief Security Officer', date: '2025-01-08', action: 'approved' },
+        { approver: 'Chief Compliance Officer', date: '2025-01-09', action: 'approved' }
       ],
       complianceScore: 95,
       gapAnalysis: { identified: 12, resolved: 10, pending: 2 }
@@ -217,9 +217,9 @@ export const PolicyManagementNew: React.FC = () => {
       reviewers: ['Sarah Chen', 'Alex Kim', 'Maria Santos'],
       approvers: ['Chief Privacy Officer', 'Legal Counsel'],
       version: '1.3',
-      effectiveDate: '2024-02-01',
-      nextReview: '2024-08-01',
-      lastUpdated: '2024-01-20',
+      effectiveDate: '2025-02-01',
+      nextReview: '2025-08-01',
+      lastUpdated: '2025-01-20',
       compliance: ['GDPR', 'CCPA', 'ISO 27701', 'LGPD'],
       trustPoints: 200,
       readCount: 134,
@@ -231,7 +231,7 @@ export const PolicyManagementNew: React.FC = () => {
       estimatedReadTime: 12,
       businessImpact: 'critical',
       lastAudit: '2023-11-15',
-      nextAudit: '2024-05-15',
+      nextAudit: '2025-05-15',
       trainingRequired: true,
       digitalSignatureRequired: true,
       automaticReminders: true,
@@ -239,7 +239,7 @@ export const PolicyManagementNew: React.FC = () => {
       attachments: 5,
       comments: 12,
       approvalHistory: [
-        { approver: 'Legal Counsel', date: '2024-01-18', action: 'requested_changes', comments: 'Update breach notification procedures' }
+        { approver: 'Legal Counsel', date: '2025-01-18', action: 'requested_changes', comments: 'Update breach notification procedures' }
       ],
       complianceScore: 88,
       gapAnalysis: { identified: 8, resolved: 6, pending: 2 }
@@ -255,9 +255,9 @@ export const PolicyManagementNew: React.FC = () => {
       reviewers: ['Sarah Chen', 'Mike Johnson', 'Dr. Raj Patel'],
       approvers: ['Chief AI Officer', 'Ethics Committee'],
       version: '1.0',
-      effectiveDate: '2024-03-01',
-      nextReview: '2024-09-01',
-      lastUpdated: '2024-01-22',
+      effectiveDate: '2025-03-01',
+      nextReview: '2025-09-01',
+      lastUpdated: '2025-01-22',
       compliance: ['EU AI Act', 'ISO 42001', 'IEEE Standards'],
       trustPoints: 180,
       readCount: 45,
@@ -289,9 +289,9 @@ export const PolicyManagementNew: React.FC = () => {
       reviewers: ['Sarah Chen', 'Lisa Wang'],
       approvers: ['Chief Security Officer'],
       version: '1.2',
-      effectiveDate: '2024-01-30',
-      nextReview: '2024-07-30',
-      lastUpdated: '2024-01-25',
+      effectiveDate: '2025-01-30',
+      nextReview: '2025-07-30',
+      lastUpdated: '2025-01-25',
       compliance: ['ISO 27001', 'NIST CSF', 'SOC 2'],
       trustPoints: 150,
       readCount: 98,
@@ -303,7 +303,7 @@ export const PolicyManagementNew: React.FC = () => {
       estimatedReadTime: 6,
       businessImpact: 'high',
       lastAudit: '2023-10-15',
-      nextAudit: '2024-04-15',
+      nextAudit: '2025-04-15',
       trainingRequired: true,
       digitalSignatureRequired: false,
       automaticReminders: true,
@@ -311,7 +311,7 @@ export const PolicyManagementNew: React.FC = () => {
       attachments: 1,
       comments: 3,
       approvalHistory: [
-        { approver: 'Chief Security Officer', date: '2024-01-26', action: 'approved' }
+        { approver: 'Chief Security Officer', date: '2025-01-26', action: 'approved' }
       ],
       complianceScore: 92,
       gapAnalysis: { identified: 6, resolved: 5, pending: 1 }
@@ -328,7 +328,7 @@ export const PolicyManagementNew: React.FC = () => {
       approvers: ['Chief Security Officer', 'Chief Operating Officer'],
       version: '3.0',
       effectiveDate: '2023-12-01',
-      nextReview: '2024-06-01',
+      nextReview: '2025-06-01',
       lastUpdated: '2023-11-28',
       compliance: ['ISO 27001', 'SOC 2', 'NIST CSF', 'ISO 27035'],
       trustPoints: 220,
@@ -341,7 +341,7 @@ export const PolicyManagementNew: React.FC = () => {
       estimatedReadTime: 14,
       businessImpact: 'critical',
       lastAudit: '2023-09-01',
-      nextAudit: '2024-03-01',
+      nextAudit: '2025-03-01',
       trainingRequired: true,
       digitalSignatureRequired: true,
       automaticReminders: true,
@@ -366,8 +366,8 @@ export const PolicyManagementNew: React.FC = () => {
       reviewers: ['Sarah Chen', 'Cloud Architecture Team'],
       approvers: ['Chief Technology Officer', 'Chief Security Officer'],
       version: '2.0',
-      effectiveDate: '2024-01-01',
-      nextReview: '2024-07-01',
+      effectiveDate: '2025-01-01',
+      nextReview: '2025-07-01',
       lastUpdated: '2023-12-28',
       compliance: ['CSA CCM', 'ISO 27001', 'SOC 2', 'FedRAMP'],
       trustPoints: 190,
@@ -380,7 +380,7 @@ export const PolicyManagementNew: React.FC = () => {
       estimatedReadTime: 10,
       businessImpact: 'high',
       lastAudit: '2023-08-01',
-      nextAudit: '2024-02-01',
+      nextAudit: '2025-02-01',
       trainingRequired: true,
       digitalSignatureRequired: false,
       automaticReminders: true,
@@ -411,7 +411,7 @@ export const PolicyManagementNew: React.FC = () => {
       color: 'from-blue-600 to-blue-700',
       popularity: 95,
       aiGenerated: true,
-      lastUpdated: '2024-01-15',
+      lastUpdated: '2025-01-15',
       usageCount: 234,
       rating: 4.8,
       complexity: 'advanced',
@@ -433,7 +433,7 @@ export const PolicyManagementNew: React.FC = () => {
       color: 'from-green-600 to-green-700',
       popularity: 88,
       aiGenerated: true,
-      lastUpdated: '2024-01-10',
+      lastUpdated: '2025-01-10',
       usageCount: 187,
       rating: 4.7,
       complexity: 'intermediate',
@@ -455,7 +455,7 @@ export const PolicyManagementNew: React.FC = () => {
       color: 'from-purple-600 to-purple-700',
       popularity: 72,
       aiGenerated: true,
-      lastUpdated: '2024-01-20',
+      lastUpdated: '2025-01-20',
       usageCount: 89,
       rating: 4.6,
       complexity: 'advanced',
@@ -477,7 +477,7 @@ export const PolicyManagementNew: React.FC = () => {
       color: 'from-orange-600 to-orange-700',
       popularity: 81,
       aiGenerated: false,
-      lastUpdated: '2024-01-05',
+      lastUpdated: '2025-01-05',
       usageCount: 156,
       rating: 4.5,
       complexity: 'intermediate',
@@ -521,7 +521,7 @@ export const PolicyManagementNew: React.FC = () => {
       color: 'from-teal-600 to-teal-700',
       popularity: 76,
       aiGenerated: false,
-      lastUpdated: '2024-01-12',
+      lastUpdated: '2025-01-12',
       usageCount: 142,
       rating: 4.4,
       complexity: 'beginner',
@@ -1418,17 +1418,17 @@ export const PolicyManagementNew: React.FC = () => {
                 <div className="space-y-4">
                   <div className="p-3 bg-blue-50 rounded-lg">
                     <div className="font-medium text-blue-900">Reduce compliance gaps</div>
-                    <div className="text-sm text-blue-700">Target: 0 gaps by Q2 2024</div>
+                    <div className="text-sm text-blue-700">Target: 0 gaps by Q2 2025</div>
                     <div className="text-xs text-blue-600 mt-1">Current: {analytics.complianceGaps} gaps</div>
                   </div>
                   <div className="p-3 bg-green-50 rounded-lg">
                     <div className="font-medium text-green-900">Increase acknowledgment rate</div>
-                    <div className="text-sm text-green-700">Target: 95% by Q1 2024</div>
+                    <div className="text-sm text-green-700">Target: 95% by Q1 2025</div>
                     <div className="text-xs text-green-600 mt-1">Current: {analytics.averageAcknowledgment}%</div>
                   </div>
                   <div className="p-3 bg-purple-50 rounded-lg">
                     <div className="font-medium text-purple-900">Enhance training completion</div>
-                    <div className="text-sm text-purple-700">Target: 98% by Q3 2024</div>
+                    <div className="text-sm text-purple-700">Target: 98% by Q3 2025</div>
                     <div className="text-xs text-purple-600 mt-1">Current: {analytics.trainingCompletion}%</div>
                   </div>
                 </div>

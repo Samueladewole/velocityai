@@ -316,7 +316,7 @@ impl VelocityCryptographicEngine {
             cryptographic_proof,
             historical_proofs: self.get_historical_trust_proofs(organization_id),
             benchmark_verification: BenchmarkVerification {
-                industry_hash: self.generate_secure_hash("industry_benchmark_2024_q1"),
+                industry_hash: self.generate_secure_hash("industry_benchmark_2025_q1"),
                 comparative_proof: self.generate_secure_hash(&format!("compare_{}_tech_q1", trust_score)),
                 anonymized_data: true,
             },
@@ -474,9 +474,9 @@ impl VelocityCryptographicEngine {
     /// Get historical trust proofs
     fn get_historical_trust_proofs(&self, organization_id: &str) -> Vec<String> {
         vec![
-            format!("{}_2024_01_proof", organization_id),
-            format!("{}_2024_02_proof", organization_id),
-            format!("{}_2024_03_proof", organization_id),
+            format!("{}_2025_01_proof", organization_id),
+            format!("{}_2025_02_proof", organization_id),
+            format!("{}_2025_03_proof", organization_id),
         ]
     }
 

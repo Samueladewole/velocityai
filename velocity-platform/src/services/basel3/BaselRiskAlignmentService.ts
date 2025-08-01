@@ -311,7 +311,7 @@ class BaselRiskAlignmentService {
 
     // Sample capital calculation
     const sampleCapitalCalc: CapitalCalculation = {
-      id: 'CAPITAL-2024-Q4',
+      id: 'CAPITAL-2025-Q4',
       calculationType: 'standardized',
       businessLines: [
         {

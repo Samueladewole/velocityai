@@ -267,7 +267,7 @@ export const EmployeeTrainingNew: React.FC = () => {
       expirationPeriod: 12,
       version: '3.2',
       author: 'Sarah Chen',
-      lastUpdated: '2024-01-15',
+      lastUpdated: '2025-01-15',
       approvalStatus: 'approved',
       gamification: {
         badges: ['Security Rookie', 'Phishing Detector'],
@@ -310,7 +310,7 @@ export const EmployeeTrainingNew: React.FC = () => {
       expirationPeriod: 24,
       version: '2.1',
       author: 'Mike Johnson',
-      lastUpdated: '2024-02-01',
+      lastUpdated: '2025-02-01',
       approvalStatus: 'approved',
       gamification: {
         badges: ['Privacy Guardian', 'GDPR Expert'],
@@ -352,7 +352,7 @@ export const EmployeeTrainingNew: React.FC = () => {
       complianceRequirement: 'recommended',
       version: '1.5',
       author: 'Alex Rivera',
-      lastUpdated: '2024-01-28',
+      lastUpdated: '2025-01-28',
       approvalStatus: 'approved',
       gamification: {
         badges: ['Threat Hunter', 'Security Expert', 'Elite Defender'],
@@ -394,7 +394,7 @@ export const EmployeeTrainingNew: React.FC = () => {
       complianceRequirement: 'recommended',
       version: '2.0',
       author: 'Dr. Lisa Wang',
-      lastUpdated: '2024-02-10',
+      lastUpdated: '2025-02-10',
       approvalStatus: 'approved',
       gamification: {
         badges: ['AI Ethics Advocate', 'Responsible Developer'],
@@ -436,7 +436,7 @@ export const EmployeeTrainingNew: React.FC = () => {
       complianceRequirement: 'optional',
       version: '1.0',
       author: 'Maria Rodriguez',
-      lastUpdated: '2024-02-05',
+      lastUpdated: '2025-02-05',
       approvalStatus: 'approved',
       gamification: {
         badges: ['Digital Leader', 'Change Champion', 'Innovation Driver'],
@@ -478,7 +478,7 @@ export const EmployeeTrainingNew: React.FC = () => {
       complianceRequirement: 'recommended',
       version: '1.8',
       author: 'John Carter',
-      lastUpdated: '2024-01-20',
+      lastUpdated: '2025-01-20',
       approvalStatus: 'approved',
       gamification: {
         badges: ['Team Player', 'Communication Pro'],
@@ -518,27 +518,27 @@ export const EmployeeTrainingNew: React.FC = () => {
       department: 'Security',
       role: 'Security Architect',
       joinDate: '2023-08-15',
-      lastActivity: '2024-02-20',
+      lastActivity: '2025-02-20',
       learningPaths: [
         {
           pathId: 'path-001',
           pathName: 'Cybersecurity Mastery',
           progress: 95,
           status: 'completed',
-          estimatedCompletion: '2024-01-15'
+          estimatedCompletion: '2025-01-15'
         },
         {
           pathId: 'path-002',
           pathName: 'AI Security Specialist',
           progress: 75,
           status: 'in_progress',
-          estimatedCompletion: '2024-03-15'
+          estimatedCompletion: '2025-03-15'
         }
       ],
       competencies: [
-        { skill: 'Threat Detection', level: 9, certified: true, lastAssessed: '2024-01-20', expiresAt: '2025-01-20' },
-        { skill: 'Incident Response', level: 8, certified: true, lastAssessed: '2024-02-01' },
-        { skill: 'Privacy Compliance', level: 7, certified: false, lastAssessed: '2024-01-15' }
+        { skill: 'Threat Detection', level: 9, certified: true, lastAssessed: '2025-01-20', expiresAt: '2025-01-20' },
+        { skill: 'Incident Response', level: 8, certified: true, lastAssessed: '2025-02-01' },
+        { skill: 'Privacy Compliance', level: 7, certified: false, lastAssessed: '2025-01-15' }
       ],
       personalizedRecommendations: ['mod-005', 'mod-007'],
       mentorshipRole: 'mentor'
@@ -558,19 +558,19 @@ export const EmployeeTrainingNew: React.FC = () => {
       department: 'IT',
       role: 'Systems Administrator',
       joinDate: '2023-09-01',
-      lastActivity: '2024-02-19',
+      lastActivity: '2025-02-19',
       learningPaths: [
         {
           pathId: 'path-003',
           pathName: 'IT Security Fundamentals',
           progress: 85,
           status: 'in_progress',
-          estimatedCompletion: '2024-03-01'
+          estimatedCompletion: '2025-03-01'
         }
       ],
       competencies: [
-        { skill: 'System Security', level: 7, certified: true, lastAssessed: '2024-01-25' },
-        { skill: 'Data Protection', level: 8, certified: true, lastAssessed: '2024-02-05', expiresAt: '2026-02-05' }
+        { skill: 'System Security', level: 7, certified: true, lastAssessed: '2025-01-25' },
+        { skill: 'Data Protection', level: 8, certified: true, lastAssessed: '2025-02-05', expiresAt: '2026-02-05' }
       ],
       personalizedRecommendations: ['mod-003', 'mod-004'],
       mentorshipRole: 'mentee'
@@ -590,19 +590,19 @@ export const EmployeeTrainingNew: React.FC = () => {
       department: 'Data Science',
       role: 'Senior Data Scientist',
       joinDate: '2023-07-20',
-      lastActivity: '2024-02-18',
+      lastActivity: '2025-02-18',
       learningPaths: [
         {
           pathId: 'path-004',
           pathName: 'Responsible AI Development',
           progress: 90,
           status: 'completed',
-          estimatedCompletion: '2024-01-30'
+          estimatedCompletion: '2025-01-30'
         }
       ],
       competencies: [
-        { skill: 'AI Ethics', level: 9, certified: true, lastAssessed: '2024-02-10', expiresAt: '2026-02-10' },
-        { skill: 'Data Science', level: 8, certified: true, lastAssessed: '2024-01-10' }
+        { skill: 'AI Ethics', level: 9, certified: true, lastAssessed: '2025-02-10', expiresAt: '2026-02-10' },
+        { skill: 'Data Science', level: 8, certified: true, lastAssessed: '2025-01-10' }
       ],
       personalizedRecommendations: ['mod-005', 'mod-008'],
       mentorshipRole: 'both'
@@ -622,19 +622,19 @@ export const EmployeeTrainingNew: React.FC = () => {
       department: 'Legal',
       role: 'Compliance Officer',
       joinDate: '2023-10-05',
-      lastActivity: '2024-02-17',
+      lastActivity: '2025-02-17',
       learningPaths: [
         {
           pathId: 'path-005',
           pathName: 'Regulatory Compliance',
           progress: 70,
           status: 'in_progress',
-          estimatedCompletion: '2024-04-01'
+          estimatedCompletion: '2025-04-01'
         }
       ],
       competencies: [
-        { skill: 'Regulatory Knowledge', level: 8, certified: true, lastAssessed: '2024-01-30' },
-        { skill: 'Risk Assessment', level: 6, certified: false, lastAssessed: '2024-01-05' }
+        { skill: 'Regulatory Knowledge', level: 8, certified: true, lastAssessed: '2025-01-30' },
+        { skill: 'Risk Assessment', level: 6, certified: false, lastAssessed: '2025-01-05' }
       ],
       personalizedRecommendations: ['mod-002', 'mod-009'],
       mentorshipRole: 'mentor'
@@ -654,19 +654,19 @@ export const EmployeeTrainingNew: React.FC = () => {
       department: 'HR',
       role: 'HR Business Partner',
       joinDate: '2023-11-12',
-      lastActivity: '2024-02-16',
+      lastActivity: '2025-02-16',
       learningPaths: [
         {
           pathId: 'path-006',
           pathName: 'HR Digital Skills',
           progress: 60,
           status: 'in_progress',
-          estimatedCompletion: '2024-04-15'
+          estimatedCompletion: '2025-04-15'
         }
       ],
       competencies: [
-        { skill: 'Digital Communication', level: 7, certified: true, lastAssessed: '2024-02-01' },
-        { skill: 'Security Awareness', level: 5, certified: false, lastAssessed: '2024-01-20' }
+        { skill: 'Digital Communication', level: 7, certified: true, lastAssessed: '2025-02-01' },
+        { skill: 'Security Awareness', level: 5, certified: false, lastAssessed: '2025-01-20' }
       ],
       personalizedRecommendations: ['mod-001', 'mod-006'],
       mentorshipRole: 'mentee'

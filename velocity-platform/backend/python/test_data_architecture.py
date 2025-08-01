@@ -181,9 +181,9 @@ class TestStorage:
     def test_data_partitioner(self):
         """Test data partitioning utilities"""
         # Test date partitioning
-        test_date = datetime(2024, 1, 15)
+        test_date = datetime(2025, 1, 15)
         date_partition = DataPartitioner.create_date_partition(test_date)
-        assert date_partition == "year=2024/month=01/day=15"
+        assert date_partition == "year=2025/month=01/day=15"
         
         # Test hash partitioning
         hash_partition = DataPartitioner.create_hash_partition("test_value", 100)

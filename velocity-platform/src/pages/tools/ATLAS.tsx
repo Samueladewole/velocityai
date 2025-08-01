@@ -433,7 +433,7 @@ export const ATLAS: React.FC = () => {
                 </table>
               </div>
               <p className="text-xs text-slate-500 mt-4">
-                *Incident costs based on IBM Cost of Data Breach Report 2024, Ponemon Institute studies, and ATLAS customer data.
+                *Incident costs based on IBM Cost of Data Breach Report 2025, Ponemon Institute studies, and ATLAS customer data.
               </p>
             </CardContent>
           </Card>
@@ -746,7 +746,7 @@ export const ATLAS: React.FC = () => {
             <p className="font-semibold">Data Sources & Disclaimers:</p>
             <p>
               <strong>*Results vary by organization.</strong> Cost reduction figures based on ATLAS customer analysis, 
-              IBM Cost of Data Breach Report 2024 (€4.88M avg breach cost), Ponemon Institute vulnerability studies, 
+              IBM Cost of Data Breach Report 2025 (€4.88M avg breach cost), Ponemon Institute vulnerability studies, 
               and enterprise security assessment benchmarks.
             </p>
             <p>

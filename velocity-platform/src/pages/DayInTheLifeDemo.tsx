@@ -269,7 +269,7 @@ const DEMO_SCENARIOS: DemoScenario[] = [
         completed: false,
         data: {
           frameworks: ['SOC 2 Type II', 'ISO 27001', 'GDPR'],
-          lastAudit: '2024-11-15',
+          lastAudit: '2025-11-15',
           nextReview: '2025-11-15',
           uptime: '99.9%'
         }

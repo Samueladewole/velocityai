@@ -63,7 +63,7 @@ CIPHER™:  "Generate Policies That Reduce Risk"
 
 #### Technical Achievements:
 - **50,000-iteration Monte Carlo** simulations for precision
-- **Industry-validated multipliers** from IBM 2024 breach cost study
+- **Industry-validated multipliers** from IBM 2025 breach cost study
 - **Real-time WebSocket** financial updates every 30 seconds
 - **Enterprise ERP integration** with SAP, Oracle, NetSuite
 

@@ -65,7 +65,7 @@ export const QIEEnhanced: React.FC = () => {
       id: '1',
       name: 'SOC 2 Type II Assessment',
       type: 'pdf',
-      uploadDate: '2024-01-15',
+      uploadDate: '2025-01-15',
       status: 'completed',
       questionsTotal: 156,
       questionsAnswered: 156,
@@ -77,7 +77,7 @@ export const QIEEnhanced: React.FC = () => {
       id: '2', 
       name: 'ISO 27001 Pre-Assessment',
       type: 'excel',
-      uploadDate: '2024-01-10',
+      uploadDate: '2025-01-10',
       status: 'pending_review',
       questionsTotal: 89,
       questionsAnswered: 76,
@@ -89,7 +89,7 @@ export const QIEEnhanced: React.FC = () => {
       id: '3',
       name: 'GDPR Compliance Checklist',
       type: 'word',
-      uploadDate: '2024-01-08',
+      uploadDate: '2025-01-08',
       status: 'processing',
       questionsTotal: 112,
       questionsAnswered: 45,
@@ -107,16 +107,16 @@ export const QIEEnhanced: React.FC = () => {
       confidence: 95,
       evidence: ['Policy Document v2.1', 'Board Approval Minutes', 'Annual Review Log'],
       needsReview: false,
-      lastModified: '2024-01-15T10:30:00Z'
+      lastModified: '2025-01-15T10:30:00Z'
     },
     {
       id: '2',
       question: 'Are security awareness training programs conducted for all employees?',
       answer: 'We conduct quarterly security awareness training for all employees with specialized training for privileged users. Training completion rates are tracked and reported to management.',
       confidence: 88,
-      evidence: ['Training Records 2024', 'Completion Reports', 'Specialized Training Materials'],
+      evidence: ['Training Records 2025', 'Completion Reports', 'Specialized Training Materials'],
       needsReview: true,
-      lastModified: '2024-01-15T09:15:00Z'
+      lastModified: '2025-01-15T09:15:00Z'
     }
   ];
 
