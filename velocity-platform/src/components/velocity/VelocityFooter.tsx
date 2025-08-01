@@ -45,9 +45,9 @@ const VelocityFooter: React.FC = () => {
       `}</style>
       
       <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid md:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-12 gap-8">
           {/* Brand */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-3">
             <div className="flex items-center gap-3 mb-4">
               <div className="relative">
                 <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
@@ -72,66 +72,90 @@ const VelocityFooter: React.FC = () => {
           </div>
           
           {/* Product */}
-          <div>
+          <div className="md:col-span-2">
             <h3 className="text-white font-semibold mb-4">Product</h3>
             <div className="space-y-3">
               {[
-                { label: 'Features', path: `€{routePrefix}/features`, icon: Bot },
-                { label: 'Integrations', path: `€{routePrefix}/integrations`, icon: Globe },
-                { label: 'Security', path: `€{routePrefix}/security`, icon: Shield },
-                { label: 'Pricing', path: `€{routePrefix}/pricing`, icon: BarChart3 }
+                { label: 'Features', path: `${routePrefix}/features`, icon: Bot },
+                { label: 'Integrations', path: `${routePrefix}/integrations`, icon: Globe },
+                { label: 'Security', path: `${routePrefix}/security`, icon: Shield },
+                { label: 'Pricing', path: `${routePrefix}/pricing`, icon: BarChart3 }
               ].map((item) => (
                 <button
                   key={item.label}
                   onClick={() => navigate(item.path)}
-                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm"
+                  className="flex items-start gap-2 text-slate-400 hover:text-white transition-colors text-sm min-h-[20px] w-full text-left"
                 >
-                  <item.icon className="w-4 h-4" />
-                  {item.label}
+                  <item.icon className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span className="leading-5">{item.label}</span>
                 </button>
               ))}
             </div>
           </div>
           
           {/* Solutions */}
-          <div>
+          <div className="md:col-span-4">
             <h3 className="text-white font-semibold mb-4">Solutions</h3>
             <div className="space-y-3">
               {[
-                { label: 'SOC 2', path: `€{routePrefix}/solutions/soc2`, icon: Shield },
-                { label: 'ISO 27001', path: `€{routePrefix}/solutions/iso27001`, icon: Award },
-                { label: 'GDPR', path: `€{routePrefix}/solutions/gdpr`, icon: Lock },
-                { label: 'HIPAA', path: `€{routePrefix}/solutions/hipaa`, icon: FileText }
+                { 
+                  label: 'Banking ROI Calculator', 
+                  path: '/calculators/banking-roi', 
+                  icon: BarChart3,
+                  subtitle: '81% savings'
+                },
+                { 
+                  label: 'ISAE 3000', 
+                  path: '/solutions/isae-3000', 
+                  icon: Award,
+                  subtitle: '88% vs Big 4'
+                },
+                { label: 'SOC 2', path: `${routePrefix}/solutions/soc2`, icon: Shield },
+                { label: 'ISO 27001', path: `${routePrefix}/solutions/iso27001`, icon: Award },
+                { label: 'GDPR', path: `${routePrefix}/solutions/gdpr`, icon: Lock },
+                { 
+                  label: 'GDPR International Transfers', 
+                  path: '/solutions/gdpr-international-transfers', 
+                  icon: Globe 
+                },
+                { label: 'HIPAA', path: `${routePrefix}/solutions/hipaa`, icon: FileText }
               ].map((item) => (
                 <button
                   key={item.label}
                   onClick={() => navigate(item.path)}
-                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm"
+                  className="flex items-start gap-2 text-slate-400 hover:text-white transition-colors text-sm min-h-[20px] w-full text-left group"
                 >
-                  <item.icon className="w-4 h-4" />
-                  {item.label}
+                  <item.icon className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="leading-5">{item.label}</div>
+                    {item.subtitle && (
+                      <div className="text-xs text-emerald-400 mt-0.5 opacity-75 group-hover:opacity-100 transition-opacity">
+                        {item.subtitle}
+                      </div>
+                    )}
+                  </div>
                 </button>
               ))}
             </div>
           </div>
           
           {/* Company */}
-          <div>
+          <div className="md:col-span-3">
             <h3 className="text-white font-semibold mb-4">Company</h3>
             <div className="space-y-3">
               {[
-                { label: 'About', path: `€{routePrefix}/about`, icon: Users },
-                { label: 'Careers', path: `€{routePrefix}/careers`, icon: Briefcase },
-                { label: 'Contact', path: `€{routePrefix}/contact`, icon: Mail },
-                { label: 'Privacy', path: `€{routePrefix}/privacy`, icon: Lock }
+                { label: 'About', path: `${routePrefix}/about`, icon: Users },
+                { label: 'Careers', path: `${routePrefix}/careers`, icon: Briefcase },
+                { label: 'Contact', path: `${routePrefix}/contact`, icon: Mail },
+                { label: 'Privacy', path: `${routePrefix}/privacy`, icon: Lock }
               ].map((item) => (
                 <button
                   key={item.label}
                   onClick={() => navigate(item.path)}
-                  className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors text-sm"
+                  className="flex items-start gap-2 text-slate-400 hover:text-white transition-colors text-sm min-h-[20px] w-full text-left"
                 >
-                  <item.icon className="w-4 h-4" />
-                  {item.label}
+                  <item.icon className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                  <span className="leading-5">{item.label}</span>
                 </button>
               ))}
             </div>

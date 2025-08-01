@@ -41,6 +41,8 @@ import ISAE3000ServicesPricing from '../../pages/ISAE3000ServicesPricing';
 import FinancialServicesPricing from '../../pages/FinancialServicesPricing';
 import ROICalculator from '../../pages/calculators/ROICalculator';
 import CaseStudies from '../../pages/CaseStudies';
+import TrustPathway from '../../pages/TrustPathway';
+import BankingROIDemo from '../../pages/demo/BankingROIDemo';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -214,7 +216,7 @@ const ComplianceAssessment: React.FC = () => {
                   <button
                     key={framework.name}
                     onClick={() => handleFrameworkSelect(framework.name)}
-                    className={`p-3 rounded-lg border text-sm transition-all duration-300 €{
+                    className={`p-3 rounded-lg border text-sm transition-all duration-300 ${
                       selectedFramework === framework.name
                         ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400'
                         : 'bg-white/5 border-white/10 text-white hover:border-emerald-500/30 hover:bg-white/10'
@@ -229,7 +231,7 @@ const ComplianceAssessment: React.FC = () => {
               <button 
                 onClick={handleStartAssessment}
                 disabled={!selectedFramework || isLoading}
-                className={`w-full mt-6 px-6 py-4 rounded-lg font-medium transition-all duration-300 €{
+                className={`w-full mt-6 px-6 py-4 rounded-lg font-medium transition-all duration-300 ${
                   selectedFramework && !isLoading
                     ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25'
                     : 'bg-slate-700 text-slate-400 cursor-not-allowed'
@@ -241,7 +243,7 @@ const ComplianceAssessment: React.FC = () => {
                     Starting Assessment...
                   </div>
                 ) : (
-                  `Start €{selectedFramework} Assessment`
+                  `Start ${selectedFramework} Assessment`
                 )}
               </button>
 
@@ -652,7 +654,9 @@ const VelocityRoutes: React.FC = () => {
       } />
       <Route path="/calculators/roi" element={<ROICalculator />} />
       <Route path="/calculators/banking-roi" element={
-        <PlaceholderPage title="Banking ROI Calculator" description="Specialized ROI calculator for financial institutions" />
+        <PublicLayout>
+          <BankingROIDemo />
+        </PublicLayout>
       } />
       <Route path="/calculators/gdpr-roi" element={
         <PlaceholderPage title="GDPR ROI Calculator" description="Calculate GDPR compliance savings" />
@@ -744,7 +748,7 @@ const VelocityRoutes: React.FC = () => {
       } />
       <Route path="/velocity/trust-pathway" element={
         <PublicLayout>
-          <PlaceholderPage title="Trust Pathway" description="Learn about our progressive integration approach" />
+          <TrustPathway />
         </PublicLayout>
       } />
       

@@ -71,7 +71,7 @@ const PRODUCTION_AGENTS: Agent[] = [
     nextRun: new Date(Date.now() + 28 * 60 * 1000), // 28 min from now
     evidenceCollected: 247,
     successRate: 98.2,
-    currentTask: 'Scanning CloudTrail configurations',
+    currentTask: '✅ Found proof your logging works perfectly',
     progress: 67
   },
   {
@@ -103,7 +103,7 @@ const PRODUCTION_AGENTS: Agent[] = [
     nextRun: new Date(Date.now() + 55 * 60 * 1000), // 55 min
     evidenceCollected: 89,
     successRate: 99.1,
-    currentTask: 'Analyzing organization security settings',
+    currentTask: '🔒 Documented your code security practices',
     progress: 23
   },
   {
@@ -125,7 +125,7 @@ const PRODUCTION_AGENTS: Agent[] = [
     nextRun: new Date(Date.now() + 14 * 60 * 1000), // 14 min
     evidenceCollected: 312,
     successRate: 99.8,
-    currentTask: 'Calculating cryptographic verification',
+    currentTask: '📈 Your compliance score just improved to 94%!',
     progress: 89
   },
   {
@@ -261,30 +261,30 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
 
   const formatTimeAgo = (date: Date) => {
     const seconds = Math.floor((Date.now() - date.getTime()) / 1000);
-    if (seconds < 60) return `€{seconds}s ago`;
+    if (seconds < 60) return `${seconds}s ago`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `€{minutes}m ago`;
+    if (minutes < 60) return `${minutes}m ago`;
     const hours = Math.floor(minutes / 60);
-    return `€{hours}h ago`;
+    return `${hours}h ago`;
   };
 
   const formatTimeUntil = (date: Date) => {
     const seconds = Math.floor((date.getTime() - Date.now()) / 1000);
-    if (seconds < 60) return `€{seconds}s`;
+    if (seconds < 60) return `${seconds}s`;
     const minutes = Math.floor(seconds / 60);
-    if (minutes < 60) return `€{minutes}m`;
+    if (minutes < 60) return `${minutes}m`;
     const hours = Math.floor(minutes / 60);
-    return `€{hours}h`;
+    return `${hours}h`;
   };
 
   const getDefaultTaskForAgent = (type: Agent['type']): string => {
     const tasks = {
-      AWS: 'Scanning CloudTrail configurations',
+      AWS: '✅ Found proof your logging works perfectly',
       GCP: 'Analyzing IAM policies and permissions',
       Azure: 'Monitoring Security Center alerts',
-      GitHub: 'Analyzing repository security settings',
+      GitHub: '🔒 Documented your code security practices',
       QIE: 'Processing compliance questionnaires',
-      TrustScore: 'Calculating cryptographic verification',
+      TrustScore: '📈 Your compliance score just improved to 94%!',
       Monitor: 'Monitoring configuration changes',
       DocGen: 'Generating compliance documentation',
       Observability: 'Collecting system metrics and logs',
@@ -327,11 +327,34 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
           }
           return agent;
         }));
-      }, 2000);
+      } else if (action === 'pause') {
+        setAgents(prev => prev.map(agent => {
+          if (agent.id === agentId) {
+            return {
+              ...agent,
+              status: 'idle' as const,
+              currentTask: 'Agent paused'
+            };
+          }
+          return agent;
+        }));
+      }
+    } catch (error) {
+      console.error('Error executing agent action:', error);
+      setAgents(prev => prev.map(agent => {
+        if (agent.id === agentId) {
+          return {
+            ...agent,
+            status: 'error' as const,
+            currentTask: 'Error occurred'
+          };
+        }
+        return agent;
+      }));
     }
 
     // TODO: Connect to actual backend API
-    console.log(`Agent €{agentId}: €{action}`);
+    console.log(`Agent ${agentId}: ${action}`);
   };
 
   const getStatusIcon = (status: string) => {
@@ -350,7 +373,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
   const avgSuccessRate = agents.reduce((sum, agent) => sum + agent.successRate, 0) / agents.length;
 
   return (
-    <div className={`space-y-6 €{className}`}>
+    <div className={`space-y-6 ${className}`}>
       {/* Hero Stats */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
         <Card className="bg-gradient-to-br from-emerald-50 to-teal-50 border-emerald-200">
@@ -429,7 +452,7 @@ export const AgentGrid: React.FC<AgentGridProps> = ({ className = '' }) => {
           return (
             <Card 
               key={agent.id} 
-              className={`h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:scale-105 €{STATUS_STYLES[agent.status]}`}
+              className={`h-full flex flex-col transition-all duration-200 hover:shadow-lg hover:scale-105 ${STATUS_STYLES[agent.status]}`}
             >
               <CardHeader className="pb-3">
                 <div className="flex items-center justify-between">

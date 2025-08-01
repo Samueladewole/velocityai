@@ -126,10 +126,10 @@ export const PublicHeader: React.FC = () => {
               </button>
               <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
+                  onClick={() => navigate('/calculators/banking-roi')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">GDPR International Transfers</div>
+                  <div className="font-medium">Banking ROI Calculator</div>
                   <div className="text-xs text-slate-400">81% vs traditional solutions</div>
                 </button>
                 <button 
@@ -173,6 +173,20 @@ export const PublicHeader: React.FC = () => {
                 >
                   <div className="font-medium">CIS Controls</div>
                   <div className="text-xs text-slate-400">Cybersecurity framework</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/gdpr')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">GDPR Automation</div>
+                  <div className="text-xs text-slate-400">Data protection compliance</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">GDPR International Transfers</div>
+                  <div className="text-xs text-slate-400">Cross-border data compliance</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/frameworks')}

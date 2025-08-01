@@ -207,6 +207,20 @@ const PublicHeader: React.FC = () => {
                   <div className="text-xs text-slate-400">Cybersecurity framework</div>
                 </button>
                 <button 
+                  onClick={() => navigate('/velocity/solutions/gdpr')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">GDPR Automation</div>
+                  <div className="text-xs text-slate-400">Data protection compliance</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">GDPR International Transfers</div>
+                  <div className="text-xs text-slate-400">Cross-border data compliance</div>
+                </button>
+                <button 
                   onClick={() => navigate('/velocity/frameworks')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
@@ -444,7 +458,7 @@ const HeroTrustScore = () => {
   }, []);
 
   return (
-    <div className={`transition-all duration-1000 €{isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+    <div className={`transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
       <div className="relative bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20">
         <div className="flex items-center gap-4">
           <div className="relative">
@@ -464,8 +478,8 @@ const HeroTrustScore = () => {
                 stroke="url(#heroGradient)"
                 strokeWidth="6"
                 fill="none"
-                strokeDasharray={`€{2 * Math.PI * 35}`}
-                strokeDashoffset={`€{2 * Math.PI * 35 * (1 - score / 100)}`}
+                strokeDasharray={`${2 * Math.PI * 35}`}
+                strokeDashoffset={`${2 * Math.PI * 35 * (1 - score / 100)}`}
                 className="transition-all duration-2000 ease-out"
                 strokeLinecap="round"
                 transform="rotate(-90 50 50)"
@@ -636,28 +650,28 @@ const ImpactMetricsSection = () => {
       label: 'Average Annual Savings',
       description: 'Per customer in first year',
       icon: '💰',
-      color: 'from-green-400 to-emerald-500'
+      colorClasses: 'from-green-400 to-emerald-500'
     },
     {
       value: '2 Hours',
       label: 'Questionnaire Response',
       description: 'vs 2 weeks industry standard',
       icon: '⚡',
-      color: 'from-blue-400 to-cyan-500'
+      colorClasses: 'from-blue-400 to-cyan-500'
     },
     {
       value: '95%',
       label: 'Evidence Automation',
       description: 'vs 40% industry average',
       icon: '🤖',
-      color: 'from-purple-400 to-pink-500'
+      colorClasses: 'from-purple-400 to-pink-500'
     },
     {
       value: '650%',
       label: 'Average ROI',
       description: 'Return on investment',
       icon: '📈',
-      color: 'from-orange-400 to-red-500'
+      colorClasses: 'from-orange-400 to-red-500'
     }
   ];
 
@@ -680,7 +694,7 @@ const ImpactMetricsSection = () => {
               className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 hover:-translate-y-2"
             >
               <div className="text-4xl mb-4">{metric.icon}</div>
-              <div className={`text-3xl font-bold bg-gradient-to-r €{metric.color} bg-clip-text text-transparent mb-2`}>
+              <div className={`text-3xl font-bold bg-gradient-to-r ${metric.colorClasses} bg-clip-text text-transparent mb-2`}>
                 {metric.value}
               </div>
               <div className="text-white font-semibold mb-1">
@@ -772,8 +786,8 @@ const TrustFirstSection = () => {
               )}
               
               <div className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
-                <div className={`p-3 bg-€{stage.color}-500/10 rounded-lg w-fit mb-4`}>
-                  {React.createElement(stage.icon, { className: `w-6 h-6 text-€{stage.color}-400` })}
+                <div className={`p-3 bg-${stage.color}-500/10 rounded-lg w-fit mb-4`}>
+                  {React.createElement(stage.icon, { className: `w-6 h-6 text-${stage.color}-400` })}
                 </div>
                 
                 <div className="mb-4">
@@ -790,7 +804,7 @@ const TrustFirstSection = () => {
                   </div>
                   <div className="flex justify-between text-xs">
                     <span className="text-slate-500">Risk Level</span>
-                    <span className={`text-€{stage.color}-400`}>{stage.risk}</span>
+                    <span className={`text-${stage.color}-400`}>{stage.risk}</span>
                   </div>
                 </div>
               </div>
@@ -958,6 +972,7 @@ const AIAgentsSection = () => {
 
 // Evidence Collection Section
 const EvidenceCollectionSection = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
   
   const evidenceTypes = [
@@ -1012,19 +1027,19 @@ const EvidenceCollectionSection = () => {
                 <button
                   key={index}
                   onClick={() => setActiveTab(index)}
-                  className={`p-4 rounded-xl text-left transition-all duration-300 €{
+                  className={`p-4 rounded-xl text-left transition-all duration-300 ${
                     activeTab === index
                       ? 'bg-emerald-500/20 border border-emerald-500/50'
                       : 'bg-white/5 border border-white/10 hover:bg-white/10'
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-2">
-                    {React.createElement(type.icon, { className: `w-5 h-5 €{activeTab === index ? 'text-emerald-400' : 'text-slate-400'}` })}
-                    <span className={`font-medium €{activeTab === index ? 'text-emerald-400' : 'text-white'}`}>
+                    {React.createElement(type.icon, { className: `w-5 h-5 ${activeTab === index ? 'text-emerald-400' : 'text-slate-400'}` })}
+                    <span className={`font-medium ${activeTab === index ? 'text-emerald-400' : 'text-white'}`}>
                       {type.title}
                     </span>
                   </div>
-                  <div className={`text-2xl font-bold font-mono mb-1 €{activeTab === index ? 'text-emerald-400' : 'text-slate-300'}`}>
+                  <div className={`text-2xl font-bold font-mono mb-1 ${activeTab === index ? 'text-emerald-400' : 'text-slate-300'}`}>
                     {type.count}
                   </div>
                   <div className="text-xs text-slate-400">{type.description}</div>
@@ -1258,13 +1273,13 @@ const CompetitiveAdvantagesSection = () => {
           {advantages.map((advantage, index) => {
             const Icon = advantage.icon;
             return (
-              <div key={index} className={`bg-gradient-to-br from-€{advantage.color}-500/10 to-€{advantage.color}-600/5 rounded-2xl p-6 border border-€{advantage.color}-500/20 hover:border-€{advantage.color}-500/40 transition-all duration-300`}>
+              <div key={index} className={`bg-gradient-to-br from-${advantage.color}-500/10 to-${advantage.color}-600/5 rounded-2xl p-6 border border-${advantage.color}-500/20 hover:border-${advantage.color}-500/40 transition-all duration-300`}>
                 <div className="text-center">
-                  <div className={`w-12 h-12 bg-€{advantage.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
-                    <Icon className={`w-6 h-6 text-€{advantage.color}-400`} />
+                  <div className={`w-12 h-12 bg-${advantage.color}-500/20 rounded-full flex items-center justify-center mx-auto mb-4`}>
+                    <Icon className={`w-6 h-6 text-${advantage.color}-400`} />
                   </div>
                   <h3 className="font-bold text-white mb-2 text-sm">{advantage.title}</h3>
-                  <div className={`text-2xl font-bold text-€{advantage.color}-400 mb-3 font-mono`}>
+                  <div className={`text-2xl font-bold text-${advantage.color}-400 mb-3 font-mono`}>
                     {advantage.metric}
                   </div>
                   <p className="text-slate-400 text-sm leading-relaxed">{advantage.description}</p>
@@ -1391,12 +1406,12 @@ const IndustryShowcaseSection = () => {
             return (
               <div 
                 key={index} 
-                className={`group bg-gradient-to-br from-€{industry.color}-500/5 to-€{industry.color}-600/5 rounded-2xl p-6 border border-€{industry.color}-500/20 hover:border-€{industry.color}-500/40 transition-all duration-300 cursor-pointer`}
+                className={`group bg-gradient-to-br from-${industry.color}-500/5 to-${industry.color}-600/5 rounded-2xl p-6 border border-${industry.color}-500/20 hover:border-${industry.color}-500/40 transition-all duration-300 cursor-pointer`}
                 onClick={() => navigate(industry.path)}
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 bg-€{industry.color}-500/10 rounded-lg`}>
-                    <Icon className={`w-6 h-6 text-€{industry.color}-400`} />
+                  <div className={`p-3 bg-${industry.color}-500/10 rounded-lg`}>
+                    <Icon className={`w-6 h-6 text-${industry.color}-400`} />
                   </div>
                   <ArrowRight className="w-4 h-4 text-slate-500 group-hover:text-white group-hover:translate-x-1 transition-all" />
                 </div>
@@ -1407,7 +1422,7 @@ const IndustryShowcaseSection = () => {
                 <div className="space-y-2">
                   {industry.metrics.map((metric, idx) => (
                     <div key={idx} className="flex items-center gap-2">
-                      <CheckCircle className={`w-3 h-3 text-€{industry.color}-400 flex-shrink-0`} />
+                      <CheckCircle className={`w-3 h-3 text-${industry.color}-400 flex-shrink-0`} />
                       <span className="text-xs text-slate-300">{metric}</span>
                     </div>
                   ))}
@@ -1604,6 +1619,7 @@ const PublicFooter: React.FC = () => {
                 { label: 'SOC 2', path: '/velocity/solutions/soc2' },
                 { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },
                 { label: 'GDPR', path: '/velocity/solutions/gdpr' },
+                { label: 'GDPR International Transfers', path: '/solutions/gdpr-international-transfers' },
                 { label: 'HIPAA', path: '/velocity/solutions/hipaa' }
               ].map((item) => (
                 <button

@@ -1,10 +1,11 @@
 import React from 'react';
-import { Check, X, ArrowRight, Zap, Shield, Building2, Sparkles } from 'lucide-react';
+import { Check, X, ArrowRight, Zap, Shield, Building2, Sparkles, Bot, Globe, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useNavigate } from 'react-router-dom';
 import { useCurrency } from '@/contexts/CurrencyContext';
 import { CurrencySelector } from '@/components/CurrencySelector';
+import { PublicHeader } from '@/components/common/PublicHeader';
 
 export const Pricing: React.FC = () => {
   const navigate = useNavigate();
@@ -12,9 +13,9 @@ export const Pricing: React.FC = () => {
 
   // Define base prices in USD
   const basePrices = {
-    starter: 550,
-    growth: 1650,
-    enterprise: 4400
+    starter: 897,
+    professional: 2397,
+    enterprise: 5897
   };
 
   const plans = [
@@ -22,46 +23,52 @@ export const Pricing: React.FC = () => {
       name: 'Starter',
       price: formatAmount(basePrices.starter),
       period: '/month',
-      description: 'Perfect for growing companies establishing their trust foundation',
-      icon: Zap,
+      description: 'Essential compliance automation for growing organizations',
+      icon: Bot,
       color: 'blue',
+      agentCount: '5 AI Agents',
       features: [
-        'Up to 50 security questionnaires/year',
-        'Basic Trust Score calculation',
-        '3 compliance frameworks',
+        '5 Core AI Agents included',
+        'Basic GDPR Transfer Compliance',
+        'AWS/GCP/Azure evidence collection',
+        'Standard document generation',
+        'Trust Score calculation',
         'Email support',
-        '1 user account',
-        'Monthly security scans',
+        'Up to 3 users',
+        'Monthly compliance reports',
         'Basic API access'
       ],
       notIncluded: [
-        'AI-powered automation',
-        'Custom frameworks',
-        'White-label options',
-        'Dedicated success manager'
+        'Advanced automation agents',
+        'Real-time monitoring',
+        'Custom integrations',
+        'White-label options'
       ]
     },
     {
-      name: 'Growth',
-      price: formatAmount(basePrices.growth),
+      name: 'Professional',
+      price: formatAmount(basePrices.professional),
       period: '/month',
-      description: 'For scaling companies accelerating sales with trust transparency',
-      icon: Shield,
+      description: 'Complete compliance automation for international organizations',
+      icon: Globe,
       color: 'purple',
       popular: true,
+      agentCount: '13 AI Agents',
       features: [
-        'Unlimited security questionnaires',
-        'Advanced Trust Score with sharing',
-        '10+ compliance frameworks',
-        'Priority support',
-        '5 user accounts',
-        'Weekly security scans',
-        'Full API access',
-        'AI-powered automation',
-        'Custom branding'
+        'All 13 AI Agents included',
+        'Complete International Transfer Compliance',
+        'Multi-cloud evidence automation',
+        'Advanced document generation',
+        'Real-time trust score updates',
+        'Priority support & training',
+        'Up to 15 users',
+        'Weekly compliance reports',
+        'Full API & WebSocket access',
+        'Custom adequacy monitoring',
+        'SCC management automation'
       ],
       notIncluded: [
-        'Custom framework development',
+        'White-label platform',
         'Dedicated success manager'
       ]
     },
@@ -69,55 +76,69 @@ export const Pricing: React.FC = () => {
       name: 'Enterprise',
       price: 'Custom',
       period: 'pricing',
-      description: 'Comprehensive platform for large organizations with complex needs',
+      description: 'Fully customized platform for large multinational organizations',
       icon: Building2,
       color: 'slate',
+      agentCount: '13+ AI Agents',
       features: [
-        'Everything in Growth, plus:',
-        'Unlimited users',
-        'Custom compliance frameworks',
-        'White-label platform',
-        'Dedicated success manager',
-        'Daily security scans',
-        'Advanced analytics',
-        'SLA guarantees',
-        'On-premise deployment option',
-        'Custom integrations',
-        'Executive reporting'
+        'Everything in Professional, plus:',
+        'Unlimited users & organizations',
+        'Custom AI agent development',
+        'White-label platform branding',
+        'Dedicated Customer Success Manager',
+        'Daily compliance monitoring',
+        'Advanced analytics & reporting',
+        'SLA guarantees (99.9% uptime)',
+        'On-premise deployment options',
+        'Custom integrations & APIs',
+        'Executive compliance dashboards',
+        'Regulatory update notifications'
       ],
       notIncluded: []
     }
   ];
 
   const allFeatures = [
-    { category: 'Core Platform', features: [
-      { name: 'Security questionnaire automation', starter: true, growth: true, enterprise: true },
-      { name: 'Trust Score calculation', starter: true, growth: true, enterprise: true },
-      { name: 'Compliance framework library', starter: '3', growth: '10+', enterprise: 'Unlimited' },
-      { name: 'Evidence repository', starter: true, growth: true, enterprise: true }
+    { category: 'AI Agents & Automation', features: [
+      { name: 'Total AI Agents included', starter: '5 Agents', professional: '13 Agents', enterprise: '13+ Agents' },
+      { name: 'International Transfer Compliance', starter: 'Basic', professional: 'Complete', enterprise: 'Advanced' },
+      { name: 'Multi-cloud evidence collection', starter: true, professional: true, enterprise: true },
+      { name: 'Document generation automation', starter: 'Standard', professional: 'Advanced', enterprise: 'Custom' },
+      { name: 'Real-time compliance monitoring', starter: false, professional: true, enterprise: true }
     ]},
-    { category: 'Automation & AI', features: [
-      { name: 'AI-powered responses', starter: false, growth: true, enterprise: true },
-      { name: 'Smart evidence matching', starter: false, growth: true, enterprise: true },
-      { name: 'Automated gap analysis', starter: false, growth: true, enterprise: true },
-      { name: 'Custom AI training', starter: false, growth: false, enterprise: true }
+    { category: 'GDPR Transfer Features', features: [
+      { name: 'Transfer Impact Assessments (TIA)', starter: 'Templates', professional: 'Automated', enterprise: 'AI-Generated' },
+      { name: 'Adequacy decision monitoring', starter: false, professional: true, enterprise: true },
+      { name: 'Standard Contractual Clauses (SCC)', starter: 'Basic', professional: 'Automated', enterprise: 'Custom' },
+      { name: 'Binding Corporate Rules (BCR)', starter: false, professional: true, enterprise: true },
+      { name: 'Technical safeguards validation', starter: false, professional: true, enterprise: true }
     ]},
-    { category: 'Security & Monitoring', features: [
-      { name: 'Cloud security scanning', starter: 'Monthly', growth: 'Weekly', enterprise: 'Daily' },
-      { name: 'Vulnerability assessment', starter: true, growth: true, enterprise: true },
-      { name: 'Risk quantification', starter: false, growth: true, enterprise: true },
-      { name: 'Real-time monitoring', starter: false, growth: false, enterprise: true }
+    { category: 'Cloud Platform Integration', features: [
+      { name: 'AWS evidence collection', starter: true, professional: true, enterprise: true },
+      { name: 'Google Cloud Platform scanning', starter: true, professional: true, enterprise: true },
+      { name: 'Microsoft Azure monitoring', starter: true, professional: true, enterprise: true },
+      { name: 'Multi-cloud compliance reports', starter: 'Monthly', professional: 'Weekly', enterprise: 'Daily' },
+      { name: 'Custom cloud integrations', starter: false, professional: false, enterprise: true }
+    ]},
+    { category: 'Trust & Security', features: [
+      { name: 'Trust Score calculation', starter: 'Basic', professional: 'Advanced', enterprise: 'Real-time' },
+      { name: 'Cryptographic verification', starter: false, professional: true, enterprise: true },
+      { name: 'Observability & monitoring', starter: false, professional: true, enterprise: true },
+      { name: 'Continuous compliance scanning', starter: false, professional: true, enterprise: true },
+      { name: 'Risk quantification & scoring', starter: false, professional: true, enterprise: true }
     ]},
     { category: 'Support & Success', features: [
-      { name: 'Support channels', starter: 'Email', growth: 'Priority', enterprise: 'Dedicated' },
-      { name: 'Onboarding', starter: 'Self-service', growth: 'Guided', enterprise: 'White-glove' },
-      { name: 'Success manager', starter: false, growth: false, enterprise: true },
-      { name: 'Custom training', starter: false, growth: false, enterprise: true }
+      { name: 'Support channels', starter: 'Email', professional: 'Priority', enterprise: 'Dedicated CSM' },
+      { name: 'Implementation onboarding', starter: 'Self-service', professional: 'Guided', enterprise: 'White-glove' },
+      { name: 'Training & certification', starter: 'Documentation', professional: 'Live sessions', enterprise: 'Custom program' },
+      { name: 'SLA guarantees', starter: 'Best effort', professional: '99.5%', enterprise: '99.9%' }
     ]}
   ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50">
+      <PublicHeader />
+      
       {/* Hero Section */}
       <section className="relative py-20 px-4">
         <div className="container mx-auto max-w-6xl">
@@ -126,11 +147,26 @@ export const Pricing: React.FC = () => {
               <CurrencySelector />
             </div>
             <h1 className="text-5xl font-bold text-slate-900 mb-6">
-              Simple, Transparent Pricing
+              AI-Powered Compliance Automation Pricing
             </h1>
-            <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Choose the plan that fits your trust journey. Scale up anytime as your needs grow.
+            <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              Scale your international transfer compliance with our 13 AI agents. 
+              From essential automation to enterprise-grade customization.
             </p>
+            <div className="mt-6 flex items-center justify-center gap-6 text-sm text-slate-600">
+              <div className="flex items-center gap-2">
+                <Bot className="h-4 w-4 text-purple-600" />
+                <span>13 AI Agents</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Globe className="h-4 w-4 text-blue-600" />
+                <span>GDPR Transfer Compliance</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="h-4 w-4 text-green-600" />
+                <span>Multi-Cloud Evidence</span>
+              </div>
+            </div>
           </div>
 
           {/* Pricing Cards */}
@@ -150,10 +186,13 @@ export const Pricing: React.FC = () => {
                 )}
 
                 <div className="text-center mb-6">
-                  <div className={`inline-flex h-12 w-12 items-center justify-center rounded-lg bg-€{plan.color}-100 mb-4`}>
-                    <plan.icon className={`h-6 w-6 text-€{plan.color}-600`} />
+                  <div className={`inline-flex h-12 w-12 items-center justify-center rounded-lg bg-${plan.color}-100 mb-4`}>
+                    <plan.icon className={`h-6 w-6 text-${plan.color}-600`} />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+                  <div className="text-xs font-medium text-purple-600 bg-purple-50 rounded-full px-3 py-1 mb-3 inline-block">
+                    {plan.agentCount}
+                  </div>
                   <div className="flex items-baseline justify-center gap-1 mb-3">
                     <span className="text-4xl font-bold">{plan.price}</span>
                     <span className="text-slate-600">{plan.period}</span>
@@ -177,9 +216,9 @@ export const Pricing: React.FC = () => {
                 </div>
 
                 <Button 
-                  className={`w-full €{plan.popular ? 'erip-gradient-primary' : ''}`}
+                  className={`w-full ${plan.popular ? 'erip-gradient-primary' : ''}`}
                   variant={plan.popular ? 'default' : 'outline'}
-                  onClick={() => navigate(plan.name === 'Enterprise' ? '/company/contact' : '/demo')}
+                  onClick={() => navigate(plan.name === 'Enterprise' ? '/company/contact' : '/app/signup')}
                 >
                   {plan.name === 'Enterprise' ? 'Contact Sales' : 'Start Free Trial'}
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -200,7 +239,7 @@ export const Pricing: React.FC = () => {
                   <tr className="border-b border-slate-200">
                     <th className="text-left py-4 px-4 font-semibold">Features</th>
                     <th className="text-center py-4 px-4 font-semibold">Starter</th>
-                    <th className="text-center py-4 px-4 font-semibold">Growth</th>
+                    <th className="text-center py-4 px-4 font-semibold">Professional</th>
                     <th className="text-center py-4 px-4 font-semibold">Enterprise</th>
                   </tr>
                 </thead>
@@ -223,10 +262,10 @@ export const Pricing: React.FC = () => {
                             )}
                           </td>
                           <td className="text-center py-3 px-4">
-                            {typeof feature.growth === 'boolean' ? (
-                              feature.growth ? <Check className="h-5 w-5 text-green-500 mx-auto" /> : <X className="h-5 w-5 text-slate-300 mx-auto" />
+                            {typeof feature.professional === 'boolean' ? (
+                              feature.professional ? <Check className="h-5 w-5 text-green-500 mx-auto" /> : <X className="h-5 w-5 text-slate-300 mx-auto" />
                             ) : (
-                              <span className="text-sm font-medium">{feature.growth}</span>
+                              <span className="text-sm font-medium">{feature.professional}</span>
                             )}
                           </td>
                           <td className="text-center py-3 px-4">
@@ -253,30 +292,44 @@ export const Pricing: React.FC = () => {
             
             <div className="space-y-6">
               <Card className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Can I change plans anytime?</h3>
+                <h3 className="text-lg font-semibold mb-2">How many AI agents are included in each plan?</h3>
                 <p className="text-slate-600">
-                  Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the next billing cycle.
+                  Starter includes 5 core AI agents, Professional includes all 13 AI agents, and Enterprise includes 13+ agents with custom development options.
                 </p>
               </Card>
               
               <Card className="p-6">
                 <h3 className="text-lg font-semibold mb-2">Do you offer a free trial?</h3>
                 <p className="text-slate-600">
-                  Yes, we offer a 14-day free trial for all plans. No credit card required to start.
+                  Yes, we offer a 14-day free trial for all plans with full access to AI agents. No credit card required to start.
+                </p>
+              </Card>
+              
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-2">What cloud platforms do you support?</h3>
+                <p className="text-slate-600">
+                  We support AWS, Google Cloud Platform, and Microsoft Azure with automated evidence collection and compliance monitoring across all three platforms.
+                </p>
+              </Card>
+              
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-2">How does GDPR transfer compliance work?</h3>
+                <p className="text-slate-600">
+                  Our AI agents automatically generate Transfer Impact Assessments, monitor adequacy decisions, manage Standard Contractual Clauses, and validate technical safeguards in real-time.
+                </p>
+              </Card>
+              
+              <Card className="p-6">
+                <h3 className="text-lg font-semibold mb-2">Can I change plans anytime?</h3>
+                <p className="text-slate-600">
+                  Yes! You can upgrade or downgrade your plan at any time. Changes take effect at the next billing cycle, and you get immediate access to additional AI agents.
                 </p>
               </Card>
               
               <Card className="p-6">
                 <h3 className="text-lg font-semibold mb-2">What payment methods do you accept?</h3>
                 <p className="text-slate-600">
-                  We accept all major credit cards, bank transfers, and can arrange annual invoicing for Enterprise customers.
-                </p>
-              </Card>
-              
-              <Card className="p-6">
-                <h3 className="text-lg font-semibold mb-2">Is there a setup fee?</h3>
-                <p className="text-slate-600">
-                  No setup fees for Starter and Growth plans. Enterprise implementations may include professional services.
+                  We accept all major credit cards, bank transfers, and can arrange annual invoicing for Enterprise customers with NET 30 terms.
                 </p>
               </Card>
             </div>
@@ -288,18 +341,32 @@ export const Pricing: React.FC = () => {
       <section className="py-20 px-4 bg-gradient-to-br from-blue-600 to-purple-700">
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="text-3xl font-bold text-white mb-6">
-            Ready to Build Trust at Scale?
+            Ready to Automate Your International Transfer Compliance?
           </h2>
           <p className="text-xl text-blue-100 mb-8">
-            Join hundreds of companies using ERIP to accelerate sales with trust transparency
+            Join organizations using Velocity AI Platform to achieve GDPR transfer compliance in hours, not weeks
           </p>
+          <div className="grid md:grid-cols-3 gap-6 mb-8 text-white">
+            <div className="text-center">
+              <div className="text-2xl font-bold">95%</div>
+              <div className="text-sm text-blue-200">Automation Rate</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold">€120K</div>
+              <div className="text-sm text-blue-200">Average Annual Savings</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl font-bold">2 Hours</div>
+              <div className="text-sm text-blue-200">Time to Compliance</div>
+            </div>
+          </div>
           <div className="flex gap-4 justify-center">
             <Button 
               size="lg" 
               className="bg-white text-blue-600 hover:bg-blue-50"
-              onClick={() => navigate('/demo')}
+              onClick={() => navigate('/app/signup')}
             >
-              Start Free Trial
+              Start Free Trial - 13 AI Agents
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 

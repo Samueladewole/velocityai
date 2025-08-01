@@ -215,7 +215,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
       metric: "100+ cloud services supported"
     },
     {
-      title: `Save €{isEULocation ? "€133K" : "€145K"} Per Year`,
+      title: `Save ${isEULocation ? "€133K" : "€145K"} Per Year`,
       description: "Stop paying lawyers €300/hour. Our AI does the work for pennies on the dollar",
       metric: "81% cheaper than law firms"
     },
@@ -322,7 +322,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
       <div className="relative overflow-hidden bg-gradient-to-br from-blue-900 via-indigo-900 to-purple-900 pt-16">
         <div className="absolute inset-0 bg-black opacity-20"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-24">
-          <div className={`text-center transition-all duration-1000 €{isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="flex items-center justify-center mb-6">
               <div className="p-3 bg-emerald-500 rounded-full mr-4">
                 <Globe className="w-8 h-8 text-white" />
@@ -399,7 +399,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
+                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
                     activeTab === tab.id
                       ? 'bg-blue-50 text-blue-600 border border-blue-200'
                       : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -458,16 +458,16 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                   const Icon = agent.icon;
                   const isNew = agent.status === 'under_development';
                   return (
-                    <div key={index} className={`border rounded-lg p-4 hover:border-blue-300 transition-colors €{
+                    <div key={index} className={`border rounded-lg p-4 hover:border-blue-300 transition-colors ${
                       isNew ? 'border-emerald-300 bg-emerald-50' : 'border-slate-200'
                     }`}>
                       <div className="flex items-center gap-3 mb-3">
-                        <div className={`p-2 rounded-lg €{isNew ? 'bg-emerald-100' : 'bg-blue-100'}`}>
-                          <Icon className={`w-5 h-5 €{isNew ? 'text-emerald-600' : 'text-blue-600'}`} />
+                        <div className={`p-2 rounded-lg ${isNew ? 'bg-emerald-100' : 'bg-blue-100'}`}>
+                          <Icon className={`w-5 h-5 ${isNew ? 'text-emerald-600' : 'text-blue-600'}`} />
                         </div>
                         <div className="flex-1">
                           <h4 className="font-semibold text-slate-900 text-sm">{agent.name}</h4>
-                          <div className={`font-bold text-sm €{isNew ? 'text-emerald-600' : 'text-emerald-600'}`}>
+                          <div className={`font-bold text-sm ${isNew ? 'text-emerald-600' : 'text-emerald-600'}`}>
                             {agent.automation}
                           </div>
                           {isNew && (
@@ -478,7 +478,7 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                         </div>
                       </div>
                       <p className="text-slate-600 text-sm mb-2">{agent.description}</p>
-                      <div className={`text-xs px-2 py-1 rounded €{
+                      <div className={`text-xs px-2 py-1 rounded ${
                         isNew ? 'bg-emerald-100 text-emerald-600' : 'bg-blue-50 text-blue-600'
                       }`}>
                         {agent.specialty}

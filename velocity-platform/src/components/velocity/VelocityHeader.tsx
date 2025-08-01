@@ -45,49 +45,49 @@ export const VelocityHeader: React.FC = () => {
     {
       label: 'Product',
       children: [
-        { label: 'Features', path: `€{routePrefix}/features`, icon: Zap },
-        { label: 'Integrations', path: `€{routePrefix}/integrations`, icon: Globe },
-        { label: 'Security', path: `€{routePrefix}/security`, icon: Shield },
-        { label: 'Pricing', path: `€{routePrefix}/pricing`, icon: DollarSign },
+        { label: 'Features', path: `${routePrefix}/features`, icon: Zap },
+        { label: 'Integrations', path: `${routePrefix}/integrations`, icon: Globe },
+        { label: 'Security', path: `${routePrefix}/security`, icon: Shield },
+        { label: 'Pricing', path: `${routePrefix}/pricing`, icon: DollarSign },
       ],
     },
     {
       label: 'Solutions',
       children: [
-        { label: 'SOC 2', path: `€{routePrefix}/solutions/soc2` },
-        { label: 'ISO 27001', path: `€{routePrefix}/solutions/iso27001` },
-        { label: 'CIS Controls', path: `€{routePrefix}/solutions/cis-controls` },
-        { label: 'GDPR', path: `€{routePrefix}/solutions/gdpr` },
-        { label: 'HIPAA', path: `€{routePrefix}/solutions/hipaa` },
+        { label: 'SOC 2', path: `${routePrefix}/solutions/soc2` },
+        { label: 'ISO 27001', path: `${routePrefix}/solutions/iso27001` },
+        { label: 'CIS Controls', path: `${routePrefix}/solutions/cis-controls` },
+        { label: 'GDPR', path: `${routePrefix}/solutions/gdpr` },
+        { label: 'HIPAA', path: `${routePrefix}/solutions/hipaa` },
       ],
     },
     {
       label: 'Resources',
       children: [
-        { label: 'Documentation', path: `€{routePrefix}/docs`, icon: BookOpen },
-        { label: 'API Reference', path: `€{routePrefix}/api`, icon: Database },
-        { label: 'Case Studies', path: `€{routePrefix}/case-studies`, icon: Award },
-        { label: 'Blog', path: `€{routePrefix}/blog`, icon: FileCheck },
-        { label: 'Support', path: `€{routePrefix}/support`, icon: HelpCircle },
+        { label: 'Documentation', path: `${routePrefix}/docs`, icon: BookOpen },
+        { label: 'API Reference', path: `${routePrefix}/api`, icon: Database },
+        { label: 'Case Studies', path: `${routePrefix}/case-studies`, icon: Award },
+        { label: 'Blog', path: `${routePrefix}/blog`, icon: FileCheck },
+        { label: 'Support', path: `${routePrefix}/support`, icon: HelpCircle },
       ],
     },
     {
       label: 'Company',
       children: [
-        { label: 'About', path: `€{routePrefix}/about`, icon: Users },
-        { label: 'Careers', path: `€{routePrefix}/careers` },
-        { label: 'Partners', path: `€{routePrefix}/partners` },
-        { label: 'Contact', path: `€{routePrefix}/contact` },
+        { label: 'About', path: `${routePrefix}/about`, icon: Users },
+        { label: 'Careers', path: `${routePrefix}/careers` },
+        { label: 'Partners', path: `${routePrefix}/partners` },
+        { label: 'Contact', path: `${routePrefix}/contact` },
       ],
     },
   ];
 
   const authenticatedNavItems: NavItem[] = [
-    { label: 'Dashboard', path: `€{routePrefix}/dashboard`, icon: Home },
-    { label: 'Live Monitor', path: `€{routePrefix}/live`, icon: Activity },
-    { label: 'Integrations', path: `€{routePrefix}/integration`, icon: Database },
-    { label: 'Agent Creator', path: `€{routePrefix}/creator`, icon: Bot },
-    { label: 'Evidence', path: `€{routePrefix}/evidence`, icon: FileCheck },
+    { label: 'Dashboard', path: `${routePrefix}/dashboard`, icon: Home },
+    { label: 'Live Monitor', path: `${routePrefix}/live`, icon: Activity },
+    { label: 'Integrations', path: `${routePrefix}/integration`, icon: Database },
+    { label: 'Agent Creator', path: `${routePrefix}/creator`, icon: Bot },
+    { label: 'Evidence', path: `${routePrefix}/evidence`, icon: FileCheck },
   ];
 
   // Check if user is authenticated (can be expanded with real auth)
@@ -102,7 +102,7 @@ export const VelocityHeader: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link to={`€{routePrefix}/`} className="flex items-center gap-2">
+          <Link to={`${routePrefix}/`} className="flex items-center gap-2">
             <div className="w-10 h-10 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
               <Zap className="w-6 h-6 text-white" />
             </div>
@@ -120,7 +120,7 @@ export const VelocityHeader: React.FC = () => {
                 <Link 
                   key={item.label}
                   to={item.path!} 
-                  className={`flex items-center gap-2 text-sm font-medium transition-colors €{
+                  className={`flex items-center gap-2 text-sm font-medium transition-colors ${
                     isActive(item.path!) 
                       ? 'text-purple-600' 
                       : 'text-gray-600 hover:text-gray-900'
@@ -141,7 +141,7 @@ export const VelocityHeader: React.FC = () => {
                         className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
                       >
                         {item.label}
-                        <ChevronDown className={`w-4 h-4 transition-transform €{
+                        <ChevronDown className={`w-4 h-4 transition-transform ${
                           dropdownOpen === item.label ? 'rotate-180' : ''
                         }`} />
                       </button>
@@ -181,7 +181,7 @@ export const VelocityHeader: React.FC = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => navigate(`€{routePrefix}/settings`)}
+                  onClick={() => navigate(`${routePrefix}/settings`)}
                 >
                   <Settings className="w-4 h-4" />
                 </Button>
@@ -189,7 +189,7 @@ export const VelocityHeader: React.FC = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => navigate(`€{routePrefix}/billing`)}
+                  onClick={() => navigate(`${routePrefix}/billing`)}
                 >
                   <CreditCard className="w-4 h-4 mr-2" />
                   Billing
@@ -208,7 +208,7 @@ export const VelocityHeader: React.FC = () => {
                 <Button 
                   variant="ghost" 
                   size="sm"
-                  onClick={() => navigate(`€{routePrefix}/login`)}
+                  onClick={() => navigate(`${routePrefix}/login`)}
                   className="hidden sm:flex"
                 >
                   Sign In
@@ -217,7 +217,7 @@ export const VelocityHeader: React.FC = () => {
                 <Button 
                   className="bg-gradient-to-r from-purple-600 to-pink-600 text-white"
                   size="sm"
-                  onClick={() => navigate(`€{routePrefix}/signup`)}
+                  onClick={() => navigate(`${routePrefix}/signup`)}
                 >
                   Start Free Trial
                 </Button>
@@ -245,7 +245,7 @@ export const VelocityHeader: React.FC = () => {
                   key={item.label}
                   to={item.path!}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors €{
+                  className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
                     isActive(item.path!)
                       ? 'bg-purple-50 text-purple-600'
                       : 'text-gray-600 hover:bg-gray-50'
@@ -280,7 +280,7 @@ export const VelocityHeader: React.FC = () => {
                     variant="outline" 
                     className="w-full"
                     onClick={() => {
-                      navigate(`€{routePrefix}/login`);
+                      navigate(`${routePrefix}/login`);
                       setMobileMenuOpen(false);
                     }}
                   >
@@ -289,7 +289,7 @@ export const VelocityHeader: React.FC = () => {
                   <Button 
                     className="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white"
                     onClick={() => {
-                      navigate(`€{routePrefix}/signup`);
+                      navigate(`${routePrefix}/signup`);
                       setMobileMenuOpen(false);
                     }}
                   >

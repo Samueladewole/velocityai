@@ -14,11 +14,29 @@ from datetime import datetime, timezone, timedelta
 from typing import Dict, List, Any, Optional
 import json
 
-# Database and scoring imports
-from sqlalchemy.orm import Session
-from models import Framework, EvidenceItem, TrustScore, Organization
-
 logger = logging.getLogger(__name__)
+
+# Database and scoring imports
+try:
+    from sqlalchemy.orm import Session
+    from models import Framework, EvidenceItem, TrustScore, Organization
+except ImportError:
+    # Handle missing database dependencies gracefully
+    Framework = None
+    TrustScore = None
+    Organization = None
+    Session = None
+    logger.warning("Database models not available - using mock data for Trust Score calculations")
+    
+    # Create mock EvidenceItem class for testing
+    class EvidenceItem:
+        def __init__(self, framework, control_id, confidence_score=0.8, trust_points=10, evidence_metadata=None, created_at=None):
+            self.framework = framework
+            self.control_id = control_id
+            self.confidence_score = confidence_score
+            self.trust_points = trust_points
+            self.evidence_metadata = evidence_metadata or {}
+            self.created_at = created_at or datetime.utcnow()
 
 class TrustScoreAgent:
     """
@@ -57,22 +75,22 @@ class TrustScoreAgent:
         
         # Framework control mappings
         self.framework_controls = {
-            Framework.SOC2: {
+            "SOC2": {
                 "total_controls": 64,
                 "critical_controls": ["CC6.1", "CC6.2", "CC6.3", "CC7.1", "CC7.2"],
                 "weight": 1.0
             },
-            Framework.ISO27001: {
+            "ISO27001": {
                 "total_controls": 114,
                 "critical_controls": ["A.9.2.1", "A.9.2.4", "A.12.6.1", "A.16.1.1"],
                 "weight": 1.2
             },
-            Framework.GDPR: {
+            "GDPR": {
                 "total_controls": 47,
                 "critical_controls": ["Art25", "Art32", "Art35", "Art37"],
                 "weight": 0.8
             },
-            Framework.HIPAA: {
+            "HIPAA": {
                 "total_controls": 78,
                 "critical_controls": ["164.312(a)(1)", "164.312(e)(1)", "164.306(a)(1)"],
                 "weight": 1.1
@@ -123,6 +141,14 @@ class TrustScoreAgent:
         
         try:
             logger.info(f"Calculating Trust Score from {len(evidence_items)} evidence items")
+            # Debug: Show evidence items
+            for i, evidence in enumerate(evidence_items):
+                logger.info(f"Evidence {i}: framework={evidence.framework}, control={evidence.control_id}")
+            
+            # If no evidence items, provide baseline calculation
+            if not evidence_items:
+                logger.warning("No evidence items provided, calculating baseline Trust Score")
+                return await self._calculate_baseline_trust_score()
             
             # Calculate component scores in parallel for performance
             security_score = await self._calculate_security_score(evidence_items)
@@ -139,7 +165,7 @@ class TrustScoreAgent:
             )
             
             # Calculate automation percentage for bonuses
-            ai_evidence_count = sum(1 for e in evidence_items if "agent_id" in e.evidence_metadata)
+            ai_evidence_count = sum(1 for e in evidence_items if "agent_id" in (e.evidence_metadata or {}))
             automation_percentage = (ai_evidence_count / len(evidence_items)) * 100 if evidence_items else 0
             
             # Apply automation bonus
@@ -189,9 +215,9 @@ class TrustScoreAgent:
                 "recommendations": recommendations,
                 "evidence_summary": {
                     "total_evidence_items": len(evidence_items),
-                    "frameworks_covered": len(set(e.framework.value for e in evidence_items)),
+                    "frameworks_covered": len(set(e.framework.value if hasattr(e.framework, 'value') else e.framework for e in evidence_items)),
                     "controls_covered": len(set(e.control_id for e in evidence_items)),
-                    "average_confidence": round(sum(e.confidence_score for e in evidence_items) / len(evidence_items), 2) if evidence_items else 0
+                    "average_confidence": round(sum(getattr(e, 'confidence_score', None) or 0.5 for e in evidence_items) / len(evidence_items), 2) if evidence_items else 0
                 },
                 "calculation_metadata": {
                     "calculated_at": datetime.utcnow().isoformat(),
@@ -226,7 +252,9 @@ class TrustScoreAgent:
             logger.info(f"Trust Score calculated: {trust_analysis['overall_trust_score']}/100 ({trust_analysis['trust_grade']})")
             
         except Exception as e:
+            import traceback
             logger.error(f"Failed to calculate Trust Score: {e}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
             raise
         
         return trust_evidence_items
@@ -475,7 +503,7 @@ class TrustScoreAgent:
             return 0.0
         
         # Score based on evidence quality and coverage
-        quality_scores = [e.confidence_score for e in security_evidence]
+        quality_scores = [getattr(e, 'confidence_score', None) or 0.5 for e in security_evidence]
         coverage_score = min(1.0, len(security_evidence) / 10)  # Expect ~10 security controls
         
         base_score = sum(quality_scores) / len(quality_scores) if quality_scores else 0
@@ -486,7 +514,8 @@ class TrustScoreAgent:
         # Group evidence by framework
         framework_evidence = {}
         for evidence in evidence_items:
-            framework = evidence.framework
+            # Handle both enum and string framework values
+            framework = evidence.framework.value if hasattr(evidence.framework, 'value') else evidence.framework
             if framework not in framework_evidence:
                 framework_evidence[framework] = []
             framework_evidence[framework].append(evidence)
@@ -502,7 +531,7 @@ class TrustScoreAgent:
                 completion = min(1.0, len(evidence_list) / total_controls)
                 
                 # Calculate evidence quality
-                quality_scores = [e.confidence_score for e in evidence_list]
+                quality_scores = [e.confidence_score or 0.5 for e in evidence_list]
                 avg_quality = sum(quality_scores) / len(quality_scores) if quality_scores else 0
                 
                 framework_score = completion * avg_quality * weight
@@ -526,10 +555,10 @@ class TrustScoreAgent:
             return 0.0
         
         # Consider automation level for operations
-        automated_evidence = [e for e in ops_evidence if "agent_id" in e.evidence_metadata]
+        automated_evidence = [e for e in ops_evidence if "agent_id" in (getattr(e, 'evidence_metadata', None) or {})]
         automation_ratio = len(automated_evidence) / len(ops_evidence)
         
-        quality_scores = [e.confidence_score for e in ops_evidence]
+        quality_scores = [getattr(e, 'confidence_score', None) or 0.5 for e in ops_evidence]
         base_score = sum(quality_scores) / len(quality_scores) if quality_scores else 0
         
         # Bonus for high automation
@@ -552,7 +581,7 @@ class TrustScoreAgent:
         if not gov_evidence:
             return 0.3  # Minimum governance score
         
-        quality_scores = [e.confidence_score for e in gov_evidence]
+        quality_scores = [getattr(e, 'confidence_score', None) or 0.5 for e in gov_evidence]
         coverage_score = min(1.0, len(gov_evidence) / 8)  # Expect ~8 governance controls
         
         base_score = sum(quality_scores) / len(quality_scores) if quality_scores else 0
@@ -565,11 +594,11 @@ class TrustScoreAgent:
         for framework, config in self.framework_controls.items():
             framework_evidence = [
                 e for e in evidence_items 
-                if e.framework == framework
+                if (e.framework.value if hasattr(e.framework, 'value') else e.framework) == framework
             ]
             
             if not framework_evidence:
-                framework_scores[framework.value] = 0.0
+                framework_scores[framework] = 0.0
                 continue
             
             total_controls = config["total_controls"]
@@ -585,7 +614,7 @@ class TrustScoreAgent:
             
             # Weighted score favoring critical controls
             score = (completion * 0.7) + (critical_completion * 0.3)
-            framework_scores[framework.value] = min(100, score * 100)
+            framework_scores[framework] = min(100, score * 100)
         
         return framework_scores
     
@@ -606,13 +635,13 @@ class TrustScoreAgent:
             quantity_bonus = min(1.5, 1 + (len(evidence_list) - 1) * 0.1)
             
             # Quality based on confidence scores
-            quality_scores = [e.confidence_score for e in evidence_list]
+            quality_scores = [getattr(e, 'confidence_score', None) or 0.5 for e in evidence_list]
             avg_quality = sum(quality_scores) / len(quality_scores)
             
             # Recency bonus
             recent_evidence = [
                 e for e in evidence_list 
-                if (datetime.utcnow() - e.created_at).days < 30
+                if (datetime.utcnow() - getattr(e, 'created_at', datetime.utcnow())).days < 30
             ]
             recency_bonus = 1 + (len(recent_evidence) / len(evidence_list) * 0.2)
             
@@ -633,9 +662,10 @@ class TrustScoreAgent:
         
         ai_evidence_count = 0
         for evidence in evidence_items:
-            base_points = evidence.trust_points or 10  # Base points per evidence
+            base_points = getattr(evidence, 'trust_points', None) or 10  # Base points per evidence
+            evidence_metadata = getattr(evidence, 'evidence_metadata', None) or {}
             
-            if "agent_id" in evidence.evidence_metadata:
+            if "agent_id" in evidence_metadata:
                 # AI collected evidence gets 3x multiplier
                 points = base_points * self.evidence_multipliers["ai_evidence"]
                 points_breakdown["ai_evidence"] += points
@@ -645,7 +675,8 @@ class TrustScoreAgent:
                 points_breakdown["manual_evidence"] += points
             
             # Quality bonus
-            if evidence.confidence_score > 0.8:
+            confidence_score = getattr(evidence, 'confidence_score', None) or 0.5
+            if confidence_score > 0.8:
                 points *= 1.2
             
             total_points += points
@@ -758,7 +789,7 @@ class TrustScoreAgent:
                 })
         
         # Evidence quality recommendations
-        low_quality_evidence = [e for e in evidence_items if e.confidence_score < 0.6]
+        low_quality_evidence = [e for e in evidence_items if (getattr(e, 'confidence_score', None) or 0.5) < 0.6]
         if len(low_quality_evidence) > 3:
             recommendations.append({
                 "type": "quality",
@@ -770,7 +801,7 @@ class TrustScoreAgent:
             })
         
         # Automation recommendations
-        manual_evidence = [e for e in evidence_items if "agent_id" not in e.evidence_metadata]
+        manual_evidence = [e for e in evidence_items if "agent_id" not in (getattr(e, 'evidence_metadata', None) or {})]
         if len(manual_evidence) > len(evidence_items) * 0.3:
             recommendations.append({
                 "type": "automation",
@@ -782,6 +813,109 @@ class TrustScoreAgent:
             })
         
         return recommendations[:5]  # Return top 5 recommendations
+    
+    async def _calculate_baseline_trust_score(self) -> List[Dict[str, Any]]:
+        """Calculate baseline Trust Score when no evidence is available"""
+        baseline_analysis = {
+            "analysis_id": f"TRUST-BASELINE-{datetime.utcnow().strftime('%Y%m%d%H%M')}",
+            "organization_id": self.organization_id,
+            "overall_trust_score": 0.0,
+            "trust_grade": "F",
+            "component_scores": {
+                "security": 0.0,
+                "compliance": 0.0,
+                "operations": 0.0,
+                "governance": 0.0
+            },
+            "framework_scores": {
+                "SOC2": 0.0,
+                "ISO27001": 0.0,
+                "GDPR": 0.0,
+                "HIPAA": 0.0
+            },
+            "control_scores": {},
+            "trust_equity": {
+                "total_points": 0,
+                "breakdown": {
+                    "manual_evidence": 0,
+                    "ai_evidence": 0,
+                    "continuous_monitoring": 0,
+                    "automation_bonus": 0
+                },
+                "automation_percentage": 0.0,
+                "ai_multiplier": self.evidence_multipliers["ai_evidence"],
+                "ai_evidence_count": 0,
+                "manual_evidence_count": 0
+            },
+            "automation_metrics": {
+                "automation_percentage": 0.0,
+                "ai_evidence_count": 0,
+                "manual_evidence_count": 0,
+                "ai_multiplier_applied": self.evidence_multipliers["ai_evidence"]
+            },
+            "next_milestone": {
+                "achieved": False,
+                "target_score": 60,
+                "current_score": 0.0,
+                "gap": 60.0,
+                "name": "Compliance Foundation",
+                "description": "Basic compliance controls in place",
+                "requirements": ["Start collecting evidence", "Connect first platform", "Enable AI agents"],
+                "estimated_time": "30 minutes"
+            },
+            "recommendations": [
+                {
+                    "type": "setup",
+                    "priority": "high",
+                    "title": "Start evidence collection",
+                    "description": "Connect your first cloud platform to begin automated evidence collection.",
+                    "estimated_impact": "+20 points",
+                    "estimated_time": "5 minutes"
+                },
+                {
+                    "type": "automation",
+                    "priority": "high",
+                    "title": "Enable AI agents",
+                    "description": "Activate AI agents for 3x Trust Equity multiplier on evidence.",
+                    "estimated_impact": "+15 points",
+                    "estimated_time": "2 minutes"
+                }
+            ],
+            "evidence_summary": {
+                "total_evidence_items": 0,
+                "frameworks_covered": 0,
+                "controls_covered": 0,
+                "average_confidence": 0.0
+            },
+            "calculation_metadata": {
+                "calculated_at": datetime.utcnow().isoformat(),
+                "scoring_version": "2.1",
+                "weights_applied": self.framework_weights,
+                "multipliers_applied": self.evidence_multipliers
+            }
+        }
+        
+        return [{
+            "type": "trust_score_calculation",
+            "resource_id": baseline_analysis["analysis_id"],
+            "resource_name": "Trust Score Analysis - Baseline",
+            "data": {
+                "trust_analysis": baseline_analysis,
+                "organization_id": self.organization_id,
+                "compliance_value": "Ready to start Trust Score journey - 0/100 baseline score",
+                "audit_relevance": "Baseline compliance scoring - ready for evidence collection setup",
+                "frameworks": ["SOC2", "ISO27001", "GDPR", "HIPAA"],
+                "scoring_breakdown": {
+                    "security_weight": self.framework_weights["security"],
+                    "compliance_weight": self.framework_weights["compliance"],
+                    "operations_weight": self.framework_weights["operations"],
+                    "governance_weight": self.framework_weights["governance"]
+                }
+            },
+            "collected_at": datetime.utcnow().isoformat(),
+            "confidence_score": 1.0,  # Perfect confidence in baseline calculation
+            "human_readable": "Trust Score: 0/100 (Baseline) - Ready to begin compliance journey with AI automation"
+        }]
     
     async def collect_all_evidence(self) -> Dict[str, Any]:
         """
@@ -800,7 +934,13 @@ class TrustScoreAgent:
         collection_results = {}
         
         # Mock evidence items for calculation (in production, would query database)
-        mock_evidence_items = []  # Would be populated from database
+        mock_evidence_items = [
+            EvidenceItem("SOC2", "CC6.1", confidence_score=0.9, trust_points=15, evidence_metadata={"agent_id": "aws_agent"}),
+            EvidenceItem("SOC2", "CC6.2", confidence_score=0.8, trust_points=12, evidence_metadata={"agent_id": "azure_agent"}),
+            EvidenceItem("ISO27001", "A.9.2.1", confidence_score=0.85, trust_points=18, evidence_metadata={"agent_id": "gcp_agent"}),
+            EvidenceItem("GDPR", "Art32", confidence_score=0.75, trust_points=14, evidence_metadata={}),  # Manual evidence
+            EvidenceItem("HIPAA", "164.312(a)(1)", confidence_score=0.9, trust_points=16, evidence_metadata={"agent_id": "continuous_monitor"}),
+        ]
         
         # Collection tasks for Trust Score analysis
         collection_tasks = [
@@ -852,6 +992,9 @@ class TrustScoreAgent:
 # Quick test to make sure everything works
 async def main():
     """Test the Trust Score Agent"""
+    # Set up basic logging
+    logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s')
+    
     credentials = {
         "organization_id": "your-org-123"
     }
