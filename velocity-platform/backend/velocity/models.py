@@ -51,6 +51,9 @@ class Platform(enum.Enum):
     GOOGLE_WORKSPACE = "google_workspace"
     SLACK = "slack"
     GDPR = "gdpr"
+    DOCUMENT = "document"
+    QIE = "qie"
+    TRUST_SCORE = "trust_score"
     CUSTOM = "custom"
 
 class Framework(enum.Enum):
