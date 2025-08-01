@@ -13,18 +13,39 @@ from enum import Enum
 from dataclasses import dataclass, asdict
 import uuid
 
-# Third-party imports
-import boto3
-from botocore.exceptions import ClientError, NoCredentialsError
-from google.cloud import resource_manager, storage, iam
-from google.oauth2 import service_account
-from google.api_core.exceptions import GoogleAPIError
-from azure.identity import DefaultAzureCredential, ClientSecretCredential
-from azure.mgmt.resource import ResourceManagementClient
-from azure.mgmt.storage import StorageManagementClient
-from azure.mgmt.security import SecurityCenter
-from azure.core.exceptions import AzureError
-import httpx
+logger = logging.getLogger(__name__)
+
+# Third-party imports - with error handling for enterprise deployment
+try:
+    import boto3
+    from botocore.exceptions import ClientError, NoCredentialsError
+    AWS_AVAILABLE = True
+except ImportError:
+    logger.warning("AWS SDK not available")
+    AWS_AVAILABLE = False
+
+try:
+    from google.cloud import storage
+    from google.oauth2 import service_account
+    GCP_AVAILABLE = True
+except ImportError:
+    logger.warning("GCP SDK not available") 
+    GCP_AVAILABLE = False
+
+try:
+    from azure.identity import DefaultAzureCredential, ClientSecretCredential
+    from azure.mgmt.resource import ResourceManagementClient
+    AZURE_AVAILABLE = True
+except ImportError:
+    logger.warning("Azure SDK not available")
+    AZURE_AVAILABLE = False
+
+try:
+    import httpx
+    HTTP_AVAILABLE = True
+except ImportError:
+    logger.warning("HTTP client not available")
+    HTTP_AVAILABLE = False
 from sqlalchemy.orm import Session
 from pydantic import BaseModel, Field
 
@@ -73,8 +94,12 @@ class EvidenceCollectionType(Enum):
 class CloudCredentials:
     """Base class for cloud credentials"""
     platform: Platform
-    created_at: datetime
+    created_at: datetime = None
     expires_at: Optional[datetime] = None
+    
+    def __post_init__(self):
+        if not self.created_at:
+            self.created_at = datetime.now(timezone.utc)
     
     def is_expired(self) -> bool:
         """Check if credentials are expired"""
@@ -85,42 +110,48 @@ class CloudCredentials:
 @dataclass
 class AWSCredentials(CloudCredentials):
     """AWS-specific credentials"""
-    access_key_id: str
-    secret_access_key: str
+    access_key_id: str = ""
+    secret_access_key: str = ""
     region: str = "us-east-1"
     session_token: Optional[str] = None
     
     def __post_init__(self):
+        super().__post_init__()
         self.platform = Platform.AWS
 
 @dataclass
 class GCPCredentials(CloudCredentials):
     """GCP-specific credentials"""
-    service_account_key: Dict[str, Any]
-    project_id: str
+    service_account_key: Dict[str, Any] = None
+    project_id: str = ""
     
     def __post_init__(self):
+        super().__post_init__()
+        if not self.service_account_key:
+            self.service_account_key = {}
         self.platform = Platform.GCP
 
 @dataclass
 class AzureCredentials(CloudCredentials):
     """Azure-specific credentials"""
-    tenant_id: str
-    client_id: str
-    client_secret: str
-    subscription_id: str
+    tenant_id: str = ""
+    client_id: str = ""
+    client_secret: str = ""
+    subscription_id: str = ""
     
     def __post_init__(self):
+        super().__post_init__()
         self.platform = Platform.AZURE
 
 @dataclass
 class GitHubCredentials(CloudCredentials):
     """GitHub-specific credentials"""
-    token: str
-    username: str
+    token: str = ""
+    username: str = ""
     organization: Optional[str] = None
     
     def __post_init__(self):
+        super().__post_init__()
         self.platform = Platform.GITHUB
 
 @dataclass

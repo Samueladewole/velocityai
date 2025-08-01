@@ -22,21 +22,72 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'agents'))
 
-# Import all existing evidence collectors
-from aws_evidence_collector import AWSEvidenceCollector
-from gcp_evidence_collector import GCPEvidenceCollector
-from azure_evidence_collector import AzureEvidenceCollector
-from workflows.github_workflows import GitHubEvidenceCollector
-from core.trust_score_engine import TrustScoreEngine
-from gdpr_transfer_compliance import GDPRTransferComplianceAgent
-from document_generator import DocumentGeneratorAgent
-from qie_integration_agent import QIEIntegrationAgent
-from trust_score_agent import TrustScoreAgent
-from continuous_monitor import ContinuousMonitorAgent
-from observability_specialist import ObservabilitySpecialistAgent
-from cryptographic_verification import CryptographicVerificationAgent
-
 logger = logging.getLogger(__name__)
+
+# Import evidence collectors with error handling
+try:
+    from aws_evidence_collector import AWSEvidenceCollector
+except ImportError as e:
+    logger.warning(f"AWS Evidence Collector import failed: {e}")
+    AWSEvidenceCollector = None
+
+try:
+    from gcp_evidence_collector import GCPEvidenceCollector
+except ImportError as e:
+    logger.warning(f"GCP Evidence Collector import failed: {e}")
+    GCPEvidenceCollector = None
+
+try:
+    from azure_evidence_collector import AzureEvidenceCollector  
+except ImportError as e:
+    logger.warning(f"Azure Evidence Collector import failed: {e}")
+    AzureEvidenceCollector = None
+
+try:
+    from gdpr_transfer_compliance import GDPRTransferComplianceAgent
+except ImportError as e:
+    logger.warning(f"GDPR Transfer Compliance import failed: {e}")
+    GDPRTransferComplianceAgent = None
+
+try:
+    from document_generator import DocumentGeneratorAgent
+except ImportError as e:
+    logger.warning(f"Document Generator import failed: {e}")
+    DocumentGeneratorAgent = None
+
+try:
+    from qie_integration_agent import QIEIntegrationAgent
+except ImportError as e:
+    logger.warning(f"QIE Integration Agent import failed: {e}")
+    QIEIntegrationAgent = None
+
+try:
+    from trust_score_agent import TrustScoreAgent
+except ImportError as e:
+    logger.warning(f"Trust Score Agent import failed: {e}")
+    TrustScoreAgent = None
+
+try:
+    from continuous_monitor import ContinuousMonitorAgent
+except ImportError as e:
+    logger.warning(f"Continuous Monitor Agent import failed: {e}")
+    ContinuousMonitorAgent = None
+
+try:
+    from observability_specialist import ObservabilitySpecialistAgent
+except ImportError as e:
+    logger.warning(f"Observability Specialist Agent import failed: {e}")
+    ObservabilitySpecialistAgent = None
+
+try:
+    from cryptographic_verification import CryptographicVerificationAgent
+except ImportError as e:
+    logger.warning(f"Cryptographic Verification Agent import failed: {e}")
+    CryptographicVerificationAgent = None
+
+# Skip complex imports for now to get server running
+GitHubEvidenceCollector = None
+TrustScoreEngine = None
 
 @dataclass
 class ExecutionResult:

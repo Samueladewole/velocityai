@@ -54,6 +54,9 @@ class Platform(enum.Enum):
     DOCUMENT = "document"
     QIE = "qie"
     TRUST_SCORE = "trust_score"
+    CONTINUOUS_MONITOR = "continuous_monitor"
+    OBSERVABILITY = "observability"
+    CRYPTOGRAPHIC = "cryptographic"
     CUSTOM = "custom"
 
 class Framework(enum.Enum):

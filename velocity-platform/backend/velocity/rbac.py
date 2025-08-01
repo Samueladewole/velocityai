@@ -106,8 +106,6 @@ class Permission(Enum):
     # Compliance Framework
     FRAMEWORK_MANAGE = "framework:manage"
     CONTROL_MANAGE = "control:manage"
-    ASSESSMENT_CREATE = "assessment:create"
-    ASSESSMENT_APPROVE = "assessment:approve"
     
     # Trust Score Management
     TRUST_SCORE_VIEW = "trust_score:view"
@@ -122,6 +120,26 @@ class Permission(Enum):
     DATA_EXPORT = "data:export"
     DATA_IMPORT = "data:import"
     BACKUP_MANAGE = "backup:manage"
+    
+    # Document Management
+    EXPORT_DOCUMENTS = "documents:export"
+    UPLOAD_DOCUMENTS = "documents:upload"
+    MANAGE_DOCUMENTS = "documents:manage"
+    DELETE_DOCUMENTS = "documents:delete"
+    SEND_EMAILS = "emails:send"
+
+# Permission helper functions
+def require_permission(permission: Permission):
+    """Dependency to require specific permission"""
+    from fastapi import Depends
+    from auth import get_current_active_user, User
+    from validation import AuthorizationException
+    
+    def check_permission_dependency(current_user: User = Depends(get_current_active_user)):
+        if not current_user.has_permission(permission.value):
+            raise AuthorizationException(f"Permission required: {permission.value}")
+        return current_user
+    return check_permission_dependency
 
 @dataclass
 class RoleDefinition:
