@@ -3,7 +3,7 @@ import { Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-
 import VelocityLanding from '@/components/velocity/VelocityLanding';
 import VelocitySignup from '@/components/velocity/VelocitySignup';
 import VelocityLogin from '@/components/velocity/VelocityLogin';
-import VelocityDashboard from '@/components/velocity/VelocityDashboardRedesigned';
+import DashboardRouter from '@/components/routing/DashboardRouter';
 
 // Coming Soon component for placeholder pages
 const VelocityComingSoon: React.FC<{ title: string; protected?: boolean }> = ({ title, protected: isProtected = false }) => {
@@ -102,22 +102,8 @@ const VelocityApp: React.FC = () => {
         <Route path="/velocity/signup" element={<VelocitySignup />} />
         <Route path="/velocity/login" element={<VelocityLogin />} />
         
-        {/* Dashboard - the main protected route */}
-        <Route path="/velocity/dashboard" element={
-          (() => {
-            console.log('Dashboard route accessed, isAuthenticated:', !!isAuthenticated);
-            if (isAuthenticated) {
-              return (
-                <div style={{ padding: '20px', color: 'white', backgroundColor: '#1e293b' }}>
-                  <h1>Dashboard Test - Authentication Working</h1>
-                  <p>Auth token: {isAuthenticated}</p>
-                  <VelocityDashboard />
-                </div>
-              );
-            }
-            return <Navigate to="/velocity/login" replace />;
-          })()
-        } />
+        {/* Dashboard - the main protected route with comprehensive routing */}
+        <Route path="/velocity/dashboard/*" element={<DashboardRouter />} />
         
         {/* All other velocity routes */}
         <Route path="/velocity/agents" element={

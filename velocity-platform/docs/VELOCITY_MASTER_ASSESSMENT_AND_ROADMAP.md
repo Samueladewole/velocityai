@@ -50,7 +50,7 @@ Despite optimistic documentation suggesting near-completion, systematic analysis
 #### **2. Core Infrastructure (80%)**
 - React/TypeScript frontend foundation with Vite
 - FastAPI backend structure with proper middleware
-- Database schema with Prisma ORM
+- Database schema with Supabase PostgreSQL
 - Basic navigation and routing system
 - Development mode authentication bypass
 - Project structure and build tooling

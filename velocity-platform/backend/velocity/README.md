@@ -161,7 +161,7 @@ print(f"Capabilities Found: {len(session.capabilities_discovered)}")
 
 ### **Requirements**
 - Python 3.11+
-- PostgreSQL 14+
+- Supabase account (PostgreSQL managed service)
 - Redis 6+
 - Docker (optional)
 
@@ -179,11 +179,11 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 
 # Configure environment
-cp .env.example .env
-# Edit .env with your settings
+cp .env.supabase.template .env
+# Edit .env with your Supabase credentials
 
-# Initialize database
-alembic upgrade head
+# Database already configured with Supabase
+# Schema and RLS policies pre-configured
 
 # Run development server
 uvicorn main:app --reload --port 8000
@@ -200,6 +200,34 @@ docker-compose up -d
 
 ---
 
+## 🗄️ **Supabase Integration**
+
+Velocity.ai now uses Supabase as the managed PostgreSQL backend for enhanced scalability and security.
+
+### **Migration Benefits**
+- **Managed Infrastructure**: No PostgreSQL maintenance required
+- **Built-in Authentication**: Integrated user management and JWT tokens
+- **Row Level Security**: Multi-tenant data isolation
+- **Real-time Subscriptions**: Live data updates
+- **Edge Functions**: Serverless compute capabilities
+- **Storage**: Integrated file storage for evidence documents
+
+### **Database Schema**
+✅ **Complete schema migrated with:**
+- 8 core tables (organizations, users, agents, evidence_items, etc.)
+- 7 custom enums for type safety
+- Row Level Security policies for multi-tenant isolation
+- Service role policies for backend access
+- Performance indexes on all key columns
+
+### **Security Features**
+- **Multi-tenant RLS**: Organizations can only access their own data
+- **Service role access**: Backend has full access using service key
+- **JWT verification**: Automatic token validation
+- **Encrypted storage**: Evidence files stored securely
+
+---
+
 ## 🛠️ **Configuration**
 
 ### **Environment Variables**
@@ -209,8 +237,11 @@ SECRET_KEY=your-secret-key-min-32-chars
 ENCRYPTION_KEY=your-encryption-key-32-chars
 AUDIT_INTEGRITY_KEY=your-integrity-key-32-chars
 
-# Database
-DATABASE_URL=postgresql://user:pass@localhost/velocity
+# Supabase Database
+DATABASE_URL=postgresql://postgres:password@db.project.supabase.co:5432/postgres
+SUPABASE_URL=https://project.supabase.co
+SUPABASE_ANON_KEY=your-anon-key
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
 
 # Redis
 REDIS_URL=redis://localhost:6379

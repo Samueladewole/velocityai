@@ -142,7 +142,7 @@ interface FrontendTech {
 interface BackendTech {
   runtime: 'Node.js with TypeScript';
   framework: 'Fastify for high performance';
-  database: 'PostgreSQL with Prisma ORM';
+  database: 'PostgreSQL with Supabase';
   cache: 'Redis for session and data caching';
   queue: 'Bull MQ for background jobs';
   storage: 'AWS S3 for evidence storage';

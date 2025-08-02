@@ -12,7 +12,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 from models import Base
-from database import DATABASE_URL, ASYNC_DATABASE_URL
+from database import DATABASE_URL
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

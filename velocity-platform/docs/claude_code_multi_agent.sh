@@ -560,7 +560,7 @@ WEEKLY INTEGRATION:
 SHARED ARTIFACTS:
 - TypeScript definitions (/types/shared.ts)
 - API contracts (/docs/api-contracts.md)
-- Database schema (/prisma/schema.prisma)
+- Database schema (Supabase PostgreSQL with RLS)
 - Configuration files (/config/)
 - Testing protocols (/tests/integration/)
 

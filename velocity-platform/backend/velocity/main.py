@@ -37,6 +37,7 @@ from auth import (
     authenticate_user, create_user, create_tokens, create_user_response,
     get_current_user, get_current_active_user
 )
+from auth_routes import router as auth_router
 from security import (
     SecurityHeadersMiddleware, RateLimitMiddleware, SecurityAuditMiddleware,
     InputValidationMiddleware, SecurityConfig, encrypt_credentials, decrypt_credentials
@@ -118,6 +119,17 @@ app.add_exception_handler(RequestValidationError, validation_exception_handler)
 app.add_exception_handler(StarletteHTTPException, http_exception_handler)
 app.add_exception_handler(Exception, general_exception_handler)
 
+# Enhanced middleware setup
+from enhanced_middleware import setup_enhanced_middleware, get_middleware_config
+import os
+
+# Get environment-specific middleware configuration
+environment = os.getenv("ENVIRONMENT", "production")
+middleware_config = get_middleware_config(environment)
+
+# Apply enhanced middleware
+app = setup_enhanced_middleware(app, middleware_config)
+
 # Security and monitoring middleware (order is important - most restrictive first)
 app.add_middleware(SecurityHeadersMiddleware)
 app.add_middleware(SecurityAuditMiddleware, log_sensitive_endpoints=True)
@@ -158,6 +170,7 @@ app.include_router(qie_router)
 app.include_router(assessment_router)
 app.include_router(evidence_router)
 app.include_router(document_router)
+app.include_router(auth_router)
 
 # API Routes
 
