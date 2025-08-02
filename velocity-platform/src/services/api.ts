@@ -1,32 +1,46 @@
 /**
- * API service for Velocity AI Platform
- * Handles all backend communication
+ * API Service Layer for Velocity AI Platform
+ * Centralized API client with authentication and error handling
  */
 
-const API_BASE_URL = 'http://localhost:8000';
+import { VelocityUser, SignupData } from '@/contexts/AuthContext';
+
+// API Configuration
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_VERSION = 'v1';
+
+// Types
+export interface ApiResponse<T = any> {
+  data?: T;
+  error?: string;
+  message?: string;
+  status: number;
+}
+
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+  page: number;
+  size: number;
+  pages: number;
+}
+
+export interface AuthTokens {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+  expires_in: number;
+}
 
 export interface LoginCredentials {
   email: string;
   password: string;
 }
 
-export interface SignupData {
-  email: string;
-  password: string;
-  first_name: string;
-  last_name: string;
-  company?: string;
-}
-
 export interface AuthResponse {
   access_token: string;
   token_type: string;
-  user: {
-    id: string;
-    email: string;
-    name: string;
-    company?: string;
-  };
+  user: VelocityUser;
 }
 
 export interface Agent {

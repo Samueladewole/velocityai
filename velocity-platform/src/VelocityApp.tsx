@@ -4,6 +4,8 @@ import VelocityLanding from '@/components/velocity/VelocityLanding';
 import VelocitySignup from '@/components/velocity/VelocitySignup';
 import VelocityLogin from '@/components/velocity/VelocityLogin';
 import DashboardRouter from '@/components/routing/DashboardRouter';
+import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import ToastProvider from '@/components/ui/ToastProvider';
 
 // Coming Soon component for placeholder pages
 const VelocityComingSoon: React.FC<{ title: string; protected?: boolean }> = ({ title, protected: isProtected = false }) => {
@@ -82,17 +84,24 @@ const VelocityComingSoon: React.FC<{ title: string; protected?: boolean }> = ({ 
   );
 };
 
-const VelocityApp: React.FC = () => {
+// Auth-aware routes component
+const VelocityRoutes: React.FC = () => {
   const location = useLocation();
-  const isAuthenticated = localStorage.getItem('velocity_auth_token');
+  const { isAuthenticated, isLoading } = useAuth();
 
   useEffect(() => {
     console.log('VelocityApp mounted successfully at:', location.pathname);
-    console.log('Authentication status:', !!isAuthenticated);
-    console.log('Auth token:', isAuthenticated);
-    console.log('LocalStorage velocity_auth_token:', localStorage.getItem('velocity_auth_token'));
-    console.log('LocalStorage velocity_user:', localStorage.getItem('velocity_user'));
-  }, [location.pathname, isAuthenticated]);
+    console.log('Authentication status:', isAuthenticated);
+    console.log('Loading:', isLoading);
+  }, [location.pathname, isAuthenticated, isLoading]);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 flex items-center justify-center">
+        <div className="text-white text-xl">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <Routes>
@@ -176,6 +185,17 @@ const VelocityApp: React.FC = () => {
         {/* Fallback route */}
         <Route path="/*" element={<Navigate to="/velocity" replace />} />
     </Routes>
+  );
+};
+
+// Main app component with AuthProvider
+const VelocityApp: React.FC = () => {
+  return (
+    <AuthProvider>
+      <ToastProvider>
+        <VelocityRoutes />
+      </ToastProvider>
+    </AuthProvider>
   );
 };
 

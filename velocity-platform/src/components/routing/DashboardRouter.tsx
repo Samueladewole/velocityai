@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/contexts/AuthContext';
+import { LiveDataProvider } from '@/components/velocity/LiveDataProvider';
 
 // Main Dashboards
 import LiveVelocityDashboard from '@/components/velocity/LiveVelocityDashboard';
@@ -51,12 +52,13 @@ const DashboardRouter: React.FC = () => {
 
   // Redirect to login if not authenticated
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/velocity/login" state={{ from: location }} replace />;
   }
 
   return (
-    <DashboardLayout>
-      <Routes>
+    <LiveDataProvider>
+      <DashboardLayout>
+        <Routes>
         {/* Default Dashboard Route */}
         <Route path="/" element={<LiveVelocityDashboard />} />
         
@@ -112,8 +114,9 @@ const DashboardRouter: React.FC = () => {
             </button>
           </div>
         } />
-      </Routes>
-    </DashboardLayout>
+        </Routes>
+      </DashboardLayout>
+    </LiveDataProvider>
   );
 };
 

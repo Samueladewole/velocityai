@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import velocityApi from '@/services/velocity/api.service';
 import velocityWebSocket from '@/services/velocity/websocket.service';
+import { useToast } from '@/hooks/use-toast';
 
 interface Agent {
   id: string;
@@ -125,6 +126,8 @@ interface LiveDataProviderProps {
 }
 
 export const LiveDataProvider: React.FC<LiveDataProviderProps> = ({ children }) => {
+  const { toast } = useToast();
+  
   // Data state
   const [agents, setAgents] = useState<Agent[]>([]);
   const [evidence, setEvidence] = useState<Evidence[]>([]);
@@ -260,8 +263,20 @@ export const LiveDataProvider: React.FC<LiveDataProviderProps> = ({ children }) 
     try {
       await velocityApi.runAgent(id);
       refreshAgents(); // Refresh to get updated status
+      
+      const agent = agents.find(a => a.id === id);
+      toast({
+        title: "Collection Started",
+        description: `${agent?.name || 'Agent'} started collecting evidence`,
+        variant: "info"
+      });
     } catch (error) {
       console.error('Error triggering collection:', error);
+      toast({
+        title: "Collection Failed",
+        description: "Failed to start evidence collection",
+        variant: "destructive"
+      });
     }
   };
 
@@ -320,14 +335,33 @@ export const LiveDataProvider: React.FC<LiveDataProviderProps> = ({ children }) 
       setEvidence(prev => [evidenceData, ...prev]);
       setLastUpdate(new Date().toISOString());
       
+      // Show success toast
+      toast({
+        title: "Evidence Collected",
+        description: `New evidence for ${evidenceData.framework || 'compliance'} collected`,
+        variant: "success"
+      });
+      
       // Refresh trust score when new evidence is collected
       refreshTrustScore();
     };
 
     const handleTrustScoreUpdate = (message: any) => {
       const scoreData = message.data;
+      const previousScore = trustScore?.total_score || 0;
+      const newScore = scoreData.total_score || 0;
+      
       setTrustScore(prev => prev ? { ...prev, ...scoreData } : null);
       setLastUpdate(new Date().toISOString());
+      
+      // Show toast if score improved significantly
+      if (newScore > previousScore + 5) {
+        toast({
+          title: "Trust Score Updated",
+          description: `Your trust score increased to ${newScore}`,
+          variant: "success"
+        });
+      }
     };
 
     const handleIntegrationStatus = (message: any) => {
@@ -342,6 +376,11 @@ export const LiveDataProvider: React.FC<LiveDataProviderProps> = ({ children }) 
 
     const handleError = (message: any) => {
       console.error('WebSocket error:', message.data);
+      toast({
+        title: "Connection Error",
+        description: "Lost connection to real-time updates. Retrying...",
+        variant: "destructive"
+      });
     };
 
     // Set up WebSocket event listeners
