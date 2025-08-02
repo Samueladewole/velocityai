@@ -91,7 +91,7 @@ const LiveVelocityDashboard: React.FC = () => {
     <div className="bg-white rounded-lg shadow-sm border p-6 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-3">
-          <div className={`w-12 h-12 rounded-lg bg-€{color}-100 flex items-center justify-center`}>
+          <div className={`w-12 h-12 rounded-lg bg-${color}-100 flex items-center justify-center`}>
             {icon}
           </div>
           <div>
@@ -102,7 +102,7 @@ const LiveVelocityDashboard: React.FC = () => {
           </div>
         </div>
         {trend && (
-          <div className={`text-sm font-medium €{trend > 0 ? 'text-green-600' : 'text-red-600'}`}>
+          <div className={`text-sm font-medium ${trend > 0 ? 'text-green-600' : 'text-red-600'}`}>
             {trend > 0 ? '+' : ''}{trend}%
           </div>
         )}
@@ -130,7 +130,7 @@ const LiveVelocityDashboard: React.FC = () => {
             <div className="flex items-start justify-between">
               <div className="flex-1">
                 <div className="flex items-center space-x-2 mb-1">
-                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium €{
+                  <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
                     evidence.status === 'validated' ? 'bg-green-100 text-green-800' :
                     evidence.status === 'validating' ? 'bg-yellow-100 text-yellow-800' :
                     evidence.status === 'collecting' ? 'bg-blue-100 text-blue-800' :
@@ -138,16 +138,16 @@ const LiveVelocityDashboard: React.FC = () => {
                   }`}>
                     {evidence.status}
                   </span>
-                  <span className="text-xs text-gray-500">{evidence.platform}</span>
+                  <span className="text-xs text-gray-500">{evidence.evidence_type}</span>
                   <span className="text-xs text-gray-500">•</span>
                   <span className="text-xs text-gray-500">{evidence.framework}</span>
                 </div>
-                <div className="text-sm font-medium text-gray-900">{evidence.control}</div>
-                <div className="text-xs text-gray-600 mt-1">{evidence.description}</div>
+                <div className="text-sm font-medium text-gray-900">{evidence.title}</div>
+                <div className="text-xs text-gray-600 mt-1">Control: {evidence.control_id}</div>
                 <div className="flex items-center space-x-4 mt-2 text-xs text-gray-500">
-                  <span>Confidence: {Math.round(evidence.confidence)}%</span>
-                  <span>+{evidence.trustPoints} Trust Points</span>
-                  <span>{new Date(evidence.timestamp).toLocaleTimeString()}</span>
+                  <span>Confidence: {Math.round(evidence.confidence_score)}%</span>
+                  <span>+{evidence.trust_points} Trust Points</span>
+                  <span>{new Date(evidence.created_at).toLocaleTimeString()}</span>
                 </div>
               </div>
               {evidence.status === 'collecting' && (
@@ -169,7 +169,7 @@ const LiveVelocityDashboard: React.FC = () => {
     <div className="bg-white rounded-lg shadow-sm border p-4 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-3">
-          <div className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center €{getStatusColor(agent.status)}`}>
+          <div className={`w-10 h-10 rounded-lg border-2 flex items-center justify-center ${getStatusColor(agent.status)}`}>
             {getStatusIcon(agent.status)}
           </div>
           <div>
@@ -217,7 +217,7 @@ const LiveVelocityDashboard: React.FC = () => {
           <div className="w-full bg-gray-200 rounded-full h-2">
             <div 
               className="bg-blue-600 h-2 rounded-full transition-all duration-500" 
-              style={{ width: `€{agent.progress}%` }}
+              style={{ width: `${agent.progress}%` }}
             ></div>
           </div>
           <div className="text-xs text-gray-500 mt-1">{agent.currentActivity}</div>
@@ -227,19 +227,19 @@ const LiveVelocityDashboard: React.FC = () => {
       <div className="grid grid-cols-2 gap-4 text-sm">
         <div>
           <div className="text-gray-600">Evidence</div>
-          <div className="font-medium">{agent.evidenceCollected}</div>
+          <div className="font-medium">{agent.evidence_collected}</div>
         </div>
         <div>
-          <div className="text-gray-600">Trust Points</div>
-          <div className="font-medium text-purple-600">{agent.trustPoints}</div>
+          <div className="text-gray-600">Success Rate</div>
+          <div className="font-medium text-purple-600">{agent.success_rate}%</div>
         </div>
         <div>
           <div className="text-gray-600">Last Run</div>
-          <div className="font-medium">{agent.lastRun}</div>
+          <div className="font-medium">{agent.last_run}</div>
         </div>
         <div>
           <div className="text-gray-600">Next Run</div>
-          <div className="font-medium">{agent.nextRun}</div>
+          <div className="font-medium">{agent.next_run}</div>
         </div>
       </div>
     </div>
@@ -261,11 +261,11 @@ const LiveVelocityDashboard: React.FC = () => {
                 <label className="text-sm text-gray-600">Auto-refresh</label>
                 <button
                   onClick={() => setAutoRefresh(!autoRefresh)}
-                  className={`w-10 h-6 rounded-full transition-colors €{
+                  className={`w-10 h-6 rounded-full transition-colors ${
                     autoRefresh ? 'bg-blue-600' : 'bg-gray-300'
                   }`}
                 >
-                  <div className={`w-4 h-4 bg-white rounded-full transition-transform €{
+                  <div className={`w-4 h-4 bg-white rounded-full transition-transform ${
                     autoRefresh ? 'translate-x-5' : 'translate-x-1'
                   }`}></div>
                 </button>
@@ -323,7 +323,7 @@ const LiveVelocityDashboard: React.FC = () => {
                   <button
                     key={range}
                     onClick={() => setSelectedTimeRange(range)}
-                    className={`px-3 py-1 text-xs rounded-full €{
+                    className={`px-3 py-1 text-xs rounded-full ${
                       selectedTimeRange === range 
                         ? 'bg-blue-100 text-blue-700' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
@@ -337,10 +337,16 @@ const LiveVelocityDashboard: React.FC = () => {
             <ResponsiveContainer width="100%" height={200}>
               <AreaChart data={metrics.trendsData.evidenceOverTime}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="time" />
+                <XAxis 
+                  dataKey="time" 
+                  tickFormatter={(time) => new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                />
                 <YAxis />
-                <Tooltip />
-                <Area type="monotone" dataKey="count" stroke="#3B82F6" fill="#93C5FD" fillOpacity={0.6} />
+                <Tooltip 
+                  labelFormatter={(time) => new Date(time).toLocaleString()}
+                  formatter={(value) => [value, 'Evidence Items']}
+                />
+                <Area type="monotone" dataKey="value" stroke="#3B82F6" fill="#93C5FD" fillOpacity={0.6} />
               </AreaChart>
             </ResponsiveContainer>
           </div>
@@ -351,10 +357,16 @@ const LiveVelocityDashboard: React.FC = () => {
             <ResponsiveContainer width="100%" height={200}>
               <LineChart data={metrics.trendsData.trustPointsOverTime}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="time" />
+                <XAxis 
+                  dataKey="time" 
+                  tickFormatter={(time) => new Date(time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                />
                 <YAxis />
-                <Tooltip />
-                <Line type="monotone" dataKey="points" stroke="#8B5CF6" strokeWidth={2} />
+                <Tooltip 
+                  labelFormatter={(time) => new Date(time).toLocaleString()}
+                  formatter={(value) => [value, 'Trust Points']}
+                />
+                <Line type="monotone" dataKey="value" stroke="#8B5CF6" strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </div>
@@ -395,7 +407,9 @@ const LiveVelocityDashboard: React.FC = () => {
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Success Rate</span>
-                <span className="font-medium text-green-600">{Math.round(metrics.successRate * 10) / 10}%</span>
+                <span className={`font-medium ${metrics.successRate >= 95 ? 'text-green-600' : metrics.successRate >= 85 ? 'text-yellow-600' : 'text-red-600'}`}>
+                  {Math.round(metrics.successRate * 10) / 10}%
+                </span>
               </div>
             </div>
           </div>
@@ -406,17 +420,17 @@ const LiveVelocityDashboard: React.FC = () => {
               <h4 className="font-semibold text-gray-900">Platform Distribution</h4>
             </div>
             <div className="space-y-2 text-sm">
-              {['AWS', 'GCP', 'Azure', 'GitHub'].map((platform, index) => (
-                <div key={platform} className="flex items-center justify-between">
-                  <span className="text-gray-600">{platform}</span>
+              {metrics.platformDistribution.map((item) => (
+                <div key={item.platform} className="flex items-center justify-between">
+                  <span className="text-gray-600">{item.platform}</span>
                   <div className="flex items-center space-x-2">
                     <div className="w-16 bg-gray-200 rounded-full h-2">
                       <div 
                         className="bg-blue-600 h-2 rounded-full" 
-                        style={{ width: `€{25 + Math.random() * 50}%` }}
+                        style={{ width: `${item.percentage}%` }}
                       ></div>
                     </div>
-                    <span className="font-medium w-8 text-right">{Math.floor(25 + Math.random() * 50)}%</span>
+                    <span className="font-medium w-8 text-right">{item.percentage}%</span>
                   </div>
                 </div>
               ))}
@@ -431,15 +445,19 @@ const LiveVelocityDashboard: React.FC = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">API Response Time</span>
-                <span className="font-medium text-green-600">145ms</span>
+                <span className={`font-medium ${metrics.systemHealth.apiResponseTime < 200 ? 'text-green-600' : 'text-yellow-600'}`}>
+                  {metrics.systemHealth.apiResponseTime}ms
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Queue Length</span>
-                <span className="font-medium">12</span>
+                <span className="font-medium">{metrics.systemHealth.queueLength}</span>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-gray-600">Error Rate</span>
-                <span className="font-medium text-green-600">0.02%</span>
+                <span className={`font-medium ${metrics.systemHealth.errorRate < 0.05 ? 'text-green-600' : 'text-red-600'}`}>
+                  {metrics.systemHealth.errorRate}%
+                </span>
               </div>
             </div>
           </div>
