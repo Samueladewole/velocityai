@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { PublicHeader } from '../../components/common/PublicHeader';
 import { 
   Shield, 
   CheckCircle, 
@@ -26,10 +27,21 @@ import {
   Gavel
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { PublicHeader } from '../../components/common/PublicHeader';
+import { useMultipleUrlState } from '../../hooks/useUrlState';
 
 const GDPRInternationalTransfersPage: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'overview' | 'features' | 'comparison' | 'demo'>('overview');
+  // Use URL state for tab persistence
+  const [tabState, updateTabState] = useMultipleUrlState({
+    tab: 'overview' as 'overview' | 'features' | 'comparison' | 'demo',
+    gdprTab: 'basic-compliance' as 'basic-compliance' | 'international-transfers'
+  }, {
+    storagePrefix: 'gdpr_page'
+  });
+  
+  const activeTab = tabState.tab;
+  const activeGDPRTab = tabState.gdprTab;
+  const setActiveTab = (tab: typeof activeTab) => updateTabState({ tab });
+  const setActiveGDPRTab = (gdprTab: typeof activeGDPRTab) => updateTabState({ gdprTab });
   const [isVisible, setIsVisible] = useState(false);
   const [showGuideModal, setShowGuideModal] = useState(false);
   const [isEULocation, setIsEULocation] = useState(false);
@@ -109,8 +121,8 @@ const GDPRInternationalTransfersPage: React.FC = () => {
   const costComparison = [
     { 
       provider: "Velocity AI International Transfers", 
-      cost: isEULocation ? "€32,000" : "€35,000", 
-      timeline: "3 weeks", 
+      cost: isEULocation ? "€30,000" : "€32,000", 
+      timeline: "3 days", 
       coverage: "100%",
       automation: "94%",
       support: "24/7"
@@ -215,60 +227,60 @@ const GDPRInternationalTransfersPage: React.FC = () => {
       metric: "100+ cloud services supported"
     },
     {
-      title: `Save ${isEULocation ? "€133K" : "€145K"} Per Year`,
+      title: `Save ${isEULocation ? "€135K" : "€148K"} Per Year`,
       description: "Stop paying lawyers €300/hour. Our AI does the work for pennies on the dollar",
-      metric: "81% cheaper than law firms"
+      metric: "82% cheaper than law firms"
     },
     {
-      title: "Setup in 3 Weeks",
-      description: "From signing up to full protection - faster than hiring a single compliance lawyer",
-      metric: "6x faster than traditional"
+      title: "Setup in 3 Days",
+      description: "From signing up to full AI protection - faster than hiring a single compliance lawyer",
+      metric: "20x faster than traditional"
     }
   ];
 
   const thirteenAgents = [
     {
       name: "International Transfer Compliance Agent",
-      description: "Cross-border data flow monitoring and assessment",
+      description: "AI-powered Transfer Impact Assessments (TIAs) with automated adequacy decision tracking and Standard Contractual Clauses management",
       automation: "Coming Q2 2025",
       icon: Globe,
       specialty: "TIA automation, adequacy tracking, SCC management",
       status: "under_development"
     },
     {
-      name: "ATLAS Discovery Agent", 
-      description: "Automated infrastructure mapping and data flow analysis",
+      name: "Cross-Border Data Mapper Agent", 
+      description: "Real-time mapping of data flows across international boundaries with automated cloud provider monitoring",
       automation: "95%",
       icon: MapPin,
-      specialty: "Cross-border data mapping"
+      specialty: "Cross-border data mapping, cloud infrastructure tracking"
     },
     {
-      name: "COMPASS Risk Assessment Agent",
-      description: "Comprehensive risk evaluation for international transfers", 
+      name: "Transfer Risk Assessment Agent",
+      description: "Quantitative risk scoring for international transfers with predictive analytics for regulatory changes", 
       automation: "94%",
       icon: Target,
-      specialty: "Transfer risk scoring"
+      specialty: "Transfer risk scoring, regulatory change prediction"
     },
     {
-      name: "CIPHER Data Classification Agent",
-      description: "Intelligent data categorization for transfer requirements",
+      name: "Data Sensitivity Classification Agent",
+      description: "AI-powered data categorization with automatic sensitivity scoring for GDPR Article 9 special categories",
       automation: "93%", 
       icon: Lock,
-      specialty: "Data sensitivity analysis"
+      specialty: "Data sensitivity analysis, GDPR Article 9 detection"
     },
     {
-      name: "CLEARANCE Access Management Agent",
-      description: "Automated access controls for international data access",
+      name: "Transfer Access Control Agent",
+      description: "Automated access controls for international data access with role-based permissions and audit trails",
       automation: "92%",
       icon: Shield,
-      specialty: "Transfer access control"
+      specialty: "Transfer access control, permission management"
     },
     {
-      name: "BEACON Monitoring Agent",
-      description: "24/7 surveillance of cross-border data movements",
+      name: "Real-Time Transfer Monitor Agent",
+      description: "24/7 surveillance of cross-border data movements with instant violation alerts and enforcement prevention",
       automation: "91%",
       icon: Eye,
-      specialty: "Transfer monitoring"
+      specialty: "Transfer monitoring, violation prevention"
     },
     {
       name: "NEXUS Vendor Assessment Agent", 
@@ -325,18 +337,18 @@ const GDPRInternationalTransfersPage: React.FC = () => {
           <div className={`text-center transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
             <div className="flex items-center justify-center mb-6">
               <div className="p-3 bg-emerald-500 rounded-full mr-4">
-                <Globe className="w-8 h-8 text-white" />
+                <Shield className="w-8 h-8 text-white" />
               </div>
-              <span className="text-emerald-400 font-semibold text-lg">International Transfer Solutions</span>
+              <span className="text-emerald-400 font-semibold text-lg">Complete GDPR Compliance & International Transfers</span>
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Never Get Caught Like Microsoft 365 Did
+              Complete GDPR Automation & International Transfer Protection
             </h1>
             
             <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
-              Never get caught like Microsoft 365 did. Our AI agents automatically check if your cloud services 
-              are GDPR compliant, so you can use the tools you need without worrying about enforcement actions.
+              Our AI agents handle complete GDPR compliance - from data mapping and consent management to international transfer risk assessment. 
+              Protect your business from €20M fines while using any cloud service globally.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
@@ -356,6 +368,32 @@ const GDPRInternationalTransfersPage: React.FC = () => {
               </button>
             </div>
 
+            {/* GDPR Specialization Tabs */}
+            <div className="flex justify-center mt-12 mb-8">
+              <div className="bg-slate-800/50 backdrop-blur-sm rounded-lg p-1 border border-slate-700/50">
+                <button
+                  onClick={() => setActiveGDPRTab('basic-compliance')}
+                  className={`px-6 py-3 rounded-md font-medium transition-all ${
+                    activeGDPRTab === 'basic-compliance'
+                      ? 'bg-emerald-500 text-white shadow-lg'
+                      : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+                  }`}
+                >
+                  GDPR Compliance
+                </button>
+                <button
+                  onClick={() => setActiveGDPRTab('international-transfers')}
+                  className={`px-6 py-3 rounded-md font-medium transition-all ${
+                    activeGDPRTab === 'international-transfers'
+                      ? 'bg-emerald-500 text-white shadow-lg'
+                      : 'text-slate-300 hover:text-white hover:bg-slate-700/50'
+                  }`}
+                >
+                  International Transfers
+                </button>
+              </div>
+            </div>
+
             {/* Key Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <div className="text-center">
@@ -363,8 +401,8 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                 <div className="text-sm text-slate-300">Cost Savings vs Traditional Solutions</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">3 Weeks</div>
-                <div className="text-sm text-slate-300">Implementation Time</div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">3 Days</div>
+                <div className="text-sm text-slate-300">Setup Time</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-purple-400 mb-2">94%</div>
@@ -417,6 +455,71 @@ const GDPRInternationalTransfersPage: React.FC = () => {
       {/* Content Sections */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         
+        {/* Tab Content Based on GDPR Specialization */}
+        {activeGDPRTab === 'basic-compliance' && (
+          <div className="mb-12 bg-blue-50 rounded-lg p-8 border border-blue-200">
+            <h2 className="text-2xl font-bold text-blue-900 mb-4">🛡️ GDPR Compliance Automation</h2>
+            <p className="text-blue-800 mb-6">
+              Velocity's AI agents automate GDPR compliance with 4 core agents handling data protection, consent management, and privacy rights fulfillment.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-lg border border-blue-200">
+                <h3 className="font-semibold text-blue-900 mb-3">🤖 Privacy Data Mapper Agent</h3>
+                <p className="text-sm text-blue-700 mb-2">Maps personal data flows and processing activities automatically</p>
+                <div className="text-blue-600 font-semibold text-sm">94% automation</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-blue-200">
+                <h3 className="font-semibold text-blue-900 mb-3">🤖 Consent Manager Agent</h3>
+                <p className="text-sm text-blue-700 mb-2">Tracks and validates consent across all touchpoints</p>
+                <div className="text-blue-600 font-semibold text-sm">97% automation</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-blue-200">
+                <h3 className="font-semibold text-blue-900 mb-3">🤖 Rights Fulfillment Agent</h3>
+                <p className="text-sm text-blue-700 mb-2">Automates subject access requests and data portability</p>
+                <div className="text-blue-600 font-semibold text-sm">92% automation</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-blue-200">
+                <h3 className="font-semibold text-blue-900 mb-3">🤖 Breach Detection Agent</h3>
+                <p className="text-sm text-blue-700 mb-2">Monitors data breaches and automates 72-hour reporting</p>
+                <div className="text-blue-600 font-semibold text-sm">99% automation</div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeGDPRTab === 'international-transfers' && (
+          <div className="mb-12 bg-emerald-50 rounded-lg p-8 border border-emerald-200">
+            <h2 className="text-2xl font-bold text-emerald-900 mb-4">🌍 13 AI Agents Including NEW Transfer Specialist</h2>
+            <p className="text-emerald-800 mb-6">
+              Complete automation suite featuring our specialized International Transfer Compliance Agent
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white p-6 rounded-lg border border-emerald-200 relative">
+                <div className="absolute top-2 right-2 bg-emerald-500 text-white text-xs px-2 py-1 rounded">NEW</div>
+                <h3 className="font-semibold text-emerald-900 mb-3">🚀 International Transfer Compliance Agent</h3>
+                <p className="text-sm text-emerald-700 mb-2">Cross-border data flow monitoring and assessment</p>
+                <p className="text-xs text-emerald-600 mb-2">TIA automation, adequacy tracking, SCC management</p>
+                <div className="text-emerald-600 font-semibold text-sm">Coming Q2 2025</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-emerald-200">
+                <h3 className="font-semibold text-emerald-900 mb-3">🤖 Cloud Monitor Agent</h3>
+                <p className="text-sm text-emerald-700 mb-2">24/7 monitoring of Microsoft 365, AWS, Google Cloud</p>
+                <div className="text-emerald-600 font-semibold text-sm">95% automation</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-emerald-200">
+                <h3 className="font-semibold text-emerald-900 mb-3">🤖 Transfer Risk Agent</h3>
+                <p className="text-sm text-emerald-700 mb-2">Automated Transfer Impact Assessments (TIAs)</p>
+                <div className="text-emerald-600 font-semibold text-sm">88% automation</div>
+              </div>
+              <div className="bg-white p-6 rounded-lg border border-emerald-200">
+                <h3 className="font-semibold text-emerald-900 mb-3">🤖 Adequacy Tracker Agent</h3>
+                <p className="text-sm text-emerald-700 mb-2">Real-time adequacy decision monitoring and alerts</p>
+                <div className="text-emerald-600 font-semibold text-sm">91% automation</div>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Overview Tab */}
         {activeTab === 'overview' && (
           <div className="space-y-16">
@@ -444,29 +547,30 @@ const GDPRInternationalTransfersPage: React.FC = () => {
               ))}
             </div>
 
-            {/* 13 AI Agents Showcase */}
+            {/* 13 AI Agents Showcase - Simplified */}
             <div className="bg-white rounded-xl border border-slate-200 p-8">
               <div className="text-center mb-12">
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">13 AI Agents Including NEW Transfer Specialist</h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">13 Specialized AI Agents</h3>
                 <p className="text-slate-600">
-                  Complete automation suite featuring our specialized International Transfer Compliance Agent
+                  Complete automation suite with our NEW International Transfer Compliance Agent
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {thirteenAgents.slice(0, 6).map((agent, index) => {
+              {/* Featured Agents - Top 3 Only */}
+              <div className="grid md:grid-cols-3 gap-6 mb-8">
+                {thirteenAgents.slice(0, 3).map((agent, index) => {
                   const Icon = agent.icon;
                   const isNew = agent.status === 'under_development';
                   return (
-                    <div key={index} className={`border rounded-lg p-4 hover:border-blue-300 transition-colors ${
+                    <div key={index} className={`border rounded-lg p-6 hover:border-blue-300 transition-colors ${
                       isNew ? 'border-emerald-300 bg-emerald-50' : 'border-slate-200'
                     }`}>
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className={`p-2 rounded-lg ${isNew ? 'bg-emerald-100' : 'bg-blue-100'}`}>
-                          <Icon className={`w-5 h-5 ${isNew ? 'text-emerald-600' : 'text-blue-600'}`} />
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className={`p-3 rounded-lg ${isNew ? 'bg-emerald-100' : 'bg-blue-100'}`}>
+                          <Icon className={`w-6 h-6 ${isNew ? 'text-emerald-600' : 'text-blue-600'}`} />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-slate-900 text-sm">{agent.name}</h4>
+                          <h4 className="font-semibold text-slate-900">{agent.name}</h4>
                           <div className={`font-bold text-sm ${isNew ? 'text-emerald-600' : 'text-emerald-600'}`}>
                             {agent.automation}
                           </div>
@@ -477,8 +581,8 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                           )}
                         </div>
                       </div>
-                      <p className="text-slate-600 text-sm mb-2">{agent.description}</p>
-                      <div className={`text-xs px-2 py-1 rounded ${
+                      <p className="text-slate-600 text-sm mb-3">{agent.description}</p>
+                      <div className={`text-xs px-3 py-1 rounded-full ${
                         isNew ? 'bg-emerald-100 text-emerald-600' : 'bg-blue-50 text-blue-600'
                       }`}>
                         {agent.specialty}
@@ -488,36 +592,140 @@ const GDPRInternationalTransfersPage: React.FC = () => {
                 })}
               </div>
 
-              <div className="text-center mt-8">
-                <button className="text-blue-600 font-medium hover:text-blue-700 transition-colors">
-                  View All 13 Agents (Including NEW Transfer Agent) →
-                </button>
+              {/* Explore All Agents CTA */}
+              <div className="text-center">
+                <Link 
+                  to="/velocity/trust-pathway"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+                >
+                  <Eye className="w-5 h-5" />
+                  Explore All 13 Agents
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+                <p className="text-slate-500 text-sm mt-2">Complete agent showcase with trust pathway</p>
               </div>
             </div>
 
-            {/* Transfer Use Cases */}
+            {/* Industry-Specific Use Cases */}
             <div className="bg-white rounded-xl border border-slate-200 p-8">
               <div className="text-center mb-12">
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">International Transfer Use Cases</h3>
+                <h3 className="text-2xl font-bold text-slate-900 mb-4">Industry-Specific International Transfer Solutions</h3>
                 <p className="text-slate-600">
-                  Purpose-built for complex cross-border data scenarios and post-Schrems II requirements
+                  Specialized automation for the most complex cross-border data scenarios across key industries
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                {transferUseCases.map((useCase, index) => (
-                  <div key={index} className="border border-slate-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
-                    <h4 className="font-semibold text-slate-900 mb-3">{useCase.title}</h4>
-                    <p className="text-slate-600 mb-4">{useCase.description}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {useCase.metrics.map((metric, idx) => (
-                        <span key={idx} className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded">
-                          {metric}
-                        </span>
-                      ))}
+              {/* Industry Use Cases Grid */}
+              <div className="grid lg:grid-cols-3 gap-8 mb-12">
+                {/* Banking & Financial Services */}
+                <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-lg p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-blue-100 rounded-lg">
+                      <Building className="w-6 h-6 text-blue-600" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-blue-900">Banking & Financial Services</h4>
+                  </div>
+                  <p className="text-blue-800 mb-4">
+                    Specialized for correspondent banking, wire transfers, and cross-border payment processing with automated TIA generation.
+                  </p>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-blue-700">
+                      <CheckCircle className="w-4 h-4 text-blue-500" />
+                      KYC/AML + GDPR coordination
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-blue-700">
+                      <CheckCircle className="w-4 h-4 text-blue-500" />
+                      Cross-border payment compliance
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-blue-700">
+                      <CheckCircle className="w-4 h-4 text-blue-500" />
+                      Basel III + data governance integration
                     </div>
                   </div>
-                ))}
+                  <div className="text-blue-600 font-semibold text-sm bg-blue-100 px-3 py-1 rounded-full inline-block">
+                    €30K annually - 81% cost reduction vs traditional
+                  </div>
+                </div>
+
+                {/* Healthcare & Life Sciences */}
+                <div className="bg-gradient-to-br from-emerald-50 to-green-50 border border-emerald-200 rounded-lg p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-emerald-100 rounded-lg">
+                      <Heart className="w-6 h-6 text-emerald-600" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-emerald-900">Healthcare & Life Sciences</h4>
+                  </div>
+                  <p className="text-emerald-800 mb-4">
+                    GDPR + HIPAA compliance for clinical trials, telemedicine, and medical device data flowing across borders.
+                  </p>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-emerald-700">
+                      <CheckCircle className="w-4 h-4 text-emerald-500" />
+                      Clinical trial data across 50+ countries
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-emerald-700">
+                      <CheckCircle className="w-4 h-4 text-emerald-500" />
+                      Medical device data sovereignty
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-emerald-700">
+                      <CheckCircle className="w-4 h-4 text-emerald-500" />
+                      Patient consent across jurisdictions
+                    </div>
+                  </div>
+                  <div className="text-emerald-600 font-semibold text-sm bg-emerald-100 px-3 py-1 rounded-full inline-block">
+                    Premium healthcare compliance automation
+                  </div>
+                </div>
+
+                {/* Manufacturing & IoT */}
+                <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div className="p-2 bg-amber-100 rounded-lg">
+                      <Settings className="w-6 h-6 text-amber-600" />
+                    </div>
+                    <h4 className="text-lg font-semibold text-amber-900">Manufacturing & IoT</h4>
+                  </div>
+                  <p className="text-amber-800 mb-4">
+                    Industrial IoT sensor data, supply chain compliance, and product design data flowing to international partners.
+                  </p>
+                  <div className="space-y-2 mb-4">
+                    <div className="flex items-center gap-2 text-sm text-amber-700">
+                      <CheckCircle className="w-4 h-4 text-amber-500" />
+                      IoT sensor data from EU factories
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-amber-700">
+                      <CheckCircle className="w-4 h-4 text-amber-500" />
+                      Supply chain data compliance
+                    </div>
+                    <div className="flex items-center gap-2 text-sm text-amber-700">
+                      <CheckCircle className="w-4 h-4 text-amber-500" />
+                      Product design data sovereignty
+                    </div>
+                  </div>
+                  <div className="text-amber-600 font-semibold text-sm bg-amber-100 px-3 py-1 rounded-full inline-block">
+                    Industry 4.0 compliance automation
+                  </div>
+                </div>
+              </div>
+
+              {/* General Use Cases */}
+              <div className="border-t border-slate-200 pt-8">
+                <h4 className="text-lg font-semibold text-slate-900 mb-6">Core Transfer Scenarios for All Industries</h4>
+                <div className="grid md:grid-cols-2 gap-8">
+                  {transferUseCases.map((useCase, index) => (
+                    <div key={index} className="border border-slate-200 rounded-lg p-6 hover:border-blue-300 transition-colors">
+                      <h4 className="font-semibold text-slate-900 mb-3">{useCase.title}</h4>
+                      <p className="text-slate-600 mb-4">{useCase.description}</p>
+                      <div className="flex flex-wrap gap-2">
+                        {useCase.metrics.map((metric, idx) => (
+                          <span key={idx} className="text-xs bg-blue-50 text-blue-600 px-2 py-1 rounded">
+                            {metric}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 

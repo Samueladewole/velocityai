@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUrlState } from '../hooks/useUrlState';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -569,7 +570,9 @@ const FrameworkManager = () => {
 };
 
 const UnifiedDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useUrlState('tab', 'overview', {
+    storageKey: 'dashboard_tab'
+  });
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
 

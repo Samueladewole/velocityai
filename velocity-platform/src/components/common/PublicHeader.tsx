@@ -38,7 +38,7 @@ export const PublicHeader: React.FC = () => {
                   <div className="text-xs text-slate-400">13 AI agents & features</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/platform/dashboard')}
+                  onClick={() => navigate('/dashboard')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">AI Agent Dashboard</div>
@@ -178,15 +178,8 @@ export const PublicHeader: React.FC = () => {
                   onClick={() => navigate('/velocity/solutions/gdpr')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">GDPR Automation</div>
-                  <div className="text-xs text-slate-400">Data protection compliance</div>
-                </button>
-                <button 
-                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
-                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
-                >
-                  <div className="font-medium">GDPR International Transfers</div>
-                  <div className="text-xs text-slate-400">Cross-border data compliance</div>
+                  <div className="font-medium">GDPR Compliance</div>
+                  <div className="text-xs text-slate-400">Data protection & international transfers</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/frameworks')}
@@ -277,7 +270,7 @@ export const PublicHeader: React.FC = () => {
               <button onClick={() => { navigate('/platform/overview'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
                 Platform Overview
               </button>
-              <button onClick={() => { navigate('/platform/dashboard'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
+              <button onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
                 AI Agent Dashboard
               </button>
               <button onClick={() => { navigate('/platform/evidence-collection'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
@@ -311,8 +304,8 @@ export const PublicHeader: React.FC = () => {
               </button>
               
               <div className="text-slate-400 text-sm font-medium py-1 pt-4">Solutions</div>
-              <button onClick={() => { navigate('/solutions/gdpr-international-transfers'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
-                GDPR International Transfers
+              <button onClick={() => { navigate('/velocity/solutions/gdpr'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
+                GDPR Compliance
               </button>
               <button onClick={() => { navigate('/solutions/isae-3000'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
                 ISAE 3000 Evidence

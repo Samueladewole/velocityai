@@ -15,8 +15,10 @@ import ISO27001Page from '../../pages/solutions/ISO27001Page';
 import GDPRPage from '../../pages/solutions/GDPRPage';
 import HIPAAPage from '../../pages/solutions/HIPAAPage';
 import PCIDSSPage from '../../pages/solutions/PCIDSSPage';
+import CISControlsPage from '../../pages/solutions/CISControlsPage';
+import FrameworksPage from '../../pages/FrameworksPage';
 import IntegrationsPage from '../../pages/IntegrationsPage';
-import PricingPage from '../../pages/PricingPage';
+import PricingPage from '../../pages/pricing/PricingPage';
 import QIEPage from '../../pages/QIEPage';
 import FeaturesPage from '../../pages/FeaturesPage';
 import ResourceCenter from '../../pages/resources/ResourceCenter';
@@ -43,6 +45,7 @@ import ROICalculator from '../../pages/calculators/ROICalculator';
 import CaseStudies from '../../pages/CaseStudies';
 import TrustPathway from '../../pages/TrustPathway';
 import BankingROIDemo from '../../pages/demo/BankingROIDemo';
+import SettingsPage from '../../pages/SettingsPage';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -521,7 +524,7 @@ const VelocityRoutes: React.FC = () => {
       } />
       <Route path="/velocity/solutions/gdpr" element={
         <PublicLayout>
-          <GDPRPage />
+          <GDPRInternationalTransfersPage />
         </PublicLayout>
       } />
       <Route path="/velocity/solutions/hipaa" element={
@@ -534,13 +537,9 @@ const VelocityRoutes: React.FC = () => {
           <PCIDSSPage />
         </PublicLayout>
       } />
-      <Route path="/solutions/gdpr-international-transfers" element={<GDPRInternationalTransfersPage />} />
+      <Route path="/solutions/gdpr-international-transfers" element={<Navigate to="/velocity/solutions/gdpr" replace />} />
       <Route path="/solutions/isae-3000" element={<ISAE3000ServicesPricing />} />
-      <Route path="/velocity/solutions/cis-controls" element={
-        <PublicLayout>
-          <PlaceholderPage title="CIS Controls" description="Implement CIS Controls with AI automation" />
-        </PublicLayout>
-      } />
+      <Route path="/velocity/solutions/cis-controls" element={<CISControlsPage />} />
       
       {/* Platform routes - Authenticated dashboard pages */}
       <Route path="/velocity/agents" element={
@@ -702,9 +701,7 @@ const VelocityRoutes: React.FC = () => {
       {/* Settings and account routes - Dashboard pages */}
       <Route path="/velocity/settings" element={
         <ProtectedRoute>
-          <DashboardLayout>
-            <PlaceholderPage title="Settings" description="Manage your account and organization settings" />
-          </DashboardLayout>
+          <SettingsPage />
         </ProtectedRoute>
       } />
       <Route path="/velocity/billing" element={
@@ -736,11 +733,7 @@ const VelocityRoutes: React.FC = () => {
           <PlaceholderPage title="Schedule Audit" description="Plan upcoming compliance audit" />
         </DashboardLayout>
       } />
-      <Route path="/velocity/frameworks" element={
-        <DashboardLayout>
-          <PlaceholderPage title="Compliance Frameworks" description="Manage your compliance frameworks" />
-        </DashboardLayout>
-      } />
+      <Route path="/velocity/frameworks" element={<FrameworksPage />} />
       <Route path="/velocity/compliance" element={
         <DashboardLayout>
           <PlaceholderPage title="Compliance Overview" description="Comprehensive compliance status overview" />

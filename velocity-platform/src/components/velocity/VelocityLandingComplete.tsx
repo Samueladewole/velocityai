@@ -39,7 +39,8 @@ import {
   DollarSign,
   Calculator,
   Rocket,
-  Building
+  Building,
+  AlertTriangle
 } from 'lucide-react';
 
 // Public Navigation Header for Landing Page
@@ -214,7 +215,7 @@ const PublicHeader: React.FC = () => {
                   <div className="text-xs text-slate-400">Data protection compliance</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/solutions/gdpr-international-transfers')}
+                  onClick={() => navigate('/velocity/solutions/gdpr')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">GDPR International Transfers</div>
@@ -624,12 +625,18 @@ const HeroSection = () => {
               ].map((item, index) => (
                 <div 
                   key={index}
-                  className="flex items-center gap-3 p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
+                  className="p-3 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10"
                 >
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                  <Bot className="w-4 h-4 text-emerald-400" />
-                  <span className="text-sm text-white font-mono">{item.agent}</span>
-                  <span className="text-sm text-slate-400">{item.task}</span>
+                  <div className="flex items-start gap-3">
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
+                      <Bot className="w-4 h-4 text-emerald-400" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm text-white font-mono font-medium mb-1">{item.agent}</div>
+                      <div className="text-sm text-slate-300">{item.task}</div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -830,88 +837,95 @@ const TrustFirstSection = () => {
 const AIAgentsSection = () => {
   const agents = [
     {
-      name: 'AWS Evidence Collector',
-      description: 'Automated AWS compliance evidence gathering',
-      capabilities: ['CloudTrail monitoring', 'Config rules validation', 'Security Hub integration'],
+      name: 'AWS Agent',
+      description: 'Automates AWS evidence collection',
+      capabilities: ['CloudTrail monitoring', 'Config rules validation', 'Security Hub integration', 'Auto-scaling compliance'],
       automation: 98,
       icon: Zap
     },
     {
-      name: 'GCP Security Scanner',
-      description: 'Google Cloud security assessment & monitoring',
-      capabilities: ['IAM policy analysis', 'Security Command Center', 'Resource inventory'],
+      name: 'GCP Agent',
+      description: 'Google Cloud compliance automation',
+      capabilities: ['IAM policy analysis', 'Security Command Center', 'Resource inventory', 'Compliance scanning'],
       automation: 97,
       icon: Cpu
     },
     {
-      name: 'Azure Security Monitor',
-      description: 'Microsoft Azure security and compliance tracking',
-      capabilities: ['Security Center alerts', 'Policy compliance', 'Defender integration'],
-      automation: 96,
-      icon: Activity
-    },
-    {
-      name: 'GitHub Security Analyzer',
-      description: 'Repository security and branch protection analysis',
-      capabilities: ['Security settings scan', 'Branch protection rules', 'Access control audit'],
+      name: 'GitHub Agent',
+      description: 'Code repository security scanning',
+      capabilities: ['Security settings scan', 'Branch protection rules', 'Access control audit', 'Code compliance'],
       automation: 99,
       icon: Database
     },
     {
-      name: 'QIE Integration Agent',
-      description: 'Questionnaire Intelligence Engine for automated responses',
-      capabilities: ['Framework questionnaires', 'AI-powered responses', 'Multi-framework mapping'],
+      name: 'QIE Agent',
+      description: 'Questionnaire Intelligence Engine',
+      capabilities: ['Framework questionnaires', 'AI-powered responses', 'Multi-framework mapping', 'Automated answers'],
       automation: 94,
       icon: FileText
     },
     {
-      name: 'Trust Score Engine',
-      description: 'Cryptographic verification and trust scoring',
-      capabilities: ['Blockchain proofs', 'Evidence verification', 'Trust calculation'],
+      name: 'Trust Score Agent',
+      description: 'Real-time compliance scoring',
+      capabilities: ['Blockchain proofs', 'Evidence verification', 'Trust calculation', 'Cryptographic validation'],
       automation: 100,
       icon: Shield
     },
     {
-      name: 'Continuous Monitor',
-      description: 'Real-time configuration change monitoring',
-      capabilities: ['Drift detection', 'Real-time alerts', 'Configuration tracking'],
+      name: 'Monitoring Agent',
+      description: 'Continuous compliance monitoring',
+      capabilities: ['Drift detection', 'Real-time alerts', 'Configuration tracking', '24/7 surveillance'],
       automation: 97,
       icon: Eye
     },
     {
-      name: 'Document Generator',
-      description: 'Automated compliance documentation creation',
-      capabilities: ['Policy generation', 'Evidence documentation', 'Report creation'],
+      name: 'Evidence Agent',
+      description: 'Automated evidence collection',
+      capabilities: ['Policy generation', 'Evidence documentation', 'Report creation', 'Audit preparation'],
       automation: 95,
       icon: FileText
     },
     {
-      name: 'Observability Specialist',
-      description: 'System monitoring and performance analysis',
-      capabilities: ['System metrics', 'Performance monitoring', 'Alert management'],
+      name: 'Framework Agent',
+      description: 'Multi-framework management',
+      capabilities: ['SOC 2 automation', 'ISO 27001 mapping', 'HIPAA compliance', 'Framework orchestration'],
       automation: 98,
-      icon: Activity
+      icon: Layers
     },
     {
-      name: 'Cryptographic Verification',
-      description: 'Blockchain-based evidence integrity verification',
-      capabilities: ['Merkle tree proofs', 'Tamper detection', 'Cryptographic hashing'],
-      automation: 100,
-      icon: Lock
-    },
-    {
-      name: 'Banking ROI Calculator Agent',
-      description: 'Automated banking compliance ROI calculation and cost optimization',
-      capabilities: ['Basel III compliance costs', 'Regulatory cost analysis', 'Banking automation ROI'],
+      name: 'Integration Agent',
+      description: 'Third-party tool connections',
+      capabilities: ['API integrations', 'Tool synchronization', 'Data flow automation', 'System connectivity'],
       automation: 96,
-      icon: Shield
+      icon: Settings
+    },
+    {
+      name: 'Reporting Agent',
+      description: 'Automated compliance reporting',
+      capabilities: ['Executive dashboards', 'Audit reports', 'Compliance metrics', 'Real-time analytics'],
+      automation: 93,
+      icon: BarChart3
+    },
+    {
+      name: 'GDPR Compliance Agent',
+      description: 'Data protection and international transfer automation',
+      capabilities: ['Data mapping', 'Consent management', 'International transfer monitoring', 'Privacy impact assessments'],
+      automation: 96,
+      icon: Globe
     },
     {
       name: 'ISAE 3000 Evidence Agent',
       description: 'Banking evidence automation for ISAE 3000 compliance',
-      capabilities: ['Core banking integration', 'Control evidence collection', 'Audit trail generation'],
+      capabilities: ['Core banking integration', 'Control evidence collection', 'Audit trail generation', 'Financial services compliance'],
       automation: 94,
-      icon: Database
+      icon: Building
+    },
+    {
+      name: 'Risk Assessment Engine',
+      description: 'Automated risk evaluation and treatment planning',
+      capabilities: ['Risk identification', 'Impact assessment', 'Treatment recommendations', 'Continuous risk monitoring'],
+      automation: 92,
+      icon: AlertTriangle
     }
   ];
 
@@ -920,16 +934,16 @@ const AIAgentsSection = () => {
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-white font-serif mb-6">
-            12 Specialized AI Agents
+            13 Specialized AI Agents
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto">
-            Revolutionary automation including Banking ROI calculations and ISAE 3000 evidence collection. 
+            Revolutionary automation including GDPR compliance and ISAE 3000 evidence collection. 
             95% of compliance tasks automated across all major frameworks.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {agents.map((agent, index) => (
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          {agents.slice(0, 3).map((agent, index) => (
             <div key={index} className="group bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-emerald-500/30 transition-all duration-300">
               <div className="flex items-start justify-between mb-4">
                 <div className="p-3 bg-emerald-500/10 rounded-lg">
@@ -959,7 +973,19 @@ const AIAgentsSection = () => {
         </div>
 
         <div className="text-center">
-          <button className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300">
+          <button 
+            onClick={() => {
+              navigate('/velocity/trust-pathway');
+              // Scroll to agents section after navigation
+              setTimeout(() => {
+                const agentsSection = document.querySelector('#ai-agents-section');
+                if (agentsSection) {
+                  agentsSection.scrollIntoView({ behavior: 'smooth' });
+                }
+              }, 100);
+            }}
+            className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
+          >
             <Bot className="w-5 h-5" />
             Explore All 13 Agents
             <ArrowRight className="w-4 h-4" />
@@ -1243,7 +1269,7 @@ const CompetitiveAdvantagesSection = () => {
     {
       title: "95% Automation Rate",
       metric: "vs 15-25% Industry Average",
-      description: "Highest automation rate with 12 visible AI agents working 24/7",
+      description: "Highest automation rate with 13 specialized AI agents working 24/7",
       icon: Zap,
       color: "amber"
     },
@@ -1300,19 +1326,19 @@ const CompetitiveAdvantagesSection = () => {
           
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="text-center p-6 bg-slate-800/50 rounded-xl">
-              <div className="text-3xl font-bold text-red-400 mb-2">€380K+</div>
-              <div className="text-slate-300 text-sm mb-1">Traditional GDPR + ISAE 3000</div>
-              <div className="text-xs text-slate-500">Annual consulting costs</div>
+              <div className="text-3xl font-bold text-red-400 mb-2">€100K+</div>
+              <div className="text-slate-300 text-sm mb-1">Traditional Compliance</div>
+              <div className="text-xs text-slate-500">Annual consulting + audit costs</div>
             </div>
             <div className="text-center p-6 bg-emerald-500/10 rounded-xl border border-emerald-500/20">
-              <div className="text-3xl font-bold text-emerald-400 mb-2">€60K</div>
-              <div className="text-slate-300 text-sm mb-1">Velocity Complete Solution</div>
-              <div className="text-xs text-emerald-400">All frameworks included</div>
+              <div className="text-3xl font-bold text-emerald-400 mb-2">€25K</div>
+              <div className="text-slate-300 text-sm mb-1">Velocity Growth Plan</div>
+              <div className="text-xs text-emerald-400">Up to 3 frameworks included</div>
             </div>
             <div className="text-center p-6 bg-slate-800/50 rounded-xl">
-              <div className="text-3xl font-bold text-emerald-400 mb-2">€320K+</div>
+              <div className="text-3xl font-bold text-emerald-400 mb-2">€75K+</div>
               <div className="text-slate-300 text-sm mb-1">Annual Savings</div>
-              <div className="text-xs text-slate-500">84% cost reduction</div>
+              <div className="text-xs text-slate-500">75% cost reduction</div>
             </div>
           </div>
           
@@ -1558,7 +1584,7 @@ const PublicFooter: React.FC = () => {
               83% cost savings, 88% vs Big 4 consulting.
             </p>
             <div className="flex items-center gap-4 text-xs text-slate-500">
-              <span>✓ 12 AI Agents</span>
+              <span>✓ 13 AI Agents</span>
               <span>✓ Banking ROI Calculator</span>
               <span>✓ ISAE 3000</span>
             </div>
@@ -1618,19 +1644,18 @@ const PublicFooter: React.FC = () => {
                 { label: 'ISAE 3000', path: '/solutions/isae-3000', badge: '88% vs Big 4' },
                 { label: 'SOC 2', path: '/velocity/solutions/soc2' },
                 { label: 'ISO 27001', path: '/velocity/solutions/iso27001' },
-                { label: 'GDPR', path: '/velocity/solutions/gdpr' },
-                { label: 'GDPR International Transfers', path: '/solutions/gdpr-international-transfers' },
+                { label: 'GDPR & International Transfers', path: '/velocity/solutions/gdpr' },
                 { label: 'HIPAA', path: '/velocity/solutions/hipaa' }
               ].map((item) => (
                 <button
                   key={item.label}
                   onClick={() => navigate(item.path)}
-                  className="block text-slate-400 hover:text-white transition-colors text-sm"
+                  className="block text-slate-400 hover:text-white transition-colors text-sm w-full text-left"
                 >
                   <div className="flex items-center justify-between">
-                    <span>{item.label}</span>
+                    <span className="truncate">{item.label}</span>
                     {item.badge && (
-                      <span className="text-xs bg-emerald-500/20 text-emerald-400 px-1 py-0.5 rounded ml-2">
+                      <span className="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded ml-2 flex-shrink-0">
                         {item.badge}
                       </span>
                     )}

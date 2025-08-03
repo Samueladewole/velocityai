@@ -1,4 +1,5 @@
 import React from 'react';
+import { PublicHeader } from '../../components/common/PublicHeader';
 import { useNavigate } from 'react-router-dom';
 import { 
   Shield, 
@@ -79,6 +80,7 @@ const PCIDSSPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-red-900">
+      <PublicHeader />
       {/* Header */}
       <div className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 py-20">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useUrlState } from '../hooks/useUrlState';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -29,7 +30,9 @@ import {
 
 export const Reports: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState('executive');
+  const [activeTab, setActiveTab] = useUrlState('tab', 'executive', {
+    storageKey: 'reports_tab'
+  });
 
   const executiveMetrics = [
     {

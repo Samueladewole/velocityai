@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useUrlState } from '../hooks/useUrlState';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,7 +18,9 @@ import {
 } from 'lucide-react';
 
 const AgentDashboard: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('agents');
+  const [activeTab, setActiveTab] = useUrlState('tab', 'agents', {
+    storageKey: 'agent_dashboard_tab'
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">

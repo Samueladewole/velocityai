@@ -372,7 +372,7 @@ const ComplianceGuides: React.FC<{ searchTerm: string; selectedCategory: string 
       color: 'emerald'
     },
     {
-      id: 'gdpr-international-transfers',
+      id: 'gdpr-compliance',
       title: 'GDPR International Transfer Solutions',
       description: 'AI-powered cross-border transfer compliance with Transfer Impact Assessments and post-Schrems II automation',
       category: 'Data Privacy',

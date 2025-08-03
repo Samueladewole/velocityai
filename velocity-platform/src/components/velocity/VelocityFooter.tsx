@@ -112,10 +112,9 @@ const VelocityFooter: React.FC = () => {
                 },
                 { label: 'SOC 2', path: `${routePrefix}/solutions/soc2`, icon: Shield },
                 { label: 'ISO 27001', path: `${routePrefix}/solutions/iso27001`, icon: Award },
-                { label: 'GDPR', path: `${routePrefix}/solutions/gdpr`, icon: Lock },
                 { 
-                  label: 'GDPR International Transfers', 
-                  path: '/solutions/gdpr-international-transfers', 
+                  label: 'GDPR & International Transfers', 
+                  path: `${routePrefix}/solutions/gdpr`, 
                   icon: Globe 
                 },
                 { label: 'HIPAA', path: `${routePrefix}/solutions/hipaa`, icon: FileText }

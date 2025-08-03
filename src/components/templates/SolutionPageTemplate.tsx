@@ -30,6 +30,14 @@ interface SolutionPageTemplateProps {
     name: string;
     painPoints: string[];
     solutions: string[];
+    pricing: string;
+  }>;
+  pricingTiers?: Array<{
+    name: string;
+    price: string;
+    description: string;
+    features: string[];
+    targetAudience: string;
   }>;
 }
 
@@ -39,6 +47,7 @@ export const SolutionPageTemplate: React.FC<SolutionPageTemplateProps> = ({
   aiAgents,
   benefits,
   industries,
+  pricingTiers,
 }) => {
   return (
     <div className="min-h-screen bg-gray-50">
@@ -63,13 +72,11 @@ export const SolutionPageTemplate: React.FC<SolutionPageTemplateProps> = ({
             <p className="text-2xl text-white/90 mb-8">{hero.subtitle}</p>
             <p className="text-lg text-white/80 mb-12">{hero.description}</p>
             <div className="flex gap-4 justify-center">
-              <Link to="/velocity/pricing">
-                <Button variant="default" size="lg">
-                  View Pricing
-                </Button>
-              </Link>
+              <Button variant="default" size="lg">
+                Start Free Trial
+              </Button>
               <Button variant="outline" size="lg">
-                Schedule Demo
+                View Demo
               </Button>
             </div>
           </div>
@@ -133,6 +140,10 @@ export const SolutionPageTemplate: React.FC<SolutionPageTemplateProps> = ({
                       ))}
                     </ul>
                   </div>
+                  <div className="bg-gray-50 rounded-lg p-4 mt-6">
+                    <p className="text-sm text-gray-600">Starting at</p>
+                    <p className="text-2xl font-bold text-gray-900">{industry.pricing}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -140,6 +151,35 @@ export const SolutionPageTemplate: React.FC<SolutionPageTemplateProps> = ({
         </section>
       )}
 
+      {/* Pricing Tiers */}
+      {pricingTiers && pricingTiers.length > 0 && (
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6">
+            <h2 className="text-4xl font-bold text-center mb-16">Choose Your Solution Tier</h2>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {pricingTiers.map((tier, index) => (
+                <div key={index} className={`rounded-lg border-2 p-8 ${index === 2 ? 'border-blue-500 shadow-xl' : 'border-gray-200'}`}>
+                  <h3 className="text-xl font-bold mb-2">{tier.name}</h3>
+                  <p className="text-3xl font-bold mb-4">{tier.price}</p>
+                  <p className="text-gray-600 mb-6">{tier.description}</p>
+                  <ul className="space-y-3 mb-8">
+                    {tier.features.map((feature, featIndex) => (
+                      <li key={featIndex} className="flex items-start">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-sm text-gray-500 italic">{tier.targetAudience}</p>
+                  <Button variant={index === 2 ? 'default' : 'outline'} className="w-full mt-6">
+                    Get Started
+                  </Button>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Benefits Section */}
       <section className="py-20 bg-gray-50">
@@ -169,11 +209,9 @@ export const SolutionPageTemplate: React.FC<SolutionPageTemplateProps> = ({
             Join thousands of companies using Velocity's AI agents to automate compliance and reduce costs by 80%.
           </p>
           <div className="flex gap-4 justify-center">
-            <Link to="/velocity/pricing">
-              <Button variant="default" size="lg">
-                View Pricing
-              </Button>
-            </Link>
+            <Button variant="default" size="lg">
+              Start Free Trial
+            </Button>
             <Button variant="outline" size="lg">
               Schedule Demo
             </Button>
