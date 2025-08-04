@@ -18,13 +18,14 @@ import {
   Settings,
   Network,
   Gauge,
-  Lock
+  Lock,
+  TrendingUp
 } from 'lucide-react';
 import { PublicHeader } from '../../components/common/PublicHeader';
 
 const Energy: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'pricing'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'impact'>('overview');
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -256,8 +257,8 @@ const Energy: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                    <div className="text-xl font-bold text-emerald-600">€500K</div>
-                    <div className="text-sm text-slate-600">Annual Compliance Savings</div>
+                    <div className="text-xl font-bold text-emerald-600">350%</div>
+                    <div className="text-sm text-slate-600">ROI Improvement</div>
                   </div>
                   <div className="text-center p-3 bg-amber-50 rounded-lg">
                     <div className="text-xl font-bold text-amber-600">95%</div>
@@ -308,120 +309,98 @@ const Energy: React.FC = () => {
           </div>
         );
 
-      case 'pricing':
+      case 'impact':
         return (
           <div className="space-y-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Energy Sector Pricing</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Energy Sector Business Impact</h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Specialized pricing for energy and utilities based on asset count and regulatory requirements
+                Critical infrastructure protection and operational excellence for energy companies
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Energy Starter</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€8,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Single facility (up to 500 assets)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Basic NERC CIP compliance</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">OT security monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Incident response automation</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
-                  Start Assessment
-                </button>
+            {/* Impact Metrics */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Power className="w-8 h-8 text-amber-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Grid Reliability</h3>
+                <div className="text-3xl font-bold text-amber-600 mb-2">99.9%</div>
+                <p className="text-slate-600 text-sm">Uptime maintained</p>
               </div>
-
-              <div className="bg-blue-50 border-2 border-blue-500 rounded-2xl p-8 relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Energy Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€19,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Multi-facility (up to 5K assets)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Full NERC CIP automation</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Critical infrastructure protection</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Smart grid integration</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">24/7 energy SOC monitoring</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Start Assessment
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Shield className="w-8 h-8 text-green-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Cyber Defense</h3>
+                <div className="text-3xl font-bold text-green-600 mb-2">Zero</div>
+                <p className="text-slate-600 text-sm">Compliance violations</p>
               </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Network className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Asset Protection</h3>
+                <div className="text-3xl font-bold text-blue-600 mb-2">100K+</div>
+                <p className="text-slate-600 text-sm">Critical assets monitored</p>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <TrendingUp className="w-8 h-8 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Operational Excellence</h3>
+                <div className="text-3xl font-bold text-purple-600 mb-2">95%</div>
+                <p className="text-slate-600 text-sm">Incident response improvement</p>
+              </div>
+            </div>
 
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Energy Enterprise</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                  <div className="text-slate-600">Contact us</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Unlimited facilities & assets</span>
+            {/* Energy Benefits */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="bg-gradient-to-br from-amber-50 to-red-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Critical Infrastructure Leadership</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">National Security Impact</h4>
+                      <p className="text-slate-600 text-sm">Protect critical infrastructure essential to national security and economic stability</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Multi-regional compliance</span>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">NERC CIP Excellence</h4>
+                      <p className="text-slate-600 text-sm">Exceed regulatory requirements with automated compliance and continuous monitoring</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Custom OT integrations</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Dedicated energy specialists</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">On-premise deployment</span>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Industry Innovation</h4>
+                      <p className="text-slate-600 text-sm">Lead the energy transformation with secure smart grid and renewable integration</p>
+                    </div>
                   </div>
                 </div>
-
-                <button className="w-full px-6 py-3 border border-slate-400 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors">
-                  Contact Energy Sales
-                </button>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Operational Resilience</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Continuous Operations</h4>
+                      <p className="text-slate-600 text-sm">Maintain 24/7 power generation and distribution without security compromises</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Rapid Threat Response</h4>
+                      <p className="text-slate-600 text-sm">Detect and neutralize threats before they impact power delivery</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Stakeholder Trust</h4>
+                      <p className="text-slate-600 text-sm">Build confidence with regulators, customers, and communities</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -429,10 +408,18 @@ const Energy: React.FC = () => {
             <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 text-center">
               <Zap className="w-8 h-8 text-amber-600 mx-auto mb-4" />
               <h3 className="text-lg font-bold text-slate-900 mb-2">E-ISAC Partner</h3>
-              <p className="text-slate-600">
+              <p className="text-slate-600 mb-4">
                 Velocity is a trusted partner with the Electricity Subsector Coordinating Council (ESCC) and 
                 E-ISAC for enhanced threat intelligence and incident coordination.
               </p>
+              <button
+                onClick={() => navigate('/pricing')}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-600 text-white font-semibold rounded-lg hover:bg-amber-700 transition-colors"
+              >
+                <Zap className="w-5 h-5" />
+                View Pricing Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         );
@@ -517,7 +504,7 @@ const Energy: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: Zap },
             { id: 'solutions', label: 'AI Agents', icon: Settings },
             { id: 'case-studies', label: 'Case Studies', icon: Target },
-            { id: 'pricing', label: 'Pricing', icon: DollarSign }
+            { id: 'impact', label: 'Business Impact', icon: TrendingUp }
           ].map((tab) => {
             const Icon = tab.icon;
             return (
@@ -562,11 +549,11 @@ const Energy: React.FC = () => {
             </button>
             
             <button
-              onClick={() => navigate('/calculators/roi')}
+              onClick={() => navigate('/pricing')}
               className="inline-flex items-center gap-2 px-8 py-4 border-2 border-slate-400 text-slate-300 font-semibold rounded-lg hover:border-white hover:text-white transition-colors"
             >
-              <DollarSign className="w-5 h-5" />
-              Calculate Energy ROI
+              <Zap className="w-5 h-5" />
+              View Pricing
             </button>
           </div>
         </div>

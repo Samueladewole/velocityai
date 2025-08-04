@@ -215,7 +215,7 @@ const TabInterface: React.FC<{
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors €{
+            className={`flex items-center gap-2 py-4 px-2 border-b-2 font-medium text-sm transition-colors ${
               activeTab === tab.id
                 ? 'border-emerald-500 text-emerald-400'
                 : 'border-transparent text-slate-400 hover:text-slate-300 hover:border-slate-600'
@@ -474,12 +474,12 @@ const ComplianceGuides: React.FC<{ searchTerm: string; selectedCategory: string 
       {filteredGuides.map((guide) => (
         <div
           key={guide.id}
-          className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 €{colorClasses[guide.color as keyof typeof colorClasses]}`}
-          onClick={() => navigate(`/velocity/resources/guides/€{guide.id}`)}
+          className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 ${colorClasses[guide.color as keyof typeof colorClasses]}`}
+          onClick={() => navigate(`/velocity/resources/guides/${guide.id}`)}
         >
           <div className="flex items-start justify-between mb-4">
             <div className="text-3xl">{guide.icon}</div>
-            <span className={`px-2 py-1 rounded-full text-xs font-medium €{difficultyColors[guide.difficulty as keyof typeof difficultyColors]}`}>
+            <span className={`px-2 py-1 rounded-full text-xs font-medium ${difficultyColors[guide.difficulty as keyof typeof difficultyColors]}`}>
               {guide.difficulty}
             </span>
           </div>
@@ -524,13 +524,137 @@ const BlogContentWrapper: React.FC<{ searchTerm: string; selectedCategory: strin
   return <BlogContent searchTerm={searchTerm} selectedCategory={selectedCategory} />;
 };
 
-// AI Tools Component (placeholder for now)
+// AI Tools Component
 const AITools: React.FC<{ searchTerm: string; selectedCategory: string }> = ({ searchTerm, selectedCategory }) => {
+  const navigate = useNavigate();
+  
+  const tools = [
+    {
+      id: 'interactive-demos',
+      title: 'Interactive Compliance Demos',
+      description: 'Experience Velocity\'s AI-powered compliance automation through realistic industry scenarios',
+      category: 'AI & Automation',
+      duration: '15-30 min',
+      scenarios: 6,
+      icon: '🎮',
+      color: 'emerald',
+      featured: true
+    },
+    {
+      id: 'roi-calculator',
+      title: 'Banking ROI Calculator',
+      description: 'Calculate cost savings and efficiency gains for banking compliance automation',
+      category: 'Financial Services',
+      duration: '5 min',
+      scenarios: 1,
+      icon: '💰',
+      color: 'blue'
+    },
+    {
+      id: 'trust-score',
+      title: 'Trust Score Engine',
+      description: 'Real-time compliance scoring and risk assessment visualization',
+      category: 'Risk Management',
+      duration: '10 min',
+      scenarios: 1,
+      icon: '📊',
+      color: 'purple'
+    },
+    {
+      id: 'evidence-collector',
+      title: 'Evidence Collection Preview',
+      description: 'See how AI agents automatically collect compliance evidence from your systems',
+      category: 'AI & Automation',
+      duration: '8 min',
+      scenarios: 1,
+      icon: '🔍',
+      color: 'amber'
+    }
+  ];
+
+  const filteredTools = tools.filter(tool => {
+    const matchesSearch = tool.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         tool.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = !selectedCategory || tool.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+
+  const colorClasses = {
+    emerald: 'border-emerald-500/30 bg-emerald-500/5',
+    blue: 'border-blue-500/30 bg-blue-500/5',
+    purple: 'border-purple-500/30 bg-purple-500/5',
+    amber: 'border-amber-500/30 bg-amber-500/5'
+  };
+
+  const handleToolClick = (toolId: string) => {
+    switch (toolId) {
+      case 'interactive-demos':
+        navigate('/velocity/demo');
+        break;
+      case 'roi-calculator':
+        navigate('/calculators/banking-roi');
+        break;
+      case 'trust-score':
+        navigate('/platform/trust-score');
+        break;
+      case 'evidence-collector':
+        navigate('/platform/evidence-collection');
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
-    <div className="text-center py-12">
-      <div className="text-4xl mb-4">🤖</div>
-      <h3 className="text-xl font-bold text-white mb-2">AI Tools Showcase Coming Soon</h3>
-      <p className="text-slate-400">Interactive demos of our 10 AI agents and their capabilities.</p>
+    <div className="space-y-6">
+      <div className="text-center mb-8">
+        <h3 className="text-2xl font-bold text-white mb-2">AI Tools & Interactive Experiences</h3>
+        <p className="text-slate-400">Hands-on tools to explore Velocity's AI-powered compliance capabilities</p>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-6">
+        {filteredTools.map((tool) => (
+          <div
+            key={tool.id}
+            className={`bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border hover:border-emerald-500/50 transition-all duration-300 cursor-pointer transform hover:scale-105 relative ${colorClasses[tool.color as keyof typeof colorClasses]}`}
+            onClick={() => handleToolClick(tool.id)}
+          >
+            {tool.featured && (
+              <div className="absolute -top-2 -right-2">
+                <span className="bg-emerald-500 text-white px-2 py-1 rounded-full text-xs font-medium">
+                  Featured
+                </span>
+              </div>
+            )}
+            
+            <div className="flex items-start justify-between mb-4">
+              <div className="text-3xl">{tool.icon}</div>
+              <div className="text-right">
+                <div className="text-emerald-400 text-sm font-medium">{tool.duration}</div>
+                <div className="text-slate-500 text-xs">{tool.scenarios} scenario{tool.scenarios > 1 ? 's' : ''}</div>
+              </div>
+            </div>
+            
+            <h4 className="text-xl font-bold text-white mb-2">{tool.title}</h4>
+            <p className="text-slate-300 text-sm mb-4">{tool.description}</p>
+            
+            <div className="flex items-center justify-between">
+              <span className="text-emerald-400 text-sm">{tool.category}</span>
+              <button className="text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors">
+                Try Tool →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {filteredTools.length === 0 && (
+        <div className="text-center py-12">
+          <div className="text-4xl mb-4">🔍</div>
+          <h3 className="text-xl font-bold text-white mb-2">No tools found</h3>
+          <p className="text-slate-400">Try adjusting your search or category filter.</p>
+        </div>
+      )}
     </div>
   );
 };

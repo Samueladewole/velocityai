@@ -237,25 +237,53 @@ const PublicHeader: React.FC = () => {
               </button>
               <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/resources/guides')}
+                  onClick={() => navigate('/velocity/resources')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Compliance Guides</div>
                   <div className="text-xs text-slate-400">Best practices & frameworks</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/resources/calculators')}
+                  onClick={() => navigate('/velocity/docs')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">ROI Calculator</div>
-                  <div className="text-xs text-slate-400">Calculate your savings</div>
+                  <div className="font-medium">Documentation</div>
+                  <div className="text-xs text-slate-400">Complete platform docs</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/resources/case-studies')}
+                  onClick={() => navigate('/velocity/api')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">API Reference</div>
+                  <div className="text-xs text-slate-400">Developer tools & APIs</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/case-studies')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Case Studies</div>
                   <div className="text-xs text-slate-400">Customer success stories</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/blog')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Blog</div>
+                  <div className="text-xs text-slate-400">Latest insights & updates</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/support')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Support</div>
+                  <div className="text-xs text-slate-400">Get help from experts</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/demo')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Interactive Demo</div>
+                  <div className="text-xs text-slate-400">Try compliance scenarios</div>
                 </button>
               </div>
             </div>
@@ -402,22 +430,46 @@ const PublicHeader: React.FC = () => {
             
             <div className="text-slate-400 text-sm font-medium py-1 pt-4">Resources</div>
             <button 
-              onClick={() => { navigate('/guides/compliance-automation'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/velocity/resources'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
               Compliance Guides
             </button>
             <button 
-              onClick={() => { navigate('/calculators/roi'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/velocity/docs'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              ROI Calculator
+              Documentation
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/api'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              API Reference
             </button>
             <button 
               onClick={() => { navigate('/case-studies'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
               Case Studies
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/blog'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Blog
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/support'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Support
+            </button>
+            <button 
+              onClick={() => { navigate('/velocity/demo'); setMobileMenuOpen(false); }}
+              className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
+            >
+              Interactive Demo
             </button>
             
             <button 
@@ -434,10 +486,24 @@ const PublicHeader: React.FC = () => {
                 Sign In
               </button>
               <button
-                onClick={() => { navigate('/velocity/assessment'); setMobileMenuOpen(false); }}
+                onClick={() => { 
+                  console.log('Mobile - Explore All 13 Agents button clicked');
+                  setMobileMenuOpen(false);
+                  
+                  // Store current position for return navigation
+                  const currentPosition = {
+                    url: window.location.href,
+                    scrollY: window.scrollY,
+                    timestamp: Date.now()
+                  };
+                  sessionStorage.setItem('velocity_return_position', JSON.stringify(currentPosition));
+                  
+                  // Use window.location.href for direct navigation with hash
+                  window.location.href = '/velocity/trust-pathway#ai-agents-section';
+                }}
                 className="block w-full px-6 py-2 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
               >
-                See Your Agents Working Live
+                Explore All 13 Agents
               </button>
             </div>
           </div>
@@ -575,12 +641,25 @@ const HeroSection = () => {
             
             <div className="flex flex-col sm:flex-row gap-4 mb-12">
               <button 
-                onClick={() => navigate('/velocity/assessment')}
+                onClick={() => {
+                  console.log('Explore All 13 Agents button clicked');
+                  
+                  // Store current position for return navigation
+                  const currentPosition = {
+                    url: window.location.href,
+                    scrollY: window.scrollY,
+                    timestamp: Date.now()
+                  };
+                  sessionStorage.setItem('velocity_return_position', JSON.stringify(currentPosition));
+                  
+                  // Use window.location.href for direct navigation with hash
+                  window.location.href = '/velocity/trust-pathway#ai-agents-section';
+                }}
                 className="group relative overflow-hidden bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl hover:shadow-emerald-500/25"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   <Target className="w-5 h-5" />
-                  See Your Agents Working Live
+                  Explore All 13 Agents
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </span>
               </button>
@@ -975,14 +1054,18 @@ const AIAgentsSection = () => {
         <div className="text-center">
           <button 
             onClick={() => {
-              navigate('/velocity/trust-pathway');
-              // Scroll to agents section after navigation
-              setTimeout(() => {
-                const agentsSection = document.querySelector('#ai-agents-section');
-                if (agentsSection) {
-                  agentsSection.scrollIntoView({ behavior: 'smooth' });
-                }
-              }, 100);
+              console.log('Third Explore All 13 Agents button clicked');
+              
+              // Store current position for return navigation
+              const currentPosition = {
+                url: window.location.href,
+                scrollY: window.scrollY,
+                timestamp: Date.now()
+              };
+              sessionStorage.setItem('velocity_return_position', JSON.stringify(currentPosition));
+              
+              // Use window.location.href for direct navigation with hash
+              window.location.href = '/velocity/trust-pathway#ai-agents-section';
             }}
             className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
           >
@@ -1511,11 +1594,24 @@ const CTASection = () => {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <button
-            onClick={() => navigate('/velocity/assessment')}
+            onClick={() => {
+              console.log('Fourth Explore All 13 Agents button clicked');
+              
+              // Store current position for return navigation
+              const currentPosition = {
+                url: window.location.href,
+                scrollY: window.scrollY,
+                timestamp: Date.now()
+              };
+              sessionStorage.setItem('velocity_return_position', JSON.stringify(currentPosition));
+              
+              // Use window.location.href for direct navigation with hash
+              window.location.href = '/velocity/trust-pathway#ai-agents-section';
+            }}
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-xl font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl"
           >
             <Target className="w-5 h-5" />
-            See Your Agents Working Live
+            Explore All 13 Agents
           </button>
           
           <button

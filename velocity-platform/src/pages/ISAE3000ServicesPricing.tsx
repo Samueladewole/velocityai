@@ -24,6 +24,7 @@ import {
   Clock,
   DollarSign
 } from 'lucide-react';
+import { PublicHeader } from '../components/common/PublicHeader';
 
 const ISAE3000ServicesPricing: React.FC = () => {
   const navigate = useNavigate();
@@ -246,20 +247,12 @@ const ISAE3000ServicesPricing: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-emerald-900 to-slate-900">
-      {/* Header */}
-      <div className="relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900">
+      <PublicHeader />
+      
+      {/* Hero Section */}
+      <div className="relative overflow-hidden pt-16">
         <div className="max-w-7xl mx-auto px-4 py-20">
-          {/* Navigation */}
-          <div className="flex justify-start mb-8">
-            <button
-              onClick={() => navigate('/velocity')}
-              className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-lg font-medium border border-white/20 hover:bg-white/20 transition-all duration-300"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back to Home
-            </button>
-          </div>
           
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 rounded-full text-emerald-400 text-sm font-medium mb-6">
@@ -286,7 +279,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                   <button
                     key={type.id}
                     onClick={() => setServiceType(type.id as any)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all €{
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       serviceType === type.id
                         ? 'bg-emerald-500 text-white'
                         : 'text-slate-300 hover:text-white'
@@ -301,18 +294,18 @@ const ISAE3000ServicesPricing: React.FC = () => {
             
             {/* Billing Toggle */}
             <div className="flex items-center justify-center gap-4 mb-12">
-              <span className={`text-sm €{billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm ${billingPeriod === 'monthly' ? 'text-white' : 'text-slate-400'}`}>
                 Monthly
               </span>
               <button
                 onClick={() => setBillingPeriod(billingPeriod === 'monthly' ? 'annual' : 'monthly')}
                 className="relative w-12 h-6 bg-slate-700 rounded-full transition-colors duration-300"
               >
-                <div className={`absolute top-1 w-4 h-4 bg-emerald-500 rounded-full transition-transform duration-300 €{
+                <div className={`absolute top-1 w-4 h-4 bg-emerald-500 rounded-full transition-transform duration-300 ${
                   billingPeriod === 'annual' ? 'translate-x-7' : 'translate-x-1'
                 }`} />
               </button>
-              <span className={`text-sm €{billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
+              <span className={`text-sm ${billingPeriod === 'annual' ? 'text-white' : 'text-slate-400'}`}>
                 Annual
               </span>
               {billingPeriod === 'annual' && (
@@ -339,7 +332,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
               return (
                 <div 
                   key={index} 
-                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 €{
+                  className={`relative bg-white/5 backdrop-blur-sm rounded-2xl p-8 border transition-all duration-300 ${
                     isSelected
                       ? 'border-emerald-500/70 shadow-2xl shadow-emerald-500/30 scale-105' 
                       : tier.popular 
@@ -357,8 +350,8 @@ const ISAE3000ServicesPricing: React.FC = () => {
                   )}
                   
                   <div className="text-center mb-8">
-                    <div className={`p-4 bg-€{tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
-                      <tier.icon className={`w-8 h-8 text-€{tier.color}-400`} />
+                    <div className={`p-4 bg-${tier.color}-500/20 rounded-lg w-fit mx-auto mb-4`}>
+                      <tier.icon className={`w-8 h-8 text-${tier.color}-400`} />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-2">{tier.name}</h3>
                     <p className="text-slate-400 text-sm mb-6">{tier.description}</p>
@@ -404,7 +397,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                     
                     <button
                       onClick={() => navigate('/solutions/isae-3000')}
-                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 €{
+                      className={`w-full px-6 py-3 rounded-lg font-medium transition-all duration-300 ${
                         tier.popular || isSelected
                           ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white hover:from-emerald-600 hover:to-emerald-700 shadow-lg hover:shadow-xl'
                           : 'bg-white/10 text-white border border-white/20 hover:bg-white/20'
@@ -428,7 +421,7 @@ const ISAE3000ServicesPricing: React.FC = () => {
                     <div className="text-white font-medium mt-6 mb-3">Service Features:</div>
                     {tier.features.slice(0, 8).map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start gap-3">
-                        <CheckCircle className={`w-4 h-4 text-€{tier.color}-400 mt-0.5 flex-shrink-0`} />
+                        <CheckCircle className={`w-4 h-4 text-${tier.color}-400 mt-0.5 flex-shrink-0`} />
                         <span className="text-slate-300 text-sm">{feature}</span>
                       </div>
                     ))}

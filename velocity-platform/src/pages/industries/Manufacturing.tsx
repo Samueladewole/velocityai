@@ -18,13 +18,14 @@ import {
   Zap,
   Network,
   Settings,
-  Lock
+  Lock,
+  TrendingUp
 } from 'lucide-react';
 import { PublicHeader } from '../../components/common/PublicHeader';
 
 const Manufacturing: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'pricing'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'impact'>('overview');
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -254,8 +255,8 @@ const Manufacturing: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                    <div className="text-xl font-bold text-emerald-600">€180K</div>
-                    <div className="text-sm text-slate-600">Annual Savings</div>
+                    <div className="text-xl font-bold text-emerald-600">90%</div>
+                    <div className="text-sm text-slate-600">Risk Reduction</div>
                   </div>
                   <div className="text-center p-3 bg-blue-50 rounded-lg">
                     <div className="text-xl font-bold text-blue-600">75%</div>
@@ -306,121 +307,110 @@ const Manufacturing: React.FC = () => {
           </div>
         );
 
-      case 'pricing':
+      case 'impact':
         return (
           <div className="space-y-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Manufacturing Pricing</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Manufacturing Business Impact</h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Specialized pricing for manufacturing operations based on facility size and device count
+                Operational excellence and strategic advantages for smart manufacturing
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Manufacturing Starter</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€3,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Single facility (up to 1K devices)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">IoT device monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Basic OT security</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">ISO 27001 compliance</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
-                  Start Trial
-                </button>
+            {/* Impact Metrics */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Factory className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Production Uptime</h3>
+                <div className="text-3xl font-bold text-blue-600 mb-2">99.9%</div>
+                <p className="text-slate-600 text-sm">Continuous operations</p>
               </div>
-
-              <div className="bg-blue-50 border-2 border-blue-500 rounded-2xl p-8 relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Manufacturing Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€7,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Multi-facility (up to 10K devices)</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Advanced OT/IT convergence</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Supply chain monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">IEC 62443 compliance</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">24/7 SOC monitoring</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Start Trial
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Shield className="w-8 h-8 text-green-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Cyber Resilience</h3>
+                <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
+                <p className="text-slate-600 text-sm">Threat detection improvement</p>
               </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Manufacturing Enterprise</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                  <div className="text-slate-600">Contact us</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Unlimited facilities & devices</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Custom OT integrations</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Global compliance</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Dedicated support</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">On-premise deployment</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-slate-400 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors">
-                  Contact Sales
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Wifi className="w-8 h-8 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">IoT Security</h3>
+                <div className="text-3xl font-bold text-purple-600 mb-2">10K+</div>
+                <p className="text-slate-600 text-sm">Devices protected</p>
               </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <TrendingUp className="w-8 h-8 text-amber-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Operational Efficiency</h3>
+                <div className="text-3xl font-bold text-amber-600 mb-2">80%</div>
+                <p className="text-slate-600 text-sm">Process optimization</p>
+              </div>
+            </div>
+
+            {/* Manufacturing Benefits */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Industry 4.0 Leadership</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Smart Factory Transformation</h4>
+                      <p className="text-slate-600 text-sm">Lead the industry with secure, connected manufacturing systems</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Supply Chain Excellence</h4>
+                      <p className="text-slate-600 text-sm">End-to-end visibility and security across your supply network</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Competitive Advantage</h4>
+                      <p className="text-slate-600 text-sm">Outpace competitors with superior operational security</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Operational Excellence</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Zero Downtime Operations</h4>
+                      <p className="text-slate-600 text-sm">Proactive threat detection prevents production shutdowns</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Quality Assurance</h4>
+                      <p className="text-slate-600 text-sm">Maintain product quality through secure, monitored processes</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Regulatory Compliance</h4>
+                      <p className="text-slate-600 text-sm">Meet industry standards with automated compliance monitoring</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <button
+                onClick={() => navigate('/pricing')}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Factory className="w-5 h-5" />
+                View Pricing Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         );
@@ -505,7 +495,7 @@ const Manufacturing: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: Factory },
             { id: 'solutions', label: 'AI Agents', icon: Zap },
             { id: 'case-studies', label: 'Case Studies', icon: Target },
-            { id: 'pricing', label: 'Pricing', icon: DollarSign }
+            { id: 'impact', label: 'Business Impact', icon: TrendingUp }
           ].map((tab) => {
             const Icon = tab.icon;
             return (
@@ -550,11 +540,11 @@ const Manufacturing: React.FC = () => {
             </button>
             
             <button
-              onClick={() => navigate('/calculators/roi')}
+              onClick={() => navigate('/pricing')}
               className="inline-flex items-center gap-2 px-8 py-4 border-2 border-slate-400 text-slate-300 font-semibold rounded-lg hover:border-white hover:text-white transition-colors"
             >
-              <DollarSign className="w-5 h-5" />
-              Calculate Manufacturing ROI
+              <Factory className="w-5 h-5" />
+              View Pricing
             </button>
           </div>
         </div>

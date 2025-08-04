@@ -18,7 +18,8 @@ import {
   Zap,
   Globe,
   Flag,
-  Star
+  Star,
+  TrendingUp
 } from 'lucide-react';
 import { PublicHeader } from '../../components/common/PublicHeader';
 
@@ -258,8 +259,8 @@ const Government: React.FC = () => {
                     <div className="text-sm text-slate-600">ATO Acceleration</div>
                   </div>
                   <div className="text-center p-3 bg-blue-50 rounded-lg">
-                    <div className="text-xl font-bold text-blue-600">€2.5M</div>
-                    <div className="text-sm text-slate-600">Cost Avoidance</div>
+                    <div className="text-xl font-bold text-blue-600">400%</div>
+                    <div className="text-sm text-slate-600">ROI Improvement</div>
                   </div>
                 </div>
 
@@ -306,120 +307,98 @@ const Government: React.FC = () => {
           </div>
         );
 
-      case 'pricing':
+      case 'impact':
         return (
           <div className="space-y-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Government Pricing</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Government Impact & Value</h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Specialized pricing for government agencies with GSA Schedule availability
+                Mission-critical outcomes and strategic advantages for government agencies
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Government Basic</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€9,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">FedRAMP Low authorization</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">NIST 800-53 Low baseline</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Basic continuous monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">ATO package automation</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
-                  Start Evaluation
-                </button>
+            {/* Impact Metrics */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Flag className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Mission Readiness</h3>
+                <div className="text-3xl font-bold text-blue-600 mb-2">18 Months</div>
+                <p className="text-slate-600 text-sm">Faster ATO timeline</p>
               </div>
-
-              <div className="bg-blue-50 border-2 border-blue-500 rounded-2xl p-8 relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Government Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€19,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">FedRAMP Moderate authorization</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">NIST 800-53 Moderate baseline</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Advanced continuous monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Supply chain risk management</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">24/7 SOC support</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Start Evaluation
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Shield className="w-8 h-8 text-green-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Security Posture</h3>
+                <div className="text-3xl font-bold text-green-600 mb-2">95%</div>
+                <p className="text-slate-600 text-sm">Control automation</p>
               </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Users className="w-8 h-8 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Citizen Service</h3>
+                <div className="text-3xl font-bold text-purple-600 mb-2">99.9%</div>
+                <p className="text-slate-600 text-sm">Service availability</p>
+              </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <TrendingUp className="w-8 h-8 text-amber-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Resource Efficiency</h3>
+                <div className="text-3xl font-bold text-amber-600 mb-2">75%</div>
+                <p className="text-slate-600 text-sm">Staff time savings</p>
+              </div>
+            </div>
 
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Government Enterprise</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                  <div className="text-slate-600">GSA Schedule</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">FedRAMP High authorization</span>
+            {/* Government Benefits */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="bg-gradient-to-br from-blue-50 to-red-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Mission-Critical Advantages</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Accelerated ATO Process</h4>
+                      <p className="text-slate-600 text-sm">Reduce Authority to Operate timeline from years to months</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">NIST 800-53 High baseline</span>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Continuous Compliance</h4>
+                      <p className="text-slate-600 text-sm">Maintain security posture with real-time monitoring and reporting</p>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Multi-agency deployment</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Custom control overlays</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Dedicated government support</span>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Interagency Collaboration</h4>
+                      <p className="text-slate-600 text-sm">Standardized security frameworks enable seamless information sharing</p>
+                    </div>
                   </div>
                 </div>
-
-                <button className="w-full px-6 py-3 border border-slate-400 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors">
-                  Contact Government Sales
-                </button>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Operational Excellence</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Taxpayer Value</h4>
+                      <p className="text-slate-600 text-sm">Maximize public investment through efficient resource utilization</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Staff Empowerment</h4>
+                      <p className="text-slate-600 text-sm">Free personnel from manual tasks to focus on mission objectives</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Future-Ready Infrastructure</h4>
+                      <p className="text-slate-600 text-sm">Built to adapt to evolving federal security requirements</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -427,10 +406,18 @@ const Government: React.FC = () => {
             <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 text-center">
               <Flag className="w-8 h-8 text-blue-600 mx-auto mb-4" />
               <h3 className="text-lg font-bold text-slate-900 mb-2">GSA Schedule Available</h3>
-              <p className="text-slate-600">
+              <p className="text-slate-600 mb-4">
                 Velocity is available through GSA Schedule 70 for streamlined government procurement. 
-                Contact our government sales team for GSA pricing and contract details.
+                Contact our government sales team for details.
               </p>
+              <button
+                onClick={() => navigate('/pricing')}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Building2 className="w-5 h-5" />
+                View Pricing Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         );
@@ -560,11 +547,11 @@ const Government: React.FC = () => {
             </button>
             
             <button
-              onClick={() => navigate('/calculators/roi')}
+              onClick={() => navigate('/pricing')}
               className="inline-flex items-center gap-2 px-8 py-4 border-2 border-slate-400 text-slate-300 font-semibold rounded-lg hover:border-white hover:text-white transition-colors"
             >
-              <DollarSign className="w-5 h-5" />
-              Calculate Government ROI
+              <Building2 className="w-5 h-5" />
+              View Pricing
             </button>
           </div>
         </div>

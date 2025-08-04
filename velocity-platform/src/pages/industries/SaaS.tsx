@@ -16,13 +16,14 @@ import {
   Server,
   Eye,
   Zap,
-  Building
+  Building,
+  TrendingUp
 } from 'lucide-react';
 import { PublicHeader } from '../../components/common/PublicHeader';
 
 const SaaS: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'pricing'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'impact'>('overview');
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -80,8 +81,8 @@ const SaaS: React.FC = () => {
                     <div className="text-sm text-slate-600">First-Time Pass Rate</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-amber-600 mb-2">€120K</div>
-                    <div className="text-sm text-slate-600">Avg Annual Savings</div>
+                    <div className="text-3xl font-bold text-amber-600 mb-2">300%</div>
+                    <div className="text-sm text-slate-600">ROI in First Year</div>
                   </div>
                 </div>
               </div>
@@ -251,8 +252,8 @@ const SaaS: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                    <div className="text-xl font-bold text-emerald-600">€120K</div>
-                    <div className="text-sm text-slate-600">Annual Savings</div>
+                    <div className="text-xl font-bold text-emerald-600">85%</div>
+                    <div className="text-sm text-slate-600">Faster Time-to-Market</div>
                   </div>
                   <div className="text-center p-3 bg-blue-50 rounded-lg">
                     <div className="text-xl font-bold text-blue-600">45 Days</div>
@@ -303,121 +304,110 @@ const SaaS: React.FC = () => {
           </div>
         );
 
-      case 'pricing':
+      case 'impact':
         return (
           <div className="space-y-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">SaaS Pricing</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">SaaS Business Impact</h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Flexible pricing that scales with your SaaS business growth
+                Strategic advantages and measurable outcomes for scaling SaaS businesses
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">SaaS Startup</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€1,499</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Up to 1M ARR</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">SOC 2 automation</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Basic multi-tenancy monitoring</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Single cloud integration</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
-                  Start Trial
-                </button>
+            {/* Impact Metrics */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Cloud className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Market Velocity</h3>
+                <div className="text-3xl font-bold text-blue-600 mb-2">85%</div>
+                <p className="text-slate-600 text-sm">Faster time-to-market</p>
               </div>
-
-              <div className="bg-blue-50 border-2 border-blue-500 rounded-2xl p-8 relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">SaaS Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€2,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Up to 10M ARR</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">SOC 2 + ISO 27001 + GDPR</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Advanced multi-tenancy</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Multi-cloud support</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">API security monitoring</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Start Trial
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Users className="w-8 h-8 text-green-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Customer Trust</h3>
+                <div className="text-3xl font-bold text-green-600 mb-2">96%</div>
+                <p className="text-slate-600 text-sm">Customer confidence increase</p>
               </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">SaaS Enterprise</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                  <div className="text-slate-600">Contact us</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">€10M+ ARR</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">All compliance frameworks</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Custom integrations</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Dedicated CSM</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">White-label options</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-slate-400 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors">
-                  Contact Sales
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Shield className="w-8 h-8 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Risk Reduction</h3>
+                <div className="text-3xl font-bold text-purple-600 mb-2">90%</div>
+                <p className="text-slate-600 text-sm">Security incident reduction</p>
               </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <TrendingUp className="w-8 h-8 text-amber-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Revenue Impact</h3>
+                <div className="text-3xl font-bold text-amber-600 mb-2">300%</div>
+                <p className="text-slate-600 text-sm">ROI in first year</p>
+              </div>
+            </div>
+
+            {/* SaaS Growth Benefits */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Hypergrowth Enablement</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Investor Confidence</h4>
+                      <p className="text-slate-600 text-sm">Enterprise-grade security attracts top-tier investors and partners</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Enterprise Sales</h4>
+                      <p className="text-slate-600 text-sm">SOC 2 certification opens doors to Fortune 500 customers</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Global Expansion</h4>
+                      <p className="text-slate-600 text-sm">GDPR compliance enables seamless international growth</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Operational Excellence</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Development Focus</h4>
+                      <p className="text-slate-600 text-sm">Engineering teams focus on product innovation, not compliance</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Customer Success</h4>
+                      <p className="text-slate-600 text-sm">Reduced churn through enhanced security and trust</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Competitive Advantage</h4>
+                      <p className="text-slate-600 text-sm">Win deals against competitors lacking proper compliance</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <button
+                onClick={() => navigate('/pricing')}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Cloud className="w-5 h-5" />
+                View Pricing Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         );
@@ -502,7 +492,7 @@ const SaaS: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: Cloud },
             { id: 'solutions', label: 'AI Agents', icon: Zap },
             { id: 'case-studies', label: 'Case Studies', icon: Target },
-            { id: 'pricing', label: 'Pricing', icon: DollarSign }
+            { id: 'impact', label: 'Business Impact', icon: TrendingUp }
           ].map((tab) => {
             const Icon = tab.icon;
             return (
@@ -547,11 +537,11 @@ const SaaS: React.FC = () => {
             </button>
             
             <button
-              onClick={() => navigate('/calculators/roi')}
+              onClick={() => navigate('/pricing')}
               className="inline-flex items-center gap-2 px-8 py-4 border-2 border-slate-400 text-slate-300 font-semibold rounded-lg hover:border-white hover:text-white transition-colors"
             >
-              <DollarSign className="w-5 h-5" />
-              Calculate SaaS ROI
+              <Cloud className="w-5 h-5" />
+              View Pricing
             </button>
           </div>
         </div>

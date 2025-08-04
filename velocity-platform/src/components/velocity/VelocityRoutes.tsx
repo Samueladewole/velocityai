@@ -5,6 +5,7 @@ import VelocityLandingComplete from './VelocityLandingComplete';
 import VelocityDashboardComplete from './VelocityDashboardComplete';
 import VelocityHeader from './VelocityHeader';
 import VelocityFooter from './VelocityFooter';
+import VelocitySignup from './VelocitySignup';
 import CustomerImpactShowcase from './CustomerImpactShowcase';
 import ROIMetricsDashboard from './ROIMetricsDashboard';
 import CompetitiveAdvantageShowcase from './CompetitiveAdvantageShowcase';
@@ -46,6 +47,8 @@ import CaseStudies from '../../pages/CaseStudies';
 import TrustPathway from '../../pages/TrustPathway';
 import BankingROIDemo from '../../pages/demo/BankingROIDemo';
 import SettingsPage from '../../pages/SettingsPage';
+import ISAE3000EnterpriseModule from '../../pages/ISAE3000EnterpriseModule';
+import DemoPage from '../../pages/DemoPage';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -76,6 +79,319 @@ const PlaceholderPage = ({ title, description }: { title: string; description: s
     </div>
   </div>
 );
+
+// Enhanced Signup Component - will be moved to separate file later
+const EnhancedSignup = () => {
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    company: '',
+    industry: '',
+    companySize: '',
+    role: '',
+    acceptTerms: false,
+    acceptMarketing: true
+  });
+  
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value, type } = e.target;
+    const checked = (e.target as HTMLInputElement).checked;
+    
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
+  
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    // Redirect to dashboard with welcome flow
+    navigate('/dashboard?welcome=true');
+  };
+  
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-emerald-900 flex items-center justify-center relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-10 left-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 right-10 w-[600px] h-[600px] bg-emerald-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-purple-500/5 to-emerald-500/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      {/* Back to Home Button */}
+      <div className="absolute top-8 left-8 z-20">
+        <button
+          onClick={() => navigate('/velocity')}
+          className="flex items-center gap-2 text-slate-300 hover:text-white transition-all duration-200 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20 hover:border-white/30 hover:scale-105"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span className="text-sm font-medium">Back to Home</span>
+        </button>
+      </div>
+      
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 flex items-center justify-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          {/* Left Side - Value Proposition */}
+          <div className="text-center lg:text-left space-y-8">
+            <div>
+              <div className="inline-flex items-center px-4 py-2 bg-purple-500/10 backdrop-blur-sm rounded-full border border-purple-500/20 mb-6">
+                <span className="text-purple-400 text-sm font-medium">🎯 Join 500+ Growing Companies</span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold text-white font-serif mb-6 leading-tight">
+                Start Your
+                <span className="block bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
+                  Trust Journey
+                </span>
+              </h1>
+              
+              <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+                Transform your security posture into a revenue engine. Join hundreds of companies already accelerating deals and reducing costs.
+              </p>
+            </div>
+            
+            {/* Success Stories */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white mb-4">What You'll Get:</h3>
+              {[
+                { icon: '⚡', title: '30-Minute Setup', desc: 'Get audit-ready in minutes, not months' },
+                { icon: '💎', title: '€4.9M Average Savings', desc: 'Proven ROI with measurable results' },
+                { icon: '🚀', title: '340% Faster Sales', desc: 'Accelerate enterprise deals instantly' },
+                { icon: '🎯', title: '95% Automation', desc: 'Eliminate manual compliance work' }
+              ].map((benefit, index) => (
+                <div key={index} className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10 hover:border-white/20 transition-all">
+                  <div className="text-2xl">{benefit.icon}</div>
+                  <div>
+                    <div className="font-semibold text-white">{benefit.title}</div>
+                    <div className="text-sm text-slate-400">{benefit.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Social Proof */}
+            <div className="p-6 bg-emerald-500/10 backdrop-blur-sm rounded-xl border border-emerald-500/20">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="flex -space-x-2">
+                  {[1,2,3,4,5].map(i => (
+                    <div key={i} className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full border-2 border-white/20 flex items-center justify-center text-xs text-white font-semibold">
+                      {String.fromCharCode(64 + i)}
+                    </div>
+                  ))}
+                </div>
+                <div className="text-emerald-400 text-sm font-medium">500+ companies</div>
+              </div>
+              <p className="text-sm text-emerald-300">
+                "Velocity helped us close our Series A 6 months faster by proving our security posture to investors instantly."
+              </p>
+              <div className="text-xs text-emerald-400 mt-2">— Sarah Chen, CTO at TechCorp</div>
+            </div>
+          </div>
+          
+          {/* Right Side - Signup Form */}
+          <div className="w-full max-w-lg mx-auto">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-emerald-400 rounded-xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-2">Start Free Trial</h2>
+                <p className="text-slate-300">No credit card required • 30-day free trial</p>
+              </div>
+              
+              <form className="space-y-6" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-200 mb-2">Full Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                      placeholder="John Doe"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-200 mb-2">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                      placeholder="john@company.com"
+                      required
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-slate-200 mb-2">Company Name</label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                    placeholder="Your Company Inc."
+                    required
+                  />
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-slate-200 mb-2">Industry</label>
+                    <select
+                      name="industry"
+                      value={formData.industry}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                      required
+                    >
+                      <option value="">Select Industry</option>
+                      <option value="fintech">Fintech</option>
+                      <option value="healthcare">Healthcare</option>
+                      <option value="saas">SaaS</option>
+                      <option value="ecommerce">E-commerce</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-slate-200 mb-2">Company Size</label>
+                    <select
+                      name="companySize"
+                      value={formData.companySize}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                      required
+                    >
+                      <option value="">Select Size</option>
+                      <option value="1-50">1-50 employees</option>
+                      <option value="51-200">51-200 employees</option>
+                      <option value="201-1000">201-1000 employees</option>
+                      <option value="1000+">1000+ employees</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-slate-200 mb-2">Password</label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/50 transition-all"
+                    placeholder="Create a secure password"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <input
+                      id="acceptTerms"
+                      name="acceptTerms"
+                      type="checkbox"
+                      checked={formData.acceptTerms}
+                      onChange={handleInputChange}
+                      className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-white/20 rounded bg-white/10 mt-1"
+                      required
+                    />
+                    <label htmlFor="acceptTerms" className="ml-3 text-sm text-slate-300">
+                      I agree to the{' '}
+                      <button type="button" className="text-purple-400 hover:text-purple-300 underline">
+                        Terms of Service
+                      </button>
+                      {' '}and{' '}
+                      <button type="button" className="text-purple-400 hover:text-purple-300 underline">
+                        Privacy Policy
+                      </button>
+                    </label>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <input
+                      id="acceptMarketing"
+                      name="acceptMarketing"
+                      type="checkbox"
+                      checked={formData.acceptMarketing}
+                      onChange={handleInputChange}
+                      className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-white/20 rounded bg-white/10 mt-1"
+                    />
+                    <label htmlFor="acceptMarketing" className="ml-3 text-sm text-slate-300">
+                      Send me product updates and best practices (optional)
+                    </label>
+                  </div>
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={isLoading || !formData.acceptTerms}
+                  className="w-full px-6 py-4 bg-gradient-to-r from-purple-500 to-emerald-500 text-white rounded-lg font-medium hover:from-purple-600 hover:to-emerald-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl text-lg"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Creating Your Account...
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2">
+                      Start Free Trial
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </div>
+                  )}
+                </button>
+                
+                <div className="text-center">
+                  <div className="inline-flex items-center px-3 py-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+                    <svg className="w-4 h-4 text-emerald-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-sm text-emerald-400">
+                      30-day free trial • No credit card required
+                    </p>
+                  </div>
+                </div>
+              </form>
+
+              {/* Login Link */}
+              <div className="text-center pt-6 border-t border-white/10 mt-8">
+                <p className="text-sm text-slate-300">
+                  Already have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => navigate('/velocity/login')}
+                    className="font-medium text-purple-400 hover:text-purple-300 transition-colors hover:underline"
+                  >
+                    Sign in here
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Assessment Component
 const ComplianceAssessment: React.FC = () => {
@@ -265,51 +581,22 @@ const ComplianceAssessment: React.FC = () => {
   );
 };
 
-// Demo Component
-const Demo = () => (
-  <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 py-20">
-    <div className="max-w-6xl mx-auto px-6">
-      <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-white font-serif mb-4">
-          Interactive Demo
-        </h1>
-        <p className="text-lg text-slate-400">
-          Experience Velocity's capabilities with realistic industry scenarios
-        </p>
-      </div>
-      
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[
-          { title: 'Startup SOC 2', description: 'Fast-growing SaaS company preparing for first SOC 2 audit', industry: 'SaaS' },
-          { title: 'Healthcare HIPAA', description: 'Medical device company ensuring HIPAA compliance', industry: 'Healthcare' },
-          { title: 'Fintech Multi-Framework', description: 'Financial services with SOC 2, PCI DSS, and ISO 27001', industry: 'Fintech' },
-          { title: 'Enterprise ISO 27001', description: 'Large enterprise managing global compliance requirements', industry: 'Enterprise' },
-          { title: 'AI Company EU Compliance', description: 'AI startup navigating EU AI Act and GDPR', industry: 'AI/ML' },
-          { title: 'Manufacturing NIS2', description: 'Manufacturing company preparing for NIS2 requirements', industry: 'Manufacturing' }
-        ].map((demo, index) => (
-          <div key={index} className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer">
-            <div className="mb-4">
-              <div className="text-xs text-emerald-400 font-medium mb-2">{demo.industry}</div>
-              <h3 className="text-lg font-semibold text-white">{demo.title}</h3>
-            </div>
-            <p className="text-sm text-slate-400 mb-4">{demo.description}</p>
-            <button className="text-emerald-400 text-sm font-medium hover:text-emerald-300 transition-colors">
-              Launch Demo →
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
-);
 
-// Login Component
+// Enhanced Login Component
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useAuthStore();
+  const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState('demo@velocity.ai');
+  const [password, setPassword] = useState('demo123');
+  const [showPassword, setShowPassword] = useState(false);
   
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
+    
+    // Simulate loading for better UX
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     // Create demo user for login
     const demoUser = {
@@ -337,51 +624,197 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-900 flex items-center justify-center">
-      <div className="max-w-md mx-auto px-6">
-        <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-8 border border-white/10">
-          <div className="text-center mb-8">
-            <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg mx-auto mb-4 flex items-center justify-center">
-              <span className="text-white text-2xl">⚡</span>
-            </div>
-            <h1 className="text-2xl font-bold text-white font-serif">Welcome Back</h1>
-            <p className="text-slate-400">Sign in to your Velocity account</p>
-          </div>
-          
-          <form className="space-y-4" onSubmit={handleLogin}>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-emerald-900 flex items-center justify-center relative overflow-hidden">
+      {/* Background Effects */}
+      <div className="absolute inset-0">
+        <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-emerald-500/5 to-blue-500/5 rounded-full blur-3xl"></div>
+      </div>
+      
+      {/* Back to Home Button */}
+      <div className="absolute top-8 left-8 z-20">
+        <button
+          onClick={() => navigate('/velocity')}
+          className="flex items-center gap-2 text-slate-300 hover:text-white transition-all duration-200 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20 hover:border-white/30 hover:scale-105"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+          </svg>
+          <span className="text-sm font-medium">Back to Home</span>
+        </button>
+      </div>
+      
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-6 flex items-center justify-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left Side - Marketing Content */}
+          <div className="text-center lg:text-left space-y-8">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Email</label>
-              <input
-                type="email"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                placeholder="Enter your email"
-                defaultValue="demo@velocity.ai"
-              />
-            </div>
-            
-            <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">Password</label>
-              <input
-                type="password"
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50"
-                placeholder="Enter your password"
-                defaultValue="demo123"
-              />
-            </div>
-            
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-emerald-700 transition-all duration-300"
-            >
-              Sign In
-            </button>
-            
-            <div className="text-center mt-4">
-              <p className="text-sm text-slate-400">
-                Demo credentials are pre-filled. Just click "Sign In"
+              <div className="inline-flex items-center px-4 py-2 bg-emerald-500/10 backdrop-blur-sm rounded-full border border-emerald-500/20 mb-6">
+                <span className="text-emerald-400 text-sm font-medium">✨ Trusted by 500+ Companies</span>
+              </div>
+              
+              <h1 className="text-4xl lg:text-6xl font-bold text-white font-serif mb-6 leading-tight">
+                Welcome Back to
+                <span className="block bg-gradient-to-r from-emerald-400 to-blue-400 bg-clip-text text-transparent">
+                  Velocity
+                </span>
+              </h1>
+              
+              <p className="text-xl text-slate-300 mb-8 leading-relaxed">
+                Continue building trust, accelerating deals, and automating compliance with our AI-powered platform.
               </p>
             </div>
-          </form>
+            
+            {/* Key Benefits */}
+            <div className="grid gap-4">
+              {[
+                { icon: '🚀', title: 'Sales Acceleration', desc: '340% faster enterprise deals' },
+                { icon: '🛡️', title: 'Trust Intelligence', desc: 'Real-time compliance monitoring' },
+                { icon: '💰', title: 'Cost Reduction', desc: '€4.9M average customer savings' }
+              ].map((benefit, index) => (
+                <div key={index} className="flex items-center gap-4 p-4 bg-white/5 backdrop-blur-sm rounded-lg border border-white/10">
+                  <div className="text-2xl">{benefit.icon}</div>
+                  <div>
+                    <div className="font-semibold text-white">{benefit.title}</div>
+                    <div className="text-sm text-slate-400">{benefit.desc}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Right Side - Login Form */}
+          <div className="w-full max-w-md mx-auto">
+            <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl">
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-xl mx-auto mb-4 flex items-center justify-center shadow-lg">
+                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-white mb-2">Sign In</h2>
+                <p className="text-slate-300">Access your trust intelligence dashboard</p>
+              </div>
+              
+              <form className="space-y-6" onSubmit={handleLogin}>
+                <div>
+                  <label className="block text-sm font-medium text-slate-200 mb-2">Email Address</label>
+                  <div className="relative">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all"
+                      placeholder="Enter your email"
+                      required
+                    />
+                    <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
+                      <svg className="h-5 w-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-slate-200 mb-2">Password</label>
+                  <div className="relative">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all pr-12"
+                      placeholder="Enter your password"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-200 transition-colors"
+                    >
+                      {showPassword ? (
+                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21" />
+                        </svg>
+                      ) : (
+                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <input
+                      id="remember-me"
+                      name="remember-me"
+                      type="checkbox"
+                      className="h-4 w-4 text-emerald-600 focus:ring-emerald-500 border-white/20 rounded bg-white/10"
+                    />
+                    <label htmlFor="remember-me" className="ml-2 text-sm text-slate-300">
+                      Remember me
+                    </label>
+                  </div>
+                  
+                  <button
+                    type="button"
+                    className="text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
+                  >
+                    Forgot password?
+                  </button>
+                </div>
+                
+                <button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full px-6 py-3 bg-gradient-to-r from-emerald-500 to-blue-500 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-blue-600 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none shadow-lg hover:shadow-xl"
+                >
+                  {isLoading ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                      Signing In...
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-center gap-2">
+                      Sign In
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </div>
+                  )}
+                </button>
+                
+                <div className="text-center mt-4">
+                  <div className="inline-flex items-center px-3 py-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+                    <svg className="w-4 h-4 text-emerald-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-sm text-emerald-400">
+                      Demo credentials are pre-filled
+                    </p>
+                  </div>
+                </div>
+              </form>
+
+              {/* Signup Link */}
+              <div className="text-center pt-6 border-t border-white/10 mt-8">
+                <p className="text-sm text-slate-300">
+                  New to Velocity?{' '}
+                  <button
+                    type="button"
+                    onClick={() => navigate('/velocity/signup')}
+                    className="font-medium text-emerald-400 hover:text-emerald-300 transition-colors hover:underline"
+                  >
+                    Start your free trial
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -438,7 +871,7 @@ const VelocityRoutes: React.FC = () => {
       } />
       <Route path="/velocity/demo" element={
         <PublicLayout>
-          <Demo />
+          <DemoPage />
         </PublicLayout>
       } />
       <Route path="/velocity/impact" element={
@@ -459,7 +892,7 @@ const VelocityRoutes: React.FC = () => {
       
       {/* Auth routes - No layout needed */}
       <Route path="/velocity/login" element={<Login />} />
-      <Route path="/velocity/signup" element={<Login />} />
+      <Route path="/velocity/signup" element={<VelocitySignup />} />
       
       {/* Dashboard routes - Protected unified dashboard */}
       <Route path="/dashboard" element={
@@ -524,7 +957,7 @@ const VelocityRoutes: React.FC = () => {
       } />
       <Route path="/velocity/solutions/gdpr" element={
         <PublicLayout>
-          <GDPRInternationalTransfersPage />
+          <GDPRPage />
         </PublicLayout>
       } />
       <Route path="/velocity/solutions/hipaa" element={
@@ -538,7 +971,11 @@ const VelocityRoutes: React.FC = () => {
         </PublicLayout>
       } />
       <Route path="/solutions/gdpr-international-transfers" element={<Navigate to="/velocity/solutions/gdpr" replace />} />
-      <Route path="/solutions/isae-3000" element={<ISAE3000ServicesPricing />} />
+      <Route path="/solutions/isae-3000" element={
+        <PublicLayout>
+          <ISAE3000EnterpriseModule />
+        </PublicLayout>
+      } />
       <Route path="/velocity/solutions/cis-controls" element={<CISControlsPage />} />
       
       {/* Platform routes - Authenticated dashboard pages */}

@@ -196,7 +196,7 @@ export const PublicHeader: React.FC = () => {
                 Resources
                 <ChevronDown className="w-4 h-4" />
               </button>
-              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
                 <button 
                   onClick={() => navigate('/velocity/resources')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
@@ -222,8 +222,8 @@ export const PublicHeader: React.FC = () => {
                   onClick={() => navigate('/velocity/demo')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">Demo</div>
-                  <div className="text-xs text-slate-400">Interactive platform tour</div>
+                  <div className="font-medium">Interactive Demo</div>
+                  <div className="text-xs text-slate-400">Try compliance scenarios</div>
                 </button>
               </div>
             </div>
@@ -340,7 +340,7 @@ export const PublicHeader: React.FC = () => {
                 Case Studies
               </button>
               <button onClick={() => { navigate('/velocity/demo'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4">
-                Demo
+                Interactive Demo
               </button>
               
               <button onClick={() => { navigate('/velocity/pricing'); setMobileMenuOpen(false); }} className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pt-4">

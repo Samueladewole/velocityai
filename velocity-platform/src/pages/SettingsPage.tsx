@@ -90,6 +90,67 @@ const SettingsPage: React.FC = () => {
     setPrivacy(prev => ({ ...prev, [type]: value }));
   };
 
+  // Backend API integration functions
+  const saveProfile = async () => {
+    try {
+      const response = await fetch('/api/v1/user/profile', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        // Show success message
+        console.log('Profile updated successfully');
+      } else {
+        console.error('Failed to update profile');
+      }
+    } catch (error) {
+      console.error('API Error:', error);
+    }
+  };
+
+  const saveNotifications = async () => {
+    try {
+      const response = await fetch('/api/v1/user/notifications', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        },
+        body: JSON.stringify(notifications)
+      });
+      
+      if (response.ok) {
+        console.log('Notification preferences updated');
+      }
+    } catch (error) {
+      console.error('Failed to update notifications:', error);
+    }
+  };
+
+  const savePrivacySettings = async () => {
+    try {
+      const response = await fetch('/api/v1/user/privacy', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('auth_token')}`
+        },
+        body: JSON.stringify(privacy)
+      });
+      
+      if (response.ok) {
+        console.log('Privacy settings updated');
+      }
+    } catch (error) {
+      console.error('Failed to update privacy settings:', error);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
       {/* Header */}
@@ -224,7 +285,10 @@ const SettingsPage: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex justify-end">
-                    <Button className="bg-emerald-600 hover:bg-emerald-700">
+                    <Button 
+                      onClick={saveProfile}
+                      className="bg-emerald-600 hover:bg-emerald-700"
+                    >
                       <Save className="w-4 h-4 mr-2" />
                       Save Changes
                     </Button>

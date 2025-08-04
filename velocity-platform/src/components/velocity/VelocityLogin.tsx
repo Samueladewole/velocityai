@@ -8,7 +8,8 @@ import {
   ArrowRight,
   Shield,
   Zap,
-  CheckCircle
+  CheckCircle,
+  Home
 } from 'lucide-react';
 
 const VelocityLogin: React.FC = () => {
@@ -104,6 +105,17 @@ const VelocityLogin: React.FC = () => {
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-emerald-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+      </div>
+
+      {/* Back to Home Button */}
+      <div className="absolute top-8 left-8 z-20">
+        <button
+          onClick={() => navigate('/velocity')}
+          className="flex items-center gap-2 text-slate-300 hover:text-white transition-colors duration-200 bg-white/10 hover:bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/20"
+        >
+          <Home className="w-4 h-4" />
+          <span className="text-sm font-medium">Back to Home</span>
+        </button>
       </div>
 
       <div className="relative z-10 min-h-screen flex items-center justify-center py-12 px-4">

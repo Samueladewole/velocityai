@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useUrlState } from '../hooks/useUrlState';
 import { PublicHeader } from '../components/common/PublicHeader';
 import { 
@@ -42,13 +42,101 @@ import { Button } from '@/components/ui/button';
 
 const TrustPathway: React.FC = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [activeStep, setActiveStep] = useUrlState('step', '0', {
     storageKey: 'trust_pathway_step'
   });
+  const [showBackButton, setShowBackButton] = useState(false);
+  const [returnPosition, setReturnPosition] = useState<any>(null);
   
   // Convert string to number for backward compatibility
   const activeStepNum = parseInt(activeStep);
   const setActiveStepNum = (step: number) => setActiveStep(step.toString());
+  
+  // Check if there's a return position stored
+  useEffect(() => {
+    const storedPosition = sessionStorage.getItem('velocity_return_position');
+    if (storedPosition) {
+      try {
+        const position = JSON.parse(storedPosition);
+        // Only show if the stored position is recent (within last 10 minutes)
+        const isRecent = Date.now() - position.timestamp < 10 * 60 * 1000;
+        if (isRecent && position.url !== window.location.href) {
+          setReturnPosition(position);
+          setShowBackButton(true);
+        }
+      } catch (error) {
+        console.error('Error parsing return position:', error);
+      }
+    }
+  }, []);
+  
+  const handleReturnToPreviousPosition = () => {
+    if (returnPosition) {
+      // Navigate back to the stored URL
+      window.location.href = returnPosition.url;
+      
+      // Schedule scroll restoration after page loads
+      setTimeout(() => {
+        window.scrollTo({
+          top: returnPosition.scrollY,
+          behavior: 'smooth'
+        });
+      }, 100);
+      
+      // Clear the stored position
+      sessionStorage.removeItem('velocity_return_position');
+      setShowBackButton(false);
+    }
+  };
+  
+  // Handle hash navigation for scrolling to sections
+  useEffect(() => {
+    // Function to handle scrolling to hash element
+    const handleHashScroll = () => {
+      const hash = window.location.hash || location.hash;
+      if (hash) {
+        const elementId = hash.substring(1); // Remove the # character
+        console.log(`Attempting to scroll to element: ${elementId}`);
+        
+        const scrollToElement = () => {
+          const element = document.getElementById(elementId);
+          if (element) {
+            console.log(`Found element: ${elementId}, scrolling...`);
+            element.scrollIntoView({ 
+              behavior: 'smooth', 
+              block: 'start',
+              inline: 'nearest'
+            });
+            return true;
+          }
+          return false;
+        };
+        
+        // Multiple attempts with increasing delays to ensure page is loaded
+        const delays = [0, 100, 300, 600, 1000, 1500];
+        delays.forEach((delay, index) => {
+          setTimeout(() => {
+            if (scrollToElement()) {
+              console.log(`Successfully scrolled to ${elementId} on attempt ${index + 1}`);
+            } else if (index === delays.length - 1) {
+              console.warn(`Failed to scroll to element: ${elementId}`);
+            }
+          }, delay);
+        });
+      }
+    };
+    
+    // Handle both location change and hash change
+    handleHashScroll();
+    
+    // Also listen for hash changes
+    window.addEventListener('hashchange', handleHashScroll);
+    
+    return () => {
+      window.removeEventListener('hashchange', handleHashScroll);
+    };
+  }, [location]);
 
   // The 13 AI Agents in Velocity's Trust Pathway
   const aiAgents = [
@@ -623,6 +711,36 @@ const TrustPathway: React.FC = () => {
           </div>
         </div>
       </section>
+      
+      {/* Floating Back Button */}
+      {showBackButton && (
+        <div className="fixed bottom-8 right-8 z-50">
+          <button
+            onClick={handleReturnToPreviousPosition}
+            className="group flex items-center gap-3 px-6 py-4 bg-slate-900/95 backdrop-blur-sm text-white rounded-xl font-medium border border-white/20 hover:bg-slate-800/95 transition-all duration-300 shadow-2xl hover:shadow-3xl hover:scale-105"
+          >
+            <svg className="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <div className="text-left">
+              <div className="text-sm font-semibold">Return to Previous Spot</div>
+              <div className="text-xs text-slate-400">Back to where you left off</div>
+            </div>
+          </button>
+          
+          {/* Dismiss button */}
+          <button
+            onClick={() => {
+              sessionStorage.removeItem('velocity_return_position');
+              setShowBackButton(false);
+            }}
+            className="absolute -top-2 -right-2 w-6 h-6 bg-slate-600 hover:bg-slate-500 text-white rounded-full flex items-center justify-center text-xs transition-colors duration-200"
+            title="Dismiss"
+          >
+            ×
+          </button>
+        </div>
+      )}
     </div>
   );
 };

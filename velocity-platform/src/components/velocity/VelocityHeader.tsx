@@ -64,6 +64,7 @@ export const VelocityHeader: React.FC = () => {
     {
       label: 'Resources',
       children: [
+        { label: 'Interactive Demo', path: `${routePrefix}/demo`, icon: Activity },
         { label: 'Documentation', path: `${routePrefix}/docs`, icon: BookOpen },
         { label: 'API Reference', path: `${routePrefix}/api`, icon: Database },
         { label: 'Case Studies', path: `${routePrefix}/case-studies`, icon: Award },

@@ -15,13 +15,14 @@ import {
   AlertTriangle,
   FileText,
   Eye,
-  Zap
+  Zap,
+  TrendingUp
 } from 'lucide-react';
 import { PublicHeader } from '../../components/common/PublicHeader';
 
 const Healthcare: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'pricing'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'impact'>('overview');
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -244,8 +245,8 @@ const Healthcare: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 bg-emerald-50 rounded-lg">
-                    <div className="text-xl font-bold text-emerald-600">€200K</div>
-                    <div className="text-sm text-slate-600">Cost Savings</div>
+                    <div className="text-xl font-bold text-emerald-600">75%</div>
+                    <div className="text-sm text-slate-600">Efficiency Gain</div>
                   </div>
                   <div className="text-center p-3 bg-blue-50 rounded-lg">
                     <div className="text-xl font-bold text-blue-600">95%</div>
@@ -276,8 +277,8 @@ const Healthcare: React.FC = () => {
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div className="text-center p-3 bg-purple-50 rounded-lg">
-                    <div className="text-xl font-bold text-purple-600">€350K</div>
-                    <div className="text-sm text-slate-600">Annual Savings</div>
+                    <div className="text-xl font-bold text-purple-600">80%</div>
+                    <div className="text-sm text-slate-600">Risk Reduction</div>
                   </div>
                   <div className="text-center p-3 bg-green-50 rounded-lg">
                     <div className="text-xl font-bold text-green-600">12</div>
@@ -296,121 +297,110 @@ const Healthcare: React.FC = () => {
           </div>
         );
 
-      case 'pricing':
+      case 'impact':
         return (
           <div className="space-y-12">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-slate-900 mb-6">Healthcare Pricing</h2>
+              <h2 className="text-3xl font-bold text-slate-900 mb-6">Healthcare Business Impact</h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Specialized pricing for healthcare organizations based on patient volume and complexity
+                Measurable outcomes and strategic advantages for healthcare organizations
               </p>
             </div>
 
-            <div className="grid lg:grid-cols-3 gap-8">
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Healthcare Starter</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€2,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Up to 10K patient records</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Core HIPAA automation</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Basic EMR integration</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">BAA management</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors">
-                  Start Trial
-                </button>
+            {/* Impact Metrics */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Heart className="w-8 h-8 text-red-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Patient Safety</h3>
+                <div className="text-3xl font-bold text-red-600 mb-2">95%</div>
+                <p className="text-slate-600 text-sm">Reduction in privacy incidents</p>
               </div>
-
-              <div className="bg-blue-50 border-2 border-blue-500 rounded-2xl p-8 relative">
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                  Most Popular
-                </div>
-                
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Healthcare Professional</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">€4,999</div>
-                  <div className="text-slate-600">/month</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Up to 100K patient records</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Full HIPAA automation</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Advanced EMR integration</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Telehealth compliance</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Incident response automation</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  Start Trial
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Shield className="w-8 h-8 text-blue-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Compliance Confidence</h3>
+                <div className="text-3xl font-bold text-blue-600 mb-2">99%</div>
+                <p className="text-slate-600 text-sm">HIPAA compliance coverage</p>
               </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-8">
-                <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-2">Healthcare Enterprise</h3>
-                  <div className="text-4xl font-bold text-blue-600 mb-2">Custom</div>
-                  <div className="text-slate-600">Contact us</div>
-                </div>
-                
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Unlimited patient records</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Multi-facility deployment</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Custom integrations</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">Dedicated support</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-emerald-500" />
-                    <span className="text-sm">On-premise deployment</span>
-                  </div>
-                </div>
-
-                <button className="w-full px-6 py-3 border border-slate-400 text-slate-600 rounded-lg hover:bg-slate-50 transition-colors">
-                  Contact Sales
-                </button>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <Clock className="w-8 h-8 text-green-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Operational Efficiency</h3>
+                <div className="text-3xl font-bold text-green-600 mb-2">75%</div>
+                <p className="text-slate-600 text-sm">Time savings on compliance tasks</p>
               </div>
+              <div className="bg-white border border-slate-200 rounded-xl p-6 text-center">
+                <TrendingUp className="w-8 h-8 text-purple-500 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-slate-900 mb-2">Audit Performance</h3>
+                <div className="text-3xl font-bold text-purple-600 mb-2">100%</div>
+                <p className="text-slate-600 text-sm">Audit success rate</p>
+              </div>
+            </div>
+
+            {/* Value Propositions */}
+            <div className="grid lg:grid-cols-2 gap-8">
+              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Strategic Advantages</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Enhanced Patient Trust</h4>
+                      <p className="text-slate-600 text-sm">Patients feel more secure knowing their data is protected by advanced AI systems</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Competitive Differentiation</h4>
+                      <p className="text-slate-600 text-sm">Stand out with best-in-class privacy and security practices</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Future-Ready Infrastructure</h4>
+                      <p className="text-slate-600 text-sm">Prepared for emerging healthcare regulations and requirements</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-2xl p-8">
+                <h3 className="text-2xl font-bold text-slate-900 mb-6">Operational Benefits</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Staff Productivity</h4>
+                      <p className="text-slate-600 text-sm">Clinical staff focus on patient care instead of compliance paperwork</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Risk Mitigation</h4>
+                      <p className="text-slate-600 text-sm">Proactive threat detection prevents costly data breaches</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-emerald-500 mt-1" />
+                    <div>
+                      <h4 className="font-semibold text-slate-900">Scalable Growth</h4>
+                      <p className="text-slate-600 text-sm">Compliance infrastructure that grows with your organization</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <button
+                onClick={() => navigate('/pricing')}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                <Heart className="w-5 h-5" />
+                View Pricing Details
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
           </div>
         );
@@ -495,14 +485,14 @@ const Healthcare: React.FC = () => {
             { id: 'overview', label: 'Overview', icon: Shield },
             { id: 'solutions', label: 'AI Agents', icon: Zap },
             { id: 'case-studies', label: 'Case Studies', icon: Target },
-            { id: 'pricing', label: 'Pricing', icon: DollarSign }
+            { id: 'impact', label: 'Business Impact', icon: TrendingUp }
           ].map((tab) => {
             const Icon = tab.icon;
             return (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as any)}
-                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
                   activeTab === tab.id
                     ? 'bg-blue-600 text-white'
                     : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
@@ -540,11 +530,11 @@ const Healthcare: React.FC = () => {
             </button>
             
             <button
-              onClick={() => navigate('/calculators/roi')}
+              onClick={() => navigate('/pricing')}
               className="inline-flex items-center gap-2 px-8 py-4 border-2 border-slate-400 text-slate-300 font-semibold rounded-lg hover:border-white hover:text-white transition-colors"
             >
-              <DollarSign className="w-5 h-5" />
-              Calculate Healthcare ROI
+              <Heart className="w-5 h-5" />
+              View Pricing
             </button>
           </div>
         </div>

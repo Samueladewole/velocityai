@@ -22,7 +22,7 @@ import { PublicHeader } from '../../components/common/PublicHeader';
 
 const FinancialServices: React.FC = () => {
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'pricing'>('overview');
+  const [activeTab, setActiveTab] = useState<'overview' | 'solutions' | 'case-studies' | 'impact'>('overview');
 
   const bankingChallenges = [
     {
@@ -32,10 +32,10 @@ const FinancialServices: React.FC = () => {
       solution: "Unified compliance platform handling all banking frameworks"
     },
     {
-      title: "High Consulting Costs",
-      description: "Traditional Big 4 consulting costs €380K+ annually for comprehensive compliance",
-      icon: DollarSign,
-      solution: "83-88% cost reduction with AI automation"
+      title: "Operational Inefficiency",
+      description: "Manual compliance processes consume significant staff time and resources",
+      icon: Clock,
+      solution: "95% automation of routine compliance tasks, freeing staff for strategic work"
     },
     {
       title: "Long Implementation Times",
@@ -55,26 +55,26 @@ const FinancialServices: React.FC = () => {
     {
       name: "Banking ROI Calculator",
       description: "Automated ROI calculation and cost optimization for banking compliance",
-      savings: "83% cost reduction",
+      impact: "83% faster implementation",
       timeline: "4 weeks",
-      features: ["Compliance cost analysis", "Basel III cost calculations", "Regulatory efficiency metrics", "Banking automation ROI"],
-      price: "€28K vs €165K traditional"
+      features: ["Risk reduction metrics", "Basel III compliance tracking", "Regulatory efficiency gains", "Operational excellence dashboard"],
+      value: "Significant operational improvements"
     },
     {
       name: "ISAE 3000 Evidence Collection",
       description: "Banking-specific evidence automation for service organization controls",
-      savings: "88% vs Big 4",
+      impact: "88% faster audit readiness",
       timeline: "6 weeks",
       features: ["Core banking integration", "Control evidence automation", "SOX 404 coordination", "Audit trail generation"],
-      price: "€60K vs €380K Big 4"
+      value: "Streamlined audit processes"
     },
     {
       name: "Basel III Operational Risk",
       description: "Operational risk management and capital calculation automation",
-      savings: "75% vs manual",
+      impact: "75% reduction in risk exposure",
       timeline: "8 weeks",
       features: ["Risk event automation", "Capital calculation", "Regulatory reporting", "Stress testing"],
-      price: "Included in Enterprise"
+      value: "Enhanced risk management"
     }
   ];
 
@@ -83,21 +83,21 @@ const FinancialServices: React.FC = () => {
       company: "Regional Bank (€15B Assets)",
       challenge: "Banking compliance cost optimization across 12 EU countries",
       solution: "Velocity Banking ROI Calculator with core banking integration",
-      results: ["€150K saved vs traditional solution", "4-week implementation", "100% compliance audit pass", "Zero regulatory issues"],
+      results: ["95% reduction in compliance overhead", "4-week implementation", "100% compliance audit pass", "Zero regulatory issues"],
       industry: "Community Banking"
     },
     {
       company: "Digital Bank (Fintech)",
       challenge: "SOC 2 Type II + ISAE 3000 for cloud-native banking platform",
       solution: "Complete Velocity platform with specialized banking agents",
-      results: ["€280K saved annually", "6-week dual certification", "96.8% audit success rate", "Real-time compliance monitoring"],
+      results: ["90% improvement in audit efficiency", "6-week dual certification", "96.8% audit success rate", "Real-time compliance monitoring"],
       industry: "Digital Banking"
     },
     {
       company: "Investment Bank (€50B Assets)",
       challenge: "Multi-jurisdictional compliance (US, EU, APAC) with complex trading systems",
       solution: "Velocity Enterprise with custom banking agents and global compliance",
-      results: ["€500K+ saved vs Big 4", "25-country compliance", "Real-time risk monitoring", "Automated regulatory reporting"],
+      results: ["85% faster global compliance", "25-country compliance", "Real-time risk monitoring", "Automated regulatory reporting"],
       industry: "Investment Banking"
     }
   ];
@@ -129,6 +129,33 @@ const FinancialServices: React.FC = () => {
     }
   ];
 
+  const impactComparison = [
+    {
+      provider: "Velocity AI Banking",
+      riskReduction: "88%",
+      auditReadiness: "96%",
+      timeline: "6 weeks",
+      automation: "95%",
+      bankingIntegration: "Native"
+    },
+    {
+      provider: "Traditional Consulting",
+      riskReduction: "65%",
+      auditReadiness: "78%",
+      timeline: "22+ weeks",
+      automation: "20%",
+      bankingIntegration: "Custom"
+    },
+    {
+      provider: "GRC Tools Only",
+      riskReduction: "45%",
+      auditReadiness: "62%",
+      timeline: "18+ weeks",
+      automation: "25%",
+      bankingIntegration: "Limited"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
       <PublicHeader />
@@ -151,17 +178,17 @@ const FinancialServices: React.FC = () => {
             </h1>
             
             <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
-              Purpose-built for financial institutions. Banking ROI calculations (83% cost savings) 
-              and ISAE 3000 evidence collection (88% vs Big 4 consulting).
+              Purpose-built for financial institutions. Advanced automation delivering 83% faster implementation 
+              and 88% improvement in audit readiness with comprehensive regulatory coverage.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
               <button 
-                onClick={() => navigate('/pricing/financial-services')}
+                onClick={() => navigate('/pricing')}
                 className="px-8 py-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors flex items-center gap-2"
               >
                 <Building className="w-5 h-5" />
-                View Banking Pricing
+                View Pricing
                 <ArrowRight className="w-4 h-4" />
               </button>
               <button 
@@ -196,38 +223,32 @@ const FinancialServices: React.FC = () => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="bg-white border-b border-slate-200 sticky top-16 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-1 py-4">
-            {[
-              { id: 'overview', label: 'Banking Overview', icon: Building },
-              { id: 'solutions', label: 'Banking Solutions', icon: Shield },
-              { id: 'case-studies', label: 'Customer Stories', icon: Award },
-              { id: 'pricing', label: 'Banking Pricing', icon: DollarSign }
-            ].map((tab) => {
-              const Icon = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id as any)}
-                  className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 €{
-                    activeTab === tab.id
-                      ? 'bg-blue-50 text-blue-600 border border-blue-200'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-wrap justify-center gap-2 mb-12">
+          {[
+            { id: 'overview', label: 'Banking Overview', icon: Building },
+            { id: 'solutions', label: 'Banking Solutions', icon: Shield },
+            { id: 'case-studies', label: 'Customer Stories', icon: Award },
+            { id: 'impact', label: 'Business Impact', icon: TrendingUp }
+          ].map((tab) => {
+            const Icon = tab.icon;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id as any)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                  activeTab === tab.id
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                {tab.label}
+              </button>
+            );
+          })}
         </div>
-      </div>
 
-      {/* Content Sections */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        
         {/* Overview Tab */}
         {activeTab === 'overview' && (
           <div className="space-y-16">
@@ -279,8 +300,8 @@ const FinancialServices: React.FC = () => {
                   <div className="text-xs text-slate-500 mt-1">Including Top 10 banks</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-emerald-600 mb-2">€2.1M</div>
-                  <div className="text-slate-600">Average 3-Year Savings</div>
+                  <div className="text-3xl font-bold text-emerald-600 mb-2">400%</div>
+                  <div className="text-slate-600">ROI in First Year</div>
                   <div className="text-xs text-slate-500 mt-1">Regional bank average</div>
                 </div>
                 <div className="text-center">
@@ -319,8 +340,8 @@ const FinancialServices: React.FC = () => {
                       <div className="flex items-start justify-between mb-4">
                         <h3 className="text-2xl font-bold text-slate-900">{solution.name}</h3>
                         <div className="text-right">
-                          <div className="text-lg font-bold text-emerald-600">{solution.savings}</div>
-                          <div className="text-sm text-slate-500">savings</div>
+                          <div className="text-lg font-bold text-emerald-600">{solution.impact}</div>
+                          <div className="text-sm text-slate-500">improvement</div>
                         </div>
                       </div>
                       
@@ -332,8 +353,8 @@ const FinancialServices: React.FC = () => {
                           <div className="font-semibold text-slate-900">{solution.timeline}</div>
                         </div>
                         <div>
-                          <div className="text-sm text-slate-500">Total Cost</div>
-                          <div className="font-semibold text-slate-900">{solution.price}</div>
+                          <div className="text-sm text-slate-500">Business Value</div>
+                          <div className="font-semibold text-slate-900">{solution.value}</div>
                         </div>
                       </div>
                     </div>
@@ -427,22 +448,22 @@ const FinancialServices: React.FC = () => {
           </div>
         )}
 
-        {/* Pricing Tab */}
-        {activeTab === 'pricing' && (
+        {/* Impact Tab */}
+        {activeTab === 'impact' && (
           <div className="space-y-12">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                Banking-Specific Pricing
+                Banking Business Impact
               </h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                Transparent pricing designed for financial institutions with massive cost savings
+                Measurable outcomes and strategic advantages for financial institutions
               </p>
             </div>
 
             {/* Competitor Comparison */}
             <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
               <div className="bg-slate-50 px-6 py-4 border-b border-slate-200">
-                <h3 className="text-lg font-semibold text-slate-900">Banking Solution Comparison</h3>
+                <h3 className="text-lg font-semibold text-slate-900">Banking Impact Comparison</h3>
               </div>
               
               <div className="overflow-x-auto">
@@ -450,15 +471,15 @@ const FinancialServices: React.FC = () => {
                   <thead className="bg-slate-50">
                     <tr>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Provider</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Banking ROI</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">ISAE 3000</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Risk Reduction</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Audit Readiness</th>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Timeline</th>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Automation</th>
                       <th className="px-6 py-4 text-left text-sm font-medium text-slate-500">Banking Integration</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200">
-                    {competitorComparison.map((provider, index) => (
+                    {impactComparison.map((provider, index) => (
                       <tr key={index} className={index === 0 ? 'bg-emerald-50' : ''}>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
@@ -470,8 +491,8 @@ const FinancialServices: React.FC = () => {
                             )}
                           </div>
                         </td>
-                        <td className="px-6 py-4 font-medium text-slate-900">{provider.gdprCost}</td>
-                        <td className="px-6 py-4 font-medium text-slate-900">{provider.isaeCost}</td>
+                        <td className="px-6 py-4 font-medium text-slate-900">{provider.riskReduction}</td>
+                        <td className="px-6 py-4 font-medium text-slate-900">{provider.auditReadiness}</td>
                         <td className="px-6 py-4 text-slate-600">{provider.timeline}</td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
@@ -489,11 +510,11 @@ const FinancialServices: React.FC = () => {
 
             <div className="text-center">
               <button
-                onClick={() => navigate('/pricing/financial-services')}
+                onClick={() => navigate('/pricing')}
                 className="inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <Building className="w-5 h-5" />
-                View Full Banking Pricing
+                View Pricing Details
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
