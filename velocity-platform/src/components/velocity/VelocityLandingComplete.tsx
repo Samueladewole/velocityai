@@ -73,25 +73,25 @@ const PublicHeader: React.FC = () => {
               </button>
               <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/platform/overview')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">AI Agent Dashboard</div>
-                  <div className="text-xs text-slate-400">13 agents working for you</div>
+                  <div className="font-medium">Platform Overview</div>
+                  <div className="text-xs text-slate-400">Learn about our AI agents</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/platform/evidence-collection')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Evidence Collection</div>
-                  <div className="text-xs text-slate-400">Automated gathering</div>
+                  <div className="text-xs text-slate-400">Learn about automation</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/platform/trust-score')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Trust Score</div>
-                  <div className="text-xs text-slate-400">Cryptographic verification</div>
+                  <div className="text-xs text-slate-400">Learn about verification</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/qie')}
@@ -363,19 +363,19 @@ const PublicHeader: React.FC = () => {
           <div className="px-6 py-4 space-y-3">
             <div className="text-slate-400 text-sm font-medium py-1">Platform</div>
             <button 
-              onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/platform/overview'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
-              AI Agent Dashboard
+              Platform Overview
             </button>
             <button 
-              onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/platform/evidence-collection'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
               Evidence Collection
             </button>
             <button 
-              onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
+              onClick={() => { navigate('/platform/trust-score'); setMobileMenuOpen(false); }}
               className="block w-full text-left text-slate-300 hover:text-white transition-colors py-2 pl-4"
             >
               Trust Score

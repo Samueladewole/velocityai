@@ -60,25 +60,25 @@ const VelocityHeader: React.FC = () => {
               </button>
               <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <button 
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/platform/overview')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
-                  <div className="font-medium">AI Agent Dashboard</div>
-                  <div className="text-xs text-slate-400">13 agents working for you</div>
+                  <div className="font-medium">Platform Overview</div>
+                  <div className="text-xs text-slate-400">Learn about our AI agents</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/platform/evidence-collection')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Evidence Collection</div>
-                  <div className="text-xs text-slate-400">Automated gathering</div>
+                  <div className="text-xs text-slate-400">Automated gathering info</div>
                 </button>
                 <button 
-                  onClick={() => navigate('/dashboard')}
+                  onClick={() => navigate('/platform/trust-score')}
                   className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
                 >
                   <div className="font-medium">Trust Score</div>
-                  <div className="text-xs text-slate-400">Cryptographic verification</div>
+                  <div className="text-xs text-slate-400">Learn about verification</div>
                 </button>
                 <button 
                   onClick={() => navigate('/velocity/qie')}
@@ -183,7 +183,7 @@ const VelocityHeader: React.FC = () => {
               Sign In
             </button>
             <button 
-              onClick={() => navigate('/dashboard')}
+              onClick={() => navigate('/velocity/login')}
               className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-amber-500 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-amber-600 transition-all duration-300"
             >
               Get Started
@@ -204,10 +204,10 @@ const VelocityHeader: React.FC = () => {
           <div className="lg:hidden py-4 border-t border-slate-800">
             <div className="space-y-2">
               <button 
-                onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
+                onClick={() => { navigate('/platform/overview'); setMobileMenuOpen(false); }}
                 className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white"
               >
-                Dashboard
+                Platform Overview
               </button>
               <button 
                 onClick={() => { navigate('/velocity/qie'); setMobileMenuOpen(false); }}
@@ -445,11 +445,11 @@ const QIEPage: React.FC = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/velocity')}
                 className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors"
               >
                 <ArrowRight className="w-4 h-4 rotate-180" />
-                <span>Back to Dashboard</span>
+                <span>Back to Home</span>
               </button>
               <div className="w-px h-6 bg-white/20" />
               <div className="flex items-center gap-2">
