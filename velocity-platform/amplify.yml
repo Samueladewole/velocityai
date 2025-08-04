@@ -22,13 +22,13 @@ applications:
           commands:
             - echo "🔧 Post-build optimizations..."
             - echo "Gzipping static assets for performance..."
-            - find build -name "*.js" -exec gzip -9 -k {} \;
-            - find build -name "*.css" -exec gzip -9 -k {} \;
+            - find dist -name "*.js" -exec gzip -9 -k {} \;
+            - find dist -name "*.css" -exec gzip -9 -k {} \;
             - echo "📊 Build statistics:"
-            - du -sh build/*
+            - du -sh dist/*
             - echo "🔐 Setting up security headers..."
       artifacts:
-        baseDirectory: build
+        baseDirectory: dist
         files:
           - '**/*'
       cache:
@@ -84,6 +84,12 @@ applications:
 environment:
   variables:
     # 🎯 Frontend Configuration
+    VITE_SUPABASE_URL: https://acefedmwnsgarsjvjyao.supabase.co
+    VITE_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFjZWZlZG13bnNnYXJzanZqeWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTQwODExODYsImV4cCI6MjA2OTY1NzE4Nn0.u7mj5kMAWIkCQEVP8QRaLWxk1-bE9wCMCHYRepn7tGg
+    VITE_APP_ENV: production
+    VITE_APP_DOMAIN: velocity.eripapp.com
+    VITE_APP_URL: https://velocity.eripapp.com
+    VITE_ENABLE_DEMO_MODE: false
     REACT_APP_API_BASE_URL: https://api.velocity.eripapp.com
     REACT_APP_WS_URL: wss://ws.velocity.eripapp.com
     REACT_APP_ENVIRONMENT: production
