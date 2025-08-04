@@ -84,7 +84,7 @@ const PlaceholderPage = ({ title, description }: { title: string; description: s
 // Enhanced Signup Component - will be moved to separate file later
 const EnhancedSignup = () => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(false);
+  const { signUp, isLoading, error, clearError } = useAuthStore();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
     name: '',
@@ -110,13 +110,23 @@ const EnhancedSignup = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    clearError();
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Redirect to dashboard with welcome flow
-    navigate('/dashboard?welcome=true');
+    try {
+      const metadata = {
+        name: formData.name,
+        organizationName: formData.company,
+        industry: formData.industry,
+        organizationSize: formData.companySize,
+        role: formData.role || 'ADMIN',
+      };
+      
+      await signUp(formData.email, formData.password, metadata);
+      navigate('/dashboard?welcome=true');
+    } catch (error) {
+      console.error('Signup failed:', error);
+      // Error is handled by the store
+    }
   };
   
   return (
@@ -586,42 +596,22 @@ const ComplianceAssessment: React.FC = () => {
 // Enhanced Login Component
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuthStore();
-  const [isLoading, setIsLoading] = useState(false);
-  const [email, setEmail] = useState('demo@velocity.ai');
-  const [password, setPassword] = useState('demo123');
+  const { login, isLoading, error, clearError } = useAuthStore();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    clearError();
     
-    // Simulate loading for better UX
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Create demo user for login
-    const demoUser = {
-      id: 'demo_user_1',
-      email: 'demo@velocity.ai',
-      name: 'Demo User',
-      organization: {
-        id: 'velocity_demo_org',
-        name: 'Velocity Demo Organization',
-        industry: 'Technology',
-        size: 'ENTERPRISE' as const,
-        subscription: {
-          plan: 'ENTERPRISE' as const,
-          status: 'ACTIVE' as const,
-          startDate: new Date(),
-        },
-      },
-      role: 'ADMIN' as const,
-      permissions: [],
-    };
-    
-    // Use Zustand store for persistent login
-    login(demoUser);
-    navigate('/dashboard');
+    try {
+      await login(email, password);
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Error is handled by the store
+    }
   };
 
   return (
@@ -699,6 +689,17 @@ const Login = () => {
               </div>
               
               <form className="space-y-6" onSubmit={handleLogin}>
+                {error && (
+                  <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+                    <div className="flex items-center gap-2">
+                      <svg className="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <p className="text-red-400 text-sm">{error}</p>
+                    </div>
+                  </div>
+                )}
+                
                 <div>
                   <label className="block text-sm font-medium text-slate-200 mb-2">Email Address</label>
                   <div className="relative">
@@ -789,16 +790,20 @@ const Login = () => {
                   )}
                 </button>
                 
-                <div className="text-center mt-4">
-                  <div className="inline-flex items-center px-3 py-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
-                    <svg className="w-4 h-4 text-emerald-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <p className="text-sm text-emerald-400">
-                      Demo credentials are pre-filled
-                    </p>
+                {import.meta.env.DEV && (
+                  <div className="text-center mt-4">
+                    <div className="inline-flex items-center px-3 py-2 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                      <svg className="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div className="text-left">
+                        <p className="text-sm text-blue-400 font-medium">Development Mode</p>
+                        <p className="text-xs text-blue-300">demo@velocity.ai / demo123</p>
+                      </div>
+                    </div>
                   </div>
-                </div>
+                )}
+                
               </form>
 
               {/* Signup Link */}

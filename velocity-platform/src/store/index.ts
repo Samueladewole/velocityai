@@ -2,13 +2,21 @@ import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import type { User } from '@/types';
 import { SubscriptionPlan, SubscriptionStatus } from '@/types';
+import { SupabaseAuth, supabase } from '@/lib/supabase';
+import type { User as SupabaseUser } from '@supabase/supabase-js';
 
 interface AuthState {
   user: User | null;
+  supabaseUser: SupabaseUser | null;
   isAuthenticated: boolean;
-  login: (user: User) => void;
-  logout: () => void;
+  isLoading: boolean;
+  error: string | null;
+  login: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string, metadata?: any) => Promise<void>;
+  logout: () => Promise<void>;
   updateUser: (user: Partial<User>) => void;
+  initializeAuth: () => Promise<void>;
+  clearError: () => void;
 }
 
 interface AppState {
@@ -35,22 +43,163 @@ export interface Notification {
   timestamp: Date;
 }
 
+// Helper to convert Supabase user to app user
+const supabaseToAppUser = (supabaseUser: SupabaseUser): User => ({
+  id: supabaseUser.id,
+  email: supabaseUser.email!,
+  name: supabaseUser.user_metadata?.name || supabaseUser.email!.split('@')[0],
+  organization: {
+    id: supabaseUser.user_metadata?.organizationId || 'default_org',
+    name: supabaseUser.user_metadata?.organizationName || 'Default Organization',
+    industry: supabaseUser.user_metadata?.industry || 'Technology',
+    size: supabaseUser.user_metadata?.organizationSize || 'STARTUP',
+    subscription: {
+      plan: SubscriptionPlan.STARTER,
+      status: SubscriptionStatus.ACTIVE,
+      startDate: new Date(supabaseUser.created_at),
+    },
+  },
+  role: supabaseUser.user_metadata?.role || 'ADMIN',
+  permissions: supabaseUser.user_metadata?.permissions || [],
+});
+
 // Auth Store
 export const useAuthStore = create<AuthState>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         user: null,
+        supabaseUser: null,
         isAuthenticated: false,
-        login: (user) => set({ user, isAuthenticated: true }),
-        logout: () => set({ user: null, isAuthenticated: false }),
+        isLoading: false,
+        error: null,
+        
+        initializeAuth: async () => {
+          set({ isLoading: true });
+          try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session?.user) {
+              const appUser = supabaseToAppUser(session.user);
+              set({ 
+                user: appUser, 
+                supabaseUser: session.user,
+                isAuthenticated: true,
+                error: null 
+              });
+            }
+          } catch (error) {
+            console.error('Auth initialization error:', error);
+            set({ error: 'Failed to initialize authentication' });
+          } finally {
+            set({ isLoading: false });
+          }
+        },
+
+        login: async (email: string, password: string) => {
+          set({ isLoading: true, error: null });
+          try {
+            // Development mode bypass for testing
+            if (import.meta.env.DEV && email === 'demo@velocity.ai' && password === 'demo123') {
+              const mockUser: User = {
+                id: 'dev_user_1',
+                email: 'demo@velocity.ai',
+                name: 'Demo User',
+                organization: {
+                  id: 'dev_org_1',
+                  name: 'Development Organization',
+                  industry: 'Technology',
+                  size: 'STARTUP',
+                  subscription: {
+                    plan: SubscriptionPlan.STARTER,
+                    status: SubscriptionStatus.ACTIVE,
+                    startDate: new Date(),
+                  },
+                },
+                role: 'ADMIN',
+                permissions: [],
+              };
+              
+              set({ 
+                user: mockUser, 
+                supabaseUser: null,
+                isAuthenticated: true,
+                error: null 
+              });
+              return;
+            }
+
+            const { user: supabaseUser } = await SupabaseAuth.signIn(email, password);
+            if (supabaseUser) {
+              const appUser = supabaseToAppUser(supabaseUser);
+              set({ 
+                user: appUser, 
+                supabaseUser,
+                isAuthenticated: true,
+                error: null 
+              });
+            }
+          } catch (error: any) {
+            console.error('Login error:', error);
+            set({ error: error.message || 'Login failed' });
+            throw error;
+          } finally {
+            set({ isLoading: false });
+          }
+        },
+
+        signUp: async (email: string, password: string, metadata?: any) => {
+          set({ isLoading: true, error: null });
+          try {
+            const { user: supabaseUser } = await SupabaseAuth.signUp(email, password, metadata);
+            if (supabaseUser) {
+              const appUser = supabaseToAppUser(supabaseUser);
+              set({ 
+                user: appUser, 
+                supabaseUser,
+                isAuthenticated: true,
+                error: null 
+              });
+            }
+          } catch (error: any) {
+            console.error('Signup error:', error);
+            set({ error: error.message || 'Signup failed' });
+            throw error;
+          } finally {
+            set({ isLoading: false });
+          }
+        },
+
+        logout: async () => {
+          set({ isLoading: true });
+          try {
+            await SupabaseAuth.signOut();
+            set({ 
+              user: null, 
+              supabaseUser: null,
+              isAuthenticated: false,
+              error: null 
+            });
+          } catch (error: any) {
+            console.error('Logout error:', error);
+            set({ error: error.message || 'Logout failed' });
+          } finally {
+            set({ isLoading: false });
+          }
+        },
+
         updateUser: (updates) =>
           set((state) => ({
             user: state.user ? { ...state.user, ...updates } : null,
           })),
+
+        clearError: () => set({ error: null }),
       }),
       {
         name: 'auth-storage',
+        partialize: (state) => ({ 
+          user: state.user,
+          isAuthenticated: state.isAuthenticated 
+        }),
       }
     )
   )
@@ -105,22 +254,4 @@ export const useNotificationStore = create<NotificationState>()(
   }))
 );
 
-// Mock user for development
-export const mockUser: User = {
-  id: 'velocity_demo_user',
-  email: 'demo@velocity.ai',
-  name: 'Velocity Demo User',
-  organization: {
-    id: 'velocity_demo_org',
-    name: 'Velocity Demo Organization',
-    industry: 'Technology',
-    size: 'ENTERPRISE' as const,
-    subscription: {
-      plan: SubscriptionPlan.ENTERPRISE,
-      status: SubscriptionStatus.ACTIVE,
-      startDate: new Date(),
-    },
-  },
-  role: 'ADMIN' as const,
-  permissions: [],
-};
+// Development mode is now handled within the auth store with proper Supabase integration

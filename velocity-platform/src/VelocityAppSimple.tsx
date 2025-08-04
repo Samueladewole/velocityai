@@ -2,6 +2,8 @@ import React, { useState, useEffect, createContext, useContext } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import VelocityRoutes from '@/components/velocity/VelocityRoutes';
 import { ScrollToTop } from '@/components/ScrollToTop';
+import { useAuthStore } from '@/store';
+import { supabase } from '@/lib/supabase';
 
 // Observability Components
 import ExecutiveDashboard from '@/components/observability/ExecutiveDashboard';
@@ -47,6 +49,7 @@ export const useVelocity = () => {
 
 // Velocity Provider Component
 const VelocityProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { initializeAuth } = useAuthStore();
   const [state, setState] = useState<VelocityState>({
     user: null,
     frameworks: [],
@@ -56,41 +59,21 @@ const VelocityProvider: React.FC<{ children: React.ReactNode }> = ({ children })
     automationRate: 95
   });
 
-  const [isAuthenticated, setIsAuthenticated] = useState(!!localStorage.getItem('velocity_token'));
-
-  // Check authentication status on mount and storage changes
+  // Initialize Supabase authentication on mount
   useEffect(() => {
-    const checkAuth = () => {
-      const token = localStorage.getItem('velocity_token');
-      setIsAuthenticated(!!token);
-    };
+    initializeAuth();
 
-    // Listen for storage changes (like login/logout in other tabs)
-    window.addEventListener('storage', checkAuth);
-    
-    const savedState = localStorage.getItem('velocity_state');
-    const savedUser = localStorage.getItem('velocity_user');
-    
-    if (savedState) {
-      try {
-        const parsedState = JSON.parse(savedState);
-        setState(prev => ({ ...prev, ...parsedState }));
-      } catch (error) {
-        console.error('Failed to parse saved state:', error);
+    // Listen for auth state changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth state changed:', event, session);
+      if (event === 'SIGNED_OUT') {
+        setState(prev => ({ ...prev, user: null }));
       }
-    }
+    });
 
-    if (savedUser && isAuthenticated) {
-      try {
-        const parsedUser = JSON.parse(savedUser);
-        setState(prev => ({ ...prev, user: parsedUser }));
-      } catch (error) {
-        console.error('Failed to parse saved user:', error);
-      }
-    }
-
-    return () => window.removeEventListener('storage', checkAuth);
-  }, [isAuthenticated]);
+    // Cleanup subscription
+    return () => subscription.unsubscribe();
+  }, [initializeAuth]);
 
   // Persist state changes
   const updateState = (updates: Partial<VelocityState>) => {
@@ -103,19 +86,18 @@ const VelocityProvider: React.FC<{ children: React.ReactNode }> = ({ children })
     });
   };
 
-  // Login function
+  // Get auth functions from the store
+  const { isAuthenticated, logout: authLogout } = useAuthStore();
+
+  // Login function - now handled by the auth store
   const login = (userData: any) => {
-    localStorage.setItem('velocity_token', userData.token);
-    localStorage.setItem('velocity_user', JSON.stringify(userData));
-    setState(prev => ({ ...prev, user: userData }));
-    setIsAuthenticated(true);
+    // This will be handled by the Supabase auth flow
+    console.log('Login should be handled through Supabase auth');
   };
 
   // Logout function
-  const logout = () => {
-    localStorage.removeItem('velocity_token');
-    localStorage.removeItem('velocity_user');
-    localStorage.removeItem('velocity_state');
+  const logout = async () => {
+    await authLogout();
     setState({
       user: null,
       frameworks: [],
@@ -124,7 +106,6 @@ const VelocityProvider: React.FC<{ children: React.ReactNode }> = ({ children })
       activeAgents: 8,
       automationRate: 95
     });
-    setIsAuthenticated(false);
   };
 
   return (
