@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuthStore } from '@/store';
 import { 
   Shield, 
   TrendingUp, 
@@ -503,11 +504,25 @@ const QuickActionsPanel = () => {
 // Main Dashboard Component
 const VelocityDashboardComplete: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, isLoading } = useAuthStore();
   const [notifications, setNotifications] = useState([
     { id: 1, title: 'SOC 2 evidence collection completed', time: '2 min ago', type: 'success' },
     { id: 2, title: 'New GDPR requirement detected', time: '15 min ago', type: 'info' },
     { id: 3, title: 'Trust score updated', time: '1 hour ago', type: 'success' }
   ]);
+
+  // Check authentication
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-950 to-slate-900 flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/velocity/login" replace />;
+  }
 
   // Simulate real-time updates
   useEffect(() => {
