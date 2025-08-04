@@ -112,7 +112,7 @@ jobs:
         if: success()
         run: |
           echo "✅ Production deployment successful!"
-          echo "🚀 Velocity AI Platform is live at https://velocity.ai"
+          echo "🚀 Velocity AI Platform is live at https://velocity.eripapp.com"
 
       - name: Notify deployment failure
         if: failure()
