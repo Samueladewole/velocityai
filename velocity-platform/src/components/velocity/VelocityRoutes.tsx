@@ -790,20 +790,6 @@ const Login = () => {
                   )}
                 </button>
                 
-                {import.meta.env.DEV && (
-                  <div className="text-center mt-4">
-                    <div className="inline-flex items-center px-3 py-2 bg-blue-500/10 rounded-lg border border-blue-500/20">
-                      <svg className="w-4 h-4 text-blue-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <div className="text-left">
-                        <p className="text-sm text-blue-400 font-medium">Development Mode</p>
-                        <p className="text-xs text-blue-300">demo@velocity.ai / demo123</p>
-                      </div>
-                    </div>
-                  </div>
-                )}
-                
               </form>
 
               {/* Signup Link */}

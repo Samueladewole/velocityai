@@ -98,36 +98,6 @@ export const useAuthStore = create<AuthState>()(
         login: async (email: string, password: string) => {
           set({ isLoading: true, error: null });
           try {
-            // Development mode bypass for testing
-            if (import.meta.env.DEV && email === 'demo@velocity.ai' && password === 'demo123') {
-              const mockUser: User = {
-                id: 'dev_user_1',
-                email: 'demo@velocity.ai',
-                name: 'Demo User',
-                organization: {
-                  id: 'dev_org_1',
-                  name: 'Development Organization',
-                  industry: 'Technology',
-                  size: 'STARTUP',
-                  subscription: {
-                    plan: SubscriptionPlan.STARTER,
-                    status: SubscriptionStatus.ACTIVE,
-                    startDate: new Date(),
-                  },
-                },
-                role: 'ADMIN',
-                permissions: [],
-              };
-              
-              set({ 
-                user: mockUser, 
-                supabaseUser: null,
-                isAuthenticated: true,
-                error: null 
-              });
-              return;
-            }
-
             const { user: supabaseUser } = await SupabaseAuth.signIn(email, password);
             if (supabaseUser) {
               const appUser = supabaseToAppUser(supabaseUser);

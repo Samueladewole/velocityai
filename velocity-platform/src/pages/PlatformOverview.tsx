@@ -72,7 +72,8 @@ const PlatformOverview: React.FC = () => {
     { name: 'Observability Specialist', automation: 98, specialty: 'System Monitoring' },
     { name: 'Cryptographic Verification', automation: 100, specialty: 'Blockchain Proofs' },
     { name: 'GDPR Compliance Agent', automation: 96, specialty: 'Privacy Automation' },
-    { name: 'ISAE 3000 Evidence Agent', automation: 94, specialty: 'Banking Evidence' }
+    { name: 'ISAE 3000 Evidence Agent', automation: 94, specialty: 'Banking Evidence' },
+    { name: 'AI Compliance Coordinator', automation: 99, specialty: 'Multi-Framework Orchestration' }
   ];
 
   const architectureFeatures = [
@@ -115,12 +116,12 @@ const PlatformOverview: React.FC = () => {
             </div>
             
             <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              12 AI Agents Automate
+              13 AI Agents Automate
               <span className="block text-blue-400">Your Compliance</span>
             </h1>
             
             <p className="text-xl text-slate-200 mb-8 max-w-3xl mx-auto">
-              Revolutionary compliance automation platform with 12 specialized AI agents, 
+              Revolutionary compliance automation platform with 13 specialized AI agents, 
               cryptographic verification, and 95% automation rate across all frameworks.
             </p>
 
@@ -144,7 +145,7 @@ const PlatformOverview: React.FC = () => {
             {/* Key Metrics */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
               <div className="text-center">
-                <div className="text-3xl font-bold text-blue-400 mb-2">12</div>
+                <div className="text-3xl font-bold text-blue-400 mb-2">13</div>
                 <div className="text-sm text-slate-300">AI Agents</div>
               </div>
               <div className="text-center">
@@ -170,7 +171,7 @@ const PlatformOverview: React.FC = () => {
           <div className="flex items-center gap-1 py-4">
             {[
               { id: 'overview', label: 'Platform Overview', icon: Target },
-              { id: 'agents', label: '12 AI Agents', icon: Bot },
+              { id: 'agents', label: '13 AI Agents', icon: Bot },
               { id: 'features', label: 'Core Features', icon: Settings },
               { id: 'architecture', label: 'Architecture', icon: Server }
             ].map((tab) => {
@@ -205,7 +206,7 @@ const PlatformOverview: React.FC = () => {
                 The Most Advanced Compliance Automation Platform
               </h2>
               <p className="text-lg text-slate-600 max-w-4xl mx-auto">
-                Velocity combines 12 specialized AI agents with cryptographic verification to deliver 
+                Velocity combines 13 specialized AI agents with cryptographic verification to deliver 
                 unprecedented compliance automation across all major frameworks.
               </p>
             </div>
@@ -277,10 +278,10 @@ const PlatformOverview: React.FC = () => {
           <div className="space-y-12">
             <div className="text-center">
               <h2 className="text-3xl font-bold text-slate-900 mb-6">
-                12 Specialized AI Agents
+                13 Specialized AI Agents
               </h2>
               <p className="text-lg text-slate-600 max-w-3xl mx-auto">
-                The only platform with 12 visible AI agents, each specialized for specific compliance tasks. 
+                The only platform with 13 visible AI agents, each specialized for specific compliance tasks. 
                 Transparency and specialization that competitors can't match.
               </p>
             </div>
@@ -315,11 +316,11 @@ const PlatformOverview: React.FC = () => {
                 Watch our AI agents work in real-time on your compliance tasks
               </p>
               <button
-                onClick={() => navigate('/dashboard')}
+                onClick={() => navigate('/velocity/login')}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
               >
                 <Eye className="w-5 h-5" />
-                View Live Dashboard
+                Sign In to View Dashboard
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -338,24 +339,26 @@ const PlatformOverview: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[
-                { title: "Evidence Collection", desc: "400+ automated evidence types", icon: Database },
-                { title: "Trust Scoring", desc: "Cryptographic verification system", icon: Shield },
-                { title: "Real-time Monitoring", desc: "24/7 compliance monitoring", icon: Eye },
-                { title: "Document Generation", desc: "Automated policy creation", icon: FileText }
-              ].map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div key={index} className="text-center">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <Icon className="w-8 h-8 text-blue-600" />
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  { title: "Evidence Collection", desc: "400+ automated evidence types", icon: Database },
+                  { title: "Trust Scoring", desc: "Cryptographic verification system", icon: Shield },
+                  { title: "Real-time Monitoring", desc: "24/7 compliance monitoring", icon: Eye },
+                  { title: "Document Generation", desc: "Automated policy creation", icon: FileText }
+                ].map((feature, index) => {
+                  const Icon = feature.icon;
+                  return (
+                    <div key={index} className="text-center">
+                      <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <Icon className="w-8 h-8 text-blue-600" />
+                      </div>
+                      <h3 className="font-bold text-slate-900 mb-2">{feature.title}</h3>
+                      <p className="text-slate-600 text-sm">{feature.desc}</p>
                     </div>
-                    <h3 className="font-bold text-slate-900 mb-2">{feature.title}</h3>
-                    <p className="text-slate-600 text-sm">{feature.desc}</p>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}
@@ -372,19 +375,21 @@ const PlatformOverview: React.FC = () => {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              {architectureFeatures.map((feature, index) => {
-                const Icon = feature.icon;
-                return (
-                  <div key={index} className="bg-white rounded-xl border border-slate-200 p-6">
-                    <div className="p-3 bg-slate-100 rounded-lg w-fit mb-4">
-                      <Icon className="w-6 h-6 text-slate-600" />
+            <div className="max-w-5xl mx-auto">
+              <div className="grid md:grid-cols-2 gap-8">
+                {architectureFeatures.map((feature, index) => {
+                  const Icon = feature.icon;
+                  return (
+                    <div key={index} className="bg-white rounded-xl border border-slate-200 p-6">
+                      <div className="p-3 bg-slate-100 rounded-lg w-fit mb-4">
+                        <Icon className="w-6 h-6 text-slate-600" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-slate-900 mb-3">{feature.title}</h3>
+                      <p className="text-slate-600">{feature.description}</p>
                     </div>
-                    <h3 className="text-xl font-semibold text-slate-900 mb-3">{feature.title}</h3>
-                    <p className="text-slate-600">{feature.description}</p>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
             </div>
           </div>
         )}

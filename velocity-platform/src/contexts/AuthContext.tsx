@@ -40,33 +40,15 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // AuthProvider component
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  // Initialize with demo user in development mode
-  const [user, setUser] = useState<VelocityUser | null>(
-    import.meta.env.DEV ? {
-      id: 'demo-user-123',
-      email: 'demo@velocity.ai',
-      name: 'Demo User',
-      role: 'org_admin',
-      organization_id: 'demo-org-456',
-      organization_name: 'Demo Organization',
-      is_active: true,
-      created_at: new Date().toISOString()
-    } : null
-  );
+  const [user, setUser] = useState<VelocityUser | null>(null);
   const [supabaseUser, setSupabaseUser] = useState<SupabaseUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // Check if user is authenticated
-  const isAuthenticated = import.meta.env.DEV ? true : (!!user && !!supabaseUser);
+  const isAuthenticated = !!user && !!supabaseUser;
 
   // Initialize auth state on mount
   useEffect(() => {
-    // In development mode, skip auth initialization and set loading to false
-    if (import.meta.env.DEV) {
-      setIsLoading(false);
-      return;
-    }
-
     const initializeAuth = async () => {
       try {
         // Check Supabase session
