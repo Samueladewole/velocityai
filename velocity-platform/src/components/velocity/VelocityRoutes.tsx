@@ -49,6 +49,7 @@ import BankingROIDemo from '../../pages/demo/BankingROIDemo';
 import SettingsPage from '../../pages/SettingsPage';
 import ISAE3000EnterpriseModule from '../../pages/ISAE3000EnterpriseModule';
 import DemoPage from '../../pages/DemoPage';
+import { VelocityPitchDeck } from '../../pages/company/VelocityPitchDeck';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -1104,6 +1105,11 @@ const VelocityRoutes: React.FC = () => {
       } />
       
       {/* Company routes - Public pages */}
+      <Route path="/velocity/pitch-deck" element={
+        <PublicLayout>
+          <VelocityPitchDeck />
+        </PublicLayout>
+      } />
       <Route path="/velocity/about" element={
         <PublicLayout>
           <PlaceholderPage title="About Velocity" description="Learn about our mission and team" />

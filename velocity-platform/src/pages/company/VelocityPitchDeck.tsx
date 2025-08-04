@@ -58,11 +58,11 @@ const marketGrowthData = [
 ];
 
 const fundingAllocation = [
-  { name: 'Platform Development', value: 35, amount: '€700K', color: '#3B82F6' },
-  { name: 'Sales & Marketing', value: 30, amount: '€600K', color: '#10B981' },
-  { name: 'Team Expansion', value: 20, amount: '€400K', color: '#8B5CF6' },
-  { name: 'Infrastructure', value: 10, amount: '€200K', color: '#F59E0B' },
-  { name: 'Operations', value: 5, amount: '€100K', color: '#EF4444' }
+  { name: 'Platform Development', value: 35, amount: '€175K-€700K', color: '#3B82F6' },
+  { name: 'Sales & Marketing', value: 30, amount: '€150K-€600K', color: '#10B981' },
+  { name: 'Team Expansion', value: 20, amount: '€100K-€400K', color: '#8B5CF6' },
+  { name: 'Infrastructure', value: 10, amount: '€50K-€200K', color: '#F59E0B' },
+  { name: 'Operations', value: 5, amount: '€25K-€100K', color: '#EF4444' }
 ];
 
 const revenueProjections = [
@@ -99,7 +99,7 @@ export const VelocityPitchDeck: React.FC = () => {
           </div>
 
           <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-2xl p-8 shadow-lg">
-            <h2 className="text-3xl font-bold text-green-800 mb-2">€2M Seed Round</h2>
+            <h2 className="text-3xl font-bold text-green-800 mb-2">€500K - €2M Seed Round</h2>
             <p className="text-xl text-green-700">Transform Trust into Revenue Growth</p>
           </div>
 
@@ -110,7 +110,7 @@ export const VelocityPitchDeck: React.FC = () => {
             </div>
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
-              <span>San Francisco, CA</span>
+              <span>Stockholm, SE</span>
             </div>
             <div className="flex items-center gap-2">
               <Briefcase className="h-4 w-4" />
@@ -400,21 +400,21 @@ export const VelocityPitchDeck: React.FC = () => {
                 <div className="p-4 bg-white rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <h4 className="font-semibold">Starter</h4>
-                    <span className="text-2xl font-bold text-blue-600">€5K/mo</span>
+                    <span className="text-2xl font-bold text-blue-600">€2K/mo</span>
                   </div>
                   <p className="text-sm text-slate-600">Up to 100 employees, SOC 2 + basic trust score</p>
                 </div>
                 <div className="p-4 bg-white rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <h4 className="font-semibold">Growth</h4>
-                    <span className="text-2xl font-bold text-green-600">€15K/mo</span>
+                    <span className="text-2xl font-bold text-green-600">€8K/mo</span>
                   </div>
                   <p className="text-sm text-slate-600">100-1,000 employees, multi-framework support</p>
                 </div>
                 <div className="p-4 bg-white rounded-lg">
                   <div className="flex justify-between items-center mb-2">
                     <h4 className="font-semibold">Enterprise</h4>
-                    <span className="text-2xl font-bold text-purple-600">€30K+/mo</span>
+                    <span className="text-2xl font-bold text-purple-600">€25K+/mo</span>
                   </div>
                   <p className="text-sm text-slate-600">1,000+ employees, full platform suite</p>
                 </div>
@@ -482,7 +482,7 @@ export const VelocityPitchDeck: React.FC = () => {
         <div className="space-y-6">
           <div className="text-center mb-8">
             <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              $2M to Scale AI Platform
+              €500K - €2M to Scale AI Platform
             </h2>
             <p className="text-xl text-slate-600 max-w-4xl mx-auto">
               Strategic investment focused on accelerating AI development, scaling go-to-market efforts, and building world-class team to capture the compliance automation opportunity
@@ -548,7 +548,7 @@ export const VelocityPitchDeck: React.FC = () => {
                     <div className="font-medium">VP of Sales</div>
                     <div className="text-sm text-slate-600">Enterprise B2B SaaS experience</div>
                   </div>
-                  <span className="font-bold">$180K</span>
+                  <span className="font-bold text-slate-600">Key Hire</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                   <div>
@@ -564,14 +564,14 @@ export const VelocityPitchDeck: React.FC = () => {
                     <div className="font-medium">Head of Marketing</div>
                     <div className="text-sm text-slate-600">B2B growth marketing</div>
                   </div>
-                  <span className="font-bold">$150K</span>
+                  <span className="font-bold text-slate-600">Key Hire</span>
                 </div>
                 <div className="flex justify-between items-center p-3 bg-white rounded-lg">
                   <div>
                     <div className="font-medium">Customer Success Lead</div>
                     <div className="text-sm text-slate-600">Technical implementation</div>
                   </div>
-                  <span className="font-bold">$120K</span>
+                  <span className="font-bold text-slate-600">Key Hire</span>
                 </div>
               </div>
             </div>
@@ -770,7 +770,7 @@ export const VelocityPitchDeck: React.FC = () => {
             <Card className="border-blue-200 bg-blue-50">
               <CardContent className="p-4 text-center">
                 <Clock className="h-8 w-8 mx-auto text-blue-600 mb-2" />
-                <div className="text-lg font-semibold text-blue-800">Q1 2025</div>
+                <div className="text-lg font-semibold text-blue-800">Q3 2025</div>
                 <div className="text-sm text-blue-700">
                   <p>Team scaling</p>
                   <p>Platform GA</p>
@@ -782,7 +782,7 @@ export const VelocityPitchDeck: React.FC = () => {
             <Card className="border-green-200 bg-green-50">
               <CardContent className="p-4 text-center">
                 <Target className="h-8 w-8 mx-auto text-green-600 mb-2" />
-                <div className="text-lg font-semibold text-green-800">Q2 2025</div>
+                <div className="text-lg font-semibold text-green-800">Q4 2025</div>
                 <div className="text-sm text-green-700">
                   <p>5 customers</p>
                   <p>€140K ARR</p>
@@ -794,7 +794,7 @@ export const VelocityPitchDeck: React.FC = () => {
             <Card className="border-purple-200 bg-purple-50">
               <CardContent className="p-4 text-center">
                 <TrendingUp className="h-8 w-8 mx-auto text-purple-600 mb-2" />
-                <div className="text-lg font-semibold text-purple-800">Q4 2025</div>
+                <div className="text-lg font-semibold text-purple-800">Q1 2026</div>
                 <div className="text-sm text-purple-700">
                   <p>25 customers</p>
                   <p>€580K ARR</p>
@@ -865,7 +865,7 @@ export const VelocityPitchDeck: React.FC = () => {
         <div className="space-y-6">
           <div className="text-center mb-8">
             <h2 className="text-5xl font-bold text-slate-900 mb-4">
-              €2M Seed Round
+              €500K - €2M Seed Round
             </h2>
             <p className="text-2xl text-slate-600 max-w-4xl mx-auto">
               Join us in creating the first security platform that pays for itself - transforming how European enterprises approach trust from reactive cost to proactive profit
@@ -880,7 +880,7 @@ export const VelocityPitchDeck: React.FC = () => {
               <CardContent className="space-y-4">
                 <div className="flex justify-between items-center p-4 bg-white rounded-lg">
                   <span className="text-lg">Round Size</span>
-                  <span className="text-2xl font-bold text-green-600">€2M</span>
+                  <span className="text-2xl font-bold text-green-600">€500K-€2M</span>
                 </div>
                 <div className="flex justify-between items-center p-4 bg-white rounded-lg">
                   <span className="text-lg">Pre-money Valuation</span>
@@ -1005,7 +1005,7 @@ export const VelocityPitchDeck: React.FC = () => {
                 </p>
                 <div className="flex justify-center gap-6">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">€2M</div>
+                    <div className="text-2xl font-bold text-blue-600">€500K-€2M</div>
                     <div className="text-sm text-slate-500">Seed Target</div>
                   </div>
                   <div className="text-center">
@@ -1046,7 +1046,7 @@ export const VelocityPitchDeck: React.FC = () => {
         <!DOCTYPE html>
         <html>
         <head>
-          <title>Velocity AI Seed Pitch Deck - $2M Round</title>
+          <title>Velocity AI Seed Pitch Deck - €500K-€2M Round</title>
           <style>
             body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
             .slide { page-break-after: always; margin-bottom: 50px; }
@@ -1065,10 +1065,10 @@ export const VelocityPitchDeck: React.FC = () => {
           <div class="slide">
             <h1>Velocity AI - AI Compliance Automation Platform</h1>
             <div class="highlight">
-              <h2>$2M Seed Round</h2>
+              <h2>€500K - €2M Seed Round</h2>
               <p>Accelerate Compliance with AI</p>
               <p><strong>Focus:</strong> AI Development & Market Expansion</p>
-              <p><strong>Timeline:</strong> August 2025 | San Francisco, CA</p>
+              <p><strong>Timeline:</strong> August 2025 | Stockholm, SE</p>
             </div>
           </div>
           
@@ -1156,25 +1156,25 @@ export const VelocityPitchDeck: React.FC = () => {
           </div>
 
           <div class="slide">
-            <h1>Use of Funds - $2M</h1>
+            <h1>Use of Funds - €500K - €2M</h1>
             <h2>Focus on AI Platform Scaling</h2>
             <div class="metric">
               <h3>Funding Allocation</h3>
               <ul>
-                <li><strong>AI Development:</strong> $800K (40%)</li>
-                <li><strong>Sales & Marketing:</strong> $500K (25%)</li>
-                <li><strong>Team Expansion:</strong> $400K (20%)</li>
-                <li><strong>Infrastructure:</strong> $200K (10%)</li>
-                <li><strong>Operations:</strong> $100K (5%)</li>
+                <li><strong>AI Development:</strong> €200K-€800K (40%)</li>
+                <li><strong>Sales & Marketing:</strong> €125K-€500K (25%)</li>
+                <li><strong>Team Expansion:</strong> €100K-€400K (20%)</li>
+                <li><strong>Infrastructure:</strong> €50K-€200K (10%)</li>
+                <li><strong>Operations:</strong> €25K-€100K (5%)</li>
               </ul>
             </div>
             <div class="metric">
               <h3>Key Hires (First 9 Months)</h3>
               <ul>
-                <li>VP of Sales: $180K (Enterprise B2B SaaS experience)</li>
-                <li>AI Engineers (3): $450K (ML/LLM specialization)</li>
-                <li>Head of Marketing: $150K (B2B growth marketing)</li>
-                <li>Customer Success Lead: $120K (Technical implementation)</li>
+                <li>VP of Sales (Enterprise B2B SaaS experience)</li>
+                <li>AI Engineers (3) (ML/LLM specialization)</li>
+                <li>Head of Marketing (B2B growth marketing)</li>
+                <li>Customer Success Lead (Technical implementation)</li>
               </ul>
             </div>
           </div>
@@ -1236,8 +1236,8 @@ export const VelocityPitchDeck: React.FC = () => {
           <div class="slide">
             <h1>The Ask</h1>
             <div class="highlight">
-              <h2>$2M Seed Round</h2>
-              <p><strong>Round Size:</strong> $2M</p>
+              <h2>€500K - €2M Seed Round</h2>
+              <p><strong>Round Size:</strong> €500K - €2M</p>
               <p><strong>Pre-money Valuation:</strong> $8M</p>
               <p><strong>Use of Funds:</strong> 18-month runway to Series A</p>
             </div>
@@ -1257,14 +1257,14 @@ export const VelocityPitchDeck: React.FC = () => {
             <div class="contact">
               <h2>Velocity AI Team</h2>
               <h3>Founders & Leadership</h3>
-              <p><strong>Email:</strong> investors@velocity.ai</p>
-              <p><strong>Phone:</strong> +1 (415) 555-1234</p>
+              <p><strong>Email:</strong> samuel@digitalsecurityinsights.com</p>
+              <p><strong>Phone:</strong> +46735457681</p>
               <br>
               <p><strong>Ready to transform compliance with AI</strong></p>
               <p>13 AI agents • 90% automation • Ready to scale</p>
               <br>
               <div style="display: flex; justify-content: center; gap: 40px;">
-                <div><strong>$2M</strong><br>Seed Round</div>
+                <div><strong>€500K-€2M</strong><br>Seed Round</div>
                 <div><strong>$32.8B</strong><br>Market Size</div>
                 <div><strong>60:1</strong><br>LTV/CAC</div>
               </div>
@@ -1282,7 +1282,7 @@ export const VelocityPitchDeck: React.FC = () => {
 
   const exportToWord = () => {
     const wordContent = `
-      VELOCITY AI SEED PITCH DECK - $2M ROUND
+      VELOCITY AI SEED PITCH DECK - €500K-€2M ROUND
       AI Compliance Automation Platform
       
       =====================================
@@ -1290,9 +1290,9 @@ export const VelocityPitchDeck: React.FC = () => {
       =====================================
       
       Company: Velocity AI (AI Compliance Automation Platform)
-      Round: $2M Seed Funding
+      Round: €500K - €2M Seed Funding
       Focus: AI Development & Market Expansion
-      Contact: investors@velocity.ai | +1 (415) 555-1234
+      Contact: samuel@digitalsecurityinsights.com | +46735457681
       
       =====================================
       THE PROBLEM: $50B COMPLIANCE CRISIS
@@ -1372,23 +1372,23 @@ export const VelocityPitchDeck: React.FC = () => {
       • 18 month payback period
       
       =====================================
-      USE OF FUNDS - $2M
+      USE OF FUNDS - €500K - €2M
       =====================================
       
       Focus on AI Platform Scaling
       
       FUNDING ALLOCATION:
-      • AI Development: $800K (40%)
-      • Sales & Marketing: $500K (25%)
-      • Team Expansion: $400K (20%)
-      • Infrastructure: $200K (10%)
-      • Operations: $100K (5%)
+      • AI Development: €200K-€800K (40%)
+      • Sales & Marketing: €125K-€500K (25%)
+      • Team Expansion: €100K-€400K (20%)
+      • Infrastructure: €50K-€200K (10%)
+      • Operations: €25K-€100K (5%)
       
       KEY HIRES (FIRST 9 MONTHS):
-      • VP of Sales: $180K (Enterprise B2B SaaS experience)
-      • AI Engineers (3): $450K (ML/LLM specialization)
-      • Head of Marketing: $150K (B2B growth marketing)
-      • Customer Success Lead: $120K (Technical implementation)
+      • VP of Sales (Enterprise B2B SaaS experience)
+      • AI Engineers (3) (ML/LLM specialization)
+      • Head of Marketing (B2B growth marketing)
+      • Customer Success Lead (Technical implementation)
       
       =====================================
       GO-TO-MARKET STRATEGY
@@ -1435,10 +1435,10 @@ export const VelocityPitchDeck: React.FC = () => {
       THE ASK
       =====================================
       
-      $2M SEED ROUND
+      €500K - €2M SEED ROUND
       
       INVESTMENT TERMS:
-      • Round Size: $2M
+      • Round Size: €500K - €2M
       • Pre-money Valuation: $8M
       • Use of Funds: 18-month runway to Series A
       
@@ -1455,8 +1455,8 @@ export const VelocityPitchDeck: React.FC = () => {
       Velocity AI Team
       Founders & Leadership
       
-      Email: investors@velocity.ai
-      Phone: +1 (415) 555-1234
+      Email: samuel@digitalsecurityinsights.com
+      Phone: +46735457681
       
       Ready to transform compliance with AI
       
@@ -1465,7 +1465,7 @@ export const VelocityPitchDeck: React.FC = () => {
       Ready to scale
       
       KEY METRICS:
-      • $2M Seed Round
+      • €500K - €2M Seed Round
       • $32.8B Market Size
       • 60:1 LTV/CAC Ratio
       
@@ -1493,10 +1493,10 @@ export const VelocityPitchDeck: React.FC = () => {
       Velocity AI
       AI Compliance Automation Platform
       
-      $2M Seed Round
+      €500K - €2M Seed Round
       Accelerate Compliance with AI
       
-      August 2025 | San Francisco, CA | B2B AI SaaS
+      August 2025 | Stockholm, SE | B2B AI SaaS
       
       
       SLIDE 2: THE PROBLEM
@@ -1562,19 +1562,19 @@ export const VelocityPitchDeck: React.FC = () => {
       
       SLIDE 6: USE OF FUNDS
       =====================
-      $2M to Scale AI Platform
+      €500K - €2M to Scale AI Platform
       
-      • AI Development: $800K (40%)
-      • Sales & Marketing: $500K (25%)
-      • Team Expansion: $400K (20%)
-      • Infrastructure: $200K (10%)
-      • Operations: $100K (5%)
+      • AI Development: €200K-€800K (40%)
+      • Sales & Marketing: €125K-€500K (25%)
+      • Team Expansion: €100K-€400K (20%)
+      • Infrastructure: €50K-€200K (10%)
+      • Operations: €25K-€100K (5%)
       
       KEY HIRES:
-      • VP of Sales: $180K
-      • AI Engineers (3): $450K
-      • Head of Marketing: $150K
-      • Customer Success Lead: $120K
+      • VP of Sales (Enterprise B2B SaaS experience)
+      • AI Engineers (3) (ML/LLM specialization)
+      • Head of Marketing (B2B growth marketing)
+      • Customer Success Lead (Technical implementation)
       
       
       SLIDE 7: GO-TO-MARKET
@@ -1612,10 +1612,10 @@ export const VelocityPitchDeck: React.FC = () => {
       
       SLIDE 9: THE ASK
       ================
-      $2M Seed Round
+      €500K - €2M Seed Round
       
       TERMS:
-      • Round Size: $2M
+      • Round Size: €500K - €2M
       • Pre-money: $8M
       • Timeline: 18-month runway
       
@@ -1633,14 +1633,14 @@ export const VelocityPitchDeck: React.FC = () => {
       Velocity AI Team
       Founders & Leadership
       
-      investors@velocity.ai
-      +1 (415) 555-1234
+      samuel@digitalsecurityinsights.com
+      +46735457681
       
       13 AI agents
       90% automation
       Ready to scale
       
-      $2M Seed | $32.8B Market | 60:1 LTV/CAC
+      €500K-€2M Seed | €79.2B Market | 60:1 LTV/CAC
       
       Join us in making compliance effortless with AI!
     `;
