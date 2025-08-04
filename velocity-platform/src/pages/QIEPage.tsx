@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { 
   Brain,
   Zap,
@@ -24,8 +24,222 @@ import {
   Search,
   Download,
   RefreshCw,
-  MessageSquare
+  MessageSquare,
+  ChevronDown,
+  Menu,
+  X
 } from 'lucide-react';
+
+// Velocity Header Component
+const VelocityHeader: React.FC = () => {
+  const navigate = useNavigate();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  return (
+    <header className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800/50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="flex items-center justify-between h-16">
+          {/* Logo */}
+          <Link to="/velocity" className="flex items-center gap-3">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
+            </div>
+            <div>
+              <span className="text-xl font-bold text-white font-serif">Velocity</span>
+              <div className="text-xs text-slate-400">AI Compliance Automation</div>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-8">
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Platform
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/dashboard')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">AI Agent Dashboard</div>
+                  <div className="text-xs text-slate-400">13 agents working for you</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/dashboard')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Evidence Collection</div>
+                  <div className="text-xs text-slate-400">Automated gathering</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/dashboard')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Trust Score</div>
+                  <div className="text-xs text-slate-400">Cryptographic verification</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/qie')}
+                  className="block w-full text-left px-4 py-2 text-purple-300 hover:text-purple-100 hover:bg-purple-800/30 transition-colors border-l-2 border-purple-400"
+                >
+                  <div className="font-medium">QIE Intelligence</div>
+                  <div className="text-xs text-purple-400">Questionnaire automation</div>
+                </button>
+              </div>
+            </div>
+            
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Solutions
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-64 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/velocity/solutions/soc2')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">SOC 2 Automation</div>
+                  <div className="text-xs text-slate-400">45-day audit readiness</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/iso27001')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">ISO 27001 Automation</div>
+                  <div className="text-xs text-slate-400">ISMS implementation</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/solutions/gdpr')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">GDPR Automation</div>
+                  <div className="text-xs text-slate-400">Data protection compliance</div>
+                </button>
+              </div>
+            </div>
+
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Resources
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/velocity/resources')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Compliance Guides</div>
+                  <div className="text-xs text-slate-400">Best practices & frameworks</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/docs')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Documentation</div>
+                  <div className="text-xs text-slate-400">Complete platform docs</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/case-studies')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Case Studies</div>
+                  <div className="text-xs text-slate-400">Customer success stories</div>
+                </button>
+              </div>
+            </div>
+
+            <div className="relative group">
+              <button className="text-slate-300 hover:text-white transition-colors flex items-center gap-1">
+                Company
+                <ChevronDown className="w-4 h-4" />
+              </button>
+              <div className="absolute top-full left-0 mt-2 w-56 bg-slate-800/95 backdrop-blur-md rounded-lg shadow-xl border border-slate-700/50 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+                <button 
+                  onClick={() => navigate('/velocity/pitch-deck')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">Investor Pitch Deck</div>
+                  <div className="text-xs text-slate-400">Seed round presentation</div>
+                </button>
+                <button 
+                  onClick={() => navigate('/velocity/about')}
+                  className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white hover:bg-slate-700/50 transition-colors"
+                >
+                  <div className="font-medium">About Us</div>
+                  <div className="text-xs text-slate-400">Our mission & team</div>
+                </button>
+              </div>
+            </div>
+          </nav>
+
+          {/* Right side actions */}
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => navigate('/velocity/login')}
+              className="hidden lg:block text-slate-300 hover:text-white transition-colors"
+            >
+              Sign In
+            </button>
+            <button 
+              onClick={() => navigate('/dashboard')}
+              className="px-4 py-2 bg-gradient-to-r from-emerald-500 to-amber-500 text-white rounded-lg font-medium hover:from-emerald-600 hover:to-amber-600 transition-all duration-300"
+            >
+              Get Started
+            </button>
+            
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-slate-400 hover:text-white"
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden py-4 border-t border-slate-800">
+            <div className="space-y-2">
+              <button 
+                onClick={() => { navigate('/dashboard'); setMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white"
+              >
+                Dashboard
+              </button>
+              <button 
+                onClick={() => { navigate('/velocity/qie'); setMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-2 text-purple-300 hover:text-purple-100"
+              >
+                QIE Intelligence
+              </button>
+              <button 
+                onClick={() => { navigate('/velocity/solutions/soc2'); setMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white"
+              >
+                Solutions
+              </button>
+              <button 
+                onClick={() => { navigate('/velocity/resources'); setMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white"
+              >
+                Resources
+              </button>
+              <button 
+                onClick={() => { navigate('/velocity/login'); setMobileMenuOpen(false); }}
+                className="block w-full text-left px-4 py-2 text-slate-300 hover:text-white"
+              >
+                Sign In
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
 
 // Trust Score Animation Component
 const QIETrustScore = () => {
@@ -222,9 +436,12 @@ const QIEPage: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-purple-950">
-      {/* Header */}
-      <header className="bg-slate-900/50 backdrop-blur-xl border-b border-white/10 sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      {/* Velocity Header */}
+      <VelocityHeader />
+      
+      {/* Breadcrumb/Page Header */}
+      <div className="pt-20 pb-4 bg-slate-900/50 backdrop-blur-xl border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
               <button
@@ -258,7 +475,7 @@ const QIEPage: React.FC = () => {
             </div>
           </div>
         </div>
-      </header>
+      </div>
 
       {/* Hero Section */}
       <div className="relative overflow-hidden">
