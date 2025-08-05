@@ -85,19 +85,19 @@ const VelocityPricing: React.FC = () => {
           'Custom workflows'
         ]
       },
-      scale: {
-        name: "Velocity Scale",
+      enterprise: {
+        name: "Velocity Enterprise",
         pricing: {
-          monthly: 4999,
-          annual: 47999,
-          annual_discount: 20
+          monthly: 0, // Custom pricing
+          annual: 0, // Custom pricing
+          annual_discount: 0
         },
         limits: {
           users: 'unlimited',
           frameworks: 'all',
-          evidence_items: 50000,
-          api_calls: 500000,
-          storage_gb: 2000
+          evidence_items: 'unlimited',
+          api_calls: 'unlimited',
+          storage_gb: 'unlimited'
         },
         support: ['email', 'chat', 'phone', 'dedicated'],
         features: [
@@ -110,7 +110,10 @@ const VelocityPricing: React.FC = () => {
           'Proactive alerts',
           'Custom integrations',
           'Dedicated CSM',
-          'White-glove onboarding'
+          'White-glove onboarding',
+          'Custom compliance frameworks',
+          'On-premise deployment',
+          'Professional services'
         ]
       }
     };
