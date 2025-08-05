@@ -41,7 +41,11 @@ interface CompanyProfile {
   complianceNeeds: string[];
 }
 
-export const OnboardingWizard: React.FC = () => {
+interface OnboardingWizardProps {
+  onComplete?: () => void;
+}
+
+export const OnboardingWizard: React.FC<OnboardingWizardProps> = ({ onComplete }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [profile, setProfile] = useState<CompanyProfile>({
     name: '',
@@ -128,6 +132,9 @@ export const OnboardingWizard: React.FC = () => {
     
     if (currentStep < steps.length - 1) {
       setCurrentStep(currentStep + 1);
+    } else {
+      // Onboarding completed
+      onComplete?.();
     }
     
     setIsLoading(false);

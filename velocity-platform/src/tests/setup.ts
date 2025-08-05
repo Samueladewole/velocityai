@@ -5,6 +5,7 @@
 
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
+import React from 'react'
 
 // Mock environment variables
 vi.mock('process', () => ({
@@ -47,9 +48,8 @@ vi.mock('react-router-dom', () => ({
   BrowserRouter: ({ children }: { children: React.ReactNode }) => children,
   Routes: ({ children }: { children: React.ReactNode }) => children,
   Route: ({ element }: { element: React.ReactNode }) => element,
-  Link: ({ children, to }: { children: React.ReactNode; to: string }) => (
-    <a href={to}>{children}</a>
-  )
+  Link: ({ children, to }: { children: React.ReactNode; to: string }) => 
+    React.createElement('a', { href: to }, children)
 }))
 
 // Mock WebSocket

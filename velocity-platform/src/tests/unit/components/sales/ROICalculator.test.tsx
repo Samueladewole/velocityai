@@ -7,7 +7,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { ROICalculator } from '@/components/sales/ROICalculator'
-import { createMockResponse } from '../../setup'
+import { createMockResponse } from '../../../setup'
 
 describe('ROICalculator', () => {
   const user = userEvent.setup()

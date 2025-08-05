@@ -13,9 +13,9 @@ interface TierConfig {
   limits: {
     users: number | string;
     frameworks: number | string;
-    evidence_items: number;
-    api_calls: number;
-    storage_gb: number;
+    evidence_items: number | string;
+    api_calls: number | string;
+    storage_gb: number | string;
   };
   support: string[];
   features: string[];
@@ -142,7 +142,7 @@ const VelocityPricing: React.FC = () => {
     const icons = {
       starter: <Zap className="w-8 h-8 text-purple-600" />,
       growth: <Shield className="w-8 h-8 text-blue-600" />,
-      scale: <Target className="w-8 h-8 text-green-600" />
+      enterprise: <Target className="w-8 h-8 text-green-600" />
     };
     return icons[tierKey as keyof typeof icons];
   };
@@ -151,7 +151,7 @@ const VelocityPricing: React.FC = () => {
     const colors = {
       starter: 'border-purple-200 hover:border-purple-300',
       growth: 'border-blue-200 hover:border-blue-300 ring-2 ring-blue-500',
-      scale: 'border-green-200 hover:border-green-300'
+      enterprise: 'border-green-200 hover:border-green-300'
     };
     return colors[tierKey as keyof typeof colors];
   };
@@ -160,7 +160,7 @@ const VelocityPricing: React.FC = () => {
     const colors = {
       starter: 'bg-purple-600 hover:bg-purple-700',
       growth: 'bg-blue-600 hover:bg-blue-700',
-      scale: 'bg-green-600 hover:bg-green-700'
+      enterprise: 'bg-green-600 hover:bg-green-700'
     };
     return colors[tierKey as keyof typeof colors];
   };
@@ -244,18 +244,26 @@ const VelocityPricing: React.FC = () => {
                     {tier.name}
                   </h3>
                   <div className="mb-4">
-                    <span className="text-4xl font-bold text-gray-900">
-                      {formatPrice(
-                        billingPeriod === 'monthly' 
-                          ? tier.pricing.monthly 
-                          : tier.pricing.annual / 12
-                      )}
-                    </span>
-                    <span className="text-gray-600 ml-2">
-                      /{billingPeriod === 'monthly' ? 'month' : 'month, billed annually'}
-                    </span>
+                    {tier.pricing.monthly === 0 ? (
+                      <span className="text-4xl font-bold text-gray-900">
+                        Custom pricing
+                      </span>
+                    ) : (
+                      <>
+                        <span className="text-4xl font-bold text-gray-900">
+                          {formatPrice(
+                            billingPeriod === 'monthly' 
+                              ? tier.pricing.monthly 
+                              : tier.pricing.annual / 12
+                          )}
+                        </span>
+                        <span className="text-gray-600 ml-2">
+                          /{billingPeriod === 'monthly' ? 'month' : 'month, billed annually'}
+                        </span>
+                      </>
+                    )}
                   </div>
-                  {billingPeriod === 'annual' && (
+                  {billingPeriod === 'annual' && tier.pricing.monthly > 0 && (
                     <div className="text-sm text-green-600 font-medium">
                       Save {formatPrice(tier.pricing.monthly * 12 - tier.pricing.annual)} per year
                     </div>
@@ -284,11 +292,21 @@ const VelocityPricing: React.FC = () => {
                   </div>
                   <div className="flex items-center text-gray-700">
                     <Database className="w-5 h-5 mr-3 text-gray-400" />
-                    <span>{tier.limits.evidence_items.toLocaleString()} evidence items</span>
+                    <span>
+                      {typeof tier.limits.evidence_items === 'number'
+                        ? `${tier.limits.evidence_items.toLocaleString()} evidence items`
+                        : 'Unlimited evidence items'
+                      }
+                    </span>
                   </div>
                   <div className="flex items-center text-gray-700">
                     <Cloud className="w-5 h-5 mr-3 text-gray-400" />
-                    <span>{tier.limits.storage_gb}GB storage</span>
+                    <span>
+                      {typeof tier.limits.storage_gb === 'number'
+                        ? `${tier.limits.storage_gb}GB storage`
+                        : 'Unlimited storage'
+                      }
+                    </span>
                   </div>
                   <div className="flex items-center text-gray-700">
                     <Headphones className="w-5 h-5 mr-3 text-gray-400" />
@@ -355,7 +373,7 @@ const VelocityPricing: React.FC = () => {
                       Growth
                     </th>
                     <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Scale
+                      Enterprise
                     </th>
                   </tr>
                 </thead>

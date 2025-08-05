@@ -419,7 +419,7 @@ const VelocitySignup: React.FC = () => {
                   <div className="grid grid-cols-3 gap-3">
                     <button
                       type="button"
-                      onClick={() => window.location.href = '/api/auth/sso/okta'}
+                      onClick={() => window.location.href = '/api/auth/sso/okta?redirectUri=' + encodeURIComponent(window.location.origin + '/velocity/sso-callback')}
                       className="inline-flex justify-center items-center py-2 px-4 border border-white/20 rounded-lg bg-white/10 text-sm font-medium text-white hover:bg-white/20 transition-colors"
                     >
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -430,7 +430,7 @@ const VelocitySignup: React.FC = () => {
                     
                     <button
                       type="button"
-                      onClick={() => window.location.href = '/api/auth/sso/azure'}
+                      onClick={() => window.location.href = '/api/auth/sso/azure?redirectUri=' + encodeURIComponent(window.location.origin + '/velocity/sso-callback')}
                       className="inline-flex justify-center items-center py-2 px-4 border border-white/20 rounded-lg bg-white/10 text-sm font-medium text-white hover:bg-white/20 transition-colors"
                     >
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -441,7 +441,7 @@ const VelocitySignup: React.FC = () => {
                     
                     <button
                       type="button"
-                      onClick={() => window.location.href = '/api/auth/sso/google'}
+                      onClick={() => window.location.href = '/api/auth/sso/google?redirectUri=' + encodeURIComponent(window.location.origin + '/velocity/sso-callback')}
                       className="inline-flex justify-center items-center py-2 px-4 border border-white/20 rounded-lg bg-white/10 text-sm font-medium text-white hover:bg-white/20 transition-colors"
                     >
                       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

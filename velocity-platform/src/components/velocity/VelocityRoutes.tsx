@@ -6,6 +6,7 @@ import VelocityLandingComplete from './VelocityLandingComplete';
 import VelocityDashboardComplete from './VelocityDashboardComplete';
 import VelocityHeader from './VelocityHeader';
 import VelocitySignup from './VelocitySignup';
+import VelocitySSOCallback from './VelocitySSOCallback';
 import CustomerImpactShowcase from './CustomerImpactShowcase';
 import ROIMetricsDashboard from './ROIMetricsDashboard';
 import CompetitiveAdvantageShowcase from './CompetitiveAdvantageShowcase';
@@ -893,6 +894,7 @@ const VelocityRoutes: React.FC = () => {
       {/* Auth routes - No layout needed */}
       <Route path="/velocity/login" element={<Login />} />
       <Route path="/velocity/signup" element={<VelocitySignup />} />
+      <Route path="/velocity/sso-callback" element={<VelocitySSOCallback />} />
       
       {/* Dashboard routes - Protected unified dashboard */}
       <Route path="/dashboard" element={

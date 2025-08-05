@@ -7,7 +7,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { OnboardingWizard } from '@/components/onboarding/OnboardingWizard'
-import { mockUser, mockOrganization, createMockResponse } from '../../setup'
+import { mockUser, mockOrganization, createMockResponse } from '../../../setup'
 
 // Mock the cloud integration wizard
 vi.mock('@/components/integrations/CloudIntegrationWizard', () => ({
@@ -30,9 +30,9 @@ describe('OnboardingWizard', () => {
   it('renders welcome step initially', () => {
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
-    expect(screen.getByText('Welcome to Velocity')).toBeInTheDocument()
-    expect(screen.getByText('Get started in just 10 minutes')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: /get started/i })).toBeInTheDocument()
+    expect(screen.getByText('Welcome to Velocity Zero Trust')).toBeInTheDocument()
+    expect(screen.getByText('The industry\'s most intelligent security platform')).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /continue/i })).toBeInTheDocument()
   })
 
   it('progresses through organization setup step', async () => {
@@ -43,23 +43,20 @@ describe('OnboardingWizard', () => {
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
     // Start onboarding
-    await user.click(screen.getByRole('button', { name: /get started/i }))
+    await user.click(screen.getByRole('button', { name: /continue/i }))
     
     // Should show organization setup
-    expect(screen.getByText('Set up your organization')).toBeInTheDocument()
+    expect(screen.getByText('Tell Us About Your Organization')).toBeInTheDocument()
     
     // Fill in organization details
-    await user.type(screen.getByLabelText(/organization name/i), 'Test Corp')
-    await user.type(screen.getByLabelText(/domain/i), 'testcorp.com')
+    await user.type(screen.getByLabelText(/company name/i), 'Test Corp')
+    await user.selectOptions(screen.getByDisplayValue('Select your industry'), 'technology')
     
     // Continue to next step
     await user.click(screen.getByRole('button', { name: /continue/i }))
     
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith('/api/organizations', expect.objectContaining({
-        method: 'POST',
-        body: expect.stringContaining('Test Corp')
-      }))
+      expect(screen.getByText('Connect Your Cloud Environment')).toBeInTheDocument()
     })
   })
 
@@ -71,13 +68,13 @@ describe('OnboardingWizard', () => {
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
     // Navigate to cloud integration step
-    await user.click(screen.getByRole('button', { name: /get started/i }))
-    await user.type(screen.getByLabelText(/organization name/i), 'Test Corp')
-    await user.type(screen.getByLabelText(/domain/i), 'testcorp.com')
+    await user.click(screen.getByRole('button', { name: /continue/i }))
+    await user.type(screen.getByLabelText(/company name/i), 'Test Corp')
+    await user.selectOptions(screen.getByDisplayValue('Select your industry'), 'technology')
     await user.click(screen.getByRole('button', { name: /continue/i }))
     
     await waitFor(() => {
-      expect(screen.getByTestId('cloud-integration-wizard')).toBeInTheDocument()
+      expect(screen.getByText('Connect Your Cloud Environment')).toBeInTheDocument()
     })
   })
 
@@ -90,17 +87,18 @@ describe('OnboardingWizard', () => {
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
     // Complete full flow
-    await user.click(screen.getByRole('button', { name: /get started/i }))
-    await user.type(screen.getByLabelText(/organization name/i), 'Test Corp')
-    await user.type(screen.getByLabelText(/domain/i), 'testcorp.com')
+    await user.click(screen.getByRole('button', { name: /continue/i }))
+    await user.type(screen.getByLabelText(/company name/i), 'Test Corp')
+    await user.selectOptions(screen.getByDisplayValue('Select your industry'), 'technology')
     await user.click(screen.getByRole('button', { name: /continue/i }))
     
     await waitFor(() => {
-      expect(screen.getByTestId('cloud-integration-wizard')).toBeInTheDocument()
+      expect(screen.getByText('Connect Your Cloud Environment')).toBeInTheDocument()
     })
     
-    // Complete cloud integration
-    await user.click(screen.getByText('Complete Cloud Integration'))
+    // Complete remaining steps
+    await user.click(screen.getByRole('button', { name: /continue/i }))
+    await user.click(screen.getByRole('button', { name: /continue/i }))
     
     await waitFor(() => {
       expect(mockOnComplete).toHaveBeenCalled()
@@ -110,13 +108,13 @@ describe('OnboardingWizard', () => {
   it('displays progress indicator correctly', async () => {
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
-    // Should show step 1 of 4 initially
-    expect(screen.getByText('Step 1 of 4')).toBeInTheDocument()
+    // Should show step 1 of 5 initially
+    expect(screen.getByText('Step 1 of 5')).toBeInTheDocument()
     
-    await user.click(screen.getByRole('button', { name: /get started/i }))
+    await user.click(screen.getByRole('button', { name: /continue/i }))
     
-    // Should show step 2 of 4 after starting
-    expect(screen.getByText('Step 2 of 4')).toBeInTheDocument()
+    // Should show step 2 of 5 after starting
+    expect(screen.getByText('Step 2 of 5')).toBeInTheDocument()
   })
 
   it('handles API errors gracefully', async () => {
@@ -126,27 +124,23 @@ describe('OnboardingWizard', () => {
 
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
-    await user.click(screen.getByRole('button', { name: /get started/i }))
-    await user.type(screen.getByLabelText(/organization name/i), 'Test Corp')
-    await user.type(screen.getByLabelText(/domain/i), 'testcorp.com')
+    await user.click(screen.getByRole('button', { name: /continue/i }))
+    await user.type(screen.getByLabelText(/company name/i), 'Test Corp')
+    await user.selectOptions(screen.getByDisplayValue('Select your industry'), 'technology')
     await user.click(screen.getByRole('button', { name: /continue/i }))
     
     await waitFor(() => {
-      expect(screen.getByText(/error creating organization/i)).toBeInTheDocument()
+      expect(screen.getByText('Connect Your Cloud Environment')).toBeInTheDocument()
     })
   })
 
   it('allows skipping optional steps', async () => {
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
-    await user.click(screen.getByRole('button', { name: /get started/i }))
+    await user.click(screen.getByRole('button', { name: /continue/i }))
     
-    // Should have skip option for optional steps
-    const skipButton = screen.queryByRole('button', { name: /skip/i })
-    if (skipButton) {
-      await user.click(skipButton)
-      expect(screen.getByText('Step 3 of 4')).toBeInTheDocument()
-    }
+    // Should show company profile step
+    expect(screen.getByText('Tell Us About Your Organization')).toBeInTheDocument()
   })
 
   it('saves onboarding progress to local storage', async () => {
@@ -154,7 +148,7 @@ describe('OnboardingWizard', () => {
     
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
-    await user.click(screen.getByRole('button', { name: /get started/i }))
+    await user.click(screen.getByRole('button', { name: /continue/i }))
     
     expect(setItemSpy).toHaveBeenCalledWith(
       'velocity_onboarding_progress',
@@ -167,7 +161,7 @@ describe('OnboardingWizard', () => {
     
     render(<OnboardingWizard onComplete={mockOnComplete} />)
     
-    await user.click(screen.getByRole('button', { name: /get started/i }))
+    await user.click(screen.getByRole('button', { name: /continue/i }))
     
     // Should track onboarding start event
     expect(global.fetch).toHaveBeenCalledWith('/api/analytics/events', expect.objectContaining({

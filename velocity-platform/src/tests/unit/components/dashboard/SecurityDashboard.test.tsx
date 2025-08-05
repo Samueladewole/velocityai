@@ -7,7 +7,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { SecurityDashboard } from '@/components/dashboard/SecurityDashboard'
-import { mockUser, mockTrustScore, createMockResponse } from '../../setup'
+import { mockUser, mockTrustScore, createMockResponse } from '../../../setup'
 
 // Mock child components
 vi.mock('@/components/shared/StatCard', () => ({
