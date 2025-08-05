@@ -11,6 +11,13 @@
 ### **Day 1 - Monday** 📱
 
 **Morning Thread (8 AM PST):**
+
+**Visual**: Split image showing:
+- Left: Person drowning in spreadsheets and papers
+- Right: Person calmly pointing to screen saying "Here's your evidence"
+- Text overlay: "3 months → 3 minutes"
+*Format: 1200x675px, dramatic before/after*
+
 ```
 🧵 Hot take: Most "compliance automation" tools are just fancy spreadsheets with APIs.
 
@@ -664,3 +671,286 @@ Now let's go make compliance suck less for everyone.
 ---
 
 *Focus on being helpful, authentic, and occasionally controversial to drive real conversations about transforming the compliance industry.*
+
+---
+
+## 🎨 **TWITTER VISUAL STRATEGY**
+
+### **Platform-Specific Visual Guidelines**
+
+#### **Twitter Image Specs:**
+- **Single images**: 1200x675px (16:9 ratio)
+- **Twitter Cards**: 800x418px  
+- **GIFs**: Under 15MB, 3-10 seconds max
+- **Aspect ratios**: 16:9, 1:1, or 2:1 work best
+- **Mobile optimization**: 80% of users on mobile
+
+#### **Visual Types for Twitter**
+
+#### **1. Thread Header Images**
+```
+Purpose: Stop the scroll for thread content
+Size: 1200x675px
+Style: Bold statement, minimal text
+Elements: Hook visual + thread topic
+Example: "🧵 Thread: Why 90% of compliance AI is fake"
+```
+
+#### **2. Quick Stat Cards**
+```
+Purpose: Single impactful statistic
+Size: 1080x1080px (square)
+Style: Large number, minimal design
+Elements: Big stat + context
+Example: "94% automation" with small competitor comparison
+```
+
+#### **3. Meme Templates**
+```
+Purpose: Viral, relatable content
+Size: 1080x1080px
+Style: Popular meme formats adapted
+Elements: Compliance-specific humor
+Example: Drake meme with manual vs automated compliance
+```
+
+#### **4. Screenshot Highlights**
+```
+Purpose: Show real product functionality
+Size: Native screenshot cropped to 1200x675px
+Style: Clean, annotated
+Elements: Real UI with callouts
+Example: Dashboard screenshot with "This took 15 minutes" annotation
+```
+
+#### **5. Quote Graphics**
+```
+Purpose: Share customer testimonials
+Size: 1080x1080px
+Style: Clean, branded
+Elements: Quote + attribution + Velocity logo
+Example: Customer quote with "Anonymous CTO" attribution
+```
+
+### **Twitter-Specific Visual Best Practices**
+
+#### **Engagement Optimization:**
+- **First impression**: Image shows in preview - make it count
+- **Text overlay**: Keep minimal (Twitter shows text below)
+- **Color psychology**: Red/orange for pain, green for solution
+- **Authenticity**: Real screenshots > stock photos
+
+#### **Algorithm Considerations:**
+- **Native uploads**: Better reach than links to external images
+- **Image quality**: High resolution, good compression
+- **Engagement bait**: Visual questions work well
+- **Thread integration**: Header image sets expectation
+
+### **Week-by-Week Visual Themes**
+
+#### **Week 1: Pain & Relatability**
+**Visual Style**: Chaotic, messy, "This is me" feeling
+```
+Color palette: Reds, oranges, stress colors
+Examples:
+- Messy desktop screenshots
+- Overwhelming spreadsheet views  
+- Stressed person memes
+- "Before" state visuals
+```
+
+#### **Week 2: Education & Authority**
+**Visual Style**: Clean, professional, technical credibility
+```
+Color palette: Blues, whites, professional
+Examples:
+- Architecture diagrams
+- Comparison charts
+- Process flow visuals
+- Technical deep-dive graphics
+```
+
+#### **Week 3: Social Proof & Success**
+**Visual Style**: Testimonials, growth, achievement
+```
+Color palette: Greens, golds, success indicators
+Examples:
+- Customer quote cards
+- Growth metric charts
+- Before/after comparisons
+- Success story visuals
+```
+
+#### **Week 4: Product & Action**
+**Visual Style**: Product shots, CTAs, urgency
+```
+Color palette: Velocity brand colors
+Examples:
+- Product screenshots
+- Demo GIFs
+- Pricing cards
+- CTA buttons and urgency indicators
+```
+
+### **High-Performing Visual Formats**
+
+#### **The "Comparison Tweet"**
+```
+Image: Split screen comparison
+Left: "Manual compliance" (chaos)
+Right: "AI compliance" (calm)
+Text: "Which side are you on?"
+Performance: 25% higher engagement
+```
+
+#### **The "Behind the Scenes"**
+```
+Image: Authentic workspace/building shots
+Style: iPhone photo, not professional
+Text: "Building the future of compliance..."
+Performance: 30% higher engagement (authenticity)
+```
+
+#### **The "Data Visualization"**
+```
+Image: Simple chart/graph
+Data: Real metrics (time saved, cost reduction)
+Style: Clean, easy to understand on mobile
+Performance: 40% higher retweet rate
+```
+
+#### **The "Meme Integration"**
+```
+Image: Popular meme format
+Text: Compliance-specific adaptation
+Style: Insider humor for industry
+Performance: 60% higher viral potential
+```
+
+### **Visual Content Calendar Integration**
+
+#### **Daily Visual Planning:**
+```
+Morning thread: Header image + hook
+Midday engagement: Stat card or meme
+Afternoon: Screenshot or testimonial
+Evening: Behind-the-scenes or lighter content
+```
+
+#### **Content Batching Strategy:**
+```
+Sunday prep: Create week's header images
+Daily: 15 minutes for daily visual selection
+Real-time: Screenshot/meme creation for trending topics
+```
+
+### **Twitter Visual Tools & Workflow**
+
+#### **Quick Creation Tools:**
+- **Canva**: Twitter templates and quick edits
+- **Figma**: Custom branded templates
+- **Screenshot tools**: For authentic product shots
+- **GIF makers**: LICEcap, CloudApp for demos
+
+#### **Mobile-First Creation:**
+- **Test on phone**: Preview how it looks in Twitter app
+- **Thumb-stopping**: Does it stop the scroll?
+- **Readability**: Can you read text without zooming?
+- **Load time**: Fast loading for better engagement
+
+### **Advanced Twitter Visual Tactics**
+
+#### **The "Thread Teaser"**
+```
+Tweet 1: Hook with compelling visual
+Tweet 2-5: Build up without revealing solution
+Tweet 6: Visual showing the "reveal"
+Tweet 7: CTA or question for engagement
+```
+
+#### **The "Real-Time Screenshot"**
+```
+Screenshot something happening right now
+Add timestamp or "live" indicator
+Share immediately while it's relevant
+Example: "Just helped customer save 400 hours" + dashboard screenshot
+```
+
+#### **The "Interactive Visual"**
+```
+Create images that invite interaction
+"Which option would you choose?"
+"Can you spot the difference?"
+"What's wrong with this picture?"
+```
+
+### **Measuring Twitter Visual Performance**
+
+#### **Key Metrics to Track:**
+```
+Impressions by visual type
+Engagement rate (likes, retweets, comments)
+Click-through rate on visual posts
+Save/bookmark rate
+Profile visits from visual content
+```
+
+#### **A/B Testing Framework:**
+```
+Same tweet text, different visuals
+With/without text overlay on images
+Different color schemes for same message
+Static image vs GIF for same content
+Professional vs authentic photo styles
+```
+
+#### **Success Benchmarks:**
+```
+Visual tweets: 50% higher engagement than text-only
+Thread headers: >5K impressions, >3% engagement
+Memes: >25 retweets for viral potential
+Screenshots: >100 profile visits
+Quote graphics: >50 comments/discussion
+```
+
+### **Crisis/Real-Time Visual Response**
+
+#### **Trending Topic Integration:**
+```
+Monitor compliance/AI trending hashtags
+Create quick visual responses to industry news
+Screenshot and comment on competitor announcements
+Share real-time customer wins with proof
+```
+
+#### **Controversy Management:**
+```
+If negative feedback: Don't create defensive visuals
+If misunderstanding: Create clarifying infographic
+If attack: Respond with data visualization proof
+If praise: Screenshot and share (with permission)
+```
+
+### **Visual Content Repurposing**
+
+#### **Multi-Platform Strategy:**
+```
+Twitter thread header → LinkedIn article header
+Twitter stat card → LinkedIn carousel slide
+Twitter meme → LinkedIn post adaptation
+Twitter screenshot → Instagram story
+```
+
+#### **Long-Term Visual Assets:**
+```
+Build library of reusable templates
+Create seasonal variations of successful visuals
+Develop signature visual style/brand recognition
+Archive high-performing visuals for inspiration
+```
+
+---
+
+**Twitter Visual Success Formula: Authentic + Helpful + Visually Striking + Mobile-Optimized = Engagement**
+
+*Remember: Twitter moves fast. Your visuals need to stop the scroll in the first 0.5 seconds or they're invisible.*
