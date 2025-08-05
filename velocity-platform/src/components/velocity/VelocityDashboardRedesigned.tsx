@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import VelocityFooter from './VelocityFooter';
 import { 
   Shield, 
   TrendingUp, 
@@ -1038,7 +1037,6 @@ const VelocityDashboard: React.FC = () => {
         </div>
       </div>
 
-      <VelocityFooter />
 
       <style jsx>{`
         @keyframes blob {

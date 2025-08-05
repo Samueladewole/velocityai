@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store';
+import { PublicHeader, PublicFooter } from './SharedComponents';
 import VelocityLandingComplete from './VelocityLandingComplete';
 import VelocityDashboardComplete from './VelocityDashboardComplete';
 import VelocityHeader from './VelocityHeader';
-import VelocityFooter from './VelocityFooter';
 import VelocitySignup from './VelocitySignup';
 import CustomerImpactShowcase from './CustomerImpactShowcase';
 import ROIMetricsDashboard from './ROIMetricsDashboard';
 import CompetitiveAdvantageShowcase from './CompetitiveAdvantageShowcase';
 import AgentDashboard from '../../pages/AgentDashboard';
+import ComplianceAssessmentPage from '../../pages/ComplianceAssessmentPage';
 import UnifiedDashboard from '../../pages/UnifiedDashboard';
 import SOC2Page from '../../pages/solutions/SOC2Page';
 import ISO27001Page from '../../pages/solutions/ISO27001Page';
@@ -813,10 +814,18 @@ const Login = () => {
   );
 };
 
-// Public Layout for landing and marketing pages (no header/footer)
-const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+// Public Layout for landing and marketing pages (with shared header and footer)
+const PublicLayout: React.FC<{ children: React.ReactNode; showHeader?: boolean; showFooter?: boolean }> = ({ 
+  children, 
+  showHeader = true,
+  showFooter = true 
+}) => (
   <div className="min-h-screen">
-    {children}
+    {showHeader && <PublicHeader />}
+    <div className={showHeader ? "pt-16" : ""}>
+      {children}
+    </div>
+    {showFooter && <PublicFooter />}
   </div>
 );
 
@@ -830,7 +839,6 @@ const DashboardLayout: React.FC<{ children: React.ReactNode; showFooter?: boolea
     <main className="pt-16">
       {children}
     </main>
-    {showFooter && <VelocityFooter />}
   </div>
 );
 
@@ -838,27 +846,27 @@ const DashboardLayout: React.FC<{ children: React.ReactNode; showFooter?: boolea
 const VelocityRoutes: React.FC = () => {
   return (
     <Routes>
-      {/* Public routes - No header/footer */}
+      {/* Public routes - Landing page has its own header/footer */}
       <Route path="/" element={
-        <PublicLayout>
+        <PublicLayout showHeader={false} showFooter={false}>
           <VelocityLandingComplete />
         </PublicLayout>
       } />
       <Route path="/velocity" element={
-        <PublicLayout>
+        <PublicLayout showHeader={false} showFooter={false}>
           <VelocityLandingComplete />
         </PublicLayout>
       } />
       <Route path="/velocity/" element={
-        <PublicLayout>
+        <PublicLayout showHeader={false} showFooter={false}>
           <VelocityLandingComplete />
         </PublicLayout>
       } />
       
-      {/* Assessment and Demo - Public pages */}
+      {/* Assessment and Demo - Public pages with their own header/footer */}
       <Route path="/velocity/assessment" element={
-        <PublicLayout>
-          <ComplianceAssessment />
+        <PublicLayout showHeader={false} showFooter={false}>
+          <ComplianceAssessmentPage />
         </PublicLayout>
       } />
       <Route path="/velocity/demo" element={
@@ -922,19 +930,63 @@ const VelocityRoutes: React.FC = () => {
       } />
       
       {/* Platform routes - Public pages */}
-      <Route path="/platform/overview" element={<PlatformOverview />} />
-      <Route path="/platform/dashboard" element={<Dashboard />} />
-      <Route path="/platform/evidence-collection" element={<EvidenceCollection />} />
-      <Route path="/platform/trust-score" element={<TrustScore />} />
-      <Route path="/platform/qie" element={<QIE />} />
+      <Route path="/platform/overview" element={
+        <PublicLayout>
+          <PlatformOverview />
+        </PublicLayout>
+      } />
+      <Route path="/platform/features" element={
+        <PublicLayout>
+          <Dashboard />
+        </PublicLayout>
+      } />
+      <Route path="/platform/evidence-collection" element={
+        <PublicLayout>
+          <EvidenceCollection />
+        </PublicLayout>
+      } />
+      <Route path="/platform/trust-score" element={
+        <PublicLayout>
+          <TrustScore />
+        </PublicLayout>
+      } />
+      <Route path="/platform/qie" element={
+        <PublicLayout>
+          <QIE />
+        </PublicLayout>
+      } />
       
       {/* Industry routes - Public pages */}
-      <Route path="/industries/financial-services" element={<FinancialServices />} />
-      <Route path="/industries/healthcare" element={<Healthcare />} />
-      <Route path="/industries/saas" element={<SaaS />} />
-      <Route path="/industries/manufacturing" element={<Manufacturing />} />
-      <Route path="/industries/government" element={<Government />} />
-      <Route path="/industries/energy" element={<Energy />} />
+      <Route path="/industries/financial-services" element={
+        <PublicLayout>
+          <FinancialServices />
+        </PublicLayout>
+      } />
+      <Route path="/industries/healthcare" element={
+        <PublicLayout>
+          <Healthcare />
+        </PublicLayout>
+      } />
+      <Route path="/industries/saas" element={
+        <PublicLayout>
+          <SaaS />
+        </PublicLayout>
+      } />
+      <Route path="/industries/manufacturing" element={
+        <PublicLayout>
+          <Manufacturing />
+        </PublicLayout>
+      } />
+      <Route path="/industries/government" element={
+        <PublicLayout>
+          <Government />
+        </PublicLayout>
+      } />
+      <Route path="/industries/energy" element={
+        <PublicLayout>
+          <Energy />
+        </PublicLayout>
+      } />
       
       {/* Solutions routes - Public marketing pages */}
       <Route path="/velocity/solutions/soc2" element={
@@ -1074,20 +1126,30 @@ const VelocityRoutes: React.FC = () => {
           <PlaceholderPage title="System Status" description="Real-time system status and uptime monitoring" />
         </PublicLayout>
       } />
-      <Route path="/case-studies" element={<CaseStudies />} />
+      <Route path="/case-studies" element={
+        <PublicLayout>
+          <CaseStudies />
+        </PublicLayout>
+      } />
       <Route path="/velocity/case-studies" element={
         <PublicLayout>
           <PlaceholderPage title="Case Studies" description="Success stories from our customers" />
         </PublicLayout>
       } />
-      <Route path="/calculators/roi" element={<ROICalculator />} />
+      <Route path="/calculators/roi" element={
+        <PublicLayout>
+          <ROICalculator />
+        </PublicLayout>
+      } />
       <Route path="/calculators/banking-roi" element={
         <PublicLayout>
           <BankingROIDemo />
         </PublicLayout>
       } />
       <Route path="/calculators/gdpr-roi" element={
-        <PlaceholderPage title="GDPR ROI Calculator" description="Calculate GDPR compliance savings" />
+        <PublicLayout>
+          <PlaceholderPage title="GDPR ROI Calculator" description="Calculate GDPR compliance savings" />
+        </PublicLayout>
       } />
       <Route path="/velocity/blog" element={
         <PublicLayout>

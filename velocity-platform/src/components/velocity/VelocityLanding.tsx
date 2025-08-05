@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import VelocityFooter from './VelocityFooter';
 import BackToTopButton from '@/components/ui/BackToTopButton';
 import { Shield, TrendingUp, Users, FileText, Settings, Bell, Search, ChevronDown, Play, CheckCircle, Zap, Clock, ChevronUp } from 'lucide-react';
 
@@ -775,7 +774,6 @@ const VelocityLanding: React.FC = () => {
       <EnhancedHero />
       <FeatureCards />
       <EvidenceCollectionSection />
-      <VelocityFooter />
       <BackToTopButton variant="emerald" alwaysVisible={true} />
     </div>
   );

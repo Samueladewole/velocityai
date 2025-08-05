@@ -1727,9 +1727,9 @@ const PublicFooter: React.FC = () => {
             <h3 className="text-white font-semibold mb-4">Platform</h3>
             <div className="space-y-3">
               {[
-                { label: 'AI Agent Dashboard', path: '/dashboard' },
-                { label: 'Evidence Collection', path: '/dashboard' },
-                { label: 'Trust Score', path: '/dashboard' },
+                { label: 'AI Agent Dashboard', path: '/platform/overview' },
+                { label: 'Evidence Collection', path: '/platform/evidence-collection' },
+                { label: 'Trust Score', path: '/platform/trust-score' },
                 { label: 'QIE Intelligence', path: '/velocity/qie' },
                 { label: 'Pricing', path: '/velocity/pricing' }
               ].map((item) => (
