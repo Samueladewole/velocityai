@@ -1,9 +1,14 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, useNavigate, Navigate } from 'react-router-dom';
 import VelocityRoutes from '@/components/velocity/VelocityRoutes';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { useAuthStore } from '@/store';
 import { supabase } from '@/lib/supabase';
+
+// Import missing components and services
+// Note: These may need to be created or the references removed
+// import QIEWorkflowComponent from '@/components/qie/QIEWorkflowComponent';
+// import { ISACADigitalTrustService, DigitalTrustAssessment } from '@/services/ISACADigitalTrustService';
 
 // Observability Components
 import ExecutiveDashboard from '@/components/observability/ExecutiveDashboard';
@@ -137,10 +142,10 @@ const TestLanding: React.FC = () => {
             Sign In
           </button>
           <button 
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/velocity/login')}
             style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', padding: '12px 24px', borderRadius: '8px', fontSize: '1.1rem', cursor: 'pointer' }}
           >
-            View Dashboard
+            Sign In to Dashboard
           </button>
         </div>
         
@@ -1198,9 +1203,11 @@ const QIEWorkflowPage: React.FC = () => {
       <VelocitySidebar />
       
       <div style={{ flex: 1, marginLeft: '280px', padding: '2rem' }}>
-        <QIEWorkflowComponent onWorkflowComplete={(questionnaire) => {
-          console.log('Questionnaire completed:', questionnaire);
-        }} />
+        {/* TODO: QIEWorkflowComponent needs to be implemented */}
+        <div style={{ textAlign: 'center', padding: '4rem', color: 'white' }}>
+          <h2>QIE Workflow</h2>
+          <p>Questionnaire Intelligence Engine workflow will be implemented here.</p>
+        </div>
       </div>
     </div>
   );
@@ -1209,15 +1216,39 @@ const QIEWorkflowPage: React.FC = () => {
 // ISACA Digital Trust Assessment Page
 const ISACADigitalTrustPage: React.FC = () => {
   const navigate = useNavigate();
-  const [assessment, setAssessment] = useState<DigitalTrustAssessment | null>(null);
+  const [assessment, setAssessment] = useState<any | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   
-  const isacaService = ISACADigitalTrustService.getInstance();
+  // TODO: ISACADigitalTrustService needs to be implemented
+  // const isacaService = ISACADigitalTrustService.getInstance();
 
   const runAssessment = async () => {
     setIsLoading(true);
     try {
-      const result = await isacaService.conductAutomatedAssessment('velocity-org');
+      // TODO: Replace with actual service call
+      // const result = await isacaService.conductAutomatedAssessment('velocity-org');
+      const result = {
+        trustScore: 94,
+        overallMaturity: 4.2,
+        riskScore: 23,
+        domainScores: {
+          edm: 4.5,
+          apo: 4.1,
+          bai: 3.8,
+          dss: 4.3
+        },
+        recommendations: [
+          {
+            id: '1',
+            domain: 'APO - Align, Plan, Organise',
+            priority: 'High',
+            description: 'Enhance governance framework alignment',
+            effort: 'Medium',
+            impact: 'High',
+            timeline: '3-6 months'
+          }
+        ]
+      };
       setAssessment(result);
     } catch (error) {
       console.error('Assessment failed:', error);
@@ -1292,7 +1323,7 @@ const ISACADigitalTrustPage: React.FC = () => {
             <div style={{ background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(20px)', border: '1px solid rgba(255,255,255,0.1)', padding: '2rem', borderRadius: '16px' }}>
               <h3 style={{ margin: '0 0 1rem 0', fontSize: '1.25rem', fontWeight: '600' }}>COBIT Domain Assessment</h3>
               <div style={{ display: 'grid', gap: '1rem' }}>
-                {Object.entries(assessment.domainScores).map(([domain, score]) => (
+                {Object.entries(assessment.domainScores).map(([domain, score]: [string, number]) => (
                   <div key={domain} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1rem', background: 'rgba(255,255,255,0.02)', borderRadius: '8px' }}>
                     <div>
                       <h4 style={{ margin: 0, fontSize: '1rem', fontWeight: '500' }}>{domain.toUpperCase()}</h4>
@@ -1303,11 +1334,11 @@ const ISACADigitalTrustPage: React.FC = () => {
                       </p>
                     </div>
                     <div style={{ textAlign: 'right' }}>
-                      <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: score >= 4 ? '#10b981' : score >= 3 ? '#f59e0b' : '#ef4444' }}>
-                        {score.toFixed(1)}/5
+                      <div style={{ fontSize: '1.2rem', fontWeight: 'bold', color: (score as number) >= 4 ? '#10b981' : (score as number) >= 3 ? '#f59e0b' : '#ef4444' }}>
+                        {(score as number).toFixed(1)}/5
                       </div>
                       <div style={{ fontSize: '0.7rem', color: '#94a3b8' }}>
-                        {score >= 4 ? 'Optimized' : score >= 3 ? 'Established' : 'Developing'}
+                        {(score as number) >= 4 ? 'Optimized' : (score as number) >= 3 ? 'Established' : 'Developing'}
                       </div>
                     </div>
                   </div>
@@ -1373,7 +1404,7 @@ const ISACADigitalTrustPage: React.FC = () => {
 };
 
 // Coming Soon Component for missing pages
-const ComingSoon: React.FC<{ title: string }> = ({ title }) => {
+const ComingSoon: React.FC<{ title: string; description?: string }> = ({ title, description }) => {
   const navigate = useNavigate();
   
   return (
@@ -1396,7 +1427,7 @@ const ComingSoon: React.FC<{ title: string }> = ({ title }) => {
             {title}
           </h1>
           <p style={{ fontSize: '1.2rem', color: '#94a3b8', marginBottom: '2rem' }}>
-            This feature is currently under development. We're working hard to bring you this functionality soon!
+            {description || "This feature is currently under development. We're working hard to bring you this functionality soon!"}
           </p>
           <button
             onClick={() => navigate('/velocity/dashboard')}

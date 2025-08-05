@@ -34,36 +34,46 @@ import {
 // Trust Score Card Component
 const TrustScoreCard = () => {
   return (
-    <Card className="bg-gradient-to-r from-emerald-500 via-teal-500 to-blue-500 text-white border-0 shadow-xl">
-      <CardContent className="p-8">
+    <Card className="bg-gradient-to-br from-emerald-500 via-teal-500 to-blue-600 text-white border-0 shadow-2xl overflow-hidden relative">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSI0Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+      
+      <CardContent className="p-8 relative z-10">
         <div className="flex items-center justify-between">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold">
-              🏆 Trust Score: 96.7%
-            </h2>
-            <p className="text-emerald-100 text-lg">
-              Cryptographically verified compliance status
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl">
+                <Trophy className="h-8 w-8 text-white" />
+              </div>
+              <div>
+                <h2 className="text-4xl font-bold">96.7%</h2>
+                <p className="text-emerald-100 text-lg font-medium">Trust Score</p>
+              </div>
+            </div>
+            <p className="text-white/90 text-lg">
+              🔐 Cryptographically verified compliance status
             </p>
-            <div className="flex items-center gap-4 text-sm">
-              <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-6 text-sm">
+              <div className="flex items-center gap-2 bg-white/20 px-3 py-2 rounded-lg backdrop-blur-sm">
                 <Shield className="h-4 w-4" />
-                <span>SOC 2 Ready</span>
+                <span className="font-medium">SOC 2 Ready</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2 bg-white/20 px-3 py-2 rounded-lg backdrop-blur-sm">
                 <Activity className="h-4 w-4" />
-                <span>13 Agents Active</span>
+                <span className="font-medium">13 Agents Active</span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2 bg-white/20 px-3 py-2 rounded-lg backdrop-blur-sm">
                 <Database className="h-4 w-4" />
-                <span>2,831 Evidence Items</span>
+                <span className="font-medium">2,831 Evidence Items</span>
               </div>
             </div>
           </div>
           <div className="hidden lg:block">
-            <div className="text-right">
-              <div className="text-4xl font-bold">98.2%</div>
-              <div className="text-emerald-100">Automation Rate</div>
-              <div className="text-sm text-emerald-200 mt-2">
+            <div className="text-right bg-white/10 backdrop-blur-sm p-6 rounded-2xl">
+              <div className="text-5xl font-bold mb-2">98.2%</div>
+              <div className="text-white/90 text-lg font-medium">Automation Rate</div>
+              <div className="text-sm text-white/80 mt-2 flex items-center gap-1">
+                <ArrowUp className="h-4 w-4" />
                 vs 15% industry average
               </div>
             </div>
@@ -101,8 +111,8 @@ const ComplianceStatus = () => {
               </div>
               <div className="w-full bg-slate-200 rounded-full h-2">
                 <div 
-                  className={`bg-€{framework.color}-500 h-2 rounded-full transition-all duration-300`}
-                  style={{ width: `€{framework.status}%` }}
+                  className={`bg-${framework.color}-500 h-2 rounded-full transition-all duration-300`}
+                  style={{ width: `${framework.status}%` }}
                 ></div>
               </div>
             </div>
@@ -171,8 +181,8 @@ const RecentActivity = () => {
         <div className="space-y-4">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start gap-3 p-3 rounded-lg hover:bg-slate-50 transition-colors">
-              <div className={`p-2 rounded-lg bg-€{activity.color}-100`}>
-                <activity.icon className={`h-4 w-4 text-€{activity.color}-600`} />
+              <div className={`p-2 rounded-lg bg-${activity.color}-100`}>
+                <activity.icon className={`h-4 w-4 text-${activity.color}-600`} />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-medium text-slate-900">{activity.message}</p>
@@ -197,7 +207,7 @@ const SimpleLineChart = ({ data, color = "emerald", height = "h-32" }: {
   const range = max - min || 1;
   
   return (
-    <div className={`€{height} relative`}>
+    <div className={`${height} relative`}>
       <svg className="w-full h-full" viewBox="0 0 100 40">
         <polyline
           fill="none"
@@ -206,7 +216,7 @@ const SimpleLineChart = ({ data, color = "emerald", height = "h-32" }: {
           points={data.map((value, index) => {
             const x = (index / (data.length - 1)) * 100;
             const y = 40 - ((value - min) / range) * 30;
-            return `€{x},€{y}`;
+            return `${x},${y}`;
           }).join(' ')}
         />
         {data.map((value, index) => {
@@ -321,8 +331,8 @@ const EvidenceCollectionChart = () => {
                 </div>
                 <div className="w-full bg-slate-200 rounded-full h-2">
                   <div 
-                    className={`bg-€{item.color}-500 h-2 rounded-full transition-all duration-500`}
-                    style={{ width: `€{(item.count / totalEvidence) * 100}%` }}
+                    className={`bg-${item.color}-500 h-2 rounded-full transition-all duration-500`}
+                    style={{ width: `${(item.count / totalEvidence) * 100}%` }}
                   ></div>
                 </div>
               </div>
@@ -442,7 +452,7 @@ const ComplianceDonutChart = () => {
           <div className="grid grid-cols-2 gap-4">
             {frameworks.map((framework) => (
               <div key={framework.name} className="flex items-center gap-2">
-                <div className={`w-3 h-3 rounded-full bg-€{framework.color}-500`}></div>
+                <div className={`w-3 h-3 rounded-full bg-${framework.color}-500`}></div>
                 <span className="text-sm font-medium">{framework.name}</span>
                 <span className="text-sm text-slate-600 ml-auto">{framework.progress}%</span>
               </div>
@@ -501,7 +511,7 @@ const ActivityFeed = () => {
         <div className="space-y-4">
           {activities.map((activity) => (
             <div key={activity.id} className="flex items-start gap-3">
-              <div className={`w-2 h-2 rounded-full mt-2 €{getActivityColor(activity.type).split(' ')[1]}`}></div>
+              <div className={`w-2 h-2 rounded-full mt-2 ${getActivityColor(activity.type).split(' ')[1]}`}></div>
               <div className="flex-1">
                 <div className="flex items-center justify-between">
                   <span className="font-medium text-sm">{activity.agent}</span>
@@ -519,6 +529,7 @@ const ActivityFeed = () => {
 
 // Framework Manager Component
 const FrameworkManager = () => {
+  const navigate = useNavigate();
   const frameworks = [
     { name: 'SOC 2', enabled: true, controls: 127, coverage: '98.4%' },
     { name: 'ISO 27001', enabled: true, controls: 114, coverage: '94.7%' },
@@ -535,7 +546,7 @@ const FrameworkManager = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="font-semibold text-lg">{framework.name}</h3>
-                <div className={`w-3 h-3 rounded-full €{framework.enabled ? 'bg-emerald-500' : 'bg-slate-300'}`}></div>
+                <div className={`w-3 h-3 rounded-full ${framework.enabled ? 'bg-emerald-500' : 'bg-slate-300'}`}></div>
               </div>
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
@@ -590,53 +601,74 @@ const UnifiedDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50/30">
       {/* Header */}
-      <div className="bg-white border-b border-slate-200 shadow-sm">
+      <div className="bg-white/80 backdrop-blur-md border-b border-slate-200/60 shadow-lg sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-18 py-2">
             <div className="flex items-center gap-4">
               <button 
                 onClick={() => navigate('/velocity')}
-                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+                className="flex items-center gap-3 hover:scale-105 transition-all duration-200 group"
               >
                 <div className="relative">
-                  <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-lg blur-sm opacity-50"></div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-xl shadow-lg"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-400 to-amber-400 rounded-xl blur-lg opacity-30 group-hover:opacity-50 transition-opacity"></div>
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-white font-bold text-lg">V</span>
+                  </div>
                 </div>
                 <div>
-                  <span className="text-xl font-bold text-slate-900 font-serif">Velocity</span>
-                  <div className="text-xs text-slate-400 -mt-1">Dashboard</div>
+                  <span className="text-2xl font-bold text-slate-900 font-serif">Velocity</span>
+                  <div className="text-sm text-emerald-600 font-medium -mt-1">AI Compliance Dashboard</div>
                 </div>
               </button>
               {user && (
-                <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-emerald-50 rounded-full">
-                  <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-                  <span className="text-sm font-medium text-emerald-700">
-                    Welcome, {user.name}
+                <div className="hidden md:flex items-center gap-3 px-4 py-2 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-full border border-emerald-200/50 shadow-sm">
+                  <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse shadow-lg"></div>
+                  <span className="text-sm font-semibold text-slate-700">
+                    Welcome, {user.name || 'User'}
                   </span>
+                  <div className="w-8 h-8 bg-gradient-to-r from-emerald-400 to-blue-400 rounded-full flex items-center justify-center text-white text-xs font-bold">
+                    {(user.name || 'U').charAt(0).toUpperCase()}
+                  </div>
                 </div>
               )}
             </div>
 
             <div className="flex items-center gap-3">
               <Button 
-                variant="outline" 
+                variant="ghost" 
                 size="sm"
+                className="hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
+              >
+                <RefreshCw className="h-4 w-4 mr-2" />
+                Refresh
+              </Button>
+              <Button 
+                variant="ghost" 
+                size="sm"
+                className="hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200"
                 onClick={() => navigate('/velocity')}
               >
                 <Home className="h-4 w-4 mr-2" />
                 Home
               </Button>
               <Button 
-                variant="outline" 
+                variant="ghost" 
                 size="sm"
+                className="hover:bg-blue-50 hover:text-blue-600 transition-all duration-200"
                 onClick={() => navigate('/velocity/settings')}
               >
                 <Settings className="h-4 w-4 mr-2" />
                 Settings
               </Button>
-              <Button variant="outline" size="sm" onClick={logout}>
+              <Button 
+                variant="outline" 
+                size="sm" 
+                onClick={logout}
+                className="bg-gradient-to-r from-slate-50 to-slate-100 hover:from-slate-100 hover:to-slate-200 transition-all duration-200 shadow-sm"
+              >
                 Sign Out
               </Button>
             </div>
@@ -647,8 +679,8 @@ const UnifiedDashboard: React.FC = () => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Navigation Tabs */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5 lg:w-fit lg:grid-cols-5">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-8">
+          <TabsList className="grid w-full grid-cols-5 lg:w-fit lg:grid-cols-5 bg-white/60 backdrop-blur-sm shadow-lg border-0 p-1">
             <TabsTrigger value="overview" className="flex items-center gap-2">
               <BarChart3 className="h-4 w-4" />
               Overview
@@ -671,9 +703,76 @@ const UnifiedDashboard: React.FC = () => {
             </TabsTrigger>
           </TabsList>
 
-          {/* Overview Tab */}
-          <TabsContent value="overview" className="space-y-6">
+          {/* Overview Tab - Enhanced Professional Layout */}
+          <TabsContent value="overview" className="space-y-8">
             <TrustScoreCard />
+            
+            {/* Real-time Status Overview */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-3 bg-emerald-100 rounded-xl">
+                      <CheckCircle className="h-6 w-6 text-emerald-600" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-emerald-600">0</div>
+                      <div className="text-xs text-emerald-600">Active Issues</div>
+                    </div>
+                  </div>
+                  <div className="text-sm font-medium text-slate-700">System Health</div>
+                  <div className="text-xs text-slate-500">All systems operational</div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-3 bg-blue-100 rounded-xl">
+                      <Activity className="h-6 w-6 text-blue-600" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-blue-600">13</div>
+                      <div className="text-xs text-blue-600">Active</div>
+                    </div>
+                  </div>
+                  <div className="text-sm font-medium text-slate-700">AI Agents</div>
+                  <div className="text-xs text-slate-500">Monitoring 247 services</div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-3 bg-purple-100 rounded-xl">
+                      <Database className="h-6 w-6 text-purple-600" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-purple-600">2.8K</div>
+                      <div className="text-xs text-purple-600">Today</div>
+                    </div>
+                  </div>
+                  <div className="text-sm font-medium text-slate-700">Evidence Items</div>
+                  <div className="text-xs text-slate-500">+147 since yesterday</div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white/70 backdrop-blur-sm border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                <CardContent className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="p-3 bg-amber-100 rounded-xl">
+                      <Gauge className="h-6 w-6 text-amber-600" />
+                    </div>
+                    <div className="text-right">
+                      <div className="text-2xl font-bold text-amber-600">98.2%</div>
+                      <div className="text-xs text-amber-600">Efficiency</div>
+                    </div>
+                  </div>
+                  <div className="text-sm font-medium text-slate-700">Automation Rate</div>
+                  <div className="text-xs text-slate-500">vs 15% industry avg</div>
+                </CardContent>
+              </Card>
+            </div>
             
             {/* Key Metrics Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -682,12 +781,40 @@ const UnifiedDashboard: React.FC = () => {
               <TrustScoreTrend />
             </div>
             
-            {/* Secondary Metrics */}
+            {/* Enhanced Secondary Metrics */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <ComplianceDonutChart />
               <ComplianceStatus />
               <ActivityFeed />
             </div>
+            
+            {/* AI Insights Panel */}
+            <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200/50 shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2 text-blue-800">
+                  <Sparkles className="h-5 w-5" />
+                  AI Insights & Recommendations
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-white/60 p-4 rounded-xl">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
+                      <span className="font-medium text-emerald-700">Compliance Optimization</span>
+                    </div>
+                    <p className="text-sm text-slate-700">Your SOC 2 compliance is 15% ahead of schedule. Consider starting ISO 27001 preparation.</p>
+                  </div>
+                  <div className="bg-white/60 p-4 rounded-xl">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className="font-medium text-blue-700">Security Alert</span>
+                    </div>
+                    <p className="text-sm text-slate-700">Unusual API access pattern detected. Review recommended for AWS CloudTrail logs.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </TabsContent>
 
           {/* AI Agents Tab */}
@@ -700,37 +827,92 @@ const UnifiedDashboard: React.FC = () => {
             <EvidenceStream />
           </TabsContent>
 
-          {/* Frameworks Tab */}
-          <TabsContent value="frameworks" className="space-y-6">
-            <div className="mb-6">
-              <h2 className="text-2xl font-bold text-slate-900 mb-2">Compliance Frameworks</h2>
-              <p className="text-slate-600">Manage your compliance frameworks and monitor coverage</p>
+          {/* Compliance Tab */}
+          <TabsContent value="compliance" className="space-y-6">
+            <div className="bg-white/70 backdrop-blur-sm p-6 rounded-2xl shadow-lg">
+              <div className="mb-6">
+                <h2 className="text-2xl font-bold text-slate-900 mb-2 flex items-center gap-3">
+                  <Shield className="h-8 w-8 text-blue-600" />
+                  Compliance Frameworks
+                </h2>
+                <p className="text-slate-600">Manage your compliance frameworks and monitor coverage across all standards</p>
+              </div>
+              <FrameworkManager />
             </div>
-            <FrameworkManager />
           </TabsContent>
 
-          {/* Integrations Tab */}
+          {/* Cloud Integrations Tab */}
           <TabsContent value="integrations" className="space-y-6">
-            <div className="text-center py-12">
-              <Cloud className="h-16 w-16 text-slate-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-slate-700 mb-2">Cloud Integrations</h3>
-              <p className="text-slate-500 mb-6">Connect your cloud platforms for automated evidence collection</p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
-                {['AWS', 'Google Cloud', 'Microsoft Azure', 'GitHub'].map((platform) => (
-                  <Button 
-                    key={platform} 
-                    variant="outline" 
-                    className="h-16"
-                    onClick={() => {
-                      if (platform === 'AWS') navigate('/velocity/integrations');
-                      else if (platform === 'Google Cloud') navigate('/velocity/integrations');
-                      else if (platform === 'Microsoft Azure') navigate('/velocity/integrations');
-                      else if (platform === 'GitHub') navigate('/velocity/integrations');
-                    }}
+            <div className="bg-white/70 backdrop-blur-sm p-8 rounded-2xl shadow-lg">
+              <div className="text-center mb-8">
+                <div className="flex items-center justify-center gap-3 mb-4">
+                  <Cloud className="h-12 w-12 text-blue-500" />
+                  <h2 className="text-3xl font-bold text-slate-900">Cloud Integration Hub</h2>
+                </div>
+                <p className="text-lg text-slate-600 max-w-2xl mx-auto">
+                  Connect and manage your cloud platforms for automated evidence collection and real-time monitoring
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                {[
+                  { name: 'AWS', status: 'connected', services: 23, color: 'emerald', icon: '☁️' },
+                  { name: 'Google Cloud', status: 'connected', services: 15, color: 'blue', icon: '🌩️' },
+                  { name: 'Microsoft Azure', status: 'setup', services: 0, color: 'amber', icon: '⛅' },
+                  { name: 'GitHub', status: 'connected', services: 8, color: 'purple', icon: '🐙' }
+                ].map((platform) => (
+                  <Card 
+                    key={platform.name} 
+                    className={`hover:shadow-xl transition-all duration-300 cursor-pointer border-2 ${
+                      platform.status === 'connected' ? 'border-emerald-200 bg-emerald-50/50' : 
+                      platform.status === 'setup' ? 'border-amber-200 bg-amber-50/50' : 
+                      'border-slate-200'
+                    }`}
+                    onClick={() => navigate('/velocity/integrations')}
                   >
-                    {platform}
-                  </Button>
+                    <CardContent className="p-6 text-center">
+                      <div className="text-4xl mb-3">{platform.icon}</div>
+                      <h3 className="font-bold text-lg mb-2">{platform.name}</h3>
+                      <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-medium mb-3 ${
+                        platform.status === 'connected' ? 'bg-emerald-100 text-emerald-700' :
+                        platform.status === 'setup' ? 'bg-amber-100 text-amber-700' :
+                        'bg-slate-100 text-slate-700'
+                      }`}>
+                        <div className={`w-2 h-2 rounded-full ${
+                          platform.status === 'connected' ? 'bg-emerald-500' :
+                          platform.status === 'setup' ? 'bg-amber-500' :
+                          'bg-slate-500'
+                        }`} />
+                        {platform.status === 'connected' ? 'Connected' : 
+                         platform.status === 'setup' ? 'Setup Required' : 'Disconnected'}
+                      </div>
+                      <div className="text-sm text-slate-600">
+                        {platform.services} services monitored
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
+              </div>
+              
+              <div className="bg-blue-50 border border-blue-200 p-6 rounded-xl">
+                <div className="flex items-center gap-3 mb-3">
+                  <Monitor className="h-6 w-6 text-blue-600" />
+                  <h3 className="font-semibold text-blue-800">Integration Health</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600">99.9%</div>
+                    <div className="text-sm text-blue-600">Uptime</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600">46</div>
+                    <div className="text-sm text-blue-600">Active Services</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-blue-600">2.1TB</div>
+                    <div className="text-sm text-blue-600">Data Processed</div>
+                  </div>
+                </div>
               </div>
             </div>
           </TabsContent>
