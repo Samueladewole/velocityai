@@ -48,6 +48,7 @@ import ROICalculator from '../../pages/calculators/ROICalculator';
 import CaseStudies from '../../pages/CaseStudies';
 import TrustPathway from '../../pages/TrustPathway';
 import BankingROIDemo from '../../pages/demo/BankingROIDemo';
+import { VideoGallery } from '../../pages/VideoGallery';
 import SettingsPage from '../../pages/SettingsPage';
 import ISAE3000EnterpriseModule from '../../pages/ISAE3000EnterpriseModule';
 import DemoPage from '../../pages/DemoPage';
@@ -875,6 +876,12 @@ const VelocityRoutes: React.FC = () => {
           <DemoPage />
         </PublicLayout>
       } />
+      {/* Video Gallery - Temporarily disabled for improvements
+      <Route path="/velocity/videos" element={
+        <PublicLayout>
+          <VideoGallery />
+        </PublicLayout>
+      } /> */}
       <Route path="/velocity/impact" element={
         <PublicLayout>
           <CustomerImpactShowcase />

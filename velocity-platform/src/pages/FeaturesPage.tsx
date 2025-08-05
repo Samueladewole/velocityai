@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+// import VideoPlayer from '@/components/video/VideoPlayer'; // Temporarily disabled
 import { 
   Bot, 
   Shield,
@@ -150,6 +151,30 @@ const FeaturesPage: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Feature Showcase Video - Temporarily disabled for improvements
+      <div className="py-16 bg-black/20">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="bg-slate-800/50 backdrop-blur-sm rounded-2xl p-8 border border-slate-700/50">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-white mb-4">See Features in Action</h2>
+              <p className="text-slate-300 max-w-2xl mx-auto">
+                Watch how Velocity's AI-powered features transform security into your competitive advantage
+              </p>
+            </div>
+            <VideoPlayer 
+              videoType="feature-showcase"
+              title="Platform Features - Transform Security into Your Competitive Advantage"
+              showDownload={true}
+              controls={true}
+              style={{
+                borderRadius: '12px',
+                overflow: 'hidden'
+              }}
+            />
+          </div>
+        </div>
+      </div> */}
 
       {/* Platform Capabilities */}
       <div className="py-16 bg-black/20">

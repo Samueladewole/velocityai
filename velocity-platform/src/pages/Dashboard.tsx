@@ -5,6 +5,7 @@ import { ComponentGrid } from '@/components/dashboard/ComponentGrid';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
+// import VideoPlayer from '@/components/video/VideoPlayer'; // Temporarily disabled
 import { 
   Shield,
   TrendingUp,
@@ -110,6 +111,28 @@ export const Dashboard: React.FC = () => {
       <div className="max-w-[1600px] mx-auto p-6 space-y-8">
         {/* Executive Summary */}
         <ExecutiveSummary {...executiveSummaryData} />
+
+        {/* Dashboard Demo Video - Temporarily disabled for improvements
+        <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Activity className="h-5 w-5 text-blue-600" />
+              Dashboard Walkthrough
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <VideoPlayer 
+              videoType="dashboard-demo"
+              title="Velocity Dashboard - Your Command Center for Compliance Automation"
+              showDownload={true}
+              controls={true}
+              style={{
+                borderRadius: '12px',
+                overflow: 'hidden'
+              }}
+            />
+          </CardContent>
+        </Card> */}
 
         {/* Quick Actions - Primary CTAs */}
         <QuickActions />

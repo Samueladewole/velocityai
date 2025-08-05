@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { OnboardingFlow } from '@/components/tour/OnboardingFlow';
 import { TourTrigger } from '@/components/tour/TourTrigger';
+// import VideoPlayer from '@/components/video/VideoPlayer'; // Temporarily disabled
 import { 
   Shield, 
   Award, 
@@ -170,6 +171,28 @@ export const TrustScore: React.FC = () => {
             </Button>
           </div>
         </div>
+
+        {/* Trust Score Overview Video - Temporarily disabled for improvements
+        <Card className="border-0 bg-gradient-to-br from-white to-slate-50/80 shadow-lg">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5 text-blue-600" />
+              How Your Trust Score Works
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <VideoPlayer 
+              videoType="trust-score"
+              title="Trust Score Overview - See How AI Calculates Your Security Posture"
+              showDownload={true}
+              controls={true}
+              style={{
+                borderRadius: '12px',
+                overflow: 'hidden'
+              }}
+            />
+          </CardContent>
+        </Card> */}
 
         {/* Main Trust Score Display */}
         <div className="grid gap-6 lg:grid-cols-3">
